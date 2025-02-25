@@ -1,10 +1,16 @@
+import Footer from "@/components/partials/Footer";
+import Header from "@/components/partials/Header";
+import customCss from "../../public/website/assets/css/custom.css";
+
 // app/layout.js
 export default function WebsiteLayout({ children }) {
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="p-4 bg-blue-500 text-white text-center">Website Header</header>
+    <>
+      <Header />
       <main className="flex-1">{children}</main>
-      <footer className="p-4 bg-gray-800 text-white text-center">Website Footer</footer>
-    </div>
+      <Footer />
+
+    </>
   );
 }
