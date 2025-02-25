@@ -107,21 +107,21 @@ function Header() {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center border-black border-[1px]">
+            <div className="flex items-center justify-center border-gray-300 border-[2px]">
                 <Image src="/website/assets/images/logo/logo.png" alt="Vercel Logo" width={2000} height={2000} className="w-[490px] h-auto p-4" />
             </div>
-            <div>
-                <ul className='flex items-center justify-around px-14  py-6'>
+            <div className='border-b-2 border-black'>
+                <ul className='flex items-center justify-around px-14  py-3'>
                     {
                         links.map((link) => (
-                            <li key={link.id} className='text-black relative text-xl cursor-pointer ' >
+                            <li key={link.id} className='text-black relative text-lg cursor-pointer ' >
                                 <Link href={link.url} className='flex items-center'>
                                     {link.title}
                                     {link.sublinks && (
                                         <Image src="/website/assets/images/icons/caret-down.png" alt="Vercel Logo" width={2000} height={2000} className="w-[20px] h-[20px] mt-1" />
                                     )}
                                 </Link>
-                                {link.sublinks && (
+                                {/* {link.sublinks && (
                                     <ul className="absolute top-8 right-0 bg-white text-black border">
                                         {link.sublinks.map((sublink) => (
                                             <li key={sublink.id} className='px-8 border-b-[1px] py-2 hover:bg-gray-100 text-sm'>
@@ -130,7 +130,7 @@ function Header() {
                                             </li>
                                         ))}
                                     </ul>
-                                )}
+                                )} */}
                             </li>
                         ))
                     }
