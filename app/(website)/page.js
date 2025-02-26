@@ -9,16 +9,13 @@ import { homeCategory } from "@/constant/data";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useRef } from "react";
-import Image from 'next/image';
-import ProductCard from '../../components/card/ProductCard';
+import Image from "next/image";
+import ProductCard from "../../components/card/ProductCard";
 import JobsCard from "@/components/card/JobsCard";
 
-
 export default function Home() {
-
   const swiperRef = useRef(null);
   return (
-
     <div className="">
       <AdBanner />
       <CategorySection category={homeCategory} />
@@ -32,7 +29,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -53,11 +56,16 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
         </ContentCard>
-
       </section>
 
       <section className="px-32 py-8">
@@ -68,7 +76,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -89,7 +103,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
 
@@ -98,7 +118,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -119,11 +145,16 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
         </ContentCard>
-
       </section>
 
       <HoverBanner />
@@ -136,7 +167,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -157,11 +194,16 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
         </ContentCard>
-
       </section>
       <section className="px-32 py-8">
         <SliderSection heading="Biography" />
@@ -171,7 +213,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -192,13 +240,17 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
         </ContentCard>
-
       </section>
     </div>
-
-  )
+  );
 }
