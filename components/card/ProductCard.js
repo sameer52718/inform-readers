@@ -11,10 +11,13 @@ function ProductCard() {
   console.log(productImage);
 
   return (
-    <div className="border rounded-lg p-4 bg-white">
+    <div className="border rounded-lg p-4 bg-white h-60">
       <div className="flex items-center justify-center flex-col">
-        <Image src={productImage} width={300} height={300} alt={productAlt} className="w-20 h-32" />
-        <h4>{productName}</h4>
+        <Image src={productImage} width={300} height={300} alt={productAlt} className="w-20 h-32 mb-4" />
+        <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
+  {productName}
+</h4>
+
       </div>
       <div className="divider h-[1px] w-full bg-black"></div>
       <div className="py-2 px-2 flex items-center justify-between">
