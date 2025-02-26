@@ -43,3 +43,18 @@ export const mapData = [
     { id: 16, name: "Nigeria", image: "/website/assets/images/map/16.png" },
 
 ]
+
+export const couponData = [
+    { id: 1, name: "Eligible Customers Only! $20 Off Your Orde", image: "/website/assets/images/brand/01.png" },
+    { id: 2, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/02.png" },
+    { id: 3, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/03.png" },
+    { id: 4, name: "5% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/04.png" },
+    { id: 5, name: "Eligible Customers Only! $20 Off Your Order", image: "/website/assets/images/brand/05.png" },
+    { id: 6, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/06.png" },
+    { id: 7, name: "5% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/07.png" },
+    { id: 8, name: "Eligible Customers Only! $20 Off Your Order", image: "/website/assets/images/brand/08.png" },
+    { id: 9, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/09.png" },
+    { id: 9, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/10.png" },
+    { id: 9, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/11.png" },
+    { id: 9, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/12.png" },
+]
