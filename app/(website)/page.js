@@ -15,7 +15,6 @@ import JobsCard from "@/components/card/JobsCard";
 import BiographyCard from "@/components/card/BiographyCard";
 import NameMeaningCard from "@/components/card/NameMeaningCard";
 
-
 export default function Home() {
   const swiperRef = useRef(null);
   return (
@@ -209,7 +208,6 @@ export default function Home() {
         </ContentCard>
       </section>
 
-
       <section className="px-32 py-8">
         <SliderSection heading="Biography" />
         <ContentCard>
@@ -309,7 +307,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -330,11 +334,16 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
         </ContentCard>
-
       </section>
 
       <section className="px-32 py-8">
@@ -345,7 +354,13 @@ export default function Home() {
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain rotate-180" />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain rotate-180"
+              />
             </button>
             <Swiper
               modules={[Autoplay]}
@@ -366,33 +381,41 @@ export default function Home() {
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
             >
-              <Image src={"/website/assets/images/icons/slider.png"} alt="prev-icon" width={1000} height={1000} className="h-7 w-7 object-contain " />
+              <Image
+                src={"/website/assets/images/icons/slider.png"}
+                alt="prev-icon"
+                width={1000}
+                height={1000}
+                className="h-7 w-7 object-contain "
+              />
             </button>
           </div>
         </ContentCard>
-
       </section>
       <section className="px-32 py-8">
         <SliderSection heading="Zip Codes" />
         <ContentCard>
           <div className="flex items-center gap-4 flex-wrap py-6 px-1">
-
-          {mapData.map((item, index) => (
-              <div key={index} className="rounded-3xl bg-white px-6 py-1 border-2 border-black flex items-center w-fit">
-
+            {mapData.map((item, index) => (
+              <div
+                key={index}
+                className="rounded-3xl bg-white px-6 py-1 border-2 border-black flex items-center w-fit"
+              >
                 <div className="flex items-center gap-2">
-                  <Image src={item.image} alt={item.image} width={32} height={20} className="w-6 h-6 object-contain rounde-full" />
-                    {item.name}
+                  <Image
+                    src={item.image}
+                    alt={item.image}
+                    width={32}
+                    height={20}
+                    className="w-6 h-6 object-contain rounde-full"
+                  />
+                  {item.name}
                 </div>
               </div>
             ))}
-
           </div>
-            
         </ContentCard>
-
       </section>
-
 
       <HoverBanner />
     </div>
