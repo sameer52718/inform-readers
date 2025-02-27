@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
-function HoverBanner() {
+function HoverBanner({padding = "128px"}) {
     return (
-        <section className="px-32 py-8 overflow-hidden">
+        <section className={` overflow-hidden`} style={{padding: `32px ${padding} `}}>
         <div className="w-[95%] mx-auto h-60 relative overflow-hidden">
             <Image
                 src={"/website/assets/images/banner/03.png"}

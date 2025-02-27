@@ -58,3 +58,20 @@ export const couponData = [
     { id: 9, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/11.png" },
     { id: 9, name: "10% Cash Back for Purchases Sitewide", image: "/website/assets/images/brand/12.png" },
 ]
+
+
+export const shopData = [
+    { id: 1,  image: "/website/assets/images/shop/01.png" },
+    { id: 2,  image: "/website/assets/images/shop/02.png" },
+    { id: 3,  image: "/website/assets/images/shop/03.png" },
+    { id: 4,  image: "/website/assets/images/shop/04.png" },
+    { id: 5,  image: "/website/assets/images/shop/05.png" },
+    { id: 6,  image: "/website/assets/images/shop/06.png" },
+    { id: 7,  image: "/website/assets/images/shop/07.png" },
+    { id: 8,  image: "/website/assets/images/shop/08.png" },
+    { id: 9,  image: "/website/assets/images/shop/09.png" },
+    { id: 9,  image: "/website/assets/images/shop/10.png" },
+]
+
+
+export const categories = ["Auto", "Children", "Healthy & Beauty", "Holidays", "House", "Office", "Pets"];

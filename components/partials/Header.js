@@ -108,7 +108,10 @@ function Header() {
             </div>
 
             <div className="flex items-center justify-center border-gray-300 border-[2px]">
-                <Image src="/website/assets/images/logo/logo.png" alt="Vercel Logo" width={2000} height={2000} className="w-[490px] h-auto p-4" />
+                <Link href="/" >
+                    <Image src="/website/assets/images/logo/logo.png" alt="Vercel Logo" width={2000} height={2000} className="w-[490px] h-auto p-4" />
+
+                </Link>
             </div>
             <div className='border-b-2 border-black'>
                 <ul className='flex items-center justify-around px-14  py-3'>

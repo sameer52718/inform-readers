@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import Link from 'next/link';
 
 
 function CategorySection({ category }) {
@@ -20,9 +21,11 @@ function CategorySection({ category }) {
                     <SwiperSlide key={index}>
                         <div className="flex items-center justify-center flex-col">
                             <div className='h-20 w-20 border-[1px] border-black rounded-lg mb-3'>
+                                <Link href={`#`}>
                                 <img src={cate.image} alt={cate.name} className='h-full w-full object-contain' />
+                                </Link>
                             </div>
-                            <h3 className='font-semibold'>{cate.name}</h3>
+                            <h3 className='font-semibold'><Link href={`#`}> {cate.name}</Link> </h3>
                         </div>
                     </SwiperSlide>
                 ))}

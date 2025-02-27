@@ -3,7 +3,7 @@ import React from "react";
 
 function JobsCard() {
     return (
-        <div className="border rounded-lg p-4 bg-white">
+        <div className="border rounded-lg p-4 bg-white  border-black">
             <div className="flex items-center  gap-5 pb-4">
                 <div className="h-20 w-20 rounded-full">
                     <Image
