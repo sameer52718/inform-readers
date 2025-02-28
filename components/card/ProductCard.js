@@ -2,7 +2,7 @@ import Image from "next/image";
 import { faker } from "@faker-js/faker";
 import React from "react";
 
-function ProductCard() {
+function ProductCard({ bgColor = "#fff" }) {
   // Generate fake product data using Faker.js
   const productName = faker.commerce.productName();
   const productPrice = faker.commerce.price(100, 2000); // Random price between $100 and $2000
@@ -11,12 +11,12 @@ function ProductCard() {
   console.log(productImage);
 
   return (
-    <div className="border rounded-lg p-4 bg-white h-60 border border-black">
+    <div className="border rounded-lg p-4 h-60  border-black" style={{ backgroundColor: bgColor }}>
       <div className="flex items-center justify-center flex-col">
         <Image src={productImage} width={300} height={300} alt={productAlt} className="w-20 h-32 mb-4" />
         <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
-  {productName}
-</h4>
+          {productName}
+        </h4>
 
       </div>
       <div className="divider h-[1px] w-full bg-black"></div>

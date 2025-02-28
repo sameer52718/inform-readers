@@ -75,7 +75,7 @@ function Coupons() {
 
             <section className='px-6'>
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5 gap-y-4 mt-6 px-6">
-                    <div className="col-span-3 bg-[#acacac] p-4 rounded-2xl h-fit">
+                    <div className="col-span-3 bg-[#d9d9d9] p-4 rounded-2xl h-fit">
                         <div className='bg-white h-40 rounded-xl flex items-center justify-center'>
                             <Image src={'/website/assets/images/coupons/01.png'} alt='coupon' width={1000} height={1000} className='w-56 h-auto object-contain' />
                         </div>
@@ -132,7 +132,6 @@ function Coupons() {
                     </div>
                     <div className="col-span-9">
                         <div className="p-4">
-                            {/* Sort By Tabs */}
                             <div className="flex items-center border-b border-black ">
                                 <span className="text-gray-600 mr-2">SortBy:</span>
                                 <button
