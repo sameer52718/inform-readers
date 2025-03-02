@@ -77,3 +77,6 @@ export const shopData = [
 
 
 export const categories = ["Auto", "Children", "Healthy & Beauty", "Holidays", "House", "Office", "Pets"];
+
+
+export const nameReligion = ["Hindu boys names", "Hindu girls names", "Muslim boys names", "Muslim girls names", "Christian boys names", "Christian girls names", "Sikh boys names", "Sikh girls names"]
