@@ -5,7 +5,6 @@ import Image from 'next/image'
 import React from 'react'
 
 
-
 const WeatherHoutlyCard = () => {
     return (
         <div className='grid grid-cols-2 gap-10 mt-4 bg-white px-20 py-12 rounded-3xl border border-black'>
@@ -42,37 +41,32 @@ const WeatherHoutlyCard = () => {
         </div>
     )
 }
-
 function HourlyWeather() {
     return (
         <div>
-
             <AdBanner />
-
             <div className='px-32 py-8'>
                 <WeatherFilter />
 
                 <div className='flex items-center gap-3 mt-6 pb-1 mb-8 border-black relative font-semibold border-b w-fit'>
                     <span className='text-red-500'>Home</span> /  Today / Houly / Daily
                     <div className="absolute top-[28px] left-0 w-14 h-[3px] bg-red-500"></div>
-
                 </div>
 
                 <div className='mt-8 '>
-                <WeatherHoutlyCard />
-                <WeatherHoutlyCard />
-                <WeatherHoutlyCard />
-                <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
 
-                <HoverBanner padding='0px' />
+                    <HoverBanner padding='0px' />
 
-                <WeatherHoutlyCard />
-                <WeatherHoutlyCard />
-                <WeatherHoutlyCard />
-                <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
+                    <WeatherHoutlyCard />
 
-                <HoverBanner padding='0px' />
-
+                    <HoverBanner padding='0px' />
                 </div>
             </div>
 
