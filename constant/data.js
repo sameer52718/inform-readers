@@ -1,7 +1,7 @@
 export const homeCategory = [
     { id: 1, name: "Specification", image: "/website/assets/images/icons/cate-icon.png", url: "/specification" },
     { id: 2, name: "Baby Names", image: "/website/assets/images/icons/cate-icon.png", url: "/baby-names" },
-    { id: 3, name: "Biographies", image: "/website/assets/images/icons/cate-icon.png", url: "/biographies" },
+    { id: 3, name: "Biographies", image: "/website/assets/images/icons/cate-icon.png", url: "/biography" },
     { id: 4, name: "Jobs", image: "/website/assets/images/icons/cate-icon.png" , url: "/jobs"},
     { id: 5, name: "Bank Codes", image: "/website/assets/images/icons/cate-icon.png", url: "/bank-codes"},
     { id: 6, name: "Postal codes", image: "/website/assets/images/icons/cate-icon.png", url: "/postal-codes"},
@@ -41,6 +41,8 @@ export const mapData = [
     { id: 14, name: "Ghana", image: "/website/assets/images/map/14.png" },
     { id: 15, name: "Reunion", image: "/website/assets/images/map/15.png" },
     { id: 16, name: "Nigeria", image: "/website/assets/images/map/16.png" },
+    { id: 17, name: "Morocco", image: "/website/assets/images/map/01.png" },
+    { id: 18, name: "Algeria", image: "/website/assets/images/map/03.png" },
 
 ]
 

@@ -12,17 +12,22 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import ProductCard from '@/components/card/ProductCard';
 import HoverBanner from '@/components/partials/HoverBanner';
 import { faker } from "@faker-js/faker";
+import Link from 'next/link';
 
 
 
-const SpecificationCard = ({product}) => {
-  
+const SpecificationCard = ({ product }) => {
+
     return (
         <div className=" rounded-3xl p-4 h-60  bg-[#d4d4d4]" >
             <div className="flex items-center justify-center flex-col">
-                <Image src={product.productImage} width={300} height={300} alt={product.productAlt} className="w-20 h-32 mb-4" />
+                <Link href={`specification/${product.productName}`}>
+                    <Image src={product.productImage} width={300} height={300} alt={product.productAlt} className="w-20 h-32 mb-4" />
+                </Link>
                 <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
-                    {product.productName}
+                    <Link href={`specification/${product.productName}`}>
+                        {product.productName}
+                    </Link>
                 </h4>
 
             </div>
@@ -58,21 +63,21 @@ function Specification() {
     const swiperRef = useRef(null);
     const [products, setProducts] = useState([]);
     console.log(products);
-    
 
-      // Generate fake product data using Faker.js
 
-      useEffect(() => {
+    // Generate fake product data using Faker.js
+
+    useEffect(() => {
         const generatedProducts = Array.from({ length: 50 }, () => ({
-          productName: faker.commerce.productName(),
-          productPrice: faker.commerce.price(100, 2000),
-          productImage: faker.image.urlLoremFlickr({ category: "product", height: 300, width: 300 }),
-          productAlt: `${faker.commerce.productName()} image`,
+            productName: faker.commerce.productName(),
+            productPrice: faker.commerce.price(100, 2000),
+            productImage: faker.image.urlLoremFlickr({ category: "product", height: 300, width: 300 }),
+            productAlt: `${faker.commerce.productName()} image`,
         }));
-    
+
         setProducts(generatedProducts);
-      }, []); 
-//   console.log(productImage);
+    }, []);
+    console.log(products);
 
     return (
         <div className='bg-white'>
@@ -138,7 +143,7 @@ function Specification() {
                     >
                         {products.map((item, index) => (
                             <SwiperSlide key={index}>
-                               <SpecificationCard product={item} />
+                                <SpecificationCard product={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -214,9 +219,9 @@ function Specification() {
                         loop={true}
                         className="w-full min-h-40"
                     >
-                         {products.map((item, index) => (
+                        {products.map((item, index) => (
                             <SwiperSlide key={index}>
-                               <SpecificationCard product={item} />
+                                <SpecificationCard product={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -295,7 +300,7 @@ function Specification() {
                     >
                         {products.map((item, index) => (
                             <SwiperSlide key={index}>
-                               <SpecificationCard product={item} />
+                                <SpecificationCard product={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -374,7 +379,7 @@ function Specification() {
                     >
                         {products.map((item, index) => (
                             <SwiperSlide key={index}>
-                               <SpecificationCard product={item} />
+                                <SpecificationCard product={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -453,9 +458,9 @@ function Specification() {
                         loop={true}
                         className="w-full min-h-40"
                     >
-                         {products.map((item, index) => (
+                        {products.map((item, index) => (
                             <SwiperSlide key={index}>
-                               <SpecificationCard product={item} />
+                                <SpecificationCard product={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -532,9 +537,9 @@ function Specification() {
                         loop={true}
                         className="w-full min-h-40"
                     >
-                         {products.map((item, index) => (
+                        {products.map((item, index) => (
                             <SwiperSlide key={index}>
-                               <SpecificationCard product={item} />
+                                <SpecificationCard product={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>

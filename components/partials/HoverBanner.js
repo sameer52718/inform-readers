@@ -4,7 +4,7 @@ import React from "react";
 function HoverBanner({padding = "128px"}) {
     return (
         <section className={` overflow-hidden`} style={{padding: `32px ${padding} `}}>
-        <div className="w-[95%] mx-auto h-60 relative overflow-hidden">
+        <div className=" mx-auto h-60 relative overflow-hidden">
             <Image
                 src={"/website/assets/images/banner/03.png"}
                 width={2000}
