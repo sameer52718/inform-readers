@@ -157,9 +157,11 @@ function BiographyDetail() {
                         </div>
                     </div>
                 </div>
+
+                <HoverBanner padding='32px'/>
             </section >
 
-            <HoverBanner />
+           
 
             <div className="mx-40 flex items-center justify-between bg-red-600 text-white px-2 py-3 text-sm font-bold mb-8">
                 <h5 className="ml-2 text-3xl">Dilraba Dilmurat</h5>
@@ -184,8 +186,8 @@ function BiographyDetail() {
 
             <div className='px-40'>
                 <BiographyTable />
+            <HoverBanner padding='0px' />
             </div>
-            <HoverBanner />
 
             <div className='px-40'>
                 <BiographyTable />
@@ -199,8 +201,8 @@ function BiographyDetail() {
 
                 </div>
 
+            <HoverBanner  padding='0px'/>
             </div>
-            <HoverBanner />
 
         </>
     )
