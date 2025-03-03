@@ -13,7 +13,7 @@ function ProductCard({ bgColor = "#fff" }) {
   return (
     <div className="border rounded-lg p-4 h-60  border-black" style={{ backgroundColor: bgColor }}>
       <div className="flex items-center justify-center flex-col">
-        <Image src={productImage} width={300} height={300} alt={productAlt} className="w-20 h-32 mb-4" />
+        <Image src={productImage} width={300} height={300} alt={productAlt} className="w-full h-32 mb-4 rounded-2xl" />
         <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
           {productName}
         </h4>
