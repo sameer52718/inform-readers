@@ -1,10 +1,20 @@
+"use client";
+
 import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
+
+const images = [
+    "/website/assets/images/ad/01.png",
+    "/website/assets/images/ad/02.png",
+    "/website/assets/images/ad/03.png",
+  ];
 
 function AdDetail() {
+    const [selectedImage, setSelectedImage] = useState(images[0]);
+
     return (
         <div>
             <AdBanner />
@@ -32,8 +42,29 @@ function AdDetail() {
                         HD Camera <span className='text-red-500'>5100</span>
                     </h4>
 
-                    <div>
+                    <div className='mb-10'>
+                        <div className="flex flex-col items-center space-y-4">
+                            {/* Large Image */}
+                            <div className="border-2 border-black rounded-3xl mb-4">
+                                <Image src={selectedImage} alt="Camera" width={3000} height={3000} className=" w-[500px] h-[400px]" />
+                            </div>
 
+                            {/* Thumbnail Carousel */}
+                            <div className="flex items-center space-x-10">
+                                <button className="text-red-500 text-6xl border rounded-full bg-[#d9d9d9] h-12 w-12 flex items-center justify-center"><Icon icon="lsicon:double-arrow-left-outline" width="40" height="40" /></button>
+                                {images.map((img, index) => (
+                                    <div
+                                        key={index}
+                                        className={`border-2 p-1 rounded-2xl cursor-pointer ${selectedImage === img ? "border-red-500" : "border-black"
+                                            }`}
+                                        onClick={() => setSelectedImage(img)}
+                                    >
+                                        <Image src={img} alt="Camera Thumbnail" width={500} height={500} className="rounded-md h-60 w-60" />
+                                    </div>
+                                ))}
+                                <button className="text-red-500 text-6xl border rounded-full bg-[#d9d9d9] h-12 w-12 flex items-center justify-center"><Icon icon="lsicon:double-arrow-right-outline" width="40" height="40" /></button>
+                            </div>
+                        </div>
                     </div>
 
                     <div className='bg-gray-300 p-6 rounded-xl'>
