@@ -17,6 +17,7 @@ import NameMeaningCard from "@/components/card/NameMeaningCard";
 
 export default function Home() {
   const swiperRef = useRef(null);
+
   return (
     <div className="">
       <AdBanner />
