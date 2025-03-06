@@ -147,10 +147,9 @@ const AllContentTwo = () => {
   return (
     <div className="grid grid-cols-2 gap-6">
       <div className="rounded-2xl overflow-hidden space-y-4">
-        {/* Main News Card */}
         <div className=" bg-[#d9d9d9] rounded-2xl overflow-hidden">
           <img
-            src="/website/assets/images/news/05.png" // Replace with actual image
+            src="/website/assets/images/news/05.png" 
             alt="News Image"
             className="w-full h-52 object-cover rounded-2xl"
           />
@@ -167,11 +166,10 @@ const AllContentTwo = () => {
           </div>
         </div>
 
-        {/* Related News Cards */}
         <div className="bg-[#d9d9d9] p-3 rounded-2xl shadow-md space-y-2">
           <div className="flex space-x-3   p-2 rounded-lg shadow">
             <img
-              src="/website/assets/images/news/05.png" // Replace with actual image
+              src="/website/assets/images/news/05.png"
               alt="News Thumbnail"
               className="w-24 h-24 rounded-lg object-cover"
             />
@@ -200,10 +198,9 @@ const AllContentTwo = () => {
       </div>
 
       <div className="rounded-2xl overflow-hidden space-y-4">
-        {/* Main News Card */}
         <div className=" bg-[#d9d9d9] rounded-2xl overflow-hidden">
           <img
-            src="/website/assets/images/news/05.png" // Replace with actual image
+            src="/website/assets/images/news/05.png" 
             alt="News Image"
             className="w-full h-52 object-cover rounded-2xl"
           />
@@ -223,7 +220,7 @@ const AllContentTwo = () => {
         <div className="bg-[#d9d9d9] p-3 rounded-2xl shadow-md space-y-2">
           <div className="flex space-x-3   p-2 rounded-lg shadow">
             <img
-              src="/website/assets/images/news/05.png" // Replace with actual image
+              src="/website/assets/images/news/05.png"
               alt="News Thumbnail"
               className="w-24 h-24 rounded-lg object-cover"
             />
@@ -255,34 +252,13 @@ const AllContentTwo = () => {
   );
 }
 
-// Tab list
-const tabs = ["All", "Style Hunter", "Vogue", "Health & Fitness", "Travel", "Gadgets"];
-const tabsTwo = ["All", "Music", "Health & Fitness", "Travel"];
-const moreTabs = ["Fashion", "Technology", "Sports"];
 
-const tabContent = {
-  All: <AllContent />,
-  "Style Hunter": <StyleHunterContent />,
-  Vogue: <VogueContent />,
-  "Health & Fitness": <HealthFitnessContent />,
-  Travel: <TravelContent />,
-  Gadgets: <GadgetsContent />,
-};
-
-const tabContentTwo = {
-  All: <AllContentTwo />,
-  "Style Hunter": <StyleHunterContent />,
-  Music: <VogueContent />,
-  "Health & Fitness": <HealthFitnessContent />,
-  Travel: <TravelContent />,
-};
 
 function TabMenu() {
   const [activeTab, setActiveTab] = useState("All");
 
   return (
     <div>
-      {/* Tabs */}
       <div className="flex border-b items-center justify-between border-black">
         <div>
           {tabs.map((tab) => (
@@ -300,7 +276,6 @@ function TabMenu() {
         <SearchInput />
       </div>
 
-      {/* Dynamic Content */}
       <div className="p-4">{tabContent[activeTab] || <h1>No Content Available</h1>}</div>
     </div>
   );
@@ -314,7 +289,6 @@ function TabMenuTwo() {
   return (
     <div>
       <div className="border-b border-black  flex items-center justify-between px-4 ">
-        {/* Tabs Section */}
         <div className="flex space-x-4">
           {tabsTwo.map((tab) => (
             <button
@@ -327,7 +301,6 @@ function TabMenuTwo() {
             </button>
           ))}
 
-          {/* More Dropdown */}
           <div className="relative">
             <button
               className="text-lg font-semibold text-gray-600 flex items-center"
@@ -354,23 +327,12 @@ function TabMenuTwo() {
             )}
           </div>
         </div>
-
-        {/* <div className="relative">
-        <input
-          type="text"
-          placeholder="Search ..."
-          className="border rounded-full px-4 py-2 pl-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
-        />
-        <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-500" />
-      </div> */}
-
         <div>
           <SearchInput />
         </div>
       </div>
 
       <div>
-        {/* Dynamic Content */}
         <div className="p-4">{tabContentTwo[activeTabTwo] || <h1>No Content Available</h1>}</div>
       </div>
     </div>
@@ -484,6 +446,28 @@ const NewsSection = () => {
       ))}
     </div>
   );
+};
+
+
+const tabs = ["All", "Style Hunter", "Vogue", "Health & Fitness", "Travel", "Gadgets"];
+const tabsTwo = ["All", "Music", "Health & Fitness", "Travel"];
+const moreTabs = ["Fashion", "Technology", "Sports"];
+
+const tabContent = {
+  All: <AllContent />,
+  "Style Hunter": <StyleHunterContent />,
+  Vogue: <VogueContent />,
+  "Health & Fitness": <HealthFitnessContent />,
+  Travel: <TravelContent />,
+  Gadgets: <GadgetsContent />,
+};
+
+const tabContentTwo = {
+  All: <AllContentTwo />,
+  "Style Hunter": <StyleHunterContent />,
+  Music: <VogueContent />,
+  "Health & Fitness": <HealthFitnessContent />,
+  Travel: <TravelContent />,
 };
 
 

@@ -36,7 +36,7 @@ function Biography() {
             <CategorySection category={homeCategory} />
             <h1 className='text-center text-5xl font-bold text-[#ff0000]'>Famous  Celebrity:</h1>
 
-            <section className='px-32 pt-5 mb-12'>
+            <section className='px-48 pt-5 mb-12'>
                 <div className='mt-12'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Singer</span>
@@ -81,7 +81,7 @@ function Biography() {
 
                 </div>
             </section>
-            <section className='px-32 pt-5 mb-12'>
+            <section className='px-48 pt-5 mb-12'>
                 <div className='mt-12'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Youtuber</span>
@@ -130,7 +130,7 @@ function Biography() {
             <HoverBanner />
 
 
-            <section className='px-32 pt-5 mb-12'>
+            <section className='px-48 pt-5 mb-12'>
                 <div className='mt-12'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Actor</span>
@@ -175,7 +175,7 @@ function Biography() {
 
                 </div>
             </section>
-            <section className='px-32 pt-5 mb-12'>
+            <section className='px-48 pt-5 mb-12'>
                 <div className='mt-12'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Actresses</span>
@@ -223,7 +223,7 @@ function Biography() {
 
             <HoverBanner />
 
-            <section className='px-32 pt-5 mb-12'>
+            <section className='px-48 pt-5 mb-12'>
                 <div className='mt-12'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Actor</span>
@@ -268,7 +268,7 @@ function Biography() {
 
                 </div>
             </section>
-            <section className='px-32 pt-5 mb-12'>
+            <section className='px-48 pt-5 mb-12'>
                 <div className='mt-12'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Actresses</span>
