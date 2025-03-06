@@ -19,10 +19,10 @@ const weatherData = [
 
 function TodayWeather() {
     return (
-        <div>
+        <div className='container mx-auto'>
             <AdBanner />
 
-            <div className='px-32 py-8'>
+            <div className='px-44 py-8'>
                 <WeatherFilter />
                 <div className='flex items-center gap-3 mt-6 pb-1 mb-8 border-black relative font-semibold border-b w-fit'>
                     <span className='text-red-500'>Home</span> /  Today / Houly / Daily

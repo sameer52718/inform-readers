@@ -16,10 +16,9 @@ function AdDetail() {
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
     return (
-        <div>
+        <div className='container mx-auto'>
             <AdBanner />
-
-            <div className='px-32 bg-white'>
+            <div className='px-44 bg-white'>
                 <div className='flex items-center gap-1 px-32 py-6'>
                     <h6>Home</h6>
                     /
@@ -46,7 +45,7 @@ function AdDetail() {
                         <div className="flex flex-col items-center space-y-4">
                             {/* Large Image */}
                             <div className="border-2 border-black rounded-3xl mb-4">
-                                <Image src={selectedImage} alt="Camera" width={3000} height={3000} className=" w-[500px] h-[400px]" />
+                                <Image src={selectedImage} alt="Camera" width={3000} height={3000} className=" w-[400px] h-[360px]" />
                             </div>
 
                             {/* Thumbnail Carousel */}
@@ -59,7 +58,7 @@ function AdDetail() {
                                             }`}
                                         onClick={() => setSelectedImage(img)}
                                     >
-                                        <Image src={img} alt="Camera Thumbnail" width={500} height={500} className="rounded-md h-60 w-60" />
+                                        <Image src={img} alt="Camera Thumbnail" width={500} height={500} className="rounded-md h-40 w-40" />
                                     </div>
                                 ))}
                                 <button className="text-red-500 text-6xl border rounded-full bg-[#d9d9d9] h-12 w-12 flex items-center justify-center"><Icon icon="lsicon:double-arrow-right-outline" width="40" height="40" /></button>

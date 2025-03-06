@@ -73,7 +73,7 @@ function Biography() {
             <div className="w-24 bg-[#ff0000] h-full"></div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-4  mt-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="col-span-1">
               <ProfileCard />
@@ -119,7 +119,7 @@ function Biography() {
             <div className="w-24 bg-[#ff0000] h-full"></div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-4  mt-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="col-span-1">
               <ProfileCard />
@@ -168,7 +168,7 @@ function Biography() {
             <div className="w-24 bg-[#ff0000] h-full"></div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-4  mt-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="col-span-1">
               <ProfileCard />
@@ -214,7 +214,7 @@ function Biography() {
             <div className="w-24 bg-[#ff0000] h-full"></div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-4  mt-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="col-span-1">
               <ProfileCard />
@@ -263,7 +263,7 @@ function Biography() {
             <div className="w-24 bg-[#ff0000] h-full"></div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-4  mt-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="col-span-1">
               <ProfileCard />
@@ -309,7 +309,7 @@ function Biography() {
             <div className="w-24 bg-[#ff0000] h-full"></div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-4  mt-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="col-span-1">
               <ProfileCard />

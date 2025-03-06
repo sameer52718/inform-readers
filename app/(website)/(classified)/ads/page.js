@@ -9,7 +9,7 @@ import React from 'react'
 
 const AdCard = () => {
   return (
-    <div className='bg-white rounded-2xl flex  p-8 gap-8 mb-5'>
+    <div className='bg-white rounded-2xl flex  p-8 gap-8 mb-5 '>
       <div>
         <Image src={"/website/assets/images/ad/01.png"} width={1000} height={1000} className="h-36 w-[500px]" />
       </div>
@@ -40,9 +40,9 @@ const AdCard = () => {
 
 function AdLisiing() {
   return (
-    <div>
+    <div className='mx-auto container'>
       <AdBanner />
-      <div className='px-32 py-8'>
+      <div className='px-44 py-8'>
         <WeatherFilter />
 
         <div className='grid grid-cols-12 gap-8 mt-10'>

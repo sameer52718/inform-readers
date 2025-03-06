@@ -13,14 +13,14 @@ function SpecificationList() {
     const [activeTab, setActiveTab] = useState("popularity");
     return (
         <>
-            <section className='px-32 bg-white'>
+            <section className='px-44 bg-white'>
                 <div className='flex items-center gap-1 px-32 py-4'>
                     <h6>Home</h6>
                     <Icon icon="basil:caret-right-solid" className='mt-[2px]' width="18" height="18" />
                     <h6>Store Page</h6>
                 </div>
 
-                <div className='px-32'>
+                <div className='px-44'>
                     <h2 className='text-3xl font-bold  pb-3'>Games</h2>
                 </div>
             </section>
@@ -39,7 +39,7 @@ function SpecificationList() {
             </section>
 
 
-            <section className='px-32'>
+            <section className='px-44'>
                 <div className="grid grid-cols-12 gap-10">
                     <div className="col-span-3">
                         <PriceFilter />

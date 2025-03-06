@@ -75,7 +75,6 @@ export default function GameCard() {
         </div>
       </div>
 
-      <hr className="my-4" />
 
       <div className="col-span-3 border-t  border-black mx-4">
         <div className="grid grid-cols-2">

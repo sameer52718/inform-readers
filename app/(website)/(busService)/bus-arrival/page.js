@@ -5,10 +5,9 @@ import React from 'react'
 
 function BusArrival() {
     return (
-        <div>
+        <div className='container mx-auto'> 
             <AdBanner />
-
-            <div className='px-32 py-8'>
+            <div className='px-56 py-8'>
                 <div className='flex items-center gap-3 mt-6 pb-1 mb-8 border-black relative font-semibold border-b w-fit'>
                     <span className='text-red-500'>Home</span> /  Today  /  Houly  /  Daily
                     <div className="absolute top-[28px] left-0 w-14 h-[3px] bg-red-500"></div>
@@ -16,28 +15,28 @@ function BusArrival() {
 
 
                 <div className='text-center'>
-                    <h6 className='text-6xl font-bold mb-1'>Bus Services  in <span className='text-red-500'>Pakistan</span> </h6>
-                    <p className='text-lg text-red-500 font-semibold'>Last Updated: 10th January 2025</p>
+                    <h6 className='text-4xl font-bold mb-1'>Bus Services  in <span className='text-red-500'>Pakistan</span> </h6>
+                    <p className='text-base text-red-500 font-semibold'>Last Updated: 10th January 2025</p>
                 </div>
 
 
                 <div>
-                    <h4 className='text-2xl font-bold my-6'>Daewoo Express Departure From Lahore Schedule</h4>
+                    <h4 className='text-xl font-bold my-6'>Daewoo Express Departure From Lahore Schedule</h4>
 
                     <div className='bg-[#d9d9d9]  justify-between py-8 px-12 rounded-3xl'>
-                        <div className="grid grid-cols-3 mb-4">
+                        <div className="grid grid-cols-3 mb-2">
                             <div className="col-span-1">
-                                <h4 className='text-3xl font-bold'>
+                                <h4 className='text-xl font-bold'>
                                     Destination
                                 </h4>
                             </div>
                             <div className="col-span-1">
-                                <h4 className='text-3xl font-bold'>
+                                <h4 className='text-xl font-bold'>
                                     Time
                                 </h4>
                             </div>
                             <div className="col-span-1">
-                                <h4 className='text-3xl font-bold'>
+                                <h4 className='text-xl font-bold'>
                                     Price / Type
                                 </h4>
 
@@ -83,19 +82,19 @@ function BusArrival() {
                     <HoverBanner padding='0px' />
 
                     <div className='bg-[#d9d9d9]  justify-between py-8 px-12 rounded-3xl'>
-                        <div className="grid grid-cols-3 mb-4">
+                        <div className="grid grid-cols-3 mb-2">
                             <div className="col-span-1">
-                                <h4 className='text-3xl font-bold'>
+                                <h4 className='text-xl font-bold'>
                                     Destination
                                 </h4>
                             </div>
                             <div className="col-span-1">
-                                <h4 className='text-3xl font-bold'>
+                                <h4 className='text-xl font-bold'>
                                     Time
                                 </h4>
                             </div>
                             <div className="col-span-1">
-                                <h4 className='text-3xl font-bold'>
+                                <h4 className='text-xl font-bold'>
                                     Price / Type
                                 </h4>
 

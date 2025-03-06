@@ -60,10 +60,10 @@ function GridView() {
 
 function ClassifiedPage() {
     return (
-        <div>
+        <div className='container mx-auto'>
             <AdBanner />
 
-            <div className='px-32 py-8' >
+            <div className='px-44 py-8' >
                 <WeatherFilter />
 
                 <div className='mt-10'>
@@ -75,7 +75,7 @@ function ClassifiedPage() {
                         {categories.map((category, index) => (
                             <div key={index} className='col-span-1 bg-white flex items-center justify-center flex-col p-8 rounded-2xl'>
                                 <h4 className='text-2xl  font-semibold mb-3'>{category.name}</h4>
-                                <Image src={category.img} width={500} height={500} className='h-32 w-full object-contain' />
+                                <Image src={category.img} width={500} height={500} className='h-32 w-full object-contain' alt='category-image' />
                             </div>
                         ))}
                     </div>
@@ -97,7 +97,7 @@ function ClassifiedPage() {
                     <div className='bg-[#d9d9d9] py-8 px-20 grid grid-cols-3 gap-x-14 gap-y-6 rounded-3xl'>
                         {ads.map((ad, index) => (
                             <div className='bg-[#fff] rounded-xl p-4'>
-                                <Image src={ad.img} width={500} height={500} className='h-44 w-full object-cover rounded-xl mb-3' />
+                                <Image src={ad.img} width={500} height={500} className='h-44 w-full object-cover rounded-xl mb-3' alt='ad-image' />
                                 <div>
                                     <h4 className='text-xl font-semibold mb-3 text-center'>{ad.name}</h4>
                                     <div className='flex items-center justify-between'>

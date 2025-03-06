@@ -86,7 +86,7 @@ function SoftwarePage() {
         <div>
             <AdBanner />
 
-            <div className='px-32 py-8'>
+            <div className='px-48 py-8'>
                 <h4 className='text-4xl text-center font-bold'>Free <span className='text-red-500'>Software Downloads</span> </h4>
           
                 <TabMenu />

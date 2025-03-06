@@ -22,7 +22,7 @@ const SpecificationCard = ({ product }) => {
         <div className=" rounded-3xl p-4 h-60  bg-[#d4d4d4]" >
             <div className="flex items-center justify-center flex-col">
                 <Link href={`specification/${product.productName}`}>
-                    <Image src={product.productImage} width={300} height={300} alt={product.productAlt} className="w-20 h-32 mb-4" />
+                    <Image src={product.productImage} width={300} height={300} alt={product.productAlt} className="w-full h-32 mb-4 rounded-lg" />
                 </Link>
                 <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
                     <Link href={`specification/${product.productName}`}>
@@ -80,11 +80,11 @@ function Specification() {
     console.log(products);
 
     return (
-        <div className='bg-white'>
+        <div className='bg-white '>
             <AdBanner />
             <CategorySection category={homeCategory} />
 
-            <section className='px-32 py-8'>
+            <section className='px-56 py-8'>
                 <div className="flex items-center border-black ">
                     <span className=" text-xl font-semibold text-red-500 mr-6">Latest Gadget</span>
                     <button
@@ -162,7 +162,7 @@ function Specification() {
                 </div>
             </section>
 
-            <section className='px-32 py-8'>
+            <section className='px-56 py-8'>
                 <div className="flex items-center border-black ">
                     <span className=" text-xl font-semibold text-red-500 mr-6">Latest Mobile</span>
                     <button
@@ -241,7 +241,7 @@ function Specification() {
             </section>
 
             <HoverBanner padding='100px' />
-            <section className='px-32 py-8'>
+            <section className='px-56 py-8'>
                 <div className="flex items-center border-black ">
                     <span className=" text-xl font-semibold text-red-500 mr-6">Latest Laptopm</span>
                     <button
@@ -320,7 +320,7 @@ function Specification() {
             </section>
 
 
-            <section className='px-32 py-8'>
+            <section className='px-56 py-8'>
                 <div className="flex items-center border-black ">
                     <span className=" text-xl font-semibold text-red-500 mr-6">Latest Smart Watches</span>
                     <button
@@ -401,7 +401,7 @@ function Specification() {
             <HoverBanner padding='100px' />
 
 
-            <section className='px-32 py-8'>
+            <section className='px-56 py-8'>
                 <div className="flex items-center border-black ">
                     <span className=" text-xl font-semibold text-red-500 mr-6">Latest Tablet</span>
                     <button
@@ -480,7 +480,7 @@ function Specification() {
             </section>
 
 
-            <section className='px-32 py-8'>
+            <section className='px-56 py-8'>
                 <div className="flex items-center border-black ">
                     <span className=" text-xl font-semibold text-red-500 mr-6">Latest AC</span>
                     <button

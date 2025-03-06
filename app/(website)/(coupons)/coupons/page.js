@@ -26,17 +26,17 @@ const CouponListCard = ({ coupon }) => {
             </div>
             <div className="border-t border-black  mt-4">
                 <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-1 border-r border-black py-2">
-                        <p className='flex items-center gap-1'>See Details
+                    <div className="col-span-3   border-black py-2">
+                        <p className='flex justify-center items-center gap-1'>See Details
                             <Icon icon="mynaui:plus-solid" width="18" height="18" className='mt-[2px]' />
                         </p>
 
                     </div>
-                    <div className="col-span-2 px-20 flex items-center" >
+                    {/* <div className="col-span-2 px-20 flex items-center" >
                         <button className='bg-black px-6 py-1 rounded-2xl text-white w-fit'>
                             Code
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
@@ -57,9 +57,11 @@ const coupons = [
 function Coupons() {
     const [activeTab, setActiveTab] = useState("popularity");
     return (
-
         <>
+        <div className='container mx-auto'>
             <AdBanner />
+
+            </div>
 
             <section className='px-32 bg-white'>
                 <div className='flex items-center gap-1 px-32 py-4'>
@@ -69,11 +71,11 @@ function Coupons() {
                 </div>
 
                 <div>
-                    <h2 className='text-3xl font-bold text-center pb-3'>A Cherry on Top Coupons & Promo Codes</h2>
+                    <h2 className='text-3xl font-bold text-center pb-6'>A Cherry on Top Coupons & Promo Codes</h2>
                 </div>
             </section>
-
-            <section className='px-6'>
+            <div className='container mx-auto'>
+            <section className='px-44'>
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5 gap-y-4 mt-6 px-6">
                     <div className="col-span-3 bg-[#d9d9d9] p-4 rounded-2xl h-fit">
                         <div className='bg-white h-40 rounded-xl flex items-center justify-center'>
@@ -196,6 +198,7 @@ function Coupons() {
                 </div>
             </section>
 
+        </div>
         </>
 
     )

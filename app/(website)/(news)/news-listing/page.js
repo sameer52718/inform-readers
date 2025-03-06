@@ -119,14 +119,14 @@ function NewsListing() {
         <div>
             <AdBanner />
 
-            <div className='px-32 py-8'>
+            <div className='px-52 py-8'>
                 <h4 className='font-bold text-4xl text-center'><span className='text-red-500'>Fashion</span> News</h4>
                 <Gallery />
             </div>
 
             <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  my-6' />
 
-            <div className='px-32 py-8'>
+            <div className='px-52 py-8'>
                 <NewsSection />
                 <NewsSection />
                 <HoverBanner padding='0px' />
@@ -136,7 +136,7 @@ function NewsListing() {
 
             <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  my-6' />
 
-            <div className='px-32 py-8'>
+            <div className='px-52 py-8'>
                 <NewsSection />
 
                 <div className='flex items-center justify-center'>

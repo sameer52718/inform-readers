@@ -12,10 +12,10 @@ import React from 'react'
 
 function NameMeaning() {
     return (
-        <div>
+        <div className='container mx-auto'>
             <AdBanner />
 
-            <div className='px-32 py-8'>
+            <div className='px-44 py-8'>
                 <NameFilter />
 
                 <div className="mt-8">

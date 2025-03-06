@@ -20,7 +20,7 @@ const weatherData = [
 function WeatherPage() {
     return (
         <>
-            <div className='px-28 py-8'>
+            <div className='px-44 py-8'>
                 <WeatherFilter />
             </div>
 
@@ -44,7 +44,7 @@ function WeatherPage() {
                 </div>
             </div>
 
-            <div className='px-28'>
+            <div className='px-44'>
                 <HoverBanner padding="0px" />
                 <h4 className='text-4xl font-semibold px-3'>Pakistan Weather Conditions</h4>
                 <div className='border border-black grid grid-cols-12 mt-8 bg-white p-12 rounded-3xl gap-10'>

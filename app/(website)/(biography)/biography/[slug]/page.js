@@ -43,10 +43,10 @@ const BiographyTable = () => {
 
 function BiographyDetail() {
     return (
-        <>
+        <div className='container mx-auto'>
             <AdBanner />
 
-            <section className='px-32 bg-white'>
+            <section className='px-36 bg-white'>
                 <div className='flex items-center gap-1 px-32 py-6'>
                     <h6>Home</h6>
                     <Icon icon="basil:caret-right-solid" className='mt-[2px]' width="18" height="18" />
@@ -56,7 +56,7 @@ function BiographyDetail() {
                 </div>
             </section>
 
-            <section className='px-32 py-8'>
+            <section className='px-48 py-8'>
                 <div className='grid grid-cols-3 mt-6 gap-2'>
                     <div className="col-span-1">
                         <div className="col-span-2 h-[340px] w-full">
@@ -163,7 +163,7 @@ function BiographyDetail() {
 
            
 
-            <div className="mx-40 flex items-center justify-between bg-red-600 text-white px-2 py-3 text-sm font-bold mb-8">
+            <div className="px-2 flex items-center justify-between bg-red-600 text-white mx-56 py-3 text-sm font-bold mb-8">
                 <h5 className="ml-2 text-3xl">Dilraba Dilmurat</h5>
                 <div className="flex items-center space-x-2 mr-2">
                     <Link href={"#"}>
@@ -184,12 +184,12 @@ function BiographyDetail() {
                 </div>
             </div>
 
-            <div className='px-40'>
+            <div className='px-56'>
                 <BiographyTable />
             <HoverBanner padding='0px' />
             </div>
 
-            <div className='px-40'>
+            <div className='px-56'>
                 <BiographyTable />
                 <div className='mt-10'>
                     <h5 className='text-3xl font-bold mt-3'>Personal Profile About Dilraba Dilmurat: </h5>
@@ -204,7 +204,7 @@ function BiographyDetail() {
             <HoverBanner  padding='0px'/>
             </div>
 
-        </>
+        </div>
     )
 }
 

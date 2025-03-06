@@ -473,13 +473,13 @@ const tabContentTwo = {
 
 function News() {
   return (
-    <div>
+    <div className=''>
       <AdBanner />
-      <div className="px-32 py-8">
+      <div className="px-48 py-8">
         <Gallery />
       </div>
       <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  mb-3' />
-      <div className='px-32 mt-12'>
+      <div className='px-48 mt-12'>
         <TabMenu />
         <HoverBanner padding='0px' />
         <TabMenuTwo />
@@ -492,7 +492,7 @@ function News() {
       </div>
       <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  my-10 ' />
 
-      <div className='px-32'>
+      <div className='px-48'>
         <NewsSection />
       </div>
 

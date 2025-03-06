@@ -6,7 +6,7 @@ import React from 'react'
 
 function SoftwareDetail() {
     return (
-        <div className=''>
+        <div className='container mx-auto'>
             <AdBanner />
             <div className='bg-[#f1f1f1]'>
                 <div className='px-32  '>

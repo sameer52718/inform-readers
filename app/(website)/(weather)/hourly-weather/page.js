@@ -43,9 +43,9 @@ const WeatherHoutlyCard = () => {
 }
 function HourlyWeather() {
     return (
-        <div>
+        <div className='container mx-auto'>
             <AdBanner />
-            <div className='px-32 py-8'>
+            <div className='px-48 py-8'>
                 <WeatherFilter />
 
                 <div className='flex items-center gap-3 mt-6 pb-1 mb-8 border-black relative font-semibold border-b w-fit'>

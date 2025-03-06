@@ -106,7 +106,7 @@ function SoftwareListing() {
 
                 <h4 className='text-3xl font-bold'>Windows Apps for Internet Software</h4>
             </div>
-            <div className='px-32 py-8'>
+            <div className='px-40 py-8'>
                 <div className="grid grid-cols-12 gap-12">
                     <div className="col-span-3">
                         <PriceFilter />

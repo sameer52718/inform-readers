@@ -196,9 +196,9 @@ function SpecificationDetail() {
         { id: 3, src: "/images/big3.jpg", thumb: "/images/thumb3.jpg" },
     ];
     return (
-        <div>
+        <div className=''>
             <AdBanner />
-            <section className='px-32 bg-white'>
+            <section className='px-48 bg-white'>
                 <div className='flex items-center gap-1 px-32 py-4'>
                     <h6>Home</h6>
                     <Icon icon="basil:caret-right-solid" className='mt-[2px]' width="18" height="18" />
@@ -207,13 +207,13 @@ function SpecificationDetail() {
                     <h6>Product Name</h6>
                 </div>
 
-                <div className='px-32'>
+                <div className='px-48'>
                     <h2 className='text-3xl font-bold  pb-3'>Motorola 65 Inch LED Ultra HD (4K) TV (65SAUHDM)</h2>
                 </div>
             </section>
 
-            <section className='px-32 py-8'>
-                <div className='px-32'>
+            <section className='px-48 py-8'>
+                <div className='px-48'>
                     <div className="flex items-center border-black ">
                         <span className=" text-xl font-semibold text-red-500 mr-6">Overview</span>
                         <button

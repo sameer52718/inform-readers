@@ -31,12 +31,12 @@ const CouponCard = ({ data }) => {
 
 function BestCoupons() {
     return (
-        <div>
+        <div className='container mx-auto'>
             <AdBanner />
             <CategorySection category={homeCategory} />
 
             <section >
-                <div className='px-32 py-6'>
+                <div className='px-44 py-6'>
                     <h4 className='text-[#ff0000] text-4xl font-bold text-center'> <span className='text-black'>Best</span> Coupons Deal & Cash Back</h4>
 
                     <div className="flex items-center justify-between mt-6">
@@ -82,7 +82,7 @@ function BestCoupons() {
             </section>
 
             <section >
-                <div className='px-32 py-6'>
+                <div className='px-44 py-6'>
                     <div className="flex items-center justify-between mt-6">
                         <div className="flex items-center gap-12 ">
                             <h6 className="text-[#ff0000] font-bold text-xl">
@@ -126,7 +126,7 @@ function BestCoupons() {
             <section >
 
 
-                <div className='px-32 py-6'>
+                <div className='px-44 py-6'>
                     <div className="flex items-center justify-between mt-6">
                         <div className="flex items-center gap-12 ">
                             <h6 className="text-[#ff0000] font-bold text-xl  ">
