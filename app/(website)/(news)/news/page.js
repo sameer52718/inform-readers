@@ -148,10 +148,12 @@ const AllContentTwo = () => {
     <div className="grid grid-cols-2 gap-6">
       <div className="rounded-2xl overflow-hidden space-y-4">
         <div className=" bg-[#d9d9d9] rounded-2xl overflow-hidden">
-          <img
-            src="/website/assets/images/news/05.png" 
+          <Image
+            src="/website/assets/images/news/05.png"
             alt="News Image"
             className="w-full h-52 object-cover rounded-2xl"
+            width={1000}
+            height={1000}
           />
           <div className="p-4">
             <h2 className="text-2xl">
@@ -168,9 +170,12 @@ const AllContentTwo = () => {
 
         <div className="bg-[#d9d9d9] p-3 rounded-2xl shadow-md space-y-2">
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               src="/website/assets/images/news/05.png"
               alt="News Thumbnail"
+
               className="w-24 h-24 rounded-lg object-cover"
             />
             <div>
@@ -182,7 +187,9 @@ const AllContentTwo = () => {
           </div>
 
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               src="/website/assets/images/news/05.png" // Replace with actual image
               alt="News Thumbnail"
               className="w-24 h-24 rounded-lg object-cover"
@@ -199,8 +206,10 @@ const AllContentTwo = () => {
 
       <div className="rounded-2xl overflow-hidden space-y-4">
         <div className=" bg-[#d9d9d9] rounded-2xl overflow-hidden">
-          <img
-            src="/website/assets/images/news/05.png" 
+          <Image
+            width={1000}
+            height={1000}
+            src="/website/assets/images/news/05.png"
             alt="News Image"
             className="w-full h-52 object-cover rounded-2xl"
           />
@@ -219,7 +228,9 @@ const AllContentTwo = () => {
 
         <div className="bg-[#d9d9d9] p-3 rounded-2xl shadow-md space-y-2">
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               src="/website/assets/images/news/05.png"
               alt="News Thumbnail"
               className="w-24 h-24 rounded-lg object-cover"
@@ -233,7 +244,9 @@ const AllContentTwo = () => {
           </div>
 
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               src="/website/assets/images/news/05.png" // Replace with actual image
               alt="News Thumbnail"
               className="w-24 h-24 rounded-lg object-cover"
@@ -344,7 +357,9 @@ const RedCard = () => {
     <div className='grid grid-cols-3 gap-10'>
       <div className=" bg-red-600 rounded-2xl overflow-hidden shadow-lg">
         <div className="w-full h-60">
-          <img
+          <Image
+            width={1000}
+            height={1000}
             src="/website/assets/images/news/05.png"
             alt="Modern Monochrome Home"
             className="w-full h-full object-cover"
@@ -360,7 +375,9 @@ const RedCard = () => {
 
       <div className=" bg-red-600 rounded-2xl overflow-hidden shadow-lg">
         <div className="w-full h-60">
-          <img
+          <Image
+            width={1000}
+            height={1000}
             src="/website/assets/images/news/05.png"
             alt="Modern Monochrome Home"
             className="w-full h-full object-cover"
@@ -376,7 +393,9 @@ const RedCard = () => {
 
       <div className=" bg-red-600 rounded-2xl overflow-hidden shadow-lg">
         <div className="w-full h-60">
-          <img
+          <Image
+            width={1000}
+            height={1000}
             src="/website/assets/images/news/05.png"
             alt="Modern Monochrome Home"
             className="w-full h-full object-cover"
@@ -426,7 +445,9 @@ const NewsSection = () => {
         >
           {/* Image */}
           <div className="w-40 h-28">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               src={news.image}
               alt="News Thumbnail"
               className="w-full h-full rounded-xl object-cover"

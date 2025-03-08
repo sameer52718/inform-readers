@@ -53,7 +53,9 @@ const CompetitorCard = () => {
             <div className="bg-white mt-4 p-4 rounded-lg flex justify-center items-center gap-6 border">
                 <div className="grid grid-cols-3 items-center">
                     <div className="flex col-span-1 flex-col items-center border-r border-gray-300">
-                        <img
+                        <Image
+                            width={1000}
+                            height={1000}
                             src="/images/tv.png"
                             alt="Motorola TV"
                             className="w-28 h-20 object-cover rounded"
@@ -158,7 +160,9 @@ const ReviewTabSection = () => {
             {/* Review Section */}
             <div className="mb-4">
                 <div className="flex items-center space-x-2">
-                    <img
+                    <Image
+                        width={1000}
+                        height={1000}
                         src="/user-avatar.png"
                         alt="User Avatar"
                         className="w-8 h-8 rounded-full"

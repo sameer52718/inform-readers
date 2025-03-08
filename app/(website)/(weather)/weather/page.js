@@ -90,7 +90,9 @@ function WeatherPage() {
                         <div className="w-full bg-gray-300 rounded-3xl px-10  py-7  flex flex-col items-center col-span-1">
                             {/* Image Section */}
                             <div className="w-full border-2 border-red-500 rounded-3xl overflow-hidden">
-                                <img
+                                <Image
+                                    width={1000}
+                                    height={1000}
                                     src="/website/assets/images/weather/01.png" // Replace with actual image URL
                                     alt="Wildfire Smoke"
                                     className="w-full h-48 object-cover rounded-3xl"
@@ -104,7 +106,9 @@ function WeatherPage() {
                         <div className="w-full bg-gray-300 rounded-3xl px-10  py-7  flex flex-col items-center col-span-1">
                             {/* Image Section */}
                             <div className="w-full border-2 border-red-500 rounded-3xl overflow-hidden">
-                                <img
+                                <Image
+                                    width={1000}
+                                    height={1000}
                                     src="/website/assets/images/weather/01.png" // Replace with actual image URL
                                     alt="Wildfire Smoke"
                                     className="w-full h-48 object-cover rounded-3xl"
@@ -118,7 +122,9 @@ function WeatherPage() {
                         <div className="w-full bg-gray-300 rounded-3xl px-10  py-7  flex flex-col items-center col-span-1">
                             {/* Image Section */}
                             <div className="w-full border-2 border-red-500 rounded-3xl overflow-hidden">
-                                <img
+                                <Image
+                                    width={1000}
+                                    height={1000}
                                     src="/website/assets/images/weather/01.png" // Replace with actual image URL
                                     alt="Wildfire Smoke"
                                     className="w-full h-48 object-cover rounded-3xl"
@@ -138,7 +144,9 @@ function WeatherPage() {
                         <div className="w-full bg-gray-300 rounded-3xl px-10  py-7  flex flex-col items-center col-span-1">
                             {/* Image Section */}
                             <div className="w-full border-2 border-red-500 rounded-3xl overflow-hidden">
-                                <img
+                                <Image
+                                    width={1000}
+                                    height={1000}
                                     src="/website/assets/images/weather/01.png" // Replace with actual image URL
                                     alt="Wildfire Smoke"
                                     className="w-full h-48 object-cover rounded-3xl"
@@ -152,7 +160,9 @@ function WeatherPage() {
                         <div className="w-full bg-gray-300 rounded-3xl px-10  py-7  flex flex-col items-center col-span-1">
                             {/* Image Section */}
                             <div className="w-full border-2 border-red-500 rounded-3xl overflow-hidden">
-                                <img
+                                <Image
+                                    width={1000}
+                                    height={1000}
                                     src="/website/assets/images/weather/01.png" // Replace with actual image URL
                                     alt="Wildfire Smoke"
                                     className="w-full h-48 object-cover rounded-3xl"
@@ -166,7 +176,9 @@ function WeatherPage() {
                         <div className="w-full bg-gray-300 rounded-3xl px-10  py-7  flex flex-col items-center col-span-1">
                             {/* Image Section */}
                             <div className="w-full border-2 border-red-500 rounded-3xl overflow-hidden">
-                                <img
+                                <Image
+                                    width={1000}
+                                    height={1000}
                                     src="/website/assets/images/weather/01.png" // Replace with actual image URL
                                     alt="Wildfire Smoke"
                                     className="w-full h-48 object-cover rounded-3xl"

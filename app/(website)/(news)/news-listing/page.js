@@ -91,7 +91,9 @@ const NewsSection = () => {
                 >
                     {/* Image */}
                     <div className="w-40 h-28">
-                        <img
+                        <Image
+                            width={1000}
+                            height={1000}
                             src={news.image}
                             alt="News Thumbnail"
                             className="w-full h-full rounded-xl object-cover"
