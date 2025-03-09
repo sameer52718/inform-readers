@@ -165,10 +165,7 @@ function FlightListing() {
                             <FlightCard />
                             <FlightCard />
                             <FlightCard />
-                            <FlightCard />
-                            <FlightCard />
-                            <FlightCard />
-                            <FlightCard />
+                            
                         </div>
                         <div className='flex items-center justify-center'>
                             <button className='bg-red-500 text-white text-lg font-semibold px-6 py-2 w-fit rounded-lg'>See More</button>
