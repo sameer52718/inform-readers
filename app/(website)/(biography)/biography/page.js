@@ -24,7 +24,7 @@ const ProfileCard = () => {
       </Link>
 
       <hr className="my-2 border-gray-400" />
-      <p className="text-gray-800 font-semibold"><Link href={"/biography/1"}> Dilraba Dilmurat </Link></p>
+      <p className="text-gray-800 font-semibold">Dislraba Dilmurat</p>
     </div>
   );
 };
