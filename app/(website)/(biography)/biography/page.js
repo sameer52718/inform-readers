@@ -21,7 +21,7 @@ const ProfileCard = () => {
       />
 
       <hr className="my-2 border-gray-400" />
-      <p className="text-gray-800 font-semibold">Dilraba Dilmurat</p>
+      <p className="text-gray-800 font-semibold">Dislraba Dilmurat</p>
     </div>
   );
 };
