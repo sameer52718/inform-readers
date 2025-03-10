@@ -4,6 +4,7 @@ import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner';
 import { Icon } from '@iconify/react'
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 
@@ -52,7 +53,7 @@ function PetrolPrice() {
                     <h6 className='text-red-500'>Home</h6>
                     <Icon icon="basil:caret-right-solid" className='mt-[2px]' width="18" height="18" />
                     <h6>Petrol Price</h6>
-                    
+
                 </div>
 
                 <div className='relative py-10'>
@@ -97,11 +98,13 @@ function PetrolPrice() {
                     <h4 className='px-2 text-2xl font-bold '>Latest Fuel News</h4>
                     <div className='bg-[#d9d9d9] p-6 rounded-2xl mt-3'>
                         {[...Array(3)].map((_, index) => (
-                            <div key={index} className='flex items-center gap-4 bg-white p-3 mb-4 rounded-3xl'>
-                                <Image src="/website/assets/images/news/01.png" width={1000} height={1000} className='w-28 h-28 object-cover rounded-lg border border-red-500' />
+                            <Link href={'/news/1'}>
+                                <div key={index} className='flex items-center gap-4 bg-white p-3 mb-4 rounded-3xl'>
+                                    <Image src="/website/assets/images/news/01.png" width={1000} height={1000} className='w-28 h-28 object-cover rounded-lg border border-red-500' />
 
-                                <h4 className='text-2xl font-semibold'>Climate Crisis: Fossil Fuel Plants That Power BTC Mining to Lose Permits in New York State</h4>
-                            </div>
+                                    <h4 className='text-2xl font-semibold'>Climate Crisis: Fossil Fuel Plants That Power BTC Mining to Lose Permits in New York State</h4>
+                                </div>
+                            </Link>
                         ))}
 
                     </div>
@@ -114,7 +117,7 @@ function PetrolPrice() {
                     </div>
                 </div>
 
-                  <Image src={"/website/assets/images/banner/01.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  w-full my-10 ' />
+                <Image src={"/website/assets/images/banner/01.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  w-full my-10 ' />
 
 
             </div>

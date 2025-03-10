@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { faker } from "@faker-js/faker";
 import React from "react";
+import Link from "next/link";
 
 function ProductCard({ bgColor = "#fff" }) {
   // Generate fake product data using Faker.js
@@ -13,10 +14,16 @@ function ProductCard({ bgColor = "#fff" }) {
   return (
     <div className="border rounded-lg p-4 h-60  border-black" style={{ backgroundColor: bgColor }}>
       <div className="flex items-center justify-center flex-col">
-        <Image src={productImage} width={300} height={300} alt={productAlt} className="w-full h-32 mb-4 rounded-2xl" />
+        <Link href={"/specification/1"}>
+          <Image src={productImage} width={300} height={300} alt={productAlt} className="w-full h-32 mb-4 rounded-2xl" />
+        </Link>
+
+        <Link href={"/specification/1"}>
         <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
           {productName}
         </h4>
+        </Link>
+        
 
       </div>
       <div className="divider h-[1px] w-full bg-black"></div>

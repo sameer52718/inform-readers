@@ -71,7 +71,7 @@ function BusService() {
                                 <h5 className='text-2xl font-bold col-span-2 flex items-center'><Icon icon="weui:location-filled" width="32" height="32" className='inline mr-2' />{item}</h5>
                                 <div className='col-span-1 flex items-center justify-between'>
                                     <button className='bg-[#ff0000] text-white px-12 py-2 rounded-xl'>
-                                        <Link href={"/bus-departure"} className='text-xl'>
+                                        <Link href={"/bus-arrival"} className='text-xl'>
                                             Departure
                                         </Link>
                                     </button>

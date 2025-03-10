@@ -48,7 +48,7 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -57,17 +57,7 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
-                                    Check Schedule
-                                </Link>
-                            </h5>
-                        </div>
-
-                        <div className='grid grid-cols-3 w-full bg-white py-3 px-8 mb-3'>
-                            <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
-                            <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
-                            <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -77,7 +67,7 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -87,7 +77,17 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
+                                    Check Schedule
+                                </Link>
+                            </h5>
+                        </div>
+
+                        <div className='grid grid-cols-3 w-full bg-white py-3 px-8 mb-3'>
+                            <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
+                            <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
+                            <h5 className='col-span-1 text-lg font-semibold text-black'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -119,7 +119,7 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -128,17 +128,7 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
-                                    Check Schedule
-                                </Link>
-                            </h5>
-                        </div>
-
-                        <div className='grid grid-cols-3 w-full bg-white py-3 px-8 mb-3'>
-                            <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
-                            <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
-                            <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -148,7 +138,7 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>
@@ -158,7 +148,17 @@ function FlightPage() {
                             <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
                             <h5 className='col-span-1 text-lg font-semibold text-black'>
-                                <Link href={''} className='underline'>
+                                <Link href={'/flight/1'} className='underline'>
+                                    Check Schedule
+                                </Link>
+                            </h5>
+                        </div>
+
+                        <div className='grid grid-cols-3 w-full bg-white py-3 px-8 mb-3'>
+                            <h5 className='text-lg font-bold col-span-1'>Bhawalpur</h5>
+                            <h5 className='col-span-1 text-lg font-semibold text-black'>BHV</h5>
+                            <h5 className='col-span-1 text-lg font-semibold text-black'>
+                                <Link href={'/flight/1'} className='underline'>
                                     Check Schedule
                                 </Link>
                             </h5>

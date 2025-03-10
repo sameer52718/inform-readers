@@ -2,6 +2,7 @@ import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner'
 import WeatherFilter from '@/components/partials/WeatherFilter'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function PostalCode() {
@@ -23,26 +24,37 @@ function PostalCode() {
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 
@@ -53,32 +65,43 @@ function PostalCode() {
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
-                    Oceania
+                        Oceania
                     </h6>
 
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 
@@ -87,32 +110,43 @@ function PostalCode() {
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
-                    Africa
+                        Africa
                     </h6>
 
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 
@@ -121,32 +155,43 @@ function PostalCode() {
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
-                    South America
+                        South America
                     </h6>
 
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 
@@ -154,32 +199,43 @@ function PostalCode() {
                 </div>
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
-                    Europa
+                        Europa
                     </h6>
 
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 
@@ -190,32 +246,43 @@ function PostalCode() {
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
-                    Asia
+                        Asia
                     </h6>
 
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 
@@ -224,32 +291,43 @@ function PostalCode() {
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
-                    North America & Caribbean
+                        North America & Caribbean
                     </h6>
 
                     <div className='bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
                         {[...Array(4)].map((_, i) => (
                             <>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    USA
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    UK
-                                </div>
-                                <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
-                                    <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
-                                    New Zealand
-                                </div>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/01.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        USA
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/02.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        UK
+                                    </div>
+                                </Link>
+                                <Link href={"/postal-code/1"}>
+                                    <div className='bg-white px-4 py-2 rounded-2xl flex items-center gap-2'>
+                                        <Image src="/website/assets/images/country/03.png" width={500} height={500} alt="country" className='h-auto w-10' />
+                                        New Zealand
+                                    </div>
+                                </Link>
+
                             </>
                         ))}
 

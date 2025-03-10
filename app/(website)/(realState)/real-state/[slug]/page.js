@@ -33,7 +33,7 @@ function RealStateDetail() {
                     <div className="flex flex-col items-center space-y-4">
                         {/* Large Image */}
                         <div className="border-2 border-black rounded-3xl mb-4">
-                            <Image src={selectedImage} alt="Camera" width={3000} height={3000} className=" w-[400px] h-[360px]" />
+                            <Image src={selectedImage} alt="Camera" width={3000} height={3000} className=" w-[480px] h-auto" />
                         </div>
 
                         {/* Thumbnail Carousel */}
@@ -46,7 +46,7 @@ function RealStateDetail() {
                                         }`}
                                     onClick={() => setSelectedImage(img)}
                                 >
-                                    <Image src={img} alt="Camera Thumbnail" width={500} height={500} className="rounded-md h-40 w-40" />
+                                    <Image src={img} alt="Camera Thumbnail" width={500} height={500} className="rounded-md h-auto w-40" />
                                 </div>
                             ))}
                             <button className="text-red-500 text-6xl border rounded-full bg-[#d9d9d9] h-12 w-12 flex items-center justify-center"><Icon icon="lsicon:double-arrow-right-outline" width="40" height="40" /></button>
@@ -128,7 +128,7 @@ function RealStateDetail() {
                         Location
                     </h5>
 
-                    <div className='border border-black rounded-2xl w-full h-[500px]'>
+                    <div className='border border-black rounded-2xl w-full h-[500px] overflow-hidden'>
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.05049102596!2d-74.30915197703663!3d40.697193370199564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1741520348326!5m2!1sen!2s"
                             style={{ border: 0 }}

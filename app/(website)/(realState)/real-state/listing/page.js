@@ -5,6 +5,7 @@ import PriceFilter from '@/components/partials/PriceFilter'
 import RealStateFilter from '@/components/partials/RealStateFilter'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useState } from 'react'
 
 
@@ -26,11 +27,13 @@ function RealStateListing() {
                     </div>
                     <div className="col-span-9 bg-gray-200 p-4 rounded-2xl h-fit">
                         <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
-                            <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='h-32 w-44 rounded-2xl' />
-
+                                <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='!h-32 !w-44 rounded-2xl' />
+                            
                             <div>
                                 <h4 className='text-3xl font-bold mb-2'>
-                                    House Market Experts.
+                                    <Link href={'/real-state/1'}>
+                                        House Market Experts.
+                                    </Link>
                                 </h4>
 
                                 <p className='text-sm font-bold'>
@@ -39,11 +42,13 @@ function RealStateListing() {
                             </div>
                         </div>
                         <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
-                            <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='h-32 w-44 rounded-2xl' />
-
+                                <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='!h-32 !w-44 rounded-2xl' />
+                            
                             <div>
                                 <h4 className='text-3xl font-bold mb-2'>
-                                    House Market Experts.
+                                    <Link href={'/real-state/1'}>
+                                        House Market Experts.
+                                    </Link>
                                 </h4>
 
                                 <p className='text-sm font-bold'>
@@ -51,38 +56,47 @@ function RealStateListing() {
                                 </p>
                             </div>
                         </div>
-                        <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
-                            <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='h-32 w-44 rounded-2xl' />
 
+                        <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
+                                <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='!h-32 !w-44 rounded-2xl' />
+                            
                             <div>
                                 <h4 className='text-3xl font-bold mb-2'>
-                                    House Market Experts.
+                                    <Link href={'/real-state/1'}>
+                                        House Market Experts.
+                                    </Link>
                                 </h4>
 
                                 <p className='text-sm font-bold'>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                                 </p>
                             </div>
                         </div>
-                        <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
-                            <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='h-32 w-44 rounded-2xl' />
 
+                        <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
+                                <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='!h-32 !w-44 rounded-2xl' />
+                            
                             <div>
                                 <h4 className='text-3xl font-bold mb-2'>
-                                    House Market Experts.
+                                    <Link href={'/real-state/1'}>
+                                        House Market Experts.
+                                    </Link>
                                 </h4>
 
                                 <p className='text-sm font-bold'>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                                 </p>
                             </div>
                         </div>
-                        <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
-                            <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='h-32 w-44 rounded-2xl' />
 
+                        <div className='bg-white rounded-2xl p-4 flex items-center gap-4 mb-3'>
+                                <Image src="/website/assets/images/real-state/01.png" width={500} height={500} alt="real-state" className='!h-32 !w-44 rounded-2xl' />
+                            
                             <div>
                                 <h4 className='text-3xl font-bold mb-2'>
-                                    House Market Experts.
+                                    <Link href={'/real-state/1'}>
+                                        House Market Experts.
+                                    </Link>
                                 </h4>
 
                                 <p className='text-sm font-bold'>
@@ -94,7 +108,7 @@ function RealStateListing() {
                 </div>
 
 
-               
+
             </div>
         </div>
     )

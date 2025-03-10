@@ -14,12 +14,13 @@ import ProductCard from "../../components/card/ProductCard";
 import JobsCard from "@/components/card/JobsCard";
 import BiographyCard from "@/components/card/BiographyCard";
 import NameMeaningCard from "@/components/card/NameMeaningCard";
+import Link from "next/link";
 
 export default function Home() {
   const swiperRef = useRef(null);
 
   return (
-    <div className="">
+    <div className="container mx-auto">
       <AdBanner />
       <CategorySection category={homeCategory} />
       <HoverBanner />
@@ -402,7 +403,7 @@ export default function Home() {
                 key={index}
                 className="rounded-3xl bg-white px-6 py-1 border-2 border-black flex items-center w-fit"
               >
-                <div className="flex items-center gap-2">
+                <Link href={"/postal-code/1"} className="flex items-center gap-2">
                   <Image
                     src={item.image}
                     alt={item.image}
@@ -411,7 +412,7 @@ export default function Home() {
                     className="w-6 h-6 object-contain rounde-full"
                   />
                   {item.name}
-                </div>
+                </Link>
               </div>
             ))}
           </div>

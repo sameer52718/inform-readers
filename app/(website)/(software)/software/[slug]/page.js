@@ -2,6 +2,7 @@ import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function SoftwareDetail() {
@@ -101,7 +102,9 @@ function SoftwareDetail() {
 
                                     <div>
                                         <h4 className='text-lg font-semibold'>
-                                            Avast Free Antivirus
+                                            <Link href={'/software/1'}>
+                                                Avast Free Antivirus
+                                            </Link>
                                         </h4>
                                         <p className='text-red-500 font-bold'>Free</p>
                                     </div>

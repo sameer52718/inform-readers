@@ -2,6 +2,7 @@ import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner';
 import { Icon } from '@iconify/react'
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 
@@ -120,11 +121,13 @@ function CryptoCurrency() {
 
         <div className='bg-[#d9d9d9] p-6 rounded-2xl mt-8'>
           {[...Array(3)].map((_, index) => (
+            <Link href={"/news"} key={index}>
             <div key={index} className='flex items-center gap-4 bg-white p-3 mb-4 rounded-3xl'>
               <Image src="/website/assets/images/news/01.png" width={1000} height={1000} className='w-28 h-28 object-cover rounded-lg border border-red-500' />
 
               <h4 className='text-2xl font-semibold'>Bitcoin Price Drops for Third Consecutive Day Alongside Ether and Most Altcoins</h4>
             </div>
+            </Link>
           ))}
 
         </div>

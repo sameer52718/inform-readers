@@ -1,6 +1,7 @@
 import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner'
 import WeatherFilter from '@/components/partials/WeatherFilter'
+import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React from 'react'
 

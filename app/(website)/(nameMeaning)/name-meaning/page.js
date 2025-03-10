@@ -3,6 +3,7 @@ import HoverBanner from '@/components/partials/HoverBanner'
 import NameFilter from '@/components/partials/NameFilter'
 import NamePagination from '@/components/ui/NamePagination'
 import { nameReligion } from '@/constant/data'
+// import { _ } from '@faker-js/faker/dist/airline-BcEu2nRk'
 import Link from 'next/link'
 import React from 'react'
 
@@ -44,38 +45,18 @@ function NameMeaning() {
                         </div>
 
                         <div className='py-8 px-8 bg-[#d9d9d9]  mt-5 rounded-xl  gap-4'>
-                            <div className='grid grid-cols-3 mb-4'>
-                                <div className="col-span-1 text-xl font-semibold">Ahmed</div>
-                                <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"#"}>
-                                        View Detail
-                                    </Link>
+                            {[...Array(3)].map((item, index) => (
+                                <div className='grid grid-cols-3 mb-4'>
+                                    <div className="col-span-1 text-xl font-semibold">Ahmed</div>
+                                    <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
+                                    <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
+                                        <Link href={"/name-meaning/1"}>
+                                            View Detail
+                                        </Link>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='grid grid-cols-3 mb-4'>
-                                <div className="col-span-1 text-xl font-semibold">Ahmed</div>
-                                <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"#"}>
-                                        View Detail
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className='grid grid-cols-3 mb-4'>
-                                <div className="col-span-1 text-xl font-semibold">Ahmed</div>
-                                <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"#"}>
-                                        View Detail
-                                    </Link>
-                                </div>
-                            </div>
-
-
-
+                            ))}
                         </div>
-
                     </div>
                 </div>
 
@@ -93,38 +74,18 @@ function NameMeaning() {
                         </div>
 
                         <div className='py-8 px-8 bg-[#d9d9d9]  mt-5 rounded-xl  gap-4'>
+                            {[...Array(3)].map((_, i) => (
                             <div className='grid grid-cols-3 mb-4'>
                                 <div className="col-span-1 text-xl font-semibold">Aisha</div>
                                 <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
                                 <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"#"}>
+                                    <Link href={"/name-meaning/1"}>
                                         View Detail
                                     </Link>
                                 </div>
                             </div>
-                            <div className='grid grid-cols-3 mb-4'>
-                                <div className="col-span-1 text-xl font-semibold">Aisha</div>
-                                <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"#"}>
-                                        View Detail
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className='grid grid-cols-3 mb-4'>
-                                <div className="col-span-1 text-xl font-semibold">Aisha</div>
-                                <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"#"}>
-                                        View Detail
-                                    </Link>
-                                </div>
-                            </div>
-
-
-
+                            ))}
                         </div>
-
                     </div>
                 </div>
 

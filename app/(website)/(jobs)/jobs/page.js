@@ -3,6 +3,7 @@ import HoverBanner from '@/components/partials/HoverBanner'
 import WeatherFilter from '@/components/partials/WeatherFilter'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function Jobs() {
@@ -11,7 +12,7 @@ function Jobs() {
             <AdBanner />
 
             <div className='container mx-auto px-44'>
-                <h4 className='text-2xl text-center font-bold'>
+                <h4 className='text-2xl text-center font-bold py-10'>
                     FIND LATEST <span>JOBS</span>
                 </h4>
 
@@ -20,6 +21,7 @@ function Jobs() {
                 <div className='bg-[#D9D9D9] p-8 rounded-3xl grid grid-cols-4 gap-5 mt-8'>
 
                     {[...Array(16)].map((_, i) => (
+                        <Link href={"/jobs/1"}>
                         <div key={i} className='bg-white rounded-xl border border-black flex items-center gap-2 px-2 py-1'>
                             <Image src="/website/assets/images/company/01.png" width={500} height={500} alt="company-logo" className="h-12 w-12" />
                             <div>
@@ -27,6 +29,7 @@ function Jobs() {
                                 <p className='text-red-500 text-xs font-bold'>Ladbrokesed Limited</p>
                             </div>
                         </div>
+                        </Link>
                     ))}
 
                 </div>

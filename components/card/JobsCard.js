@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function JobsCard() {
@@ -6,16 +7,22 @@ function JobsCard() {
         <div className="border rounded-lg p-4 bg-white  border-black">
             <div className="flex items-center  gap-5 pb-4">
                 <div className="h-20 w-20 rounded-full">
-                    <Image
-                        src={"/website/assets/images/logo/01.png"}
-                        width={1000}
-                        height={1000}
-                        alt="product"
-                        className="w-full h-full rounded-full"
-                    />
+                    <Link href={"/jobs/1"}>
+                        <Image
+                            src={"/website/assets/images/logo/01.png"}
+                            width={1000}
+                            height={1000}
+                            alt="product"
+                            className="w-full h-full rounded-full"
+                        />
+                    </Link>
                 </div>
                 <div className="flex justify-center flex-col">
-                    <h5 className="text-gray-600 text-xl mb-1">Full Stack Developer</h5>
+                    <h5 className="text-gray-600 text-xl mb-1">
+                        <Link href={"/jobs/1"}>
+                            Full Stack Developer
+                        </Link>
+                    </h5>
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1 text-gray-600">
                             <Image src={"/website/assets/images/icons/location.png"} alt="location-icon" width={1000} height={1000} className="w-4 h-auto" />

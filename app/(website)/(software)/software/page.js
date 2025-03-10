@@ -4,6 +4,7 @@ import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react'
 
 
@@ -70,9 +71,16 @@ function TabMenu() {
                         className="px-6 py-8 rounded-3xl border border-blackbg-white bg-white"
                     >
                         <div className='flex justify-center border-b border-black'>
-                            <Image src={app.img} alt={app.name} className="w-24 h-24 mb-2" width={1000} height={1000} />
+                            <Link href={'/software/1'}>
+                                <Image src={app.img} alt={app.name} className="w-24 h-24 mb-2" width={1000} height={1000} />
+                            </Link>
                         </div>
-                        <p className="font-semibold text-xl">{app.name}</p>
+                        <p className="font-semibold text-xl">
+                            <Link href={'/software/1'}>
+                                {app.name}
+                            </Link>
+                        </p>
+
                         <span className="text-sm text-gray-500">{app.type}</span>
                     </div>
                 ))}
@@ -88,7 +96,7 @@ function SoftwarePage() {
 
             <div className='px-48 py-8'>
                 <h4 className='text-4xl text-center font-bold'>Free <span className='text-red-500'>Software Downloads</span> </h4>
-          
+
                 <TabMenu />
                 <HoverBanner padding='0px' />
                 <div>

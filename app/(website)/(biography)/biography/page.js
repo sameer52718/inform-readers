@@ -7,11 +7,13 @@ import Pagination from "@/components/ui/Pagination";
 import SearchInput from "@/components/ui/SearchInput";
 import { homeCategory } from "@/constant/data";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const ProfileCard = () => {
   return (
     <div className="bg-gray-300 mx-8 p-4 rounded-lg text-center mt-6 shadow-md">
+      <Link href={"/biography/1"}>
       <Image
         src="/website/assets/images/biography/01.png"
         alt="Profile"
@@ -19,9 +21,10 @@ const ProfileCard = () => {
         height={1000}
         className="w-full h-44 rounded-lg mx-auto mb-4"
       />
+      </Link>
 
       <hr className="my-2 border-gray-400" />
-      <p className="text-gray-800 font-semibold">Dilraba Dilmurat</p>
+      <p className="text-gray-800 font-semibold"><Link href={"/biography/1"}> Dilraba Dilmurat </Link></p>
     </div>
   );
 };

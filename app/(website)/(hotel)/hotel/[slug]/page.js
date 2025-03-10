@@ -2,6 +2,7 @@
 
 import AdBanner from '@/components/partials/AdBanner'
 import HoverBanner from '@/components/partials/HoverBanner';
+import Pagination from '@/components/ui/Pagination';
 import { Icon } from '@iconify/react'
 import Image from 'next/image';
 import React, { useState } from 'react'
@@ -509,6 +510,10 @@ function HotelDetail() {
                 <div className='mt-6'>
                     <ReviewSection />
                     <ReviewTabSection />
+                </div>
+
+                <div className='flex items-center justify-center'>
+                    <Pagination currentPage={1} totalPages={10} />
                 </div>
 
 

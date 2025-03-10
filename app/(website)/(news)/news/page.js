@@ -5,6 +5,7 @@ import HoverBanner from '@/components/partials/HoverBanner';
 import SearchInput from '@/components/ui/SearchInput';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react'
 
 
@@ -81,14 +82,16 @@ const AllContent = () => {
       <div className='bg-[#d9d9d9] rounded-2xl p-6'>
 
         {[...Array(4)].map((_, i) => (
-          <div key={i} className=' flex gap-3 rounded-2xl overflow-hidden mb-5'>
-            <Image src={"/website/assets/images/news/05.png"} alt='card-img' width={1000} height={1000} className='h-32 w-32' />
-            <div className=''>
-              <h4 className='text-xl font-semibold bg-white p-2 rounded-xl'>Have a look around this bold and colourful 1930s semi in London</h4>
+          <Link href={"/news/1"} key={i}>
+            <div key={i} className=' flex gap-3 rounded-2xl overflow-hidden mb-5'>
+              <Image src={"/website/assets/images/news/05.png"} alt='card-img' width={1000} height={1000} className='h-32 w-32' />
+              <div className=''>
+                <h4 className='text-xl font-semibold bg-white p-2 rounded-xl'>Have a look around this bold and colourful 1930s semi in London</h4>
 
-              <p className='text-red-500 font-bold mt-2'>August 7, 2019</p>
+                <p className='text-red-500 font-bold mt-2'>August 7, 2019</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
 
       </div>
@@ -148,16 +151,20 @@ const AllContentTwo = () => {
     <div className="grid grid-cols-2 gap-6">
       <div className="rounded-2xl overflow-hidden space-y-4">
         <div className=" bg-[#d9d9d9] rounded-2xl overflow-hidden">
-          <Image
-            src="/website/assets/images/news/05.png"
-            alt="News Image"
-            className="w-full h-52 object-cover rounded-2xl"
-            width={1000}
-            height={1000}
-          />
+          <Link href={'/news/ '}>
+            <Image
+              src="/website/assets/images/news/05.png"
+              alt="News Image"
+              className="w-full h-52 object-cover rounded-2xl"
+              width={1000}
+              height={1000}
+            />
+          </Link>
           <div className="p-4">
             <h2 className="text-2xl">
-              Now Is the Time to Think About Your Small-Business Success
+              <Link href={'/news/1'}>
+                Now Is the Time to Think About Your Small-Business Success
+              </Link>
             </h2>
             <p className="text-red-600 text-xl font-bold mt-2">Armin Vans <span className='text-gray-600 text-sm font-light'>- August 7, 2019</span></p>
             <p className="text-gray-500 text-sm"></p>
@@ -170,33 +177,42 @@ const AllContentTwo = () => {
 
         <div className="bg-[#d9d9d9] p-3 rounded-2xl shadow-md space-y-2">
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <Image
-              width={1000}
-              height={1000}
-              src="/website/assets/images/news/05.png"
-              alt="News Thumbnail"
+            <Link href={'/news/1'}>
+              <Image
+                width={1000}
+                height={1000}
+                src="/website/assets/images/news/05.png"
+                alt="News Thumbnail"
 
-              className="w-24 h-24 rounded-lg object-cover"
-            />
+                className="w-24 h-24 rounded-lg object-cover"
+              />
+            </Link>
             <div>
               <p className="text-lg font-semibold bg-white py-2 px-2 rounded-xl">
-                Have a look around this bold and colourful 1930s semi in London
+                <Link href={'/news/1'}>
+                  Have a look around this bold and colourful 1930s semi in London
+                </Link>
               </p>
               <p className="text-red-600 text-sm font-bold mt-2 px-2">August 7, 2019</p>
             </div>
           </div>
 
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <Image
-              width={1000}
-              height={1000}
-              src="/website/assets/images/news/05.png" // Replace with actual image
-              alt="News Thumbnail"
-              className="w-24 h-24 rounded-lg object-cover"
-            />
+            <Link href={'/news/1'}>
+              <Image
+                width={1000}
+                height={1000}
+                src="/website/assets/images/news/05.png"
+                alt="News Thumbnail"
+
+                className="w-24 h-24 rounded-lg object-cover"
+              />
+            </Link>
             <div>
               <p className="text-lg font-semibold bg-white py-2 px-2 rounded-xl">
-                Have a look around this bold and colourful 1930s semi in London
+                <Link href={'/news/1'}>
+                  Have a look around this bold and colourful 1930s semi in London
+                </Link>
               </p>
               <p className="text-red-600 text-sm font-bold mt-2 px-2">August 7, 2019</p>
             </div>
@@ -228,32 +244,42 @@ const AllContentTwo = () => {
 
         <div className="bg-[#d9d9d9] p-3 rounded-2xl shadow-md space-y-2">
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <Image
-              width={1000}
-              height={1000}
-              src="/website/assets/images/news/05.png"
-              alt="News Thumbnail"
-              className="w-24 h-24 rounded-lg object-cover"
-            />
+            <Link href={'/news/1'}>
+              <Image
+                width={1000}
+                height={1000}
+                src="/website/assets/images/news/05.png"
+                alt="News Thumbnail"
+
+                className="w-24 h-24 rounded-lg object-cover"
+              />
+            </Link>
             <div>
               <p className="text-lg font-semibold bg-white py-2 px-2 rounded-xl">
-                Have a look around this bold and colourful 1930s semi in London
+                <Link href={'/news/1'}>
+                  Have a look around this bold and colourful 1930s semi in London
+                </Link>
               </p>
               <p className="text-red-600 text-sm font-bold mt-2 px-2">August 7, 2019</p>
             </div>
           </div>
 
           <div className="flex space-x-3   p-2 rounded-lg shadow">
-            <Image
-              width={1000}
-              height={1000}
-              src="/website/assets/images/news/05.png" // Replace with actual image
-              alt="News Thumbnail"
-              className="w-24 h-24 rounded-lg object-cover"
-            />
+            <Link href={'/news/1'}>
+              <Image
+                width={1000}
+                height={1000}
+                src="/website/assets/images/news/05.png"
+                alt="News Thumbnail"
+
+                className="w-24 h-24 rounded-lg object-cover"
+              />
+            </Link>
             <div>
-              <p className="text-lg font-semibold bg-white py-2 px-2   rounded-xl">
-                Have a look around this bold and colourful 1930s semi in London
+              <p className="text-lg font-semibold bg-white py-2 px-2 rounded-xl">
+                <Link href={'/news/1'}>
+                  Have a look around this bold and colourful 1930s semi in London
+                </Link>
               </p>
               <p className="text-red-600 text-sm font-bold mt-2 px-2">August 7, 2019</p>
             </div>

@@ -1,5 +1,6 @@
 import AdBanner from '@/components/partials/AdBanner'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function FlightDetail() {
@@ -51,6 +52,7 @@ function FlightDetail() {
 
                     <div className='grid grid-cols-2 gap-14 px-14'>
                         <div className="col-span-1 border border-black bg-white rounded-xl overflow-hidden">
+                            <Link href={"/flight-arrival"}>
                             <div className='flex items-center justify-center my-6'>
                                 <Image src={"/website/assets/images/flight/01.png"} width={1000} height={1000} alt={"flight detail"} className='w-36 h-36' />
                             </div>
@@ -58,10 +60,12 @@ function FlightDetail() {
                             <div className='bg-[#ff0000] p-4 font-bold text-white text-2xl text-center rounded-tl-lg rounded-tr-lg'>
                                 Departure
                             </div>
+                            </Link>
 
                         </div>
 
                         <div className="col-span-1 border border-black bg-white rounded-xl overflow-hidden">
+                            <Link href={"/flight-arrival"}>
                             <div className='flex items-center justify-center my-6'>
                                 <Image src={"/website/assets/images/flight/02.png"} width={1000} height={1000} alt={"flight detail"} className='w-36 h-36' />
                             </div>
@@ -69,6 +73,7 @@ function FlightDetail() {
                             <div className='bg-[#000] p-4 font-bold text-white text-2xl text-center rounded-tl-lg rounded-tr-lg'>
                                 Arrival
                             </div>
+                            </Link>
 
                         </div>
 
