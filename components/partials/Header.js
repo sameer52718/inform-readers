@@ -88,7 +88,7 @@ function Header() {
 
     return (
         <header className="  text-white text-center ">
-            <div className="flex items-center justify-between bg-gray-100 px-16 py-3">
+            <div className="flex sm:flex-row flex-col items-center justify-between bg-gray-100 md:px-16 sm:px-10 py-3">
                 <div>
                     <h6 className="text-black">{currentDate}</h6>
                 </div>
@@ -109,12 +109,12 @@ function Header() {
 
             <div className="flex items-center justify-center border-gray-300 border-[2px]">
                 <Link href="/" >
-                    <Image src="/website/assets/images/logo/logo.png" alt="Vercel Logo" width={2000} height={2000} className="w-[490px] h-auto p-4" />
+                    <Image src="/website/assets/images/logo/logo.png" alt="Vercel Logo" width={2000} height={2000} className="md:w-[490px] w-[400px] h-auto p-4" />
 
                 </Link>
             </div>
             <div className='border-b-2 border-black'>
-                <ul className='flex items-center justify-around px-14  py-3'>
+                <ul className='flex flex-wrap items-center justify-around px-14  py-3'>
                     {
                         links.map((link) => (
                             <li key={link.id} className='text-black relative text-lg cursor-pointer ' >

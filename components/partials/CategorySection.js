@@ -9,13 +9,12 @@ import Image from 'next/image';
 
 function CategorySection({ category }) {
     return (
-        <section className='px-32 py-10'>
+        <section className='md:px-32 sm:px-12 px-4 py-10'>
             <Swiper
-                slidesPerView={6}  // Ek time pe kitne items dikhane hain
-                spaceBetween={5}  // Items ke beech ka gap
                 pagination={{ clickable: true }}
                 breakpoints={{
-                    640: { slidesPerView: 2, spaceBetween: 10 },
+                    320: { slidesPerView: 3, spaceBetween: 20 },
+                    640: { slidesPerView: 3, spaceBetween: 20 },
                     1024: { slidesPerView: 6, spaceBetween: 20 },
                 }}
             >
@@ -38,7 +37,7 @@ function CategorySection({ category }) {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <div className=' bg-[#d9d9d9] mt-10 w-full h-2 mx-8'>
+            <div className=' bg-[#d9d9d9] mt-10 w-full h-2 md:mx-8 sm:mx-4 mx-2'>
                 <div className='w-40 h-full bg-[#FF0000] '></div>
             </div>
         </section>

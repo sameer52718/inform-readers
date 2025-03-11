@@ -4,9 +4,9 @@ import React from "react";
 
 function JobsCard() {
     return (
-        <div className="border rounded-lg p-4 bg-white  border-black">
-            <div className="flex items-center  gap-5 pb-4">
-                <div className="h-20 w-20 rounded-full">
+        <div className="border rounded-lg md:p-4 p-2 bg-white  border-black">
+            <div className="flex items-center  gap-3 pb-4">
+                <div className="md:h-20 md:w-20 h-14 w-14 rounded-full">
                     <Link href={"/jobs/1"}>
                         <Image
                             src={"/website/assets/images/logo/01.png"}
@@ -18,12 +18,12 @@ function JobsCard() {
                     </Link>
                 </div>
                 <div className="flex justify-center flex-col">
-                    <h5 className="text-gray-600 text-xl mb-1">
+                    <h5 className="text-gray-600 md:text-xl text-base mb-1">
                         <Link href={"/jobs/1"}>
                             Full Stack Developer
                         </Link>
                     </h5>
-                    <div className="flex items-center gap-4">
+                    <div className="flex md:flex-row flex-col  md:items-center md:gap-4 ">
                         <div className="flex items-center gap-1 text-gray-600">
                             <Image src={"/website/assets/images/icons/location.png"} alt="location-icon" width={1000} height={1000} className="w-4 h-auto" />
                             Chivers Rd
