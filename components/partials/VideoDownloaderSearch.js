@@ -23,29 +23,30 @@ import { Icon } from '@iconify/react';
   };
 
   return (
-    <div className="bg-gray-900 p-3 flex items-center space-x-3 rounded-lg ">
-      <input
+    <div className="bg-gray-900 p-3 flex flex-wrap items-center gap-3 sm:gap-4 rounded-lg">
+    <input
         type="text"
         placeholder="Paste URL Instagram"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        className="flex-1 px-3 py-2 border rounded-lg outline-none text-gray-800"
-      />
-      <button
+        className="flex-1 px-3 py-2 border rounded-lg outline-none text-gray-800 w-full sm:w-auto"
+    />
+    <button
         onClick={handlePaste}
-        className="border-2 border-red-500 px-4 py-2 flex items-center space-x-1 rounded-lg text-red-500 font-semibold"
-      >
+        className="border-2 border-red-500 px-4 py-2 flex items-center space-x-1 rounded-lg text-red-500 font-semibold w-full sm:w-auto justify-center"
+    >
         <Icon icon="mdi:content-paste" className="text-lg" />
         <span>Paste</span>
-      </button>
-      <button
+    </button>
+    <button
         onClick={handleDownload}
-        className="bg-red-500 text-white px-4 py-2 flex items-center space-x-2 rounded-lg font-semibold"
-      >
+        className="bg-red-500 text-white px-4 py-2 flex items-center space-x-2 rounded-lg font-semibold w-full sm:w-auto justify-center"
+    >
         <Icon icon="mdi:download" className="text-lg" />
         <span>Download</span>
-      </button>
-    </div>
+    </button>
+</div>
+
   );
 }
 
