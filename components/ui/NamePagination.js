@@ -10,7 +10,7 @@ const NamePagination = ({ totalPages, currentPage, onPageChange }) => {
     const pageLetters = alphabet.slice(0, totalPages); // Adjust based on totalPages
 
     return (
-        <div className="flex items-center space-x-1 justify-center w-full bg-[#d9d9d9] rounded-xl border border-black">
+        <div className="flex items-center space-x-1 justify-center sm:justify-start bg-[#d9d9d9] rounded-xl border border-black w-[100%] overflow-hidden overflow-x-auto">
             {/* First Page Button (A) */}
             <button
                 className={`px-1 py-1 rounded ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-red-500"}`}
