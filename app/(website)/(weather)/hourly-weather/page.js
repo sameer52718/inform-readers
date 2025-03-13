@@ -7,45 +7,49 @@ import React from 'react'
 
 const WeatherHoutlyCard = () => {
     return (
-        <div className='grid grid-cols-2 gap-10 mt-4 bg-white px-20 py-12 rounded-3xl border border-black'>
-            <div className="col-span-1 flex  flex-col">
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 my-8 bg-white p-4 sm:p-8 lg:p-12 rounded-3xl border border-black'>
+            {/* Left Column */}
+            <div className="col-span-1 flex flex-col">
                 <div className='flex items-center gap-4'>
-                    <Image src={"/website/assets/images/weather/sky-1.png"} width={1000} height={1000} className='w-48 h-48' />
+                    <Image src={"/website/assets/images/weather/sky-1.png"} width={1000} height={1000} className='w-24 h-24 sm:w-36 sm:h-36 lg:w-48 lg:h-48' />
                     <div>
-                        <h4 className='text-5xl font-semibold mb-2'>18°</h4>
-                        <h6 className='text-gray-500 text-2xl'> Real Feel 19°</h6>
+                        <h4 className='text-3xl sm:text-4xl lg:text-5xl font-semibold mb-2'>18°</h4>
+                        <h6 className='text-gray-500 text-lg sm:text-xl lg:text-2xl'> Real Feel 19°</h6>
                     </div>
                 </div>
                 <div>
-                    <h5 className='text-2xl font-semibold'>Hazy clouds</h5>
-                    <h6 className='text-xl font-semibold'>More Details</h6>
+                    <h5 className='text-lg sm:text-2xl font-semibold'>Hazy clouds</h5>
+                    <h6 className='text-md sm:text-xl font-semibold'>More Details</h6>
                 </div>
             </div>
+
+            {/* Right Column */}
             <div className="col-span-1">
-                <h6 className='text-end text-xl mr-4 mb-2 font-bold'>02 PM</h6>
-                <div className='bg-[#d1d1d1] px-10 py-5 rounded-2xl'>
-                    <div className='flex items-center justify-between py-2  border-b border-black'>
-                        <h5 className='text-2xl font-bold '>Wind</h5>
-                        <h6 className='text-2xl font-bold'>0 Km/h</h6>
+                <h6 className='text-end text-md sm:text-xl mr-2 sm:mr-4 mb-2 font-bold'>02 PM</h6>
+                <div className='bg-[#d1d1d1] px-6 sm:px-10 py-4 sm:py-5 rounded-2xl'>
+                    <div className='flex items-center justify-between py-2 border-b border-black'>
+                        <h5 className='text-lg sm:text-2xl font-bold'>Wind</h5>
+                        <h6 className='text-lg sm:text-2xl font-bold'>0 Km/h</h6>
                     </div>
                     <div className='flex items-center justify-between py-2 border-b border-black'>
-                        <h5 className='text-2xl font-bold'> Wind Gusts</h5>
-                        <h6 className='text-2xl font-bold'>0 Km/h</h6>
+                        <h5 className='text-lg sm:text-2xl font-bold'> Wind Gusts</h5>
+                        <h6 className='text-lg sm:text-2xl font-bold'>0 Km/h</h6>
                     </div>
                     <div className='flex items-center justify-between py-2 border-b border-black'>
-                        <h5 className='text-2xl font-bold'> Air Quality</h5>
-                        <h6 className='text-red-500 text-2xl font-bold' >Poor </h6>
+                        <h5 className='text-lg sm:text-2xl font-bold'> Air Quality</h5>
+                        <h6 className='text-red-500 text-lg sm:text-2xl font-bold'>Poor</h6>
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
 function HourlyWeather() {
     return (
         <div className='container mx-auto'>
             <AdBanner />
-            <div className='px-48 py-8'>
+            <div className='md:px-48 px-4 py-8'>
                 <WeatherFilter />
 
                 <div className='flex items-center gap-3 mt-6 pb-1 mb-8 border-black relative font-semibold border-b w-fit'>

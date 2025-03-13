@@ -46,8 +46,8 @@ function JobCategory() {
         <div>
             <AdBanner />
 
-            <div className='container mx-auto px-32 py-8'>
-                <div className='flex items-center gap-8 mb-5'>
+            <div className='container mx-auto md:px-44 px-6 py-8'>
+                <div className='flex flex-wrap justify-between gap-8 mb-5'>
                     <div className='flex items-center gap-2'>
                         <Icon icon="majesticons:airplane-flight-2" width="24" height="24" />
                         <h1 className='text-lg font-semibold text-gray-400'>Flights</h1>
@@ -58,13 +58,14 @@ function JobCategory() {
                     </div>
                     <div className='flex items-center gap-2'>
                         <Icon icon="clarity:car-line" width="24" height="24" />
-                        <h1 className='text-lg font-semibold text-gray-400'> Rental Cars</h1>
+                        <h1 className='text-lg font-semibold text-gray-400'>Rental Cars</h1>
                     </div>
                     <div className='flex items-center gap-2'>
                         <Icon icon="majesticons:beach" width="24" height="24" />
-                        <h1 className='text-lg font-semibold text-gray-400'> Packages</h1>
+                        <h1 className='text-lg font-semibold text-gray-400'>Packages</h1>
                     </div>
                 </div>
+
 
                 <WeatherFilter />
 
@@ -74,43 +75,44 @@ function JobCategory() {
                     <h6>Jobs</h6>
                 </div>
 
-                <div className='grid grid-cols-12 gap-4'>
-                    <div className="col-span-3">
+                <div className='grid grid-cols-1 md:grid-cols-12 gap-4'>
+                    {/* Price Filter */}
+                    <div className="col-span-1 md:col-span-3">
                         <PriceFilter />
                     </div>
-                    <div className="col-span-9">
+                    {/* Job Cards Section */}
+                    <div className="col-span-1 md:col-span-9">
                         <JobsFoundCard />
 
-                        <div className='grid grid-cols-1 gap-5 mt-6 p-4 rounded-2xl bg-gray-300 '>
-
+                        {/* Job Listings */}
+                        <div className='grid grid-cols-1 gap-5 mt-6 p-4 rounded-2xl bg-gray-300'>
                             {[...Array(5)].map((_, index) => (
-                                <div key={index} className='bg-white justify-center py-1 relative px-16 rounded-2xl flex items-center gap-2'>
+                                <div key={index} className='bg-white justify-center py-1 relative md:px-16 px-4 rounded-2xl flex md:flex-row flex-col items-center gap-2'>
                                     <Image src={"/website/assets/images/company/01.png"} width={500} height={500} alt="company-logo" className='w-52 h-auto object-cover' />
                                     <div className='flex-1'>
                                         <h6 className='text-2xl font-bold'>Accountant For Early Audit Required</h6>
-                                        <div className='flex  mt-3 gap-2 justify-between'>
+                                        <div className='flex mt-3 gap-2 justify-between'>
                                             <p className='text-lg font-semibold'>Nelnons Hompathy</p>
-
-                                            <button className='px-5 py-2 rounded-lg bg-red-500 text-white'>
+                                            <button className='md:px-5 md:text-lg px-3 text-sm py-2 rounded-lg bg-red-500 text-white'>
                                                 Full Time
                                             </button>
                                         </div>
                                     </div>
 
-                                    <div className='absolute top-6 right-8 bg-gray-200 flex items-center justify-center w-10 h-10 rounded-full '>
+                                    {/* Heart Icon */}
+                                    <div className='absolute md:top-6 md:right-8 top-2 right-2 bg-gray-200 flex items-center justify-center w-10 h-10 rounded-full'>
                                         <Icon icon="mdi-light:heart" width="24" height="24" />
                                     </div>
                                 </div>
                             ))}
-
-
-
-
                         </div>
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
+            </div>
+
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
             </div>
         </div>
     )

@@ -9,15 +9,15 @@ function PostalCode() {
     return (
         <div>
             <AdBanner />
-            <div className='container mx-auto px-32 py-8'>
+            <div className='container mx-auto md:px-44 px-4 py-8'>
                 <WeatherFilter />
 
-                <h4 className='text-4xl font-bold my-7 text-center'>
+                <h4 className='md:text-4xl text-2xl font-bold my-7 text-center'>
                     World <span className='text-red-500'> Zip/postal </span> Codes
                 </h4>
 
                 <div>
-                    <h6 className='text-2xl font-semibold mb-3 px-2'>
+                    <h6 className='md:text-2xl text-xl font-semibold mb-3 px-2'>
                         Popular Countries:
                     </h6>
 
@@ -61,7 +61,9 @@ function PostalCode() {
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
+                <div className="py-8">
+                    <HoverBanner />
+                </div>
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
@@ -242,7 +244,9 @@ function PostalCode() {
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
+                <div className="py-8">
+                    <HoverBanner />
+                </div>
 
                 <div className='mb-5'>
                     <h6 className='text-2xl font-semibold mb-3 px-2'>
@@ -334,7 +338,9 @@ function PostalCode() {
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
+                <div className="py-8">
+                    <HoverBanner />
+                </div>
 
 
 

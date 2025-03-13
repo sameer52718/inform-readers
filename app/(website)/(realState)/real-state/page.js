@@ -57,7 +57,7 @@ function PropertySlider() {
         spaceBetween={20}
         slidesPerView={1}
         breakpoints={{
-          640: { slidesPerView: 1 },
+          640: { slidesPerView: 1.3 },
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
@@ -89,10 +89,10 @@ function PropertySlider() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <button className="swiper-button-prev absolute !-left-12 !top-1/2 !h-12 !w-12 transform -translate-y-1/2 border border-red-500 bg-gray-300 p-2 rounded-full">
+      <button className="swiper-button-prev absolute md:!-left-12 !-left-3 !top-1/2 !h-12 !w-12 transform -translate-y-1/2 border border-red-500 bg-gray-300 p-2 rounded-full">
         <Icon icon="ri:arrow-left-double-line" width="24" height="24" className='text-red-500' />
       </button>
-      <button className="swiper-button-next absolute border !-right-12 !top-1/2 transform -translate-y-1/2  text-white p-2 rounded-full border-red-500 bg-gray-300 !h-12 !w-12">
+      <button className="swiper-button-next absolute border md:!-right-12 !-right-3 !top-1/2 transform -translate-y-1/2  text-white p-2 rounded-full border-red-500 bg-gray-300 !h-12 !w-12">
         <Icon icon="ri:arrow-right-double-fill" width="24" height="24" className='text-red-500' />
         {/* <Icon icon="ic:round-chevron-right" width="24"  className='!block'/> */}
       </button>
@@ -166,12 +166,15 @@ function RealState() {
   return (
     <div>
       <AdBanner />
-      <div className='container mx-auto px-44 py-8'>
+      <div className='container mx-auto md:px-44 px-4 py-8'>
         <RealStateFilter />
         <h4 className='text-4xl font-bold text-center mt-6'>Real <span className='text-red-500'> Estate </span></h4>
         <PropertyGrid />
-        <HoverBanner padding='0px' />
-        <h4 className='text-4xl font-bold text-center mt-6'>Looking for properties to rent </h4>
+        <div className='py-8'>
+        <HoverBanner  />
+
+        </div>
+        <h4 className='md:text-4xl text-2xl font-bold text-center mt-6'>Looking for properties to rent </h4>
         <PropertySlider />
         <PropertySlider />
         <PropertySlider />

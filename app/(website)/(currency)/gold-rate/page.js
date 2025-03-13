@@ -28,13 +28,13 @@ function GoldRateCalculator() {
 
     return (
         <>
-            <h2 className="text-3xl font-semibold mb-3 px-2">Gold Rate Calculator</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-3 px-2">Gold Rate Calculator</h2>
             <div className='p-4 bg-gray-200 rounded-lg shadow-md'>
                 <div className="bg-white p-6 rounded-3xl">
-                    <div className="grid grid-cols-12 space-x-4 w-full bg-white">
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 w-full bg-white">
                         {/* City Selection */}
-                        <div className='col-span-4'>
-                            <label className=" text-lg font-medium">City</label>
+                        <div className='sm:col-span-4'>
+                            <label className="text-lg font-medium">City</label>
                             <select
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
@@ -47,7 +47,7 @@ function GoldRateCalculator() {
                         </div>
 
                         {/* Quantity Selection */}
-                        <div className='col-span-3'>
+                        <div className='sm:col-span-3'>
                             <label className="text-lg font-medium">Quantity (gram)</label>
                             <input
                                 type="number"
@@ -59,8 +59,8 @@ function GoldRateCalculator() {
                         </div>
 
                         {/* Purity Selection */}
-                        <div className='col-span-3'>
-                            <label className="text-lg font-medium ">Purity</label>
+                        <div className='sm:col-span-3'>
+                            <label className="text-lg font-medium">Purity</label>
                             <div className="flex space-x-2">
                                 <label className="flex items-center space-x-1">
                                     <input
@@ -85,7 +85,8 @@ function GoldRateCalculator() {
                             </div>
                         </div>
 
-                        <div className='col-span-2'>
+                        {/* Calculate Button */}
+                        <div className='sm:col-span-2'>
                             <button
                                 onClick={calculatePrice}
                                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-full"
@@ -97,9 +98,10 @@ function GoldRateCalculator() {
                     </div>
 
                     {/* Price Display */}
-                    <div className="text-2xl font-bold text-right mt-3">₹ {price.toLocaleString()}</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-right mt-3">₹ {price.toLocaleString()}</div>
                 </div>
             </div>
+            .
         </>
     );
 }
@@ -115,39 +117,40 @@ function PriceTable() {
     return (
 
         <div className='mt-4 pb-6'>
-            <h4 className='text-3xl font-semibold mb-4 px-3'>24 Carat Gold Price in India Today</h4>
-            <div className=" p-6 bg-gray-200 rounded-2xl ">
-                <table className="w-full border border-gray-300 text-left">
-                    {/* Table Head */}
-                    <thead className="bg-gray-200">
-                        <tr className='text-xl'>
-                            <th className="p-2 border">Gram</th>
-                            <th className="p-2 border">24K Gold Price</th>
-                            <th className="p-2 border">Daily Price Change</th>
-                        </tr>
-                    </thead>
-
-                    {/* Table Body */}
-                    <tbody className="">
-                        {goldPrices.map((item, index) => (
-                            <tr key={index} className="border text-lg font-bold mb-3 bg-white rounded-2xl">
-                                <td className="p-2 border">{item.grams}</td>
-                                <td className="p-2 border">{item.price}</td>
-                                <td className="p-2 border">{item.change}</td>
+            <h4 className='text-2xl sm:text-3xl font-semibold mb-4 px-3'>24 Carat Gold Price in India Today</h4>
+            <div className="md:p-6 p-2 bg-gray-200 rounded-2xl">
+                <div className="overflow-x-auto">
+                    <table className="w-full border border-gray-300 text-left">
+                        <thead className="bg-gray-200">
+                            <tr className=' sm:text-xl text-sm'>
+                                <th className="p-2 border">Gram</th>
+                                <th className="p-2 border">24K Gold Price</th>
+                                <th className="p-2 border">Daily Price Change</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+
+                        {/* Table Body */}
+                        <tbody>
+                            {goldPrices.map((item, index) => (
+                                <tr key={index} className="border text-lg sm:text-xl font-bold mb-3 bg-white rounded-2xl">
+                                    <td className="p-2 border">{item.grams}</td>
+                                    <td className="p-2 border">{item.price}</td>
+                                    <td className="p-2 border">{item.change}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     );
 }
 
 const GoldRateTable = () => {
     return (
         <div className="overflow-x-auto">
-            <table className="border border-gray-500 w-full text-center rounded-2xl overflow-hidden ">
-                {/* Table Head */}
+            <table className="border border-gray-500 w-full text-center rounded-2xl overflow-hidden">
                 <thead>
                     <tr className="bg-gray-500 text-white">
                         <th className="p-2 border border-gray-400">Gold Rate</th>
@@ -157,10 +160,7 @@ const GoldRateTable = () => {
                         <th className="p-2 border border-gray-400">Gold Rate In Lahore</th>
                     </tr>
                 </thead>
-
-                {/* Table Body */}
                 <tbody className="bg-white">
-                    {/* 22 Carat Row */}
                     <tr>
                         <td className="p-2 border border-gray-400">22 Carat</td>
                         <td className="p-2 border border-gray-400">
@@ -176,8 +176,6 @@ const GoldRateTable = () => {
                             <div className="bg-gray-300 p-2 rounded-md">244,170</div>
                         </td>
                     </tr>
-
-                    {/* 24 Carat Row */}
                     <tr>
                         <td className="p-2 border border-gray-400">24 Carat</td>
                         <td className="p-2 border border-gray-400">
@@ -196,6 +194,7 @@ const GoldRateTable = () => {
                 </tbody>
             </table>
         </div>
+
     );
 };
 
@@ -203,23 +202,17 @@ const GoldRateTable = () => {
 function GoldComparisonTable() {
     return (
         <div className='py-8'>
-
             <h2 className="text-3xl font-bold  mb-4 px-2">
                 24 Carat and 22 Carat Gold: Know the Difference
             </h2>
             <div className="  bg-gray-300 p-4 rounded-lg ">
-
-
                 <table className="w-full border  text-left p-4 rounded-xl overflow-hidden">
-                    {/* Table Header */}
                     <thead className="">
                         <tr>
                             <th className="p-3 border bg-white text-lg">24 Carat Gold</th>
                             <th className="p-3 border bg-white text-lg">22 Carat Gold</th>
                         </tr>
                     </thead>
-
-                    {/* Table Body */}
                     <tbody className="bg-white">
                         <tr className="border">
                             <td className="p-3 border">
@@ -229,7 +222,6 @@ function GoldComparisonTable() {
                                 It has 91.6% parts of pure gold. Rest of the parts are metals such as silver, copper, or some others.
                             </td>
                         </tr>
-
                         <tr className="border">
                             <td className="p-3 border">It is quite soft, pliable, brittle, and bendable.</td>
                             <td className="p-3 border">It has a hard texture and thus cannot be easily moulded or bended.</td>
@@ -274,12 +266,12 @@ function GoldRatesCitywise() {
     ];
 
     return (
-        <div className=" p-6 bg-gray-300 rounded-2xl ">
+        <div className="p-6 bg-gray-300 rounded-2xl">
             <h2 className="text-2xl font-bold mb-4">Gold Rates Citywise List</h2>
 
             <div className="space-y-3">
                 {cities.map((row, rowIndex) => (
-                    <div key={rowIndex} className="grid grid-cols-3 gap-4 bg-white p-3 rounded-lg shadow-sm">
+                    <div key={rowIndex} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-white p-3 rounded-lg shadow-sm">
                         {row.map((city, colIndex) => (
                             <label key={colIndex} className="flex items-center space-x-2">
                                 <input type="checkbox" className="w-5 h-5 accent-gray-600" />
@@ -290,6 +282,7 @@ function GoldRatesCitywise() {
                 ))}
             </div>
         </div>
+
     );
 }
 
@@ -298,8 +291,8 @@ function GoldRate() {
     return (
         <div className=''>
             <AdBanner />
-            <div className='px-48 py-8 container mx-auto'>
-                <div className='flex items-center gap-1  '>
+            <div className='md:px-48 px-4 py-8 container mx-auto'>
+                <div className='flex items-center gap-1 flex-wrap'>
                     <h6 className='text-red-500'>Home</h6>
                     <Icon icon="basil:caret-right-solid" className='mt-[2px]' width="18" height="18" />
                     <h6>Specification</h6>
@@ -307,8 +300,9 @@ function GoldRate() {
                     <h6>Product Name</h6>
                 </div>
 
+
                 <div className='relative py-10'>
-                    <h4 className='text-5xl text-center font-bold '>Gold Price in Pakistan</h4>
+                    <h4 className='md:text-5xl text-2xl md:mt-0 mt-10 text-center font-bold '>Gold Price in Pakistan</h4>
                     <div className="flex absolute top-5 -right-4 items-center space-x-1 px-5 py-2  rounded-full w-fit ">
                         <div className="p-2  cursor-pointer">
                             <Icon icon="material-symbols:share" className='text-xl' />
@@ -348,24 +342,38 @@ function GoldRate() {
                 <div className='my-16'>
                     <h4 className='text-3xl font-bold mb-3'> Gold Rate Today in Pakistan</h4>
                     <GoldRateTable />
-
                     <p className='text-lg font-semibold mt-5 px-5'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
+            </div>
 
-                <HoverBanner padding='0px' />
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+            <div className='md:px-48 px-4 py-8 container mx-auto'>
+                <PriceTable />
+                <PriceTable />
 
+            </div>
+
+
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
+            <div className='md:px-48 px-4 py-8 container mx-auto'>
                 <PriceTable />
-                <PriceTable />
-                <HoverBanner padding='0px' />
-                <PriceTable />
-                <HoverBanner padding='0px' />
+            </div>
+
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
+            <div className='md:px-48 px-4 py-8 container mx-auto'>
                 <GoldRateCalculator />
-
                 <div className='py-10'>
                     <h4 className='font-semibold text-3xl mb-4'>
                         Know About Gold Price
                     </h4>
-
                     <h6 className='text-xl mb-4 font-semibold '>24 Carat Gold</h6>
                     <p className='text-lg mb-4'>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -379,7 +387,6 @@ function GoldRate() {
                 <Image src={"/website/assets/images/banner/01.png"} width={1000} height={1000} alt="banner" className="w-full h-[400px]" />
 
                 <GoldComparisonTable />
-
                 <div className='py-6'>
                     <h4 className='font-bold text-3xl mb-4'>
                         Know About Gold Price
@@ -390,35 +397,38 @@ function GoldRate() {
                     </p>
 
                 </div>
+            </div>
 
-                <HoverBanner padding='0px' />
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
+            <div className='md:px-48 px-4 py-8 container mx-auto'>
                 <GoldRatesCitywise />
-
                 <div className='py-6'>
-                    <h4 className='font-bold text-3xl mb-4'>
+                    <h4 className='font-bold text-2xl sm:text-3xl mb-4'>
                         Gold Weight Conversion Table
                     </h4>
-
                     <p className='text-lg mb-4'>
                         Refer to the following table to find out the value of gold in different units. Gold is often measured in grams, kilograms, troy ounce, bhats, and tonnes.
                     </p>
-
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[...Array(18)].map((_, i) => (
                             <div key={i} className='bg-white rounded-lg border py-3 border-black text-center font-bold'>
                                 To Convert From
                             </div>
                         ))}
                     </div>
-
-                    <button className='w-full py-4 text-white bg-red-500 rounded-xl mt-6 font-bold'>See All</button>
-
+                    <button className='w-full py-4 text-white bg-red-500 rounded-xl mt-6 font-bold'>
+                        See All
+                    </button>
                 </div>
-
-                <HoverBanner padding='0px' />
-
-
             </div>
+
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
         </div>
     )
 }

@@ -83,14 +83,14 @@ const NewsSection = () => {
     ];
 
     return (
-        <div className="bg-gray-200 p-6 rounded-3xl border border-black mb-6">
+        <div className="bg-gray-200 md:p-6 rounded-3xl border border-black mb-6">
             {newsData.map((news) => (
                 <div
                     key={news.id}
-                    className="flex space-x-4  p-4 rounded-xl  mb-6"
+                    className="flex flex-col sm:flex-row space-x-4 sm:space-x-6 p-4 rounded-xl mb-6"
                 >
                     {/* Image */}
-                    <div className="w-40 h-28">
+                    <div className="w-full sm:w-40 h-28 mb-4 sm:mb-0 px-4">
                         <Image
                             width={1000}
                             height={1000}
@@ -102,16 +102,18 @@ const NewsSection = () => {
 
                     {/* News Content */}
                     <div className="flex-1 bg-white p-5 rounded-3xl">
-                        <h2 className="font-bold text-lg">{news.title}</h2>
-                        <p className="text-red-600 font-bold text-xl mt-1 mb-3">{news.author} <span className='text-xs text-gray-600'>- August 7, 2019</span></p>
-                        {/* <p className="text-gray-500 text-xs mb-2">{news.date}</p> */}
-                        <p className="text-gray-700  bg-gray-300 px-3 py-5 text-lg font-semibold rounded-md">
+                        <h2 className="font-bold text-lg sm:text-xl">{news.title}</h2>
+                        <p className="text-red-600 font-bold text-xl mt-1 mb-3">
+                            {news.author} <span className='text-xs text-gray-600'>- August 7, 2019</span>
+                        </p>
+                        <p className="text-gray-700 bg-gray-300 px-3 py-5 text-lg font-semibold rounded-md">
                             {news.description}
                         </p>
                     </div>
                 </div>
             ))}
         </div>
+
     );
 };
 
@@ -121,24 +123,30 @@ function NewsListing() {
         <div>
             <AdBanner />
 
-            <div className='px-52 py-8'>
-                <h4 className='font-bold text-4xl text-center'><span className='text-red-500'>Fashion</span> News</h4>
+            <div className='md:px-52 py-8'>
+                <h4 className='font-bold text-4xl text-center md:mb-0 mb-5'><span className='text-red-500'>Fashion</span> News</h4>
                 <Gallery />
             </div>
 
             <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  my-6' />
 
-            <div className='px-52 py-8'>
+            <div className='md:px-52 py-8'>
                 <NewsSection />
                 <NewsSection />
-                <HoverBanner padding='0px' />
+            </div>
+
+            <div className="md:px-52 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
+            <div className='md:px-52 py-8'>
                 <NewsSection />
                 <NewsSection />
             </div>
 
             <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  my-6' />
 
-            <div className='px-52 py-8'>
+            <div className='md:px-52 py-8'>
                 <NewsSection />
 
                 <div className='flex items-center justify-center'>

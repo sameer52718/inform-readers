@@ -16,84 +16,114 @@ function NameMeaning() {
         <div className='container mx-auto'>
             <AdBanner />
 
-            <div className='px-44 py-8'>
+            <div className='md:px-44 px-4 py-8'>
                 <NameFilter />
 
                 <div className="mt-8">
-                    <h4 className=" font-semibold text-2xl">Search Baby Names By Religion:</h4>
+                    <h4 className="font-semibold text-2xl">Search Baby Names By Religion:</h4>
 
-                    <div className='bg-[#D9d9d9] p-5 rounded-xl border border-black mt-2 px-12 gap-3 py-4 flex items-center flex-wrap'>
+                    <div className='bg-[#D9d9d9] md:p-5 rounded-xl border border-black mt-2 px-2 sm:px-12 md:gap-3 gap-2 py-4 flex flex-wrap'>
                         {nameReligion.map((name, index) => (
-                            <Link key={index} href={"#"} className='bg-white py-4  px-6  w-fit text-xl font-semibold rounded-2xl'>
+                            <Link key={index} href={"#"} className='bg-white md:py-4 p-3 md:px-6 w-fit md:text-xl text-sm font-semibold rounded-2xl mb-3 sm:mb-0'>
                                 {name}
                             </Link>
                         ))}
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
+            </div>
 
+
+            <div className="md:px-48 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
+
+            <div className='md:px-44 px-4 py-8'>
                 <div>
                     <h5 className='text-xl font-semibold '>Browse Boys Names by Alphabets</h5>
                     <div className='mt-4'>
                         <NamePagination totalPages={26} currentPage={1} />
 
-                        <div className='grid grid-cols-3 gap-4  bg-red-600 rounded-lg mt-3 px-8'>
-                            <div className="col-span-1  text-2xl py-3 text-white font-semibold border-r-2 border-white ">Names </div>
-                            <div className="col-span-1  text-2xl py-3 text-white font-semibold border-r-2 border-white">Meaning</div>
-                            <div className="col-span-1 text-center text-2xl py-3 text-white font-semibold ">Details</div>
-                        </div>
-
-                        <div className='py-8 px-8 bg-[#d9d9d9]  mt-5 rounded-xl  gap-4'>
-                            {[...Array(3)].map((item, index) => (
-                                <div className='grid grid-cols-3 mb-4'>
-                                    <div className="col-span-1 text-xl font-semibold">Ahmed</div>
-                                    <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                    <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                        <Link href={"/name-meaning/1"}>
-                                            View Detail
-                                        </Link>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                <HoverBanner padding='0px' />
-
-                <div>
-                    <h5 className='text-xl font-semibold '>Browse Girls Names by Alphabets</h5>
-                    <div className='mt-4'>
-                        <NamePagination totalPages={26} currentPage={1} />
-
-                        <div className='grid grid-cols-3 gap-4  bg-red-600 rounded-lg mt-3 px-8'>
-                            <div className="col-span-1  text-2xl py-3 text-white font-semibold border-r-2 border-white ">Names </div>
-                            <div className="col-span-1  text-2xl py-3 text-white font-semibold border-r-2 border-white">Meaning</div>
-                            <div className="col-span-1 text-center text-2xl py-3 text-white font-semibold ">Details</div>
-                        </div>
-
-                        <div className='py-8 px-8 bg-[#d9d9d9]  mt-5 rounded-xl  gap-4'>
-                            {[...Array(3)].map((_, i) => (
-                            <div className='grid grid-cols-3 mb-4'>
-                                <div className="col-span-1 text-xl font-semibold">Aisha</div>
-                                <div className="col-span-1 text-xl font-semibold">Praiseworthy</div>
-                                <div className="col-span-1 text-xl font-semibold underline text-red-500 text-center">
-                                    <Link href={"/name-meaning/1"}>
-                                        View Detail
-                                    </Link>
-                                </div>
-                            </div>
-                            ))}
+                        {/* Table for names, meaning, and details */}
+                        <div className='overflow-x-auto'>
+                            <table className='min-w-full bg-red-600 text-white rounded-lg mt-3'>
+                                <thead>
+                                    <tr>
+                                        <th className="py-3 md:text-2xl text-base font-semibold border-b-2">Names</th>
+                                        <th className="py-3 md:text-2xl text-base font-semibold border-b-2">Meaning</th>
+                                        <th className="py-3 md:text-2xl text-base font-semibold border-b-2 text-center">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody className='bg-[#d9d9d9]'>
+                                    {[...Array(3)].map((item, index) => (
+                                        <tr key={index} className='border-b-2'>
+                                            <td className="py-4 md:text-xl text-sm px-3 text-black font-semibold">Ahmed</td>
+                                            <td className="py-4 md:text-xl text-sm px-3 text-black font-semibold">Praiseworthy</td>
+                                            <td className="py-4 md:text-xl text-sm px-3 text-black font-semibold text-center">
+                                                <Link href={"/name-meaning/1"} className='underline text-red-500'>
+                                                    View Detail
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <HoverBanner padding='0px' />
-
 
             </div>
 
+            <div className="md:px-48 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
+
+            <div className='md:px-44 px-4 py-8'>
+                <div>
+                    <h5 className='text-xl font-semibold'>Browse Boys Names by Alphabets</h5>
+                    <div className='mt-4'>
+                        <NamePagination totalPages={26} currentPage={1} />
+
+                        {/* Table Header */}
+                        <div className='overflow-x-auto mt-3 bg-red-600 rounded-lg'>
+                            <table className='min-w-full table-auto'>
+                                <thead>
+                                    <tr>
+                                        <th className='md:text-2xl text-lg py-3 text-white font-semibold border-b-2 sm:border-r-2 sm:border-white text-center sm:text-left'>
+                                            Names
+                                        </th>
+                                        <th className='md:text-2xl text-lg py-3 text-white font-semibold border-b-2 sm:border-r-2 sm:border-white text-center sm:text-left'>
+                                            Meaning
+                                        </th>
+                                        <th className='text-center md:text-2xl text-lg py-3 text-white font-semibold border-b-2 sm:border-none'>
+                                            Details
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {[...Array(3)].map((item, index) => (
+                                        <tr key={index} className='bg-[#d9d9d9]'>
+                                            <td className="md:text-xl text-sm px-4 font-semibold py-3">{`Ahmed`}</td>
+                                            <td className="md:text-xl text-sm px-4 font-semibold py-3">{`Praiseworthy`}</td>
+                                            <td className="md:text-xl text-sm px-4 font-semibold py-3 text-center">
+                                                <Link href={"/name-meaning/1"} className="underline text-red-500">
+                                                    View Detail
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
         </div>
     )
 }

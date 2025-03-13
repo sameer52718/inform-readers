@@ -16,30 +16,30 @@ import { useState } from "react";
 const CouponListCard = ({ coupon }) => {
 
     return (
-        <div className=" bg-[#d9d9d9] pt-5 px-8 rounded-lg">
-            <div className="flex items-center justify-between">
-                <p className="text-red-500 text-2xl font-bold">{coupon.discount} <br /> Off</p>
-                <p className=" font-semibold text-2xl text-gray-600">{coupon.details}</p>
-                <button className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium">
+        <div className="bg-[#d9d9d9] pt-5 px-6 sm:px-8 rounded-lg">
+            <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+                <p className="text-red-500 text-xl sm:text-2xl font-bold text-center sm:text-left">
+                    {coupon.discount} <br className="hidden sm:block" /> Off
+                </p>
+                <p className="font-semibold text-lg sm:text-2xl text-gray-600 text-center sm:text-left">
+                    {coupon.details}
+                </p>
+                <button className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium w-full sm:w-auto">
                     Reveal Code
                 </button>
             </div>
-            <div className="border-t border-black  mt-4">
-                <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-3   border-black py-2">
-                        <p className='flex justify-center items-center gap-1'>See Details
-                            <Icon icon="mynaui:plus-solid" width="18" height="18" className='mt-[2px]' />
+            <div className="border-t border-black mt-4">
+                <div className="grid grid-cols-1">
+                    <div className="py-2">
+                        <p className="flex justify-center items-center gap-1 text-center">
+                            See Details
+                            <Icon icon="mynaui:plus-solid" width="18" height="18" className="mt-[2px]" />
                         </p>
-
                     </div>
-                    {/* <div className="col-span-2 px-20 flex items-center" >
-                        <button className='bg-black px-6 py-1 rounded-2xl text-white w-fit'>
-                            Code
-                        </button>
-                    </div> */}
                 </div>
             </div>
         </div>
+
     )
 }
 
@@ -58,26 +58,23 @@ function Coupons() {
     const [activeTab, setActiveTab] = useState("popularity");
     return (
         <>
-        <div className='container mx-auto'>
-            <AdBanner />
+            <div className='container mx-auto'>
+                <AdBanner />
 
             </div>
 
-            <section className='px-32 bg-white'>
-                <div className='flex items-center gap-1 px-32 py-4'>
+            <section className='md:px-32 bg-white'>
+                <div className='flex items-center gap-1 md:px-32 px-4 py-4'>
                     <h6>Home</h6>
                     <Icon icon="basil:caret-right-solid" className='mt-[2px]' width="18" height="18" />
                     <h6>Store Page</h6>
                 </div>
-
-                <div>
-                    <h2 className='text-3xl font-bold text-center pb-6'>A Cherry on Top Coupons & Promo Codes</h2>
-                </div>
+                <h2 className='md:text-3xl text-xl font-bold text-center pb-6'>A Cherry on Top Coupons & Promo Codes</h2>
             </section>
-            <div className='container mx-auto'>
-            <section className='px-44'>
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 gap-y-4 mt-6 px-6">
-                    <div className="col-span-3 bg-[#d9d9d9] p-4 rounded-2xl h-fit">
+
+            <div className='container mx-auto md:px-44' >
+                <div className="grid grid-cols-12 gap-5 gap-y-4 mt-6 px-6">
+                    <div className="md:col-span-3 col-span-12 bg-[#d9d9d9] p-4 rounded-2xl h-fit">
                         <div className='bg-white h-40 rounded-xl flex items-center justify-center'>
                             <Image src={'/website/assets/images/coupons/01.png'} alt='coupon' width={1000} height={1000} className='w-56 h-auto object-contain' />
                         </div>
@@ -132,73 +129,76 @@ function Coupons() {
 
                         </div>
                     </div>
-                    <div className="col-span-9">
-                        <div className="p-4">
-                            <div className="flex items-center border-b border-black ">
-                                <span className="text-gray-600 mr-2">SortBy:</span>
-                                <button
-                                    className={`mr-4 pb-1 text-lg font-medium ${activeTab === "popularity" ? "text-red-500 border-b-2 border-red-500" : "text-gray-700"
-                                        }`}
-                                    onClick={() => setActiveTab("popularity")}
-                                >
-                                    Popularity
-                                </button>
-                                <button
-                                    className={`pb-1 text-lg font-medium ${activeTab === "latest" ? "text-red-500 border-b-2 border-red-500" : "text-gray-700"
-                                        }`}
-                                    onClick={() => setActiveTab("latest")}
-                                >
-                                    Latest
-                                </button>
+                    <div className="md:col-span-9 col-span-12">
+                        <div className="md:p-4">
+                            <div className="flex md:flex-row flex-col-reverse items-center border-b border-black ">
+                                <div className='md:py-0 py-4'>
+                                    <span className="text-gray-600 mr-2">SortBy:</span>
+                                    <button
+                                        className={`mr-4 pb-1 md:text-lg text-sm font-medium ${activeTab === "popularity" ? "text-red-500 border-b-2 border-red-500" : "text-gray-700"
+                                            }`}
+                                        onClick={() => setActiveTab("popularity")}
+                                    >
+                                        Popularity
+                                    </button>
+                                    <button
+                                        className={`pb-1 md:text-lg text-sm font-medium ${activeTab === "latest" ? "text-red-500 border-b-2 border-red-500" : "text-gray-700"
+                                            }`}
+                                        onClick={() => setActiveTab("latest")}
+                                    >
+                                        Latest
+                                    </button>
+                                </div>
+
                                 {/* Search Box */}
-                                <div className="ml-auto relative">
+                                <div className="md:ml-auto relative">
                                     <SearchInput />
                                 </div>
                             </div>
-
-                            {/* Coupon Cards */}
-                            <div className="mt-4 space-y-3">
-                                {coupons.map((coupon, index) => (
-                                    <CouponListCard key={index} coupon={coupon} />
-                                ))}
-                            </div>
-                            <HoverBanner padding='0px' />
-
-                            <div className="mt-4 space-y-3">
-                                {coupons.map((coupon, index) => (
-                                    <CouponListCard key={index} coupon={coupon} />
-                                ))}
-                            </div>
-
-                            <HoverBanner padding='0px' />
-
-                            <div className="mt-4 space-y-3">
-                                {coupons.map((coupon, index) => (
-                                    <CouponListCard key={index} coupon={coupon} />
-                                ))}
-                            </div>
-
-                            <div className='flex justify-center mt-8'>
-                                <button className='px-8 py-3  border  border-red-600 rounded-3xl text-red-600 bg-white'>
-                                    <Link href={"#"} className='flex items-center justify-center font-bold'>
-                                        Show More
-                                        <Image src={"/website/assets/images/icons/slider.png"} width={1000} height={1000} alt="product" className="w-7 h-auto ml-1 mt-1" />
-                                    </Link>
-
-                                </button>
-                            </div>
                         </div>
 
+                        <div className="mt-4 space-y-3">
+                            {coupons.map((coupon, index) => (
+                                <CouponListCard key={index} coupon={coupon} />
+                            ))}
+                        </div>
 
-                    </div>
+                        <div className=" py-8">
+                            <HoverBanner />
+                        </div>
 
-                    <div className="col-span-12">
-                        <HoverBanner padding='0px'  />
+                        <div className="mt-4 space-y-3">
+                            {coupons.map((coupon, index) => (
+                                <CouponListCard key={index} coupon={coupon} />
+                            ))}
+                        </div>
+
+                        <div className=" py-8">
+                            <HoverBanner />
+                        </div>
+
+                        <div className="mt-4 space-y-3">
+                            {coupons.map((coupon, index) => (
+                                <CouponListCard key={index} coupon={coupon} />
+                            ))}
+                        </div>
+
+                        <div className='flex justify-center my-8'>
+                            <button className='px-8 py-3  border  border-red-600 rounded-3xl text-red-600 bg-white'>
+                                <Link href={"#"} className='flex items-center justify-center font-bold'>
+                                    Show More
+                                    <Image src={"/website/assets/images/icons/slider.png"} width={1000} height={1000} alt="product" className="w-7 h-auto ml-1 mt-1" />
+                                </Link>
+
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-        </div>
+            <div className="md:px-56 sm:px-12 px-2 py-8">
+                <HoverBanner />
+            </div>
         </>
 
     )

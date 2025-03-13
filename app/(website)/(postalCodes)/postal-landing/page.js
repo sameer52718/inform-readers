@@ -22,19 +22,19 @@ function LocationTable() {
     ];
 
     return (
-        <div className="p-3 border border-black bg-gray-300 rounded-lg w-full">
-            <table className="w-full border-collapse">
-                <thead className='mb-5'>
-                    <tr className="bg-red-500 text-white">
+        <div className="p-3 border border-black bg-gray-300 rounded-lg w-full overflow-x-auto">
+            <table className="w-full min-w-max border-collapse">
+                <thead>
+                    <tr className="bg-red-500 text-white text-sm sm:text-base">
                         <th className="p-2 text-left">Country</th>
-                        <th className="p-2 text-left">Regions/ States /Provinces</th>
-                        <th className="p-2 text-left">City/Area</th>
+                        <th className="p-2 text-left">Regions / States / Provinces</th>
+                        <th className="p-2 text-left">City / Area</th>
                         <th className="p-2 text-left">Postal Code</th>
                     </tr>
                 </thead>
-                <tbody className='bg-gray-300'>
+                <tbody className="bg-gray-300 text-sm sm:text-base">
                     {locations.map((location, index) => (
-                        <tr key={index} className="">
+                        <tr key={index} className="even:bg-gray-200">
                             <td className="p-2">{location.country}</td>
                             <td className="p-2">{location.state}</td>
                             <td className="p-2">{location.city}</td>
@@ -44,6 +44,7 @@ function LocationTable() {
                 </tbody>
             </table>
         </div>
+
     );
 }
 
@@ -51,28 +52,37 @@ function PostalLanding() {
     return (
         <div>
             <AdBanner />
-            <div className='container mx-auto px-44 py-8'>
+            <div className='container mx-auto md:px-44 px-4 py-8'>
 
                 <WeatherFilter />
 
-                <div className='mb-5 py-5'>
-                    <h6 className='text-3xl font-semibold mb-3 px-2'>
-                        Regions
-                    </h6>
-                    <div className='bg-gray-300 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6'>
-                        <div className='grid grid-cols-3 w-full'>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Azad Jammu And Kashmir</div>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Fedral Capital </div>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Balochistan</div>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Gilgit Baltistan</div>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Sindh</div>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Punjab</div>
-                            <div className='text-red-500 text-xl font-bold  mb-5'><Icon icon="bi:dot" width="16" height="16" className='h-6 w-6 inline' /> Khyber Pakhtunkhwa</div>
+                <div className="mb-5 py-5">
+                    <h6 className="text-2xl sm:text-3xl font-semibold mb-3 px-2">Regions</h6>
+
+                    <div className="bg-gray-300 flex items-start px-4 sm:px-6 flex-wrap gap-3 rounded-3xl py-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-4">
+                            {[
+                                "Azad Jammu And Kashmir",
+                                "Federal Capital",
+                                "Balochistan",
+                                "Gilgit Baltistan",
+                                "Sindh",
+                                "Punjab",
+                                "Khyber Pakhtunkhwa",
+                            ].map((region, index) => (
+                                <div key={index} className="text-red-500 text-lg sm:text-xl font-bold flex items-center gap-2">
+                                    <Icon icon="bi:dot" width="20" height="20" className="h-6 w-6 inline" />
+                                    {region}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
+
+                <div className="py-8">
+                    <HoverBanner />
+                </div>
 
                 <LocationTable />
 
@@ -80,7 +90,9 @@ function PostalLanding() {
                     <Pagination currentPage={1} totalPages={10} />
                 </div>
 
-                <HoverBanner padding='0px' />
+                <div className="py-8">
+                    <HoverBanner />
+                </div>
 
 
                 <div>
@@ -143,8 +155,9 @@ function PostalLanding() {
                     </div>
                 </div>
 
-                <HoverBanner padding='0px' />
-
+                <div className="py-8">
+                    <HoverBanner />
+                </div>
 
             </div>
         </div>
