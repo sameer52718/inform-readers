@@ -5,7 +5,7 @@ import React from 'react'
 
 function BusArrival() {
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto '>
             <AdBanner />
             <div className='md:px-56 sm:12 px-4 md:py-8 py-4'>
                 <div className="flex flex-wrap items-center gap-3 mt-6 pb-1 mb-8 border-black relative font-semibold border-b w-fit text-sm sm:text-base">
