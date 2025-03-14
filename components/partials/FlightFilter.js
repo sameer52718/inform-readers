@@ -18,7 +18,7 @@ const FlightFilter = () => {
   };
 
   return (
-    <div className="bg-gray-900 p-4 rounded-lg flex items-center space-x-2">
+    <div className="bg-gray-900 p-4 rounded-lg grid grid-cols-1 md:grid-cols-5 gap-2">
       {/* From */}
       <div className="bg-white flex items-center px-4 py-2 rounded-lg w-full">
         <select
@@ -32,8 +32,7 @@ const FlightFilter = () => {
         </select>
       </div>
 
-      {/* Swap Icon */}
-      <Icon icon="mdi:swap-horizontal" className="text-xl text-black" />
+     
 
       {/* To */}
       <div className="bg-white flex items-center px-4 py-2 rounded-lg w-full">
@@ -49,7 +48,7 @@ const FlightFilter = () => {
       </div>
 
       {/* Date Picker */}
-      <div className="bg-white flex items-center px-4 py-2 rounded-lg w-full cursor-pointer">
+      <div className="bg-white flex items-center px-4 py-2 rounded-lg w-full">
         <DatePicker
           selected={date}
           onChange={(date) => setDate(date)}
@@ -72,13 +71,17 @@ const FlightFilter = () => {
       </div>
 
       {/* Search Button */}
-      <button
-        onClick={handleSearch}
-        className="bg-white p-3 rounded-lg hover:bg-gray-200 transition"
-      >
-        <Icon icon="mdi:magnify" className="text-2xl text-blue-500" />
-      </button>
+      <div className="w-full flex justify-center">
+        <button
+          onClick={handleSearch}
+          className="bg-white p-3 w-full flex justify-center rounded-lg hover:bg-gray-200 transition"
+        >
+          <Icon icon="mdi:magnify" className="text-2xl text-blue-500" />
+        </button>
+      </div>
     </div>
+
+
   );
 };
 

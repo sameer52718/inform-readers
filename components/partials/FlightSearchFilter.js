@@ -35,7 +35,7 @@ function FlightSearchFilter() {
 
 
     return (
-        <div className="w-80 p-4 bg-gray-200 rounded-lg">
+        <div className="md:w-80 p-4 bg-gray-200 rounded-lg">
             <h2 className="text-xl font-bold text-center bg-white p-2 rounded-md">Filters</h2>
             <div className="mt-4">
                 <p className='text-lg mb-2'>1 <span className='text-gray-500'> of 1 Flight </span></p>
@@ -68,7 +68,7 @@ function FlightSearchFilter() {
                 </div>
             </div>
 
-            <div className="bg-gray-400 p-4 rounded-lg w-72 text-white mt-6">
+            <div className="bg-gray-400 p-4 rounded-lg md:w-72 text-white mt-6">
                 {/* Tabs */}
                 <div className="flex justify-between bg-white rounded-md p-1 mb-4 gap-2">
                     <button

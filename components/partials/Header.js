@@ -114,31 +114,25 @@ function Header() {
                 </Link>
             </div>
             <div className='border-b-2 border-black'>
-                <ul className='flex flex-wrap items-center justify-around px-14  py-3'>
-                    {
-                        links.map((link) => (
-                            <li key={link.id} className='text-black relative text-lg cursor-pointer ' >
-                                <Link href={link.url} className='flex items-center'>
-                                    {link.title}
-                                    {link.sublinks && (
-                                        <Image src="/website/assets/images/icons/caret-down.png" alt="Vercel Logo" width={2000} height={2000} className="w-[20px] h-[20px] mt-1" />
-                                    )}
-                                </Link>
-                                {/* {link.sublinks && (
-                                    <ul className="absolute top-8 right-0 bg-white text-black border">
-                                        {link.sublinks.map((sublink) => (
-                                            <li key={sublink.id} className='px-8 border-b-[1px] py-2 hover:bg-gray-100 text-sm'>
-                                                <Link href={sublink.url}>{sublink.title}</Link>
-                                                
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )} */}
-                            </li>
-                        ))
-                    }
-
+                <ul className="flex flex-wrap items-center justify-center sm:justify-around px-5 sm:px-10 md:px-14 py-3 gap-4">
+                    {links.map((link) => (
+                        <li key={link.id} className="text-black relative text-lg cursor-pointer">
+                            <Link href={link.url} className="flex items-center">
+                                {link.title}
+                                {link.sublinks && (
+                                    <Image
+                                        src="/website/assets/images/icons/caret-down.png"
+                                        alt="Caret Down"
+                                        width={20}
+                                        height={20}
+                                        className="w-[20px] h-[20px] mt-1"
+                                    />
+                                )}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
+
             </div>
         </header>
     )

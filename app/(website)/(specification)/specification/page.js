@@ -84,32 +84,32 @@ function Specification() {
             <AdBanner />
             <CategorySection category={homeCategory} />
 
-            <section className='px-56 py-8'>
-                <div className="flex items-center border-black ">
-                    <span className=" text-xl font-semibold text-red-500 mr-6">Latest Gadget</span>
+            <section className='md:px-56 px-4 py-8'>
+                <div className="flex items-center border-black pb-3 md:pb-0">
+                    <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Latest Gadget</span>
                     <button
-                        className={`mr-4  text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+                        className={`mr-4  md:text-lg text-sm  font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("showAll")}
                     >
                         Show All
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("popular")}
                     >
                         Popular
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("bestRated")}
                     >
                         Best Rated
                     </button>
                     {/* Search Box */}
-                    <div className="ml-auto relative">
+                    <div className="ml-auto md:block hidden relative">
                         <SearchInput />
                     </div>
                 </div>
@@ -136,6 +136,12 @@ function Specification() {
                         modules={[Autoplay]}
                         spaceBetween={40}
                         slidesPerView={5}
+                        breakpoints={{
+                            0: { slidesPerView: 1.7 },
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1440: { slidesPerView: 5 },
+                        }}
                         onSwiper={(swiper) => (swiperRef.current = swiper)}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         loop={true}
@@ -162,32 +168,32 @@ function Specification() {
                 </div>
             </section>
 
-            <section className='px-56 py-8'>
-                <div className="flex items-center border-black ">
-                    <span className=" text-xl font-semibold text-red-500 mr-6">Latest Mobile</span>
+            <section className='md:px-56 px-4 py-8'>
+                <div className="flex items-center border-black pb-3 md:pb-0">
+                    <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Latest Gadget</span>
                     <button
-                        className={`mr-4  text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+                        className={`mr-4  md:text-lg text-sm  font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("showAll")}
                     >
                         Show All
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("popular")}
                     >
                         Popular
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("bestRated")}
                     >
                         Best Rated
                     </button>
                     {/* Search Box */}
-                    <div className="ml-auto relative">
+                    <div className="ml-auto md:block hidden relative">
                         <SearchInput />
                     </div>
                 </div>
@@ -214,164 +220,12 @@ function Specification() {
                         modules={[Autoplay]}
                         spaceBetween={40}
                         slidesPerView={5}
-                        onSwiper={(swiper) => (swiperRef.current = swiper)}
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        loop={true}
-                        className="w-full min-h-40"
-                    >
-                        {products.map((item, index) => (
-                            <SwiperSlide key={index}>
-                                <SpecificationCard product={item} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                    <button
-                        onClick={() => swiperRef.current?.slideNext()}
-                        className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-                    >
-                        <Image
-                            src={"/website/assets/images/icons/slider.png"}
-                            alt="prev-icon"
-                            width={1000}
-                            height={1000}
-                            className="h-7 w-7 object-contain "
-                        />
-                    </button>
-                </div>
-            </section>
-
-            <HoverBanner padding='100px' />
-            <section className='px-56 py-8'>
-                <div className="flex items-center border-black ">
-                    <span className=" text-xl font-semibold text-red-500 mr-6">Latest Laptopm</span>
-                    <button
-                        className={`mr-4  text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
-                            }`}
-                        onClick={() => setActiveTab("showAll")}
-                    >
-                        Show All
-                    </button>
-                    <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
-                            }`}
-                        onClick={() => setActiveTab("popular")}
-                    >
-                        Popular
-                    </button>
-                    <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
-                            }`}
-                        onClick={() => setActiveTab("bestRated")}
-                    >
-                        Best Rated
-                    </button>
-                    {/* Search Box */}
-                    <div className="ml-auto relative">
-                        <SearchInput />
-                    </div>
-                </div>
-
-                <div className="divider h-[2px]  w-full bg-black">
-                    <div className="w-24 bg-[#ff0000] h-full"></div>
-                </div>
-
-
-                <div className="relative w-full mt-8   h-fit">
-                    <button
-                        onClick={() => swiperRef.current?.slidePrev()}
-                        className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-                    >
-                        <Image
-                            src={"/website/assets/images/icons/slider.png"}
-                            alt="prev-icon"
-                            width={1000}
-                            height={1000}
-                            className="h-7 w-7 object-contain rotate-180"
-                        />
-                    </button>
-                    <Swiper
-                        modules={[Autoplay]}
-                        spaceBetween={40}
-                        slidesPerView={5}
-                        onSwiper={(swiper) => (swiperRef.current = swiper)}
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        loop={true}
-                        className="w-full min-h-40"
-                    >
-                        {products.map((item, index) => (
-                            <SwiperSlide key={index}>
-                                <SpecificationCard product={item} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                    <button
-                        onClick={() => swiperRef.current?.slideNext()}
-                        className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-                    >
-                        <Image
-                            src={"/website/assets/images/icons/slider.png"}
-                            alt="prev-icon"
-                            width={1000}
-                            height={1000}
-                            className="h-7 w-7 object-contain "
-                        />
-                    </button>
-                </div>
-            </section>
-
-
-            <section className='px-56 py-8'>
-                <div className="flex items-center border-black ">
-                    <span className=" text-xl font-semibold text-red-500 mr-6">Latest Smart Watches</span>
-                    <button
-                        className={`mr-4  text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
-                            }`}
-                        onClick={() => setActiveTab("showAll")}
-                    >
-                        Show All
-                    </button>
-                    <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
-                            }`}
-                        onClick={() => setActiveTab("popular")}
-                    >
-                        Popular
-                    </button>
-                    <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
-                            }`}
-                        onClick={() => setActiveTab("bestRated")}
-                    >
-                        Best Rated
-                    </button>
-                    {/* Search Box */}
-                    <div className="ml-auto relative">
-                        <SearchInput />
-                    </div>
-                </div>
-
-                <div className="divider h-[2px]  w-full bg-black">
-                    <div className="w-24 bg-[#ff0000] h-full"></div>
-                </div>
-
-
-                <div className="relative w-full mt-8   h-fit">
-                    <button
-                        onClick={() => swiperRef.current?.slidePrev()}
-                        className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-                    >
-                        <Image
-                            src={"/website/assets/images/icons/slider.png"}
-                            alt="prev-icon"
-                            width={1000}
-                            height={1000}
-                            className="h-7 w-7 object-contain rotate-180"
-                        />
-                    </button>
-                    <Swiper
-                        modules={[Autoplay]}
-                        spaceBetween={40}
-                        slidesPerView={5}
+                        breakpoints={{
+                            0: { slidesPerView: 1.7 },
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1440: { slidesPerView: 5 },
+                        }}
                         onSwiper={(swiper) => (swiperRef.current = swiper)}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         loop={true}
@@ -399,34 +253,32 @@ function Specification() {
             </section>
 
             <HoverBanner padding='100px' />
-
-
-            <section className='px-56 py-8'>
-                <div className="flex items-center border-black ">
-                    <span className=" text-xl font-semibold text-red-500 mr-6">Latest Tablet</span>
+            <section className='md:px-56 px-4 py-8'>
+                <div className="flex items-center border-black pb-3 md:pb-0">
+                    <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Latest Gadget</span>
                     <button
-                        className={`mr-4  text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+                        className={`mr-4  md:text-lg text-sm  font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("showAll")}
                     >
                         Show All
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("popular")}
                     >
                         Popular
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("bestRated")}
                     >
                         Best Rated
                     </button>
                     {/* Search Box */}
-                    <div className="ml-auto relative">
+                    <div className="ml-auto md:block hidden relative">
                         <SearchInput />
                     </div>
                 </div>
@@ -453,6 +305,12 @@ function Specification() {
                         modules={[Autoplay]}
                         spaceBetween={40}
                         slidesPerView={5}
+                        breakpoints={{
+                            0: { slidesPerView: 1.7 },
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1440: { slidesPerView: 5 },
+                        }}
                         onSwiper={(swiper) => (swiperRef.current = swiper)}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         loop={true}
@@ -480,32 +338,32 @@ function Specification() {
             </section>
 
 
-            <section className='px-56 py-8'>
-                <div className="flex items-center border-black ">
-                    <span className=" text-xl font-semibold text-red-500 mr-6">Latest AC</span>
+            <section className='md:px-56 px-4 py-8'>
+                <div className="flex items-center border-black pb-3 md:pb-0">
+                    <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Latest Gadget</span>
                     <button
-                        className={`mr-4  text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+                        className={`mr-4  md:text-lg text-sm  font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("showAll")}
                     >
                         Show All
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("popular")}
                     >
                         Popular
                     </button>
                     <button
-                        className={` mr-4 text-lg font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
                             }`}
                         onClick={() => setActiveTab("bestRated")}
                     >
                         Best Rated
                     </button>
                     {/* Search Box */}
-                    <div className="ml-auto relative">
+                    <div className="ml-auto md:block hidden relative">
                         <SearchInput />
                     </div>
                 </div>
@@ -532,6 +390,184 @@ function Specification() {
                         modules={[Autoplay]}
                         spaceBetween={40}
                         slidesPerView={5}
+                        breakpoints={{
+                            0: { slidesPerView: 1.7 },
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1440: { slidesPerView: 5 },
+                        }}
+                        onSwiper={(swiper) => (swiperRef.current = swiper)}
+                        autoplay={{ delay: 3000, disableOnInteraction: false }}
+                        loop={true}
+                        className="w-full min-h-40"
+                    >
+                        {products.map((item, index) => (
+                            <SwiperSlide key={index}>
+                                <SpecificationCard product={item} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                    <button
+                        onClick={() => swiperRef.current?.slideNext()}
+                        className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
+                    >
+                        <Image
+                            src={"/website/assets/images/icons/slider.png"}
+                            alt="prev-icon"
+                            width={1000}
+                            height={1000}
+                            className="h-7 w-7 object-contain "
+                        />
+                    </button>
+                </div>
+            </section>
+
+            <HoverBanner padding='100px' />
+
+
+            <section className='md:px-56 px-4 py-8'>
+                <div className="flex items-center border-black pb-3 md:pb-0">
+                    <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Latest Gadget</span>
+                    <button
+                        className={`mr-4  md:text-lg text-sm  font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+                            }`}
+                        onClick={() => setActiveTab("showAll")}
+                    >
+                        Show All
+                    </button>
+                    <button
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
+                            }`}
+                        onClick={() => setActiveTab("popular")}
+                    >
+                        Popular
+                    </button>
+                    <button
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+                            }`}
+                        onClick={() => setActiveTab("bestRated")}
+                    >
+                        Best Rated
+                    </button>
+                    {/* Search Box */}
+                    <div className="ml-auto md:block hidden relative">
+                        <SearchInput />
+                    </div>
+                </div>
+
+                <div className="divider h-[2px]  w-full bg-black">
+                    <div className="w-24 bg-[#ff0000] h-full"></div>
+                </div>
+
+
+                <div className="relative w-full mt-8   h-fit">
+                    <button
+                        onClick={() => swiperRef.current?.slidePrev()}
+                        className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
+                    >
+                        <Image
+                            src={"/website/assets/images/icons/slider.png"}
+                            alt="prev-icon"
+                            width={1000}
+                            height={1000}
+                            className="h-7 w-7 object-contain rotate-180"
+                        />
+                    </button>
+                    <Swiper
+                        modules={[Autoplay]}
+                        spaceBetween={40}
+                        slidesPerView={5}
+                        breakpoints={{
+                            0: { slidesPerView: 1.7 },
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1440: { slidesPerView: 5 },
+                        }}
+                        onSwiper={(swiper) => (swiperRef.current = swiper)}
+                        autoplay={{ delay: 3000, disableOnInteraction: false }}
+                        loop={true}
+                        className="w-full min-h-40"
+                    >
+                        {products.map((item, index) => (
+                            <SwiperSlide key={index}>
+                                <SpecificationCard product={item} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                    <button
+                        onClick={() => swiperRef.current?.slideNext()}
+                        className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
+                    >
+                        <Image
+                            src={"/website/assets/images/icons/slider.png"}
+                            alt="prev-icon"
+                            width={1000}
+                            height={1000}
+                            className="h-7 w-7 object-contain "
+                        />
+                    </button>
+                </div>
+            </section>
+
+
+            <section className='md:px-56 px-4 py-8'>
+                <div className="flex items-center border-black pb-3 md:pb-0">
+                    <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Latest Gadget</span>
+                    <button
+                        className={`mr-4  md:text-lg text-sm  font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+                            }`}
+                        onClick={() => setActiveTab("showAll")}
+                    >
+                        Show All
+                    </button>
+                    <button
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
+                            }`}
+                        onClick={() => setActiveTab("popular")}
+                    >
+                        Popular
+                    </button>
+                    <button
+                        className={` mr-4 md:text-lg text-sm  font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+                            }`}
+                        onClick={() => setActiveTab("bestRated")}
+                    >
+                        Best Rated
+                    </button>
+                    {/* Search Box */}
+                    <div className="ml-auto md:block hidden relative">
+                        <SearchInput />
+                    </div>
+                </div>
+
+                <div className="divider h-[2px]  w-full bg-black">
+                    <div className="w-24 bg-[#ff0000] h-full"></div>
+                </div>
+
+
+                <div className="relative w-full mt-8   h-fit">
+                    <button
+                        onClick={() => swiperRef.current?.slidePrev()}
+                        className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
+                    >
+                        <Image
+                            src={"/website/assets/images/icons/slider.png"}
+                            alt="prev-icon"
+                            width={1000}
+                            height={1000}
+                            className="h-7 w-7 object-contain rotate-180"
+                        />
+                    </button>
+                    <Swiper
+                        modules={[Autoplay]}
+                        spaceBetween={40}
+                        slidesPerView={5}
+                        breakpoints={{
+                            0: { slidesPerView: 1.7 },
+                            640: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1440: { slidesPerView: 5 },
+                        }}
                         onSwiper={(swiper) => (swiperRef.current = swiper)}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         loop={true}

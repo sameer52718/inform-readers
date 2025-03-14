@@ -9,49 +9,44 @@ function FlightDetail() {
         <div>
             <AdBanner />
 
-            <div className='container px-44 py-8'>
+            <div className='container md:px-44 px-4 py-8'>
                 <h4 className='text-3xl mb-3  font-bold'>Step 1: Review what’s included in your fare</h4>
                 <p className='text-lg font-semnibold '>
                     See baggage size and weight limit.Total prices may include estimated baggage fees and flexibility. Some options may require added baggage or flexibility when checking out. Check terms and conditions on the booking site.
                 </p>
 
-                <div className=" rounded-xl p-4 bg-white border border-black mt-4 ">
-                    <h2 className="text-2xl font-semibold">Lite</h2>
-                    <p className="text-gray-600 font-semibold">$380</p>
-                    <hr className="my-2 text-black" />
-                    <div className="space-y-2  grid grid-cols-2">
-                        <div className="flex items-center gap-2">
-                            <Icon icon="mdi:check-circle" className="text-green-500 text-2xl" />
-                            <span className='text-xl'>1 carry-on bag</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Icon icon="mdi:currency-usd" className="text-black text-2xl" />
-                            <span className='text-xl'> Checked bag for a fee</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Icon icon="mdi:currency-usd" className="text-black text-2xl" />
-                            <span className='text-xl'>Seat selection for a fee</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Icon icon="mdi:currency-usd" className="text-black text-2xl" />
-                            <span className='text-xl'>Extra legroom for a fee</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Icon icon="mdi:close-circle" className="text-red-500 text-2xl" />
-                            <span className='text-xl'>No ticket changes</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Icon icon="mdi:close-circle" className="text-red-500 text-2xl" />
-                            <span className='text-xl'>No refunds</span>
-                        </div>
+                <div className="rounded-xl p-4 bg-white border border-black mt-4 w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto">
+                    <h2 className="text-xl sm:text-2xl font-semibold">Lite</h2>
+                    <p className="text-gray-600 font-semibold text-lg">$380</p>
+                    <hr className="my-2 border-black" />
+
+                    <div className="space-y-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                            { icon: "mdi:check-circle", text: "1 carry-on bag", color: "text-green-500" },
+                            { icon: "mdi:currency-usd", text: "Checked bag for a fee", color: "text-black" },
+                            { icon: "mdi:currency-usd", text: "Seat selection for a fee", color: "text-black" },
+                            { icon: "mdi:currency-usd", text: "Extra legroom for a fee", color: "text-black" },
+                            { icon: "mdi:close-circle", text: "No ticket changes", color: "text-red-500" },
+                            { icon: "mdi:close-circle", text: "No refunds", color: "text-red-500" },
+                        ].map((item, index) => (
+                            <div key={index} className="flex items-center gap-2">
+                                <Icon icon={item.icon} className={`${item.color} text-lg sm:text-2xl`} />
+                                <span className="text-sm sm:text-lg">{item.text}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
+
 
                 <p className='text-xl  font-bold mt-7 '>
                     Fare and baggage fees apply to the entire trip.
                 </p>
 
-                <HoverBanner padding='0px' />
+                <div className='py-10'>
+                    <HoverBanner />
+
+                </div>
+
 
 
                 <h4 className='text-3xl mb-3  font-bold'>Step 1: Review what’s included in your fare</h4>
@@ -59,31 +54,33 @@ function FlightDetail() {
                     See baggage size and weight limit.Total prices may include estimated baggage fees and flexibility. Some options may require added baggage or flexibility when checking out. Check terms and conditions on the booking site.
                 </p>
 
-                <div className="border rounded-3xl my-8  border-black px-16 py-6 flex items-center justify-between ">
+                <div className="border rounded-3xl my-8 border-black px-6 sm:px-16 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-8">
+                    {/* Left Section (Logo, Name, Rating) */}
                     <div className="flex items-center gap-2">
                         <Image
-                            src="/website/assets/images/icons/arrow-up.png" 
+                            src="/website/assets/images/icons/arrow-up.png"
                             alt="Expedia Logo"
-                            className="w-24 h-auto"
+                            className="w-16 sm:w-24 h-auto"
                             width={1000}
                             height={1000}
                         />
-                        <span className="font-semibold text-2xl">Expedia</span>
+                        <span className="font-semibold text-lg sm:text-2xl">Expedia</span>
                         <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded">5.5</span>
                     </div>
 
                     {/* Price & Button */}
-                    <div className="flex items-center gap-4">
-                        <span className="font-semibold text-2xl">$380</span>
-                        <button className="bg-red-500 text-white px-4 py-1 rounded-full font-semibold">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                        <span className="font-semibold text-lg sm:text-2xl">$380</span>
+                        <button className="bg-red-500 text-white px-4 py-1 rounded-full font-semibold text-sm sm:text-base">
                             Book
                         </button>
                     </div>
                 </div>
 
+
                 <h4 className='text-3xl mb-3  font-bold'>Multān to Dubai</h4>
                 <p className='text-lg font-semnibold '>
-                Round-trip, 1 Traveler
+                    Round-trip, 1 Traveler
                 </p>
 
 
@@ -91,7 +88,7 @@ function FlightDetail() {
                     {/* Header */}
                     <div className="flex items-center gap-3">
                         <Image
-                            src="/website/assets/images/icons/wave.png" 
+                            src="/website/assets/images/icons/wave.png"
                             alt="Airline Logo"
                             className="w-20 h-auto"
                             width={400}
@@ -134,7 +131,7 @@ function FlightDetail() {
                     {/* Header */}
                     <div className="flex items-center gap-3">
                         <Image
-                            src="/website/assets/images/icons/wave.png" 
+                            src="/website/assets/images/icons/wave.png"
                             alt="Airline Logo"
                             className="w-20 h-auto"
                             width={400}

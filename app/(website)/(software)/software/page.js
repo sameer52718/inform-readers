@@ -52,7 +52,7 @@ function TabMenu() {
                 {tabs.map((tab) => (
                     <button
                         key={tab}
-                        className={`px-4 py-2 text-xl font-semibold ${activeTab === tab
+                        className={`px-4 py-2 md:text-xl font-semibold ${activeTab === tab
                             ? "text-red-500 border-b-2 border-red-500"
                             : "text-gray-600"
                             }`}
@@ -64,27 +64,36 @@ function TabMenu() {
             </div>
 
             {/* Content */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 md:px-0 px-8">
                 {appData[activeTab].map((app, index) => (
                     <div
                         key={index}
-                        className="px-6 py-8 rounded-3xl border border-blackbg-white bg-white"
+                        className="p-4 sm:p-6 rounded-3xl border border-black bg-white shadow-md"
                     >
-                        <div className='flex justify-center border-b border-black'>
+                        {/* Image Section */}
+                        <div className="flex justify-center border-b border-black pb-4">
                             <Link href={'/software/1'}>
-                                <Image src={app.img} alt={app.name} className="w-24 h-24 mb-2" width={1000} height={1000} />
+                                <Image
+                                    src={app.img}
+                                    alt={app.name}
+                                    className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
+                                    width={1000}
+                                    height={1000}
+                                />
                             </Link>
                         </div>
-                        <p className="font-semibold text-xl">
-                            <Link href={'/software/1'}>
-                                {app.name}
-                            </Link>
+
+                        {/* App Name */}
+                        <p className="font-semibold text-lg sm:text-xl mt-3">
+                            <Link href={'/software/1'}>{app.name}</Link>
                         </p>
 
-                        <span className="text-sm text-gray-500">{app.type}</span>
+                        {/* App Type */}
+                        <span className="text-xs sm:text-sm text-gray-500">{app.type}</span>
                     </div>
                 ))}
             </div>
+
         </div>
     );
 }
@@ -94,13 +103,16 @@ function SoftwarePage() {
         <div>
             <AdBanner />
 
-            <div className='px-48 py-8'>
-                <h4 className='text-4xl text-center font-bold'>Free <span className='text-red-500'>Software Downloads</span> </h4>
+            <div className='md:px-48 py-8'>
+                <h4 className='md:text-4xl text-2xl md:text-center px-4 font-bold'>Free <span className='text-red-500'>Software Downloads</span> </h4>
 
                 <TabMenu />
-                <HoverBanner padding='0px' />
+
+                <div className='py-8'>
+                    <HoverBanner />
+                </div>
                 <div>
-                    <h4 className='text-2xl font-bold text-red-500 mb-4'>Best Games Software:</h4>
+                    <h4 className='text-2xl font-bold text-red-500 mb-4 px-4'>Best Games Software:</h4>
                     <TabMenu />
                     <div className='flex items-center justify-center mt-6'>
                         <button className='border border-red-500 bg-white font-bold text-red-500 px-7 py-2 rounded-2xl'>
@@ -108,9 +120,11 @@ function SoftwarePage() {
                         </button>
                     </div>
                 </div>
-                <HoverBanner padding='0px' />
+                <div className='py-8'>
+                    <HoverBanner />
+                </div>
                 <div>
-                    <h4 className='text-2xl font-bold text-red-500 mb-4'>Best Games Software:</h4>
+                    <h4 className='text-2xl font-bold text-red-500 mb-4 px-4'>Best Games Software:</h4>
                     <TabMenu />
                     <div className='flex items-center justify-center mt-6'>
                         <button className='border border-red-500 bg-white font-bold text-red-500 px-7 py-2 rounded-2xl'>
@@ -118,7 +132,9 @@ function SoftwarePage() {
                         </button>
                     </div>
                 </div>
-                <HoverBanner padding='0px' />
+                <div className='py-8'>
+                    <HoverBanner />
+                </div>
             </div>
 
 
