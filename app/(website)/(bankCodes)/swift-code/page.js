@@ -1,36 +1,30 @@
-"use client";
 import AdBanner from "@/components/partials/AdBanner";
 import HoverBanner from "@/components/partials/HoverBanner";
-import WeatherFilter from "@/components/partials/WeatherFilter";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-function PostalCode() {
-  const [data, setData] = useState([]);
+async function fetchData() {
+  try {
+    const { data } = await axiosInstance.get("/common/country", {
+      params: { groupCountry: true },
+    });
+    return data.error ? [] : data.response.groupCountry;
+  } catch (error) {
+    handleError(error);
+    return [];
+  }
+}
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const { data } = await axiosInstance.get("/common/country", { params: { groupCountry: true } });
-        if (!data.error) {
-          setData(data.response.groupCountry);
-        }
-      } catch (error) {
-        handleError(error);
-      }
-    };
-    getData();
-  }, []);
+export default async function PostalCode() {
+  const data = await fetchData();
 
   return (
     <div>
       <AdBanner />
       <div className="container mx-auto md:px-44 px-4 py-8">
-        <WeatherFilter />
-
         <h4 className="md:text-4xl text-2xl font-bold my-7 text-center">
           World <span className="text-red-500"> Zip/postal </span> Codes
         </h4>
@@ -64,5 +58,3 @@ function PostalCode() {
     </div>
   );
 }
-
-export default PostalCode;
