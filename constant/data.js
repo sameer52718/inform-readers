@@ -26,7 +26,7 @@ export const homeCategory = [
   { id: 1, name: "Travel", image: "/website/assets/images/icons/cate-icon.png", url: "/travel" },
   { id: 1, name: "Weather", image: "/website/assets/images/icons/cate-icon.png", url: "/weather" },
   { id: 3, name: "Biographies", image: "/website/assets/images/icons/cate-icon.png", url: "/biography" },
-  { id: 5, name: "Swift Codes", image: "/website/assets/images/icons/cate-icon.png", url: "/swift-code" },
+  { id: 5, name: "Swift Codes", image: "/website/assets/images/icons/cate-icon.png", url: "/swiftcode" },
   { id: 2, name: "Baby Names", image: "/website/assets/images/icons/cate-icon.png", url: "/baby-names" },
   { id: 3, name: "Biographies", image: "/website/assets/images/icons/cate-icon.png", url: "/biographies" },
 ];

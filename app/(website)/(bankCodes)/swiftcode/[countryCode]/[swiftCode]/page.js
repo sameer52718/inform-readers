@@ -30,7 +30,7 @@ function LocationTable({ data = [] }) {
                 <td className="p-2">{code?.city}</td>
                 <td className="p-2">{code?.branch || "---"}</td>
                 <td className="p-2 text-red-500 font-bold underline">
-                  <Link href={`/swift-code/${countryCode}/${code?.swiftCode}`}>{code?.swiftCode}</Link>
+                  <Link href={`/swiftcode/${countryCode}/${code?.swiftCode}`}>{code?.swiftCode}</Link>
                 </td>
               </tr>
             ))

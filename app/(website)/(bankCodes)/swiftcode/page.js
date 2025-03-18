@@ -35,7 +35,7 @@ export default async function PostalCode() {
 
             <div className="bg-gray-200 flex items-start px-3 flex-wrap gap-3 rounded-3xl py-6">
               {item?.countries?.map((country) => (
-                <Link href={`/swift-code/${country.countryCode}`} key={country.countryCode}>
+                <Link href={`/swiftcode/${country.countryCode}`} key={country.countryCode}>
                   <div className="bg-white px-4 py-2 rounded-2xl flex items-center gap-2">
                     <Image
                       src={country.flag}
