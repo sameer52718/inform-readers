@@ -1,30 +1,80 @@
 "use client";
 
-import GameCard from "@/components/card/SpecificationCard";
+import SpecificationCard from "@/components/card/SpecificationCard";
 import HoverBanner from "@/components/partials/HoverBanner";
 import PriceFilter from "@/components/partials/PriceFilter";
-import SearchInput from "@/components/ui/SearchInput";
+import Loading from "@/components/ui/Loading";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
-import React, { useState } from "react";
+import { useParams } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
 
 function SpecificationList() {
+  const [fetching, setFetching] = useState(false);
   const [activeTab, setActiveTab] = useState("popularity");
+  const { category } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({
+    totalItems: 0,
+    currentPage: 1,
+    totalPages: 1,
+    pageSize: 25,
+  });
+
+  const getData = useCallback(
+    async (loading = true, page = 1, sortBy = "popularity") => {
+      try {
+        setIsLoading(loading);
+        const { data } = await axiosInstance.get(`/website/specification/${category}`, {
+          params: { page, sortBy },
+        });
+        if (!data.error) {
+          setData((prev) => (page == 1 ? data.specification : [...prev, ...data.specification]));
+          setPagination(data.pagination);
+        }
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [category]
+  );
+  console.log(pagination);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  const onPageChange = async (page) => {
+    setFetching(true);
+    await getData(false, page, activeTab);
+    setFetching(false);
+  };
+
+  const onSortByChange = async (value) => {
+    if (activeTab == value) return;
+    setActiveTab(value);
+    await getData(true, 1, value);
+  };
+
   return (
-    <>
-      <section className="md:px-44 bg-white">
-        <div className="flex items-center gap-1 md:px-32 px-4 py-4">
+    <Loading loading={isLoading}>
+      <section className="container mx-auto bg-white">
+        <div className="flex items-center gap-1  py-4">
           <h6>Home</h6>
           <Icon icon="basil:caret-right-solid" className="mt-[2px]" width="18" height="18" />
-          <h6>Store Page</h6>
+          <h6>{category.replaceAll("_", " ")}</h6>
         </div>
 
-        <div className="md:px-44 px-3">
-          <h2 className="text-3xl font-bold  pb-3">Games</h2>
+        <div>
+          <h2 className="text-3xl font-bold  pb-3">{category.replaceAll("_", " ")}</h2>
         </div>
       </section>
 
-      <section className="py-6">
+      {/* <section className="py-6">
         <div className="flex  gap-2 lg:px-64 md:px-24 px-4 mb-4">
           <div className="h-6 w-6 mt-2  rounded-full bg-white border-[6px] border-red-600"></div>
           <h6 className="w-fit text-lg text-gray-700">
@@ -42,31 +92,31 @@ function SpecificationList() {
           <div className="h-6 w-6 mt-2  rounded-full bg-white border-[6px] border-red-600"></div>
           <h6 className="w-fit text-lg text-gray-700">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-            the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+            the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of
             type and scrambled it to make a type specimen book. It has survived not only five centuries, but
             also the leap into electronic typesetting, remaining essentially unchanged.
           </h6>
         </div>
-      </section>
+      </section> */}
 
-      <section className="md:px-44">
+      <section className="container mx-auto">
         <div className="grid grid-cols-12  md:gap-10">
-          <div className="md:col-span-3 col-span-12 px-4">
+          <div className="md:col-span-3 col-span-12 ">
             <PriceFilter />
           </div>
-          <div className="md:col-span-9 col-span-12 px-4">
+          <div className="md:col-span-9 col-span-12 ">
             <div className="w-full overflow-x-auto py-3 mt-5">
-              <div className="flex items-center border-black gap-4 sm:gap-6 min-w-max">
+              <div className="flex items-center justify-between border-black gap-4 sm:gap-6 min-w-max">
                 {/* Sort By Label */}
                 <span className="text-lg sm:text-xl font-semibold text-black whitespace-nowrap">Sort By</span>
 
                 {/* Sorting Buttons */}
                 <div className="flex overflow-x-auto gap-4">
                   {[
-                    { key: "showAll", label: "Popularity" },
+                    { key: "popularity", label: "Popularity" },
                     { key: "latest", label: "Latest" },
-                    { key: "highPrice", label: "High Price" },
-                    { key: "lowPrice", label: "Low Price" },
+                    { key: "highToLowPrice", label: "High Price" },
+                    { key: "LowToHighPrice", label: "Low Price" },
                     { key: "name", label: "Name" },
                   ].map(({ key, label }) => (
                     <button
@@ -74,16 +124,11 @@ function SpecificationList() {
                       className={`text-sm sm:text-lg font-medium transition ${
                         activeTab === key ? "text-black" : "text-gray-500 hover:text-black"
                       } whitespace-nowrap`}
-                      onClick={() => setActiveTab(key)}
+                      onClick={() => onSortByChange(key)}
                     >
                       {label}
                     </button>
                   ))}
-                </div>
-
-                {/* Search Box (Hidden on Small Screens) */}
-                <div className="ml-auto w-full sm:w-auto mt-2 sm:mt-0 hidden md:block">
-                  <SearchInput />
                 </div>
               </div>
             </div>
@@ -92,20 +137,27 @@ function SpecificationList() {
               <div className="w-24 bg-[#ff0000] h-full"></div>
             </div>
             <div className="mt-4">
-              <GameCard />
-              <GameCard />
-              <GameCard />
-
-              <HoverBanner padding="0px" />
-
-              <GameCard />
-              <GameCard />
-              <GameCard />
+              {data.map((item, index) => (
+                <div key={item._id}>
+                  <SpecificationCard item={item} />
+                  {(index + 1) % 3 === 0 && <HoverBanner padding="0px" />}
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-center my-5">
+              {pagination.totalPages > pagination.currentPage && (
+                <button
+                  onClick={() => onPageChange(pagination.currentPage + 1)}
+                  className="bg-red-500 px-4 py-2 text-white rounded-md  font-bold"
+                >
+                  {fetching ? "Loading" : "Load More"}
+                </button>
+              )}
             </div>
           </div>
         </div>
       </section>
-    </>
+    </Loading>
   );
 }
 
