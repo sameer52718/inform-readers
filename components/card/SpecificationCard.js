@@ -36,7 +36,6 @@ export default function SpecificationCard({ item }) {
                         ? `${spec.value.slice(0, 50)}...`
                         : spec.value
                       : "---"}
-                    {console.log(spec.value.length > 50 ? `${spec.value.slice(0, 50)}...` : item.value)}
                   </span>
                 </div>
               ))}
