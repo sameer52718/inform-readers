@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "@/store";
 
 import "./admin/scss/app.scss";
+import "simplebar-react/dist/simplebar.min.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
