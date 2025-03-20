@@ -1,7 +1,7 @@
 "use client";
 import AdBanner from "@/components/partials/AdBanner";
 import HoverBanner from "@/components/partials/HoverBanner";
-import Pagination from "@/components/ui/Pagination";
+import Pagination from "@/components/ui/Pagination.js";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Image from "next/image";
@@ -101,7 +101,7 @@ function PostalLanding() {
   return (
     <div>
       <AdBanner />
-      <div className="container mx-auto md:px-44 px-4 py-8">
+      <div className="container mx-auto  py-8">
         <form className="bg-gray-800 px-2 p-2 rounded-md w-full flex gap-3" onSubmit={handleSubmit}>
           <div className="flex-1">
             <input

@@ -80,14 +80,14 @@ function PostalCodeDetail() {
   return (
     <div>
       <AdBanner />
-      <div className="container mx-auto md:px-44 px-4 py-8">
+      <div className="container mx-auto  py-8">
         <h4 className="md:text-4xl text-2xl font-bold my-7 text-center">Bank Swift Code</h4>
 
         <HoverBanner />
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center sm:justify-between bg-red-600 text-white px-4 sm:px-6 py-3 text-sm font-bold mb-8 rounded-lg">
+        <div className="mt-8 flex flex-col sm:flex-row items-center sm:justify-between bg-red-600  px-4 sm:px-6 py-3 text-sm font-bold mb-8 rounded-lg">
           {/* Title */}
-          <h5 className="text-xl sm:text-3xl text-center sm:text-left mb-3 sm:mb-0">
+          <h5 className="text-xl sm:text-3xl text-center sm:text-left mb-3 sm:mb-0 text-white">
             Detailed information about SWIFT code {swiftCode}
           </h5>
         </div>

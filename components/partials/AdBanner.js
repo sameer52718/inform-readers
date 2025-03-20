@@ -9,7 +9,7 @@ function AdBanner() {
         width={2000}
         height={2000}
         alt="ad-banner"
-        className="md:px-32 h-auto px-2 mx-auto w-full "
+        className=" h-auto px-2 mx-auto w-full "
       />
     </div>
   );

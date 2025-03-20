@@ -6,7 +6,7 @@ import Image from "next/image";
 
 function CategorySection({ category }) {
   return (
-    <section className=" px-4 py-10">
+    <section className="  py-10">
       <Swiper
         pagination={{ clickable: true }}
         breakpoints={{
@@ -36,7 +36,7 @@ function CategorySection({ category }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className=" bg-[#d9d9d9] mt-10 w-full h-2 md:mx-8 sm:mx-4 mx-2">
+      <div className=" bg-[#d9d9d9] mt-10 w-full h-2 ">
         <div className="w-40 h-full bg-[#FF0000] "></div>
       </div>
     </section>

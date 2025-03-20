@@ -24,7 +24,7 @@ export default async function PostalCode() {
   return (
     <div>
       <AdBanner />
-      <div className="container mx-auto md:px-44 px-4 py-8">
+      <div className="container mx-auto  py-8">
         <h4 className="md:text-4xl text-2xl font-bold my-7 text-center">
           World <span className="text-red-500"> Zip/postal </span> Codes
         </h4>

@@ -16,12 +16,11 @@ import BiographyCard from "@/components/card/BiographyCard";
 import NameMeaningCard from "@/components/card/NameMeaningCard";
 import Link from "next/link";
 
-
 const LatestGadget = () => {
   const swiperRef = useRef(null);
   return (
     <>
-      <section className="md:px-32 sm:px-12 px-2 py-8">
+      <section className="">
         <SliderSection heading="Latest Gadget" />
         <ContentCard>
           <div className="relative w-full mt-8   h-fit">
@@ -91,12 +90,12 @@ const LatestGadget = () => {
       </section>
     </>
   );
-}
+};
 
 const LatestJobs = () => {
   const swiperRef = useRef(null);
   return (
-    <section className="md:px-32 sm:px-12 px-2 py-8">
+    <section>
       <SliderSection heading="Jobs Opening" />
       <ContentCard>
         <div className="relative w-full mt-8   h-fit">
@@ -131,7 +130,7 @@ const LatestJobs = () => {
               },
               1024: {
                 slidesPerView: 2,
-              }
+              },
             }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -192,7 +191,7 @@ const LatestJobs = () => {
               },
               1024: {
                 slidesPerView: 2,
-              }
+              },
             }}
             loop={true}
             className="w-full min-h-40"
@@ -218,14 +217,13 @@ const LatestJobs = () => {
         </div>
       </ContentCard>
     </section>
-  )
-}
-
+  );
+};
 
 const NameMeaning = () => {
   const swiperRef = useRef(null);
   return (
-    <section className="md:px-32 sm:px-12 px-2 py-8">
+    <section>
       <SliderSection heading="Name Meaning" />
       <ContentCard>
         <div className="relative w-full mt-8   h-fit">
@@ -257,8 +255,7 @@ const NameMeaning = () => {
               },
               1024: {
                 slidesPerView: 2,
-
-              }
+              },
             }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -286,13 +283,13 @@ const NameMeaning = () => {
         </div>
       </ContentCard>
     </section>
-  )
-}
+  );
+};
 
 const Biography = () => {
   const swiperRef = useRef(null);
   return (
-    <section className="md:px-32 sm:px-12 px-2 py-8">
+    <section>
       <SliderSection heading="Biography" />
       <ContentCard>
         <div className="relative w-full mt-8   h-fit">
@@ -324,7 +321,7 @@ const Biography = () => {
               },
               1024: {
                 slidesPerView: 5,
-              }
+              },
             }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -380,7 +377,7 @@ const Biography = () => {
               },
               1024: {
                 slidesPerView: 5,
-              }
+              },
             }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -408,13 +405,13 @@ const Biography = () => {
         </div>
       </ContentCard>
     </section>
-  )
-}
+  );
+};
 
 const GeneralSliderSection = ({ title }) => {
   const swiperRef = useRef(null);
   return (
-    <section className="md:px-32 sm:px-12 px-2 py-8">
+    <section>
       <SliderSection heading={title} />
       <ContentCard>
         <div className="relative w-full mt-8   h-fit">
@@ -446,7 +443,7 @@ const GeneralSliderSection = ({ title }) => {
               },
               1024: {
                 slidesPerView: 5,
-              }
+              },
             }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -474,12 +471,12 @@ const GeneralSliderSection = ({ title }) => {
         </div>
       </ContentCard>
     </section>
-  )
-}
+  );
+};
 
 const ZipCodes = () => {
   return (
-    <section className="md:px-32 sm:px-12 px-2 py-8">
+    <section>
       <SliderSection heading="Zip Codes" />
       <ContentCard>
         <div className="flex items-center md:gap-4 gap-2 flex-wrap py-6 md:px-1">
@@ -503,32 +500,31 @@ const ZipCodes = () => {
         </div>
       </ContentCard>
     </section>
-  )
-}
+  );
+};
 
 export default function Home() {
-
   return (
     <div className="container mx-auto">
       <AdBanner />
       <CategorySection category={homeCategory} />
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div>
         <HoverBanner />
       </div>
       <LatestGadget />
       <LatestJobs />
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div>
         <HoverBanner />
       </div>
       <NameMeaning />
       <Biography />
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div>
         <HoverBanner />
       </div>
       <GeneralSliderSection title="Cars" />
       <GeneralSliderSection title="Bikes" />
       <ZipCodes />
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div>
         <HoverBanner />
       </div>
     </div>
