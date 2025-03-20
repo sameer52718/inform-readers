@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const SpecificationTable = () => {
+const SpecificationTable = ({ data = [] }) => {
   const specifications = [
     { label: "Brand", value: "Motorola" },
     { label: "Model", value: "65 Inch LED Ultra HD (4K) TV (65SAUHDM)" },
@@ -36,10 +36,10 @@ const SpecificationTable = () => {
       <div className="border rounded-lg overflow-hidden">
         <table className="w-full text-sm text-gray-700">
           <tbody>
-            {specifications.map((item, index) => (
+            {data.map((item, index) => (
               <tr key={index} className="odd:bg-gray-100 even:bg-white">
-                <td className="px-4 py-2 font-medium">{item.label}</td>
-                <td className="px-4 py-2">{item.value}</td>
+                <td className="px-4 py-2 font-medium">{item.name}</td>
+                <td className="px-4 py-2">{item.value || "---"}</td>
               </tr>
             ))}
           </tbody>
@@ -119,7 +119,7 @@ const ReviewSection = () => {
   );
 };
 
-const InfoSections = () => {
+const InfoSections = ({ data, name }) => {
   return (
     <>
       <div className="py-10">
@@ -128,10 +128,8 @@ const InfoSections = () => {
       <div className="grid md:grid-cols-3 grid-cols-1 px-4 md:px-0 mt-6 gap-6">
         <div className="col-span-1"></div>
         <div className="md:col-span-2 col-span-1">
-          <h5 className="text-gray-400 font-bold text-xl mb-4">
-            Motorola 65 Inch LED Ultra HD (4K) TV (65SAUHDM) Full Specifications
-          </h5>
-          <SpecificationTable />
+          <h5 className="text-gray-400 font-bold text-xl mb-4">{name}</h5>
+          <SpecificationTable data={data} />
         </div>
       </div>
     </>
@@ -317,6 +315,19 @@ function SpecificationDetail() {
               </div>
             </div>
           </div>
+
+          {data?.data &&
+            Object.keys(data?.data).map((key) => {
+              if (key === "_id") {
+                return null;
+              }
+
+              if (data.data[key].length === 0) {
+                return null;
+              }
+
+              return <InfoSections key={key} data={data.data[key]} name={data?.name} />;
+            })}
 
           <div className="grid md:grid-cols-3 grid-cols-1 px-4 md:px-0 mt-6 gap-6">
             <div className="col-span-1"></div>
