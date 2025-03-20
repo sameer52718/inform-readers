@@ -1,7 +1,6 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -30,7 +29,7 @@ function CategorySection({ category }) {
                   />
                 </Link>
               </div>
-              <h3 className="font-semibold">
+              <h3 className="font-semibold text-lg">
                 <Link href={cate.url}> {cate.name}</Link>{" "}
               </h3>
             </div>
