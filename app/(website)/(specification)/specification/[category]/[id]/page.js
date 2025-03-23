@@ -46,6 +46,130 @@ const products = [
     price: "₹24,999",
     platform: "flipkart",
   },
+  {
+    id: 1,
+    image: "/website/assets/images/product/01.png",
+    title: "iQOO Neo 10R (8GB RAM, 128GB) - Raging dsa sdsad dsadsa asd",
+    price: "₹26,998",
+    discount: "Flat ₹2,000 Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 2,
+    image: "/website/assets/images/product/02.png",
+    title: "Deals on Refrigerators Starting @ ₹65/Day",
+    price: "No Cost EMI*",
+    discount: "Extra 10% Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 3,
+    image: "/website/assets/images/product/03.png",
+    title: "Affordable Deals on Best Window & Split ACs",
+    price: "Starting ₹23,240",
+    discount: "10% Instant Discount",
+    platform: "amazon",
+  },
+  {
+    id: 4,
+    image: "/website/assets/images/product/04.png",
+    title: "Nothing Phone 3a (8GB RAM, 128GB) - White",
+    price: "₹24,999",
+    platform: "flipkart",
+  },
+  {
+    id: 1,
+    image: "/website/assets/images/product/01.png",
+    title: "iQOO Neo 10R (8GB RAM, 128GB) - Raging dsa sdsad dsadsa asd",
+    price: "₹26,998",
+    discount: "Flat ₹2,000 Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 2,
+    image: "/website/assets/images/product/02.png",
+    title: "Deals on Refrigerators Starting @ ₹65/Day",
+    price: "No Cost EMI*",
+    discount: "Extra 10% Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 3,
+    image: "/website/assets/images/product/03.png",
+    title: "Affordable Deals on Best Window & Split ACs",
+    price: "Starting ₹23,240",
+    discount: "10% Instant Discount",
+    platform: "amazon",
+  },
+  {
+    id: 4,
+    image: "/website/assets/images/product/04.png",
+    title: "Nothing Phone 3a (8GB RAM, 128GB) - White",
+    price: "₹24,999",
+    platform: "flipkart",
+  },
+  {
+    id: 1,
+    image: "/website/assets/images/product/01.png",
+    title: "iQOO Neo 10R (8GB RAM, 128GB) - Raging dsa sdsad dsadsa asd",
+    price: "₹26,998",
+    discount: "Flat ₹2,000 Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 2,
+    image: "/website/assets/images/product/02.png",
+    title: "Deals on Refrigerators Starting @ ₹65/Day",
+    price: "No Cost EMI*",
+    discount: "Extra 10% Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 3,
+    image: "/website/assets/images/product/03.png",
+    title: "Affordable Deals on Best Window & Split ACs",
+    price: "Starting ₹23,240",
+    discount: "10% Instant Discount",
+    platform: "amazon",
+  },
+  {
+    id: 4,
+    image: "/website/assets/images/product/04.png",
+    title: "Nothing Phone 3a (8GB RAM, 128GB) - White",
+    price: "₹24,999",
+    platform: "flipkart",
+  },
+  {
+    id: 1,
+    image: "/website/assets/images/product/01.png",
+    title: "iQOO Neo 10R (8GB RAM, 128GB) - Raging dsa sdsad dsadsa asd",
+    price: "₹26,998",
+    discount: "Flat ₹2,000 Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 2,
+    image: "/website/assets/images/product/02.png",
+    title: "Deals on Refrigerators Starting @ ₹65/Day",
+    price: "No Cost EMI*",
+    discount: "Extra 10% Discount*",
+    platform: "amazon",
+  },
+  {
+    id: 3,
+    image: "/website/assets/images/product/03.png",
+    title: "Affordable Deals on Best Window & Split ACs",
+    price: "Starting ₹23,240",
+    discount: "10% Instant Discount",
+    platform: "amazon",
+  },
+  {
+    id: 4,
+    image: "/website/assets/images/product/04.png",
+    title: "Nothing Phone 3a (8GB RAM, 128GB) - White",
+    price: "₹24,999",
+    platform: "flipkart",
+  },
 ];
 
 const SpecificationTable = ({ data = [] }) => {
@@ -89,21 +213,21 @@ const ReviewSection = () => {
   const ratings = [1, 0, 0, 0, 0];
 
   return (
-    <div className="px-4 sm:px-6 py-6 sm:py-10 bg-white shadow-md rounded-lg">
+    <div className="px-4 sm:px-6 py-6 sm:py-10 bg-white shadow-md rounded-lg mb-5">
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-0">
         {/* Left Section - Overall Rating */}
-        <div className="sm:col-span-2 flex flex-col items-center sm:items-start sm:border-r-4 border-gray-200 pb-4 sm:pb-0">
+        <div className="sm:col-span-3 flex flex-col items-center sm:items-start sm:border-r-4 border-gray-200 pb-4 sm:pb-0">
           <div className="flex items-end space-x-2">
-            <span className="text-5xl sm:text-6xl font-bold text-red-600">5.0</span>
-            <span className="text-gray-500 text-base sm:text-lg">out of 5</span>
+            <span className="text-3xl sm:text-4xl font-bold text-red-600">5.0</span>
+            <span className="text-gray-500 text-base sm:text-base">out of 5</span>
           </div>
           <div className="flex items-center my-2">
             {[...Array(5)].map((_, i) => (
               <Icon
                 key={i}
                 icon="material-symbols-light:star-rounded"
-                width="28"
-                height="28"
+                width="20"
+                height="20"
                 className="text-red-600 fill-red-600"
               />
             ))}
@@ -111,7 +235,7 @@ const ReviewSection = () => {
         </div>
 
         {/* Right Section - Rating Distribution */}
-        <div className="sm:col-span-10 pl-0 sm:pl-4">
+        <div className="sm:col-span-9 pl-0 sm:pl-4">
           <div className="space-y-2">
             {[...Array(5)].map((_, i) => (
               <div key={5 - i} className="flex items-center space-x-2">
@@ -285,7 +409,7 @@ function SpecificationDetail() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   console.log(activeTabHeder);
-  
+
 
   useEffect(() => {
     const getData = async () => {
@@ -368,7 +492,7 @@ function SpecificationDetail() {
             </div>
 
             <div className="grid md:grid-cols-12 grid-cols-1 mt-6 gap-6 items-start">
-              <div className="md:col-span-3  sticky top-40">
+              <div className="md:col-span-3  sticky top-32">
                 <div className="flex gap-4 mb-8">
                   <div className="flex flex-col gap-2">
                     {images.map((item, index) => (
@@ -403,36 +527,6 @@ function SpecificationDetail() {
                 </div>
               </div>
               <div className="md:col-span-6  sm:p-0 p-4 ">
-                <div className="bg-[#d9d9d9] px-4 pt-4 rounded-xl w-full mb-4 shadow-md">
-                  <h2 className="text-xl sm:text-2xl font-semibold text-center text-gray-600 underline">
-                    <Link href="#">Red Dead Redemption 2</Link>
-                  </h2>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
-                    {data?.data?.generalSpecs.slice(0, 6).map((spec, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <Icon icon={"ic:baseline-play-arrow"} className="flex-none" />
-                        <span className="text-gray-600 text-sm sm:text-base">
-                          {spec.name}:{" "}
-                          {spec.value
-                            ? spec.value.length > 50
-                              ? `${spec.value.slice(0, 50)}...`
-                              : spec.value
-                            : "---"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="border-t border-black mx-4 mt-4">
-                    <div className="flex flex-col items-center py-3">
-                      <span className="text-black text-lg font-semibold">Listing Date</span>
-                      <span className="text-gray-600 text-sm font-semibold">
-                        {formatDate(data?.createdAt, "DD MMMM YYYY")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
 
                 <div className="bg-[#d9d9d9] px-4 pt-4 rounded-xl w-full mb-4 shadow-md">
                   <h2 className="text-xl sm:text-2xl font-semibold text-center text-gray-600 underline">
@@ -464,10 +558,60 @@ function SpecificationDetail() {
                     </div>
                   </div>
                 </div>
+
+                {/* {[...Array(20)].map((_, index) => (
+                  <div className="bg-[#d9d9d9] px-4 pt-4 rounded-xl w-full mb-4 shadow-md">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-center text-gray-600 underline">
+                      <Link href="#">Red Dead Redemption 2</Link>
+                    </h2>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
+                      {data?.data?.generalSpecs.slice(0, 6).map((spec, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <Icon icon={"ic:baseline-play-arrow"} className="flex-none" />
+                          <span className="text-gray-600 text-sm sm:text-base">
+                            {spec.name}:{" "}
+                            {spec.value
+                              ? spec.value.length > 50
+                                ? `${spec.value.slice(0, 50)}...`
+                                : spec.value
+                              : "---"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="border-t border-black mx-4 mt-4">
+                      <div className="flex flex-col items-center py-3">
+                        <span className="text-black text-lg font-semibold">Listing Date</span>
+                        <span className="text-gray-600 text-sm font-semibold">
+                          {formatDate(data?.createdAt, "DD MMMM YYYY")}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))} */}
+
+                {data?.data &&
+                  Object.keys(data?.data).map((key) => {
+                    if (key === "_id") {
+                      return null;
+                    }
+
+                    if (data.data[key].length === 0) {
+                      return null;
+                    }
+
+                    return <InfoSections key={key} data={data.data[key]} name={data?.name} />;
+                  })}
+
+                <ReviewSection />
+
+                <ReviewTabSection />
               </div>
 
-              <div className="md:col-span-3 ">
-                <div className=" bg-white border rounded-lg shadow-md p-4">
+              <div className="md:col-span-3 sticky ">
+                <div className=" bg-white border rounded-lg shadow-md p-4 h-full">
                   {/* Header */}
                   <div className="bg-red-600 text-white text-sm font-semibold p-2 rounded-t-lg text-center">
                     TRENDING PRODUCTS »
@@ -512,32 +656,18 @@ function SpecificationDetail() {
               </div>
             </div>
 
-
-            {data?.data &&
-              Object.keys(data?.data).map((key) => {
-                if (key === "_id") {
-                  return null;
-                }
-
-                if (data.data[key].length === 0) {
-                  return null;
-                }
-
-                return <InfoSections key={key} data={data.data[key]} name={data?.name} />;
-              })}
-
-            <div className="grid md:grid-cols-3 grid-cols-1 px-4 md:px-0 mt-6 gap-6">
+            {/* <div className="grid md:grid-cols-3 grid-cols-1 px-4 md:px-0 mt-6 gap-6">
               <div className="col-span-1"></div>
-              {/* <div className="md:col-span-2">
-              <CompetitorCard />
-            </div> */}
+              <div className="md:col-span-2">
+                <CompetitorCard />
+              </div>
               <div className="md:col-span-3" id="reviews">
-                <ReviewSection />
+
               </div>
               <div className="md:col-span-3">
-                <ReviewTabSection />
+
               </div>
-            </div>
+            </div> */}
           </section>
         </Loading>
       </div>
