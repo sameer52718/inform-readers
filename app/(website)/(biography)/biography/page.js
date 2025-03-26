@@ -32,29 +32,32 @@ const ProfileCard = () => {
 const FamousCelebrity = () => {
   const [activeTab, setActiveTab] = useState("popularity");
   return (
-    <section className="md:px-48 pt-5 sm:px-6 px-4 mb-12">
+    <section className=" mb-12">
       <h1 className="text-center md:text-5xl text-3xl font-bold text-[#ff0000] ">Famous Celebrity:</h1>
       <div className="mt-12">
         <div className="flex sm:flex-row flex-col-reverse items-center border-black ">
           <div className="mb-3 sm:mb-0">
             <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Singer</span>
             <button
-              className={`md:mr-4 text-sm  md:text-lg font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={`md:mr-4 text-sm  md:text-lg font-medium ${
+                activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("showAll")}
             >
               Show All
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "popular" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("popular")}
             >
               Popular
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("bestRated")}
             >
               Best Rated
@@ -78,34 +81,37 @@ const FamousCelebrity = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
 const Youtuber = () => {
   const [activeTab, setActiveTab] = useState("popularity");
   return (
-    <section className="md:px-48 pt-5 sm:px-6 px-4 mb-12">
+    <section className=" mb-12">
       <div className="mt-12">
         <div className="flex sm:flex-row flex-col-reverse items-center border-black ">
           <div className="my-3 sm:my-0">
             <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Youtuber</span>
             <button
-              className={`mr-4  md:text-lg text-sm font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={`mr-4  md:text-lg text-sm font-medium ${
+                activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("showAll")}
             >
               Show All
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "popular" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("popular")}
             >
               Popular
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("bestRated")}
             >
               Best Rated
@@ -129,34 +135,37 @@ const Youtuber = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
 const Actor = () => {
   const [activeTab, setActiveTab] = useState("popularity");
   return (
-    <section className="md:px-48 pt-5 sm:px-6 px-4 mb-12">
+    <section className=" mb-12">
       <div className="mt-12">
         <div className="flex sm:flex-row flex-col-reverse items-center border-black ">
           <div className="my-3 sm:my-0">
             <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Actor</span>
             <button
-              className={`mr-4  md:text-lg text-sm font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={`mr-4  md:text-lg text-sm font-medium ${
+                activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("showAll")}
             >
               Show All
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "popular" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("popular")}
             >
               Popular
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("bestRated")}
             >
               Best Rated
@@ -180,33 +189,36 @@ const Actor = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 const Actresses = () => {
   const [activeTab, setActiveTab] = useState("popularity");
   return (
-    <section className="md:px-48 pt-5 sm:px-6 px-4 mb-12">
+    <section className=" mb-12">
       <div className="mt-12">
         <div className="flex sm:flex-row flex-col-reverse items-center border-black ">
           <div className="my-3 sm:my-0">
             <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">Actresses</span>
             <button
-              className={`mr-4  md:text-lg text-sm font-medium ${activeTab === "showAll" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={`mr-4  md:text-lg text-sm font-medium ${
+                activeTab === "showAll" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("showAll")}
             >
               Show All
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "popular" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "popular" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("popular")}
             >
               Popular
             </button>
             <button
-              className={` mr-4 md:text-lg text-sm font-medium ${activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
-                }`}
+              className={` mr-4 md:text-lg text-sm font-medium ${
+                activeTab === "bestRated" ? "text-black-500" : "text-gray-500"
+              }`}
               onClick={() => setActiveTab("bestRated")}
             >
               Best Rated
@@ -230,13 +242,11 @@ const Actresses = () => {
         ))}
       </div>
     </section>
-  )
-}
-
+  );
+};
 
 function Biography() {
   const [activeTab, setActiveTab] = useState("popularity");
-
 
   return (
     <div className="container mx-auto">
@@ -244,17 +254,17 @@ function Biography() {
       <CategorySection category={homeCategory} />
       <FamousCelebrity />
       <Youtuber />
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div className=" py-8">
         <HoverBanner />
       </div>
       <Actor />
       <Actresses />
-     
+
       <div className="flex justify-center py-5">
         <Pagination totalPages={10} />
       </div>
 
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div className=" py-8">
         <HoverBanner />
       </div>
     </div>

@@ -7,9 +7,9 @@ import React from "react";
 
 function RegionPortalCode() {
   return (
-    <div>
+    <div className="container mx-auto">
       <AdBanner />
-      <div className="container mx-auto md:px-44 px-4 py-8">
+      <div className=" py-8">
         <h4 className="md:text-4xl text-2xl font-bold my-7 text-center">
           World <span className="text-red-500"> Zip/postal </span> Codes
         </h4>
@@ -87,7 +87,10 @@ function RegionPortalCode() {
                 "Punjab",
                 "Khyber Pakhtunkhwa",
               ].map((region, index) => (
-                <div key={index} className="text-red-500 lg:text-xl sm:text-base text-sm font-bold flex items-center">
+                <div
+                  key={index}
+                  className="text-red-500 lg:text-xl sm:text-base text-sm font-bold flex items-center"
+                >
                   <Icon icon="bi:dot" width="16" height="16" className="h-6 w-6 inline" /> {region}
                 </div>
               ))}
@@ -95,14 +98,14 @@ function RegionPortalCode() {
           </div>
         </div>
 
-
         <HoverBanner />
 
         <div className="my-8 px-4 sm:px-2">
           <h6 className="text-3xl font-bold text-center sm:text-left">Search by Map</h6>
 
           <p className="text-lg font-semibold text-center sm:text-left mt-2">
-            Interactive map of zip codes in Pakistan. Click on the location you desire for a postal code/address.
+            Interactive map of zip codes in Pakistan. Click on the location you desire for a postal
+            code/address.
           </p>
 
           <div className="w-full h-[500px] md:h-[400px] sm:h-[300px] rounded-3xl overflow-hidden mt-6">
@@ -116,7 +119,6 @@ function RegionPortalCode() {
             />
           </div>
         </div>
-
 
         <HoverBanner />
 

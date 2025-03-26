@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import AdBanner from '@/components/partials/AdBanner'
-import HoverBanner from '@/components/partials/HoverBanner';
-import SearchInput from '@/components/ui/SearchInput';
-import { Icon } from '@iconify/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react'
-
+import AdBanner from "@/components/partials/AdBanner";
+import HoverBanner from "@/components/partials/HoverBanner";
+import SearchInput from "@/components/ui/SearchInput";
+import { Icon } from "@iconify/react";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
 
 const Gallery = () => {
   return (
@@ -66,7 +65,7 @@ const Gallery = () => {
 const AllContent = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 ">
-      <div className='md:col-span-6 col-span-12'>
+      <div className="md:col-span-6 col-span-12">
         <Image
           src={"/website/assets/images/news/06.png"}
           width={1000}
@@ -106,10 +105,7 @@ const AllContent = () => {
           </Link>
         ))}
       </div>
-
-
     </div>
-
   );
 };
 
@@ -174,12 +170,11 @@ const AllContentTwo = () => {
                 <Link href="/news/1">Now Is the Time to Think About Your Small-Business Success</Link>
               </h2>
               <p className="text-red-600 text-lg md:text-xl font-bold mt-2">
-                Armin Vans{" "}
-                <span className="text-gray-600 text-sm font-light">- August 7, 2019</span>
+                Armin Vans <span className="text-gray-600 text-sm font-light">- August 7, 2019</span>
               </p>
               <p className="text-gray-700 mt-2 text-sm md:text-base font-bold">
-                We woke reasonably late following the feast and free-flowing wine the night before.
-                After gathering ourselves and our packs, we headed down to...
+                We woke reasonably late following the feast and free-flowing wine the night before. After
+                gathering ourselves and our packs, we headed down to...
               </p>
             </div>
           </div>
@@ -211,12 +206,8 @@ const AllContentTwo = () => {
         </div>
       ))}
     </div>
-
-
   );
-}
-
-
+};
 
 function TabMenu() {
   const [activeTab, setActiveTab] = useState("All");
@@ -224,12 +215,13 @@ function TabMenu() {
   return (
     <div>
       <div className="flex border-b md:flex-row flex-col items-center justify-between border-black">
-        <div className='mb-5'>
+        <div className="mb-5">
           {tabs.map((tab) => (
             <button
               key={tab}
-              className={`px-4 md:py-2 py-3 md:text-xl text-xs font-semibold ${activeTab === tab ? "text-red-500 border-b-2 border-red-500" : "text-gray-600"
-                }`}
+              className={`px-4 md:py-2 py-3 md:text-xl text-xs font-semibold ${
+                activeTab === tab ? "text-red-500 border-b-2 border-red-500" : "text-gray-600"
+              }`}
               onClick={() => setActiveTab(tab)}
             >
               {tab}
@@ -245,7 +237,6 @@ function TabMenu() {
   );
 }
 
-
 function TabMenuTwo() {
   const [activeTabTwo, setActiveTabTwo] = useState("All");
   const [showMore, setShowMore] = useState(false);
@@ -258,8 +249,9 @@ function TabMenuTwo() {
           {tabsTwo.map((tab) => (
             <button
               key={tab}
-              className={`md:text-lg text-sm font-semibold whitespace-nowrap ${activeTabTwo === tab ? "text-red-500 border-b-2 border-red-500" : "text-gray-600"
-                } px-2`}
+              className={`md:text-lg text-sm font-semibold whitespace-nowrap ${
+                activeTabTwo === tab ? "text-red-500 border-b-2 border-red-500" : "text-gray-600"
+              } px-2`}
               onClick={() => setActiveTabTwo(tab)}
             >
               {tab}
@@ -303,7 +295,6 @@ function TabMenuTwo() {
       {/* Tab Content */}
       <div className="p-4">{tabContentTwo[activeTabTwo] || <h1>No Content Available</h1>}</div>
     </div>
-
   );
 }
 
@@ -330,11 +321,8 @@ const RedCard = () => {
         </div>
       ))}
     </div>
-
-
   );
 };
-
 
 const NewsSection = () => {
   const newsData = [
@@ -390,10 +378,8 @@ const NewsSection = () => {
         </div>
       ))}
     </div>
-
   );
 };
-
 
 const tabs = ["All", "Style Hunter", "Vogue", "Health & Fitness", "Travel", "Gadgets"];
 const tabsTwo = ["All", "Music", "Health & Fitness", "Travel"];
@@ -416,52 +402,61 @@ const tabContentTwo = {
   Travel: <TravelContent />,
 };
 
-
 function News() {
   return (
-    <div className=''>
+    <div className="container mx-auto">
       <AdBanner />
-      <div className="md:px-48 px-4 py-8">
+      <div className=" py-8">
         <Gallery />
       </div>
-      <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  mb-3' />
-      <div className='md:px-48 px-4 mt-12'>
+      <Image
+        src={"/website/assets/images/banner/04.png"}
+        width={2000}
+        height={2000}
+        alt="ad-banner"
+        className=" h-auto  mb-3"
+      />
+      <div className=" mt-12">
         <TabMenu />
-
       </div>
 
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div className=" py-8">
         <HoverBanner />
       </div>
 
-      <div className='md:px-48  mt-12'>
+      <div className="  mt-12">
         <TabMenuTwo />
       </div>
 
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div className=" py-8">
         <HoverBanner />
       </div>
 
-      <div className='md:px-48 px-4 mt-12'>
+      <div className=" mt-12">
         <RedCard />
       </div>
 
-      <div className="md:px-44 sm:px-12 px-2 py-8">
+      <div className=" py-8">
         <HoverBanner />
       </div>
 
-      <div className='md:px-48 px-4 mt-12'>
+      <div className=" mt-12">
         <NewsSection />
       </div>
 
-      <Image src={"/website/assets/images/banner/04.png"} width={2000} height={2000} alt="ad-banner" className=' h-auto  my-10 ' />
+      <Image
+        src={"/website/assets/images/banner/04.png"}
+        width={2000}
+        height={2000}
+        alt="ad-banner"
+        className=" h-auto  my-10 "
+      />
 
-      <div className='md:px-48 px-4'>
+      <div className="">
         <NewsSection />
       </div>
-
     </div>
-  )
+  );
 }
 
-export default News
+export default News;
