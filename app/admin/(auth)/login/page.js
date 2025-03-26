@@ -50,7 +50,7 @@ const Login2 = () => {
                 <div className="text-center 2xl:mb-10 mb-4">
                   <h4 className="font-medium">Sign in</h4>
                   <div className="text-slate-500 dark:text-slate-400 text-base">
-                    Sign in to your account to start using Dashcode
+                    Sign in to your account to start using Admin Logo
                   </div>
                 </div>
 

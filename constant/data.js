@@ -118,7 +118,12 @@ export const menuItems = [
   {
     title: "Dashboard",
     icon: "heroicons-outline:home",
-    link: "admin",
+    link: "/admin",
+  },
+  {
+    title: "Accounts",
+    icon: "eos-icons:admin-outlined",
+    link: "/admin/account",
   },
 ];
 

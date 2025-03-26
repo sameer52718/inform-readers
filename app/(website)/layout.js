@@ -10,7 +10,7 @@ export default function WebsiteLayout({ children }) {
   return (
     <>
       <Header />
-      <main className="flex-1 bg-gray-100">{children}</main>
+      <main className="flex-1 bg-white">{children}</main>
       <Footer />
     </>
   );

@@ -52,7 +52,7 @@ const Navmenu = ({ menus }) => {
             className={` single-sidebar-menu 
               ${item.child ? "item-has-children" : ""}
               ${activeSubmenu === i ? "open" : ""}
-              ${locationName === item.link ? "menu-item-active" : ""}`}
+              ${location === item.link ? "menu-item-active" : ""}`}
           >
             {/* single menu with no childred*/}
             {!item.child && !item.isHeadr && (

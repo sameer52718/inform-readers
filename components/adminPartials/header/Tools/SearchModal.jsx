@@ -15,7 +15,7 @@ const SearchModal = () => {
   const searchList = [
     {
       id: 1,
-      name: "What is Dashcode ?",
+      name: "What is Admin Logo ?",
     },
     {
       id: 2,
@@ -110,9 +110,7 @@ const SearchModal = () => {
                         {filteredsearchList.length === 0 && query !== "" && (
                           <div>
                             <div className=" text-base py-2 px-4">
-                              <p className="text-slate-500 text-base dark:text-white">
-                                No result found
-                              </p>
+                              <p className="text-slate-500 text-base dark:text-white">No result found</p>
                             </div>
                           </div>
                         )}
