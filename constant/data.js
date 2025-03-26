@@ -125,6 +125,56 @@ export const menuItems = [
     icon: "eos-icons:admin-outlined",
     link: "/admin/account",
   },
+  {
+    title: "Users",
+    icon: "mdi:user-outline",
+    link: "/dashboard/user",
+  },
+  {
+    title: "Category",
+    icon: "material-symbols:category-outline",
+    link: "/dashboard/category",
+  },
+  {
+    title: "Sub Category",
+    icon: "material-symbols:category-outline",
+    link: "/dashboard/subcategory",
+  },
+  {
+    title: "Brand",
+    icon: "tabler:brand-prisma",
+    link: "/dashboard/brand",
+  },
+  {
+    title: "Specification",
+    icon: "uil:setting",
+    link: "/dashboard/specification",
+  },
+  {
+    title: "Software",
+    icon: "hugeicons:software",
+    link: "/dashboard/software",
+  },
+  {
+    title: "Blog",
+    icon: "bxl:blogger",
+    link: "/dashboard/blog",
+  },
+  {
+    title: "Biography",
+    icon: "mdi:biography",
+    link: "/dashboard/biography",
+  },
+  {
+    title: "Coupons",
+    icon: "mdi:coupon-outline",
+    link: "/dashboard/coupons",
+  },
+  {
+    title: "Settings",
+    icon: "uil:setting",
+    link: "/dashboard/setting",
+  },
 ];
 
 export const topMenu = [];
