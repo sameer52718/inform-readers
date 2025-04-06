@@ -485,7 +485,7 @@ const ZipCodes = () => {
               key={index}
               className="rounded-3xl bg-white md:px-6 px-3 py-1 border-2 border-black flex items-center w-fit"
             >
-              <Link href={"/postal-code/1"} className="flex items-center gap-2">
+              <Link href={"/postalcode/1"} className="flex items-center gap-2">
                 <Image
                   src={item.image}
                   alt={item.image}
