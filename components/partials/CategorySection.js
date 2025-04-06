@@ -1,6 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,6 +10,8 @@ function CategorySection({ category }) {
     <section className="  py-10">
       <Swiper
         pagination={{ clickable: true }}
+        modules={[Autoplay]}
+        autoplay={{ delay: 2000, disableOnInteraction: true }}
         breakpoints={{
           320: { slidesPerView: 3, spaceBetween: 20 },
           640: { slidesPerView: 3, spaceBetween: 20 },
