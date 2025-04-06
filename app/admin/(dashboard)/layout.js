@@ -19,6 +19,8 @@ import useDarkMode from "@/hooks/useDarkMode";
 import useSkin from "@/hooks/useSkin";
 import Loading from "@/components/ui/Loading";
 import useNavbarType from "@/hooks/useNavbarType";
+import AdminGuard from "@/components/gaurds/adminGaurd";
+
 export default function RootLayout({ children }) {
   const { width, breakpoints } = useWidth();
   const [collapsed] = useSidebar();
@@ -49,43 +51,45 @@ export default function RootLayout({ children }) {
   const [mobileMenu, setMobileMenu] = useMobileMenu();
 
   return (
-    <div
-      dir={isRtl ? "rtl" : "ltr"}
-      className={`app-warp    ${isDark ? "dark" : "light"} ${
-        skin === "bordered" ? "skin--bordered" : "skin--default"
-      }
+    <AdminGuard>
+      <div
+        dir={isRtl ? "rtl" : "ltr"}
+        className={`app-warp    ${isDark ? "dark" : "light"} ${
+          skin === "bordered" ? "skin--bordered" : "skin--default"
+        }
       ${navbarType === "floating" ? "has-floating" : ""}
       `}
-    >
-      <ToastContainer />
-      <Header className={width > breakpoints.xl ? switchHeaderClass() : ""} />
-      {menuType === "vertical" && width > breakpoints.xl && !menuHidden && <Sidebar />}
-      <MobileMenu
-        className={`${
-          width < breakpoints.xl && mobileMenu
-            ? "left-0 visible opacity-100  z-[9999]"
-            : "left-[-300px] invisible opacity-0  z-[-999] "
-        }`}
-      />
-      {/* mobile menu overlay*/}
-      {width < breakpoints.xl && mobileMenu && (
-        <div
-          className="overlay bg-slate-900/50 backdrop-filter backdrop-blur-sm opacity-100 fixed inset-0 z-[999]"
-          onClick={() => setMobileMenu(false)}
-        ></div>
-      )}
-      <div
-        className={`content-wrapper transition-all duration-150 ${width > 1280 ? switchHeaderClass() : ""}`}
       >
-        {/* md:min-h-screen will h-full*/}
-        <div className="page-content   page-min-height  ">
-          <div className={contentWidth === "boxed" ? "container mx-auto" : "container-fluid"}>
-            <div>
-              <Suspense fallback={<Loading />}>{children}</Suspense>
+        <ToastContainer />
+        <Header className={width > breakpoints.xl ? switchHeaderClass() : ""} />
+        {menuType === "vertical" && width > breakpoints.xl && !menuHidden && <Sidebar />}
+        <MobileMenu
+          className={`${
+            width < breakpoints.xl && mobileMenu
+              ? "left-0 visible opacity-100  z-[9999]"
+              : "left-[-300px] invisible opacity-0  z-[-999] "
+          }`}
+        />
+        {/* mobile menu overlay*/}
+        {width < breakpoints.xl && mobileMenu && (
+          <div
+            className="overlay bg-slate-900/50 backdrop-filter backdrop-blur-sm opacity-100 fixed inset-0 z-[999]"
+            onClick={() => setMobileMenu(false)}
+          ></div>
+        )}
+        <div
+          className={`content-wrapper transition-all duration-150 ${width > 1280 ? switchHeaderClass() : ""}`}
+        >
+          {/* md:min-h-screen will h-full*/}
+          <div className="page-content   page-min-height  ">
+            <div className={contentWidth === "boxed" ? "container mx-auto" : "container-fluid"}>
+              <div>
+                <Suspense fallback={<Loading />}>{children}</Suspense>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </AdminGuard>
   );
 }

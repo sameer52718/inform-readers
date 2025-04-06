@@ -219,3 +219,10 @@ export const bottomFilterLists = [];
 export const meets = [];
 
 export const files = [];
+
+
+
+export const userTypes = {
+  USER:"USER",
+  ADMIN:"ADMIN",
+}
