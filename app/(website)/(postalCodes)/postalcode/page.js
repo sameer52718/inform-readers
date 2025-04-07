@@ -7,22 +7,24 @@ import handleError from "@/lib/handleError";
 import { Globe2, MapPin, Navigation, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-async function fetchData() {
-  try {
-    const { data } = await axiosInstance.get("/common/country", {
-      params: { groupCountry: true },
-    });
-    return data.error ? [] : data.response.groupCountry;
-  } catch (error) {
-    handleError(error);
-    return [];
-  }
-}
+export default function PostalCode() {
+  const [data, setData] = useState([])
 
-export default async function PostalCode() {
-  const data = await fetchData();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await axiosInstance.get("/common/country", {
+          params: { groupCountry: true },
+        });
+        setData(data.error ? [] : data.response.groupCountry);
+      } catch (error) {
+        handleError(error);
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-50">
