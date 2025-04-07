@@ -1,3 +1,4 @@
+"use client"
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const TableBody = ({ tableInstance }) => {
@@ -30,8 +31,8 @@ const TableBody = ({ tableInstance }) => {
               {...getTableProps}
             >
               <thead className="bg-gray-200 dark:bg-slate-700">
-                {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroups.map((headerGroup, index) => (
+                  <tr {...headerGroup.getHeaderGroupProps()} key={index}>
                     {headerGroup.headers.map((column) => (
                       <th
                         {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -49,10 +50,10 @@ const TableBody = ({ tableInstance }) => {
                 className="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700"
                 {...getTableBodyProps}
               >
-                {page.map((row) => {
+                {page.map((row,index) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()} key={index}>
                       {row.cells.map((cell) => {
                         return (
                           <td {...cell.getCellProps()} className="table-td">
@@ -112,11 +113,10 @@ const TableBody = ({ tableInstance }) => {
               <button
                 href="#"
                 aria-current="page"
-                className={` ${
-                  pageIdx === pageIndex
-                    ? "bg-red-600 dark:bg-slate-600  dark:text-slate-200 text-white font-medium "
+                className={` ${pageIdx === pageIndex
+                    ? "bg-black-500 dark:bg-slate-600  dark:text-slate-200 text-white font-medium "
                     : "bg-slate-100 dark:bg-slate-700 dark:text-slate-400 text-slate-900  font-normal  "
-                }    text-sm rounded leading-[16px] flex h-6 w-6 items-center justify-center transition-all duration-150`}
+                  }    text-sm rounded leading-[16px] flex h-6 w-6 items-center justify-center transition-all duration-150`}
                 onClick={() => gotoPage(pageIdx)}
               >
                 {page + 1}

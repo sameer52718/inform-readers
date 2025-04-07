@@ -9,9 +9,11 @@ import TableBody from "@/components/shared/TableBody";
 import GlobalFilter from "@/components/ui/GlobalFilter";
 import ActionButton from "@/components/shared/ActionButton";
 import AddButton from "@/components/shared/AddButton";
+import axiosInstance from "@/lib/axiosInstance";
+import { toast } from "react-toastify";
 const COLUMNS = [
   {
-    Header: "User",
+    Header: "Name",
     accessor: "name",
     Cell: (row) => {
       return <span>{row?.cell?.value}</span>;
@@ -32,13 +34,6 @@ const COLUMNS = [
     },
   },
   {
-    Header: "Role",
-    accessor: "role",
-    Cell: (row) => {
-      return <span>{row?.cell?.value}</span>;
-    },
-  },
-  {
     Header: "created At",
     accessor: "createdAt",
     Cell: (row) => {
@@ -52,9 +47,8 @@ const COLUMNS = [
       return (
         <span className="block w-full">
           <span
-            className={` inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 ${
-              row?.cell?.value === "Public" ? "text-success-500 bg-success-500" : ""
-            } 
+            className={` inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 ${row?.cell?.value === "Public" ? "text-success-500 bg-success-500" : ""
+              } 
             ${row?.cell?.value === "Private" ? "text-danger-500 bg-danger-500" : ""}
             
              `}
@@ -76,28 +70,30 @@ const UserPage = () => {
     const getData = async () => {
       try {
         setIsLoading(true);
-        // const { data } = await axiosInstance.get("/admin/account");
-        // if (!data.error) {
-        //   setData(data.admins);
-        // }
+        const { data } = await axiosInstance.get("/admin/account");
+        if (!data.error) {
+          console.log(data.data);
+
+          setData(data.data);
+        }
       } catch (error) {
         handleError(error);
       } finally {
         setIsLoading(false);
       }
     };
-    // getData();
+    getData();
   }, []);
 
   const handleStatusChange = async (id) => {
     try {
-      //   const { data } = await axiosInstance.patch(`/admin/account/${id}`);
-      //   if (!data.error) {
-      //     setData((prev) => prev.map((item) => (item._id === id ? { ...item, status: !item.status } : item)));
-      //     toast.success(data.message);
-      //   } else {
-      //     toast.error(data.message);
-      //   }
+        const { data } = await axiosInstance.patch(`/admin/account/${id}`);
+        if (!data.error) {
+          setData((prev) => prev.map((item) => (item._id === id ? { ...item, status: !item.status } : item)));
+          toast.success(data.message);
+        } else {
+          toast.error(data.message);
+        }
     } catch (error) {
       handleError(error);
     }
@@ -138,18 +134,18 @@ const UserPage = () => {
   const { globalFilter } = state;
 
   return (
-    // <Loading isLoading={isLoading}>
-    <Card>
-      <div className="md:flex justify-between items-center mb-6">
-        <h4 className="card-title">Admins</h4>
-        <div className="flex gap-2">
-          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} placeholder="Search Admins..." />
-          <AddButton route={"/admin/account/add"} />
+    <Loading loading={isLoading}>
+      <Card>
+        <div className="md:flex justify-between items-center mb-6">
+          <h4 className="card-title">Admins</h4>
+          <div className="flex gap-2">
+            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} placeholder="Search Admins..." />
+            <AddButton route={"/admin/account/add"} />
+          </div>
         </div>
-      </div>
-      <TableBody tableInstance={tableInstance} />
-    </Card>
-    // </Loading>
+        <TableBody tableInstance={tableInstance} />
+      </Card>
+    </Loading>
   );
 };
 
