@@ -144,7 +144,7 @@ const UserPage = () => {
         <h4 className="card-title">Admins</h4>
         <div className="flex gap-2">
           <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} placeholder="Search Admins..." />
-          <AddButton />
+          <AddButton route={"/admin/account/add"} />
         </div>
       </div>
       <TableBody tableInstance={tableInstance} />
