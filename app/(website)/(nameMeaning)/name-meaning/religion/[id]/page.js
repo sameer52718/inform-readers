@@ -84,7 +84,7 @@ const GenderWiseTable = () => {
                       {item?.shortMeaning || "---"}
                     </td>
                     <td className="py-4 md:text-xl text-sm px-3 text-black font-semibold text-center">
-                      <Link href={"/name-meaning/1"} className="underline text-red-500">
+                      <Link href={`/name-meaning/${item?._id}`} className="underline text-red-500">
                         View Detail
                       </Link>
                     </td>
