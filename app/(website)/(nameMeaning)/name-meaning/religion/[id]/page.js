@@ -8,9 +8,12 @@ import Pagination from "@/components/ui/Pagination.js";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const GenderWiseTable = ({ gender }) => {
+const GenderWiseTable = () => {
+  const { id } = useParams();
+
   const [pagination, setPagination] = useState({
     totalItems: 0,
     currentPage: 1,
@@ -26,7 +29,7 @@ const GenderWiseTable = ({ gender }) => {
     try {
       setLoading(loading);
       const { data } = await axiosInstance.get("/website/name", {
-        params: { gender, initialLetter, page, limit: 25 },
+        params: { initialLetter, page, limit: 50, categoryId: id },
       });
       if (!data.error) {
         setData(data.data);
@@ -40,8 +43,6 @@ const GenderWiseTable = ({ gender }) => {
   };
 
   const onPageChange = async (page) => {
-    console.log(page);
-
     getData(true, page, initialLetter);
   };
 
@@ -53,15 +54,13 @@ const GenderWiseTable = ({ gender }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [id]);
   // console.log(pagination);
 
   return (
     <div className=" py-8">
       <div>
-        <h5 className="text-xl font-semibold ">
-          Browse {gender === "MALE" ? "Boys" : "Girls"} Names by Alphabets
-        </h5>
+        <h5 className="text-xl font-semibold ">Browse Names by Alphabets</h5>
         <div className="mt-4">
           <NamePagination totalPages={26} currentPage={initialLetter} onPageChange={onInitialChange} />
 
@@ -155,13 +154,7 @@ function NameMeaning() {
         <HoverBanner />
       </div>
 
-      <GenderWiseTable gender={"MALE"} />
-
-      <div className=" py-8">
-        <HoverBanner />
-      </div>
-
-      <GenderWiseTable gender={"FEMALE"} />
+      <GenderWiseTable />
 
       <div className=" py-8">
         <HoverBanner />
