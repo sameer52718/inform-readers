@@ -1,20 +1,34 @@
 "use client";
 
-import AdBanner from "@/components/partials/AdBanner";
-import React, { useEffect, useState } from "react";
-import NameFilter from "@/components/partials/NameFilter";
-import Link from "next/link";
-import HoverBanner from "@/components/partials/HoverBanner";
-import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
-import handleError from "@/lib/handleError";
-import axiosInstance from "@/lib/axiosInstance";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import Loading from "@/components/ui/Loading";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
+import {
+  Share2,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  MessageCircle,
+  Heart,
+  Globe,
+  Hash,
+  BookOpen,
+  Users,
+  Star,
+  Calendar,
+  Sparkles,
+  Clock,
+} from "lucide-react";
 
-function NameDetail() {
+export default function NameDetail() {
   const { slug } = useParams();
   const [data, setData] = useState([]);
   const [name, setName] = useState(null);
+  const [activeTab, setActiveTab] = useState("overview");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -45,184 +59,294 @@ function NameDetail() {
         setIsLoading(false);
       }
     };
-    getData(data);
+    getData();
   }, [slug]);
+
+  const socialLinks = [
+    { icon: Facebook, label: "Share on Facebook", href: "#" },
+    { icon: Twitter, label: "Share on Twitter", href: "#" },
+    { icon: Linkedin, label: "Share on LinkedIn", href: "#" },
+    { icon: Instagram, label: "Share on Instagram", href: "#" },
+    { icon: MessageCircle, label: "Share on WhatsApp", href: "#" },
+  ];
+
+  const nameAttributes = [
+    { icon: Globe, label: "Origin", value: name?.origion || "---" },
+    { icon: Heart, label: "Religion", value: name?.religionId?.name },
+    { icon: Hash, label: "Length", value: `${name?.nameLength} Letters` },
+    { icon: BookOpen, label: "Short Name", value: name?.shortName },
+    { icon: Star, label: "Lucky Number", value: "7" },
+    { icon: Calendar, label: "Lucky Day", value: "Friday" },
+  ];
 
   return (
     <Loading loading={isLoading}>
-      <div className="container mx-auto">
-        <AdBanner />
-
-        <div className=" py-8">
-          <NameFilter />
-
-          <div className="mt-8">
-            <h4 className="font-semibold text-2xl">Search Baby Names By Religion:</h4>
-
-            <div className="bg-[#D9d9d9] md:p-5 rounded-xl border border-black mt-2 px-2 sm:px-12 md:gap-3 gap-2 py-4 flex flex-wrap">
-              {data.map((item, index) => (
-                <Link
-                  key={index}
-                  href={`/name-meaning/religion/${item._id}`}
-                  className="bg-white md:py-4 p-3 md:px-6 w-fit md:text-xl text-sm font-semibold rounded-2xl mb-3 sm:mb-0"
-                >
-                  {item.name}
-                </Link>
-              ))}
+      <div className="min-h-screen bg-gray-50">
+        {/* Hero Banner */}
+        <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-white">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <h1 className="text-5xl font-bold text-white">{name?.name}</h1>
+                  <span className="px-4 py-1 bg-white/20 rounded-full text-sm font-medium">
+                    {name?.gender}
+                  </span>
+                </div>
+                <p className="text-xl text-white/90 max-w-2xl">{name?.shortMeaning}</p>
+              </div>
+              <div className="flex gap-3">
+                {socialLinks.map((social, index) => (
+                  <Link
+                    key={index}
+                    href={social.href}
+                    className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all hover:scale-110"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className=" py-8">
-          <HoverBanner />
-        </div>
-
-        <div className=" py-8">
-          <h5 className="text-2xl font-semibold ">{name?.name} Name Meaning</h5>
-          <p>{name?.longMeaning}</p>
-
-          <div className=" mt-8 flex items-center justify-between bg-red-600 text-white md:px-6 px-2 py-3 text-sm font-bold mb-8">
-            <h5 className="ml-2 md:text-3xl text-base">Meaning of {name?.name} Name:</h5>
-            <div className="flex items-center space-x-2 mr-2">
-              <Link href={"#"}>
-                <Icon
-                  icon="ic:baseline-share"
-                  width="24"
-                  height="24"
-                  className="md:w-8 w-5 h-8 cursor-pointer"
-                />
-              </Link>
-              <Link href={"#"}>
-                <Icon
-                  icon="logos:whatsapp-icon"
-                  width="24"
-                  height="24"
-                  className="md:w-8 w-5 h-8 cursor-pointer"
-                />
-              </Link>
-              <Link href={"#"}>
-                <Icon
-                  icon="skill-icons:instagram"
-                  width="24"
-                  height="24"
-                  className="md:w-8 w-5 h-8 cursor-pointer"
-                />
-              </Link>
-              <Link href={"#"}>
-                <Icon
-                  icon="logos:facebook"
-                  width="15"
-                  height="15"
-                  className="md:w-8 w-5 h-8 cursor-pointer"
-                />
-              </Link>
-              <Link href={"#"}>
-                <Icon
-                  icon="devicon:linkedin"
-                  width="24"
-                  height="24"
-                  className="md:w-8 w-5 h-8 cursor-pointer"
-                />
-              </Link>
-              <Link href={"#"}>
-                <Icon icon="logos:twitter" width="24" height="24" className="md:w-8 w-5 h-8 cursor-pointer" />
-              </Link>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+            {nameAttributes.map((attr, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <attr.icon className="w-6 h-6 text-red-500 mb-3" />
+                <div className="space-y-1">
+                  <p className="text-sm text-gray-500">{attr.label}</p>
+                  <p className="font-semibold">{attr.value}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div>
-            <div className="border rounded-lg overflow-hidden bg-gray-300 p-2">
-              <table className="min-w-full border-collapse">
-                <thead>
-                  <tr>
-                    <th className="bg-white text-xl font-semibold px-3 py-2 text-left">Attribute</th>
-                    <th className="bg-white text-xl font-semibold px-3 py-2 text-left">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* Row - Name */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Name</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.name}</td>
-                  </tr>
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Tabs Navigation */}
+              <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div className="border-b">
+                  <div className="flex">
+                    {["overview", "meaning", "numerology", "popularity"].map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`px-6 py-4 text-lg font-medium transition-colors relative ${
+                          activeTab === tab ? "text-red-600" : "text-gray-500 hover:text-gray-700"
+                        }`}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        {activeTab === tab && (
+                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-600" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-                  {/* Row - Meaning */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Meaning</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.shortMeaning}</td>
-                  </tr>
+                <div className="p-6">
+                  {activeTab === "overview" && (
+                    <div className="space-y-8">
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Name Overview</h2>
+                        <p className="text-gray-600 leading-relaxed">{name?.longMeaning}</p>
+                      </div>
 
-                  {/* Row - Gender */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Gender</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.gender}</td>
-                  </tr>
+                      <div className="bg-red-50 rounded-lg p-6">
+                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                          <Sparkles className="w-5 h-5 text-red-500" />
+                          Key Characteristics
+                        </h3>
+                        <ul className="grid md:grid-cols-2 gap-4">
+                          <li className="flex items-center gap-2 text-gray-700">
+                            <span className="w-2 h-2 bg-red-500 rounded-full" />
+                            Strong and meaningful origin
+                          </li>
+                          <li className="flex items-center gap-2 text-gray-700">
+                            <span className="w-2 h-2 bg-red-500 rounded-full" />
+                            Cultural significance
+                          </li>
+                          <li className="flex items-center gap-2 text-gray-700">
+                            <span className="w-2 h-2 bg-red-500 rounded-full" />
+                            Modern appeal
+                          </li>
+                          <li className="flex items-center gap-2 text-gray-700">
+                            <span className="w-2 h-2 bg-red-500 rounded-full" />
+                            Positive associations
+                          </li>
+                        </ul>
+                      </div>
 
-                  {/* Row - Origin */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Origin</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.origion || "---"}</td>
-                  </tr>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-4">Cultural Significance</h3>
+                        <p className="text-gray-600 leading-relaxed">
+                          The name {name?.name} holds deep cultural significance in {name?.origion}
+                          traditions. It has been passed down through generations, carrying with it a rich
+                          history and meaningful heritage that continues to resonate with modern families.
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
-                  {/* Row - Religion */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Religion</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.religionId?.name}</td>
-                  </tr>
+                  {activeTab === "meaning" && (
+                    <div className="space-y-8">
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Detailed Meaning</h2>
+                        <p className="text-gray-600 leading-relaxed">{name?.longMeaning}</p>
+                      </div>
 
-                  {/* Row - Short Name */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Short Name</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.shortName}</td>
-                  </tr>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-gray-50 rounded-lg p-6">
+                          <h3 className="text-xl font-semibold mb-4">Religious Context</h3>
+                          <p className="text-gray-600">
+                            In {name?.religionId?.name} tradition, this name carries special significance...
+                          </p>
+                        </div>
+                        <div className="bg-gray-50 rounded-lg p-6">
+                          <h3 className="text-xl font-semibold mb-4">Modern Usage</h3>
+                          <p className="text-gray-600">
+                            Today, {name?.name} is chosen by parents who value its cultural heritage...
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-                  {/* Row - Length of Name */}
-                  <tr>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">Length of Name</td>
-                    <td className="bg-white text-xl font-semibold px-3 py-2">{name?.nameLength} Letters</td>
-                  </tr>
-                </tbody>
-              </table>
+                  {activeTab === "numerology" && (
+                    <div className="space-y-8">
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Numerological Significance</h2>
+                        <p className="text-gray-600 leading-relaxed">
+                          In numerology, each letter in {name?.name} carries a unique vibration...
+                        </p>
+                      </div>
+
+                      <div className="bg-red-50 rounded-lg p-6">
+                        <h3 className="text-xl font-semibold mb-4">Lucky Attributes</h3>
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Lucky Number</p>
+                            <p className="text-2xl font-bold text-red-600">7</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Lucky Day</p>
+                            <p className="text-2xl font-bold text-red-600">Friday</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === "popularity" && (
+                    <div className="space-y-8">
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Name Popularity</h2>
+                        <p className="text-gray-600 leading-relaxed">
+                          {name?.name} has maintained a steady popularity over the years...
+                        </p>
+                      </div>
+
+                      <div className="bg-gray-50 rounded-lg p-6">
+                        <h3 className="text-xl font-semibold mb-4">Usage Statistics</h3>
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <span className="text-gray-600">Current Rank</span>
+                            <span className="font-semibold">#123</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-gray-600">Trend</span>
+                            <span className="font-semibold text-green-500">↑ Rising</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* FAQ Section */}
+              <div className="bg-white rounded-xl shadow-sm p-6">
+                <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+                <div className="space-y-6">
+                  <div className="border-b pb-4">
+                    <h3 className="text-xl font-semibold mb-2">What does the name {name?.name} mean?</h3>
+                    <p className="text-gray-600">{name?.shortMeaning}</p>
+                  </div>
+                  <div className="border-b pb-4">
+                    <h3 className="text-xl font-semibold mb-2">Is {name?.name} a traditional name?</h3>
+                    <p className="text-gray-600">
+                      Yes, {name?.name} is a traditional name with roots in {name?.origion} culture.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">
+                      What are common nicknames for {name?.name}?
+                    </h3>
+                    <p className="text-gray-600">
+                      Common nicknames include {name?.shortName} and variations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-8">
+              {/* Related Names */}
+              <div className="bg-white rounded-xl shadow-sm p-6">
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                  <Users className="w-6 h-6 text-red-500" />
+                  More Names By Religion
+                </h2>
+                <div className="space-y-3">
+                  {data.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={`/name-meaning/religion/${item._id}`}
+                      className="block w-full text-left px-4 py-3 rounded-lg bg-gray-50 hover:bg-red-50 hover:text-red-600 transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Name Timeline */}
+              <div className="bg-white rounded-xl shadow-sm p-6">
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                  <Clock className="w-6 h-6 text-red-500" />
+                  Name Timeline
+                </h2>
+                <div className="space-y-4">
+                  <div className="relative pl-8 pb-4 border-l-2 border-red-200">
+                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-red-500 rounded-full" />
+                    <p className="font-semibold">Origin</p>
+                    <p className="text-sm text-gray-600">{name?.origion} roots</p>
+                  </div>
+                  <div className="relative pl-8 pb-4 border-l-2 border-red-200">
+                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-red-500 rounded-full" />
+                    <p className="font-semibold">Traditional Use</p>
+                    <p className="text-sm text-gray-600">Historical significance</p>
+                  </div>
+                  <div className="relative pl-8">
+                    <div className="absolute left-[-8px] top-0 w-4 h-4 bg-red-500 rounded-full" />
+                    <p className="font-semibold">Modern Day</p>
+                    <p className="text-sm text-gray-600">Contemporary popularity</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className=" py-8">
-          <HoverBanner />
-        </div>
-
-        <div className=" py-8">
-          <h4 className="text-xl sm:text-2xl  font-semibold my-5">FAQs About The Name</h4>
-
-          <h4 className="text-xl sm:text-2xl  font-semibold my-5">What is the Meaning of {name?.name}?</h4>
-
-          <p className="text-base sm:text-lg  font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </p>
-
-          <h4 className="text-xl sm:text-2xl  font-semibold my-5">
-            What is the name length of {name?.name}?
-          </h4>
-
-          <p className="text-base sm:text-lg  font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </p>
-
-          <h4 className="text-xl sm:text-2xl  font-semibold my-5">
-            What is the lucky number of {name?.name}?
-          </h4>
-
-          <p className="text-base sm:text-lg  font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </p>
-        </div>
-
-        <div className=" py-8">
-          <HoverBanner />
         </div>
       </div>
     </Loading>
   );
 }
-
-export default NameDetail;
