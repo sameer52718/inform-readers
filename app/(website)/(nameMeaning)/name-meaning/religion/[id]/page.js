@@ -1,26 +1,42 @@
 "use client";
 
-import AdBanner from "@/components/partials/AdBanner";
-import HoverBanner from "@/components/partials/HoverBanner";
-import NameFilter from "@/components/partials/NameFilter";
-import NamePagination from "@/components/ui/NamePagination";
-import Pagination from "@/components/ui/Pagination.js";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { Search, Filter, ChevronRight, Users, Baby, Heart, ArrowRight, BookOpen } from "lucide-react";
+import { useParams } from "next/navigation";
 
-const GenderWiseTable = () => {
+const AlphabetSelector = ({ currentLetter, onLetterChange }) => {
+  const alphabet = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+
+  return (
+    <div className="flex flex-wrap gap-2 justify-center">
+      {alphabet.map((letter) => (
+        <button
+          key={letter}
+          onClick={() => onLetterChange(letter)}
+          className={`w-10 h-10 rounded-lg font-semibold transition-all ${
+            currentLetter === letter
+              ? "bg-red-600 text-white scale-110"
+              : "bg-white hover:bg-red-50 text-gray-700 hover:text-red-600"
+          }`}
+        >
+          {letter}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+const NameTable = () => {
   const { id } = useParams();
-
   const [pagination, setPagination] = useState({
     totalItems: 0,
     currentPage: 1,
     totalPages: 1,
     pageSize: 25,
   });
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [initialLetter, setInitialLetter] = useState("A");
@@ -42,75 +58,102 @@ const GenderWiseTable = () => {
     }
   };
 
-  const onPageChange = async (page) => {
-    getData(true, page, initialLetter);
-  };
-
-  const onInitialChange = async (initialLetter) => {
-    setInitialLetter(initialLetter);
-
-    getData(true, 1, initialLetter);
-  };
-
   useEffect(() => {
     getData();
-  }, [id]);
-  // console.log(pagination);
+  }, []);
 
   return (
-    <div className=" py-8">
-      <div>
-        <h5 className="text-xl font-semibold ">Browse Names by Alphabets</h5>
-        <div className="mt-4">
-          <NamePagination totalPages={26} currentPage={initialLetter} onPageChange={onInitialChange} />
+    <section className="py-12">
+      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-gradient-to-r from-red-600 to-pink-500 p-6">
+          <p className="text-white/80 mt-2">Browse through our collection of beautiful names</p>
+        </div>
 
-          {/* Table for names, meaning, and details */}
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-red-600 text-white rounded-lg mt-3">
-              <thead>
+        <div className="p-6">
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">Select a letter to begin:</h3>
+            <AlphabetSelector
+              currentLetter={initialLetter}
+              onLetterChange={(letter) => {
+                setInitialLetter(letter);
+                getData(true, 1, letter);
+              }}
+            />
+          </div>
+
+          <div className="overflow-hidden rounded-xl border border-gray-200">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
                 <tr>
-                  <th className="py-3 md:text-2xl text-base font-semibold border-b-2">Names</th>
-                  <th className="py-3 md:text-2xl text-base font-semibold border-b-2">Meaning</th>
-                  <th className="py-3 md:text-2xl text-base font-semibold border-b-2 text-center">Details</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">NAME</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">MEANING</th>
+                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-600">DETAILS</th>
                 </tr>
               </thead>
-              <tbody className="bg-[#d9d9d9]">
+              <tbody className="bg-white divide-y divide-gray-200">
                 {data.map((item, index) => (
-                  <tr key={index} className="border-b-2">
-                    <td className="py-4 md:text-xl text-sm px-3 text-black-500 font-semibold">
-                      {item?.name}
+                  <tr key={index} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-3">
+                          {item?.name?.[0]}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">{item?.name}</p>
+                          <p className="text-sm text-gray-500">{item?.origion || "Traditional"}</p>
+                        </div>
+                      </div>
                     </td>
-                    <td className="py-4 md:text-xl text-sm px-3 text-black-500 font-semibold">
-                      {item?.shortMeaning || "---"}
+                    <td className="px-6 py-4">
+                      <p className="text-gray-600">{item?.shortMeaning || "---"}</p>
                     </td>
-                    <td className="py-4 md:text-xl text-sm px-3 text-black font-semibold text-center">
-                      <Link href={`/name-meaning/${item?._id}`} className="underline text-red-500">
-                        View Detail
+                    <td className="px-6 py-4 text-center">
+                      <Link
+                        href={`/name-meaning/${item?._id}`}
+                        className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
+                      >
+                        View Details
+                        <ChevronRight className="w-4 h-4" />
                       </Link>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            {/* Pagination */}
-            {!loading && data.length > 0 && (
-              <div className="mt-8 flex justify-center">
-                <Pagination
-                  currentPage={pagination.currentPage}
-                  totalPages={pagination.totalPages}
-                  onPageChange={onPageChange}
-                />
-              </div>
-            )}
           </div>
+
+          {!loading && data.length > 0 && (
+            <div className="mt-6 flex items-center justify-between px-4">
+              <button
+                onClick={() => getData(true, Math.max(1, pagination.currentPage - 1), initialLetter)}
+                disabled={pagination.currentPage === 1}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+              >
+                Previous
+              </button>
+              <span className="text-sm text-gray-600">
+                Page {pagination.currentPage} of {pagination.totalPages}
+              </span>
+              <button
+                onClick={() =>
+                  getData(true, Math.min(pagination.totalPages, pagination.currentPage + 1), initialLetter)
+                }
+                disabled={pagination.currentPage === pagination.totalPages}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 function NameMeaning() {
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const getData = async () => {
@@ -127,37 +170,67 @@ function NameMeaning() {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <AdBanner />
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Find the Perfect Name for Your Baby
+            </h1>
+            <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
+              Explore thousands of meaningful names from different cultures and traditions
+            </p>
 
-      <div className=" py-8">
-        <NameFilter />
-
-        <div className="mt-8">
-          <h4 className="font-semibold text-2xl">Search Baby Names By Religion:</h4>
-
-          <div className="bg-[#D9d9d9] md:p-5 rounded-xl border border-black mt-2 px-2 sm:px-12 md:gap-3 gap-2 py-4 flex flex-wrap">
-            {data.map((item, index) => (
-              <Link
-                key={index}
-                href={`/name-meaning/religion/${item._id}`}
-                className="bg-white md:py-4 p-3 md:px-6 w-fit md:text-xl text-sm font-semibold rounded-2xl mb-3 sm:mb-0"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search for a name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className=" py-8">
-        <HoverBanner />
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Religion Categories */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <Users className="w-6 h-6 text-red-600" />
+              Browse Names by Religion
+            </h2>
+          </div>
 
-      <GenderWiseTable />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data.map((item, index) => (
+              <Link
+                key={index}
+                href={`/name-meaning/religion/${item._id}`}
+                className="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="p-6">
+                  <BookOpen className="w-6 h-6 text-red-600 mb-3" />
+                  <h3 className="font-semibold text-gray-900 group-hover:text-red-600 text-xl transition-colors">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1">Explore {item.name} names</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-      <div className=" py-8">
-        <HoverBanner />
+        {/* Name Tables */}
+        <NameTable />
       </div>
     </div>
   );
