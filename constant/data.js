@@ -128,7 +128,7 @@ export const menuItems = [
   {
     title: "Users",
     icon: "mdi:user-outline",
-    link: "/dashboard/user",
+    link: "/admin/user",
   },
   {
     title: "Category",
