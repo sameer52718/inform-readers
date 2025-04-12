@@ -1,160 +1,312 @@
-import AdBanner from "@/components/partials/AdBanner";
-import HoverBanner from "@/components/partials/HoverBanner";
-import { Icon } from "@iconify/react";
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { ChevronRight, Download, Star, Shield, Clock, Zap, Check, ArrowRight, Home, Calendar, HardDrive } from "lucide-react";
+import { useParams } from "next/navigation";
+import axiosInstance from "@/lib/axiosInstance";
 
-function SoftwareDetail() {
-  return (
-    <div className="container mx-auto">
-      <AdBanner />
-      <div className="bg-[#f1f1f1]">
-        <div className="  ">
-          <div className="flex items-center gap-1  px-4 py-6">
-            <h6>Home</h6>/<h6>Electronics</h6>/<h6>HD Camera 5100</h6>
+
+// Mock related software data
+const relatedSoftware = [
+  {
+    id: "1",
+    name: "Firefox Browser",
+    logo: "https://images.dwncdn.net/images/t_app-icon-s/p/fb711dc4-6849-47d1-a7af-183072b02ea4/2587926876/2356_4-10208569-Fx-Browser-icon-fullColor-512(1).png",
+    tag: ["Free"],
+    version: "123.0"
+  },
+  {
+    id: "2",
+    name: "Chrome Browser",
+    logo: "https://assets.dwncdn.net/public/3cd92b.svg",
+    tag: ["Free"],
+    version: "122.0"
+  },
+  {
+    id: "3",
+    name: "Safari Browser",
+    logo: "https://images.dwncdn.net/images/t_app-icon-s/p/b7de5260-51a2-4b8e-b758-79d6884ec215/3719711317/2356_4-34119-imgingest-8808337677785917100.png",
+    tag: ["Free"],
+    version: "17.0"
+  }
+];
+
+const features = [
+  "Enhanced privacy protection",
+  "Built-in VPN service",
+  "Battery saver mode",
+  "Customizable interface",
+  "Integrated ad-blocker",
+  "Crypto wallet support"
+];
+
+const systemRequirements = {
+  os: "macOS 10.15 or later",
+  processor: "64-bit processor",
+  memory: "4 GB RAM",
+  storage: "500 MB available space"
+};
+
+
+const quickStats = [
+  {
+    icon: Download,
+    value: "10M+",
+    label: "Downloads",
+  },
+  {
+    icon: Shield,
+    value: "100%",
+    label: "Secure",
+  },
+  {
+    icon: Clock,
+    value: "24/7",
+    label: "Support",
+  },
+];so
+
+export default function SoftwareDetailPage() {
+  const { slug } = useParams()
+
+
+  const [software, setSoftware] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {data} = await axiosInstance.get(`/website/software/${slug}`);
+        setSoftware(data.data);
+      } catch (error) {
+        console.error("Error fetching software details:", error);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 animate-pulse">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="h-8 bg-gray-200 w-1/3 rounded mb-4"></div>
+          <div className="bg-white rounded-2xl p-8">
+            <div className="h-32 bg-gray-200 rounded-xl mb-4"></div>
           </div>
-          <div className="w-full mb-16 px-4">
-            <h4 className="md:text-center  md:text-5xl text-2xl font-bold mb-5">
-              Free <span className="text-red-500">Software Download</span>
-            </h4>
-            <div className="bg-[#d9d9d9] p-4 sm:p-6 rounded-2xl flex flex-wrap items-center justify-between w-full gap-4">
-              {/* Software Info */}
-              <div className="flex items-center gap-3 flex-wrap">
-                <Image
-                  src={"/website/assets/images/software/01.png"}
-                  alt="software-download"
-                  width={1000}
-                  height={1000}
-                  className="h-12 w-12 sm:h-16 sm:w-16"
-                />
-                <h4 className="text-lg sm:text-2xl font-bold">
-                  Avast Free Antivirus
-                  <span className="text-red-500 text-sm sm:text-base"> for Windows</span>
-                </h4>
-              </div>
+        </div>
+      </div>
+    );
+  }
 
-              <div className="bg-white p-3 sm:p-4 border border-black rounded-2xl flex items-center justify-between w-full sm:w-auto">
-                <ul className="mx-2 sm:mx-4">
-                  <li className="list-disc text-sm sm:text-lg font-semibold">Free-user Rating</li>
-                </ul>
-                <div className="flex gap-1 sm:gap-2">
-                  {[...Array(5)].map((_, index) => (
-                    <Icon
-                      key={index}
-                      icon="ic:baseline-star"
-                      width="20"
-                      height="20"
-                      className="text-[#ff0000] sm:w-6 sm:h-6"
-                    />
+  if (!software) return null;
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+              Discover Amazing Software
+            </h1>
+            <p className="text-xl text-red-100 mb-8">
+              Find the perfect tools to enhance your digital experience
+            </p>
+            <div className="flex justify-center gap-4">
+              {quickStats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={index} className="text-center px-6 py-4 bg-white/10 rounded-lg backdrop-blur-sm">
+                    <Icon className="h-6 w-6 mx-auto mb-2" />
+                    <div className="text-2xl font-bold">{stat.value}</div>
+                    <div className="text-sm text-red-100">{stat.label}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-red-600">
+              <Home className="h-4 w-4" />
+              Home
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <Link href="/software" className="hover:text-red-600">Software</Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-gray-900">{software.name}</span>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <div className="bg-white rounded-2xl p-8 shadow-sm">
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            <Image
+              src={software.logo}
+              alt={software.name}
+              width={128}
+              height={128}
+              className="rounded-2xl"
+            />
+            <div className="flex-1">
+              <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                <h1 className="text-3xl font-bold">{software.name}</h1>
+                <div className="flex gap-2">
+                  {software.tag.map((tag) => (
+                    <span key={tag} className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="mb-16 md:px-0 px-4">
-            <h4 className="md:text-3xl text-xl font-bold mb-5">Key Details of Avast Free Antivirus</h4>
-            <div className="bg-[#d9d9d9] md:p-10 p-4 rounded-3xl">
-              <ul className="list-disc pl-5 space-y-2">
-                <li className="text-lg font-semibold">
-                  Avast Free Antivirus works on Windows computers, including Windows 10. It also supports
-                  Android phones, iPhones, and Macs.
-                </li>
-                <li className="text-lg font-semibold">
-                  Avast is user-friendly, even for non-tech users. The interface is intuitive, with clear
-                  buttons and guided steps to help keep your computer secure.
-                </li>
-                <li className="text-lg font-semibold">
-                  It provides strong protection against viruses and hackers at no cost, making it an excellent
-                  security solution.
-                </li>
-              </ul>
-              <p className="text-lg font-semibold mt-4">
-                When you open Avast, it quickly assesses your computer's security status. Its straightforward
-                design helps users monitor and maintain their device's health with ease. Using advanced
-                technology, Avast detects and blocks new threats before they can cause harm. The interface
-                also includes clear prompts that guide users through essential security decisions.
-              </p>
-            </div>
-          </div>
-          <div className="mb-12 md:px-0 px-4 ">
-            <h4 className="text-3xl font-bold mb-5">Editors’ Review:</h4>
-            <div className="bg-[#d9d9d9] md:p-10 p-5 rounded-3xl">
-              <ul className="list-disc pl-5 space-y-2">
-                <li className="text-lg font-semibold">
-                  Aggressively low pricing: If you do decide to order Avast Pro, you can do so from within the
-                  app, and Avast offers a one-year subscription for a reasonable $15, which is about half of
-                  its street price. If you change your mind, Avast offers a 60-day trial of Avast Internet
-                  Security, which was priced at $20 a year. Pro purports to add enhancements to online banking
-                  security and "a test space for checking suspicious apps." This latter function appears to be
-                  a sandbox, in which you can open an app and investigate its behavior without risking an
-                  infection.
-                </li>
-                <li className="text-lg font-semibold">
-                  Relatively muted sales pitch: Free antivirus apps have a reputation for being pretty pushy
-                  about paying for a subscription, but Avast is on the low-key end of the spectrum (and it has
-                  been for a number of years). There are a couple upgrade buttons on the main console, and a
-                  number of features (a firewall, URL safety verifier, and "Webcam Shield," among others) that
-                  redirect you to an order screen when you click on them, but nothing felt particularly
-                  tricky, and the sales pitch doesn't make ironclad claims about what the program can do.
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex items-center justify-center mb-12">
-            <button className="bg-[#ff0000] text-3xl px-6 py-4 flex items-center gap-4 text-white rounded-2xl">
-              Download Now
-              <div className="h-12 w-12 rounded-full bg-black flex items-center justify-center">
-                <Icon icon="la:download" width="32" height="32" className="text-white" />
-              </div>
-            </button>
-          </div>
-          <div className="mb-12">
-            {/* Responsive Banner Image */}
-            <Image
-              src={"/website/assets/images/banner/01.png"}
-              width={1000}
-              height={1000}
-              className="w-full h-[250px] sm:h-[350px] md:h-[400px] object-cover rounded-xl"
-            />
-
-            <div className="mt-8">
-              <h4 className="text-2xl sm:text-3xl font-bold text-red-500 mb-6 sm:mb-8">Explore More</h4>
-
-              {/* Responsive Grid */}
-              <div className="bg-white p-4 sm:p-6 rounded-xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {[...Array(16)].map((_, i) => (
-                  <div key={i} className="bg-[#d9d9d9] p-3 sm:p-4 rounded-lg flex items-center gap-3">
-                    <Image
-                      src={"/website/assets/images/software/01.png"}
-                      width={100}
-                      height={100}
-                      className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
-                    />
-
-                    <div>
-                      <h4 className="text-sm sm:text-lg font-semibold">
-                        <Link href={"/software/1"}>Avast Free Antivirus</Link>
-                      </h4>
-                      <p className="text-red-500 font-bold text-xs sm:text-sm">Free</p>
-                    </div>
+              <p className="text-gray-600 mb-6">{software.overview}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500">Last Updated</p>
+                    <p className="font-medium">{new Date(software.lastUpdate).toLocaleDateString()}</p>
                   </div>
-                ))}
+                </div>
+                <div className="flex items-center gap-2">
+                  <HardDrive className="h-5 w-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500">Size</p>
+                    <p className="font-medium">{software.size} MB</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500">Version</p>
+                    <p className="font-medium">{software.version}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500">Status</p>
+                    <p className="font-medium text-green-600">Verified</p>
+                  </div>
+                </div>
               </div>
+              <a
+                href={software.download}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors group"
+              >
+                <Download className="h-5 w-5" />
+                <span className="font-semibold">Download Now</span>
+                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center ml-2 group-hover:bg-white/30 transition-colors">
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
 
-              {/* Responsive Button */}
-              <button className="p-3 sm:p-4 rounded-2xl text-white bg-red-500 w-full text-center mt-6 sm:mt-8 text-base sm:text-lg font-bold">
-                See All
+        {/* Features Grid */}
+        <div className="mt-8 grid md:grid-cols-2 gap-8">
+          <div className="bg-white rounded-2xl p-8 shadow-sm">
+            <h2 className="text-xl font-bold mb-6">Key Features</h2>
+            <div className="grid grid-cols-1 gap-4">
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                    <Check className="h-4 w-4 text-green-600" />
+                  </div>
+                  <span className="text-gray-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-8 shadow-sm">
+            <h2 className="text-xl font-bold mb-6">System Requirements</h2>
+            <div className="space-y-4">
+              {Object.entries(systemRequirements).map(([key, value]) => (
+                <div key={key} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
+                    <Check className="h-4 w-4 text-red-600" />
+                  </div>
+                  <div>
+                    <span className="block text-sm text-gray-500 capitalize">{key}</span>
+                    <span className="text-gray-900">{value}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Related Software */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-6">Related Software</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {relatedSoftware.map((item) => (
+              <Link
+                key={item.id}
+                href={`/software/${item.id}`}
+                className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="flex flex-col items-center">
+                  <Image
+                    src={item.logo}
+                    alt={item.name}
+                    width={64}
+                    height={64}
+                    className="rounded-lg mb-4"
+                  />
+                  <h3 className="text-lg font-semibold text-center mb-2">
+                    {item.name}
+                  </h3>
+                  <div className="flex items-center gap-2 flex-wrap justify-center">
+                    <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
+                      v{item.version}
+                    </span>
+                    {item.tag.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2 py-1 border border-gray-200 text-gray-600 text-sm rounded-md"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="mt-12 bg-gradient-to-r from-red-600 to-pink-500 rounded-2xl p-8 text-white">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4 text-white">Stay Updated</h2>
+            <p className="text-red-100 mb-6">
+              Get notified about new software releases and updates.
+            </p>
+            <div className="flex gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500"
+              />
+              <button className="px-6 py-3 bg-white text-red-600 rounded-lg font-semibold hover:bg-red-50 transition-colors">
+                Subscribe
               </button>
             </div>
           </div>
-
-          <HoverBanner />
         </div>
       </div>
     </div>
   );
 }
-
-export default SoftwareDetail;
