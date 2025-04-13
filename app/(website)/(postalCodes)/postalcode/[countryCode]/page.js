@@ -116,7 +116,8 @@ function RegionPortalCode() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {data?.regions?.length ? (
               data?.regions?.map((region) => (
-                <div
+                <Link
+                  href={`/postalcode/${countryCode}/${region}`}
                   key={region}
                   className="flex transform items-center rounded-xl border bg-white p-4 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md"
                 >
@@ -124,7 +125,7 @@ function RegionPortalCode() {
                     <Navigation className="h-5 w-5 text-red-600" />
                   </div>
                   <span className="font-medium text-gray-900">{region}</span>
-                </div>
+                </Link>
               ))
             ) : (
               <p className="text-gray-600 col-span-full text-center">
