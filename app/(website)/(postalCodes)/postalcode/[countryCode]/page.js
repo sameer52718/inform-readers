@@ -46,12 +46,12 @@ function RegionPortalCode() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-white to-gray-50">
+      <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500 mb-4">
         <div className="container mx-auto px-4 py-16">
-          <h1 className="text-center text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
+          <h1 className="text-center text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
             Postal Codes in {data?.country?.name}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-gray-600">
+          <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-white">
             Find postal codes for any location in {data?.country?.name}. Browse by region or search on the
             interactive map.
           </p>
