@@ -3,10 +3,21 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Download, Star, Shield, Clock, Zap, Check, ArrowRight, Home, Calendar, HardDrive } from "lucide-react";
+import {
+  ChevronRight,
+  Download,
+  Star,
+  Shield,
+  Clock,
+  Zap,
+  Check,
+  ArrowRight,
+  Home,
+  Calendar,
+  HardDrive,
+} from "lucide-react";
 import { useParams } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
-
 
 // Mock related software data
 const relatedSoftware = [
@@ -15,22 +26,22 @@ const relatedSoftware = [
     name: "Firefox Browser",
     logo: "https://images.dwncdn.net/images/t_app-icon-s/p/fb711dc4-6849-47d1-a7af-183072b02ea4/2587926876/2356_4-10208569-Fx-Browser-icon-fullColor-512(1).png",
     tag: ["Free"],
-    version: "123.0"
+    version: "123.0",
   },
   {
     id: "2",
     name: "Chrome Browser",
     logo: "https://assets.dwncdn.net/public/3cd92b.svg",
     tag: ["Free"],
-    version: "122.0"
+    version: "122.0",
   },
   {
     id: "3",
     name: "Safari Browser",
     logo: "https://images.dwncdn.net/images/t_app-icon-s/p/b7de5260-51a2-4b8e-b758-79d6884ec215/3719711317/2356_4-34119-imgingest-8808337677785917100.png",
     tag: ["Free"],
-    version: "17.0"
-  }
+    version: "17.0",
+  },
 ];
 
 const features = [
@@ -39,16 +50,15 @@ const features = [
   "Battery saver mode",
   "Customizable interface",
   "Integrated ad-blocker",
-  "Crypto wallet support"
+  "Crypto wallet support",
 ];
 
 const systemRequirements = {
   os: "macOS 10.15 or later",
   processor: "64-bit processor",
   memory: "4 GB RAM",
-  storage: "500 MB available space"
+  storage: "500 MB available space",
 };
-
 
 const quickStats = [
   {
@@ -66,11 +76,10 @@ const quickStats = [
     value: "24/7",
     label: "Support",
   },
-];so
+];
 
 export default function SoftwareDetailPage() {
-  const { slug } = useParams()
-
+  const { slug } = useParams();
 
   const [software, setSoftware] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,7 +87,7 @@ export default function SoftwareDetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axiosInstance.get(`/website/software/${slug}`);
+        const { data } = await axiosInstance.get(`/website/software/${slug}`);
         setSoftware(data.data);
       } catch (error) {
         console.error("Error fetching software details:", error);
@@ -110,9 +119,7 @@ export default function SoftwareDetailPage() {
       <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500 text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Discover Amazing Software
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Discover Amazing Software</h1>
             <p className="text-xl text-red-100 mb-8">
               Find the perfect tools to enhance your digital experience
             </p>
@@ -150,19 +157,16 @@ export default function SoftwareDetailPage() {
         {/* Hero Section */}
         <div className="bg-white rounded-2xl p-8 shadow-sm">
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            <Image
-              src={software.logo}
-              alt={software.name}
-              width={128}
-              height={128}
-              className="rounded-2xl"
-            />
+            <Image src={software.logo} alt={software.name} width={128} height={128} className="rounded-2xl" />
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
                 <h1 className="text-3xl font-bold">{software.name}</h1>
                 <div className="flex gap-2">
                   {software.tag.map((tag) => (
-                    <span key={tag} className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -258,16 +262,8 @@ export default function SoftwareDetailPage() {
                 className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex flex-col items-center">
-                  <Image
-                    src={item.logo}
-                    alt={item.name}
-                    width={64}
-                    height={64}
-                    className="rounded-lg mb-4"
-                  />
-                  <h3 className="text-lg font-semibold text-center mb-2">
-                    {item.name}
-                  </h3>
+                  <Image src={item.logo} alt={item.name} width={64} height={64} className="rounded-lg mb-4" />
+                  <h3 className="text-lg font-semibold text-center mb-2">{item.name}</h3>
                   <div className="flex items-center gap-2 flex-wrap justify-center">
                     <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
                       v{item.version}
@@ -291,9 +287,7 @@ export default function SoftwareDetailPage() {
         <div className="mt-12 bg-gradient-to-r from-red-600 to-pink-500 rounded-2xl p-8 text-white">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4 text-white">Stay Updated</h2>
-            <p className="text-red-100 mb-6">
-              Get notified about new software releases and updates.
-            </p>
+            <p className="text-red-100 mb-6">Get notified about new software releases and updates.</p>
             <div className="flex gap-4 max-w-md mx-auto">
               <input
                 type="email"
