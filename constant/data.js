@@ -130,50 +130,50 @@ export const menuItems = [
     icon: "mdi:user-outline",
     link: "/admin/user",
   },
-  {
-    title: "Category",
-    icon: "material-symbols:category-outline",
-    link: "/dashboard/category",
-  },
-  {
-    title: "Sub Category",
-    icon: "material-symbols:category-outline",
-    link: "/dashboard/subcategory",
-  },
-  {
-    title: "Brand",
-    icon: "tabler:brand-prisma",
-    link: "/dashboard/brand",
-  },
+  // {
+  //   title: "Category",
+  //   icon: "material-symbols:category-outline",
+  //   link: "/admin/category",
+  // },
+  // {
+  //   title: "Sub Category",
+  //   icon: "material-symbols:category-outline",
+  //   link: "/admin/subcategory",
+  // },
+  // {
+  //   title: "Brand",
+  //   icon: "tabler:brand-prisma",
+  //   link: "/admin/brand",
+  // },
   {
     title: "Specification",
     icon: "uil:setting",
-    link: "/dashboard/specification",
+    link: "/admin/specification",
   },
   {
     title: "Software",
     icon: "hugeicons:software",
-    link: "/dashboard/software",
+    link: "/admin/software",
   },
   {
     title: "Blog",
     icon: "bxl:blogger",
-    link: "/dashboard/blog",
+    link: "/admin/blog",
   },
   {
     title: "Biography",
     icon: "mdi:biography",
-    link: "/dashboard/biography",
+    link: "/admin/biography",
   },
   {
     title: "Coupons",
     icon: "mdi:coupon-outline",
-    link: "/dashboard/coupons",
+    link: "/admin/coupons",
   },
   {
     title: "Settings",
     icon: "uil:setting",
-    link: "/dashboard/setting",
+    link: "/admin/setting",
   },
 ];
 
@@ -220,9 +220,7 @@ export const meets = [];
 
 export const files = [];
 
-
-
 export const userTypes = {
-  USER:"USER",
-  ADMIN:"ADMIN",
-}
+  USER: "USER",
+  ADMIN: "ADMIN",
+};
