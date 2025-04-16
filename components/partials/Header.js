@@ -147,13 +147,12 @@
 
 // export default Header;
 
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Menu, X, ChevronDown, } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -212,18 +211,14 @@ function Header() {
         <div className="flex items-center justify-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Link href="/">
-              <Image
-                src="/website/assets/images/logo/logo.png"
-                alt="Vercel Logo"
-                width={2000}
-                height={2000}
-                className="md:w-[490px] w-[400px] h-auto "
-              />
-            </Link>
+            <Image
+              src="/website/assets/images/logo/logo.png"
+              alt="Vercel Logo"
+              width={2000}
+              height={2000}
+              className="md:w-[490px] w-[400px] h-auto "
+            />
           </Link>
-
-
 
           {/* Mobile Menu Button */}
           <button
@@ -247,10 +242,7 @@ function Header() {
                     <ChevronDown className="w-4 h-4" />
                   </button>
                 ) : (
-                  <Link
-                    href={category.url}
-                    className="text-gray-700 hover:text-red-600 transition-colors"
-                  >
+                  <Link href={category.url} className="text-gray-700 hover:text-red-600 transition-colors">
                     {category.title}
                   </Link>
                 )}
@@ -291,17 +283,14 @@ function Header() {
                 <li key={category.id}>
                   {category.sublinks ? (
                     <button
-                      onClick={() => { }}
+                      onClick={() => {}}
                       className="flex items-center justify-between w-full py-2 text-gray-700"
                     >
                       {category.title}
                       <ChevronDown className="w-4 h-4" />
                     </button>
                   ) : (
-                    <Link
-                      href={category.url}
-                      className="block py-2 text-gray-700 hover:text-red-600"
-                    >
+                    <Link href={category.url} className="block py-2 text-gray-700 hover:text-red-600">
                       {category.title}
                     </Link>
                   )}
@@ -315,4 +304,4 @@ function Header() {
   );
 }
 
-export default Header
+export default Header;
