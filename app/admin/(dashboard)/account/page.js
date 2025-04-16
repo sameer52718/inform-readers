@@ -75,6 +75,7 @@ const UserPage = () => {
       const { data } = await axiosInstance.get("/admin/account", { params: { page, limit: size } });
       if (!data.error) {
         setData(data.data);
+        setPagination(data.pagination);
       }
     } catch (error) {
       handleError(error);
@@ -84,8 +85,8 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData(pagination.currentPage, pagination.pageSize);
+  }, [pagination.currentPage, pagination.pageSize]);
 
   const handleStatusChange = async (id) => {
     try {
@@ -105,6 +106,8 @@ const UserPage = () => {
     {
       columns,
       data,
+      manualPagination: true,
+      pageCount: pagination.totalPages,
     },
     useGlobalFilter,
     useSortBy,

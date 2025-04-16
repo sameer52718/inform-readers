@@ -68,7 +68,7 @@ const TableBody = ({ tableInstance, pagination, handlePageSizeChange, handlePage
             value={pagination.pageSize}
             onChange={(e) => handlePageSizeChange(Number(e.target.value))}
           >
-            {[1, 2, 3, 10, 25, 50, 100].map((size) => (
+            {[10, 25, 50, 100, 500, 1000].map((size) => (
               <option key={size} value={size}>
                 Show {size}
               </option>
@@ -101,21 +101,54 @@ const TableBody = ({ tableInstance, pagination, handlePageSizeChange, handlePage
             </button>
           </li>
 
-          {Array.from({ length: pagination.totalPages }, (_, page) => (
-            <li key={page}>
-              <button
-                className={`${
-                  page === pagination.currentPage - 1
-                    ? "bg-blue-500 dark:bg-slate-600 text-white font-medium"
-                    : "bg-slate-100 dark:bg-slate-700 text-slate-900 font-normal"
-                } text-sm rounded flex h-6 w-6 items-center justify-center transition-all duration-150`}
-                onClick={() => handlePageChange(page + 1)}
-              >
-                {page + 1}
-              </button>
-            </li>
-          ))}
+          {(() => {
+            const pageButtons = [];
+            const total = pagination.totalPages;
+            const current = pagination.currentPage;
+            const maxButtons = 5; // You can adjust this limit
 
+            const generateButton = (pageNum) => (
+              <li key={pageNum}>
+                <button
+                  className={`${
+                    pageNum === current
+                      ? "bg-black-500 dark:bg-slate-600 text-white font-medium"
+                      : "bg-slate-100 dark:bg-slate-700 text-slate-900 font-normal"
+                  } text-sm rounded flex h-6 w-6 items-center justify-center transition-all duration-150`}
+                  onClick={() => handlePageChange(pageNum)}
+                >
+                  {pageNum}
+                </button>
+              </li>
+            );
+
+            if (total <= maxButtons + 2) {
+              for (let i = 1; i <= total; i++) {
+                pageButtons.push(generateButton(i));
+              }
+            } else {
+              pageButtons.push(generateButton(1));
+
+              if (current > 3) {
+                pageButtons.push(<li key="start-ellipsis">...</li>);
+              }
+
+              const start = Math.max(2, current - 1);
+              const end = Math.min(total - 1, current + 1);
+
+              for (let i = start; i <= end; i++) {
+                pageButtons.push(generateButton(i));
+              }
+
+              if (current < total - 2) {
+                pageButtons.push(<li key="end-ellipsis">...</li>);
+              }
+
+              pageButtons.push(generateButton(total));
+            }
+
+            return pageButtons;
+          })()}
           <li>
             <button
               className={` ${
