@@ -1,132 +1,237 @@
 "use client";
+
+import { useEffect, useState, useRef } from "react";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
+import { homeCategory } from "@/constant/data";
 import AdBanner from "@/components/partials/AdBanner";
 import CategorySection from "@/components/partials/CategorySection";
-import { homeCategory } from "@/constant/data";
-import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import HoverBanner from "@/components/partials/HoverBanner";
-import Link from "next/link";
-import handleError from "@/lib/handleError";
-import axiosInstance from "@/lib/axiosInstance";
 import Loading from "@/components/ui/Loading";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import HoverBanner from "@/components/partials/HoverBanner";
 
-const SpecificationCard = ({ product }) => {
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
+const HeroSection = () => {
   return (
-    <div className=" rounded-3xl p-4 h-60  bg-[#d4d4d4]">
-      <div className="flex items-center justify-center flex-col">
-        <Link href={`/specification/${product.category}/${product._id}`}>
-          <Image
-            src={product.image}
-            width={300}
-            height={300}
-            alt={product.name}
-            className="w-full h-32 mb-4 object-cover rounded-lg"
-          />
-        </Link>
-        <h4 className="text-[15px] leading-5 line-clamp-2 overflow-hidden">
-          <Link href={`/specification/${product.category}/${product._id}`}>{product.name}</Link>
-        </h4>
+    <div className="relative w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black overflow-hidden">
+      <div className="absolute inset-0 opacity-20">
+        <Image
+          src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
+          alt="Product specifications background"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
-      <div className="divider h-[1px] w-full bg-black"></div>
-      <div className="py-2 px-2 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Image
-            src={"/website/assets/images/icons/heart.png"}
-            width={1000}
-            height={1000}
-            alt="product"
-            className="w-5 h-auto"
-          />
-        </div>
-        <div>
-          <h6 className="text-[#ff0000]">{product.price + " " + product.priceSymbal}</h6>
-        </div>
+
+      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl"
+        >
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Product Specifications
+          </h1>
+
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl">
+            Explore detailed specifications for all our products. Compare features, specifications and prices
+            to find the perfect match for your needs.
+          </p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-8 flex flex-wrap gap-4"
+          >
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="#categories"
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-medium text-sm md:text-base shadow-lg transition-colors"
+            >
+              Browse Categories
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="#featured"
+              className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-medium text-sm md:text-base backdrop-blur-sm transition-colors"
+            >
+              Featured Products
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-const Section = ({ item }) => {
-  const swiperRef = useRef(null);
+const SpecificationCard = ({ product }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <>
-      <section className=" py-8">
-        <div className="flex items-center justify-between border-black pb-3 md:pb-0">
-          <span className=" md:text-xl text-sm font-semibold text-red-500 mr-6">
-            {item?.category.replaceAll("_", " ")}
-          </span>
+    <motion.div
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{ y: -5 }}
+      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
+    >
+      <div className="relative p-3 pb-2">
+        <Link
+          href={`/specification/${product.category}/${product._id}`}
+          className="block overflow-hidden rounded-lg"
+        >
+          <motion.div
+            animate={{ scale: isHovered ? 1.05 : 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative aspect-[4/3] w-full"
+          >
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover rounded-lg"
+              priority
+            />
+          </motion.div>
+        </Link>
+
+        <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
           <Link
-            href={`/specification/${item?.category}`}
-            className={`mr-4  md:text-lg text-sm  font-medium text-gray-500`}
-            onClick={() => {}}
+            href={`/specification/${product.category}/${product._id}`}
+            className="hover:text-red-600 transition-colors"
           >
-            Show All
+            {product.name}
           </Link>
-        </div>
+        </h3>
+      </div>
 
-        <div className="divider h-[2px]  w-full bg-black">
-          <div className="w-24 bg-[#ff0000] h-full"></div>
-        </div>
+      <div className="h-px w-full bg-gray-200" />
 
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={40}
-            slidesPerView={5}
-            breakpoints={{
-              0: { slidesPerView: 1.7 },
-              640: { slidesPerView: 3 },
-              1024: { slidesPerView: 4 },
-              1440: { slidesPerView: 5 },
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {item?.specification?.map((data, index) => (
-              <SwiperSlide key={index}>
-                <SpecificationCard product={data} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-      </section>
-      <HoverBanner />
-    </>
+      <div className="p-3 pt-2 flex items-center justify-between">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="text-gray-500 hover:text-red-500 transition-colors"
+          aria-label="Add to favorites"
+        >
+          <Heart className="h-5 w-5" />
+        </motion.button>
+
+        <motion.div
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          className="text-red-600 font-semibold text-sm md:text-base"
+        >
+          {product.price} {product.priceSymbal}
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 
-function Specification() {
-  const [isLoading, setIsLoading] = useState(true);
+const SpecificationSection = ({ item }) => {
+  const swiperRef = useRef(null);
 
+  // Format category name for display
+  const formatCategoryName = (name) => {
+    return name.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+  };
+
+  return (
+    <section className="relative">
+      <div className="flex items-center justify-between mb-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-xl md:text-2xl font-bold tracking-tight text-red-600"
+        >
+          {formatCategoryName(item?.category)}
+        </motion.h2>
+
+        <Link
+          href={`/specification/${item?.category}`}
+          className="text-sm md:text-base font-medium text-gray-600 hover:text-red-600 transition-colors"
+        >
+          View All
+        </Link>
+      </div>
+
+      <div className="relative h-1 w-full bg-gray-200 mb-8">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "20%" }}
+          transition={{ duration: 0.8 }}
+          className="absolute left-0 top-0 h-full bg-red-600"
+        />
+      </div>
+
+      <div className="relative w-full group mb-6">
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          aria-label="Previous slide"
+          className="absolute left-1 md:-left-10 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          spaceBetween={16}
+          slidesPerView={1}
+          breakpoints={{
+            540: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 24 },
+            1440: { slidesPerView: 5, spaceBetween: 24 },
+          }}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          loop={true}
+          className="w-full pb-4"
+        >
+          {item?.specification?.map((product, index) => (
+            <SwiperSlide key={product._id}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <SpecificationCard product={product} />
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          aria-label="Next slide"
+          className="absolute right-1 md:-right-10 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+      </div>
+
+      <HoverBanner />
+    </section>
+  );
+};
+
+export default function Specification() {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -151,17 +256,17 @@ function Specification() {
   }, []);
 
   return (
-    <div className="bg-white container mx-auto my-8">
+    <div className="bg-background min-h-screen">
       <Loading loading={isLoading}>
-        <AdBanner />
-        <CategorySection category={homeCategory} />
-
-        {data.map((item) => (
-          <Section item={item} key={item.category} />
-        ))}
+        <HeroSection />
+        <div className="container mx-auto px-4 py-8">
+          <div className="space-y-16 mt-8">
+            {data.map((item) => (
+              <SpecificationSection key={item.category} item={item} />
+            ))}
+          </div>
+        </div>
       </Loading>
     </div>
   );
 }
-
-export default Specification;
