@@ -71,7 +71,7 @@ const UserPage = () => {
   const getData = async (page, size) => {
     try {
       setIsLoading(true);
-      const { data } = await axiosInstance.get("/admin/account", { params: { page, limit: size } });
+      const { data } = await axiosInstance.get("/admin/user", { params: { page, limit: size } });
       if (!data.error) {
         setData(data.data);
         setPagination(data.pagination);
@@ -89,7 +89,7 @@ const UserPage = () => {
 
   const handleStatusChange = async (id) => {
     try {
-      const { data } = await axiosInstance.patch(`/admin/account/${id}`);
+      const { data } = await axiosInstance.patch(`/admin/user/${id}`);
       if (!data.error) {
         setData((prev) => prev.map((item) => (item._id === id ? { ...item, status: !item.status } : item)));
         toast.success(data.message);

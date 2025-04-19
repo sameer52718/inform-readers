@@ -4,6 +4,7 @@ import "../../public/website/assets/css/custom.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ToastContainer } from "react-toastify";
 
 // app/layout.js
 export default function WebsiteLayout({ children }) {
@@ -12,6 +13,7 @@ export default function WebsiteLayout({ children }) {
       <Header />
       <main className="flex-1 bg-white">{children}</main>
       <Footer />
+      <ToastContainer />
     </>
   );
 }
