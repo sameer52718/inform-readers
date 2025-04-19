@@ -160,6 +160,11 @@ export const menuItems = [
     icon: "icon-park-solid:edit-name",
     link: "/admin/names",
   },
+  {
+    title: "Postal Codes",
+    icon: "solar:signpost-outline",
+    link: "/admin/postalcode",
+  },
   // {
   //   title: "Blog",
   //   icon: "bxl:blogger",

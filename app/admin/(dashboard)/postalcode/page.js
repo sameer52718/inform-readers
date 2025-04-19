@@ -14,22 +14,29 @@ import ConfirmationDialog from "@/components/shared/ConfirmationDialog";
 import useConfirmationDialog from "@/hooks/useConfirmationDialog";
 const COLUMNS = [
   {
-    Header: "Name",
-    accessor: "name",
+    Header: "Code",
+    accessor: "code",
     Cell: (row) => {
       return <span>{row?.cell?.value}</span>;
     },
   },
   {
-    Header: "Origin",
-    accessor: "origion",
+    Header: "Area/City",
+    accessor: "area",
     Cell: (row) => {
       return <span>{row?.cell?.value}</span>;
     },
   },
   {
-    Header: "Religion",
-    accessor: "religionId.name",
+    Header: "State/Region",
+    accessor: "state",
+    Cell: (row) => {
+      return <span>{row?.cell?.value}</span>;
+    },
+  },
+  {
+    Header: "Country",
+    accessor: "countryId.name",
     Cell: (row) => {
       return <span>{row?.cell?.value}</span>;
     },
@@ -73,7 +80,7 @@ const UserPage = () => {
   const getData = async (page, size) => {
     try {
       setIsLoading(true);
-      const { data } = await axiosInstance.get("/admin/name", { params: { page, limit: size } });
+      const { data } = await axiosInstance.get("/admin/postalCode", { params: { page, limit: size } });
       if (!data.error) {
         setData(data.data);
         setPagination(data.pagination);
@@ -91,7 +98,7 @@ const UserPage = () => {
 
   const handleStatusChange = async (id) => {
     try {
-      const { data } = await axiosInstance.patch(`/admin/name/${id}`);
+      const { data } = await axiosInstance.patch(`/admin/postalCode/${id}`);
       if (!data.error) {
         setData((prev) => prev.map((item) => (item._id === id ? { ...item, status: !item.status } : item)));
         toast.success(data.message);
@@ -105,7 +112,7 @@ const UserPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { data } = await axiosInstance.delete(`/admin/name/${id}`);
+      const { data } = await axiosInstance.delete(`/admin/postalCode/${id}`);
       if (!data.error) {
         toast.success(data.message);
         getData(pagination.currentPage, pagination.pageSize);
@@ -161,9 +168,13 @@ const UserPage = () => {
   return (
     <Card>
       <div className="md:flex justify-between items-center mb-6">
-        <h4 className="card-title">Baby Names</h4>
+        <h4 className="card-title">Postal Codes</h4>
         <div className="flex gap-2">
-          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} placeholder="Search Admins..." />
+          <GlobalFilter
+            filter={globalFilter}
+            setFilter={setGlobalFilter}
+            placeholder="Search Postal Codes..."
+          />
         </div>
       </div>
       <TableBody
