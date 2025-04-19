@@ -125,11 +125,11 @@ export const menuItems = [
     icon: "eos-icons:admin-outlined",
     link: "/admin/account",
   },
-  // {
-  //   title: "Users",
-  //   icon: "mdi:user-outline",
-  //   link: "/admin/user",
-  // },
+  {
+    title: "Users",
+    icon: "mdi:user-outline",
+    link: "/admin/user",
+  },
   // {
   //   title: "Category",
   //   icon: "material-symbols:category-outline",

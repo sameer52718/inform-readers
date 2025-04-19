@@ -1,532 +1,272 @@
 "use client";
 
-import ContentCard from "@/components/card/ContentCard";
-import AdBanner from "@/components/partials/AdBanner";
-import CategorySection from "@/components/partials/CategorySection";
-import HoverBanner from "@/components/partials/HoverBanner";
-import SliderSection from "@/components/partials/SliderSection";
-import { biographyData, homeCategory, mapData } from "@/constant/data";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import ProductCard from "../../components/card/ProductCard";
-import JobsCard from "@/components/card/JobsCard";
-import BiographyCard from "@/components/card/BiographyCard";
-import NameMeaningCard from "@/components/card/NameMeaningCard";
 import Link from "next/link";
-
-const LatestGadget = () => {
-  const swiperRef = useRef(null);
-  return (
-    <>
-      <section className="">
-        <SliderSection heading="Latest Gadget" />
-        <ContentCard>
-          <div className="relative w-full mt-8   h-fit">
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute md:left-[-55px] sm:left-[45px] left-[-38px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-            >
-              <Image
-                src={"/website/assets/images/icons/slider.png"}
-                alt="prev-icon"
-                width={1000}
-                height={1000}
-                className="h-7 w-7 object-contain rotate-180"
-              />
-            </button>
-            <Swiper
-              modules={[Autoplay]}
-              spaceBetween={40}
-              slidesPerView={5}
-              breakpoints={{
-                0: {
-                  slidesPerView: 1.4,
-                  spaceBetween: 10,
-                },
-                640: {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-                },
-                768: {
-                  slidesPerView: 3,
-                  spaceBetween: 20,
-                },
-                1024: {
-                  slidesPerView: 4,
-                  spaceBetween: 20,
-                },
-                1280: {
-                  slidesPerView: 5,
-                  spaceBetween: 20,
-                },
-              }}
-              onSwiper={(swiper) => (swiperRef.current = swiper)}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
-              loop={true}
-              className="w-full min-h-40"
-            >
-              {[...Array(7)].map((_, index) => (
-                <SwiperSlide key={index}>
-                  <ProductCard />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              className="absolute md:right-[-55px] sm:right-[45px] right-[-38px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-            >
-              <Image
-                src={"/website/assets/images/icons/slider.png"}
-                alt="prev-icon"
-                width={1000}
-                height={1000}
-                className="h-7 w-7 object-contain "
-              />
-            </button>
-          </div>
-        </ContentCard>
-      </section>
-    </>
-  );
-};
-
-const LatestJobs = () => {
-  const swiperRef = useRef(null);
-  return (
-    <section>
-      <SliderSection heading="Jobs Opening" />
-      <ContentCard>
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={80}
-            slidesPerView={2}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-                spaceBetween: 4,
-              },
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 2,
-              },
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {[...Array(7)].map((_, index) => (
-              <SwiperSlide key={index}>
-                <JobsCard />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={80}
-            slidesPerView={2}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-                spaceBetween: 4,
-              },
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 2,
-              },
-            }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {[...Array(7)].map((_, index) => (
-              <SwiperSlide key={index}>
-                <JobsCard />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-      </ContentCard>
-    </section>
-  );
-};
-
-const NameMeaning = () => {
-  const swiperRef = useRef(null);
-  return (
-    <section>
-      <SliderSection heading="Name Meaning" />
-      <ContentCard>
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute md:left-[-55px] sm:left-[40px] left-[-38px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={80}
-            slidesPerView={2}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-                spaceBetween: 4,
-              },
-
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 2,
-              },
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {[...Array(7)].map((_, index) => (
-              <SwiperSlide key={index}>
-                <NameMeaningCard />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute md:right-[-55px] sm:right-[-40px] right-[-38px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-      </ContentCard>
-    </section>
-  );
-};
-
-const Biography = () => {
-  const swiperRef = useRef(null);
-  return (
-    <section>
-      <SliderSection heading="Biography" />
-      <ContentCard>
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={40}
-            slidesPerView={5}
-            breakpoints={{
-              0: {
-                slidesPerView: 1.2,
-                spaceBetween: 4,
-              },
-
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 5,
-              },
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {biographyData.map((item, index) => (
-              <SwiperSlide key={index}>
-                <BiographyCard data={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={40}
-            slidesPerView={5}
-            breakpoints={{
-              0: {
-                slidesPerView: 1.2,
-                spaceBetween: 4,
-              },
-
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 5,
-              },
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {biographyData.map((item, index) => (
-              <SwiperSlide key={index}>
-                <BiographyCard data={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-      </ContentCard>
-    </section>
-  );
-};
-
-const GeneralSliderSection = ({ title }) => {
-  const swiperRef = useRef(null);
-  return (
-    <section>
-      <SliderSection heading={title} />
-      <ContentCard>
-        <div className="relative w-full mt-8   h-fit">
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain rotate-180"
-            />
-          </button>
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={40}
-            slidesPerView={5}
-            breakpoints={{
-              0: {
-                slidesPerView: 1.2,
-                spaceBetween: 4,
-              },
-
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 5,
-              },
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            className="w-full min-h-40"
-          >
-            {[...Array(7)].map((_, index) => (
-              <SwiperSlide key={index}>
-                <ProductCard />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-[-55px] bg-[#d1d1d1] top-1/2 transform -translate-y-1/2 border border-[#ff0000] flex items-center justify-center text-white p-1 rounded-full object-contain z-10"
-          >
-            <Image
-              src={"/website/assets/images/icons/slider.png"}
-              alt="prev-icon"
-              width={1000}
-              height={1000}
-              className="h-7 w-7 object-contain "
-            />
-          </button>
-        </div>
-      </ContentCard>
-    </section>
-  );
-};
-
-const ZipCodes = () => {
-  return (
-    <section>
-      <SliderSection heading="Zip Codes" />
-      <ContentCard>
-        <div className="flex items-center md:gap-4 gap-2 flex-wrap py-6 md:px-1">
-          {mapData.map((item, index) => (
-            <div
-              key={index}
-              className="rounded-3xl bg-white md:px-6 px-3 py-1 border-2 border-black flex items-center w-fit"
-            >
-              <Link href={"/postalcode/1"} className="flex items-center gap-2">
-                <Image
-                  src={item.image}
-                  alt={item.image}
-                  width={32}
-                  height={20}
-                  className="w-6 h-6 object-contain rounde-full"
-                />
-                {item.name}
-              </Link>
-            </div>
-          ))}
-        </div>
-      </ContentCard>
-    </section>
-  );
-};
+import { ArrowRight, ChevronRight, Globe2, Search } from "lucide-react";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
+import Loading from "@/components/ui/Loading";
+import HoverBanner from "@/components/partials/HoverBanner";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await axiosInstance.get("/website/home");
+        setData(data.data);
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
   return (
-    <div className="container mx-auto">
-      <AdBanner />
-      <CategorySection category={homeCategory} />
-      <div>
-        <HoverBanner />
+    <Loading loading={isLoading}>
+      <div className="min-h-screen bg-gray-50">
+        {/* Hero Section */}
+        <div className="bg-gradient-to-br from-red-600 to-red-800 text-white">
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center">
+              <Globe2 className="w-16 h-16 mx-auto mb-6 text-red-100 animate-pulse" />
+              <h1 className="text-4xl md:text-5xl text-white font-bold mb-4 leading-tight">
+                Global Information Hub
+              </h1>
+              <p className="text-lg md:text-xl text-red-100 mb-8">
+                Discover software, explore name meanings, and access postal & bank codes all in one place.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 pb-16">
+          {/* Software Section */}
+          <section className="py-16">
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Software</h2>
+                <p className="text-gray-600">Discover powerful tools for your digital needs</p>
+              </div>
+              <Link
+                href="/software"
+                className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200"
+              >
+                View All Software
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {data?.randomSoftware?.map((software) => (
+                <Link
+                  href={`/software/${software._id}`}
+                  key={software._id}
+                  className="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:border-red-100 transition-all duration-300"
+                >
+                  <div className="p-6">
+                    <div className="bg-gray-50 p-4 rounded-xl mb-5 w-24 h-24 mx-auto flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                      <Image
+                        src={software.logo}
+                        alt={software.name}
+                        width={64}
+                        height={64}
+                        className="rounded-lg object-contain"
+                      />
+                    </div>
+                    <h3 className="text-xl font-semibold text-center mb-3 text-gray-900">{software.name}</h3>
+                    <p className="text-gray-600 text-center mb-4 line-clamp-2">{software.overview}</p>
+                    <div className="flex items-center gap-2 flex-wrap justify-center">
+                      <span className="px-3 py-1 bg-red-50 text-red-600 text-sm rounded-full font-medium">
+                        v{software.version}
+                      </span>
+                      {software.tag.slice(0, 2).map((t) => (
+                        <span key={t} className="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <HoverBanner />
+
+          {/* Names Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+              <div className="bg-gradient-to-r from-red-600 to-pink-500 p-8">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-2xl font-bold text-white mb-2">Name Meanings</h2>
+                    <p className="text-red-100">Browse through our collection of beautiful names</p>
+                  </div>
+                  <Link
+                    href="/name-meaning"
+                    className="flex items-center gap-2 text-white hover:text-red-100 transition-colors duration-200"
+                  >
+                    View All Names
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-gray-600">NAME</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-gray-600">MEANING</th>
+                        <th className="text-center py-4 px-6 text-sm font-semibold text-gray-600">DETAILS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data?.randomNames?.map((item, index) => (
+                        <tr
+                          key={index}
+                          className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200"
+                        >
+                          <td className="py-4 px-6">
+                            <div className="flex items-center">
+                              <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-4">
+                                {item?.name?.[0]}
+                              </div>
+                              <div>
+                                <p className="font-semibold text-gray-900">{item?.name}</p>
+                                <p className="text-sm text-gray-500">{item?.origion || "Traditional"}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="py-4 px-6">
+                            <p className="text-gray-600">{item?.shortMeaning || "---"}</p>
+                          </td>
+                          <td className="py-4 px-6 text-center">
+                            <Link
+                              href={`/name-meaning/${item?._id}`}
+                              className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium group"
+                            >
+                              View Details
+                              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <HoverBanner />
+
+          {/* Postal Codes Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse Postal Codes</h2>
+                  <p className="text-gray-600">Find postal codes for countries worldwide</p>
+                </div>
+                <Link
+                  href="/postalcode"
+                  className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200"
+                >
+                  View All Codes
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {data?.postalCodeCountry?.map((country) => (
+                  <Link
+                    href={`/postalcode/${country.countryCode}`}
+                    key={country.countryCode}
+                    className="group"
+                  >
+                    <div className="flex items-center p-4 rounded-xl border border-gray-200 bg-white hover:shadow-md hover:border-red-100 transition-all duration-200">
+                      <div className="relative h-12 w-12 overflow-hidden rounded-lg">
+                        <Image
+                          src={country.flag}
+                          alt={`${country.name} flag`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="ml-4">
+                        <p className="font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200">
+                          {country.name}
+                        </p>
+                        <p className="text-sm text-gray-500">Format: {country.countryCode}-####</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <HoverBanner />
+
+          {/* Bank Codes Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Bank Swift Codes</h2>
+                  <p className="text-gray-600">Access international bank identification codes</p>
+                </div>
+                <Link
+                  href="/swiftcode"
+                  className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200"
+                >
+                  View All Codes
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {data?.bankCodeCountry?.map((country) => (
+                  <Link
+                    href={`/swiftcode/${country.countryCode}`}
+                    key={country.countryCode}
+                    className="group"
+                  >
+                    <div className="flex items-center p-4 rounded-xl border border-gray-200 bg-white hover:shadow-md hover:border-red-100 transition-all duration-200">
+                      <div className="relative h-12 w-12 overflow-hidden rounded-lg">
+                        <Image
+                          src={country.flag}
+                          alt={`${country.name} flag`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="ml-4">
+                        <p className="font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200">
+                          {country.name}
+                        </p>
+                        <p className="text-sm text-gray-500">{country.countryCode}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <HoverBanner />
+        </div>
       </div>
-      <LatestGadget />
-      <LatestJobs />
-      <div>
-        <HoverBanner />
-      </div>
-      <NameMeaning />
-      <Biography />
-      <div>
-        <HoverBanner />
-      </div>
-      <GeneralSliderSection title="Cars" />
-      <GeneralSliderSection title="Bikes" />
-      <ZipCodes />
-      <div>
-        <HoverBanner />
-      </div>
-    </div>
+    </Loading>
   );
 }
