@@ -87,19 +87,19 @@ const UserPage = () => {
     getData(pagination.currentPage, pagination.pageSize);
   }, [pagination.currentPage, pagination.pageSize]);
 
-  const handleStatusChange = async (id) => {
-    try {
-      const { data } = await axiosInstance.patch(`/admin/user/${id}`);
-      if (!data.error) {
-        setData((prev) => prev.map((item) => (item._id === id ? { ...item, status: !item.status } : item)));
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      handleError(error);
-    }
-  };
+  //   const handleStatusChange = async (id) => {
+  //     try {
+  //       const { data } = await axiosInstance.patch(`/admin/user/${id}`);
+  //       if (!data.error) {
+  //         setData((prev) => prev.map((item) => (item._id === id ? { ...item, status: !item.status } : item)));
+  //         toast.success(data.message);
+  //       } else {
+  //         toast.error(data.message);
+  //       }
+  //     } catch (error) {
+  //       handleError(error);
+  //     }
+  //   };
 
   const tableInstance = useTable(
     {
@@ -111,27 +111,27 @@ const UserPage = () => {
     useGlobalFilter,
     useSortBy,
     usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => [
-        ...columns,
-        {
-          Header: "action",
-          accessor: "action",
-          Cell: ({ row }) => {
-            return (
-              <div className="flex space-x-3 rtl:space-x-reverse">
-                <ActionButton
-                  title={row.original.status ? "Private" : "Public"}
-                  icon={row.original.status ? "solar:lock-outline" : "mynaui:lock-open"}
-                  onClick={() => handleStatusChange(row.original._id)}
-                />
-              </div>
-            );
-          },
-        },
-      ]);
-    }
+    useRowSelect
+    // (hooks) => {
+    //   hooks.visibleColumns.push((columns) => [
+    //     ...columns,
+    //     {
+    //       Header: "action",
+    //       accessor: "action",
+    //       Cell: ({ row }) => {
+    //         return (
+    //           <div className="flex space-x-3 rtl:space-x-reverse">
+    //             <ActionButton
+    //               title={row.original.status ? "Private" : "Public"}
+    //               icon={row.original.status ? "solar:lock-outline" : "mynaui:lock-open"}
+    //               onClick={() => handleStatusChange(row.original._id)}
+    //             />
+    //           </div>
+    //         );
+    //       },
+    //     },
+    //   ]);
+    // }
   );
 
   const { state, setGlobalFilter } = tableInstance;
@@ -140,10 +140,9 @@ const UserPage = () => {
   return (
     <Card>
       <div className="md:flex justify-between items-center mb-6">
-        <h4 className="card-title">Admins</h4>
+        <h4 className="card-title">Users</h4>
         <div className="flex gap-2">
-          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} placeholder="Search Admins..." />
-          <AddButton route={"/admin/account/add"} />
+          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} placeholder="Search Users..." />
         </div>
       </div>
       <TableBody
