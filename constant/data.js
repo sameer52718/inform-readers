@@ -165,6 +165,11 @@ export const menuItems = [
     icon: "solar:signpost-outline",
     link: "/admin/postalcode",
   },
+  {
+    title: "Swift Codes",
+    icon: "mdi:bank-outline",
+    link: "/admin/swiftcode",
+  },
   // {
   //   title: "Blog",
   //   icon: "bxl:blogger",
