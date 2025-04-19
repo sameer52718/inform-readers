@@ -145,11 +145,6 @@ export const menuItems = [
   //   icon: "tabler:brand-prisma",
   //   link: "/admin/brand",
   // },
-  // {
-  //   title: "Specification",
-  //   icon: "uil:setting",
-  //   link: "/admin/specification",
-  // },
   {
     title: "Software",
     icon: "hugeicons:software",
@@ -169,6 +164,11 @@ export const menuItems = [
     title: "Swift Codes",
     icon: "mdi:bank-outline",
     link: "/admin/swiftcode",
+  },
+  {
+    title: "Specifications",
+    icon: "fluent-mdl2:product",
+    link: "/admin/specification",
   },
   // {
   //   title: "Blog",
