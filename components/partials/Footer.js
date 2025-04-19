@@ -1,3 +1,6 @@
+"use client";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 import {
   Facebook,
   Twitter,
@@ -12,8 +15,27 @@ import {
   Globe,
 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axiosInstance.post("/website/newsletter", { email });
+      if (!data.error) {
+        toast.success("Email Submitted For Future Newsletter updates.");
+        setEmail("");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   return (
     <footer className="bg-gradient-to-br from-red-600 to-red-800 text-gray-300">
       {/* Main Footer Content */}
@@ -170,11 +192,15 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Newsletter</h3>
             <p className="text-sm mb-4">Subscribe to our newsletter for daily updates and breaking news.</p>
-            <form className="space-y-3">
+            <form className="space-y-3" onSubmit={handleSubmit}>
               <input
                 type="email"
+                autoComplete="email"
                 placeholder="Your email address"
                 className="w-full px-4 py-2 text-black-500  rounded-md focus:outline-none focus:border-blue-500"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
               <button
                 type="submit"
