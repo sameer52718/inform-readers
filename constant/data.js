@@ -125,11 +125,11 @@ export const menuItems = [
     icon: "eos-icons:admin-outlined",
     link: "/admin/account",
   },
-  {
-    title: "Users",
-    icon: "mdi:user-outline",
-    link: "/admin/user",
-  },
+  // {
+  //   title: "Users",
+  //   icon: "mdi:user-outline",
+  //   link: "/admin/user",
+  // },
   // {
   //   title: "Category",
   //   icon: "material-symbols:category-outline",
@@ -145,31 +145,36 @@ export const menuItems = [
   //   icon: "tabler:brand-prisma",
   //   link: "/admin/brand",
   // },
-  {
-    title: "Specification",
-    icon: "uil:setting",
-    link: "/admin/specification",
-  },
+  // {
+  //   title: "Specification",
+  //   icon: "uil:setting",
+  //   link: "/admin/specification",
+  // },
   {
     title: "Software",
     icon: "hugeicons:software",
     link: "/admin/software",
   },
   {
-    title: "Blog",
-    icon: "bxl:blogger",
-    link: "/admin/blog",
+    title: "Baby Names",
+    icon: "icon-park-solid:edit-name",
+    link: "/admin/names",
   },
-  {
-    title: "Biography",
-    icon: "mdi:biography",
-    link: "/admin/biography",
-  },
-  {
-    title: "Coupons",
-    icon: "mdi:coupon-outline",
-    link: "/admin/coupons",
-  },
+  // {
+  //   title: "Blog",
+  //   icon: "bxl:blogger",
+  //   link: "/admin/blog",
+  // },
+  // {
+  //   title: "Biography",
+  //   icon: "mdi:biography",
+  //   link: "/admin/biography",
+  // },
+  // {
+  //   title: "Coupons",
+  //   icon: "mdi:coupon-outline",
+  //   link: "/admin/coupons",
+  // },
   {
     title: "Settings",
     icon: "uil:setting",

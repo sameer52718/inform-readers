@@ -14,7 +14,7 @@ import SubmitButton from "@/components/ui/SubmitButton";
 import { useDispatch } from "react-redux";
 import { setAuth } from "@/store/auth";
 import { userTypes } from "@/constant/data";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 const schema = yup
   .object({
     email: yup.string().email("Invalid email").required("Email is Required"),
@@ -119,6 +119,7 @@ const Login2 = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
