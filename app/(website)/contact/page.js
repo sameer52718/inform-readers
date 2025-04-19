@@ -1,6 +1,9 @@
 "use client";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 import { Mail, Phone, MapPin, Clock, Send, AlertCircle } from "lucide-react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,12 +13,25 @@ export default function Contact() {
     message: "",
   });
   const [status, setStatus] = useState("idle");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate form submission
-    setStatus("success");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      // Simulate form submission
+      setIsSubmitting(true);
+      const { data } = await axiosInstance.post("/website/contact", formData);
+      if (!data.error) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -164,7 +180,8 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-red-600 text-white py-3 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center space-x-2"
+                className="w-full bg-red-600 text-white py-3 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center space-x-2 disabled:opacity-70"
+                disabled={isSubmitting}
               >
                 <Send className="h-5 w-5" />
                 <span>Send Message</span>
