@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import { MapPin, Bed, Bath, Square, Search, DollarSign, Home, Filter } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 const PropertyListing = () => {
   const [priceRange, setPriceRange] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [location, setLocation] = useState("");
   const [bedrooms, setBedrooms] = useState("");
+  const router = useRouter();
 
   const properties = [
     {
@@ -206,7 +208,10 @@ const PropertyListing = () => {
 
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-red-600">{property.type}</span>
-                    <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                    <button
+                      className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                      onClick={() => router.push(`/real-state/prop-1}`)}
+                    >
                       View Details
                     </button>
                   </div>
