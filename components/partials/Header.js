@@ -27,7 +27,7 @@ function Header() {
     { id: 6, title: "Travel", url: "/travel" },
     { id: 7, title: "Biography", url: "/biography" },
     { id: 8, title: "News", url: "/news" },
-    { id: 8, title: "Video Downloader", url: "/video-downloader" },
+    { id: 10, title: "Video Downloader", url: "/video-downloader" },
     {
       id: 9,
       title: "More",
@@ -36,6 +36,7 @@ function Header() {
         { id: 2, title: "Entertainment", url: "/entertainment" },
         { id: 3, title: "Lifestyle", url: "/lifestyle" },
         { id: 4, title: "Jobs", url: "/jobs" },
+        { id: 5, title: "Real State", url: "/real-state" },
       ],
     },
   ];

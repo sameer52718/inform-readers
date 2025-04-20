@@ -1,189 +1,222 @@
-"use client";
+import { Bed, Bath, Square, Heart, MapPin } from "lucide-react";
+import Link from "next/link";
 
-import AdBanner from '@/components/partials/AdBanner';
-import RealStateFilter from '@/components/partials/RealStateFilter'
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
-import { Icon } from '@iconify/react';
-import Image from 'next/image';
-import HoverBanner from '@/components/partials/HoverBanner';
-import Link from 'next/link';
-
-
-
-function PropertySlider() {
+const PropertyGrid = () => {
   const properties = [
     {
-      price: "$1,400 PER MONTH",
-      title: "The Ledbury",
-      image: "/website/assets/images/real-state/01.png",
-      size: "850 sq ft",
-      rooms: "2 Rooms",
-      bathrooms: "2 Bathrooms",
+      id: 1,
+      title: "Cozy Family Home",
+      location: "Seattle, WA",
+      price: "$750,000",
+      image: "https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg",
+      beds: 3,
+      baths: 2,
+      sqft: 2000,
+      type: "House",
     },
     {
-      price: "$1,600 PER MONTH",
-      title: "Moon Point",
-      image: "/website/assets/images/real-state/01.png",
-      size: "620 sq ft",
-      rooms: "2 Rooms",
-      bathrooms: "2 Bathrooms",
+      id: 2,
+      title: "Urban Loft",
+      location: "Portland, OR",
+      price: "$450,000",
+      image: "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg",
+      beds: 1,
+      baths: 1,
+      sqft: 950,
+      type: "Apartment",
     },
     {
-      price: "$1,800 PER MONTH",
-      title: "Azra Point",
-      image: "/website/assets/images/real-state/01.png",
-      size: "480 sq ft",
-      rooms: "1 Room",
-      bathrooms: "1 Bathroom",
+      id: 3,
+      title: "Suburban Ranch",
+      location: "Austin, TX",
+      price: "$580,000",
+      image: "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg",
+      beds: 4,
+      baths: 2,
+      sqft: 2400,
+      type: "House",
     },
     {
-      price: "$1,800 PER MONTH",
-      title: "Azra Point",
-      image: "/website/assets/images/real-state/01.png",
-      size: "480 sq ft",
-      rooms: "1 Room",
-      bathrooms: "1 Bathroom",
+      id: 4,
+      title: "Mountain View Condo",
+      location: "Denver, CO",
+      price: "$420,000",
+      image: "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg",
+      beds: 2,
+      baths: 2,
+      sqft: 1200,
+      type: "Condo",
     },
   ];
 
-  return (
-    <div className="relative w-full p-8 bg-gray-300 mt-8 rounded-2xl property-card-slider">
-      <Swiper
-        modules={[Navigation]}
-        spaceBetween={20}
-        slidesPerView={1}
-        breakpoints={{
-          640: { slidesPerView: 1.3 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        className="relative"
-      >
-        {properties.map((property, index) => (
-          <SwiperSlide key={index} className="bg-white rounded-lg shadow-lg overflow-hidden p-2">
-            <Link href={"/real-state/1"}>
-              <Image src={property.image} alt={property.title} className="w-full h-40 object-cover rounded-2xl" width={1000} height={1000} />
-            </Link>
-            <div className="p-4">
-              {/* <span className="bg-gray-800 text-white text-xs px-2 py-1 rounded">{property.price}</span> */}
-              <Link href={"/real-state/1"}>
-                <h3 className="text-2xl font-semibold text-center">{property.title}</h3>
-              </Link>
-              <div className="flex justify-between text-sm text-gray-600 mt-2">
-                <span>{property.size}</span>
-                <span className="flex items-center gap-1"><Icon icon="solar:copy-linear" width="20" height="20" />{property.rooms}</span>
-                <span className='flex items-center gap-1'> <Icon icon="fa:bath" width="20" height="20" />{property.bathrooms}</span>
-
-              </div>
-
-              <span className='flex items-center gap-1 mt-3 text-sm'> <Icon icon="material-symbols:bed-rounded" width="24" height="24" />{property.bathrooms}</span>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <button className="swiper-button-prev absolute md:!-left-12 !-left-3 !top-1/2 !h-12 !w-12 transform -translate-y-1/2 border border-red-500 bg-gray-300 p-2 rounded-full">
-        <Icon icon="ri:arrow-left-double-line" width="24" height="24" className='text-red-500' />
-      </button>
-      <button className="swiper-button-next absolute border md:!-right-12 !-right-3 !top-1/2 transform -translate-y-1/2  text-white p-2 rounded-full border-red-500 bg-gray-300 !h-12 !w-12">
-        <Icon icon="ri:arrow-right-double-fill" width="24" height="24" className='text-red-500' />
-        {/* <Icon icon="ic:round-chevron-right" width="24"  className='!block'/> */}
-      </button>
-    </div>
-  );
-}
-
-
-
-function PropertyGrid() {
-  const properties = [
-    {
-      price: "$2,800 PER MONTH",
-      title: "Sunny, Modern room in East Village!",
-      address: "148 Iffley Road",
-      image: "/website/assets/images/news/01.png",
-    },
-    {
-      price: "$2,800 PER MONTH",
-      title: "Sunny, Modern room in East Village!",
-      address: "148 Iffley Road",
-      image: "/website/assets/images/news/02.png",
-    },
-    {
-      price: "$1,400 PER MONTH",
-      title: "Bright studio apartment for rent",
-      address: "11 Thurloe Pl",
-      image: "/website/assets/images/news/03.png",
-    },
-    {
-      price: "$850 PER MONTH",
-      title: "Charming 1-bedroom flat for rent",
-      address: "East Roof Terrace",
-      image: "/website/assets/images/news/04.png",
-    },
-  ];
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-      {properties.map((property, index) => (
-        <Link href={'/real-state/1'}>
-
-          <div
-            key={index}
-            className="relative rounded-lg overflow-hidden shadow-lg"
-          >
-            <img
-              src={property.image}
-              alt={property.title}
-              className="w-full h-72 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-25 p-4 -top-4 text-white">
-              <span className=" px-6 border flex items-center justify-center w-fit py-4 text-sm font-semibold rounded-md">
-                {property.price}
-              </span>
-            </div>
-
-            <div className='absolute bottom-2 left-2'>
-              <h4 className='text-xl font-semibold text-white'>Bright Studio Apartment for rent</h4>
-              <p className='text-sm text-white'> 148 Iffley Road</p>
-            </div>
-          </div>
-        </Link>
-
-      ))}
-    </div>
-  );
-}
-
-function RealState() {
   return (
     <div>
-      <AdBanner />
-      <div className='container mx-auto md:px-44 px-4 py-8'>
-        <RealStateFilter />
-        <h4 className='text-4xl font-bold text-center mt-6'>Real <span className='text-red-500'> Estate </span></h4>
-        <PropertyGrid />
-        <div className='py-8'>
-        <HoverBanner  />
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold mb-8">Latest Properties</h2>
+        <Link href={"/real-state/listing"} className="text-red-500">
+          View More
+        </Link>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {properties.map((property) => (
+          <div
+            key={property.id}
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-red-600">{property.type}</span>
+                <span className="text-lg font-bold text-red-600">{property.price}</span>
+              </div>
 
-        </div>
-        <h4 className='md:text-4xl text-2xl font-bold text-center mt-6'>Looking for properties to rent </h4>
-        <PropertySlider />
-        <PropertySlider />
-        <PropertySlider />
-        {/* <PropertySlider /> */}
-        <HoverBanner padding='0px' />
+              <h3 className="text-lg font-semibold mb-2">{property.title}</h3>
 
+              <div className="flex items-center text-gray-600 mb-4">
+                <MapPin className="h-4 w-4 mr-1" />
+                <span className="text-sm">{property.location}</span>
+              </div>
+
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center">
+                  <Bed className="h-4 w-4 mr-1" />
+                  <span>{property.beds} beds</span>
+                </div>
+                <div className="flex items-center">
+                  <Bath className="h-4 w-4 mr-1" />
+                  <span>{property.baths} baths</span>
+                </div>
+                <div className="flex items-center">
+                  <Square className="h-4 w-4 mr-1" />
+                  <span>{property.sqft} sqft</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RealState
+const FeaturedProperties = () => {
+  const properties = [
+    {
+      id: 1,
+      title: "Modern Luxury Villa",
+      location: "Beverly Hills, CA",
+      price: "$2,500,000",
+      image: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg",
+      beds: 4,
+      baths: 3,
+      sqft: 3200,
+    },
+    {
+      id: 2,
+      title: "Waterfront Apartment",
+      location: "Miami Beach, FL",
+      price: "$1,800,000",
+      image: "https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg",
+      beds: 3,
+      baths: 2,
+      sqft: 2100,
+    },
+    {
+      id: 3,
+      title: "Downtown Penthouse",
+      location: "New York, NY",
+      price: "$3,200,000",
+      image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
+      beds: 5,
+      baths: 4,
+      sqft: 4500,
+    },
+  ];
+
+  return (
+    <div className="mb-16">
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold mb-8">Featured Properties</h2>
+        <Link href={"/real-state/listing"} className="text-red-500">
+          View More
+        </Link>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {properties.map((property) => (
+          <div key={property.id} className="bg-white rounded-lg shadow-lg overflow-hidden group">
+            <div className="relative">
+              <img
+                src={property.image}
+                alt={property.title}
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <button className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors">
+                <Heart className="h-5 w-5 text-red-500" />
+              </button>
+            </div>
+
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2">{property.title}</h3>
+              <p className="text-gray-600 mb-4">{property.location}</p>
+
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-4 text-gray-600">
+                  <div className="flex items-center">
+                    <Bed className="h-5 w-5 mr-2" />
+                    <span>{property.beds}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Bath className="h-5 w-5 mr-2" />
+                    <span>{property.baths}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Square className="h-5 w-5 mr-2" />
+                    <span>{property.sqft} sqft</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-bold text-red-600">{property.price}</span>
+                <button className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const RealEstate = () => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">
+        <div
+          className="relative h-[500px] bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg')`,
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="text-center text-white px-4">
+              <h1 className="text-4xl md:text-6xl text-white font-bold mb-4">Find Your Dream Home</h1>
+              <p className="text-xl md:text-2xl mb-8">
+                Discover the perfect property in your favorite location
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 py-12">
+          <FeaturedProperties />
+          <PropertyGrid />
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default RealEstate;
