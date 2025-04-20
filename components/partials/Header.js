@@ -27,6 +27,7 @@ function Header() {
     { id: 6, title: "Travel", url: "/travel" },
     { id: 7, title: "Biography", url: "/biography" },
     { id: 8, title: "News", url: "/news" },
+    { id: 8, title: "Video Downloader", url: "/video-downloader" },
     {
       id: 9,
       title: "More",
