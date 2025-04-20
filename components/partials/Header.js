@@ -34,6 +34,7 @@ function Header() {
         { id: 1, title: "Sports", url: "/sports" },
         { id: 2, title: "Entertainment", url: "/entertainment" },
         { id: 3, title: "Lifestyle", url: "/lifestyle" },
+        { id: 4, title: "Jobs", url: "/jobs" },
       ],
     },
   ];

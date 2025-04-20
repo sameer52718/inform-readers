@@ -1,0 +1,223 @@
+export const jobListings = [
+  {
+    id: "1",
+    title: "Senior Frontend Developer",
+    company: "TechCorp",
+    logo: "https://images.pexels.com/photos/3987020/pexels-photo-3987020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "San Francisco, CA (Remote)",
+    salary: "$120,000 - $150,000",
+    description:
+      "We are looking for a skilled frontend developer with experience in React and TypeScript to join our growing team.",
+    jobType: ["Full-time", "Remote"],
+    experienceLevel: "Senior Level",
+    postedDate: "2023-05-15",
+    applicationDeadline: "2023-06-15",
+    isFeatured: true,
+    applicants: 45,
+    tags: ["React", "TypeScript", "Redux", "Next.js"],
+  },
+  {
+    id: "2",
+    title: "Product Designer",
+    company: "DesignHub",
+    logo: "https://images.pexels.com/photos/4064839/pexels-photo-4064839.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "New York, NY",
+    salary: "$90,000 - $110,000",
+    description: "Join our design team to create beautiful, user-friendly interfaces for our clients.",
+    jobType: ["Full-time"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-05-12",
+    applicationDeadline: "2023-06-12",
+    isFeatured: false,
+    applicants: 32,
+    tags: ["Figma", "UI/UX", "Prototyping"],
+  },
+  {
+    id: "3",
+    title: "Data Scientist",
+    company: "DataMind",
+    logo: "https://images.pexels.com/photos/5712159/pexels-photo-5712159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Remote",
+    salary: "$130,000 - $160,000",
+    description: "We are seeking a data scientist to help us analyze and interpret complex data sets.",
+    jobType: ["Full-time", "Remote"],
+    experienceLevel: "Senior Level",
+    postedDate: "2023-05-10",
+    applicationDeadline: "2023-06-10",
+    isFeatured: true,
+    applicants: 28,
+    tags: ["Python", "Machine Learning", "TensorFlow", "SQL"],
+  },
+  {
+    id: "4",
+    title: "Backend Developer",
+    company: "ServerSide",
+    logo: "https://images.pexels.com/photos/6446709/pexels-photo-6446709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Austin, TX",
+    salary: "$100,000 - $130,000",
+    description:
+      "Looking for a backend developer with Node.js and database expertise to join our engineering team.",
+    jobType: ["Full-time"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-05-08",
+    applicationDeadline: "2023-06-08",
+    isFeatured: false,
+    applicants: 36,
+    tags: ["Node.js", "Express", "MongoDB", "SQL"],
+  },
+  {
+    id: "5",
+    title: "UI/UX Designer",
+    company: "CreativeMinds",
+    logo: "https://images.pexels.com/photos/5716001/pexels-photo-5716001.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Los Angeles, CA",
+    salary: "$85,000 - $105,000",
+    description: "Join our creative team to design beautiful and intuitive user interfaces for our products.",
+    jobType: ["Full-time"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-05-05",
+    applicationDeadline: "2023-06-05",
+    isFeatured: false,
+    applicants: 40,
+    tags: ["Figma", "Adobe XD", "Sketch", "Prototyping"],
+  },
+  {
+    id: "6",
+    title: "DevOps Engineer",
+    company: "CloudTech",
+    logo: "https://images.pexels.com/photos/2653362/pexels-photo-2653362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Chicago, IL (Hybrid)",
+    salary: "$110,000 - $140,000",
+    description:
+      "We need a skilled DevOps engineer to help us automate our deployment processes and manage our cloud infrastructure.",
+    jobType: ["Full-time", "Remote"],
+    experienceLevel: "Senior Level",
+    postedDate: "2023-05-03",
+    applicationDeadline: "2023-06-03",
+    isFeatured: true,
+    applicants: 22,
+    tags: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+  },
+  {
+    id: "7",
+    title: "Marketing Specialist",
+    company: "GrowthHackers",
+    logo: "https://images.pexels.com/photos/935979/pexels-photo-935979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Miami, FL",
+    salary: "$70,000 - $90,000",
+    description: "Join our marketing team to help us grow our brand and reach new customers.",
+    jobType: ["Full-time"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-05-01",
+    applicationDeadline: "2023-06-01",
+    isFeatured: false,
+    applicants: 38,
+    tags: ["Digital Marketing", "SEO", "Social Media", "Content Creation"],
+  },
+  {
+    id: "8",
+    title: "Mobile Developer",
+    company: "AppFactory",
+    logo: "https://images.pexels.com/photos/2528118/pexels-photo-2528118.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Boston, MA (Remote)",
+    salary: "$95,000 - $125,000",
+    description:
+      "We are looking for a talented mobile developer to help us build amazing apps for our clients.",
+    jobType: ["Full-time", "Remote"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-04-28",
+    applicationDeadline: "2023-05-28",
+    isFeatured: false,
+    applicants: 30,
+    tags: ["React Native", "Swift", "Kotlin", "Mobile Development"],
+  },
+  {
+    id: "9",
+    title: "Frontend Developer Intern",
+    company: "WebWizards",
+    logo: "https://images.pexels.com/photos/1181622/pexels-photo-1181622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Remote",
+    salary: "$25/hour",
+    description:
+      "Great opportunity for a student or recent graduate to gain real-world experience in frontend development.",
+    jobType: ["Internship", "Remote"],
+    experienceLevel: "Entry Level",
+    postedDate: "2023-04-25",
+    applicationDeadline: "2023-05-25",
+    isFeatured: false,
+    applicants: 50,
+    tags: ["HTML", "CSS", "JavaScript", "React"],
+  },
+  {
+    id: "10",
+    title: "Product Manager",
+    company: "ProductLab",
+    logo: "https://images.pexels.com/photos/3184603/pexels-photo-3184603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Seattle, WA",
+    salary: "$120,000 - $150,000",
+    description: "We are looking for an experienced product manager to lead our product development team.",
+    jobType: ["Full-time"],
+    experienceLevel: "Senior Level",
+    postedDate: "2023-04-22",
+    applicationDeadline: "2023-05-22",
+    isFeatured: true,
+    applicants: 35,
+    tags: ["Product Management", "Agile", "User Research", "Roadmapping"],
+  },
+  {
+    id: "11",
+    title: "Technical Writer",
+    company: "DocuTech",
+    logo: "https://images.pexels.com/photos/7439145/pexels-photo-7439145.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Remote",
+    salary: "$75,000 - $95,000",
+    description:
+      "Join our documentation team to create clear, concise technical documentation for our products.",
+    jobType: ["Full-time", "Remote"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-04-20",
+    applicationDeadline: "2023-05-20",
+    isFeatured: false,
+    applicants: 18,
+    tags: ["Technical Writing", "Documentation", "Markdown", "Content Creation"],
+  },
+  {
+    id: "12",
+    title: "QA Engineer",
+    company: "BugBusters",
+    logo: "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    location: "Denver, CO",
+    salary: "$85,000 - $110,000",
+    description:
+      "We are seeking a detail-oriented QA engineer to ensure the quality of our software products.",
+    jobType: ["Full-time"],
+    experienceLevel: "Mid Level",
+    postedDate: "2023-04-18",
+    applicationDeadline: "2023-05-18",
+    isFeatured: false,
+    applicants: 25,
+    tags: ["Quality Assurance", "Testing", "Selenium", "Automation"],
+  },
+];
+
+export const allJobTypes = ["Full-time", "Part-time", "Contract", "Internship", "Remote"];
+export const allExperienceLevels = ["Entry Level", "Mid Level", "Senior Level", "Executive"];
+
+export function getTimeAgo(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 1) return "1 day ago";
+  if (diffDays < 30) return `${diffDays} days ago`;
+
+  const diffMonths = Math.floor(diffDays / 30);
+  if (diffMonths === 1) return "1 month ago";
+  return `${diffMonths} months ago`;
+}
+
+export function formatDate(dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
