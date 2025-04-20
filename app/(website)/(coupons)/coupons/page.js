@@ -1,216 +1,172 @@
-"use client"; // For Next.js App Router
+"use client";
 
-import AdBanner from "@/components/partials/AdBanner";
-import CategoryBox from "@/components/partials/CategoryBox";
-import HoverBanner from "@/components/partials/HoverBanner";
-import SearchInput from "@/components/ui/SearchInput";
-import { categories, couponData, shopData } from "@/constant/data";
-import { Icon } from "@iconify/react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { couponCategories, deals } from "@/constant/data";
 
-const CouponListCard = ({ coupon }) => {
+export default function CouponsPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All Deals");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [copiedCode, setCopiedCode] = useState(null);
+
+  const filteredDeals = deals.filter((deal) => {
+    const matchesCategory = selectedCategory === "All Deals" || deal.category === selectedCategory;
+    const matchesSearch =
+      deal.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      deal.store.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const copyCode = (code) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2000);
+  };
+
   return (
-    <div className="bg-[#d9d9d9] pt-5 px-6 sm:px-8 rounded-lg">
-      <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
-        <p className="text-red-500 text-xl sm:text-2xl font-bold text-center sm:text-left">
-          {coupon.discount} <br className="hidden sm:block" /> Off
-        </p>
-        <p className="font-semibold text-lg sm:text-2xl text-gray-600 text-center sm:text-left">
-          {coupon.details}
-        </p>
-        <button className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium w-full sm:w-auto">
-          Reveal Code
-        </button>
-      </div>
-      <div className="border-t border-black mt-4">
-        <div className="grid grid-cols-1">
-          <div className="py-2">
-            <p className="flex justify-center items-center gap-1 text-center">
-              See Details
-              <Icon icon="mynaui:plus-solid" width="18" height="18" className="mt-[2px]" />
-            </p>
+    <main className="min-h-screen bg-neutral-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-red-600 to-red-700 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-4xl text-white md:text-5xl font-bold mb-6">Latest Deals & Coupons</h1>
+              <p className="text-xl text-white mb-8">
+                Save money with our hand-picked deals and discount codes
+              </p>
+
+              {/* Search Bar */}
+              <div className="relative max-w-2xl mx-auto">
+                <input
+                  type="text"
+                  placeholder="Search for deals..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-6 py-4 rounded-full text-neutral-900 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/20"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-const coupons = [
-  { discount: "10%", details: "Extra 10% Off Sitewide", code: "SAVE10" },
-  { discount: "20%", details: "Extra 20% Off Sitewide", code: "SAVE20" },
-  { discount: "20%", details: "Extra 20% Off Sitewide", code: "SAVE20" },
-];
-
-function Coupons() {
-  const [activeTab, setActiveTab] = useState("popularity");
-  return (
-    <>
-      <div className="container mx-auto">
-        <AdBanner />
-      </div>
-
-      <section className="container bg-white">
-        <div className="flex items-center gap-1   py-4">
-          <h6>Home</h6>
-          <Icon icon="basil:caret-right-solid" className="mt-[2px]" width="18" height="18" />
-          <h6>Store Page</h6>
+      {/* Categories */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-wrap gap-3 justify-center mb-12">
+          {couponCategories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                selectedCategory === category
+                  ? "bg-red-600 text-white"
+                  : "bg-white text-neutral-700 hover:bg-neutral-100"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
-        <h2 className="md:text-3xl text-xl font-bold text-center pb-6">
-          A Cherry on Top Coupons & Promo Codes
-        </h2>
-      </section>
 
-      <div className="container mx-auto ">
-        <div className="grid grid-cols-12 gap-5 gap-y-4 mt-6 px-6">
-          <div className="md:col-span-3 col-span-12 bg-[#d9d9d9] p-4 rounded-2xl h-fit">
-            <div className="bg-white h-40 rounded-xl flex items-center justify-center">
-              <Image
-                src={"/website/assets/images/coupons/01.png"}
-                alt="coupon"
-                width={1000}
-                height={1000}
-                className="w-56 h-auto object-contain"
-              />
-            </div>
-
-            <h6 className="text-lg mt-8 leading-6 font-semibold">
-              When you buy through links on Informreaders{" "}
-              <Link href={"#"} className="text-[#ff0000]">
-                {" "}
-                we may earn commission.
-              </Link>
-            </h6>
-
-            <h6 className="text-lg mt-8 leading-6 font-semibold">Today's top A Cherry on Top offers:</h6>
-            <ul className="pb-2">
-              <li className="list-disc ml-4 mt-1 font-semibold">Extra 10% Off Sitewide</li>
-              <li className="list-disc ml-4 mt-1 font-semibold">Extra $5 Off Orders $25+</li>
-            </ul>
-
-            <h6 className="text-lg mt-2 mb-0 leading-6 font-semibold flex items-center justify-between">
-              Total Offers
-              <span>0</span>
-            </h6>
-            <h6 className="text-lg mt-2 mb-0 leading-6 font-semibold flex items-center justify-between">
-              Coupon Codes
-              <span>0</span>
-            </h6>
-            <h6 className="text-lg mt-2 mb-0 leading-6 font-semibold flex items-center justify-between">
-              In-Store Coupons
-              <span>0</span>
-            </h6>
-            <h6 className="text-lg mt-2 mb-0 leading-6 font-semibold flex items-center justify-between">
-              Free Shipping Deals
-              <span>0</span>
-            </h6>
-
-            <div className="mt-10">
-              <h5 className="text-2xl font-semibold pb-2">Categories</h5>
-
-              <CategoryBox categories={categories} />
-            </div>
-
-            <div className="mt-10">
-              <h5 className="text-2xl font-semibold pb-2">Other Shops</h5>
-
-              <div className="grid grid-cols-3 gap-1">
-                {shopData.map((item, index) => (
-                  <div key={index} className="bg-white py-0  mb-1  col-span-1">
-                    <Image
-                      src={item.image}
-                      alt="coupon"
-                      width={1000}
-                      height={1000}
-                      className="w-full h-10 object-contain"
-                    />
+        {/* Featured Deals */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Featured Deals</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDeals
+              .filter((deal) => deal.featured)
+              .map((deal) => (
+                <motion.div
+                  key={deal.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                >
+                  <div className="relative h-48">
+                    <Image src={deal.image} alt={deal.title} fill className="object-cover" />
+                    {deal.verified && (
+                      <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Verified
+                      </div>
+                    )}
+                    <div className="absolute top-4 right-4 bg-white/90 text-neutral-900 text-xs px-2 py-1 rounded-full">
+                      Expires {new Date(deal.expiryDate).toLocaleDateString()}
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  <div className="p-6">
+                    <div className="text-sm text-red-600 font-medium mb-2">{deal.store}</div>
+                    <h3 className="text-xl font-semibold mb-3">{deal.title}</h3>
+                    <p className="text-neutral-600 text-sm mb-4">{deal.description}</p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-neutral-500">
+                        <span>{deal.usedCount} used</span>
+                      </div>
+                      <button
+                        onClick={() => copyCode(deal.code)}
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                      >
+                        {copiedCode === deal.code ? "Copied!" : deal.code}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
           </div>
-          <div className="md:col-span-9 col-span-12">
-            <div className="md:p-4">
-              <div className="flex md:flex-row flex-col-reverse items-center border-b border-black ">
-                <div className="md:py-0 py-4">
-                  <span className="text-gray-600 mr-2">SortBy:</span>
-                  <button
-                    className={`mr-4 pb-1 md:text-lg text-sm font-medium ${
-                      activeTab === "popularity" ? "text-red-500 border-b-2 border-red-500" : "text-gray-700"
-                    }`}
-                    onClick={() => setActiveTab("popularity")}
-                  >
-                    Popularity
-                  </button>
-                  <button
-                    className={`pb-1 md:text-lg text-sm font-medium ${
-                      activeTab === "latest" ? "text-red-500 border-b-2 border-red-500" : "text-gray-700"
-                    }`}
-                    onClick={() => setActiveTab("latest")}
-                  >
-                    Latest
-                  </button>
-                </div>
+        </div>
 
-                {/* Search Box */}
-                <div className="md:ml-auto relative">
-                  <SearchInput />
-                </div>
-              </div>
-            </div>
+        {/* All Deals */}
+        <div>
+          <h2 className="text-2xl font-bold mb-6">All Deals</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDeals
+              .filter((deal) => !deal.featured)
+              .map((deal) => (
+                <motion.div
+                  key={deal.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                >
+                  <div className="relative h-48">
+                    <Image src={deal.image} alt={deal.title} fill className="object-cover" />
+                    {deal.verified && (
+                      <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Verified
+                      </div>
+                    )}
+                    <div className="absolute top-4 right-4 bg-white/90 text-neutral-900 text-xs px-2 py-1 rounded-full">
+                      Expires {new Date(deal.expiryDate).toLocaleDateString()}
+                    </div>
+                  </div>
 
-            <div className="mt-4 space-y-3">
-              {coupons.map((coupon, index) => (
-                <CouponListCard key={index} coupon={coupon} />
+                  <div className="p-6">
+                    <div className="text-sm text-red-600 font-medium mb-2">{deal.store}</div>
+                    <h3 className="text-xl font-semibold mb-3">{deal.title}</h3>
+                    <p className="text-neutral-600 text-sm mb-4">{deal.description}</p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-neutral-500">
+                        <span>{deal.usedCount} used</span>
+                      </div>
+                      <button
+                        onClick={() => copyCode(deal.code)}
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                      >
+                        {copiedCode === deal.code ? "Copied!" : deal.code}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
-            </div>
-
-            <div className=" py-8">
-              <HoverBanner />
-            </div>
-
-            <div className="mt-4 space-y-3">
-              {coupons.map((coupon, index) => (
-                <CouponListCard key={index} coupon={coupon} />
-              ))}
-            </div>
-
-            <div className=" py-8">
-              <HoverBanner />
-            </div>
-
-            <div className="mt-4 space-y-3">
-              {coupons.map((coupon, index) => (
-                <CouponListCard key={index} coupon={coupon} />
-              ))}
-            </div>
-
-            <div className="flex justify-center my-8">
-              <button className="px-8 py-3  border  border-red-600 rounded-3xl text-red-600 bg-white">
-                <Link href={"#"} className="flex items-center justify-center font-bold">
-                  Show More
-                  <Image
-                    src={"/website/assets/images/icons/slider.png"}
-                    width={1000}
-                    height={1000}
-                    alt="product"
-                    className="w-7 h-auto ml-1 mt-1"
-                  />
-                </Link>
-              </button>
-            </div>
           </div>
         </div>
       </div>
-
-      <div className="container py-8">
-        <HoverBanner />
-      </div>
-    </>
+    </main>
   );
 }
-
-export default Coupons;
