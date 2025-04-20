@@ -239,3 +239,181 @@ export const userTypes = {
   USER: "USER",
   ADMIN: "ADMIN",
 };
+
+export const biographyCategories = [
+  {
+    id: "singer",
+    title: "Singers",
+    color: "red",
+    items: [
+      {
+        id: 1,
+        name: "Adele Adkins",
+        role: "Singer-Songwriter",
+        image:
+          "https://images.pexels.com/photos/4993292/pexels-photo-4993292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        trending: true,
+        rating: 4.9,
+      },
+      {
+        id: 2,
+        name: "The Weeknd",
+        role: "R&B Artist",
+        image:
+          "https://images.pexels.com/photos/1309240/pexels-photo-1309240.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 4.7,
+      },
+      {
+        id: 3,
+        name: "Billie Eilish",
+        role: "Singer-Songwriter",
+        image:
+          "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        trending: true,
+        rating: 4.6,
+      },
+      {
+        id: 4,
+        name: "Bruno Mars",
+        role: "Singer-Songwriter",
+        image:
+          "https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 4.8,
+      },
+    ],
+  },
+  {
+    id: "youtuber",
+    title: "YouTubers",
+    color: "blue",
+    items: [
+      {
+        id: 5,
+        name: "MrBeast",
+        role: "Content Creator",
+        image:
+          "https://images.pexels.com/photos/18261281/pexels-photo-18261281/free-photo-of-close-up-of-camera-lens.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        trending: true,
+        rating: 4.9,
+      },
+      {
+        id: 6,
+        name: "Emma Chamberlain",
+        role: "Lifestyle Creator",
+        image:
+          "https://images.pexels.com/photos/3602374/pexels-photo-3602374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        trending: true,
+        rating: 4.5,
+      },
+      {
+        id: 7,
+        name: "Marques Brownlee",
+        role: "Tech Reviewer",
+        image:
+          "https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 4.8,
+      },
+      {
+        id: 8,
+        name: "Lilly Singh",
+        role: "Comedian",
+        image:
+          "https://images.pexels.com/photos/4420634/pexels-photo-4420634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        rating: 4.3,
+      },
+    ],
+  },
+  {
+    id: "actor",
+    title: "Actors",
+    color: "amber",
+    items: [
+      {
+        id: 9,
+        name: "Tom Holland",
+        role: "Actor",
+        image:
+          "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        trending: true,
+        rating: 4.7,
+      },
+      {
+        id: 10,
+        name: "Denzel Washington",
+        role: "Actor",
+        image:
+          "https://images.pexels.com/photos/1590644/pexels-photo-1590644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 4.9,
+      },
+      {
+        id: 11,
+        name: "Ryan Reynolds",
+        role: "Actor",
+        image:
+          "https://images.pexels.com/photos/2096708/pexels-photo-2096708.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        trending: true,
+        rating: 4.6,
+      },
+      {
+        id: 12,
+        name: "Leonardo DiCaprio",
+        role: "Actor",
+        image:
+          "https://images.pexels.com/photos/902030/pexels-photo-902030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 4.8,
+      },
+    ],
+  },
+  {
+    id: "actress",
+    title: "Actresses",
+    color: "purple",
+    items: [
+      {
+        id: 13,
+        name: "Zendaya",
+        role: "Actress",
+        image:
+          "https://images.pexels.com/photos/1042140/pexels-photo-1042140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        trending: true,
+        rating: 4.8,
+      },
+      {
+        id: 14,
+        name: "Viola Davis",
+        role: "Actress",
+        image:
+          "https://images.pexels.com/photos/2823094/pexels-photo-2823094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 4.9,
+      },
+      {
+        id: 15,
+        name: "Florence Pugh",
+        role: "Actress",
+        image:
+          "https://images.pexels.com/photos/697244/pexels-photo-697244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        trending: true,
+        rating: 4.6,
+      },
+      {
+        id: 16,
+        name: "Meryl Streep",
+        role: "Actress",
+        image:
+          "https://images.pexels.com/photos/761536/pexels-photo-761536.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        popular: true,
+        rating: 5.0,
+      },
+    ],
+  },
+];
