@@ -31,7 +31,7 @@ function SpecificationList() {
           params: { page, sortBy },
         });
         if (!data.error) {
-          setData((prev) => (page == 1 ? data.specification : [...prev, ...data.specification]));
+          setData((prev) => (page == 1 ? data.data : [...prev, ...data.data]));
           setPagination(data.pagination);
         }
       } catch (error) {

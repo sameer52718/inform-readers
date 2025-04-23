@@ -3,9 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-import { homeCategory } from "@/constant/data";
-import AdBanner from "@/components/partials/AdBanner";
-import CategorySection from "@/components/partials/CategorySection";
 import Loading from "@/components/ui/Loading";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -77,7 +74,7 @@ const HeroSection = () => {
   );
 };
 
-const SpecificationCard = ({ product }) => {
+const SpecificationCard = ({ product, category }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -88,10 +85,7 @@ const SpecificationCard = ({ product }) => {
       className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
     >
       <div className="relative p-3 pb-2">
-        <Link
-          href={`/specification/${product.category}/${product._id}`}
-          className="block overflow-hidden rounded-lg"
-        >
+        <Link href={`/specification/${category}/${product._id}`} className="block overflow-hidden rounded-lg">
           <motion.div
             animate={{ scale: isHovered ? 1.05 : 1 }}
             transition={{ duration: 0.3 }}
@@ -147,7 +141,7 @@ const SpecificationSection = ({ item }) => {
 
   // Format category name for display
   const formatCategoryName = (name) => {
-    return name.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+    return name?.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
   };
 
   return (
@@ -159,11 +153,11 @@ const SpecificationSection = ({ item }) => {
           transition={{ duration: 0.5 }}
           className="text-xl md:text-2xl font-bold tracking-tight text-red-600"
         >
-          {formatCategoryName(item?.category)}
+          {formatCategoryName(item?.categoryName)}
         </motion.h2>
 
         <Link
-          href={`/specification/${item?.category}`}
+          href={`/specification/${item?.categoryName}`}
           className="text-sm md:text-base font-medium text-gray-600 hover:text-red-600 transition-colors"
         >
           View All
@@ -203,14 +197,14 @@ const SpecificationSection = ({ item }) => {
           loop={true}
           className="w-full pb-4"
         >
-          {item?.specification?.map((product, index) => (
+          {item?.specifications?.map((product, index) => (
             <SwiperSlide key={product._id}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <SpecificationCard product={product} />
+                <SpecificationCard product={product} category={item?.categoryName} />
               </motion.div>
             </SwiperSlide>
           ))}
@@ -262,7 +256,7 @@ export default function Specification() {
         <div className="container mx-auto px-4 py-8">
           <div className="space-y-16 mt-8">
             {data.map((item) => (
-              <SpecificationSection key={item.category} item={item} />
+              <SpecificationSection key={item.categoryId} item={item} />
             ))}
           </div>
         </div>
