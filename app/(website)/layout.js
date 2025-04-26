@@ -12,10 +12,6 @@ export default function WebsiteLayout({ children }) {
     <>
       <Header />
       <main className="flex-1 bg-white">{children}</main>
-      <section>
-        <span>ADS Tera Verification Code</span>
-        <span>92gh47g92</span>
-      </section>
       <Footer />
       <ToastContainer />
     </>
