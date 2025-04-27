@@ -52,7 +52,7 @@ export default function Banner() {
       banner.current.appendChild(conf);
       banner.current.appendChild(script);
     }
-  }, []); // <-- No need to add [banner]
+  }, [banner]); // <-- No need to add [banner]
 
   return (
     <div
