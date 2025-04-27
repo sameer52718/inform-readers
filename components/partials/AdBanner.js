@@ -27,6 +27,7 @@
 
 // export default AdBanner;
 
+"use client";
 import { useEffect, useRef } from "react";
 
 export default function Banner() {
