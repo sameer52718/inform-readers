@@ -7,7 +7,7 @@ import { ArrowRight, ChevronRight, Globe2, Search } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Loading from "@/components/ui/Loading";
-import HoverBanner from "@/components/partials/HoverBanner";
+import AdBanner from "@/components/partials/AdBanner";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -99,7 +99,7 @@ export default function Home() {
             </div>
           </section>
 
-          <HoverBanner />
+          <AdBanner />
 
           {/* Names Section */}
           <section className="py-16">
@@ -168,7 +168,7 @@ export default function Home() {
             </div>
           </section>
 
-          <HoverBanner />
+          <AdBanner />
 
           {/* Postal Codes Section */}
           <section className="py-16">
@@ -216,7 +216,7 @@ export default function Home() {
             </div>
           </section>
 
-          <HoverBanner />
+          <AdBanner />
 
           {/* Bank Codes Section */}
           <section className="py-16">
@@ -264,7 +264,7 @@ export default function Home() {
             </div>
           </section>
 
-          <HoverBanner />
+          <AdBanner />
         </div>
       </div>
     </Loading>
