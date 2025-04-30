@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { biographyCategories } from "@/constant/data";
+import handleError from "@/lib/handleError";
+import axiosInstance from "@/lib/axiosInstance";
+import Loading from "@/components/ui/Loading";
 
 function SearchBanner() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -174,14 +176,14 @@ function HeroSection() {
             Explore the lives and achievements of the world's most influential personalities
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          {/* <div className="flex flex-col sm:flex-row gap-4">
             <button className="bg-red-600 hover:bg-red-700 transition-colors text-white px-8 py-3 rounded-full font-medium text-lg">
               Explore Categories
             </button>
             <button className="bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors text-white border border-white/30 px-8 py-3 rounded-full font-medium text-lg">
               Featured Biographies
             </button>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Slide indicators */}
@@ -203,96 +205,15 @@ function HeroSection() {
 }
 
 function BiographySection({ category, className = "" }) {
-  const [filter, setFilter] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const filteredItems = category.items.filter((item) => {
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
-
-    if (filter === "all") return matchesSearch;
-    if (filter === "popular") return matchesSearch && item.popular;
-    if (filter === "trending") return matchesSearch && item.trending;
-    if (filter === "rated") return matchesSearch && item.rating && item.rating >= 4;
-
-    return matchesSearch;
-  });
+  console.log(category);
 
   return (
     <section className={`py-10 ${className}`}>
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center">
         <div>
           <h2 className="text-3xl font-bold mb-1">
-            <span className={`text-red-600`}>{category.title}</span>
+            <span className={`text-red-600`}>{category.categoryName}</span>
           </h2>
-          <div className="flex space-x-6 mt-3">
-            <button
-              onClick={() => setFilter("all")}
-              className={`pb-1 ${
-                filter === "all"
-                  ? `border-b-2 border-red-600 font-medium text-neutral-900`
-                  : "text-neutral-500 hover:text-neutral-700"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setFilter("popular")}
-              className={`pb-1 ${
-                filter === "popular"
-                  ? `border-b-2 border-red-600 font-medium text-neutral-900`
-                  : "text-neutral-500 hover:text-neutral-700"
-              }`}
-            >
-              Popular
-            </button>
-            <button
-              onClick={() => setFilter("trending")}
-              className={`pb-1 ${
-                filter === "trending"
-                  ? `border-b-2 border-red-600 font-medium text-neutral-900`
-                  : "text-neutral-500 hover:text-neutral-700"
-              }`}
-            >
-              Trending
-            </button>
-            <button
-              onClick={() => setFilter("rated")}
-              className={`pb-1 ${
-                filter === "rated"
-                  ? `border-b-2 border-red-600 font-medium text-neutral-900`
-                  : "text-neutral-500 hover:text-neutral-700"
-              }`}
-            >
-              Top Rated
-            </button>
-          </div>
-        </div>
-        <div className="mt-4 sm:mt-0 sm:ml-auto relative">
-          <input
-            type="text"
-            placeholder={`Search ${category.title}...`}
-            className="pl-10 pr-4 py-2 rounded-full border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-            value={searchQuery}
-            onChange={handleSearch}
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 absolute left-3 top-2.5 text-neutral-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
         </div>
       </div>
 
@@ -300,49 +221,43 @@ function BiographySection({ category, className = "" }) {
         <div className={`h-1 w-24 bg-red-600`} />
       </div>
 
-      {filteredItems.length > 0 ? (
+      {category?.biographies?.length > 0 ? (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
         >
-          {filteredItems.map((item) => (
-            <BiographyCard key={item.id} celebrity={item} categoryColor={category.color} />
+          {category?.biographies.map((item) => (
+            <BiographyCard key={item.name} celebrity={item} category={category.categoryName} />
           ))}
         </motion.div>
       ) : (
         <div className="text-center py-12">
           <p className="text-neutral-500 text-lg">No biographies found matching your criteria.</p>
-          <button
-            onClick={() => {
-              setFilter("all");
-              setSearchQuery("");
-            }}
-            className="mt-3 text-red-600 hover:text-red-700 font-medium"
-          >
-            Clear filters
-          </button>
         </div>
       )}
 
-      {filteredItems.length > 0 && (
+      {category?.biographies?.length > 0 && (
         <div className="mt-8 text-center">
-          <button className={`text-red-600 hover:text-red-700 font-medium`}>
-            View All {category.title} →
-          </button>
+          <Link
+            href={`/biography/listing?category=${category?._id}`}
+            className={`text-red-600 hover:text-red-700 font-medium`}
+          >
+            View All {category.categoryName} →
+          </Link>
         </div>
       )}
     </section>
   );
 }
 
-function BiographyCard({ celebrity, categoryColor }) {
+function BiographyCard({ celebrity, category }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-      <Link href={`/biography/${celebrity.id}`}>
+      <Link href={`/biography/${celebrity._id}`}>
         <div
           className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl bg-white"
           onMouseEnter={() => setIsHovered(true)}
@@ -360,16 +275,6 @@ function BiographyCard({ celebrity, categoryColor }) {
             <div
               className={`absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
             />
-
-            {/* Badges */}
-            <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-              {celebrity.popular && (
-                <span className={`bg-red-600 text-white text-xs px-2 py-1 rounded-full`}>Popular</span>
-              )}
-              {celebrity.trending && (
-                <span className="bg-emerald-600 text-white text-xs px-2 py-1 rounded-full">Trending</span>
-              )}
-            </div>
 
             {/* Rating */}
             {celebrity.rating && (
@@ -393,7 +298,7 @@ function BiographyCard({ celebrity, categoryColor }) {
               className={`absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
             >
               <div className="text-white">
-                <p className="font-medium">{celebrity.role || "Celebrity"}</p>
+                <p className="font-medium">{category}</p>
                 <p className="text-white/80 text-sm">View biography</p>
               </div>
             </div>
@@ -403,7 +308,7 @@ function BiographyCard({ celebrity, categoryColor }) {
             <h3 className="font-semibold text-lg text-neutral-900">{celebrity.name}</h3>
             <div className="mt-2 flex items-center">
               <div className={`w-10 h-0.5 bg-red-600 mr-3`} />
-              <p className="text-neutral-600">{celebrity.role || "Celebrity"}</p>
+              <p className="text-neutral-600">{category}</p>
             </div>
           </div>
         </div>
@@ -413,32 +318,40 @@ function BiographyCard({ celebrity, categoryColor }) {
 }
 
 export default function BiographyPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await axiosInstance.get("/website/biography");
+        if (!data.error) {
+          setData(data.categories || []);
+        }
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <main className="min-h-screen bg-neutral-50">
       <HeroSection />
-      <div className="container mx-auto px-4 py-12">
-        <SearchBanner />
+      <Loading loading={isLoading}>
+        <div className="container mx-auto px-4 py-12">
+          <SearchBanner />
 
-        {biographyCategories.map((category, index) => (
-          <React.Fragment key={category.id}>
-            <BiographySection category={category} className={index % 2 === 0 ? "" : "bg-neutral-100"} />
-            {index !== biographyCategories.length - 1 && index % 2 === 1 && (
-              <div className="py-8">
-                <div className="rounded-lg bg-gradient-to-r from-red-600 to-red-500 p-8 text-white text-center shadow-lg">
-                  <h3 className="text-2xl font-bold mb-3">Discover More Biographies</h3>
-                  <p className="text-white/90 mb-4">
-                    Explore the lives of your favorite celebrities and personalities
-                  </p>
-                  <button className="bg-white text-red-600 px-6 py-2 rounded-full font-medium hover:bg-red-50 transition duration-200">
-                    View All
-                  </button>
-                </div>
-              </div>
-            )}
-          </React.Fragment>
-        ))}
+          {data.map((category, index) => (
+            <React.Fragment key={category._id}>
+              <BiographySection category={category} className={index % 2 === 0 ? "" : "bg-neutral-100"} />
+            </React.Fragment>
+          ))}
 
-        <div className="mt-12 flex justify-center">
+          {/* <div className="mt-12 flex justify-center">
           <nav className="flex items-center">
             <button className="h-10 w-10 flex items-center justify-center rounded-l-lg border border-neutral-300 hover:bg-neutral-100 transition-colors">
               <span className="sr-only">Previous</span>
@@ -475,8 +388,9 @@ export default function BiographyPage() {
               </svg>
             </button>
           </nav>
+        </div> */}
         </div>
-      </div>
+      </Loading>
     </main>
   );
 }
