@@ -3,53 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { VideoDownloadProvider, VideoDownloadContext } from "@/context/VideoDownloadContext";
 import { Search, Loader2, CheckCircle, XCircle, Clock, Download } from "lucide-react";
 import { motion } from "framer-motion";
-import axiosInstance from "@/lib/axiosInstance";
-const RecentDownloads = () => {
-  const { downloadHistory } = useContext(VideoDownloadContext);
-
-  if (downloadHistory.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="mt-12">
-      <div className="flex items-center mb-4">
-        <Clock className="mr-2 text-gray-600" />
-        <h2 className="text-xl font-semibold">Recent Downloads</h2>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-md p-4">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {downloadHistory.map((video) => (
-            <div
-              key={video.id}
-              className="flex border border-gray-100 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
-            >
-              <div className="w-24 h-24 flex-shrink-0">
-                <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
-              </div>
-
-              <div className="flex-1 p-3">
-                <h3 className="font-medium text-sm mb-1 line-clamp-1">{video.title}</h3>
-                <p className="text-xs text-gray-500 mb-2">
-                  {video.duration} • {video.format}
-                </p>
-
-                <button className="flex items-center gap-1 text-xs text-red-600 hover:text-red-700 transition-colors">
-                  <Download className="h-3 w-3" />
-                  Download again
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
+import handleError from "@/lib/handleError";
 
 const DownloadProcess = () => {
-  const { currentUrl, videoInfo, downloadComplete, resetDownload } = useContext(VideoDownloadContext);
+  const { videoInfo, resetDownload, setIsProcessing } = useContext(VideoDownloadContext);
   const [steps, setSteps] = useState([
     { id: "validation", label: "Validating URL", status: "processing" },
     { id: "fetching", label: "Fetching video info", status: "pending" },
@@ -66,28 +23,22 @@ const DownloadProcess = () => {
       );
     };
 
-    // Simulate the download process
     const simulateProcess = async () => {
-      // Step 1: Validate URL (already started)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((r) => setTimeout(r, 1500));
       updateStepStatus("validation", "completed");
 
-      // Step 2: Fetch video info
       updateStepStatus("fetching", "processing");
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((r) => setTimeout(r, 2000));
       updateStepStatus("fetching", "completed");
 
-      // Step 3: Process video
       updateStepStatus("processing", "processing");
-      await new Promise((resolve) => setTimeout(resolve, 2500));
+      await new Promise((r) => setTimeout(r, 2000));
       updateStepStatus("processing", "completed");
 
-      // Step 4: Prepare download
       updateStepStatus("downloading", "processing");
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((r) => setTimeout(r, 1500));
       updateStepStatus("downloading", "completed");
-
-      // Start countdown
+      // setIsProcessing(false);
       setCountdown(5);
     };
 
@@ -99,16 +50,12 @@ const DownloadProcess = () => {
 
     if (countdown <= 0) {
       setDownloadReady(true);
-      downloadComplete();
       return;
     }
 
-    const timer = setTimeout(() => {
-      setCountdown(countdown - 1);
-    }, 1000);
-
+    const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
     return () => clearTimeout(timer);
-  }, [countdown, downloadComplete]);
+  }, [countdown]);
 
   const getStepIcon = (status) => {
     switch (status) {
@@ -123,34 +70,16 @@ const DownloadProcess = () => {
     }
   };
 
-  const handleResetDownload = () => {
-    resetDownload();
-  };
-
   return (
-    <div className="py-4">
-      <div className="flex flex-col items-center mb-6">
-        <div className="relative w-full max-w-md overflow-hidden rounded-lg">
-          <img src={videoInfo.thumbnail} alt={videoInfo.title} className="w-full object-cover aspect-video" />
-          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-            <div className="text-white text-center p-4">
-              <h3 className="font-semibold truncate max-w-xs">{videoInfo.title}</h3>
-              <p className="text-sm opacity-80">
-                {videoInfo.duration} • {videoInfo.channel}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div className="py-4 max-w-md mx-auto">
       <div className="space-y-4 mb-6">
         {steps.map((step) => (
           <div key={step.id} className="flex items-center">
             <div className="mr-3">{getStepIcon(step.status)}</div>
-            <div className="flex-1">
+            <div>
               <div className="font-medium">{step.label}</div>
               {step.id === "downloading" && step.status === "completed" && !downloadReady && (
-                <div className="text-sm text-gray-600">Download will be ready in {countdown}s...</div>
+                <p className="text-sm text-gray-600">Download will be ready in {countdown}s...</p>
               )}
             </div>
           </div>
@@ -158,39 +87,24 @@ const DownloadProcess = () => {
       </div>
 
       {downloadReady ? (
-        <div className="flex flex-col items-center">
-          <div className="mb-4 bg-green-50 text-green-800 p-3 rounded-lg text-center w-full">
-            <p className="font-medium">Your download is ready!</p>
-            <p className="text-sm">Click the button below to download</p>
-          </div>
-
-          <div className="flex gap-4">
-            <a
-              href="#download-link"
-              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Download started! (This is a simulation)");
-              }}
-            >
-              <Download className="h-5 w-5" />
-              Download MP4 (720p)
-            </a>
-
-            <button
-              onClick={handleResetDownload}
-              className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              New Download
-            </button>
-          </div>
+        <div className="text-center space-y-4">
+          <p className="text-green-700 font-medium">Your download is ready!</p>
+          <a
+            href={videoInfo.videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+          >
+            <Download className="h-5 w-5" />
+            Click here to download
+          </a>
+          <button onClick={resetDownload} className="text-sm text-gray-600 hover:underline mt-2">
+            Start New Download
+          </button>
         </div>
       ) : (
-        <div className="flex justify-center">
-          <button
-            onClick={handleResetDownload}
-            className="text-gray-600 hover:text-gray-800 transition-colors"
-          >
+        <div className="text-center">
+          <button onClick={resetDownload} className="text-sm text-gray-600 hover:underline">
             Cancel
           </button>
         </div>
@@ -198,11 +112,12 @@ const DownloadProcess = () => {
     </div>
   );
 };
-
 const DownloaderForm = () => {
   const [url, setUrl] = useState("");
   const [isValidating, setIsValidating] = useState(false);
   const [validationError, setValidationError] = useState("");
+  // const [isProcessing, setIsProcessing] = useState(false);
+
   const { isProcessing, startDownload } = useContext(VideoDownloadContext);
 
   const validateYoutubeUrl = (url) => {
@@ -213,26 +128,23 @@ const DownloaderForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      setValidationError("");
+      setIsValidating(true);
 
-    const { data } = await axiosInstance.get("/website/youtube", { params: { url } });
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // // Reset states
-    // setValidationError("");
-    // setIsValidating(true);
-
-    // // Simulate validation delay
-    // setTimeout(() => {
-    //   const isValid = validateYoutubeUrl(url);
-
-    //   if (!isValid) {
-    //     setValidationError("Please enter a valid YouTube URL");
-    //     setIsValidating(false);
-    //     return;
-    //   }
-
-    //   setIsValidating(false);
-    //   startDownload(url);
-    // }, 1000);
+      const isValid = validateYoutubeUrl(url);
+      if (!isValid) {
+        setValidationError("Please enter a valid YouTube URL");
+        setIsValidating(false);
+        return;
+      }
+      startDownload(url);
+      setIsValidating(false);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (
@@ -242,7 +154,7 @@ const DownloaderForm = () => {
           <form onSubmit={handleSubmit} className="mb-4">
             <div className="relative">
               <input
-                type="text"
+                type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 className={`w-full p-4 pr-12 border ${
@@ -309,7 +221,6 @@ const YoutubeDownloader = () => {
 
         <main className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
           <DownloaderForm />
-          <RecentDownloads />
         </main>
       </div>
     </VideoDownloadProvider>
