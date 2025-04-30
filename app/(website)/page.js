@@ -99,7 +99,7 @@ export default function Home() {
             </div>
           </section>
 
-          <AdBanner />
+          {/* <AdBanner /> */}
 
           {/* Names Section */}
           <section className="py-16">
@@ -168,7 +168,7 @@ export default function Home() {
             </div>
           </section>
 
-          <AdBanner />
+          {/* <AdBanner /> */}
 
           {/* Postal Codes Section */}
           <section className="py-16">
@@ -216,7 +216,7 @@ export default function Home() {
             </div>
           </section>
 
-          <AdBanner />
+          {/* <AdBanner /> */}
 
           {/* Bank Codes Section */}
           <section className="py-16">

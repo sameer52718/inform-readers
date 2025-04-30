@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { VideoDownloadProvider, VideoDownloadContext } from "@/context/VideoDownloadContext";
 import { Search, Loader2, CheckCircle, XCircle, Clock, Download } from "lucide-react";
 import { motion } from "framer-motion";
+import axiosInstance from "@/lib/axiosInstance";
 const RecentDownloads = () => {
   const { downloadHistory } = useContext(VideoDownloadContext);
 
@@ -213,23 +214,25 @@ const DownloaderForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Reset states
-    setValidationError("");
-    setIsValidating(true);
+    const { data } = await axiosInstance.get("/website/youtube", { params: { url } });
 
-    // Simulate validation delay
-    setTimeout(() => {
-      const isValid = validateYoutubeUrl(url);
+    // // Reset states
+    // setValidationError("");
+    // setIsValidating(true);
 
-      if (!isValid) {
-        setValidationError("Please enter a valid YouTube URL");
-        setIsValidating(false);
-        return;
-      }
+    // // Simulate validation delay
+    // setTimeout(() => {
+    //   const isValid = validateYoutubeUrl(url);
 
-      setIsValidating(false);
-      startDownload(url);
-    }, 1000);
+    //   if (!isValid) {
+    //     setValidationError("Please enter a valid YouTube URL");
+    //     setIsValidating(false);
+    //     return;
+    //   }
+
+    //   setIsValidating(false);
+    //   startDownload(url);
+    // }, 1000);
   };
 
   return (
