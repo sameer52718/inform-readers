@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Loading from "@/components/ui/Loading";
 import Image from "next/image";
@@ -296,4 +296,12 @@ const BiographyListing = () => {
   );
 };
 
-export default BiographyListing;
+const page = () => {
+  return (
+    <Suspense>
+      <BiographyListing />
+    </Suspense>
+  );
+};
+
+export default page;
