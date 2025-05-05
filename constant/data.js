@@ -175,11 +175,11 @@ export const menuItems = [
   //   icon: "bxl:blogger",
   //   link: "/admin/blog",
   // },
-  // {
-  //   title: "Biography",
-  //   icon: "mdi:biography",
-  //   link: "/admin/biography",
-  // },
+  {
+    title: "Biography",
+    icon: "mdi:biography",
+    link: "/admin/biography",
+  },
   // {
   //   title: "Coupons",
   //   icon: "mdi:coupon-outline",
