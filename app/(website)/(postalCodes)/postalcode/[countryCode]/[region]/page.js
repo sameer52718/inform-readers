@@ -3,7 +3,7 @@
 import Pagination from "@/components/ui/Pagination.js";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-import { Navigation, Mail, Building2, MapPinned, Info } from "lucide-react";
+import { Navigation, Mail, Building2, MapPinned, Info, Search } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
@@ -55,6 +55,7 @@ function LocationTable({ data = [] }) {
 
 function PostalLanding() {
   const { countryCode, region } = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
@@ -87,11 +88,16 @@ function PostalLanding() {
   );
 
   useEffect(() => {
-    loadData();
+    loadData(true, 1);
   }, [loadData]);
 
   const onPageChange = async (page) => {
     loadData(true, page);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    loadData(true, 1, searchQuery);
   };
 
   if (loading) {
@@ -110,10 +116,24 @@ function PostalLanding() {
           <h1 className="text-center text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
             Postal Codes in {data?.country?.name}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-white">
+          <p className="mx-auto my-6 max-w-2xl text-center text-lg text-white">
             Find postal codes for any location in {data?.country?.name}. Browse by region or search on the
             interactive map.
           </p>
+          <form className="max-w-2xl mx-auto" onSubmit={handleSearch}>
+            <div className="relative">
+              <button type="submit">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              </button>
+              <input
+                type="search"
+                placeholder="Search for a code or city/area..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30"
+              />
+            </div>
+          </form>
         </div>
       </div>
 
@@ -141,6 +161,23 @@ function PostalLanding() {
         </div>
       </div>
 
+      {/* Postal Codes Table */}
+      <div className="container mx-auto px-4 py-16">
+        <h2 className="mb-8 text-2xl font-bold text-gray-900 sm:text-3xl">Postal Code Directory</h2>
+        <LocationTable data={data?.postalCodes} />
+        <div className="mt-8 flex justify-center">
+          {/* Pagination */}
+          {!loading && data?.postalCodes?.length > 0 && (
+            <div className="mt-8 flex justify-center">
+              <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                onPageChange={onPageChange}
+              />
+            </div>
+          )}
+        </div>
+      </div>
       {/* Regions Section */}
       <div className="bg-white py-16">
         <div className="container mx-auto px-4">
@@ -158,24 +195,6 @@ function PostalLanding() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Postal Codes Table */}
-      <div className="container mx-auto px-4 py-16">
-        <h2 className="mb-8 text-2xl font-bold text-gray-900 sm:text-3xl">Postal Code Directory</h2>
-        <LocationTable data={data?.postalCodes} />
-        <div className="mt-8 flex justify-center">
-          {/* Pagination */}
-          {!loading && data?.postalCodes?.length > 0 && (
-            <div className="mt-8 flex justify-center">
-              <Pagination
-                currentPage={pagination.currentPage}
-                totalPages={pagination.totalPages}
-                onPageChange={onPageChange}
-              />
-            </div>
-          )}
         </div>
       </div>
 

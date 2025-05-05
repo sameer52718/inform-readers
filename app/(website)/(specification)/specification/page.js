@@ -104,7 +104,7 @@ const SpecificationCard = ({ product, category }) => {
 
         <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
           <Link
-            href={`/specification/${product.category}/${product._id}`}
+            href={`/specification/${category}/${product._id}`}
             className="hover:text-red-600 transition-colors"
           >
             {product.name}

@@ -322,19 +322,6 @@ export default function SoftwarePage() {
             })}
           </div>
         </div>
-
-        {/* Getting Started Section */}
-        <div className="mt-16 bg-gradient-to-r from-red-500 via-red-600 to-pink-500 rounded-2xl p-8 text-white">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4 text-white">Ready to Get Started?</h2>
-            <p className="text-lg mb-6">
-              Join millions of users who trust our software directory for their digital needs.
-            </p>
-            <button className="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors">
-              Browse All Categories
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -245,6 +245,37 @@ export default function SoftwareDetailPage() {
             </div>
           </div>
         </div>
+        {/* Software Description Section */}
+        <div className="mt-8 bg-white rounded-2xl p-8 shadow-sm">
+          <h2 className="text-xl font-bold mb-4">Why Choose {software.name}?</h2>
+          <p className="text-gray-700 leading-relaxed">
+            <strong>{software.name}</strong> is a reliable and feature-rich{" "}
+            <span className="text-gray-900 font-medium">{software.category || "software"}</span> tool designed
+            to help users{" "}
+            <span className="text-gray-900 font-medium">
+              {software.purpose || "enhance their productivity and experience"}
+            </span>
+            .
+          </p>
+          <p className="mt-4 text-gray-700 leading-relaxed">
+            Developed by{" "}
+            <span className="text-gray-900 font-medium">{software.developer || "a trusted developer"}</span>,
+            this software is known for its{" "}
+            <span className="text-gray-900 font-medium">{software.highlight || "speed and simplicity"}</span>{" "}
+            and is trusted by millions of users worldwide.
+          </p>
+          <p className="mt-4 text-gray-700 leading-relaxed">
+            Whether you're a beginner or a professional, <strong>{software.name}</strong> offers{" "}
+            <span className="text-gray-900 font-medium">
+              {software.benefit || "a smooth and flexible experience"}
+            </span>{" "}
+            to meet your needs.
+          </p>
+          <p className="mt-4 text-gray-700 leading-relaxed">
+            With regular updates and a clean interface, it stands out as one of the top solutions in its
+            category.
+          </p>
+        </div>
 
         {/* Related Software */}
         <div className="mt-8">
@@ -276,6 +307,27 @@ export default function SoftwareDetailPage() {
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Disclaimer Section */}
+        <div className="mt-12 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-2xl p-6 text-sm leading-relaxed shadow-sm">
+          <h2 className="text-lg font-semibold mb-2">Disclaimer</h2>
+          <p className="mb-2">
+            We do <strong>not host</strong> any software or games on our server. All download links provided
+            on this page redirect to third-party websites such as <strong>download.cnet.com</strong>.
+          </p>
+          <p className="mb-2">
+            We are <strong>not responsible</strong> for the content, availability, or any damages resulting
+            from the downloads.
+          </p>
+          <p className="mb-2">
+            All rights to the software and games belong to their{" "}
+            <strong>respective developers or owners</strong>.
+          </p>
+          <p>
+            If you encounter any issues with a file or link, please{" "}
+            <strong>contact the official website</strong> directly.
+          </p>
         </div>
       </div>
     </div>

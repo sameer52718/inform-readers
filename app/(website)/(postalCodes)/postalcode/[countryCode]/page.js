@@ -58,6 +58,42 @@ function RegionPortalCode() {
         </div>
       </div>
 
+      {/* Regions Section */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Regions in {data?.country?.name}</h2>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-red-600" />
+              <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-600">
+                {data?.regions?.length} Regions
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {data?.regions?.length ? (
+              data?.regions?.map((region) => (
+                <Link
+                  href={`/postalcode/${countryCode}/${region}`}
+                  key={region}
+                  className="flex transform items-center rounded-xl border bg-white p-4 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md"
+                >
+                  <div className="mr-4 rounded-full bg-red-100 p-2">
+                    <Navigation className="h-5 w-5 text-red-600" />
+                  </div>
+                  <span className="font-medium text-gray-900">{region}</span>
+                </Link>
+              ))
+            ) : (
+              <p className="text-gray-600 col-span-full text-center">
+                No regions available for this country.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Countries in Continent Section */}
       <div className="container mx-auto px-4 py-12 bg-white rounded-3xl mb-4">
         <div className="mb-8 flex items-center justify-between">
@@ -97,42 +133,6 @@ function RegionPortalCode() {
               No other countries found in this Continent.
             </p>
           )}
-        </div>
-      </div>
-
-      {/* Regions Section */}
-      <div className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Regions in {data?.country?.name}</h2>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-red-600" />
-              <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-600">
-                {data?.regions?.length} Regions
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {data?.regions?.length ? (
-              data?.regions?.map((region) => (
-                <Link
-                  href={`/postalcode/${countryCode}/${region}`}
-                  key={region}
-                  className="flex transform items-center rounded-xl border bg-white p-4 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md"
-                >
-                  <div className="mr-4 rounded-full bg-red-100 p-2">
-                    <Navigation className="h-5 w-5 text-red-600" />
-                  </div>
-                  <span className="font-medium text-gray-900">{region}</span>
-                </Link>
-              ))
-            ) : (
-              <p className="text-gray-600 col-span-full text-center">
-                No regions available for this country.
-              </p>
-            )}
-          </div>
         </div>
       </div>
 
