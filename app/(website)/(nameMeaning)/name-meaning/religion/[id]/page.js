@@ -4,7 +4,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Search, Filter, ChevronRight, Users, Baby, Heart, ArrowRight, BookOpen } from "lucide-react";
+import { Search, ChevronRight, Users, BookOpen } from "lucide-react";
 import { useParams } from "next/navigation";
 
 const AlphabetSelector = ({ currentLetter, onLetterChange }) => {
@@ -29,7 +29,7 @@ const AlphabetSelector = ({ currentLetter, onLetterChange }) => {
   );
 };
 
-const NameTable = () => {
+const NameTable = ({ searchQuery, searchTrigger }) => {
   const { id } = useParams();
   const [pagination, setPagination] = useState({
     totalItems: 0,
@@ -45,7 +45,7 @@ const NameTable = () => {
     try {
       setLoading(loading);
       const { data } = await axiosInstance.get("/website/name", {
-        params: { initialLetter, page, limit: 50, categoryId: id },
+        params: { initialLetter, page, limit: 50, categoryId: id, search: searchQuery },
       });
       if (!data.error) {
         setData(data.data);
@@ -59,8 +59,8 @@ const NameTable = () => {
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData(true, 1, initialLetter);
+  }, [searchTrigger]);
 
   return (
     <section className="py-12">
@@ -91,33 +91,47 @@ const NameTable = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {data.map((item, index) => (
-                  <tr key={index} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-3">
-                          {item?.name?.[0]}
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-900">{item?.name}</p>
-                          <p className="text-sm text-gray-500">{item?.origion || "Traditional"}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <p className="text-gray-600">{item?.shortMeaning || "---"}</p>
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      <Link
-                        href={`/name-meaning/${item?._id}`}
-                        className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
-                      >
-                        View Details
-                        <ChevronRight className="w-4 h-4" />
-                      </Link>
+                {loading ? (
+                  <tr>
+                    <td colSpan={3} className="text-center py-6 text-gray-500">
+                      Loading...
                     </td>
                   </tr>
-                ))}
+                ) : data.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} className="text-center py-6 text-gray-500">
+                      No data available.
+                    </td>
+                  </tr>
+                ) : (
+                  data.map((item, index) => (
+                    <tr key={index} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center">
+                          <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-3">
+                            {item?.name?.[0]}
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-900">{item?.name}</p>
+                            <p className="text-sm text-gray-500">{item?.origion || "Traditional"}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <p className="text-gray-600">{item?.shortMeaning || "---"}</p>
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <Link
+                          href={`/name-meaning/${item?._id}`}
+                          className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
+                        >
+                          View Details
+                          <ChevronRight className="w-4 h-4" />
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -154,6 +168,7 @@ const NameTable = () => {
 function NameMeaning() {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchTrigger, setSearchTrigger] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
@@ -169,6 +184,11 @@ function NameMeaning() {
     getData();
   }, []);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTrigger((prev) => prev + 1);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -183,9 +203,11 @@ function NameMeaning() {
             </p>
 
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto">
+            <form className="max-w-2xl mx-auto" onSubmit={handleSearch}>
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <button type="submit">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                </button>
                 <input
                   type="text"
                   placeholder="Search for a name..."
@@ -194,7 +216,7 @@ function NameMeaning() {
                   className="w-full pl-12 pr-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -230,7 +252,7 @@ function NameMeaning() {
         </section>
 
         {/* Name Tables */}
-        <NameTable />
+        <NameTable searchQuery={searchQuery} searchTrigger={searchTrigger} />
       </div>
     </div>
   );

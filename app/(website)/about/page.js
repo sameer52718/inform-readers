@@ -40,7 +40,9 @@ export default function AboutUs() {
               <div className="p-6 bg-gray-200 rounded-lg shadow-lg">
                 <Shield className="h-8 w-8 mb-4 text-lg text-primary" />
                 <h3 className="font-semibold text-lg mb-2">Verified Data</h3>
-                <p className="text-sm text-muted-foreground">Ethical data scraping & verified sources</p>
+                <p className="text-sm text-muted-foreground">
+                  Ethically sourced, rigorously verified—data you can trust
+                </p>
               </div>
               <div className="p-6 bg-gray-200 rounded-lg shadow-lg">
                 <Users className="h-8 w-8 mb-4 text-primary" />

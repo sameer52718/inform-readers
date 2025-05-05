@@ -220,7 +220,7 @@ export default function Footer() {
             <div className="text-sm">© {new Date().getFullYear()} InformReaders. All rights reserved.</div>
             <div className="mt-4 md:mt-0">
               <a href="https://thebytepulse.com" target="_blank" className="text-sm">
-                Platform Develop By The Byte Pulse Software Company.
+                Platform Develop By The Byte Pulse Software Company. (Website Powerd by Hawkeye)
               </a>
             </div>
           </div>
