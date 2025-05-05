@@ -71,11 +71,6 @@ const quickStats = [
     value: "100%",
     label: "Secure",
   },
-  {
-    icon: Clock,
-    value: "24/7",
-    label: "Support",
-  },
 ];
 
 export default function SoftwareDetailPage() {
@@ -280,24 +275,6 @@ export default function SoftwareDetailPage() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-
-        {/* Newsletter Section */}
-        <div className="mt-12 bg-gradient-to-r from-red-600 to-pink-500 rounded-2xl p-8 text-white">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4 text-white">Stay Updated</h2>
-            <p className="text-red-100 mb-6">Get notified about new software releases and updates.</p>
-            <div className="flex gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500"
-              />
-              <button className="px-6 py-3 bg-white text-red-600 rounded-lg font-semibold hover:bg-red-50 transition-colors">
-                Subscribe
-              </button>
-            </div>
           </div>
         </div>
       </div>

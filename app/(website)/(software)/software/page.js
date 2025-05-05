@@ -3,7 +3,21 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { Monitor, Smartphone, Apple, TabletSmartphone, Search, ChevronLeft, ChevronRight, Star, Download, Shield, Zap, Trophy, Clock } from "lucide-react";
+import {
+  Monitor,
+  Smartphone,
+  Apple,
+  TabletSmartphone,
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  Download,
+  Shield,
+  Zap,
+  Trophy,
+  Clock,
+} from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
 import Link from "next/link";
 
@@ -15,7 +29,6 @@ const operatingSystems = [
 ];
 
 const tags = ["Free", "Paid", "Premium"];
-
 
 const featuredSoftware = [
   {
@@ -46,11 +59,6 @@ const quickStats = [
     value: "100%",
     label: "Secure",
   },
-  {
-    icon: Clock,
-    value: "24/7",
-    label: "Support",
-  },
 ];
 
 export default function SoftwarePage() {
@@ -63,13 +71,15 @@ export default function SoftwarePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12); // default value, adjust as needed
 
-
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchData = async () => {
       setIsLoading(true);
       try {
         const { data } = await axiosInstance.get(
-          `/website/software?operatingSystem=${currentOS}&tag=${currentTag}&page=${currentPage}&limit=${pageSize}`
+          `/website/software?operatingSystem=${currentOS}&tag=${currentTag}&page=${currentPage}&limit=${pageSize}&search=${searchTerm}`,
+          { signal: controller.signal }
         );
         setData(data);
       } catch (error) {
@@ -79,7 +89,9 @@ export default function SoftwarePage() {
     };
 
     fetchData();
-  }, [currentOS, currentTag, currentPage, pageSize]);
+
+    return () => controller.abort();
+  }, [currentOS, currentTag, currentPage, pageSize, searchTerm]);
 
   const updateFilters = (type, value) => {
     if (type === "os") {
@@ -90,16 +102,13 @@ export default function SoftwarePage() {
     setCurrentPage(1);
   };
 
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500 text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Discover Amazing Software
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Discover Amazing Software</h1>
             <p className="text-xl text-red-100 mb-8">
               Find the perfect tools to enhance your digital experience
             </p>
@@ -150,7 +159,6 @@ export default function SoftwarePage() {
               ))}
             </select>
           </div>
-
         </div>
 
         {/* Filters */}
@@ -164,10 +172,11 @@ export default function SoftwarePage() {
                   <button
                     key={os.name}
                     onClick={() => updateFilters("os", os.name)}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${currentOS === os.name
-                      ? "bg-red-500 text-white"
-                      : "bg-white border border-gray-300 hover:bg-gray-50"
-                      }`}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${
+                      currentOS === os.name
+                        ? "bg-red-500 text-white"
+                        : "bg-white border border-gray-300 hover:bg-gray-50"
+                    }`}
                   >
                     <Icon className="h-4 w-4" />
                     {os.name}
@@ -184,10 +193,11 @@ export default function SoftwarePage() {
                 <button
                   key={tag}
                   onClick={() => updateFilters("tag", tag)}
-                  className={`px-4 py-2 rounded-lg transition-colors ${currentTag === tag
-                    ? "bg-red-500 text-white"
-                    : "bg-white border border-gray-300 hover:bg-gray-50"
-                    }`}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    currentTag === tag
+                      ? "bg-red-500 text-white"
+                      : "bg-white border border-gray-300 hover:bg-gray-50"
+                  }`}
                 >
                   {tag}
                 </button>
@@ -200,54 +210,47 @@ export default function SoftwarePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {isLoading
             ? Array(pageSize)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse"
-                >
-                  <div className="w-16 h-16 bg-gray-200 rounded-lg mx-auto mb-4" />
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-3" />
-                  <div className="h-4 bg-gray-200 rounded w-full mb-3" />
-                  <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
-                </div>
-              ))
-            : data?.data.map((software) => (
-              <Link
-                href={`/software/${software._id}`}
-                key={software._id}
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="flex flex-col items-center">
-                  <Image
-                    src={software.logo}
-                    alt={software.name}
-                    width={64}
-                    height={64}
-                    className="rounded-lg mb-4"
-                  />
-                  <h3 className="text-lg font-semibold text-center mb-2">
-                    {software.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 text-center mb-4 line-clamp-2">
-                    {software.overview}
-                  </p>
-                  <div className="flex items-center gap-2 flex-wrap justify-center">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
-                      v{software.version}
-                    </span>
-                    {software.tag.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-1 border border-gray-200 text-gray-600 text-sm rounded-md"
-                      >
-                        {t}
-                      </span>
-                    ))}
+                .fill(0)
+                .map((_, i) => (
+                  <div key={i} className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse">
+                    <div className="w-16 h-16 bg-gray-200 rounded-lg mx-auto mb-4" />
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-3" />
+                    <div className="h-4 bg-gray-200 rounded w-full mb-3" />
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
                   </div>
-                </div>
-              </Link>
-            ))}
+                ))
+            : data?.data.map((software) => (
+                <Link
+                  href={`/software/${software._id}`}
+                  key={software._id}
+                  className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src={software.logo}
+                      alt={software.name}
+                      width={64}
+                      height={64}
+                      className="rounded-lg mb-4"
+                    />
+                    <h3 className="text-lg font-semibold text-center mb-2">{software.name}</h3>
+                    <p className="text-sm text-gray-600 text-center mb-4 line-clamp-2">{software.overview}</p>
+                    <div className="flex items-center gap-2 flex-wrap justify-center">
+                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
+                        v{software.version}
+                      </span>
+                      {software.tag.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-1 border border-gray-200 text-gray-600 text-sm rounded-md"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              ))}
         </div>
 
         {/* Pagination */}
@@ -268,18 +271,17 @@ export default function SoftwarePage() {
                   <button
                     key={pageNumber}
                     onClick={() => setCurrentPage(pageNumber)}
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${currentPage === pageNumber
-                      ? "bg-red-500 text-white"
-                      : "border border-gray-300 hover:bg-gray-50"
-                      }`}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      currentPage === pageNumber
+                        ? "bg-red-500 text-white"
+                        : "border border-gray-300 hover:bg-gray-50"
+                    }`}
                   >
                     {pageNumber}
                   </button>
                 );
               })}
-              {data.pagination.totalPages > 5 && (
-                <span className="px-2">...</span>
-              )}
+              {data.pagination.totalPages > 5 && <span className="px-2">...</span>}
             </div>
 
             <button
@@ -306,7 +308,10 @@ export default function SoftwarePage() {
                   </div>
                   <ul className="space-y-3">
                     {category.items.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-gray-600 hover:text-red-500 cursor-pointer">
+                      <li
+                        key={idx}
+                        className="flex items-center gap-2 text-gray-600 hover:text-red-500 cursor-pointer"
+                      >
                         <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                         {item}
                       </li>
