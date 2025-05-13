@@ -50,7 +50,7 @@ export default function Home() {
         <div className="container mx-auto px-4 pb-16">
           {/* Software Section */}
           <section className="py-16">
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col md:flex-row  justify-between items-center mb-8">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Software</h2>
                 <p className="text-gray-600">Discover powerful tools for your digital needs</p>
@@ -105,7 +105,7 @@ export default function Home() {
           <section className="py-16">
             <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
               <div className="bg-gradient-to-r from-red-600 to-pink-500 p-8">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col md:flex-row  justify-between items-center">
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-2">Name Meanings</h2>
                     <p className="text-red-100">Browse through our collection of beautiful names</p>
@@ -173,7 +173,7 @@ export default function Home() {
           {/* Postal Codes Section */}
           <section className="py-16">
             <div className="bg-white rounded-2xl shadow-sm p-8">
-              <div className="flex justify-between items-center border-b border-gray-200 pb-6 mb-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse Postal Codes</h2>
                   <p className="text-gray-600">Find postal codes for countries worldwide</p>
@@ -221,7 +221,7 @@ export default function Home() {
           {/* Bank Codes Section */}
           <section className="py-16">
             <div className="bg-white rounded-2xl shadow-sm p-8">
-              <div className="flex justify-between items-center border-b border-gray-200 pb-6 mb-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">Bank Swift Codes</h2>
                   <p className="text-gray-600">Access international bank identification codes</p>
