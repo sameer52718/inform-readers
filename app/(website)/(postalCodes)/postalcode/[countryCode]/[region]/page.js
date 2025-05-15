@@ -6,15 +6,17 @@ import axiosInstance from "@/lib/axiosInstance";
 export async function generateMetadata({ params }) {
   const { countryCode, region } = params;
 
+  const validRegion = region.replaceAll("%20", " ");
+
   try {
     const { data } = await axiosInstance.get("/website/postalCode", {
-      params: { countryCode: countryCode, region },
+      params: { countryCode: countryCode, region: validRegion },
     });
 
     if (!data.error) {
       return {
-        title: `Postal Codes in ${data.data.country?.name} - ${region}`,
-        description: `Explore postal code information for ${region}, ${data.data.country?.name}. Search cities, towns, and ZIP codes.`,
+        title: `Postal Codes in ${data.data.country?.name} - ${validRegion}`,
+        description: `Explore postal code information for ${validRegion}, ${data.data.country?.name}. Search cities, towns, and ZIP codes.`,
       };
     }
   } catch (error) {
