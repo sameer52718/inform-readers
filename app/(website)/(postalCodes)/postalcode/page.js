@@ -1,5 +1,3 @@
-"use client";
-
 import AdBanner from "@/components/partials/AdBanner";
 import HoverBanner from "@/components/partials/HoverBanner";
 import axiosInstance from "@/lib/axiosInstance";
@@ -7,24 +5,43 @@ import handleError from "@/lib/handleError";
 import { Globe2, MapPin, Navigation, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-export default function PostalCode() {
-  const [data, setData] = useState([])
+export const metadata = {
+  title: "Global Postal Code Directory | Country-wise ZIP & Format Guide",
+  description:
+    "Explore global postal codes and address formats. Find country-wise ZIP code systems for accurate international mail delivery.",
+  keywords: "postal codes, ZIP codes, address formats, country postal codes, international mailing",
+  openGraph: {
+    title: "Global Postal Code Directory",
+    description:
+      "Find postal codes and address formats for every country. Your ultimate guide to international ZIP code systems.",
+    url: "http://informreaders.com/postalcode",
+    siteName: "Global Postal Code Directory",
+    images: [
+      {
+        url: "http://informreaders.com/images/postal-code-og.jpg", // Replace with your actual image URL
+        width: 1200,
+        height: 630,
+        alt: "World map with postal codes",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data } = await axiosInstance.get("/common/country", {
-          params: { groupCountry: true },
-        });
-        setData(data.error ? [] : data.response.groupCountry);
-      } catch (error) {
-        handleError(error);
-      }
-    }
-    fetchData()
-  }, [])
+export default async function PostalCode() {
+  let data = [];
+
+  try {
+    const res = await axiosInstance.get("/common/country", {
+      params: { groupCountry: true },
+    });
+    data = res.data.error ? [] : res.data.response.groupCountry;
+  } catch (error) {
+    handleError(error);
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
