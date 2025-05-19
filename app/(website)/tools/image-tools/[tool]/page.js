@@ -1,12 +1,10 @@
-// "use client";
-// import { useParams, useRouter } from "next/navigation"; // Use next/navigation instead of next/router
 import RemoveWatermark from "@/components/pages/tools/images/remove-watermark";
 import { toolMetadata } from "@/constant/tools";
 import UpscaleImage from "@/components/pages/tools/images/upscale-image";
 import BlurImage from "@/components/pages/tools/images/blur-image";
 import ImageToSvg from "@/components/pages/tools/images/image-to-svg";
+import ImageHistogram from "@/components/pages/tools/images/image-histogram";
 // Uncomment and update these imports as you create each component
-// import ImageHistogram from "@/components/pages/tools/images/image-histogram";
 // import ImageWatermark from "@/components/pages/tools/images/image-watermark";
 // import AdjustBrightnessContrast from "@/components/pages/tools/images/adjust-brightness-contrast";
 // import NoiseReduction from "@/components/pages/tools/images/noise-reduction";
@@ -17,7 +15,7 @@ const toolComponents = {
   "upscale-image": UpscaleImage,
   "image-to-svg": ImageToSvg,
   "blur-image": BlurImage,
-  // "image-histogram": ImageHistogram,
+  "image-histogram": ImageHistogram,
   // "image-watermark": ImageWatermark,
   // "adjust-brightness-contrast": AdjustBrightnessContrast,
   // "noise-reduction": NoiseReduction,

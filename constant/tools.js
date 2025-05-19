@@ -188,4 +188,94 @@ export const toolMetadata = {
       url: "https://www.informreaders.com/tools/image-tools/blur-image",
     },
   },
+  "image-histogram": {
+    title: "Image Histogram - Free Tool | Inform Readers",
+    description:
+      "Analyze your images with Inform Readers' free image histogram tool. Visualize the color distribution of your images easily.",
+    keywords: "image histogram, analyze image colors, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Image Histogram - Free Tool | Inform Readers",
+      description:
+        "Analyze your images with Inform Readers' free image histogram tool. Visualize the color distribution of your images easily.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/image-histogram",
+    },
+  },
+  "image-watermark": {
+    title: "Add Watermark to Image - Free Tool | Inform Readers",
+    description:
+      "Add watermarks to your images with Inform Readers' free tool. Customize position, opacity, and more for perfect branding.",
+    keywords: "add watermark to image, image watermark tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Add Watermark to Image - Free Tool | Inform Readers",
+      description:
+        "Add watermarks to your images with Inform Readers' free tool. Customize position, opacity, and more for perfect branding.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/image-watermark",
+    },
+  },
+  "adjust-brightness-contrast": {
+    title: "Adjust Brightness/Contrast - Free Tool | Inform Readers",
+    description:
+      "Adjust the brightness and contrast of your images with Inform Readers' free tool. Enhance your photos effortlessly.",
+    keywords: "adjust brightness contrast, image brightness tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Adjust Brightness/Contrast - Free Tool | Inform Readers",
+      description:
+        "Adjust the brightness and contrast of your images with Inform Readers' free tool. Enhance your photos effortlessly.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/adjust-brightness-contrast",
+    },
+  },
+  "noise-reduction": {
+    title: "Image Noise Reduction - Free Tool | Inform Readers",
+    description:
+      "Reduce noise in your images with Inform Readers' free tool. Clean up your photos with adjustable filter sizes.",
+    keywords: "image noise reduction, reduce image noise, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Image Noise Reduction - Free Tool | Inform Readers",
+      description:
+        "Reduce noise in your images with Inform Readers' free tool. Clean up your photos with adjustable filter sizes.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/noise-reduction",
+    },
+  },
+  "advanced-image-compressor": {
+    title: "Advanced Image Compressor - Free Tool | Inform Readers",
+    description:
+      "Compress your images with Inform Readers' free advanced compressor. Optimize quality and size for web and storage.",
+    keywords: "advanced image compressor, compress image, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Advanced Image Compressor - Free Tool | Inform Readers",
+      description:
+        "Compress your images with Inform Readers' free advanced compressor. Optimize quality and size for web and storage.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/advanced-image-compressor",
+    },
+  },
+  "image-to-ascii": {
+    title: "Image to ASCII Art - Free Tool | Inform Readers",
+    description:
+      "Convert your images to ASCII art with Inform Readers' free tool. Customize the width for detailed text-based art.",
+    keywords: "image to ascii, convert image to ascii art, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Image to ASCII Art - Free Tool | Inform Readers",
+      description:
+        "Convert your images to ASCII art with Inform Readers' free tool. Customize the width for detailed text-based art.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/image-to-ascii",
+    },
+  },
 };

@@ -2,30 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 
-export const metadata = {
-  title: "Remove Watermark from Images - Free Tool | Inform Readers",
-  description:
-    "Easily remove watermarks from your images with Inform Readers' free tool. Specify watermark position and size for precise removal.",
-  keywords: "remove watermark, image watermark remover, free image tool, Inform Readers",
-  author: "Inform Readers",
-  robots: "index, follow",
-  openGraph: {
-    title: "Remove Watermark from Images - Free Tool | Inform Readers",
-    description:
-      "Easily remove watermarks from your images with Inform Readers' free tool. Specify watermark position and size for precise removal.",
-    type: "website",
-    url: "https://www.informreaders.com/tools/image-tools/remove-watermark",
-    image: "https://www.informreaders.com/images/og-image-remove-watermark.jpg",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Remove Watermark from Images - Free Tool | Inform Readers",
-    description:
-      "Easily remove watermarks from your images with Inform Readers' free tool. Specify watermark position and size for precise removal.",
-    image: "https://www.informreaders.com/images/og-image-remove-watermark.jpg",
-  },
-};
-
 const RemoveWatermark = () => {
   const [image, setImage] = useState(null);
   const [watermarkX, setWatermarkX] = useState("");
@@ -111,7 +87,7 @@ const RemoveWatermark = () => {
 
       const dataUrl = canvas.toDataURL("image/png");
       setResult(
-        <a href={dataUrl} download="no_watermark_image.png" className="text-blue-600 hover:underline">
+        <a href={dataUrl} download="no_watermark_image.png" className="text-red-600 hover:underline">
           Download Image
         </a>
       );
@@ -127,7 +103,7 @@ const RemoveWatermark = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto  px-4">
         <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">Remove Watermark</h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
           <div>
@@ -136,7 +112,7 @@ const RemoveWatermark = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -146,7 +122,7 @@ const RemoveWatermark = () => {
                 type="number"
                 value={watermarkX}
                 onChange={(e) => setWatermarkX(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               />
             </div>
             <div>
@@ -155,7 +131,7 @@ const RemoveWatermark = () => {
                 type="number"
                 value={watermarkY}
                 onChange={(e) => setWatermarkY(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               />
             </div>
             <div>
@@ -164,7 +140,7 @@ const RemoveWatermark = () => {
                 type="number"
                 value={watermarkWidth}
                 onChange={(e) => setWatermarkWidth(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               />
             </div>
             <div>
@@ -173,13 +149,13 @@ const RemoveWatermark = () => {
                 type="number"
                 value={watermarkHeight}
                 onChange={(e) => setWatermarkHeight(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               />
             </div>
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             Remove Watermark
           </button>

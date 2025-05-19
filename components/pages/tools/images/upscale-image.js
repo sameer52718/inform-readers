@@ -44,7 +44,7 @@ const UpscaleImage = () => {
 
       const dataUrl = canvas.toDataURL("image/png");
       setResult(
-        <a href={dataUrl} download="upscaled_image.png" className="text-blue-600 hover:underline">
+        <a href={dataUrl} download="upscaled_image.png" className="text-red-600 hover:underline">
           Download Upscaled Image
         </a>
       );
@@ -69,7 +69,7 @@ const UpscaleImage = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"
             />
           </div>
           <div>
@@ -80,12 +80,12 @@ const UpscaleImage = () => {
               max="4"
               value={scaleFactor}
               onChange={(e) => setScaleFactor(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             Upscale Image
           </button>
