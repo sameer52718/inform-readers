@@ -8,19 +8,7 @@ import handleError from "@/lib/handleError";
 import axiosInstance from "@/lib/axiosInstance";
 import Loading from "@/components/ui/Loading";
 
-function SearchBanner() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const categories = [
-    { id: "all", name: "All Categories" },
-    { id: "actor", name: "Actors" },
-    { id: "actress", name: "Actresses" },
-    { id: "singer", name: "Singers" },
-    { id: "youtuber", name: "YouTubers" },
-    { id: "athlete", name: "Athletes" },
-  ];
-
+function SearchBanner({ searchQuery, setSearchQuery, getData }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -62,43 +50,11 @@ function SearchBanner() {
               />
             </div>
 
-            <div className="md:w-1/3">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300 text-neutral-800 appearance-none bg-white"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "right 1rem center",
-                  backgroundSize: "1.5rem",
-                }}
-              >
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <button className="bg-neutral-900 hover:bg-black text-white py-3 px-6 rounded-lg font-medium transition-colors">
+            <button
+              className="bg-neutral-900 hover:bg-black text-white py-3 px-6 rounded-lg font-medium transition-colors"
+              onClick={getData}
+            >
               Search
-            </button>
-          </div>
-
-          <div className="mt-4 flex flex-wrap gap-2 justify-center">
-            <button className="text-white/80 hover:text-white text-sm py-1 px-3 rounded-full border border-white/30 hover:border-white/60 transition-colors">
-              Most Popular
-            </button>
-            <button className="text-white/80 hover:text-white text-sm py-1 px-3 rounded-full border border-white/30 hover:border-white/60 transition-colors">
-              Recent Updates
-            </button>
-            <button className="text-white/80 hover:text-white text-sm py-1 px-3 rounded-full border border-white/30 hover:border-white/60 transition-colors">
-              Academy Award Winners
-            </button>
-            <button className="text-white/80 hover:text-white text-sm py-1 px-3 rounded-full border border-white/30 hover:border-white/60 transition-colors">
-              Grammy Winners
             </button>
           </div>
         </div>
@@ -320,77 +276,41 @@ function BiographyCard({ celebrity, category }) {
 export default function BiographyPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const getData = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axiosInstance.get("/website/biography", {
+        params: { search: searchQuery },
+      });
+      if (!data.error) {
+        setData(data.categories || []);
+      }
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await axiosInstance.get("/website/biography");
-        if (!data.error) {
-          setData(data.categories || []);
-        }
-      } catch (error) {
-        handleError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     getData();
   }, []);
 
   return (
     <main className="min-h-screen bg-neutral-50">
       <HeroSection />
-      <Loading loading={isLoading}>
-        <div className="container mx-auto px-4 py-12">
-          <SearchBanner />
-
+      <div className="container mx-auto px-4 py-12">
+        <SearchBanner setSearchQuery={setSearchQuery} searchQuery={searchQuery} getData={getData} />
+        <Loading loading={isLoading}>
           {data.map((category, index) => (
             <React.Fragment key={category._id}>
               <BiographySection category={category} className={index % 2 === 0 ? "" : "bg-neutral-100"} />
             </React.Fragment>
           ))}
-
-          {/* <div className="mt-12 flex justify-center">
-          <nav className="flex items-center">
-            <button className="h-10 w-10 flex items-center justify-center rounded-l-lg border border-neutral-300 hover:bg-neutral-100 transition-colors">
-              <span className="sr-only">Previous</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            {[1, 2, 3, 4, 5].map((page) => (
-              <button
-                key={page}
-                className={`h-10 w-10 flex items-center justify-center border-t border-b border-neutral-300 ${
-                  page === 1 ? "bg-red-600 text-white" : "hover:bg-neutral-100 transition-colors"
-                }`}
-              >
-                {page}
-              </button>
-            ))}
-            <button className="h-10 w-10 flex items-center justify-center rounded-r-lg border border-neutral-300 hover:bg-neutral-100 transition-colors">
-              <span className="sr-only">Next</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </nav>
-        </div> */}
-        </div>
-      </Loading>
+        </Loading>
+      </div>
     </main>
   );
 }

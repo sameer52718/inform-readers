@@ -14,6 +14,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { useSelector } from "react-redux";
+import { userTypes } from "@/constant/data";
+import { toast } from "react-toastify";
 
 const HeroSection = () => {
   return (
@@ -75,7 +78,23 @@ const HeroSection = () => {
 };
 
 const SpecificationCard = ({ product, category }) => {
+  const { userType, user } = useSelector((state) => state.auth);
   const [isHovered, setIsHovered] = useState(false);
+  const [wishlist, setWishlist] = useState(product?.wishlist?.includes(user?._id) || false);
+
+  const handleWislisht = async () => {
+    try {
+      if (userType !== userTypes.USER) {
+        toast.warn("You Have to login first!");
+        return;
+      }
+
+      setWishlist((prev) => !prev);
+      await axiosInstance.post("/website/specification/wishlist", { id: product._id });
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   return (
     <motion.div
@@ -118,10 +137,11 @@ const SpecificationCard = ({ product, category }) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="text-gray-500 hover:text-red-500 transition-colors"
+          className="text-red-500 transition-colors"
           aria-label="Add to favorites"
+          onClick={handleWislisht}
         >
-          <Heart className="h-5 w-5" />
+          <Heart className="h-5 w-5" fill={wishlist ? "red" : "transparent"} />
         </motion.button>
 
         <motion.div

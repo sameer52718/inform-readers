@@ -1,6 +1,5 @@
 "use client";
 
-import SpecificationCard from "@/components/card/SpecificationCard";
 import HoverBanner from "@/components/partials/HoverBanner";
 import PriceFilter from "@/components/partials/PriceFilter";
 import Loading from "@/components/ui/Loading";
@@ -9,6 +8,93 @@ import handleError from "@/lib/handleError";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Heart } from "lucide-react";
+import Image from "next/image";
+import { userTypes } from "@/constant/data";
+
+const SpecificationCard = ({ product, category }) => {
+  const { userType, user } = useSelector((state) => state.auth);
+  const [isHovered, setIsHovered] = useState(false);
+  const [wishlist, setWishlist] = useState(product?.wishlist?.includes(user?._id) || false);
+
+  const handleWislisht = async () => {
+    try {
+      if (userType !== userTypes.USER) {
+        toast.warn("You Have to login first!");
+        return;
+      }
+
+      setWishlist((prev) => !prev);
+      await axiosInstance.post("/website/specification/wishlist", { id: product._id });
+    } catch (error) {
+      handleError(error);
+    }
+  };
+  console.log(user);
+
+  return (
+    <motion.div
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{ y: -5 }}
+      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
+    >
+      <div className="relative p-3 pb-2">
+        <Link href={`/specification/${category}/${product._id}`} className="block overflow-hidden rounded-lg">
+          <motion.div
+            animate={{ scale: isHovered ? 1.05 : 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative aspect-[4/3] w-full"
+          >
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover rounded-lg"
+              priority
+            />
+          </motion.div>
+        </Link>
+
+        <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
+          <Link
+            href={`/specification/${category}/${product._id}`}
+            className="hover:text-red-600 transition-colors"
+          >
+            {product.name}
+          </Link>
+        </h3>
+      </div>
+
+      <div className="h-px w-full bg-gray-200" />
+
+      <div className="p-3 pt-2 flex items-center justify-between">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="text-red-500 transition-colors"
+          aria-label="Add to favorites"
+          onClick={handleWislisht}
+        >
+          <Heart className="h-5 w-5" fill={wishlist ? "red" : "transparent"} />
+        </motion.button>
+
+        <motion.div
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          className="text-red-600 font-semibold text-sm md:text-base"
+        >
+          {product.price} {product.priceSymbal}
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
 
 function SpecificationList() {
   const [fetching, setFetching] = useState(false);
@@ -66,11 +152,11 @@ function SpecificationList() {
         <div className="flex items-center gap-1  py-4">
           <h6>Home</h6>
           <Icon icon="basil:caret-right-solid" className="mt-[2px]" width="18" height="18" />
-          <h6>{category.replaceAll("_", " ")}</h6>
+          <h6>{category.replaceAll("_", " ").replaceAll("%20", " ")}</h6>
         </div>
 
         <div>
-          <h2 className="text-3xl font-bold  pb-3">{category.replaceAll("_", " ")}</h2>
+          <h2 className="text-3xl font-bold  pb-3">{category.replaceAll("_", " ").replaceAll("%20", " ")}</h2>
         </div>
       </section>
 
@@ -101,10 +187,7 @@ function SpecificationList() {
 
       <section className="container mx-auto">
         <div className="grid grid-cols-12  md:gap-10">
-          <div className="md:col-span-3 col-span-12 ">
-            <PriceFilter />
-          </div>
-          <div className="md:col-span-9 col-span-12 ">
+          <div className=" col-span-12 ">
             <div className="w-full overflow-x-auto py-3 mt-5">
               <div className="flex items-center justify-between border-black gap-4 sm:gap-6 min-w-max">
                 {/* Sort By Label */}
@@ -136,14 +219,20 @@ function SpecificationList() {
             <div className="divider h-[2px]  w-full bg-black">
               <div className="w-24 bg-[#ff0000] h-full"></div>
             </div>
-            <div className="mt-4">
+            <div className="grid grid-cols-4">
+              {data.map((item) => (
+                <SpecificationCard product={item} category={category} />
+              ))}
+            </div>
+
+            {/* <div className="mt-4">
               {data.map((item, index) => (
                 <div key={item._id}>
                   <SpecificationCard item={item} />
                   {(index + 1) % 3 === 0 && <HoverBanner padding="0px" />}
                 </div>
               ))}
-            </div>
+            </div> */}
             <div className="flex items-center justify-center my-5">
               {pagination.totalPages > pagination.currentPage && (
                 <button
