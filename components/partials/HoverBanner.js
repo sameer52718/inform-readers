@@ -3,8 +3,8 @@ import React from "react";
 
 function AdBanner() {
   return (
-    <div className="w-[728px] h-[90px] mx-auto my-4">
-      <Script id="ad-script-options" strategy="afterInteractive">
+    <div className=" h-[90px] mx-auto my-4">
+      {/* <Script id="ad-script-options" strategy="afterInteractive">
         {`
           atOptions = {
             'key' : '3601496aca75aa7c85a600dae63104d0',
@@ -20,7 +20,7 @@ function AdBanner() {
         id="ad-script-load"
         src="//www.highperformanceformat.com/3601496aca75aa7c85a600dae63104d0/invoke.js"
         strategy="afterInteractive"
-      />
+      /> */}
     </div>
   );
 }

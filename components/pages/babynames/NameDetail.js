@@ -128,12 +128,12 @@ export default function NameDetail() {
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
               {/* Tabs Navigation */}
               <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div className="border-b">
+                <div className="border-b overflow-x-auto">
                   <div className="flex">
                     {["overview", "meaning", "numerology", "popularity"].map((tab) => (
                       <button

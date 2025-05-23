@@ -82,58 +82,60 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
           </div>
 
           <div className="overflow-hidden rounded-xl border border-gray-200">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">NAME</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">MEANING</th>
-                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-600">DETAILS</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {loading ? (
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
                   <tr>
-                    <td colSpan={3} className="text-center py-6 text-gray-500">
-                      Loading...
-                    </td>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">NAME</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">MEANING</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-600">DETAILS</th>
                   </tr>
-                ) : data.length === 0 ? (
-                  <tr>
-                    <td colSpan={3} className="text-center py-6 text-gray-500">
-                      No data available.
-                    </td>
-                  </tr>
-                ) : (
-                  data.map((item, index) => (
-                    <tr key={index} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="flex items-center">
-                          <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-3">
-                            {item?.name?.[0]}
-                          </div>
-                          <div>
-                            <p className="font-semibold text-gray-900">{item?.name}</p>
-                            <p className="text-sm text-gray-500">{item?.origion || "Traditional"}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <p className="text-gray-600">{item?.shortMeaning || "---"}</p>
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        <Link
-                          href={`/name-meaning/${item?._id}`}
-                          className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
-                        >
-                          View Details
-                          <ChevronRight className="w-4 h-4" />
-                        </Link>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {loading ? (
+                    <tr>
+                      <td colSpan={3} className="text-center py-6 text-gray-500">
+                        Loading...
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : data.length === 0 ? (
+                    <tr>
+                      <td colSpan={3} className="text-center py-6 text-gray-500">
+                        No data available.
+                      </td>
+                    </tr>
+                  ) : (
+                    data.map((item, index) => (
+                      <tr key={index} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4">
+                          <div className="flex items-center">
+                            <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-3">
+                              {item?.name?.[0]}
+                            </div>
+                            <div>
+                              <p className="font-semibold text-gray-900">{item?.name}</p>
+                              <p className="text-sm text-gray-500">{item?.origion || "Traditional"}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <p className="text-gray-600">{item?.shortMeaning || "---"}</p>
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <Link
+                            href={`/name-meaning/${item?._id}`}
+                            className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
+                          >
+                            View Details
+                            <ChevronRight className="w-4 h-4" />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {!loading && data.length > 0 && (
@@ -231,7 +233,7 @@ function NameMeaning() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {data.map((item, index) => (
               <Link
                 key={index}

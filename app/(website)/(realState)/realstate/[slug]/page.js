@@ -82,9 +82,9 @@ function RelatedProperties({ currentPropertyId }) {
         <h2 className="text-2xl font-semibold text-gray-900">Similar Properties</h2>
       </div>
 
-      <div ref={scrollRef} className=" grid grid-cols-4 gap-4  pb-4 ">
+      <div ref={scrollRef} className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4  pb-4 ">
         {properties.map((property) => (
-          <div key={property.id} className="flex-shrink-0 w-72 group">
+          <div key={property.id} className="flex-shrink-0  group">
             <Link href={`/realstate/${property.id}`}>
               <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 {/* Property Image */}
@@ -226,7 +226,7 @@ function PropertyHighlights({ property }) {
     <div className="bg-white rounded-xl shadow-sm p-6 mt-8">
       <h2 className="text-2xl font-semibold text-gray-900 mb-6">Property Highlights</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {highlights.map((item, index) => (
           <div key={index} className="flex items-center space-x-4 group">
             <div className="flex-shrink-0 bg-red-50 rounded-full p-3 transition-all duration-300 group-hover:bg-red-100">

@@ -31,7 +31,7 @@ export default function AboutUs() {
                 bank codes, job listings, travel routes, gold and crypto rates, and more.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 bg-gray-200 rounded-lg shadow-lg">
                 <Globe2 className="h-8 w-8 mb-4 text-primary" />
                 <h3 className="font-semibold text-lg mb-2">Global Reach</h3>

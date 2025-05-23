@@ -10,6 +10,7 @@ import { userTypes } from "@/constant/data";
 function Header() {
   const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState({});
 
   const currentDate = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -43,6 +44,13 @@ function Header() {
       ],
     },
   ];
+
+  const toggleDropdown = (id) => {
+    setOpenDropdowns((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   return (
     <header className="w-full bg-white shadow-base">
@@ -134,24 +142,37 @@ function Header() {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100">
           <div className="container py-4">
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Search articles..."
-                className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-red-500"
-              />
-            </div>
             <ul className="space-y-2">
               {categories.map((category) => (
                 <li key={category.id}>
                   {category.sublinks ? (
-                    <button
-                      onClick={() => {}}
-                      className="flex items-center justify-between w-full py-2 text-gray-700"
-                    >
-                      {category.title}
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
+                    <>
+                      <button
+                        onClick={() => toggleDropdown(category.id)}
+                        className="flex items-center justify-between w-full py-2 text-gray-700"
+                      >
+                        {category.title}
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform ${
+                            openDropdowns[category.id] ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      {openDropdowns[category.id] && (
+                        <ul className="pl-4 space-y-1">
+                          {category.sublinks.map((sublink) => (
+                            <li key={sublink.id}>
+                              <Link
+                                href={sublink.url}
+                                className="block py-1 text-gray-600 hover:text-red-600"
+                              >
+                                {sublink.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
                   ) : (
                     <Link href={category.url} className="block py-2 text-gray-700 hover:text-red-600">
                       {category.title}
