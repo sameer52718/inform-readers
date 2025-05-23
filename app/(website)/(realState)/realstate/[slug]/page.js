@@ -85,7 +85,7 @@ function RelatedProperties({ currentPropertyId }) {
       <div ref={scrollRef} className=" grid grid-cols-4 gap-4  pb-4 ">
         {properties.map((property) => (
           <div key={property.id} className="flex-shrink-0 w-72 group">
-            <Link href={`/real-state/${property.id}`}>
+            <Link href={`/realstate/${property.id}`}>
               <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 {/* Property Image */}
                 <div className="relative h-48 w-full">

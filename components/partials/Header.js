@@ -35,7 +35,7 @@ function Header() {
         // { id: 2, title: "Entertainment", url: "/entertainment" },
         // { id: 3, title: "Lifestyle", url: "/lifestyle" },
         { id: 4, title: "Jobs", url: "/jobs" },
-        { id: 5, title: "Real State", url: "/real-state" },
+        { id: 5, title: "Real State", url: "/realstate" },
         { id: 6, title: "Coupons", url: "/coupons" },
         { id: 7, title: "Weather", url: "/weather" },
         { id: 8, title: "News", url: "/news" },

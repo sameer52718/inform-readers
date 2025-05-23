@@ -15,7 +15,7 @@ export const homeCategory = [
   { id: 1, name: "News", image: "/website/assets/images/icons/cate-icon.png", url: "/news" },
   { id: 1, name: "Petrol prices", image: "/website/assets/images/icons/cate-icon.png", url: "/petrol-price" },
   { id: 6, name: "Postal codes", image: "/website/assets/images/icons/cate-icon.png", url: "/postalcode" },
-  { id: 1, name: "Real State", image: "/website/assets/images/icons/cate-icon.png", url: "/real-state" },
+  { id: 1, name: "Real State", image: "/website/assets/images/icons/cate-icon.png", url: "/realstate" },
   { id: 1, name: "Software", image: "/website/assets/images/icons/cate-icon.png", url: "/software" },
   {
     id: 1,

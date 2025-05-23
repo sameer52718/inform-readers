@@ -53,7 +53,7 @@ const PropertyGrid = () => {
     <div>
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold mb-8">Latest Properties</h2>
-        <Link href={"/real-state/listing"} className="text-red-500">
+        <Link href={"/realstate/listing"} className="text-red-500">
           View More
         </Link>
       </div>
@@ -137,7 +137,7 @@ const FeaturedProperties = () => {
     <div className="mb-16">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold mb-8">Featured Properties</h2>
-        <Link href={"/real-state/listing"} className="text-red-500">
+        <Link href={"/realstate/listing"} className="text-red-500">
           View More
         </Link>
       </div>
