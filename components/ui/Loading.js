@@ -1,12 +1,12 @@
 import React from "react";
 
-const Loading = ({ loading = true, children }) => {
+const Loading = ({ loading = true, children, className = "h-[50vh]" }) => {
   if (!loading) {
     return children;
   }
 
   return (
-    <div className="h-[50vh] flex justify-center items-center">
+    <div className={`${className} flex justify-center items-center`}>
       <span className="loader"></span>
     </div>
   );
