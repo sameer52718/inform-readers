@@ -2,7 +2,7 @@
 
 import WeatherIcon from "./WeatherIcon";
 
-export default function DailyForecast({ forecast, textColor }) {
+export default function DailyForecast({ forecast, textColor, bgColor }) {
   return (
     <div className="mt-6">
       <h3 className={`text-xl font-semibold mb-4 ${textColor}`}>5-Day Forecast</h3>
@@ -20,7 +20,7 @@ export default function DailyForecast({ forecast, textColor }) {
             <div
               key={index}
               className={`flex items-center justify-between p-3 rounded-lg ${
-                isToday ? "bg-slate-200" : "bg-slate-100"
+                isToday ? `border border-white ${bgColor} ` : bgColor
               } backdrop-blur-md transition-all hover:bg-white/30`}
             >
               <div className="flex items-center">
