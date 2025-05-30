@@ -57,8 +57,6 @@ export default function Home() {
     };
 
     fetchWeatherByIP();
-
-    return () => controller.abort();
   }, []);
 
   const bgColor = isDay
