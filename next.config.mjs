@@ -12,6 +12,7 @@ const nextConfig = {
       "img.indiaforums.com",
       "celebritytall.com",
       "www.thefamouspeople.com",
+      "www.auto-data.net",
     ],
   },
 };
