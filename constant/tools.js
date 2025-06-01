@@ -39,6 +39,15 @@ export const TOOL_CATEGORIES = [
         path: "/tools/image-tools/image-format-converter",
       },
       { id: "image-splitter", name: "Image Splitter", path: "/tools/image-tools/image-splitter" },
+
+      // Newly added tools
+      { id: "image-to-text", name: "Image to Text", path: "/tools/image-tools/image-to-text" },
+      { id: "pdf-to-jpg", name: "PDF to JPG", path: "/tools/image-tools/pdf-to-jpg" },
+      { id: "pixelate-image", name: "Pixelate Image", path: "/tools/image-tools/pixelate-image" },
+      { id: "remove-background", name: "Remove Background", path: "/tools/image-tools/remove-background" },
+      { id: "resize-image", name: "Resize Image", path: "/tools/image-tools/resize-image" },
+      { id: "round-image", name: "Round Image", path: "/tools/image-tools/round-image" },
+      { id: "view-metadata", name: "View Metadata", path: "/tools/image-tools/view-metadata" },
     ],
   },
   {
@@ -444,6 +453,111 @@ export const toolMetadata = {
         "Split your images into multiple parts with Inform Readers' free tool. Customize rows and columns for perfect divisions.",
       type: "website",
       url: "https://www.informreaders.com/tools/image-tools/image-splitter",
+    },
+  },
+  "image-to-text": {
+    title: "Image to Text Converter - Free Tool | Inform Readers",
+    description:
+      "Extract text from images easily with Inform Readers' free Image to Text converter. Supports multiple languages and formats.",
+    keywords: "image to text, OCR tool, text extraction, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Image to Text Converter - Free Tool | Inform Readers",
+      description:
+        "Extract text from images easily with Inform Readers' free Image to Text converter. Supports multiple languages and formats.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/image-to-text",
+    },
+  },
+  "pdf-to-jpg": {
+    title: "PDF to JPG Converter - Free Tool | Inform Readers",
+    description:
+      "Convert your PDF files to high-quality JPG images quickly with Inform Readers' free PDF to JPG converter.",
+    keywords: "pdf to jpg, convert pdf to image, free pdf tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "PDF to JPG Converter - Free Tool | Inform Readers",
+      description:
+        "Convert your PDF files to high-quality JPG images quickly with Inform Readers' free PDF to JPG converter.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/pdf-to-jpg",
+    },
+  },
+  "pixelate-image": {
+    title: "Pixelate Image - Free Tool | Inform Readers",
+    description:
+      "Pixelate your images easily with Inform Readers' free tool. Control pixel size for privacy or creative effects.",
+    keywords: "pixelate image, image pixelation, privacy tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Pixelate Image - Free Tool | Inform Readers",
+      description:
+        "Pixelate your images easily with Inform Readers' free tool. Control pixel size for privacy or creative effects.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/pixelate-image",
+    },
+  },
+  "remove-background": {
+    title: "Remove Image Background - Free Tool | Inform Readers",
+    description:
+      "Quickly remove backgrounds from images with Inform Readers' free background remover. Perfect for product photos and designs.",
+    keywords: "remove background, background remover, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Remove Image Background - Free Tool | Inform Readers",
+      description:
+        "Quickly remove backgrounds from images with Inform Readers' free background remover. Perfect for product photos and designs.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/remove-background",
+    },
+  },
+  "resize-image": {
+    title: "Resize Image - Free Tool | Inform Readers",
+    description:
+      "Resize your images easily with Inform Readers' free tool. Maintain quality while adjusting width and height.",
+    keywords: "resize image, image resizer, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Resize Image - Free Tool | Inform Readers",
+      description:
+        "Resize your images easily with Inform Readers' free tool. Maintain quality while adjusting width and height.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/resize-image",
+    },
+  },
+  "round-image": {
+    title: "Round Image Corners - Free Tool | Inform Readers",
+    description:
+      "Add rounded corners to your images effortlessly with Inform Readers' free Round Image tool. Customize radius and style.",
+    keywords: "round image, rounded corners, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Round Image Corners - Free Tool | Inform Readers",
+      description:
+        "Add rounded corners to your images effortlessly with Inform Readers' free Round Image tool. Customize radius and style.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/round-image",
+    },
+  },
+  "view-metadata": {
+    title: "View Image Metadata - Free Tool | Inform Readers",
+    description:
+      "View detailed metadata of your images including EXIF data with Inform Readers' free metadata viewer tool.",
+    keywords: "view metadata, image metadata viewer, EXIF viewer, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "View Image Metadata - Free Tool | Inform Readers",
+      description:
+        "View detailed metadata of your images including EXIF data with Inform Readers' free metadata viewer tool.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/view-metadata",
     },
   },
 };

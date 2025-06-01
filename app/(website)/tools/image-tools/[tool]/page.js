@@ -1,5 +1,5 @@
-import RemoveWatermark from "@/components/pages/tools/images/remove-watermark";
 import { toolMetadata } from "@/constant/tools";
+import RemoveWatermark from "@/components/pages/tools/images/remove-watermark";
 import UpscaleImage from "@/components/pages/tools/images/upscale-image";
 import BlurImage from "@/components/pages/tools/images/blur-image";
 import ImageToSvg from "@/components/pages/tools/images/image-to-svg";
@@ -19,6 +19,13 @@ import CropImage from "@/components/pages/tools/images/crop-image";
 import HeicToJpg from "@/components/pages/tools/images/heic-to-jpg";
 import ImageFormatConverter from "@/components/pages/tools/images/image-format-converter";
 import ImageSplitter from "@/components/pages/tools/images/image-splitter";
+import ImageToText from "@/components/pages/tools/images/image-to-text";
+import PdfToJpg from "@/components/pages/tools/images/pdf-to-jpg";
+import PixelateImage from "@/components/pages/tools/images/pixelate-image";
+import RemoveBackground from "@/components/pages/tools/images/remove-background";
+import ResizeImage from "@/components/pages/tools/images/resize-image";
+import RoundImage from "@/components/pages/tools/images/round-image";
+import ViewMetadata from "@/components/pages/tools/images/view-metadata";
 
 const toolComponents = {
   "remove-watermark": RemoveWatermark,
@@ -41,6 +48,13 @@ const toolComponents = {
   "heic-to-jpg": HeicToJpg,
   "image-format-converter": ImageFormatConverter,
   "image-splitter": ImageSplitter,
+  "image-to-text": ImageToText,
+  "pdf-to-jpg": PdfToJpg,
+  "pixelate-image": PixelateImage,
+  "remove-background": RemoveBackground,
+  "resize-image": ResizeImage,
+  "round-image": RoundImage,
+  "view-metadata": ViewMetadata,
 };
 
 export async function generateMetadata({ params }) {
