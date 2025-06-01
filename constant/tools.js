@@ -129,6 +129,56 @@ export const TOOL_CATEGORIES = [
             name: "Cosmology Calculator",
             path: "/tools/calculators/physics/cosmology-calculator",
           },
+          {
+            id: "electromagnetism_calculator",
+            name: "Electromagnetism Calculator",
+            path: "/tools/calculators/physics/electromagnetism-calculator",
+          },
+          {
+            id: "energy_calculator_advanced",
+            name: "Advanced Energy Calculator",
+            path: "/tools/calculators/physics/energy-calculator-advanced",
+          },
+          {
+            id: "fluid_dynamics_calculator",
+            name: "Fluid Dynamics Calculator",
+            path: "/tools/calculators/physics/fluid-dynamics-calculator",
+          },
+          {
+            id: "free_fall_air_resistance_calculator",
+            name: "Free Fall with Air Resistance Calculator",
+            path: "/tools/calculators/physics/free-fall-air-resistance-calculator",
+          },
+          {
+            id: "general_relativity_calculator",
+            name: "General Relativity Calculator",
+            path: "/tools/calculators/physics/general-relativity-calculator",
+          },
+          {
+            id: "gravitational_force_calculator",
+            name: "Gravitational Force Calculator",
+            path: "/tools/calculators/physics/gravitational-force-calculator",
+          },
+          {
+            id: "ground_speed_calculator",
+            name: "Ground Speed Calculator",
+            path: "/tools/calculators/physics/ground-speed-calculator",
+          },
+          {
+            id: "harmonic_motion_calculator",
+            name: "Harmonic Motion Calculator",
+            path: "/tools/calculators/physics/harmonic-motion-calculator",
+          },
+          {
+            id: "magnitude_acceleration_calculator",
+            name: "Magnitude of Acceleration Calculator",
+            path: "/tools/calculators/physics/magnitude-acceleration-calculator",
+          },
+          {
+            id: "momentum_collision_calculator",
+            name: "Momentum & Collision Calculator",
+            path: "/tools/calculators/physics/momentum-collision-calculator",
+          },
         ],
       },
       {
@@ -574,14 +624,13 @@ export const toolMetadata = {
     },
   },
 };
-
 export const calculatorMetaData = {
   "acceleration-calculator-with-charts": {
     title: "Acceleration Calculator with Charts | Inform Readers",
     description:
       "Calculate acceleration with visual charts for better understanding of motion dynamics. Ideal for physics students and educators.",
   },
-  " arrow-speed-calculator": {
+  "arrow-speed-calculator": {
     title: "Arrow Speed Calculator | Inform Readers",
     description:
       "Estimate the speed of arrows based on draw weight, arrow mass, and release factors. Useful for archers and ballistics analysis.",
@@ -625,5 +674,55 @@ export const calculatorMetaData = {
     title: "Cosmology Calculator | Inform Readers",
     description:
       "Explore universe models, expansion rates, and redshift-distance relationships with this cosmology tool.",
+  },
+  "electromagnetism-calculator": {
+    title: "Electromagnetism Calculator | Inform Readers",
+    description:
+      "Calculate electromagnetic field strengths, forces, and potentials. Essential for E&M and electronics applications.",
+  },
+  "energy-calculator-advanced": {
+    title: "Advanced Energy Calculator | Inform Readers",
+    description:
+      "Analyze kinetic, potential, thermal, and mechanical energy in various physical systems with advanced parameters.",
+  },
+  "fluid-dynamics-calculator": {
+    title: "Fluid Dynamics Calculator | Inform Readers",
+    description:
+      "Compute pressure, flow rate, drag force, and more in fluid systems. A must-have for aerodynamics and hydrodynamics studies.",
+  },
+  "free-fall-air-resistance-calculator": {
+    title: "Free Fall with Air Resistance Calculator | Inform Readers",
+    description:
+      "Simulate object motion under gravity and air resistance to determine terminal velocity and fall time accurately.",
+  },
+  "general-relativity-calculator": {
+    title: "General Relativity Calculator | Inform Readers",
+    description:
+      "Explore time dilation, gravitational lensing, and curvature of spacetime with this Einstein-inspired physics tool.",
+  },
+  "gravitational-force-calculator": {
+    title: "Gravitational Force Calculator | Inform Readers",
+    description:
+      "Determine gravitational attraction between two masses. Perfect for physics education and astrophysics modeling.",
+  },
+  "ground-speed-calculator": {
+    title: "Ground Speed Calculator | Inform Readers",
+    description:
+      "Calculate an object's speed relative to the ground, factoring in wind or current influences. Great for aviation and sailing.",
+  },
+  "harmonic-motion-calculator": {
+    title: "Harmonic Motion Calculator | Inform Readers",
+    description:
+      "Analyze oscillatory systems like springs and pendulums, including period, frequency, and displacement over time.",
+  },
+  "magnitude-acceleration-calculator": {
+    title: "Magnitude of Acceleration Calculator | Inform Readers",
+    description:
+      "Compute the magnitude of an object's acceleration vector given its components. Useful in vector physics and kinematics.",
+  },
+  "momentum-collision-calculator": {
+    title: "Momentum & Collision Calculator | Inform Readers",
+    description:
+      "Calculate momentum, impulse, and final velocities for elastic and inelastic collisions between bodies.",
   },
 };
