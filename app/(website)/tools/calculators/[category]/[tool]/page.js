@@ -5,11 +5,11 @@ import ArrowSpeedCalculator from "@/components/pages/tools/calculator/physics/ar
 import AstrophysicsCalculator from "@/components/pages/tools/calculator/physics/astrophysics-calculator";
 import BallisticCoefficientCalculator from "@/components/pages/tools/calculator/physics/ballistic-coefficient-calculator";
 import BiophysicsCalculator from "@/components/pages/tools/calculator/physics/biophysics-calculator";
-// import CarCrashCalculator from "@/components/pages/tools/calculator/physics/car-crash-calculator";
-// import CarJumpDistanceCalculator from "@/components/pages/tools/calculator/physics/car-jump-distance-calculator";
-// import ComputationalPhysicsCalculator from "@/components/pages/tools/calculator/physics/computational-physics-calculator";
-// import CondensedMatterCalculator from "@/components/pages/tools/calculator/physics/condensed-matter-calculator";
-// import CosmologyCalculator from "@/components/pages/tools/calculator/physics/cosmology-calculator";
+import CarCrashCalculator from "@/components/pages/tools/calculator/physics/car-crash-calculator";
+import CarJumpDistanceCalculator from "@/components/pages/tools/calculator/physics/car-jump-distance-calculator";
+import ComputationalPhysicsCalculator from "@/components/pages/tools/calculator/physics/computational-physics-calculator";
+import CondensedMatterCalculator from "@/components/pages/tools/calculator/physics/condensed-matter-calculator";
+import CosmologyCalculator from "@/components/pages/tools/calculator/physics/cosmology-calculator";
 
 const toolComponents = {
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
@@ -17,11 +17,11 @@ const toolComponents = {
   "astrophysics-calculator": AstrophysicsCalculator,
   "ballistic-coefficient-calculator": BallisticCoefficientCalculator,
   "biophysics-calculator": BiophysicsCalculator,
-  //   "car-crash-calculator": CarCrashCalculator,
-  //   "car-jump-distance-calculator": CarJumpDistanceCalculator,
-  //   "computational-physics-calculator": ComputationalPhysicsCalculator,
-  //   "condensed-matter-calculator": CondensedMatterCalculator,
-  //   "cosmology-calculator": CosmologyCalculator,
+  "car-crash-calculator": CarCrashCalculator,
+  "car-jump-distance-calculator": CarJumpDistanceCalculator,
+  "computational-physics-calculator": ComputationalPhysicsCalculator,
+  "condensed-matter-calculator": CondensedMatterCalculator,
+  "cosmology-calculator": CosmologyCalculator,
 };
 
 export async function generateMetadata({ params }) {
