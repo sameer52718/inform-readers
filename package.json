@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^2.6.1",
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.8.3",
+    "chart.js": "^4.4.9",
     "cleave.js": "^1.6.0",
     "dayjs": "^1.11.13",
     "exif-js": "^2.3.0",

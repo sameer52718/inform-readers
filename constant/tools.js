@@ -58,25 +58,16 @@ export const TOOL_CATEGORIES = [
         id: "pdf-to-jpg",
         name: "PDF to JPG",
         path: "/tools/pdf/convert-pdf-to-jpg",
-        metaTitle: "Convert PDF to JPG Online - Inform Readers",
-        metaDescription:
-          "Transform PDF files into high-quality JPG images with Inform Readers' free PDF to JPG converter.",
       },
       {
         id: "merge-pdf",
         name: "Merge PDFs",
         path: "/tools/pdf/merge-pdf",
-        metaTitle: "Merge PDF Files Online for Free - Inform Readers",
-        metaDescription:
-          "Combine multiple PDF files into one document easily with Inform Readers' free Merge PDFs tool.",
       },
       {
         id: "compress-pdf",
         name: "Compress PDF",
         path: "/tools/pdf/compress-pdf",
-        metaTitle: "Compress PDF Files Online - Inform Readers",
-        metaDescription:
-          "Reduce PDF file sizes quickly and efficiently with Inform Readers' free PDF Compressor tool.",
       },
     ],
   },
@@ -89,20 +80,54 @@ export const TOOL_CATEGORIES = [
         name: "Physics Calculators",
         tools: [
           {
-            id: "force-calculator",
-            name: "Force Calculator",
-            path: "/tools/calculators/physics/force",
-            metaTitle: "Calculate Force Online - Inform Readers",
-            metaDescription:
-              "Compute force using mass and acceleration with Inform Readers' free Physics Force Calculator.",
+            id: "acceleration_calculator_with_charts",
+            name: "Acceleration Calculator with Charts",
+            path: "/tools/calculators/physics/acceleration-calculator-with-charts",
           },
           {
-            id: "velocity-calculator",
-            name: "Velocity Calculator",
-            path: "/tools/calculators/physics/velocity",
-            metaTitle: "Calculate Velocity Online - Inform Readers",
-            metaDescription:
-              "Determine velocity quickly with Inform Readers' free Physics Velocity Calculator.",
+            id: "arrow_speed_calculator",
+            name: "Arrow Speed Calculator",
+            path: "/tools/calculators/physics/arrow-speed-calculator",
+          },
+          {
+            id: "astrophysics_calculator",
+            name: "Astrophysics Calculator",
+            path: "/tools/calculators/physics/astrophysics-calculator",
+          },
+          {
+            id: "ballistic_coefficient_calculator",
+            name: "Ballistic Coefficient Calculator",
+            path: "/tools/calculators/physics/ballistic-coefficient-calculator",
+          },
+          {
+            id: "biophysics_calculator",
+            name: "Biophysics Calculator",
+            path: "/tools/calculators/physics/biophysics-calculator",
+          },
+          {
+            id: "car_crash_calculator",
+            name: "Car Crash Calculator",
+            path: "/tools/calculators/physics/car-crash-calculator",
+          },
+          {
+            id: "car_jump_distance_calculator",
+            name: "Car Jump Distance Calculator",
+            path: "/tools/calculators/physics/car-jump-distance-calculator",
+          },
+          {
+            id: "computational_physics_calculator",
+            name: "Computational Physics Calculator",
+            path: "/tools/calculators/physics/computational-physics-calculator",
+          },
+          {
+            id: "condensed_matter_calculator",
+            name: "Condensed Matter Calculator",
+            path: "/tools/calculators/physics/condensed-matter-calculator",
+          },
+          {
+            id: "cosmology_calculator",
+            name: "Cosmology Calculator",
+            path: "/tools/calculators/physics/cosmology-calculator",
           },
         ],
       },
@@ -114,17 +139,11 @@ export const TOOL_CATEGORIES = [
             id: "quadratic-solver",
             name: "Quadratic Solver",
             path: "/tools/calculators/maths/quadratic-solver",
-            metaTitle: "Solve Quadratic Equations Online - Inform Readers",
-            metaDescription:
-              "Solve quadratic equations easily with Inform Readers' free Quadratic Solver tool.",
           },
           {
             id: "percentage-calculator",
             name: "Percentage Calculator",
             path: "/tools/calculators/maths/percentage",
-            metaTitle: "Calculate Percentages Online - Inform Readers",
-            metaDescription:
-              "Compute percentages quickly and accurately with Inform Readers' free Percentage Calculator.",
           },
         ],
       },
@@ -138,17 +157,11 @@ export const TOOL_CATEGORIES = [
         id: "unit-converter",
         name: "Unit Converter",
         path: "/tools/other/unit-converter",
-        metaTitle: "Convert Units Online - Inform Readers",
-        metaDescription:
-          "Convert between various units like length, weight, and more with Inform Readers' free Unit Converter.",
       },
       {
         id: "text-to-speech",
         name: "Text to Speech",
         path: "/tools/other/text-to-speech",
-        metaTitle: "Text to Speech Online - Inform Readers",
-        metaDescription:
-          "Convert text to natural-sounding speech with Inform Readers' free Text to Speech tool.",
       },
     ],
   },
@@ -559,5 +572,58 @@ export const toolMetadata = {
       type: "website",
       url: "https://www.informreaders.com/tools/image-tools/view-metadata",
     },
+  },
+};
+
+export const calculatorMetaData = {
+  "acceleration-calculator-with-charts": {
+    title: "Acceleration Calculator with Charts | Inform Readers",
+    description:
+      "Calculate acceleration with visual charts for better understanding of motion dynamics. Ideal for physics students and educators.",
+  },
+  " arrow-speed-calculator": {
+    title: "Arrow Speed Calculator | Inform Readers",
+    description:
+      "Estimate the speed of arrows based on draw weight, arrow mass, and release factors. Useful for archers and ballistics analysis.",
+  },
+  "astrophysics-calculator": {
+    title: "Astrophysics Calculator | Inform Readers",
+    description:
+      "Perform key astrophysics calculations such as gravitational forces, orbital dynamics, and star properties.",
+  },
+  "ballistic-coefficient-calculator": {
+    title: "Ballistic Coefficient Calculator | Inform Readers",
+    description:
+      "Calculate the ballistic coefficient to predict projectile behavior and flight performance over distances.",
+  },
+  "biophysics-calculator": {
+    title: "Biophysics Calculator | Inform Readers",
+    description:
+      "Explore physical principles applied to biological systems, from molecular motion to cellular dynamics.",
+  },
+  "car-crash-calculator": {
+    title: "Car Crash Impact Calculator | Inform Readers",
+    description:
+      "Estimate impact force in car crashes based on speed, mass, and stopping distance. A valuable tool for safety analysis.",
+  },
+  "car-jump-distance-calculator": {
+    title: "Car Jump Distance Calculator | Inform Readers",
+    description:
+      "Predict how far a vehicle will jump based on speed and launch angle. Great for stunt planning and simulations.",
+  },
+  "computational-physics-calculator": {
+    title: "Computational Physics Calculator | Inform Readers",
+    description:
+      "Solve complex physics problems using numerical methods and simulations with this advanced calculator.",
+  },
+  "condensed-matter-calculator": {
+    title: "Condensed Matter Physics Calculator | Inform Readers",
+    description:
+      "Analyze properties of solids and liquids, including lattice dynamics, electron interactions, and thermal properties.",
+  },
+  "cosmology-calculator": {
+    title: "Cosmology Calculator | Inform Readers",
+    description:
+      "Explore universe models, expansion rates, and redshift-distance relationships with this cosmology tool.",
   },
 };
