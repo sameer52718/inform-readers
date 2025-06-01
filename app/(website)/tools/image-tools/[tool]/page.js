@@ -9,7 +9,16 @@ import AdjustBrightnessContrast from "@/components/pages/tools/images/adjust-bri
 import NoiseReduction from "@/components/pages/tools/images/noise-reduction";
 import AdvancedImageCompressor from "@/components/pages/tools/images/advanced-image-compressor";
 import ImageToAscii from "@/components/pages/tools/images/image-to-ascii";
-// Uncomment and update these imports as you create each component
+import AddBorder from "@/components/pages/tools/images/add-border";
+import AddTextToImage from "@/components/pages/tools/images/add-text-to-image";
+import BlackWhiteFilter from "@/components/pages/tools/images/black-white-filter";
+import CollageMaker from "@/components/pages/tools/images/collage-maker";
+import ColorizePhoto from "@/components/pages/tools/images/colorize-photo";
+import CompressImage from "@/components/pages/tools/images/compress-image";
+import CropImage from "@/components/pages/tools/images/crop-image";
+import HeicToJpg from "@/components/pages/tools/images/heic-to-jpg";
+import ImageFormatConverter from "@/components/pages/tools/images/image-format-converter";
+import ImageSplitter from "@/components/pages/tools/images/image-splitter";
 
 const toolComponents = {
   "remove-watermark": RemoveWatermark,
@@ -22,6 +31,16 @@ const toolComponents = {
   "noise-reduction": NoiseReduction,
   "advanced-image-compressor": AdvancedImageCompressor,
   "image-to-ascii": ImageToAscii,
+  "add-border": AddBorder,
+  "add-text-to-image": AddTextToImage,
+  "black-white-filter": BlackWhiteFilter,
+  "collage-maker": CollageMaker,
+  "colorize-photo": ColorizePhoto,
+  "compress-image": CompressImage,
+  "crop-image": CropImage,
+  "heic-to-jpg": HeicToJpg,
+  "image-format-converter": ImageFormatConverter,
+  "image-splitter": ImageSplitter,
 };
 
 export async function generateMetadata({ params }) {

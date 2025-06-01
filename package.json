@@ -19,6 +19,7 @@
     "cleave.js": "^1.6.0",
     "dayjs": "^1.11.13",
     "framer-motion": "^12.7.4",
+    "heic2any": "^0.0.4",
     "lucide-react": "^0.487.0",
     "next": "15.1.7",
     "react": "^19.0.0",

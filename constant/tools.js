@@ -21,6 +21,24 @@ export const TOOL_CATEGORIES = [
         path: "/tools/image-tools/advanced-image-compressor",
       },
       { id: "image-to-ascii", name: "Image to ASCII", path: "/tools/image-tools/image-to-ascii" },
+      { id: "add-border", name: "Add Border", path: "/tools/image-tools/add-border" },
+      { id: "add-text-to-image", name: "Add Text to Image", path: "/tools/image-tools/add-text-to-image" },
+      {
+        id: "black-white-filter",
+        name: "Black & White Filter",
+        path: "/tools/image-tools/black-white-filter",
+      },
+      { id: "collage-maker", name: "Collage Maker", path: "/tools/image-tools/collage-maker" },
+      { id: "colorize-photo", name: "Colorize Photo", path: "/tools/image-tools/colorize-photo" },
+      { id: "compress-image", name: "Compress Image", path: "/tools/image-tools/compress-image" },
+      { id: "crop-image", name: "Crop Image", path: "/tools/image-tools/crop-image" },
+      { id: "heic-to-jpg", name: "HEIC to JPG", path: "/tools/image-tools/heic-to-jpg" },
+      {
+        id: "image-format-converter",
+        name: "Image Format Converter",
+        path: "/tools/image-tools/image-format-converter",
+      },
+      { id: "image-splitter", name: "Image Splitter", path: "/tools/image-tools/image-splitter" },
     ],
   },
   {
@@ -276,6 +294,156 @@ export const toolMetadata = {
         "Convert your images to ASCII art with Inform Readers' free tool. Customize the width for detailed text-based art.",
       type: "website",
       url: "https://www.informreaders.com/tools/image-tools/image-to-ascii",
+    },
+  },
+  "add-border": {
+    title: "Add Border to Image - Free Tool | Inform Readers",
+    description:
+      "Easily add borders to your images with Inform Readers' free tool. Customize border width, color, and style for a polished look.",
+    keywords: "add border to image, image border tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Add Border to Image - Free Tool | Inform Readers",
+      description:
+        "Easily add borders to your images with Inform Readers' free tool. Customize border width, color, and style for a polished look.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/add-border",
+    },
+  },
+  "add-text-to-image": {
+    title: "Add Text to Image - Free Tool | Inform Readers",
+    description:
+      "Add custom text to your images with Inform Readers' free tool. Adjust font, size, color, and position for perfect overlays.",
+    keywords: "add text to image, image text tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Add Text to Image - Free Tool | Inform Readers",
+      description:
+        "Add custom text to your images with Inform Readers' free tool. Adjust font, size, color, and position for perfect overlays.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/add-text-to-image",
+    },
+  },
+  "black-white-filter": {
+    title: "Black & White Filter - Free Tool | Inform Readers",
+    description:
+      "Convert your images to black and white with Inform Readers' free tool. Apply a classic monochrome filter effortlessly.",
+    keywords: "black and white filter, image monochrome tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Black & White Filter - Free Tool | Inform Readers",
+      description:
+        "Convert your images to black and white with Inform Readers' free tool. Apply a classic monochrome filter effortlessly.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/black-white-filter",
+    },
+  },
+  "collage-maker": {
+    title: "Collage Maker - Free Tool | Inform Readers",
+    description:
+      "Create stunning photo collages with Inform Readers' free tool. Combine multiple images with customizable layouts and spacing.",
+    keywords: "collage maker, photo collage tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Collage Maker - Free Tool | Inform Readers",
+      description:
+        "Create stunning photo collages with Inform Readers' free tool. Combine multiple images with customizable layouts and spacing.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/collage-maker",
+    },
+  },
+  "colorize-photo": {
+    title: "Colorize Photo - Free Tool | Inform Readers",
+    description:
+      "Bring old photos to life with Inform Readers' free colorize tool. Add vibrant colors to black and white images easily.",
+    keywords: "colorize photo, photo colorization tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Colorize Photo - Free Tool | Inform Readers",
+      description:
+        "Bring old photos to life with Inform Readers' free colorize tool. Add vibrant colors to black and white images easily.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/colorize-photo",
+    },
+  },
+  "compress-image": {
+    title: "Compress Image - Free Tool | Inform Readers",
+    description:
+      "Reduce image file size with Inform Readers' free compression tool. Optimize images for web and storage without losing quality.",
+    keywords: "compress image, image compression tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Compress Image - Free Tool | Inform Readers",
+      description:
+        "Reduce image file size with Inform Readers' free compression tool. Optimize images for web and storage without losing quality.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/compress-image",
+    },
+  },
+  "crop-image": {
+    title: "Crop Image - Free Tool | Inform Readers",
+    description:
+      "Crop your images precisely with Inform Readers' free tool. Adjust dimensions and focus on the perfect section of your photo.",
+    keywords: "crop image, image cropping tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Crop Image - Free Tool | Inform Readers",
+      description:
+        "Crop your images precisely with Inform Readers' free tool. Adjust dimensions and focus on the perfect section of your photo.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/crop-image",
+    },
+  },
+  "heic-to-jpg": {
+    title: "HEIC to JPG Converter - Free Tool | Inform Readers",
+    description:
+      "Convert HEIC images to JPG with Inform Readers' free tool. Transform your photos for broader compatibility easily.",
+    keywords: "heic to jpg, convert heic to jpg, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "HEIC to JPG Converter - Free Tool | Inform Readers",
+      description:
+        "Convert HEIC images to JPG with Inform Readers' free tool. Transform your photos for broader compatibility easily.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/heic-to-jpg",
+    },
+  },
+  "image-format-converter": {
+    title: "Image Format Converter - Free Tool | Inform Readers",
+    description:
+      "Convert images between formats (PNG, JPG, GIF, etc.) with Inform Readers' free tool. Easy and fast format conversion.",
+    keywords: "image format converter, convert image format, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Image Format Converter - Free Tool | Inform Readers",
+      description:
+        "Convert images between formats (PNG, JPG, GIF, etc.) with Inform Readers' free tool. Easy and fast format conversion.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/image-format-converter",
+    },
+  },
+  "image-splitter": {
+    title: "Image Splitter - Free Tool | Inform Readers",
+    description:
+      "Split your images into multiple parts with Inform Readers' free tool. Customize rows and columns for perfect divisions.",
+    keywords: "image splitter, split image tool, free image tool, Inform Readers",
+    author: "Inform Readers",
+    robots: "index, follow",
+    openGraph: {
+      title: "Image Splitter - Free Tool | Inform Readers",
+      description:
+        "Split your images into multiple parts with Inform Readers' free tool. Customize rows and columns for perfect divisions.",
+      type: "website",
+      url: "https://www.informreaders.com/tools/image-tools/image-splitter",
     },
   },
 };
