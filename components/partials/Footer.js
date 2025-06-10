@@ -114,12 +114,12 @@ export default function Footer() {
                     News
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/travel" className="hover:text-white transition-colors flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     Travel
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/biography" className="hover:text-white transition-colors flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
