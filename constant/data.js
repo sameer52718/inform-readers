@@ -180,11 +180,11 @@ export const menuItems = [
     icon: "mdi:biography",
     link: "/admin/biography",
   },
-  // {
-  //   title: "Coupons",
-  //   icon: "mdi:coupon-outline",
-  //   link: "/admin/coupons",
-  // },
+  {
+    title: "Config",
+    icon: "uil:setting",
+    link: "/admin/config",
+  },
   {
     title: "Settings",
     icon: "uil:setting",
