@@ -1,54 +1,48 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import WeatherIcon from "@/components/weather/WeatherIcon";
-import HourlyForecast from "@/components/weather/HourlyForcast";
-import DailyForecast from "@/components/weather/DailyForcast";
-import WeatherDetails from "@/components/weather/WeatherDetails";
-import { MapPin, AlertTriangle, BellRing } from "lucide-react";
 import axios from "axios";
-import formatDate from "@/lib/formatDate";
+import Link from "next/link";
+import { Search, MapPin, Sun, Moon } from "lucide-react";
+import WeatherIcon from "@/components/weather/WeatherIcon";
+import countriesCities from "@/constant/countriesCities";
 
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
 export default function Home() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [isDay, setIsDay] = useState(true);
-  const [hasAlert, setHasAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [country, setCountry] = useState("Unknown");
 
   useEffect(() => {
     const fetchWeatherByIP = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        // Step 1: Use IP-based location detection via WeatherAPI's IP lookup
+        // Step 1: Get user's location via IP
         const ipResponse = await axios.get(`https://api.weatherapi.com/v1/ip.json?key=${API_KEY}&q=auto:ip`);
-        const location = ipResponse.data;
+        const userCountry = ipResponse.data.country_name;
+        setCountry(userCountry);
 
-        // Step 2: Fetch weather data for the detected location
-        const weatherResponse = await axios.get("https://api.weatherapi.com/v1/forecast.json", {
-          params: {
-            key: API_KEY,
-            q: `${location.lat},${location.lon}`,
-            days: 15,
-            aqi: "yes",
-            alerts: "yes",
-          },
-        });
+        // Step 2: Get major cities for the country (fallback to Pakistan if country not in mapping)
+        const cities = countriesCities[userCountry] || countryCities.Pakistan;
 
-        const data = weatherResponse.data;
+        // Step 3: Fetch weather for each city
+        const promises = cities.map((city) =>
+          axios.get("https://api.weatherapi.com/v1/current.json", {
+            params: { key: API_KEY, q: city, aqi: "yes" },
+          })
+        );
+        const responses = await Promise.all(promises);
+        const data = responses.map((res) => res.data);
         setWeatherData(data);
 
-        // Determine if it's daytime based on current hour and location data
-        const currentHour = new Date(data.location.localtime).getHours();
-        setIsDay(data.current.is_day === 1);
-
-        // Check for weather alerts
-        setHasAlert(data.alerts && data.alerts.alert && data.alerts.alert.length > 0);
+        // Set daytime based on first city's data
+        setIsDay(data[0].current.is_day === 1);
       } catch (err) {
-        if (err.name === "AbortError") return;
         console.error("Error fetching weather data:", err);
         setError("Failed to fetch weather data. Please try again later.");
       } finally {
@@ -59,184 +53,96 @@ export default function Home() {
     fetchWeatherByIP();
   }, []);
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!searchQuery) return;
+    try {
+      const response = await axios.get("https://api.weatherapi.com/v1/search.json", {
+        params: { key: API_KEY, q: searchQuery },
+      });
+      if (response.data.length > 0) {
+        window.location.href = `/weather/${response.data[0].name.toLowerCase()}`;
+      } else {
+        setError("City not found. Please try another city.");
+      }
+    } catch (err) {
+      setError("Error searching for city. Please try again.");
+    }
+  };
+
   const bgColor = isDay
-    ? "bg-gradient-to-br from-blue-400 to-blue-600"
-    : "bg-gradient-to-br from-gray-800 to-blue-900";
+    ? "bg-gradient-to-b from-blue-500 to-blue-300"
+    : "bg-gradient-to-b from-gray-900 to-blue-800";
   const textColor = "text-white";
 
   return (
-    <main className={`min-h-screen ${bgColor} ${textColor} transition-colors duration-1000 ease-in-out`}>
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header with location */}
-        <div className="flex items-center justify-between mb-6">
-          {isLoading ? (
-            <div className="flex items-center animate-pulse">
-              <MapPin className={textColor} size={24} />
-              <div className="h-8 bg-white/20 rounded w-1/3 ml-2" />
-            </div>
-          ) : (
-            <div className="flex items-center">
-              <MapPin className={textColor} size={24} />
-              <h1 className={`text-2xl font-bold ml-2 ${textColor}`}>
-                {weatherData?.location.name}, {weatherData?.location.country}
-              </h1>
-            </div>
-          )}
+    <main className={`min-h-screen ${bgColor} ${textColor}`}>
+      <header className="bg-white/10 backdrop-blur-md sticky top-0 z-10">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <MapPin size={24} />
+            <h1 className="text-2xl text-white font-bold">{country} Weather</h1>
+          </div>
+          <form onSubmit={handleSearch} className="flex items-center bg-white/20 rounded-full px-4 py-2">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for a city..."
+              className="bg-transparent text-white placeholder-white/70 focus:outline-none"
+            />
+            <button type="submit">
+              <Search size={20} />
+            </button>
+          </form>
         </div>
+      </header>
 
-        {/* Error message if fetch fails */}
+      <div className="container mx-auto px-4 py-8">
         {error && (
-          <div className="mb-6 bg-red-500/70 backdrop-blur-md rounded-lg p-4">
-            <div className="flex items-start">
-              <AlertTriangle className="flex-shrink-0 h-5 w-5 text-white mt-0.5" />
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-white">Error</h3>
-                <div className="mt-1 text-sm text-white opacity-90">
-                  <p>{error}</p>
-                </div>
-              </div>
-            </div>
+          <div className="mb-6 bg-red-500/70 rounded-lg p-4">
+            <p>{error}</p>
           </div>
         )}
 
-        {/* Weather alert if present */}
-        {!isLoading && hasAlert && weatherData?.alerts?.alert?.length > 0 && (
-          <div className="mb-6 bg-amber-500/70 backdrop-blur-md rounded-lg p-4 animate-pulse">
-            <div className="flex items-start">
-              <AlertTriangle className="flex-shrink-0 h-5 w-5 text-white mt-0.5" />
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-white">Weather Alert</h3>
-                <div className="mt-1 text-sm text-white opacity-90">
-                  <p>{weatherData.alerts.alert[0].headline}</p>
-                  <p>{weatherData.alerts.alert[0].desc}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Current weather */}
-        <div
-          className={`bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-lg transform transition-all duration-500 hover:shadow-xl`}
-        >
-          {isLoading ? (
-            <div className="flex flex-col md:flex-row md:items-center justify-between animate-pulse">
-              <div className="flex items-center mb-4 md:mb-0">
-                <div className="mr-4 w-20 h-20 bg-white/20 rounded" />
-                <div>
-                  <div className="h-12 bg-white/20 rounded w-24 mb-2" />
-                  <div className="h-6 bg-white/20 rounded w-32 mb-2" />
-                  <div className="h-4 bg-white/20 rounded w-40" />
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="h-10 bg-white/20 rounded-full w-24" />
-                <div className="h-10 bg-white/20 rounded-full w-24" />
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col md:flex-row md:items-center justify-between">
-              <div className="flex items-center mb-4 md:mb-0">
-                <div className="mr-4">
-                  <WeatherIcon
-                    condition={weatherData?.current.condition.text}
-                    size={80}
-                    className={textColor}
-                    isDay={isDay}
-                  />
-                </div>
-                <div>
-                  <h2 className={`text-5xl font-bold ${textColor}`}>
-                    {Math.round(weatherData?.current.temp_c)}°C
-                  </h2>
-                  <p className={`text-xl ${textColor} opacity-90`}>{weatherData?.current.condition.text}</p>
-                  <p className={`text-sm ${textColor} opacity-70`}>
-                    Last updated: {formatDate(weatherData?.current.last_updated)}
-                  </p>
-                </div>
-              </div>
-
-              <div className={`flex items-center space-x-3 ${textColor}`}>
-                <button className="flex items-center bg-white/20 backdrop-blur-md px-3 py-2 rounded-full hover:bg-white/30 transition-colors">
-                  <BellRing size={18} className="mr-2" />
-                  <span className="text-sm font-medium">Notify</span>
-                </button>
-
-                <button
-                  className="flex items-center bg-white/20 backdrop-blur-md px-3 py-2 rounded-full hover:bg-white/30 transition-colors"
-                  onClick={() => {
-                    console.log("Toggle temperature unit");
-                  }}
-                >
-                  <span className="text-sm font-medium">°C | °F</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Hourly forecast */}
-          {isLoading ? (
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 animate-pulse">
-              {Array(6)
-                .fill(0)
-                .map((_, i) => (
-                  <div key={i} className="p-3 bg-white/10 rounded-lg">
-                    <div className="h-4 bg-white/20 rounded w-1/2 mx-auto mb-2" />
-                    <div className="h-8 bg-white/20 rounded w-12 mx-auto mb-2" />
-                    <div className="h-4 bg-white/20 rounded w-1/3 mx-auto" />
-                  </div>
-                ))}
-            </div>
-          ) : (
-            <HourlyForecast forecast={weatherData?.forecast.forecastday[0].hour} />
-          )}
-        </div>
-        {/* Weather details and extra details */}
         {isLoading ? (
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 animate-pulse">
-            {Array(4)
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse">
+            {Array(6)
               .fill(0)
               .map((_, i) => (
-                <div key={i} className="p-4 bg-white/10 rounded-lg">
-                  <div className="h-4 bg-white/20 rounded w-1/2 mb-2" />
-                  <div className="h-6 bg-white/20 rounded w-3/4" />
+                <div key={i} className="bg-white/10 rounded-lg p-4">
+                  <div className="h-6 bg-white/20 rounded w-1/2 mb-2" />
+                  <div className="h-10 bg-white/20 rounded w-1/3" />
                 </div>
               ))}
           </div>
         ) : (
-          <>
-            <WeatherDetails current={weatherData?.current} textColor={textColor} />
-          </>
-        )}
-
-        {/* 5-day forecast */}
-        {isLoading ? (
-          <div className="mt-8 space-y-4 animate-pulse">
-            <div className="h-6 bg-white/20 rounded w-1/4" />
-            {Array(5)
-              .fill(0)
-              .map((_, i) => (
-                <div key={i} className="p-4 bg-white/10 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {weatherData.map((data, index) => (
+              <Link href={`/weather/${data.location.name.toLowerCase()}`} key={index}>
+                <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 hover:bg-white/20 transition">
                   <div className="flex items-center justify-between">
-                    <div className="h-4 bg-white/20 rounded w-1/4" />
-                    <div className="h-8 bg-white/20 rounded w-12" />
-                    <div className="h-4 bg-white/20 rounded w-1/3" />
+                    <div>
+                      <h2 className="text-xl text-white font-semibold">{data.location.name}</h2>
+                      <p className="text-sm opacity-70">{data.location.country}</p>
+                    </div>
+                    <WeatherIcon
+                      condition={data.current.condition.text}
+                      size={40}
+                      isDay={data.current.is_day === 1}
+                    />
                   </div>
+                  <p className="text-3xl font-bold mt-2">{Math.round(data.current.temp_c)}°C</p>
+                  <p className="text-sm">{data.current.condition.text}</p>
                 </div>
-              ))}
+              </Link>
+            ))}
           </div>
-        ) : (
-          <DailyForecast
-            forecast={weatherData?.forecast.forecastday}
-            textColor={textColor}
-            bgColor={bgColor}
-          />
         )}
 
-        {/* Footer with attribution */}
-        <div className="mt-8 text-center">
-          <p className={`text-sm ${textColor} opacity-70`}>Weather data provided by WeatherAPI.com</p>
-        </div>
+        <footer className="mt-8 text-center text-sm opacity-70">
+          <p>Weather data provided by WeatherAPI.com</p>
+        </footer>
       </div>
     </main>
   );
