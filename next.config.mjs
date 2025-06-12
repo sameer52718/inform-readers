@@ -13,6 +13,7 @@ const nextConfig = {
       "celebritytall.com",
       "www.thefamouspeople.com",
       "www.auto-data.net",
+      "api.informreaders.com",
     ],
   },
 };

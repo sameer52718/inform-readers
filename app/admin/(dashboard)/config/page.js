@@ -2,7 +2,7 @@
 import BackButton from "@/components/ui/BackButton";
 import Loading from "@/components/ui/Loading";
 import { useState } from "react";
-// import ShopInfo from "./ShopInfo";
+import WebsiteLogo from "@/components/adminPartials/config/Logo";
 // import ShopSettings from "./ShopSetting";
 // import ShopSocial from "./ShopSocial";
 // import ShopLogo from "./ShopLogo";
@@ -20,7 +20,7 @@ const Shop = () => {
           <BackButton />
         </div>
         <div className="space-y-6">
-          {/* <ShopLogo /> */}
+          <WebsiteLogo />
           {/* <ShopInfo /> */}
           {/* <ShopSettings /> */}
           {/* <PaymentServiceFees/> */}

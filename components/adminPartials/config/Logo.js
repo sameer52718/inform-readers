@@ -1,15 +1,16 @@
 import React, { useRef, useState } from "react";
-import { Card, Icon, SubmitButton } from "../../../components/ui";
-import { useShop } from "./ShopProvider";
-import NoProfile from "../../../assets/images/avatar/NoProfile.webp";
-import { handleError } from "../../../utils/functions";
-import axiosInstance from "../../../configs/axios.config";
+import SubmitButton from "@/components/ui/SubmitButton";
+import Icon from "@/components/ui/Icon";
+import Card from "@/components/ui/Card";
+import handleError from "@/lib/handleError";
+import axiosInstance from "@/lib/axiosInstance";
 import { toast } from "react-toastify";
-const ShopLogo = () => {
+import { useSelector } from "react-redux";
+const WebsiteLogo = () => {
+  const { logo } = useSelector((state) => state.config);
   const [profile, setProfile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef();
-  const { shop, refetch } = useShop();
 
   const handleUpdate = async () => {
     try {
@@ -17,8 +18,8 @@ const ShopLogo = () => {
         return;
       }
       setIsSubmitting(true);
-      const { data } = await axiosInstance.patch(
-        `/shop/update-shop-logo`,
+      const { data } = await axiosInstance.post(
+        `/admin/config`,
         { logo: profile },
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -47,11 +48,11 @@ const ShopLogo = () => {
             accept="image/*"
           />
         </div>
-        <div className="h-[100px] w-[100px] ">
+        <div className=" w-[100px] ">
           <img
-            src={profile ? URL.createObjectURL(profile) : shop.logo.url ? shop.logo.url : NoProfile}
+            src={profile ? URL.createObjectURL(profile) : logo ? logo : ""}
             alt="Profile"
-            className="h-full w-full object-cover rounded-full"
+            className="h-full w-full object-cover "
           />
         </div>
       </div>
@@ -62,4 +63,4 @@ const ShopLogo = () => {
   );
 };
 
-export default ShopLogo;
+export default WebsiteLogo;

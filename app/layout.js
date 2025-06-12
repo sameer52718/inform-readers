@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
 import store from "@/store";
+import { ConfigContextProvider } from "@/context/ThemeContext";
 
 import "./admin/scss/app.scss";
 import "simplebar-react/dist/simplebar.min.css";
@@ -29,7 +30,9 @@ export default function RootLayout({ children }) {
         <meta name="adsterraverification" content="92gh47g92" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>
+          <ConfigContextProvider>{children}</ConfigContextProvider>
+        </Provider>
       </body>
     </html>
   );

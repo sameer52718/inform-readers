@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { userTypes } from "@/constant/data";
 
 function Header() {
+  const { color, logo } = useSelector((state) => state.config); // Fallback to 'red' if color is undefined
   const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState({});
@@ -25,26 +26,18 @@ function Header() {
     { id: 3, title: "Swift Codes", url: "/swiftcode" },
     { id: 4, title: "Software & Games", url: "/software" },
     { id: 5, title: "Specifications", url: "/specification" },
-    // { id: 6, title: "Travel", url: "/travel" },
     { id: 7, title: "Biography", url: "/biography" },
-
     {
       id: 9,
       title: "More",
       sublinks: [
-        // { id: 1, title: "Sports", url: "/sports" },
-        // { id: 2, title: "Entertainment", url: "/entertainment" },
-        // { id: 3, title: "Lifestyle", url: "/lifestyle" },
-        // { id: 4, title: "Jobs", url: "/jobs" },
-        // { id: 5, title: "Real State", url: "/realstate" },
-        // { id: 6, title: "Coupons", url: "/coupons" },
         { id: 7, title: "Weather", url: "/weather" },
         { id: 8, title: "News", url: "/news" },
         { id: 10, title: "Currency Converter", url: "/currency-rate" },
         { id: 11, title: "Metal Rates", url: "/metal-rate" },
         { id: 12, title: "Cars", url: "/car" },
         { id: 13, title: "Bikes", url: "/bike" },
-        { id: 13, title: "Tools", url: "/tools" },
+        { id: 14, title: "Tools", url: "/tools" }, // Fixed duplicate ID
       ],
     },
   ];
@@ -64,18 +57,30 @@ function Header() {
           <div className="flex justify-between items-center">
             <p className="text-sm hidden md:block text-gray-600">{currentDate}</p>
             <div className="flex items-center gap-4">
-              <Link href="/about" className="text-sm text-gray-600 hover:text-red-600">
+              <Link
+                href="/about"
+                className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
+              >
                 About
               </Link>
-              <Link href="/contact" className="text-sm text-gray-600 hover:text-red-600">
+              <Link
+                href="/contact"
+                className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
+              >
                 Contact
               </Link>
               {token && userType === userTypes.USER ? (
-                <Link href="/dashboard" className="text-sm text-red-600 hover:text-red-700 font-medium">
+                <Link
+                  href="/dashboard"
+                  className={`text-sm text-${color}-600 hover:text-${color}-700 font-medium transition-colors`}
+                >
                   My Account
                 </Link>
               ) : (
-                <Link href="/signin" className="text-sm text-red-600 hover:text-red-700 font-medium">
+                <Link
+                  href="/signin"
+                  className={`text-sm text-${color}-600 hover:text-${color}-700 font-medium transition-colors`}
+                >
                   Sign in
                 </Link>
               )}
@@ -85,23 +90,18 @@ function Header() {
       </div>
 
       {/* Main Header */}
-      {/* Main Header */}
       <div className="container py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <Image
-            src="/website/assets/images/logo/logo.png"
-            alt="Website Logo"
-            width={200}
-            height={80}
-            className="h-[80px] w-auto"
-          />
+          <Image src={logo} alt="Website Logo" width={200} height={80} className="h-[80px] w-auto" />
         </Link>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 text-gray-600 hover:text-red-600"
+          className={`p-2 text-gray-600 hover:text-${color}-600 transition-colors md:hidden`}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -112,23 +112,35 @@ function Header() {
             {categories.map((category) => (
               <li key={category.id} className="relative group">
                 {category.sublinks ? (
-                  <button className="flex items-center gap-1 text-gray-700 hover:text-red-600">
+                  <button
+                    className={`flex items-center gap-1 text-gray-700 hover:text-${color}-600 transition-colors`}
+                    onClick={() => toggleDropdown(category.id)}
+                    aria-expanded={openDropdowns[category.id] || false}
+                    aria-haspopup="true"
+                  >
                     {category.title}
                     <ChevronDown className="w-4 h-4" />
                   </button>
                 ) : (
-                  <Link href={category.url} className="text-gray-700 hover:text-red-600 transition-colors">
+                  <Link
+                    href={category.url}
+                    className={`text-gray-700 hover:text-${color}-600 transition-colors`}
+                  >
                     {category.title}
                   </Link>
                 )}
 
                 {category.sublinks && (
-                  <ul className="absolute hidden group-hover:block bg-white shadow-dropdown rounded-lg py-2 w-48 z-50">
+                  <ul
+                    className={`absolute ${
+                      openDropdowns[category.id] || "hidden group-hover:block"
+                    } bg-white shadow-dropdown rounded-lg py-2 w-48 z-50`}
+                  >
                     {category.sublinks.map((sublink) => (
                       <li key={sublink.id}>
                         <Link
                           href={sublink.url}
-                          className="block px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600"
+                          className={`block px-4 py-2 text-gray-700 hover:bg-${color}-50 hover:text-${color}-600 transition-colors`}
                         >
                           {sublink.title}
                         </Link>
@@ -153,7 +165,9 @@ function Header() {
                     <>
                       <button
                         onClick={() => toggleDropdown(category.id)}
-                        className="flex items-center justify-between w-full py-2 text-gray-700"
+                        className={`flex items-center justify-between w-full py-2 text-gray-700 hover:text-${color}-600 transition-colors`}
+                        aria-expanded={openDropdowns[category.id] || false}
+                        aria-haspopup="true"
                       >
                         {category.title}
                         <ChevronDown
@@ -168,7 +182,7 @@ function Header() {
                             <li key={sublink.id}>
                               <Link
                                 href={sublink.url}
-                                className="block py-1 text-gray-600 hover:text-red-600"
+                                className={`block py-1 text-gray-600 hover:text-${color}-600 transition-colors`}
                               >
                                 {sublink.title}
                               </Link>
@@ -178,7 +192,10 @@ function Header() {
                       )}
                     </>
                   ) : (
-                    <Link href={category.url} className="block py-2 text-gray-700 hover:text-red-600">
+                    <Link
+                      href={category.url}
+                      className={`block py-2 text-gray-700 hover:text-${color}-600 transition-colors`}
+                    >
                       {category.title}
                     </Link>
                   )}

@@ -16,9 +16,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 export default function Footer() {
+  const { color } = useSelector((state) => state.config);
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
@@ -37,7 +39,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-red-600 to-red-800 text-gray-300">
+    <footer className={`bg-gradient-to-br from-${color}-600 to-${color}-800 text-gray-300`}>
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -204,7 +206,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="w-full px-4 py-2  text-white rounded-md  transition-colors border border-white hover:bg-white hover:text-red-500"
+                className={`w-full px-4 py-2  text-white rounded-md  transition-colors border border-white hover:bg-white hover:text-${color}-500`}
               >
                 Subscribe Now
               </button>
