@@ -5,8 +5,10 @@ import { Search, Loader2, CheckCircle, XCircle, Clock, Download } from "lucide-r
 import { motion } from "framer-motion";
 import handleError from "@/lib/handleError";
 
+
+
 const DownloadProcess = () => {
-  const { videoInfo, resetDownload, setIsProcessing } = useContext(VideoDownloadContext);
+  const { videoInfo, resetDownload, platform } = useContext(VideoDownloadContext);
   const [steps, setSteps] = useState([
     { id: "validation", label: "Validating URL", status: "processing" },
     { id: "fetching", label: "Fetching video info", status: "pending" },
@@ -38,7 +40,6 @@ const DownloadProcess = () => {
       updateStepStatus("downloading", "processing");
       await new Promise((r) => setTimeout(r, 1500));
       updateStepStatus("downloading", "completed");
-      // setIsProcessing(false);
       setCountdown(5);
     };
 
@@ -88,7 +89,9 @@ const DownloadProcess = () => {
 
       {downloadReady ? (
         <div className="text-center space-y-4">
-          <p className="text-green-700 font-medium">Your download is ready!</p>
+          <p className="text-green-700 font-medium">
+            Your {platform.charAt(0).toUpperCase() + platform.slice(1)} video is ready!
+          </p>
           <a
             href={videoInfo.videoUrl}
             target="_blank"
@@ -112,18 +115,18 @@ const DownloadProcess = () => {
     </div>
   );
 };
+
+
+
 const DownloaderForm = () => {
   const [url, setUrl] = useState("");
   const [isValidating, setIsValidating] = useState(false);
   const [validationError, setValidationError] = useState("");
-  // const [isProcessing, setIsProcessing] = useState(false);
+  const { isProcessing, startDownload, platform } = useContext(VideoDownloadContext);
 
-  const { isProcessing, startDownload } = useContext(VideoDownloadContext);
-
-  const validateYoutubeUrl = (url) => {
-    // Basic YouTube URL validation
-    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-    return youtubeRegex.test(url);
+  const validateUrl = (url) => {
+    const urlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|facebook\.com|instagram\.com|tiktok\.com)\/.+$/;
+    return urlRegex.test(url);
   };
 
   const handleSubmit = async (e) => {
@@ -134,9 +137,9 @@ const DownloaderForm = () => {
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const isValid = validateYoutubeUrl(url);
+      const isValid = validateUrl(url);
       if (!isValid) {
-        setValidationError("Please enter a valid YouTube URL");
+        setValidationError("Please enter a valid URL from YouTube, Facebook, Instagram, or TikTok");
         setIsValidating(false);
         return;
       }
@@ -144,6 +147,7 @@ const DownloaderForm = () => {
       setIsValidating(false);
     } catch (error) {
       handleError(error);
+      setIsValidating(false);
     }
   };
 
@@ -157,10 +161,9 @@ const DownloaderForm = () => {
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className={`w-full p-4 pr-12 border ${
-                  validationError ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent`}
-                placeholder="Paste YouTube URL here..."
+                className={`w-full p-4 pr-12 border ${validationError ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent`}
+                placeholder="Paste YouTube, Facebook, Instagram, or TikTok URL here..."
                 disabled={isValidating}
               />
               <button
@@ -175,19 +178,11 @@ const DownloaderForm = () => {
           </form>
 
           <div className="flex flex-wrap gap-3 justify-center mt-4">
-            <div className="text-sm text-gray-600">Popular formats:</div>
-            <button className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-              MP4 - 720p
-            </button>
-            <button className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-              MP4 - 1080p
-            </button>
-            <button className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-              MP3 - 320kbps
-            </button>
-            <button className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-              MP3 - 128kbps
-            </button>
+            <div className="text-sm text-gray-600">Supported platforms:</div>
+            <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">YouTube</span>
+            <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Facebook</span>
+            <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">Instagram</span>
+            <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">TikTok</span>
           </div>
         </>
       ) : (
@@ -197,7 +192,7 @@ const DownloaderForm = () => {
   );
 };
 
-const YoutubeDownloader = () => {
+const VideoDownloader = () => {
   return (
     <VideoDownloadProvider>
       <div className="flex flex-col min-h-screen">
@@ -209,10 +204,9 @@ const YoutubeDownloader = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="text-4xl text-white md:text-5xl font-bold mb-6">YouTube Video Downloader</h1>
+                <h1 className="text-4xl text-white md:text-5xl font-bold mb-6">Video Downloader</h1>
                 <p className="text-xl text-white mb-8">
-                  Download your favorite YouTube videos quickly and easily. Just paste the URL, select
-                  quality, and download!
+                  Download videos from YouTube, Facebook, Instagram, or TikTok quickly and easily. Just paste the URL and download!
                 </p>
               </motion.div>
             </div>
@@ -227,4 +221,4 @@ const YoutubeDownloader = () => {
   );
 };
 
-export default YoutubeDownloader;
+export default VideoDownloader;
