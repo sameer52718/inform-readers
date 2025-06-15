@@ -276,14 +276,54 @@ export const TOOL_CATEGORIES = [
         name: "Maths Calculators",
         tools: [
           {
-            id: "quadratic-solver",
-            name: "Quadratic Solver",
-            path: "/tools/calculators/maths/quadratic-solver",
+            id: "advanced_fraction_calculator",
+            name: "Advanced Fraction Calculator",
+            path: "/tools/calculators/math/advanced-fraction-calculator",
           },
           {
-            id: "percentage-calculator",
-            name: "Percentage Calculator",
-            path: "/tools/calculators/maths/percentage",
+            id: "area_calculator",
+            name: "Area Calculator",
+            path: "/tools/calculators/math/area-calculator",
+          },
+          {
+            id: "average_calculator",
+            name: "Average Calculator",
+            path: "/tools/calculators/math/average-calculator",
+          },
+          {
+            id: "big_number_calculator",
+            name: "Big Number Calculator",
+            path: "/tools/calculators/math/big-number-calculator",
+          },
+          {
+            id: "binary_calculator",
+            name: "Binary Calculator",
+            path: "/tools/calculators/math/binary-calculator",
+          },
+          {
+            id: "circle_calculator",
+            name: "Circle Calculator",
+            path: "/tools/calculators/math/circle-calculator",
+          },
+          {
+            id: "common_factor_calculator",
+            name: "Common Factor Calculator",
+            path: "/tools/calculators/math/common-factor-calculator",
+          },
+          {
+            id: "confidence_interval_calculator",
+            name: "Confidence Interval Calculator",
+            path: "/tools/calculators/math/confidence-interval-calculator",
+          },
+          {
+            id: "distance_calculator",
+            name: "Distance Calculator",
+            path: "/tools/calculators/math/distance-calculator",
+          },
+          {
+            id: "exponent_calculator",
+            name: "Exponent Calculator",
+            path: "/tools/calculators/math/exponent-calculator",
           },
         ],
       },
@@ -904,5 +944,49 @@ export const calculatorMetaData = {
     title: "Work and Energy Calculator | Inform Readers",
     description:
       "Calculate work done, kinetic and potential energy, and energy conservation in various physical systems.",
+  },
+  "advanced-fraction-calculator": {
+    title: "Advanced Fraction Calculator | Inform Readers",
+    description:
+      "Add, subtract, multiply, or divide fractions with step-by-step simplification. Great for students and professionals alike.",
+  },
+  "area-calculator": {
+    title: "Area Calculator | Inform Readers",
+    description: "Quickly calculate the area of geometric shapes like circles, squares, triangles, and more.",
+  },
+  "average-calculator": {
+    title: "Average Calculator | Inform Readers",
+    description:
+      "Find the mean of any data set quickly and easily. Supports weighted and unweighted averages.",
+  },
+  "big-number-calculator": {
+    title: "Big Number Calculator | Inform Readers",
+    description: "Perform calculations on extremely large integers beyond normal calculator limits.",
+  },
+  "binary-calculator": {
+    title: "Binary Calculator | Inform Readers",
+    description: "Convert between binary, decimal, and hexadecimal or perform binary arithmetic operations.",
+  },
+  "circle-calculator": {
+    title: "Circle Calculator | Inform Readers",
+    description: "Calculate circle area, circumference, diameter, and radius with just one value.",
+  },
+  "common-factor-calculator": {
+    title: "Common Factor Calculator | Inform Readers",
+    description: "Find common factors or the greatest common divisor (GCD) of any two or more integers.",
+  },
+  "confidence-interval-calculator": {
+    title: "Confidence Interval Calculator | Inform Readers",
+    description:
+      "Compute confidence intervals for population means and proportions. Useful for statistics students and researchers.",
+  },
+  "distance-calculator": {
+    title: "Distance Calculator | Inform Readers",
+    description: "Calculate the straight-line distance between two points in 2D or 3D space.",
+  },
+  "exponent-calculator": {
+    title: "Exponent Calculator | Inform Readers",
+    description:
+      "Calculate powers and exponents with base and exponent inputs. Supports negative and fractional powers.",
   },
 };

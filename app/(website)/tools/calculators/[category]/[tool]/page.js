@@ -1,5 +1,6 @@
 import { calculatorMetaData } from "@/constant/tools";
 
+// Physics
 import AccelerationCalculatorWithCharts from "@/components/pages/tools/calculator/physics/acceleration-calculator-with-charts";
 import ArrowSpeedCalculator from "@/components/pages/tools/calculator/physics/arrow-speed-calculator";
 import AstrophysicsCalculator from "@/components/pages/tools/calculator/physics/astrophysics-calculator";
@@ -39,7 +40,20 @@ import VectorResolver from "@/components/pages/tools/calculator/physics/vector-r
 import WaveMechanicsCalculator from "@/components/pages/tools/calculator/physics/wave-mechanics-calculator";
 import WorkEnergyCalculator from "@/components/pages/tools/calculator/physics/work-energy-calculator";
 
+// Maths
+import AdvancedFractionCalculator from "@/components/pages/tools/calculator/math/advanced-fraction-calculator";
+import AreaCalculator from "@/components/pages/tools/calculator/math/area-calculator";
+import AverageCalculator from "@/components/pages/tools/calculator/math/average-calculator";
+import BigNumberCalculator from "@/components/pages/tools/calculator/math/big-number-calculator";
+import BinaryCalculator from "@/components/pages/tools/calculator/math/binary-calculator";
+import CircleCalculator from "@/components/pages/tools/calculator/math/circle-calculator";
+import CommonFactorCalculator from "@/components/pages/tools/calculator/math/common-factor-calculator";
+import ConfidenceIntervalCalculator from "@/components/pages/tools/calculator/math/confidence-interval-calculator";
+import DistanceCalculator from "@/components/pages/tools/calculator/math/distance-calculator";
+import ExponentCalculator from "@/components/pages/tools/calculator/math/exponent-calculator";
+
 const toolComponents = {
+  // Physics
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
   "arrow-speed-calculator": ArrowSpeedCalculator,
   "astrophysics-calculator": AstrophysicsCalculator,
@@ -78,6 +92,17 @@ const toolComponents = {
   "vector-resolver": VectorResolver,
   "wave-mechanics-calculator": WaveMechanicsCalculator,
   "work-energy-calculator": WorkEnergyCalculator,
+  // Maths
+  "advanced-fraction-calculator": AdvancedFractionCalculator,
+  "area-calculator": AreaCalculator,
+  "average-calculator": AverageCalculator,
+  "big-number-calculator": BigNumberCalculator,
+  "binary-calculator": BinaryCalculator,
+  "circle-calculator": CircleCalculator,
+  "common-factor-calculator": CommonFactorCalculator,
+  "confidence-interval-calculator": ConfidenceIntervalCalculator,
+  "distance-calculator": DistanceCalculator,
+  "exponent-calculator": ExponentCalculator,
 };
 
 export async function generateMetadata({ params }) {
