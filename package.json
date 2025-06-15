@@ -37,6 +37,7 @@
     "simplebar-react": "^3.3.0",
     "swiper": "^11.2.4",
     "tesseract.js": "^6.0.1",
+    "three": "^0.177.0",
     "uuid": "^11.1.0",
     "yup": "^1.6.1"
   },
