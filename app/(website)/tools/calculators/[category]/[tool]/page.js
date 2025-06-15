@@ -86,6 +86,23 @@ import TriangleCalculator from "@/components/pages/tools/calculator/math/triangl
 import VolumeCalculator from "@/components/pages/tools/calculator/math/volume-calculator";
 import ZScoreCalculator from "@/components/pages/tools/calculator/math/z-score-calculator";
 
+// Health
+import AnorexicBMICalculator from "@/components/pages/tools/calculator/health/anorexic-bmi-calculator";
+import ArmyBodyFatCalculator from "@/components/pages/tools/calculator/health/army-body-fat-calculator";
+import BMICalculator from "@/components/pages/tools/calculator/health/bmi-calculator";
+import BMRCalculator from "@/components/pages/tools/calculator/health/bmr-calculator";
+import BodySurfaceAreaCalculator from "@/components/pages/tools/calculator/health/body-surface-area-calculator";
+import CaloriesBurnedCalculator from "@/components/pages/tools/calculator/health/calories-burned-calculator";
+import CarbohydrateCalculator from "@/components/pages/tools/calculator/health/carbohydrate-calculator";
+import FatIntakeCalculator from "@/components/pages/tools/calculator/health/fat-intake-calculator";
+import HealthyWeightCalculator from "@/components/pages/tools/calculator/health/healthy-weight-calculator";
+import IdealWeightCalculator from "@/components/pages/tools/calculator/health/ideal-weight-calculator";
+import LeanBodyMassCalculator from "@/components/pages/tools/calculator/health/lean-body-mass-calculator";
+import OneRepMaxCalculator from "@/components/pages/tools/calculator/health/one-rep-max-calculator";
+import OverweightCalculator from "@/components/pages/tools/calculator/health/overweight-calculator";
+import ProteinCalculator from "@/components/pages/tools/calculator/health/protein-calculator";
+import TDEECalculator from "@/components/pages/tools/calculator/health/tdee-calculator";
+
 const toolComponents = {
   // Physics
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
@@ -171,6 +188,22 @@ const toolComponents = {
   "triangle-calculator": TriangleCalculator,
   "volume-calculator": VolumeCalculator,
   "z-score-calculator": ZScoreCalculator,
+  // Health
+  "anorexic-bmi-calculator": AnorexicBMICalculator,
+  "army-body-fat-calculator": ArmyBodyFatCalculator,
+  "bmi-calculator": BMICalculator,
+  "bmr-calculator": BMRCalculator,
+  "body-surface-area-calculator": BodySurfaceAreaCalculator,
+  "calories-burned-calculator": CaloriesBurnedCalculator,
+  "carbohydrate-calculator": CarbohydrateCalculator,
+  "fat-intake-calculator": FatIntakeCalculator,
+  "healthy-weight-calculator": HealthyWeightCalculator,
+  "ideal-weight-calculator": IdealWeightCalculator,
+  "lean-body-mass-calculator": LeanBodyMassCalculator,
+  "one-rep-max-calculator": OneRepMaxCalculator,
+  "overweight-calculator": OverweightCalculator,
+  "protein-calculator": ProteinCalculator,
+  "tdee-calculator": TDEECalculator,
 };
 
 export async function generateMetadata({ params }) {

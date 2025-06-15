@@ -497,6 +497,87 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "health-calculators",
+        name: "Health Calculators",
+        tools: [
+          {
+            id: "anorexic_bmi_calculator",
+            name: "Anorexic BMI Calculator",
+            path: "/tools/calculators/health/anorexic-bmi-calculator",
+          },
+          {
+            id: "army_body_fat_calculator",
+            name: "Army Body Fat Calculator",
+            path: "/tools/calculators/health/army-body-fat-calculator",
+          },
+          {
+            id: "bmi_calculator",
+            name: "BMI Calculator",
+            path: "/tools/calculators/health/bmi-calculator",
+          },
+          {
+            id: "bmr_calculator",
+            name: "BMR Calculator",
+            path: "/tools/calculators/health/bmr-calculator",
+          },
+          {
+            id: "body_surface_area_calculator",
+            name: "Body Surface Area Calculator",
+            path: "/tools/calculators/health/body-surface-area-calculator",
+          },
+          {
+            id: "calories_burned_calculator",
+            name: "Calories Burned Calculator",
+            path: "/tools/calculators/health/calories-burned-calculator",
+          },
+          {
+            id: "carbohydrate_calculator",
+            name: "Carbohydrate Calculator",
+            path: "/tools/calculators/health/carbohydrate-calculator",
+          },
+          {
+            id: "fat_intake_calculator",
+            name: "Fat Intake Calculator",
+            path: "/tools/calculators/health/fat-intake-calculator",
+          },
+          {
+            id: "healthy_weight_calculator",
+            name: "Healthy Weight Calculator",
+            path: "/tools/calculators/health/healthy-weight-calculator",
+          },
+          {
+            id: "ideal_weight_calculator",
+            name: "Ideal Weight Calculator",
+            path: "/tools/calculators/health/ideal-weight-calculator",
+          },
+          {
+            id: "lean_body_mass_calculator",
+            name: "Lean Body Mass Calculator",
+            path: "/tools/calculators/health/lean-body-mass-calculator",
+          },
+          {
+            id: "one_rep_max_calculator",
+            name: "One Rep Max Calculator",
+            path: "/tools/calculators/health/one-rep-max-calculator",
+          },
+          {
+            id: "overweight_calculator",
+            name: "Overweight Calculator",
+            path: "/tools/calculators/health/overweight-calculator",
+          },
+          {
+            id: "protein_calculator",
+            name: "Protein Calculator",
+            path: "/tools/calculators/health/protein-calculator",
+          },
+          {
+            id: "tdee_calculator",
+            name: "TDEE Calculator",
+            path: "/tools/calculators/health/tdee-calculator",
+          },
+        ],
+      },
     ],
   },
   {
@@ -1383,5 +1464,76 @@ export const calculatorMetaData = {
     title: "Z-score Calculator | Inform Readers",
     description:
       "Calculate Z-scores for normal distributions to determine standard deviations from the mean.",
+  },
+  "anorexic-bmi-calculator": {
+    title: "Anorexic BMI Calculator | Inform Readers",
+    description:
+      "Determine if your BMI falls within anorexic levels using our specialized Anorexic BMI Calculator.",
+  },
+  "army-body-fat-calculator": {
+    title: "Army Body Fat Calculator | Inform Readers",
+    description:
+      "Calculate your body fat percentage using official U.S. Army standards for fitness assessments.",
+  },
+  "bmi-calculator": {
+    title: "BMI Calculator | Inform Readers",
+    description:
+      "Instantly calculate your Body Mass Index (BMI) and understand your weight category for better health planning.",
+  },
+  "bmr-calculator": {
+    title: "BMR Calculator | Inform Readers",
+    description:
+      "Estimate your Basal Metabolic Rate to understand how many calories your body burns at rest.",
+  },
+  "body-surface-area-calculator": {
+    title: "Body Surface Area Calculator | Inform Readers",
+    description: "Calculate your total body surface area (BSA) for medical dosing and clinical purposes.",
+  },
+  "calories-burned-calculator": {
+    title: "Calories Burned Calculator | Inform Readers",
+    description: "Estimate how many calories you burn from activities like running, cycling, and walking.",
+  },
+  "carbohydrate-calculator": {
+    title: "Carbohydrate Calculator | Inform Readers",
+    description:
+      "Find out how many carbs you need daily based on your activity level, weight goals, and dietary preferences.",
+  },
+  "fat-intake-calculator": {
+    title: "Fat Intake Calculator | Inform Readers",
+    description:
+      "Determine the optimal amount of dietary fat for your health goals with our Fat Intake Calculator.",
+  },
+  "healthy-weight-calculator": {
+    title: "Healthy Weight Calculator | Inform Readers",
+    description: "See if you're within the healthy weight range for your height and age using our easy tool.",
+  },
+  "ideal-weight-calculator": {
+    title: "Ideal Weight Calculator | Inform Readers",
+    description:
+      "Estimate your ideal body weight using multiple methods like Devine, Robinson, and BMI-based formulas.",
+  },
+  "lean-body-mass-calculator": {
+    title: "Lean Body Mass Calculator | Inform Readers",
+    description: "Calculate your lean body mass to better plan fitness, diet, and body composition goals.",
+  },
+  "one-rep-max-calculator": {
+    title: "One Rep Max Calculator | Inform Readers",
+    description:
+      "Estimate your 1RM — the maximum weight you can lift for one repetition — for strength training.",
+  },
+  "overweight-calculator": {
+    title: "Overweight Calculator | Inform Readers",
+    description:
+      "Check if your BMI places you in the overweight category and what steps you can take for change.",
+  },
+  "protein-calculator": {
+    title: "Protein Calculator | Inform Readers",
+    description:
+      "Determine your daily protein needs based on body weight, activity level, and fitness goals.",
+  },
+  "tdee-calculator": {
+    title: "TDEE Calculator | Inform Readers",
+    description:
+      "Calculate your Total Daily Energy Expenditure (TDEE) to plan calorie intake for weight loss or gain.",
   },
 };
