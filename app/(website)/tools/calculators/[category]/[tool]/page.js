@@ -61,6 +61,16 @@ import LogarithmCalculator from "@/components/pages/tools/calculator/math/logari
 import LongDivisionCalculator from "@/components/pages/tools/calculator/math/long-division-calculator";
 import MatrixCalculator from "@/components/pages/tools/calculator/math/matrix-calculator";
 import MeanMedianModeRangeCalculator from "@/components/pages/tools/calculator/math/mean-median-mode-range-calculator";
+import NumberSequenceCalculator from "@/components/pages/tools/calculator/math/number-sequence-calculator";
+import PValueCalculator from "@/components/pages/tools/calculator/math/p-value-calculator";
+import PercentErrorCalculator from "@/components/pages/tools/calculator/math/percent-error-calculator";
+import PercentageCalculator from "@/components/pages/tools/calculator/math/percentage-calculator";
+import PermutationAndCombinationCalculator from "@/components/pages/tools/calculator/math/permutation-and-combination-calculator";
+import PrimeFactorizationCalculator from "@/components/pages/tools/calculator/math/prime-factorization-calculator";
+import ProbabilityCalculator from "@/components/pages/tools/calculator/math/probability-calculator";
+import PythagoreanTheoremCalculator from "@/components/pages/tools/calculator/math/pythagorean-theorem-calculator";
+import QuadraticFormulaCalculator from "@/components/pages/tools/calculator/math/quadratic-formula-calculator";
+import RandomNumberGenerator from "@/components/pages/tools/calculator/math/random-number-generator";
 
 const toolComponents = {
   // Physics
@@ -123,6 +133,16 @@ const toolComponents = {
   "long-division-calculator": LongDivisionCalculator,
   "matrix-calculator": MatrixCalculator,
   "mean-median-mode-range-calculator": MeanMedianModeRangeCalculator,
+  "number-sequence-calculator": NumberSequenceCalculator,
+  "p-value-calculator": PValueCalculator,
+  "percent-error-calculator": PercentErrorCalculator,
+  "percentage-calculator": PercentageCalculator,
+  "permutation-and-combination-calculator": PermutationAndCombinationCalculator,
+  "prime-factorization-calculator": PrimeFactorizationCalculator,
+  "probability-calculator": ProbabilityCalculator,
+  "pythagorean-theorem-calculator": PythagoreanTheoremCalculator,
+  "quadratic-formula-calculator": QuadraticFormulaCalculator,
+  "random-number-generator": RandomNumberGenerator,
 };
 
 export async function generateMetadata({ params }) {

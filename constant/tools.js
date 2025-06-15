@@ -375,6 +375,56 @@ export const TOOL_CATEGORIES = [
             name: "Mean, Median, Mode, Range Calculator",
             path: "/tools/calculators/math/mean-median-mode-range-calculator",
           },
+          {
+            id: "number_sequence_calculator",
+            name: "Number Sequence Calculator",
+            path: "/tools/calculators/math/number-sequence-calculator",
+          },
+          {
+            id: "p_value_calculator",
+            name: "P-value Calculator",
+            path: "/tools/calculators/math/p-value-calculator",
+          },
+          {
+            id: "percent_error_calculator",
+            name: "Percent Error Calculator",
+            path: "/tools/calculators/math/percent-error-calculator",
+          },
+          {
+            id: "percentage_calculator",
+            name: "Percentage Calculator",
+            path: "/tools/calculators/math/percentage-calculator",
+          },
+          {
+            id: "permutation_and_combination_calculator",
+            name: "Permutation and Combination Calculator",
+            path: "/tools/calculators/math/permutation-and-combination-calculator",
+          },
+          {
+            id: "prime_factorization_calculator",
+            name: "Prime Factorization Calculator",
+            path: "/tools/calculators/math/prime-factorization-calculator",
+          },
+          {
+            id: "probability_calculator",
+            name: "Probability Calculator",
+            path: "/tools/calculators/math/probability-calculator",
+          },
+          {
+            id: "pythagorean_theorem_calculator",
+            name: "Pythagorean Theorem Calculator",
+            path: "/tools/calculators/math/pythagorean-theorem-calculator",
+          },
+          {
+            id: "quadratic_formula_calculator",
+            name: "Quadratic Formula Calculator",
+            path: "/tools/calculators/math/quadratic-formula-calculator",
+          },
+          {
+            id: "random_number_generator",
+            name: "Random Number Generator",
+            path: "/tools/calculators/math/random-number-generator",
+          },
         ],
       },
     ],
@@ -1083,5 +1133,127 @@ export const calculatorMetaData = {
     title: "Mean, Median, Mode, Range Calculator | Inform Readers",
     description:
       "Compute key statistical measures from a data set in seconds. Useful for students and analysts.",
+  },
+  "advanced-fraction-calculator": {
+    title: "Advanced Fraction Calculator | Inform Readers",
+    description:
+      "Solve complex fraction calculations with step-by-step output and simplification using our Advanced Fraction Calculator.",
+  },
+  "area-calculator": {
+    title: "Area Calculator | Inform Readers",
+    description: "Calculate the area of various geometric shapes instantly with our Area Calculator.",
+  },
+  "average-calculator": {
+    title: "Average Calculator | Inform Readers",
+    description: "Find the mean of numbers accurately with our easy-to-use Average Calculator.",
+  },
+  "big-number-calculator": {
+    title: "Big Number Calculator | Inform Readers",
+    description:
+      "Perform calculations on large integers beyond normal limits using our Big Number Calculator.",
+  },
+  "binary-calculator": {
+    title: "Binary Calculator | Inform Readers",
+    description: "Add, subtract, and convert binary numbers with our comprehensive Binary Calculator.",
+  },
+  "circle-calculator": {
+    title: "Circle Calculator | Inform Readers",
+    description: "Compute the area, circumference, and diameter of a circle with ease.",
+  },
+  "common-factor-calculator": {
+    title: "Common Factor Calculator | Inform Readers",
+    description: "Find all common factors of two or more numbers with our fast and simple tool.",
+  },
+  "confidence-interval-calculator": {
+    title: "Confidence Interval Calculator | Inform Readers",
+    description: "Estimate the confidence interval for population parameters based on sample statistics.",
+  },
+  "distance-calculator": {
+    title: "Distance Calculator | Inform Readers",
+    description: "Compute the distance between two points using coordinate geometry.",
+  },
+  "exponent-calculator": {
+    title: "Exponent Calculator | Inform Readers",
+    description: "Easily calculate powers and exponents of numbers with this quick calculator.",
+  },
+  "factor-calculator": {
+    title: "Factor Calculator | Inform Readers",
+    description: "Get all the factors of any integer quickly and accurately.",
+  },
+  "fraction-calculator": {
+    title: "Fraction Calculator | Inform Readers",
+    description: "Perform operations on fractions, including simplification and conversion.",
+  },
+  "greatest-common-factor-calculator": {
+    title: "Greatest Common Factor Calculator | Inform Readers",
+    description: "Find the GCF of two or more numbers quickly and easily.",
+  },
+  "half-life-calculator": {
+    title: "Half-Life Calculator | Inform Readers",
+    description: "Determine the remaining quantity of a substance based on its half-life.",
+  },
+  "hex-calculator": {
+    title: "Hex Calculator | Inform Readers",
+    description: "Perform hexadecimal arithmetic and conversions with ease.",
+  },
+  "lcm-calculator": {
+    title: "LCM Calculator | Inform Readers",
+    description: "Calculate the least common multiple (LCM) of any set of integers.",
+  },
+  "logarithm-calculator": {
+    title: "Logarithm Calculator | Inform Readers",
+    description: "Calculate logarithms for any base, including natural and common logs.",
+  },
+  "long-division-calculator": {
+    title: "Long Division Calculator | Inform Readers",
+    description: "Perform long division with step-by-step instructions.",
+  },
+  "matrix-calculator": {
+    title: "Matrix Calculator | Inform Readers",
+    description: "Add, subtract, and multiply matrices or find the determinant and inverse.",
+  },
+  "mean-median-mode-range-calculator": {
+    title: "Mean, Median, Mode, Range Calculator | Inform Readers",
+    description: "Quickly compute all key measures of central tendency for your dataset.",
+  },
+  "number-sequence-calculator": {
+    title: "Number Sequence Calculator | Inform Readers",
+    description: "Identify patterns and predict the next terms in number sequences.",
+  },
+  "p-value-calculator": {
+    title: "P-value Calculator | Inform Readers",
+    description: "Find the p-value for your statistical test results to interpret significance.",
+  },
+  "percent-error-calculator": {
+    title: "Percent Error Calculator | Inform Readers",
+    description: "Calculate the percentage error between a measured and true value.",
+  },
+  "percentage-calculator": {
+    title: "Percentage Calculator | Inform Readers",
+    description: "Quickly compute percentages, percentage increases or decreases.",
+  },
+  "permutation-and-combination-calculator": {
+    title: "Permutation and Combination Calculator | Inform Readers",
+    description: "Calculate total permutations and combinations for given elements.",
+  },
+  "prime-factorization-calculator": {
+    title: "Prime Factorization Calculator | Inform Readers",
+    description: "Break down numbers into their prime factors step by step.",
+  },
+  "probability-calculator": {
+    title: "Probability Calculator | Inform Readers",
+    description: "Compute the probability of events based on inputs and conditions.",
+  },
+  "pythagorean-theorem-calculator": {
+    title: "Pythagorean Theorem Calculator | Inform Readers",
+    description: "Calculate the hypotenuse or any side of a right triangle easily.",
+  },
+  "quadratic-formula-calculator": {
+    title: "Quadratic Formula Calculator | Inform Readers",
+    description: "Solve quadratic equations using the standard formula with real-time output.",
+  },
+  "random-number-generator": {
+    title: "Random Number Generator | Inform Readers",
+    description: "Generate random numbers for any range and format instantly.",
   },
 };
