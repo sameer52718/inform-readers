@@ -180,11 +180,6 @@ export const TOOL_CATEGORIES = [
             path: "/tools/calculators/physics/momentum-collision-calculator",
           },
           {
-            id: "muzzle_velocity_calculator",
-            name: "Muzzle Velocity Calculator",
-            path: "/tools/calculators/physics/muzzle-velocity-calculator",
-          },
-          {
             id: "nuclear_physics_calculator",
             name: "Nuclear Physics Calculator",
             path: "/tools/calculators/physics/nuclear-physics-calculator",
@@ -774,11 +769,6 @@ export const calculatorMetaData = {
     title: "Momentum & Collision Calculator | Inform Readers",
     description:
       "Calculate momentum, impulse, and final velocities for elastic and inelastic collisions between bodies.",
-  },
-  "muzzle-velocity-calculator": {
-    title: "Muzzle Velocity Calculator | Inform Readers",
-    description:
-      "Calculate the muzzle velocity of a projectile based on barrel length, propellant force, and projectile mass. Ideal for ballistics and firearms analysis.",
   },
   "nuclear-physics-calculator": {
     title: "Nuclear Physics Calculator | Inform Readers",

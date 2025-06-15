@@ -20,16 +20,15 @@ import GroundSpeedCalculator from "@/components/pages/tools/calculator/physics/g
 import HarmonicMotionCalculator from "@/components/pages/tools/calculator/physics/harmonic-motion-calculator";
 import MagnitudeAccelerationCalculator from "@/components/pages/tools/calculator/physics/magnitude-acceleration-calculator";
 import MomentumCollisionCalculator from "@/components/pages/tools/calculator/physics/momentum-collision-calculator";
-// import MuzzleVelocityCalculator from "@/components/pages/tools/calculator/physics/muzzle-velocity-calculator";
-// import NuclearPhysicsCalculator from "@/components/pages/tools/calculator/physics/nuclear-physics-calculator";
-// import OpticsCalculator from "@/components/pages/tools/calculator/physics/optics-calculator";
-// import ParticlePhysicsCalculator from "@/components/pages/tools/calculator/physics/particle-physics-calculator";
-// import PlasmaPhysicsCalculator from "@/components/pages/tools/calculator/physics/plasma-physics-calculator";
-// import PolarMomentCalculator from "@/components/pages/tools/calculator/physics/polar-moment-calculator";
-// import ProjectileMotionCalculator from "@/components/pages/tools/calculator/physics/projectile-motion-calculator";
-// import ProjectileVisualizerAdvanced from "@/components/pages/tools/calculator/physics/projectile-visualizer-advanced";
-// import QuantumFieldTheoryCalculator from "@/components/pages/tools/calculator/physics/quantum-field-theory-calculator";
-// import QuantumMechanicsCalculator from "@/components/pages/tools/calculator/physics/quantum-mechanics-calculator";
+import NuclearPhysicsCalculator from "@/components/pages/tools/calculator/physics/nuclear-physics-calculator";
+import OpticsCalculator from "@/components/pages/tools/calculator/physics/optics-calculator";
+import ParticlePhysicsCalculator from "@/components/pages/tools/calculator/physics/particle-physics-calculator";
+import PlasmaPhysicsCalculator from "@/components/pages/tools/calculator/physics/plasma-physics-calculator";
+import PolarMomentCalculator from "@/components/pages/tools/calculator/physics/polar-moment-calculator";
+import ProjectileMotionCalculator from "@/components/pages/tools/calculator/physics/projectile-motion-calculator";
+import ProjectileVisualizerAdvanced from "@/components/pages/tools/calculator/physics/projectile-visualizer-advanced";
+import QuantumFieldTheoryCalculator from "@/components/pages/tools/calculator/physics/quantum-field-theory-calculator";
+import QuantumMechanicsCalculator from "@/components/pages/tools/calculator/physics/quantum-mechanics-calculator";
 
 const toolComponents = {
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
@@ -52,16 +51,15 @@ const toolComponents = {
   "harmonic-motion-calculator": HarmonicMotionCalculator,
   "magnitude-acceleration-calculator": MagnitudeAccelerationCalculator,
   "momentum-collision-calculator": MomentumCollisionCalculator,
-  //  "muzzle-velocity-calculator": MuzzleVelocityCalculator,
-  // "nuclear-physics-calculator": NuclearPhysicsCalculator,
-  // "optics-calculator": OpticsCalculator,
-  // "particle-physics-calculator": ParticlePhysicsCalculator,
-  // "plasma-physics-calculator": PlasmaPhysicsCalculator,
-  // "polar-moment-calculator": PolarMomentCalculator,
-  // "projectile-motion-calculator": ProjectileMotionCalculator,
-  // "projectile-visualizer-advanced": ProjectileVisualizerAdvanced,
-  // "quantum-field-theory-calculator": QuantumFieldTheoryCalculator,
-  // "quantum-mechanics-calculator": QuantumMechanicsCalculator,
+  "nuclear-physics-calculator": NuclearPhysicsCalculator,
+  "optics-calculator": OpticsCalculator,
+  "particle-physics-calculator": ParticlePhysicsCalculator,
+  "plasma-physics-calculator": PlasmaPhysicsCalculator,
+  "polar-moment-calculator": PolarMomentCalculator,
+  "projectile-motion-calculator": ProjectileMotionCalculator,
+  "projectile-visualizer-advanced": ProjectileVisualizerAdvanced,
+  "quantum-field-theory-calculator": QuantumFieldTheoryCalculator,
+  "quantum-mechanics-calculator": QuantumMechanicsCalculator,
 };
 
 export async function generateMetadata({ params }) {
