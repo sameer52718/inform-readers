@@ -179,6 +179,56 @@ export const TOOL_CATEGORIES = [
             name: "Momentum & Collision Calculator",
             path: "/tools/calculators/physics/momentum-collision-calculator",
           },
+          {
+            id: "muzzle_velocity_calculator",
+            name: "Muzzle Velocity Calculator",
+            path: "/tools/calculators/physics/muzzle-velocity-calculator",
+          },
+          {
+            id: "nuclear_physics_calculator",
+            name: "Nuclear Physics Calculator",
+            path: "/tools/calculators/physics/nuclear-physics-calculator",
+          },
+          {
+            id: "optics_calculator",
+            name: "Optics Calculator",
+            path: "/tools/calculators/physics/optics-calculator",
+          },
+          {
+            id: "particle_physics_calculator",
+            name: "Particle Physics Calculator",
+            path: "/tools/calculators/physics/particle-physics-calculator",
+          },
+          {
+            id: "plasma_physics_calculator",
+            name: "Plasma Physics Calculator",
+            path: "/tools/calculators/physics/plasma-physics-calculator",
+          },
+          {
+            id: "polar_moment_calculator",
+            name: "Polar Moment Calculator",
+            path: "/tools/calculators/physics/polar-moment-calculator",
+          },
+          {
+            id: "projectile_motion_calculator",
+            name: "Projectile Motion Calculator",
+            path: "/tools/calculators/physics/projectile-motion-calculator",
+          },
+          {
+            id: "projectile_visualizer_advanced",
+            name: "Projectile Visualizer Advanced",
+            path: "/tools/calculators/physics/projectile-visualizer-advanced",
+          },
+          {
+            id: "quantum_field_theory_calculator",
+            name: "Quantum Field Theory Calculator",
+            path: "/tools/calculators/physics/quantum-field-theory-calculator",
+          },
+          {
+            id: "quantum_mechanics_calculator",
+            name: "Quantum Mechanics Calculator",
+            path: "/tools/calculators/physics/quantum-mechanics-calculator",
+          },
         ],
       },
       {
@@ -724,5 +774,55 @@ export const calculatorMetaData = {
     title: "Momentum & Collision Calculator | Inform Readers",
     description:
       "Calculate momentum, impulse, and final velocities for elastic and inelastic collisions between bodies.",
+  },
+  "muzzle-velocity-calculator": {
+    title: "Muzzle Velocity Calculator | Inform Readers",
+    description:
+      "Calculate the muzzle velocity of a projectile based on barrel length, propellant force, and projectile mass. Ideal for ballistics and firearms analysis.",
+  },
+  "nuclear-physics-calculator": {
+    title: "Nuclear Physics Calculator | Inform Readers",
+    description:
+      "Perform calculations related to nuclear decay, binding energy, and fission/fusion processes. Designed for advanced nuclear science studies.",
+  },
+  "optics-calculator": {
+    title: "Optics Calculator | Inform Readers",
+    description:
+      "Analyze light behavior through lenses and mirrors, including focal length, magnification, and image formation.",
+  },
+  "particle-physics-calculator": {
+    title: "Particle Physics Calculator | Inform Readers",
+    description:
+      "Explore interactions between subatomic particles, decay processes, and energy-mass relations with this high-energy physics tool.",
+  },
+  "plasma-physics-calculator": {
+    title: "Plasma Physics Calculator | Inform Readers",
+    description:
+      "Calculate plasma parameters such as Debye length, plasma frequency, and temperature. Ideal for space and fusion research.",
+  },
+  "polar-moment-calculator": {
+    title: "Polar Moment Calculator | Inform Readers",
+    description:
+      "Determine the polar moment of inertia for various cross-sections. Useful for torsional stress analysis in mechanical engineering.",
+  },
+  "projectile-motion-calculator": {
+    title: "Projectile Motion Calculator | Inform Readers",
+    description:
+      "Compute the trajectory, range, time of flight, and maximum height of projectiles under gravity.",
+  },
+  "projectile-visualizer-advanced": {
+    title: "Projectile Visualizer Advanced | Inform Readers",
+    description:
+      "Visualize and simulate complex projectile motion with air resistance and angle variations. Great for advanced physics demonstrations.",
+  },
+  "quantum-field-theory-calculator": {
+    title: "Quantum Field Theory Calculator | Inform Readers",
+    description:
+      "Dive into quantum fields and particle interactions with tools for Lagrangians, Feynman diagrams, and more.",
+  },
+  "quantum-mechanics-calculator": {
+    title: "Quantum Mechanics Calculator | Inform Readers",
+    description:
+      "Solve quantum problems involving wavefunctions, potential wells, uncertainty principles, and energy levels.",
   },
 };
