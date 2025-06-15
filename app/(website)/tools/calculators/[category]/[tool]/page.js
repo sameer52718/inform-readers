@@ -103,6 +103,9 @@ import OverweightCalculator from "@/components/pages/tools/calculator/health/ove
 import ProteinCalculator from "@/components/pages/tools/calculator/health/protein-calculator";
 import TDEECalculator from "@/components/pages/tools/calculator/health/tdee-calculator";
 
+// Biology
+import AnnealingTemperatureCalculator from "@/components/pages/tools/calculator/biology/annealing-temperature-calculator";
+
 const toolComponents = {
   // Physics
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
@@ -204,6 +207,8 @@ const toolComponents = {
   "overweight-calculator": OverweightCalculator,
   "protein-calculator": ProteinCalculator,
   "tdee-calculator": TDEECalculator,
+  // biology
+  "annealing-temperature-calculator": AnnealingTemperatureCalculator,
 };
 
 export async function generateMetadata({ params }) {

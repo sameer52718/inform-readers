@@ -578,6 +578,17 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "biology-calculators",
+        name: "Biology Calculators",
+        tools: [
+          {
+            id: "annealing-temperature-calculator",
+            name: "Annealing Temperature Calculator",
+            path: "/tools/calculators/biology/annealing-temperature-calculator",
+          },
+        ],
+      },
     ],
   },
   {
@@ -1535,5 +1546,9 @@ export const calculatorMetaData = {
     title: "TDEE Calculator | Inform Readers",
     description:
       "Calculate your Total Daily Energy Expenditure (TDEE) to plan calorie intake for weight loss or gain.",
+  },
+  "annealing-temperature-calculator": {
+    title: "Annealing Temperature Calculator | Inform Readers",
+    description: "Calculate your Total Annealing Temperature.",
   },
 };
