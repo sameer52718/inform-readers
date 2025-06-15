@@ -224,6 +224,51 @@ export const TOOL_CATEGORIES = [
             name: "Quantum Mechanics Calculator",
             path: "/tools/calculators/physics/quantum-mechanics-calculator",
           },
+          {
+            id: "relativity_calculator",
+            name: "Relativity Calculator",
+            path: "/tools/calculators/physics/relativity-calculator",
+          },
+          {
+            id: "rotational_dynamics_calculator",
+            name: "Rotational Dynamics Calculator",
+            path: "/tools/calculators/physics/rotational-dynamics-calculator",
+          },
+          {
+            id: "statistical_mechanics_calculator",
+            name: "Statistical Mechanics Calculator",
+            path: "/tools/calculators/physics/statistical-mechanics-calculator",
+          },
+          {
+            id: "suvat_calculator_advanced",
+            name: "SUVAT Calculator Advanced",
+            path: "/tools/calculators/physics/suvat-calculator-advanced",
+          },
+          {
+            id: "tension_calculator",
+            name: "Tension Calculator",
+            path: "/tools/calculators/physics/tension-calculator",
+          },
+          {
+            id: "thermodynamics_calculator",
+            name: "Thermodynamics Calculator",
+            path: "/tools/calculators/physics/thermodynamics-calculator",
+          },
+          {
+            id: "vector_resolver",
+            name: "Vector Resolver",
+            path: "/tools/calculators/physics/vector-resolver",
+          },
+          {
+            id: "wave_mechanics_calculator",
+            name: "Wave Mechanics Calculator",
+            path: "/tools/calculators/physics/wave-mechanics-calculator",
+          },
+          {
+            id: "work_energy_calculator",
+            name: "Work and Energy Calculator",
+            path: "/tools/calculators/physics/work-energy-calculator",
+          },
         ],
       },
       {
@@ -814,5 +859,50 @@ export const calculatorMetaData = {
     title: "Quantum Mechanics Calculator | Inform Readers",
     description:
       "Solve quantum problems involving wavefunctions, potential wells, uncertainty principles, and energy levels.",
+  },
+  "relativity-calculator": {
+    title: "Relativity Calculator | Inform Readers",
+    description:
+      "Explore time dilation, length contraction, and relativistic mass changes based on Einstein's theory of relativity.",
+  },
+  "rotational-dynamics-calculator": {
+    title: "Rotational Dynamics Calculator | Inform Readers",
+    description:
+      "Calculate torque, angular momentum, rotational inertia, and more for rotating bodies and systems.",
+  },
+  "statistical-mechanics-calculator": {
+    title: "Statistical Mechanics Calculator | Inform Readers",
+    description:
+      "Analyze macroscopic properties using statistical methods, including partition functions, entropy, and thermodynamic probabilities.",
+  },
+  "suvat-calculator-advanced": {
+    title: "SUVAT Calculator Advanced | Inform Readers",
+    description:
+      "Solve motion problems using SUVAT equations with flexible inputs for displacement, velocity, acceleration, and time.",
+  },
+  "tension-calculator": {
+    title: "Tension Calculator | Inform Readers",
+    description:
+      "Determine the tension force in cables, ropes, or strings in mechanical systems under various conditions.",
+  },
+  "thermodynamics-calculator": {
+    title: "Thermodynamics Calculator | Inform Readers",
+    description:
+      "Calculate energy transfer, work, heat, entropy, and efficiency across thermodynamic processes and cycles.",
+  },
+  "vector-resolver": {
+    title: "Vector Resolver | Inform Readers",
+    description:
+      "Resolve vectors into components or find resultant vectors in 2D and 3D space. Essential for physics and engineering.",
+  },
+  "wave-mechanics-calculator": {
+    title: "Wave Mechanics Calculator | Inform Readers",
+    description:
+      "Compute wave properties like speed, frequency, wavelength, energy, and interference in classical and quantum contexts.",
+  },
+  "work-energy-calculator": {
+    title: "Work and Energy Calculator | Inform Readers",
+    description:
+      "Calculate work done, kinetic and potential energy, and energy conservation in various physical systems.",
   },
 };

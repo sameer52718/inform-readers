@@ -29,6 +29,15 @@ import ProjectileMotionCalculator from "@/components/pages/tools/calculator/phys
 import ProjectileVisualizerAdvanced from "@/components/pages/tools/calculator/physics/projectile-visualizer-advanced";
 import QuantumFieldTheoryCalculator from "@/components/pages/tools/calculator/physics/quantum-field-theory-calculator";
 import QuantumMechanicsCalculator from "@/components/pages/tools/calculator/physics/quantum-mechanics-calculator";
+import RelativityCalculator from "@/components/pages/tools/calculator/physics/relativity-calculator";
+import RotationalDynamicsCalculator from "@/components/pages/tools/calculator/physics/rotational-dynamics-calculator";
+import StatisticalMechanicsCalculator from "@/components/pages/tools/calculator/physics/statistical-mechanics-calculator";
+import SuvatCalculatorAdvanced from "@/components/pages/tools/calculator/physics/suvat-calculator-advanced";
+import TensionCalculator from "@/components/pages/tools/calculator/physics/tension-calculator";
+import ThermodynamicsCalculator from "@/components/pages/tools/calculator/physics/thermodynamics-calculator";
+import VectorResolver from "@/components/pages/tools/calculator/physics/vector-resolver";
+import WaveMechanicsCalculator from "@/components/pages/tools/calculator/physics/wave-mechanics-calculator";
+import WorkEnergyCalculator from "@/components/pages/tools/calculator/physics/work-energy-calculator";
 
 const toolComponents = {
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
@@ -60,6 +69,15 @@ const toolComponents = {
   "projectile-visualizer-advanced": ProjectileVisualizerAdvanced,
   "quantum-field-theory-calculator": QuantumFieldTheoryCalculator,
   "quantum-mechanics-calculator": QuantumMechanicsCalculator,
+  "relativity-calculator": RelativityCalculator,
+  "rotational-dynamics-calculator": RotationalDynamicsCalculator,
+  "statistical-mechanics-calculator": StatisticalMechanicsCalculator,
+  "suvat-calculator-advanced": SuvatCalculatorAdvanced,
+  "tension-calculator": TensionCalculator,
+  "thermodynamics-calculator": ThermodynamicsCalculator,
+  "vector-resolver": VectorResolver,
+  "wave-mechanics-calculator": WaveMechanicsCalculator,
+  "work-energy-calculator": WorkEnergyCalculator,
 };
 
 export async function generateMetadata({ params }) {
