@@ -71,6 +71,20 @@ import ProbabilityCalculator from "@/components/pages/tools/calculator/math/prob
 import PythagoreanTheoremCalculator from "@/components/pages/tools/calculator/math/pythagorean-theorem-calculator";
 import QuadraticFormulaCalculator from "@/components/pages/tools/calculator/math/quadratic-formula-calculator";
 import RandomNumberGenerator from "@/components/pages/tools/calculator/math/random-number-generator";
+import RatioCalculator from "@/components/pages/tools/calculator/math/ratio-calculator";
+import RightTriangleCalculator from "@/components/pages/tools/calculator/math/right-triangle-calculator";
+import RootCalculator from "@/components/pages/tools/calculator/math/root-calculator";
+import RoundingCalculator from "@/components/pages/tools/calculator/math/rounding-calculator";
+import SampleSizeCalculator from "@/components/pages/tools/calculator/math/sample-size-calculator";
+import ScientificCalculator from "@/components/pages/tools/calculator/math/scientific-calculator";
+import ScientificNotationCalculator from "@/components/pages/tools/calculator/math/scientific-notation-calculator";
+import SlopeCalculator from "@/components/pages/tools/calculator/math/slope-calculator";
+import StandardDeviationCalculator from "@/components/pages/tools/calculator/math/standard-deviation-calculator";
+import StatisticsCalculator from "@/components/pages/tools/calculator/math/statistics-calculator";
+import SurfaceAreaCalculator from "@/components/pages/tools/calculator/math/surface-area-calculator";
+import TriangleCalculator from "@/components/pages/tools/calculator/math/triangle-calculator";
+import VolumeCalculator from "@/components/pages/tools/calculator/math/volume-calculator";
+import ZScoreCalculator from "@/components/pages/tools/calculator/math/z-score-calculator";
 
 const toolComponents = {
   // Physics
@@ -143,6 +157,20 @@ const toolComponents = {
   "pythagorean-theorem-calculator": PythagoreanTheoremCalculator,
   "quadratic-formula-calculator": QuadraticFormulaCalculator,
   "random-number-generator": RandomNumberGenerator,
+  "ratio-calculator": RatioCalculator,
+  "right-triangle-calculator": RightTriangleCalculator,
+  "root-calculator": RootCalculator,
+  "rounding-calculator": RoundingCalculator,
+  "sample-size-calculator": SampleSizeCalculator,
+  "scientific-calculator": ScientificCalculator,
+  "scientific-notation-calculator": ScientificNotationCalculator,
+  "slope-calculator": SlopeCalculator,
+  "standard-deviation-calculator": StandardDeviationCalculator,
+  "statistics-calculator": StatisticsCalculator,
+  "surface-area-calculator": SurfaceAreaCalculator,
+  "triangle-calculator": TriangleCalculator,
+  "volume-calculator": VolumeCalculator,
+  "z-score-calculator": ZScoreCalculator,
 };
 
 export async function generateMetadata({ params }) {

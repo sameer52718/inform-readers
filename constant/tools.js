@@ -425,6 +425,76 @@ export const TOOL_CATEGORIES = [
             name: "Random Number Generator",
             path: "/tools/calculators/math/random-number-generator",
           },
+          {
+            id: "ratio_calculator",
+            name: "Ratio Calculator",
+            path: "/tools/calculators/math/ratio-calculator",
+          },
+          {
+            id: "right_triangle_calculator",
+            name: "Right Triangle Calculator",
+            path: "/tools/calculators/math/right-triangle-calculator",
+          },
+          {
+            id: "root_calculator",
+            name: "Root Calculator",
+            path: "/tools/calculators/math/root-calculator",
+          },
+          {
+            id: "rounding_calculator",
+            name: "Rounding Calculator",
+            path: "/tools/calculators/math/rounding-calculator",
+          },
+          {
+            id: "sample_size_calculator",
+            name: "Sample Size Calculator",
+            path: "/tools/calculators/math/sample-size-calculator",
+          },
+          {
+            id: "scientific_calculator",
+            name: "Scientific Calculator",
+            path: "/tools/calculators/math/scientific-calculator",
+          },
+          {
+            id: "scientific_notation_calculator",
+            name: "Scientific Notation Calculator",
+            path: "/tools/calculators/math/scientific-notation-calculator",
+          },
+          {
+            id: "slope_calculator",
+            name: "Slope Calculator",
+            path: "/tools/calculators/math/slope-calculator",
+          },
+          {
+            id: "standard_deviation_calculator",
+            name: "Standard Deviation Calculator",
+            path: "/tools/calculators/math/standard-deviation-calculator",
+          },
+          {
+            id: "statistics_calculator",
+            name: "Statistics Calculator",
+            path: "/tools/calculators/math/statistics-calculator",
+          },
+          {
+            id: "surface_area_calculator",
+            name: "Surface Area Calculator",
+            path: "/tools/calculators/math/surface-area-calculator",
+          },
+          {
+            id: "triangle_calculator",
+            name: "Triangle Calculator",
+            path: "/tools/calculators/math/triangle-calculator",
+          },
+          {
+            id: "volume_calculator",
+            name: "Volume Calculator",
+            path: "/tools/calculators/math/volume-calculator",
+          },
+          {
+            id: "z_score_calculator",
+            name: "Z-score Calculator",
+            path: "/tools/calculators/math/z-score-calculator",
+          },
         ],
       },
     ],
@@ -1255,5 +1325,63 @@ export const calculatorMetaData = {
   "random-number-generator": {
     title: "Random Number Generator | Inform Readers",
     description: "Generate random numbers for any range and format instantly.",
+  },
+  "ratio-calculator": {
+    title: "Ratio Calculator | Inform Readers",
+    description: "Simplify and compare ratios or find missing values with our powerful Ratio Calculator.",
+  },
+  "right-triangle-calculator": {
+    title: "Right Triangle Calculator | Inform Readers",
+    description: "Calculate sides and angles of right triangles using trigonometry and Pythagoras.",
+  },
+  "root-calculator": {
+    title: "Root Calculator | Inform Readers",
+    description: "Find square roots, cube roots, and nth roots quickly and accurately.",
+  },
+  "rounding-calculator": {
+    title: "Rounding Calculator | Inform Readers",
+    description: "Round numbers to the nearest whole, decimal place, or custom precision.",
+  },
+  "sample-size-calculator": {
+    title: "Sample Size Calculator | Inform Readers",
+    description:
+      "Determine ideal sample sizes for surveys and studies based on confidence and margin of error.",
+  },
+  "scientific-calculator": {
+    title: "Scientific Calculator | Inform Readers",
+    description: "Use a full-featured online scientific calculator for all complex math operations.",
+  },
+  "scientific-notation-calculator": {
+    title: "Scientific Notation Calculator | Inform Readers",
+    description: "Convert numbers to and from scientific notation instantly.",
+  },
+  "slope-calculator": {
+    title: "Slope Calculator | Inform Readers",
+    description: "Calculate the slope between two points on a line using simple geometry.",
+  },
+  "standard-deviation-calculator": {
+    title: "Standard Deviation Calculator | Inform Readers",
+    description: "Compute standard deviation and variance for any set of data points.",
+  },
+  "statistics-calculator": {
+    title: "Statistics Calculator | Inform Readers",
+    description: "Calculate mean, median, variance, standard deviation and more statistical measures.",
+  },
+  "surface-area-calculator": {
+    title: "Surface Area Calculator | Inform Readers",
+    description: "Compute surface area for 3D shapes like cubes, spheres, pyramids, and more.",
+  },
+  "triangle-calculator": {
+    title: "Triangle Calculator | Inform Readers",
+    description: "Solve triangle side lengths and angles using various trigonometric formulas.",
+  },
+  "volume-calculator": {
+    title: "Volume Calculator | Inform Readers",
+    description: "Find the volume of 3D geometric figures like cylinders, cones, and cubes.",
+  },
+  "z-score-calculator": {
+    title: "Z-score Calculator | Inform Readers",
+    description:
+      "Calculate Z-scores for normal distributions to determine standard deviations from the mean.",
   },
 };
