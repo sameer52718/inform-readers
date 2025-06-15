@@ -325,6 +325,56 @@ export const TOOL_CATEGORIES = [
             name: "Exponent Calculator",
             path: "/tools/calculators/math/exponent-calculator",
           },
+          {
+            id: "factor_calculator",
+            name: "Factor Calculator",
+            path: "/tools/calculators/math/factor-calculator",
+          },
+          {
+            id: "fraction_calculator",
+            name: "Fraction Calculator",
+            path: "/tools/calculators/math/fraction-calculator",
+          },
+          {
+            id: "greatest_common_factor_calculator",
+            name: "Greatest Common Factor Calculator",
+            path: "/tools/calculators/math/greatest-common-factor-calculator",
+          },
+          {
+            id: "half_life_calculator",
+            name: "Half-Life Calculator",
+            path: "/tools/calculators/math/half-life-calculator",
+          },
+          {
+            id: "hex_calculator",
+            name: "Hex Calculator",
+            path: "/tools/calculators/math/hex-calculator",
+          },
+          {
+            id: "lcm_calculator",
+            name: "LCM Calculator",
+            path: "/tools/calculators/math/lcm-calculator",
+          },
+          {
+            id: "logarithm_calculator",
+            name: "Logarithm Calculator",
+            path: "/tools/calculators/math/logarithm-calculator",
+          },
+          {
+            id: "long_division_calculator",
+            name: "Long Division Calculator",
+            path: "/tools/calculators/math/long-division-calculator",
+          },
+          {
+            id: "matrix_calculator",
+            name: "Matrix Calculator",
+            path: "/tools/calculators/math/matrix-calculator",
+          },
+          {
+            id: "mean_median_mode_range_calculator",
+            name: "Mean, Median, Mode, Range Calculator",
+            path: "/tools/calculators/math/mean-median-mode-range-calculator",
+          },
         ],
       },
     ],
@@ -988,5 +1038,50 @@ export const calculatorMetaData = {
     title: "Exponent Calculator | Inform Readers",
     description:
       "Calculate powers and exponents with base and exponent inputs. Supports negative and fractional powers.",
+  },
+  "factor-calculator": {
+    title: "Factor Calculator | Inform Readers",
+    description:
+      "Find all the factors of any integer quickly and easily. Great for number theory and math homework.",
+  },
+  "fraction-calculator": {
+    title: "Fraction Calculator | Inform Readers",
+    description:
+      "Perform addition, subtraction, multiplication, and division of fractions with simplified output.",
+  },
+  "greatest-common-factor-calculator": {
+    title: "Greatest Common Factor Calculator | Inform Readers",
+    description: "Calculate the GCF (HCF) of two or more numbers using efficient algorithms.",
+  },
+  "half-life-calculator": {
+    title: "Half-Life Calculator | Inform Readers",
+    description: "Calculate the remaining quantity of a substance after a given number of half-life periods.",
+  },
+  "hex-calculator": {
+    title: "Hex Calculator | Inform Readers",
+    description: "Perform hexadecimal arithmetic and convert between hex, binary, and decimal formats.",
+  },
+  "lcm-calculator": {
+    title: "LCM Calculator | Inform Readers",
+    description: "Find the Least Common Multiple (LCM) of two or more numbers efficiently.",
+  },
+  "logarithm-calculator": {
+    title: "Logarithm Calculator | Inform Readers",
+    description:
+      "Compute logarithms with any base, including natural and common logs. Ideal for algebra and calculus.",
+  },
+  "long-division-calculator": {
+    title: "Long Division Calculator | Inform Readers",
+    description: "Solve division problems with detailed steps using the long division method.",
+  },
+  "matrix-calculator": {
+    title: "Matrix Calculator | Inform Readers",
+    description:
+      "Perform matrix operations such as addition, multiplication, and inversion. Great for linear algebra.",
+  },
+  "mean-median-mode-range-calculator": {
+    title: "Mean, Median, Mode, Range Calculator | Inform Readers",
+    description:
+      "Compute key statistical measures from a data set in seconds. Useful for students and analysts.",
   },
 };

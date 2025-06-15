@@ -51,6 +51,16 @@ import CommonFactorCalculator from "@/components/pages/tools/calculator/math/com
 import ConfidenceIntervalCalculator from "@/components/pages/tools/calculator/math/confidence-interval-calculator";
 import DistanceCalculator from "@/components/pages/tools/calculator/math/distance-calculator";
 import ExponentCalculator from "@/components/pages/tools/calculator/math/exponent-calculator";
+import FactorCalculator from "@/components/pages/tools/calculator/math/factor-calculator";
+import FractionCalculator from "@/components/pages/tools/calculator/math/fraction-calculator";
+import GreatestCommonFactorCalculator from "@/components/pages/tools/calculator/math/greatest-common-factor-calculator";
+import HalfLifeCalculator from "@/components/pages/tools/calculator/math/half-life-calculator";
+import HexCalculator from "@/components/pages/tools/calculator/math/hex-calculator";
+import LCMCalculator from "@/components/pages/tools/calculator/math/lcm-calculator";
+import LogarithmCalculator from "@/components/pages/tools/calculator/math/logarithm-calculator";
+import LongDivisionCalculator from "@/components/pages/tools/calculator/math/long-division-calculator";
+import MatrixCalculator from "@/components/pages/tools/calculator/math/matrix-calculator";
+import MeanMedianModeRangeCalculator from "@/components/pages/tools/calculator/math/mean-median-mode-range-calculator";
 
 const toolComponents = {
   // Physics
@@ -103,6 +113,16 @@ const toolComponents = {
   "confidence-interval-calculator": ConfidenceIntervalCalculator,
   "distance-calculator": DistanceCalculator,
   "exponent-calculator": ExponentCalculator,
+  "factor-calculator": FactorCalculator,
+  "fraction-calculator": FractionCalculator,
+  "greatest-common-factor-calculator": GreatestCommonFactorCalculator,
+  "half-life-calculator": HalfLifeCalculator,
+  "hex-calculator": HexCalculator,
+  "lcm-calculator": LCMCalculator,
+  "logarithm-calculator": LogarithmCalculator,
+  "long-division-calculator": LongDivisionCalculator,
+  "matrix-calculator": MatrixCalculator,
+  "mean-median-mode-range-calculator": MeanMedianModeRangeCalculator,
 };
 
 export async function generateMetadata({ params }) {
