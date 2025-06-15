@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { userTypes } from "@/constant/data";
 
 function Header() {
-  const { color, logo } = useSelector((state) => state.config); // Fallback to 'red' if color is undefined
+  const { color, logo } = useSelector((state) => state.config);
   const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState({});
@@ -35,9 +35,11 @@ function Header() {
         { id: 8, title: "News", url: "/news" },
         { id: 10, title: "Currency Converter", url: "/currency-rate" },
         { id: 11, title: "Metal Rates", url: "/metal-rate" },
+        { id: 16, title: "Crypto Rates", url: "/crypto-currency" },
         { id: 12, title: "Cars", url: "/car" },
         { id: 13, title: "Bikes", url: "/bike" },
-        { id: 14, title: "Tools", url: "/tools" }, // Fixed duplicate ID
+        { id: 14, title: "Tools", url: "/tools" },
+        { id: 15, title: "Video Downloader", url: "/video-downloader" },
       ],
     },
   ];
