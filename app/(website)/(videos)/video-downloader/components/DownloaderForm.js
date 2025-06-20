@@ -17,7 +17,7 @@ const DownloaderForm = ({ platform }) => {
             youtube: /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/,
             facebook: /^(https?:\/\/)?(www\.)?facebook\.com\/.+$/,
             instagram: /^(https?:\/\/)?(www\.)?instagram\.com\/.+$/,
-            tiktok: /^(https?:\/\/)?(www\.)?tiktok\.com\/.+$/,
+            tiktok: /^(https?:\/\/)?(www\.)?(tiktok\.com|vt\.tiktok\.com)\/.+$/,
         };
         return platformRegex[platform].test(url);
     };
