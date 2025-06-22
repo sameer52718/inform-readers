@@ -127,6 +127,46 @@ import CommissionCalculator from "@/components/pages/tools/calculator/financial/
 import CompoundInterestCalculator from "@/components/pages/tools/calculator/financial/compound-interest-calculator";
 import CreditCardCalculator from "@/components/pages/tools/calculator/financial/credit-card-calculator";
 import CreditCardPayoffCalculator from "@/components/pages/tools/calculator/financial/credit-card-payoff-calculator";
+import DebtPayoffCalculator from "@/components/pages/tools/calculator/financial/debt-payoff-calculator";
+import DebtConsolidationCalculator from "@/components/pages/tools/calculator/financial/debt-consolidation-calculator";
+import DepreciationCalculator from "@/components/pages/tools/calculator/financial/depreciation-calculator";
+import DiscountCalculator from "@/components/pages/tools/calculator/financial/discount-calculator";
+import DownPaymentCalculator from "@/components/pages/tools/calculator/financial/down-payment-calculator";
+import DTIRatioCalculator from "@/components/pages/tools/calculator/financial/dti-ratio-calculator";
+import EstateTaxCalculator from "@/components/pages/tools/calculator/financial/estate-tax-calculator";
+import FHALoanCalculator from "@/components/pages/tools/calculator/financial/fha-loan-calculator";
+import FinanceCalculator from "@/components/pages/tools/calculator/financial/finance-calculator";
+import FutureValueCalculator from "@/components/pages/tools/calculator/financial/future-value-calculator";
+import HouseAffordabilityCalculator from "@/components/pages/tools/calculator/financial/house-affordability-calculator";
+import IncomeTaxCalculator from "@/components/pages/tools/calculator/financial/income-tax-calculator";
+import InflationCalculator from "@/components/pages/tools/calculator/financial/inflation-calculator";
+import InterestCalculator from "@/components/pages/tools/calculator/financial/interest-calculator";
+import InterestRateCalculator from "@/components/pages/tools/calculator/financial/interest-rate-calculator";
+import InvestmentCalculator from "@/components/pages/tools/calculator/financial/investment-calculator";
+import IRACalculator from "@/components/pages/tools/calculator/financial/ira-calculator";
+import IRRCalculator from "@/components/pages/tools/calculator/financial/irr-calculator";
+import LeaseCalculator from "@/components/pages/tools/calculator/financial/lease-calculator";
+import LoanCalculator from "@/components/pages/tools/calculator/financial/loan-calculator";
+// import MarginCalculator from "@/components/pages/tools/calculator/financial/margin-calculator";
+// import MortgageAmortizationCalculator from "@/components/pages/tools/calculator/financial/mortgage-amortization-calculator";
+// import MortgagePayoffCalculator from "@/components/pages/tools/calculator/financial/mortgage-payoff-calculator";
+// import MortgageCalculator from "@/components/pages/tools/calculator/financial/mortgage-calculator";
+// import PaybackPeriodCalculator from "@/components/pages/tools/calculator/financial/payback-period-calculator";
+// import PaymentCalculator from "@/components/pages/tools/calculator/financial/payment-calculator";
+// import PensionCalculator from "@/components/pages/tools/calculator/financial/pension-calculator";
+// import PercentOffCalculator from "@/components/pages/tools/calculator/financial/percent-off-calculator";
+// import PersonalLoanCalculator from "@/components/pages/tools/calculator/financial/personal-loan-calculator";
+// import PresentValueCalculator from "@/components/pages/tools/calculator/financial/present-value-calculator";
+// import RefinanceCalculator from "@/components/pages/tools/calculator/financial/refinance-calculator";
+// import RentVsBuyCalculator from "@/components/pages/tools/calculator/financial/rent-vs.-buy-calculator";
+// import RentCalculator from "@/components/pages/tools/calculator/financial/rent-calculator";
+// import RentalPropertyCalculator from "@/components/pages/tools/calculator/financial/rental-property-calculator";
+// import RepaymentCalculator from "@/components/pages/tools/calculator/financial/repayment-calculator";
+// import RetirementCalculator from "@/components/pages/tools/calculator/financial/retirement-calculator";
+// import RmdCalculator from "@/components/pages/tools/calculator/financial/rmd-calculator";
+// import RoiCalculator from "@/components/pages/tools/calculator/financial/roi-calculator";
+// import RothIraCalculator from "@/components/pages/tools/calculator/financial/roth-ira-calculator";
+// import SalaryCalculator from "@/components/pages/tools/calculator/financial/salary-calculator";
 
 const toolComponents = {
   // Physics
@@ -252,6 +292,46 @@ const toolComponents = {
   "compound-interest-calculator": CompoundInterestCalculator,
   "credit-card-calculator": CreditCardCalculator,
   "credit-card-payoff-calculator": CreditCardPayoffCalculator,
+  "debt-payoff-calculator": DebtPayoffCalculator,
+  "debt-consolidation-calculator": DebtConsolidationCalculator,
+  "depreciation-calculator": DepreciationCalculator,
+  "discount-calculator": DiscountCalculator,
+  "down-payment-calculator": DownPaymentCalculator,
+  "dti-ratio-calculator": DTIRatioCalculator,
+  "estate-tax-calculator": EstateTaxCalculator,
+  "fha-loan-calculator": FHALoanCalculator,
+  "finance-calculator": FinanceCalculator,
+  "future-value-calculator": FutureValueCalculator,
+  "house-affordability-calculator": HouseAffordabilityCalculator,
+  "income-tax-calculator": IncomeTaxCalculator,
+  "inflation-calculator": InflationCalculator,
+  "interest-calculator": InterestCalculator,
+  "interest-rate-calculator": InterestRateCalculator,
+  "investment-calculator": InvestmentCalculator,
+  "ira-calculator": IRACalculator,
+  "irr-calculator": IRRCalculator,
+  "lease-calculator": LeaseCalculator,
+  "loan-calculator": LoanCalculator,
+  // "margin-calculator": MarginCalculator,
+  // "mortgage-amortization-calculator": MortgageAmortizationCalculator,
+  // "mortgage-payoff-calculator": MortgagePayoffCalculator,
+  // "mortgage-calculator": MortgageCalculator,
+  // "payback-period-calculator": PaybackPeriodCalculator,
+  // "payment-calculator": PaymentCalculator,
+  // "pension-calculator": PensionCalculator,
+  // "percent-off-calculator": PercentOffCalculator,
+  // "personal-loan-calculator": PersonalLoanCalculator,
+  // "present-value-calculator": PresentValueCalculator,
+  // "refinance-calculator": RefinanceCalculator,
+  // "rent-vs.-buy-calculator": RentVsBuyCalculator,
+  // "rent-calculator": RentCalculator,
+  // "rental-property-calculator": RentalPropertyCalculator,
+  // "repayment-calculator": RepaymentCalculator,
+  // "retirement-calculator": RetirementCalculator,
+  // "rmd-calculator": RmdCalculator,
+  // "roi-calculator": RoiCalculator,
+  // "roth-ira-calculator": RothIraCalculator,
+  // "salary-calculator": SalaryCalculator,
 };
 
 export async function generateMetadata({ params }) {

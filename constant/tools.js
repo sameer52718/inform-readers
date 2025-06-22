@@ -693,6 +693,206 @@ export const TOOL_CATEGORIES = [
             name: "Credit Card Payoff Calculator",
             path: "/tools/calculators/financial/credit-card-payoff-calculator",
           },
+          {
+            id: "debt_payoff_calculator",
+            name: "Debt Payoff Calculator",
+            path: "/tools/calculators/financial/debt-payoff-calculator",
+          },
+          {
+            id: "debt_consolidation_calculator",
+            name: "Debt Consolidation Calculator",
+            path: "/tools/calculators/financial/debt-consolidation-calculator",
+          },
+          {
+            id: "depreciation_calculator",
+            name: "Depreciation Calculator",
+            path: "/tools/calculators/financial/Depreciation-Calculator",
+          },
+          {
+            id: "discount_calculator",
+            name: "Discount Calculator",
+            path: "/tools/calculators/financial/Discount-Calculator",
+          },
+          {
+            id: "down_payment_calculator",
+            name: "Down Payment Calculator",
+            path: "/tools/calculators/financial/Down-Payment-Calculator",
+          },
+          {
+            id: "dti_ratio_calculator",
+            name: "DTI Ratio Calculator",
+            path: "/tools/calculators/financial/DTI-Ratio-Calculator",
+          },
+          {
+            id: "estate_tax_calculator",
+            name: "Estate Tax Calculator",
+            path: "/tools/calculators/financial/estate-tax-calculator",
+          },
+          {
+            id: "fha_loan_calculator",
+            name: "FHA Loan Calculator",
+            path: "/tools/calculators/financial/FHA-Loan-Calculator",
+          },
+          {
+            id: "finance_calculator",
+            name: "Finance Calculator",
+            path: "/tools/calculators/financial/finance-calculator",
+          },
+          {
+            id: "future_value_calculator",
+            name: "Future Value Calculator",
+            path: "/tools/calculators/financial/Future-Value-Calculator",
+          },
+          {
+            id: "house_affordability_calculator",
+            name: "House Affordability Calculator",
+            path: "/tools/calculators/financial/house-affordability-calculator",
+          },
+          {
+            id: "income_tax_calculator",
+            name: "Income Tax Calculator",
+            path: "/tools/calculators/financial/income-tax-calculator",
+          },
+          {
+            id: "inflation_calculator",
+            name: "Inflation Calculator",
+            path: "/tools/calculators/financial/inflation-calculator",
+          },
+          {
+            id: "interest_calculator",
+            name: "Interest Calculator",
+            path: "/tools/calculators/financial/interest-calculator",
+          },
+          {
+            id: "interest_rate_calculator",
+            name: "Interest Rate Calculator",
+            path: "/tools/calculators/financial/interest-rate-calculator",
+          },
+          {
+            id: "investment_calculator",
+            name: "Investment Calculator",
+            path: "/tools/calculators/financial/investment-calculator",
+          },
+          {
+            id: "ira_calculator",
+            name: "IRA Calculator",
+            path: "/tools/calculators/financial/IRA-Calculator",
+          },
+          {
+            id: "irr_calculator",
+            name: "IRR Calculator",
+            path: "/tools/calculators/financial/IRR-Calculator",
+          },
+          {
+            id: "lease_calculator",
+            name: "Lease Calculator",
+            path: "/tools/calculators/financial/lease-Calculator",
+          },
+          {
+            id: "loan_calculator",
+            name: "Loan Calculator",
+            path: "/tools/calculators/financial/loan-calculator",
+          },
+          {
+            id: "margin_calculator",
+            name: "Margin Calculator",
+            path: "/tools/calculators/financial/margin-calculator",
+          },
+          {
+            id: "mortgage_amortization_calculator",
+            name: "Mortgage Amortization Calculator",
+            path: "/tools/calculators/financial/mortgage-amortization-calculator",
+          },
+          {
+            id: "mortgage_payoff_calculator",
+            name: "Mortgage Payoff Calculator",
+            path: "/tools/calculators/financial/mortgage-payoff-calculator",
+          },
+          {
+            id: "mortgage_calculator",
+            name: "Mortgage Calculator",
+            path: "/tools/calculators/financial/mortgage-calculator",
+          },
+          {
+            id: "payback_period_calculator",
+            name: "Payback Period Calculator",
+            path: "/tools/calculators/financial/payback-period-calculator",
+          },
+          {
+            id: "payment_calculator",
+            name: "Payment Calculator",
+            path: "/tools/calculators/financial/payment-calculator",
+          },
+          {
+            id: "pension_calculator",
+            name: "Pension Calculator",
+            path: "/tools/calculators/financial/pension-calculator",
+          },
+          {
+            id: "percent_off_calculator",
+            name: "Percent Off Calculator",
+            path: "/tools/calculators/financial/percent-off-calculator",
+          },
+          {
+            id: "personal_loan_calculator",
+            name: "Personal Loan Calculator",
+            path: "/tools/calculators/financial/personal-loan-calculator",
+          },
+          {
+            id: "present_value_calculator",
+            name: "Present Value Calculator",
+            path: "/tools/calculators/financial/present-value-calculator",
+          },
+          {
+            id: "refinance_calculator",
+            name: "Refinance Calculator",
+            path: "/tools/calculators/financial/refinance-calculator",
+          },
+          {
+            id: "rent_vs_buy_calculator",
+            name: "Rent vs. Buy Calculator",
+            path: "/tools/calculators/financial/rent-vs.-buy-calculator",
+          },
+          {
+            id: "rent_calculator",
+            name: "Rent Calculator",
+            path: "/tools/calculators/financial/rent-calculator",
+          },
+          {
+            id: "rental_property_calculator",
+            name: "Rental Property Calculator",
+            path: "/tools/calculators/financial/rental-property-calculator",
+          },
+          {
+            id: "repayment_calculator",
+            name: "Repayment Calculator",
+            path: "/tools/calculators/financial/repayment-calculator",
+          },
+          {
+            id: "retirement_calculator",
+            name: "Retirement Calculator",
+            path: "/tools/calculators/financial/retirement-calculator",
+          },
+          {
+            id: "rmd_calculator",
+            name: "RMD Calculator",
+            path: "/tools/calculators/financial/rmd-calculator",
+          },
+          {
+            id: "roi_calculator",
+            name: "ROI Calculator",
+            path: "/tools/calculators/financial/roi-calculator",
+          },
+          {
+            id: "roth_ira_calculator",
+            name: "Roth IRA Calculator",
+            path: "/tools/calculators/financial/roth-ira-calculator",
+          },
+          {
+            id: "salary_calculator",
+            name: "Salary Calculator",
+            path: "/tools/calculators/financial/salary-calculator",
+          },
         ],
       },
     ],
@@ -1757,5 +1957,179 @@ export const calculatorMetaData = {
     title: "Credit Card Payoff Calculator | Inform Readers",
     description:
       "Create a strategy to pay off your credit card debt faster and save on interest with various payoff methods.",
+  },
+  "debt-payoff-calculator": {
+    title: "Debt Payoff Calculator | Inform Readers",
+    description:
+      "Plan your debt-free journey by estimating how long it will take to pay off your debt with our Debt Payoff Calculator.",
+  },
+  "debt-consolidation-calculator": {
+    title: "Debt Consolidation Calculator | Inform Readers",
+    description:
+      "Evaluate your savings potential by consolidating multiple debts into a single loan with our Debt Consolidation Calculator.",
+  },
+  "Depreciation-Calculator": {
+    title: "Depreciation Calculator | Inform Readers",
+    description:
+      "Calculate the depreciation of assets using methods like straight-line, declining balance, and sum-of-years-digits.",
+  },
+  "Discount-Calculator": {
+    title: "Discount Calculator | Inform Readers",
+    description:
+      "Quickly calculate discounted prices and savings for any item using our Discount Calculator.",
+  },
+  "Down-Payment-Calculator": {
+    title: "Down Payment Calculator | Inform Readers",
+    description:
+      "Estimate your ideal down payment amount and how it impacts your monthly mortgage or loan payments.",
+  },
+  "DTI-Ratio-Calculator": {
+    title: "DTI Ratio Calculator | Inform Readers",
+    description:
+      "Calculate your Debt-to-Income (DTI) ratio to assess loan eligibility and improve financial planning.",
+  },
+  "estate-tax-calculator": {
+    title: "Estate Tax Calculator | Inform Readers",
+    description:
+      "Estimate estate taxes owed based on federal limits and exemptions using our Estate Tax Calculator.",
+  },
+  "FHA-Loan-Calculator": {
+    title: "FHA Loan Calculator | Inform Readers",
+    description:
+      "Calculate your monthly FHA loan payments including MIP, taxes, and insurance with our FHA Loan Calculator.",
+  },
+  "finance-calculator": {
+    title: "Finance Calculator | Inform Readers",
+    description:
+      "Perform essential financial computations like loan payments, interest, and time value of money.",
+  },
+  "Future-Value-Calculator": {
+    title: "Future Value Calculator | Inform Readers",
+    description:
+      "Estimate the future value of investments based on interest rate and time using our Future Value Calculator.",
+  },
+  "house-affordability-calculator": {
+    title: "House Affordability Calculator | Inform Readers",
+    description: "Determine how much house you can afford based on income, debt, and expenses.",
+  },
+  "income-tax-calculator": {
+    title: "Income Tax Calculator | Inform Readers",
+    description: "Estimate your federal income tax liability with our up-to-date Income Tax Calculator.",
+  },
+  "inflation-calculator": {
+    title: "Inflation Calculator | Inform Readers",
+    description:
+      "Understand the impact of inflation on purchasing power over time using our Inflation Calculator.",
+  },
+  "interest-calculator": {
+    title: "Interest Calculator | Inform Readers",
+    description: "Calculate simple and compound interest on savings, loans, or investments.",
+  },
+  "interest-rate-calculator": {
+    title: "Interest Rate Calculator | Inform Readers",
+    description: "Find the effective interest rate or compare interest rates between different loan options.",
+  },
+  "investment-calculator": {
+    title: "Investment Calculator | Inform Readers",
+    description: "Project your investment growth based on initial capital, rate of return, and time horizon.",
+  },
+  "IRA-Calculator": {
+    title: "IRA Calculator | Inform Readers",
+    description:
+      "Estimate your retirement savings and tax benefits using our IRA Calculator for traditional and Roth accounts.",
+  },
+  "IRR-Calculator": {
+    title: "IRR Calculator | Inform Readers",
+    description: "Calculate the Internal Rate of Return (IRR) for your investment to evaluate profitability.",
+  },
+  "lease-Calculator": {
+    title: "Lease Calculator | Inform Readers",
+    description:
+      "Estimate monthly lease payments based on vehicle price, residual value, term, and money factor.",
+  },
+  "loan-calculator": {
+    title: "Loan Calculator | Inform Readers",
+    description: "Calculate loan payments, interest, and amortization schedules with our Loan Calculator.",
+  },
+  "margin-calculator": {
+    title: "Margin Calculator | Inform Readers",
+    description: "Calculate required margin and potential profit/loss for margin-based trading strategies.",
+  },
+  "mortgage-amortization-calculator": {
+    title: "Mortgage Amortization Calculator | Inform Readers",
+    description: "Visualize your mortgage amortization schedule including interest vs. principal payments.",
+  },
+  "mortgage-payoff-calculator": {
+    title: "Mortgage Payoff Calculator | Inform Readers",
+    description: "Estimate how quickly you can pay off your mortgage by making extra payments.",
+  },
+  "mortgage-calculator": {
+    title: "Mortgage Calculator | Inform Readers",
+    description: "Calculate your monthly mortgage payment based on loan amount, interest rate, and term.",
+  },
+  "payback-period-calculator": {
+    title: "Payback Period Calculator | Inform Readers",
+    description:
+      "Determine how long it will take to recoup your investment with our Payback Period Calculator.",
+  },
+  "payment-calculator": {
+    title: "Payment Calculator | Inform Readers",
+    description: "Figure out monthly or periodic payments for any loan amount and term.",
+  },
+  "pension-calculator": {
+    title: "Pension Calculator | Inform Readers",
+    description: "Estimate your expected pension income at retirement based on service and salary.",
+  },
+  "percent-off-calculator": {
+    title: "Percent Off Calculator | Inform Readers",
+    description: "Quickly calculate how much you’ll save with discounts and percent-off deals.",
+  },
+  "personal-loan-calculator": {
+    title: "Personal Loan Calculator | Inform Readers",
+    description: "Calculate your monthly payments and total cost for any personal loan amount and rate.",
+  },
+  "present-value-calculator": {
+    title: "Present Value Calculator | Inform Readers",
+    description: "Find out the present value of future cash flows or investments with this calculator.",
+  },
+  "refinance-calculator": {
+    title: "Refinance Calculator | Inform Readers",
+    description: "See how much you can save by refinancing your loan at a new interest rate.",
+  },
+  "rent-vs.-buy-calculator": {
+    title: "Rent vs. Buy Calculator | Inform Readers",
+    description: "Compare renting versus buying a home based on financial and lifestyle factors.",
+  },
+  "rent-calculator": {
+    title: "Rent Calculator | Inform Readers",
+    description: "Estimate how much rent you can afford based on your income and expenses.",
+  },
+  "rental-property-calculator": {
+    title: "Rental Property Calculator | Inform Readers",
+    description: "Evaluate potential returns on rental properties by factoring in income and expenses.",
+  },
+  "repayment-calculator": {
+    title: "Repayment Calculator | Inform Readers",
+    description: "Determine repayment schedules for various loan types and payment strategies.",
+  },
+  "retirement-calculator": {
+    title: "Retirement Calculator | Inform Readers",
+    description: "Estimate how much you need to retire comfortably and whether you're on track.",
+  },
+  "rmd-calculator": {
+    title: "RMD Calculator | Inform Readers",
+    description: "Calculate Required Minimum Distributions (RMDs) from your retirement accounts.",
+  },
+  "roi-calculator": {
+    title: "ROI Calculator | Inform Readers",
+    description: "Compute the Return on Investment (ROI) to evaluate the profitability of your investments.",
+  },
+  "roth-ira-calculator": {
+    title: "Roth IRA Calculator | Inform Readers",
+    description: "Estimate future value of your Roth IRA contributions and tax-free withdrawals.",
+  },
+  "salary-calculator": {
+    title: "Salary Calculator | Inform Readers",
+    description: "Convert salary to hourly, estimate take-home pay, or compare annual incomes.",
   },
 };
