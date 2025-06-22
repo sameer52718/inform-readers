@@ -1,3 +1,5 @@
+// app/components/VideoDownloadContext.js
+"use client";
 import React, { createContext, useState, useCallback } from "react";
 import axios from "axios";
 
@@ -17,7 +19,7 @@ export const VideoDownloadContext = createContext({
   currentUrl: null,
   videoInfo: defaultVideoInfo,
   platform: "",
-  startDownload: (url) => {},
+  startDownload: () => {},
   resetDownload: () => {},
 });
 
@@ -35,14 +37,14 @@ export const VideoDownloadProvider = ({ children }) => {
     return "";
   };
 
-  const startDownload = useCallback(async (url) => {
+  const startDownload = useCallback(async (url, expectedPlatform) => {
     try {
       setIsProcessing(true);
       setCurrentUrl(url);
 
       const detectedPlatform = detectPlatform(url);
-      if (!detectedPlatform) {
-        throw new Error("Unsupported platform");
+      if (detectedPlatform !== expectedPlatform) {
+        throw new Error(`Please enter a valid ${expectedPlatform} URL`);
       }
       setPlatform(detectedPlatform);
 
@@ -66,6 +68,7 @@ export const VideoDownloadProvider = ({ children }) => {
     } catch (error) {
       console.error("Download error:", error);
       setIsProcessing(false);
+      throw error;
     }
   }, []);
 
