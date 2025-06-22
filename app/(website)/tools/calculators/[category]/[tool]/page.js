@@ -163,19 +163,19 @@ import RentCalculator from "@/components/pages/tools/calculator/financial/rent-c
 import RentalPropertyCalculator from "@/components/pages/tools/calculator/financial/rental-property-calculator";
 import RepaymentCalculator from "@/components/pages/tools/calculator/financial/repayment-calculator";
 import RetirementCalculator from "@/components/pages/tools/calculator/financial/retirement-calculator";
-// import RmdCalculator from "@/components/pages/tools/calculator/financial/rmd-calculator";
-// import RoiCalculator from "@/components/pages/tools/calculator/financial/roi-calculator";
-// import RothIraCalculator from "@/components/pages/tools/calculator/financial/roth-ira-calculator";
-// import SalaryCalculator from "@/components/pages/tools/calculator/financial/salary-calculator";
-// import SavingsCalculator from "@/components/pages/tools/calculator/financial/savings-calculator";
-// import SimpleInterestCalculator from "@/components/pages/tools/calculator/financial/simple-interest-calculator";
-// import SimplifiedSalesTaxCalculator from "@/components/pages/tools/calculator/financial/simplified-sales-tax-calculator";
-// import SocialSecurityCalculator from "@/components/pages/tools/calculator/financial/social-security-calculator";
-// import StudentLoanCalculator from "@/components/pages/tools/calculator/financial/student-loan-calculator";
-// import TakeHomePaycheckCalculator from "@/components/pages/tools/calculator/financial/take-home-paycheck-calculator";
-// import UKMortgageCalculator from "@/components/pages/tools/calculator/financial/uk-mortgage-calculator";
-// import VAMortgageCalculator from "@/components/pages/tools/calculator/financial/va-mortgage-calculator";
-// import VATCalculator from "@/components/pages/tools/calculator/financial/vat-calculator";
+import RmdCalculator from "@/components/pages/tools/calculator/financial/rmd-calculator";
+import RoiCalculator from "@/components/pages/tools/calculator/financial/roi-calculator";
+import RothIraCalculator from "@/components/pages/tools/calculator/financial/roth-ira-calculator";
+import SalaryCalculator from "@/components/pages/tools/calculator/financial/salary-calculator";
+import SavingsCalculator from "@/components/pages/tools/calculator/financial/savings-calculator";
+import SimpleInterestCalculator from "@/components/pages/tools/calculator/financial/simple-interest-calculator";
+import SimplifiedSalesTaxCalculator from "@/components/pages/tools/calculator/financial/simplified-sales-tax-calculator";
+import SocialSecurityCalculator from "@/components/pages/tools/calculator/financial/social-security-calculator";
+import StudentLoanCalculator from "@/components/pages/tools/calculator/financial/student-loan-calculator";
+import TakeHomePaycheckCalculator from "@/components/pages/tools/calculator/financial/take-home-paycheck-calculator";
+import UKMortgageCalculator from "@/components/pages/tools/calculator/financial/uk-mortgage-calculator";
+import VAMortgageCalculator from "@/components/pages/tools/calculator/financial/va-mortgage-calculator";
+import VATCalculator from "@/components/pages/tools/calculator/financial/vat-calculator";
 
 const toolComponents = {
   // Physics
@@ -337,19 +337,19 @@ const toolComponents = {
   "rental-property-calculator": RentalPropertyCalculator,
   "repayment-calculator": RepaymentCalculator,
   "retirement-calculator": RetirementCalculator,
-  // "rmd-calculator": RmdCalculator,
-  // "roi-calculator": RoiCalculator,
-  // "roth-ira-calculator": RothIraCalculator,
-  // "salary-calculator": SalaryCalculator,
-  // "savings-calculator": SavingsCalculator,
-  // "simple-interest-calculator": SimpleInterestCalculator,
-  // "simplified-sales-tax-calculator": SimplifiedSalesTaxCalculator,
-  // "social-security-calculator": SocialSecurityCalculator,
-  // "student-loan-calculator": StudentLoanCalculator,
-  // "take-home-paycheck-calculator": TakeHomePaycheckCalculator,
-  // "uk-mortgage-calculator": UKMortgageCalculator,
-  // "va-mortgage-calculator": VAMortgageCalculator,
-  // "vat-calculator": VATCalculator,
+  "rmd-calculator": RmdCalculator,
+  "roi-calculator": RoiCalculator,
+  "roth-ira-calculator": RothIraCalculator,
+  "salary-calculator": SalaryCalculator,
+  "savings-calculator": SavingsCalculator,
+  "simple-interest-calculator": SimpleInterestCalculator,
+  "simplified-sales-tax-calculator": SimplifiedSalesTaxCalculator,
+  "social-security-calculator": SocialSecurityCalculator,
+  "student-loan-calculator": StudentLoanCalculator,
+  "take-home-paycheck-calculator": TakeHomePaycheckCalculator,
+  "uk-mortgage-calculator": UKMortgageCalculator,
+  "va-mortgage-calculator": VAMortgageCalculator,
+  "vat-calculator": VATCalculator,
 };
 
 export async function generateMetadata({ params }) {
