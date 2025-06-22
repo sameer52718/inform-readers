@@ -589,6 +589,112 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "financial-calculators",
+        name: "Financial Calculators",
+        tools: [
+          {
+            id: "401k_calculator_for_use_by_us_residents",
+            name: "401(k) Calculator",
+            path: "/tools/calculators/financial/401k-calculator-for-use-by-us-residents",
+          },
+          {
+            id: "advance_debt_consolidation_calculator",
+            name: "Debt Consolidation Calculator",
+            path: "/tools/calculators/financial/advance-debt-consolidation-calculator",
+          },
+          {
+            id: "amortization_calculator",
+            name: "Amortization Calculator",
+            path: "/tools/calculators/financial/amortization-calculator",
+          },
+          {
+            id: "annuity_calculator",
+            name: "Annuity Calculator",
+            path: "/tools/calculators/financial/annuity-calculator",
+          },
+          {
+            id: "annuity_payout_calculator",
+            name: "Annuity Payout Calculator",
+            path: "/tools/calculators/financial/annuity-payout-calculator",
+          },
+          {
+            id: "apr_calculator",
+            name: "APR Calculator",
+            path: "/tools/calculators/financial/apr-calculator",
+          },
+          {
+            id: "auto_lease_calculator",
+            name: "Auto Lease Calculator",
+            path: "/tools/calculators/financial/auto-lease-calculator",
+          },
+          {
+            id: "auto_loan_calculator",
+            name: "Auto Loan Calculator",
+            path: "/tools/calculators/financial/auto-loan-calculator",
+          },
+          {
+            id: "average_return_calculator",
+            name: "Average Return Calculator",
+            path: "/tools/calculators/financial/average-return-calculator",
+          },
+          {
+            id: "bond_calculator",
+            name: "Bond Calculator",
+            path: "/tools/calculators/financial/bond-calculator",
+          },
+          {
+            id: "budget_calculator",
+            name: "Budget Calculator",
+            path: "/tools/calculators/financial/budget-calculator",
+          },
+          {
+            id: "business_loan_calculator",
+            name: "Business Loan Calculator",
+            path: "/tools/calculators/financial/business-loan-calculator",
+          },
+          {
+            id: "canadian_mortgage_calculator",
+            name: "Canadian Mortgage Calculator",
+            path: "/tools/calculators/financial/canadian-mortgage-calculator",
+          },
+          {
+            id: "cash_back_low_interest_calculator",
+            name: "Cash Back & Low Interest Calculator",
+            path: "/tools/calculators/financial/cash-back-and-low-interest-calculator",
+          },
+          {
+            id: "cd_calculator",
+            name: "CD Calculator",
+            path: "/tools/calculators/financial/cd-calculator",
+          },
+          {
+            id: "college_cost_calculator",
+            name: "College Cost Calculator",
+            path: "/tools/calculators/financial/college-cost-calculator",
+          },
+          {
+            id: "commission_calculator",
+            name: "Commission Calculator",
+            path: "/tools/calculators/financial/commission-calculator",
+          },
+          {
+            id: "compound_interest_calculator",
+            name: "Compound Interest Calculator",
+            path: "/tools/calculators/financial/compound-interest-calculator",
+          },
+          {
+            id: "credit_card_calculator",
+            name: "Credit Card Calculator",
+            path: "/tools/calculators/financial/credit-card-calculator",
+          },
+          {
+            id: "credit_card_payoff_calculator",
+            name: "Credit Card Payoff Calculator",
+            path: "/tools/calculators/financial/credit-card-payoff-calculator",
+          },
+        ],
+      },
     ],
   },
   {
@@ -1550,5 +1656,106 @@ export const calculatorMetaData = {
   "annealing-temperature-calculator": {
     title: "Annealing Temperature Calculator | Inform Readers",
     description: "Calculate your Total Annealing Temperature.",
+  },
+  // Financial Calculators
+  "401k-calculator-for-use-by-us-residents": {
+    title: "401(k) Calculator | Inform Readers",
+    description:
+      "Estimate your 401(k) retirement savings and see how contributions, employer match, and investment returns affect your future balance.",
+  },
+  "advance-debt-consolidation-calculator": {
+    title: "Debt Consolidation Calculator | Inform Readers",
+    description:
+      "Evaluate whether consolidating your debts into a single loan can lower your monthly payments and total interest costs.",
+  },
+  "amortization-calculator": {
+    title: "Amortization Calculator | Inform Readers",
+    description:
+      "Visualize your loan repayment over time with a detailed amortization schedule including principal and interest breakdowns.",
+  },
+  "annuity-calculator": {
+    title: "Annuity Calculator | Inform Readers",
+    description:
+      "Calculate the present or future value of an annuity based on payment frequency, rate of return, and duration.",
+  },
+  "annuity-payout-calculator": {
+    title: "Annuity Payout Calculator | Inform Readers",
+    description:
+      "Estimate the monthly or annual payouts you can receive from an annuity based on principal and interest rate.",
+  },
+  "apr-calculator": {
+    title: "APR Calculator | Inform Readers",
+    description:
+      "Determine the true annual percentage rate (APR) of a loan, including interest and additional fees.",
+  },
+  "auto-lease-calculator": {
+    title: "Auto Lease Calculator | Inform Readers",
+    description:
+      "Estimate your monthly car lease payments, factoring in residual value, money factor, term, and more.",
+  },
+  "auto-loan-calculator": {
+    title: "Auto Loan Calculator | Inform Readers",
+    description:
+      "Figure out your monthly car loan payments and total interest based on loan amount, term, and APR.",
+  },
+  "average-return-calculator": {
+    title: "Average Return Calculator | Inform Readers",
+    description:
+      "Calculate average annual return on investment (ROI) to assess the historical performance of your portfolio.",
+  },
+  "bond-calculator": {
+    title: "Bond Calculator | Inform Readers",
+    description:
+      "Evaluate bond yield, price, and interest income using various inputs like face value, coupon rate, and maturity.",
+  },
+  "budget-calculator": {
+    title: "Budget Calculator | Inform Readers",
+    description:
+      "Create a personal budget by tracking income and expenses to better manage your monthly finances.",
+  },
+  "business-loan-calculator": {
+    title: "Business Loan Calculator | Inform Readers",
+    description:
+      "Estimate loan payments for your business financing needs based on amount, term, and interest rate.",
+  },
+  "canadian-mortgage-calculator": {
+    title: "Canadian Mortgage Calculator | Inform Readers",
+    description:
+      "Calculate monthly mortgage payments, interest costs, and amortization schedules under Canadian lending rules.",
+  },
+  "cash-back-and-low-interest-calculator": {
+    title: "Cash Back & Low Interest Calculator | Inform Readers",
+    description:
+      "Compare savings between credit cards with cash back offers versus low interest rates over time.",
+  },
+  "cd-calculator": {
+    title: "CD Calculator | Inform Readers",
+    description:
+      "Estimate how much interest you’ll earn on a Certificate of Deposit (CD) over time with compound growth.",
+  },
+  "college-cost-calculator": {
+    title: "College Cost Calculator | Inform Readers",
+    description:
+      "Plan for education expenses by estimating total college costs, including tuition, fees, housing, and inflation.",
+  },
+  "commission-calculator": {
+    title: "Commission Calculator | Inform Readers",
+    description:
+      "Calculate commission earnings based on sales amount and commission percentage or tiered structures.",
+  },
+  "compound-interest-calculator": {
+    title: "Compound Interest Calculator | Inform Readers",
+    description:
+      "See how your savings grow over time with compound interest using customizable rate, time, and contribution inputs.",
+  },
+  "credit-card-calculator": {
+    title: "Credit Card Calculator | Inform Readers",
+    description:
+      "Understand the long-term costs of carrying a credit card balance and how payments affect interest accrual.",
+  },
+  "credit-card-payoff-calculator": {
+    title: "Credit Card Payoff Calculator | Inform Readers",
+    description:
+      "Create a strategy to pay off your credit card debt faster and save on interest with various payoff methods.",
   },
 };

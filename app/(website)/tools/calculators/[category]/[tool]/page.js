@@ -106,6 +106,28 @@ import TDEECalculator from "@/components/pages/tools/calculator/health/tdee-calc
 // Biology
 import AnnealingTemperatureCalculator from "@/components/pages/tools/calculator/biology/annealing-temperature-calculator";
 
+// Financial
+import Calculator401k from "@/components/pages/tools/calculator/financial/401k-calculator-for-use-by-us-residents";
+import AdvanceDebtConsolidationCalculator from "@/components/pages/tools/calculator/financial/advance-debt-consolidation-calculator";
+import AmortizationCalculator from "@/components/pages/tools/calculator/financial/amortization-calculator";
+import AnnuityCalculator from "@/components/pages/tools/calculator/financial/annuity-calculator";
+import AnnuityPayoutCalculator from "@/components/pages/tools/calculator/financial/annuity-payout-calculator";
+import APRCalculator from "@/components/pages/tools/calculator/financial/apr-calculator";
+import AutoLeaseCalculator from "@/components/pages/tools/calculator/financial/auto-lease-calculator";
+import AutoLoanCalculator from "@/components/pages/tools/calculator/financial/auto-loan-calculator";
+import AverageReturnCalculator from "@/components/pages/tools/calculator/financial/average-return-calculator";
+import BondCalculator from "@/components/pages/tools/calculator/financial/bond-calculator";
+import BudgetCalculator from "@/components/pages/tools/calculator/financial/budget-calculator";
+import BusinessLoanCalculator from "@/components/pages/tools/calculator/financial/business-loan-calculator";
+import CanadianMortgageCalculator from "@/components/pages/tools/calculator/financial/canadian-mortgage-calculator";
+import CashBackLowInterestCalculator from "@/components/pages/tools/calculator/financial/cash-back-&-low-interest-calculator";
+import CDCalculator from "@/components/pages/tools/calculator/financial/cd-calculator";
+import CollegeCostCalculator from "@/components/pages/tools/calculator/financial/college-cost-calculator";
+import CommissionCalculator from "@/components/pages/tools/calculator/financial/commission-calculator";
+import CompoundInterestCalculator from "@/components/pages/tools/calculator/financial/compound-interest-calculator";
+import CreditCardCalculator from "@/components/pages/tools/calculator/financial/credit-card-calculator";
+import CreditCardPayoffCalculator from "@/components/pages/tools/calculator/financial/credit-card-payoff-calculator";
+
 const toolComponents = {
   // Physics
   "acceleration-calculator-with-charts": AccelerationCalculatorWithCharts,
@@ -209,6 +231,27 @@ const toolComponents = {
   "tdee-calculator": TDEECalculator,
   // biology
   "annealing-temperature-calculator": AnnealingTemperatureCalculator,
+  // Financial
+  "401k-calculator-for-use-by-us-residents": Calculator401k,
+  "advance-debt-consolidation-calculator": AdvanceDebtConsolidationCalculator,
+  "amortization-calculator": AmortizationCalculator,
+  "annuity-calculator": AnnuityCalculator,
+  "annuity-payout-calculator": AnnuityPayoutCalculator,
+  "apr-calculator": APRCalculator,
+  "auto-lease-calculator": AutoLeaseCalculator,
+  "auto-loan-calculator": AutoLoanCalculator,
+  "average-return-calculator": AverageReturnCalculator,
+  "bond-calculator": BondCalculator,
+  "budget-calculator": BudgetCalculator,
+  "business-loan-calculator": BusinessLoanCalculator,
+  "canadian-mortgage-calculator": CanadianMortgageCalculator,
+  "cash-back-and-low-interest-calculator": CashBackLowInterestCalculator,
+  "cd-calculator": CDCalculator,
+  "college-cost-calculator": CollegeCostCalculator,
+  "commission-calculator": CommissionCalculator,
+  "compound-interest-calculator": CompoundInterestCalculator,
+  "credit-card-calculator": CreditCardCalculator,
+  "credit-card-payoff-calculator": CreditCardPayoffCalculator,
 };
 
 export async function generateMetadata({ params }) {
