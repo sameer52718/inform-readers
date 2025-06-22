@@ -850,8 +850,8 @@ export const TOOL_CATEGORIES = [
           },
           {
             id: "rent_vs_buy_calculator",
-            name: "Rent vs. Buy Calculator",
-            path: "/tools/calculators/financial/rent-vs.-buy-calculator",
+            name: "Rent vs Buy Calculator",
+            path: "/tools/calculators/financial/rent-vs-buy-calculator",
           },
           {
             id: "rent_calculator",
@@ -892,6 +892,51 @@ export const TOOL_CATEGORIES = [
             id: "salary_calculator",
             name: "Salary Calculator",
             path: "/tools/calculators/financial/salary-calculator",
+          },
+          {
+            id: "savings_calculator",
+            name: "Savings Calculator",
+            path: "/tools/calculators/financial/savings-calculator",
+          },
+          {
+            id: "simple_interest_calculator",
+            name: "Simple Interest Calculator",
+            path: "/tools/calculators/financial/simple-interest-calculator",
+          },
+          {
+            id: "simplified_sales_tax_calculator",
+            name: "Simplified Sales Tax Calculator",
+            path: "/tools/calculators/financial/simplified-sales-tax-calculator",
+          },
+          {
+            id: "social_security_calculator",
+            name: "Social Security Calculator",
+            path: "/tools/calculators/financial/social-security-calculator",
+          },
+          {
+            id: "student_loan_calculator",
+            name: "Student Loan Calculator",
+            path: "/tools/calculators/financial/student-loan-calculator",
+          },
+          {
+            id: "take_home_paycheck_calculator",
+            name: "Take-Home Paycheck Calculator",
+            path: "/tools/calculators/financial/take-home-paycheck-calculator",
+          },
+          {
+            id: "uk_mortgage_calculator",
+            name: "UK Mortgage Calculator",
+            path: "/tools/calculators/financial/uk-mortgage-calculator",
+          },
+          {
+            id: "va_mortgage_calculator",
+            name: "VA Mortgage Calculator",
+            path: "/tools/calculators/financial/va-mortgage-calculator",
+          },
+          {
+            id: "vat_calculator",
+            name: "VAT Calculator",
+            path: "/tools/calculators/financial/vat-calculator",
           },
         ],
       },
@@ -2096,7 +2141,7 @@ export const calculatorMetaData = {
     title: "Refinance Calculator | Inform Readers",
     description: "See how much you can save by refinancing your loan at a new interest rate.",
   },
-  "rent-vs.-buy-calculator": {
+  "rent-vs-buy-calculator": {
     title: "Rent vs. Buy Calculator | Inform Readers",
     description: "Compare renting versus buying a home based on financial and lifestyle factors.",
   },
@@ -2131,5 +2176,43 @@ export const calculatorMetaData = {
   "salary-calculator": {
     title: "Salary Calculator | Inform Readers",
     description: "Convert salary to hourly, estimate take-home pay, or compare annual incomes.",
+  },
+  "savings-calculator": {
+    title: "Savings Calculator | Inform Readers",
+    description: "Estimate how your savings will grow over time with compound interest and regular deposits.",
+  },
+  "simple-interest-calculator": {
+    title: "Simple Interest Calculator | Inform Readers",
+    description: "Calculate simple interest earned or paid based on principal, rate, and time.",
+  },
+  "simplified-sales-tax-calculator": {
+    title: "Simplified Sales Tax Calculator | Inform Readers",
+    description: "Quickly estimate sales tax for your purchases based on location and tax rate.",
+  },
+  "social-security-calculator": {
+    title: "Social Security Calculator | Inform Readers",
+    description: "Estimate your future Social Security benefits based on earnings and retirement age.",
+  },
+  "student-loan-calculator": {
+    title: "Student Loan Calculator | Inform Readers",
+    description:
+      "Project monthly payments and total cost of your student loans based on loan terms and interest.",
+  },
+  "take-home-paycheck-calculator": {
+    title: "Take-Home Paycheck Calculator | Inform Readers",
+    description: "Estimate your net paycheck after taxes and deductions using this take-home pay calculator.",
+  },
+  "uk-mortgage-calculator": {
+    title: "UK Mortgage Calculator | Inform Readers",
+    description:
+      "Calculate mortgage payments and costs specific to the UK housing market and interest rates.",
+  },
+  "va-mortgage-calculator": {
+    title: "VA Mortgage Calculator | Inform Readers",
+    description: "Estimate monthly mortgage payments for VA loans with zero down payment options.",
+  },
+  "vat-calculator": {
+    title: "VAT Calculator | Inform Readers",
+    description: "Calculate Value-Added Tax (VAT) for purchases and services with customizable tax rates.",
   },
 };
