@@ -24,7 +24,7 @@ import RemovePagesTool from "@/components/pages/tools/pdf/remove-pages-tool";
 import RepairPDFTool from "@/components/pages/tools/pdf/repair-pdf-tool";
 import RotatePDFTool from "@/components/pages/tools/pdf/rotate-pdf-tool";
 import TxtToPDFTool from "@/components/pages/tools/pdf/txt-to-pdf-tool";
-import WordToPDFConverter from "@/components/pages/tools/pdf/word-to-pdf-converter";
+// import WordToPDFConverter from "@/components/pages/tools/pdf/word-to-pdf-converter";
 
 const toolComponents = {
   "add-page-number-to-pdf": AddPageNumberToPDF,
@@ -51,7 +51,7 @@ const toolComponents = {
   "repair-pdf-tool": RepairPDFTool,
   "rotate-pdf-tool": RotatePDFTool,
   "txt-to-pdf-tool": TxtToPDFTool,
-  "word-to-pdf-converter": WordToPDFConverter,
+  //   "word-to-pdf-converter": WordToPDFConverter,
 };
 
 export async function generateMetadata({ params }) {

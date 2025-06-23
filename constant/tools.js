@@ -174,11 +174,11 @@ export const TOOL_CATEGORIES = [
         name: "TXT to PDF",
         path: "/tools/pdf-tools/txt-to-pdf-tool",
       },
-      {
-        id: "word_to_pdf_converter",
-        name: "Word to PDF Converter",
-        path: "/tools/pdf-tools/word-to-pdf-converter",
-      },
+      // {
+      //   id: "word_to_pdf_converter",
+      //   name: "Word to PDF Converter",
+      //   path: "/tools/pdf-tools/word-to-pdf-converter",
+      // },
     ],
   },
 
