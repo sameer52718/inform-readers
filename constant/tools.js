@@ -55,22 +55,133 @@ export const TOOL_CATEGORIES = [
     name: "PDF Tools",
     tools: [
       {
-        id: "pdf-to-jpg",
-        name: "PDF to JPG",
-        path: "/tools/pdf/convert-pdf-to-jpg",
+        id: "add_page_number_to_pdf",
+        name: "Add Page Number to PDF",
+        path: "/tools/pdf-tools/add-page-number-to-pdf",
       },
       {
-        id: "merge-pdf",
-        name: "Merge PDFs",
-        path: "/tools/pdf/merge-pdf",
+        id: "bmp_to_pdf_converter",
+        name: "BMP to PDF Converter",
+        path: "/tools/pdf-tools/bmp-to-pdf-converter",
       },
       {
-        id: "compress-pdf",
+        id: "compress_pdf_tool",
         name: "Compress PDF",
-        path: "/tools/pdf/compress-pdf",
+        path: "/tools/pdf-tools/compress-pdf-tool",
+      },
+      {
+        id: "excel_to_pdf_tool",
+        name: "Excel to PDF",
+        path: "/tools/pdf-tools/excel-to-pdf-tool",
+      },
+      {
+        id: "extract_from_pdf",
+        name: "Extract from PDF",
+        path: "/tools/pdf-tools/extract-from-pdf",
+      },
+      {
+        id: "extract_pdf_pages_tool",
+        name: "Extract PDF Pages",
+        path: "/tools/pdf-tools/extract-pdf-pages-tool",
+      },
+      {
+        id: "high_resolution_tiff_to_pdf_converter",
+        name: "High-Res TIFF to PDF",
+        path: "/tools/pdf-tools/high-resolution-tiff-to-pdf-converter",
+      },
+      {
+        id: "jpg_to_pdf_converter",
+        name: "JPG to PDF Converter",
+        path: "/tools/pdf-tools/jpg-to-pdf-converter",
+      },
+      {
+        id: "merge_pdf_tool",
+        name: "Merge PDFs",
+        path: "/tools/pdf-tools/merge-pdf-tool",
+      },
+      {
+        id: "organize_pdf_tool",
+        name: "Organize PDF",
+        path: "/tools/pdf-tools/organize-pdf-tool",
+      },
+      {
+        id: "pdf_to_bmp_converter",
+        name: "PDF to BMP Converter",
+        path: "/tools/pdf-tools/pdf-to-bmp-converter",
+      },
+      {
+        id: "pdf_to_csv",
+        name: "PDF to CSV",
+        path: "/tools/pdf-tools/pdf-to-csv",
+      },
+      {
+        id: "pdf_to_png_converter",
+        name: "PDF to PNG Converter",
+        path: "/tools/pdf-tools/pdf-to-png-converter",
+      },
+      {
+        id: "pdf_to_ppt",
+        name: "PDF to PPT",
+        path: "/tools/pdf-tools/pdf-to-ppt",
+      },
+      {
+        id: "pdf_to_tiff_converter",
+        name: "PDF to TIFF Converter",
+        path: "/tools/pdf-tools/pdf-to-tiff-converter",
+      },
+      {
+        id: "pdf_to_txt_tool",
+        name: "PDF to TXT",
+        path: "/tools/pdf-tools/pdf-to-txt-tool",
+      },
+      {
+        id: "pdf_to_word",
+        name: "PDF to Word",
+        path: "/tools/pdf-tools/pdf-to-word",
+      },
+      {
+        id: "pdf_to_zip_converter",
+        name: "PDF to ZIP",
+        path: "/tools/pdf-tools/pdf-to-zip-converter",
+      },
+      {
+        id: "png_to_pdf_converter",
+        name: "PNG to PDF Converter",
+        path: "/tools/pdf-tools/png-to-pdf-converter",
+      },
+      {
+        id: "powerpoint_to_pdf_converter",
+        name: "PowerPoint to PDF",
+        path: "/tools/pdf-tools/powerpoint-to-pdf-converter",
+      },
+      {
+        id: "remove_pages_tool",
+        name: "Remove PDF Pages",
+        path: "/tools/pdf-tools/remove-pages-tool",
+      },
+      {
+        id: "repair_pdf_tool",
+        name: "Repair PDF",
+        path: "/tools/pdf-tools/repair-pdf-tool",
+      },
+      {
+        id: "rotate_pdf_tool",
+        name: "Rotate PDF",
+        path: "/tools/pdf-tools/rotate-pdf-tool",
+      },
+      {
+        id: "txt_to_pdf_tool",
+        name: "TXT to PDF",
+        path: "/tools/pdf-tools/txt-to-pdf-tool",
+      },
+      {
+        id: "word_to_pdf_converter",
+        name: "Word to PDF Converter",
+        path: "/tools/pdf-tools/word-to-pdf-converter",
       },
     ],
   },
+
   {
     id: "calculators",
     name: "Calculators",
@@ -2214,5 +2325,115 @@ export const calculatorMetaData = {
   "vat-calculator": {
     title: "VAT Calculator | Inform Readers",
     description: "Calculate Value-Added Tax (VAT) for purchases and services with customizable tax rates.",
+  },
+};
+
+export const pdfToolMetaData = {
+  "add-page-number-to-pdf": {
+    title: "Add Page Numbers to PDF | Inform Readers",
+    description:
+      "Easily insert page numbers into your PDF documents for organized reading and professional formatting.",
+  },
+  "bmp-to-pdf-converter": {
+    title: "BMP to PDF Converter | Inform Readers",
+    description: "Convert BMP image files into high-quality PDFs instantly with our user-friendly tool.",
+  },
+  "compress-pdf-tool": {
+    title: "Compress PDF Tool | Inform Readers",
+    description:
+      "Reduce the file size of your PDFs without sacrificing quality for faster sharing and uploading.",
+  },
+  "excel-to-pdf-tool": {
+    title: "Excel to PDF Tool | Inform Readers",
+    description: "Convert your Excel spreadsheets to PDF format quickly and accurately for easy sharing.",
+  },
+  "extract-from-pdf": {
+    title: "Extract from PDF Tool | Inform Readers",
+    description:
+      "Pull text, images, or specific content from PDF files effortlessly with our extraction tool.",
+  },
+  "extract-pdf-pages-tool": {
+    title: "Extract PDF Pages Tool | Inform Readers",
+    description: "Select and extract specific pages from a PDF file into a new document with ease.",
+  },
+  "high-resolution-tiff-to-pdf-converter": {
+    title: "High Resolution TIFF to PDF Converter | Inform Readers",
+    description: "Convert high-quality TIFF images into PDFs while preserving clarity and resolution.",
+  },
+  "jpg-to-pdf-converter": {
+    title: "JPG to PDF Converter | Inform Readers",
+    description: "Quickly convert JPG images into a single or multi-page PDF with our efficient converter.",
+  },
+  "merge-pdf-tool": {
+    title: "Merge PDF Tool | Inform Readers",
+    description: "Combine multiple PDF documents into one seamless file using our intuitive PDF merger.",
+  },
+  "organize-pdf-tool": {
+    title: "Organize PDF Tool | Inform Readers",
+    description: "Rearrange, rotate, or delete PDF pages to structure your document exactly how you want it.",
+  },
+  "pdf-to-bmp-converter": {
+    title: "PDF to BMP Converter | Inform Readers",
+    description: "Convert your PDF pages to BMP image format for editing, storage, or printing needs.",
+  },
+  "pdf-to-csv": {
+    title: "PDF to CSV Converter | Inform Readers",
+    description: "Extract tabular data from PDF files and convert it into editable CSV spreadsheets.",
+  },
+  "pdf-to-jpg-converter": {
+    title: "PDF to JPG Converter | Inform Readers",
+    description: "Turn your PDF pages into JPG image files in just a few clicks with this quick tool.",
+  },
+  "pdf-to-png-converter": {
+    title: "PDF to PNG Converter | Inform Readers",
+    description: "Convert PDF documents to PNG format for sharing, editing, or archiving.",
+  },
+  "pdf-to-ppt": {
+    title: "PDF to PPT Converter | Inform Readers",
+    description: "Transform PDF documents into PowerPoint presentations while maintaining formatting.",
+  },
+  "pdf-to-tiff-converter": {
+    title: "PDF to TIFF Converter | Inform Readers",
+    description: "Convert PDF pages to TIFF image format for high-resolution printing or storage.",
+  },
+  "pdf-to-txt-tool": {
+    title: "PDF to TXT Tool | Inform Readers",
+    description: "Extract plain text from PDF documents for editing, analysis, or storage purposes.",
+  },
+  "pdf-to-word": {
+    title: "PDF to Word Converter | Inform Readers",
+    description: "Convert your PDFs into editable Microsoft Word documents in seconds with great accuracy.",
+  },
+  "pdf-to-zip-converter": {
+    title: "PDF to ZIP Converter | Inform Readers",
+    description: "Bundle your PDF files into a ZIP archive for easy sharing and compressed storage.",
+  },
+  "png-to-pdf-converter": {
+    title: "PNG to PDF Converter | Inform Readers",
+    description: "Convert PNG images to PDF documents while preserving image quality and layout.",
+  },
+  "powerpoint-to-pdf-converter": {
+    title: "PowerPoint to PDF Converter | Inform Readers",
+    description: "Convert PowerPoint presentations (.ppt/.pptx) into easy-to-share PDF files instantly.",
+  },
+  "remove-pages-tool": {
+    title: "Remove PDF Pages Tool | Inform Readers",
+    description: "Delete unwanted pages from your PDF documents quickly and cleanly.",
+  },
+  "repair-pdf-tool": {
+    title: "Repair PDF Tool | Inform Readers",
+    description: "Fix corrupted or damaged PDF files and recover readable content automatically.",
+  },
+  "rotate-pdf-tool": {
+    title: "Rotate PDF Tool | Inform Readers",
+    description: "Easily rotate individual or all pages in your PDF to the desired orientation.",
+  },
+  "txt-to-pdf-tool": {
+    title: "TXT to PDF Tool | Inform Readers",
+    description: "Convert plain text files (.txt) into properly formatted PDF documents with ease.",
+  },
+  "word-to-pdf-converter": {
+    title: "Word to PDF Converter | Inform Readers",
+    description: "Transform Microsoft Word documents into PDF format for universal sharing and printing.",
   },
 };
