@@ -13,7 +13,7 @@ import OrganizePDFTool from "@/components/pages/tools/pdf/organize-pdf-tool";
 import PDFToBmpConverter from "@/components/pages/tools/pdf/pdf-to-bmp-converter";
 import PDFToCSV from "@/components/pages/tools/pdf/pdf-to-csv";
 import PDFToPngConverter from "@/components/pages/tools/pdf/pdf-to-png-converter";
-import PDFToPPT from "@/components/pages/tools/pdf/pdf-to-ppt";
+// import PDFToPPT from "@/components/pages/tools/pdf/pdf-to-ppt";
 import PDFToTiffConverter from "@/components/pages/tools/pdf/pdf-to-tiff-converter";
 import PDFToTxtTool from "@/components/pages/tools/pdf/pdf-to-txt-tool";
 import PDFToWord from "@/components/pages/tools/pdf/pdf-to-word";
@@ -40,7 +40,7 @@ const toolComponents = {
   "pdf-to-bmp-converter": PDFToBmpConverter,
   "pdf-to-csv": PDFToCSV,
   "pdf-to-png-converter": PDFToPngConverter,
-  "pdf-to-ppt": PDFToPPT,
+  // "pdf-to-ppt": PDFToPPT,
   "pdf-to-tiff-converter": PDFToTiffConverter,
   "pdf-to-txt-tool": PDFToTxtTool,
   "pdf-to-word": PDFToWord,

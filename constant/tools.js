@@ -119,11 +119,11 @@ export const TOOL_CATEGORIES = [
         name: "PDF to PNG Converter",
         path: "/tools/pdf-tools/pdf-to-png-converter",
       },
-      {
-        id: "pdf_to_ppt",
-        name: "PDF to PPT",
-        path: "/tools/pdf-tools/pdf-to-ppt",
-      },
+      // {
+      //   id: "pdf_to_ppt",
+      //   name: "PDF to PPT",
+      //   path: "/tools/pdf-tools/pdf-to-ppt",
+      // },
       {
         id: "pdf_to_tiff_converter",
         name: "PDF to TIFF Converter",
