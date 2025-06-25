@@ -40,6 +40,9 @@ function Header() {
         { id: 13, title: "Bikes", url: "/bikes" },
         { id: 14, title: "Tools", url: "/tools" },
         { id: 15, title: "Video Downloader", url: "/video-downloader" },
+        { id: 16, title: "Coupons", url: "/coupons" },
+        { id: 17, title: "Jobs", url: "/jobs" },
+        { id: 18, title: "Jobs", url: "/realstate" },
       ],
     },
   ];
