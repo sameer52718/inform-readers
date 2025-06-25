@@ -11,7 +11,7 @@ export const homeCategory = [
   { id: 1, name: "Currency", image: "/website/assets/images/icons/cate-icon.png", url: "/currency-rate" },
   // { id: 1, name: "Hotel", image: "/website/assets/images/icons/cate-icon.png", url: "/hotel" },
   { id: 4, name: "Jobs", image: "/website/assets/images/icons/cate-icon.png", url: "/jobs" },
-  { id: 2, name: "Baby Names", image: "/website/assets/images/icons/cate-icon.png", url: "/name-meaning" },
+  { id: 2, name: "Baby Names", image: "/website/assets/images/icons/cate-icon.png", url: "/names" },
   { id: 1, name: "News", image: "/website/assets/images/icons/cate-icon.png", url: "/news" },
   { id: 1, name: "Petrol prices", image: "/website/assets/images/icons/cate-icon.png", url: "/petrol-price" },
   { id: 6, name: "Postal codes", image: "/website/assets/images/icons/cate-icon.png", url: "/postalcode" },

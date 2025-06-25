@@ -78,7 +78,7 @@ export default function Footer() {
               <h3 className="text-white text-lg font-semibold mb-4">Categories</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/name-meaning" className="hover:text-white transition-colors flex items-center">
+                  <Link href="/names" className="hover:text-white transition-colors flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     Baby Names
                   </Link>

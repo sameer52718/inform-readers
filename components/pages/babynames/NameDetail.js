@@ -23,6 +23,7 @@ import {
   Sparkles,
   Clock,
 } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function NameDetail() {
   const { slug } = useParams();
@@ -30,6 +31,68 @@ export default function NameDetail() {
   const [name, setName] = useState(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [isLoading, setIsLoading] = useState(true);
+
+  // Get the current page URL
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  // Social media share links
+  const socialLinks = [
+    {
+      icon: Facebook,
+      label: "Share on Facebook",
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+    },
+    {
+      icon: Twitter,
+      label: "Share on Twitter",
+      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+        currentUrl
+      )}&text=Check out the meaning of the name ${encodeURIComponent(name?.name || "")}!`,
+    },
+    {
+      icon: Linkedin,
+      label: "Share on LinkedIn",
+      href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+        currentUrl
+      )}&title=${encodeURIComponent(name?.name || "")}&summary=${encodeURIComponent(
+        name?.shortMeaning || ""
+      )}`,
+    },
+    {
+      icon: Instagram,
+      label: "Share on Instagram",
+      href: "#", // Instagram doesn't support direct web sharing; handle via copy link or redirect
+      onClick: () => {
+        // Copy link to clipboard for Instagram
+        navigator.clipboard.writeText(currentUrl);
+        toast.success("Link copied! Paste it in Instagram to share.");
+      },
+    },
+    {
+      icon: MessageCircle,
+      label: "Share on WhatsApp",
+      href: `https://api.whatsapp.com/send?text=${encodeURIComponent(
+        `Check out the meaning of the name ${name?.name || ""}: ${currentUrl}`
+      )}`,
+    },
+  ];
+
+  // Web Share API handler
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Name: ${name?.name}`,
+          text: `Discover the meaning of the name ${name?.name}! ${name?.shortMeaning}`,
+          url: currentUrl,
+        });
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      alert("Web Share API is not supported in this browser. Use the social links to share.");
+    }
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -62,14 +125,6 @@ export default function NameDetail() {
     getData();
   }, [slug]);
 
-  const socialLinks = [
-    { icon: Facebook, label: "Share on Facebook", href: "#" },
-    { icon: Twitter, label: "Share on Twitter", href: "#" },
-    { icon: Linkedin, label: "Share on LinkedIn", href: "#" },
-    { icon: Instagram, label: "Share on Instagram", href: "#" },
-    { icon: MessageCircle, label: "Share on WhatsApp", href: "#" },
-  ];
-
   const nameAttributes = [
     { icon: Globe, label: "Origin", value: name?.origion || "---" },
     { icon: Heart, label: "Religion", value: name?.religionId?.name },
@@ -100,8 +155,11 @@ export default function NameDetail() {
                   <Link
                     key={index}
                     href={social.href}
+                    onClick={social.onClick || (() => {})}
                     className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all hover:scale-110"
                     aria-label={social.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <social.icon className="w-5 h-5" />
                   </Link>
@@ -310,7 +368,7 @@ export default function NameDetail() {
                   {data.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/name-meaning/religion/${item._id}`}
+                      href={`/names/religion/${item._id}`}
                       className="block w-full text-left px-4 py-3 rounded-lg bg-gray-50 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       {item.name}

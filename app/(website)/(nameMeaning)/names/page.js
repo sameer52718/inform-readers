@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import NameMeaning from "@/components/pages/babynames/NameTables";
 
 // Server-side metadata
@@ -24,7 +23,7 @@ export const metadata = {
     title: "Baby Name Meanings | Boy & Girl Names by Religion & Culture",
     description:
       "Search and explore thousands of baby names with rich meanings and cultural roots. Find the perfect name today!",
-    url: "https://informreaders.com/name-meaning",
+    url: "https://informreaders.com/names",
     type: "website",
   },
 };

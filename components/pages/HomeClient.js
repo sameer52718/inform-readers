@@ -115,7 +115,7 @@ export default function Home() {
                     <p className={`text-${color}-100`}>Browse through our collection of beautiful names</p>
                   </div>
                   <Link
-                    href="/name-meaning"
+                    href="/names"
                     className={`flex items-center gap-2 text-white hover:text-${color}-100 transition-colors duration-200`}
                   >
                     View All Names
@@ -158,7 +158,7 @@ export default function Home() {
                           </td>
                           <td className="py-4 px-6 text-center">
                             <Link
-                              href={`/name-meaning/${item?._id}`}
+                              href={`/names/${item?._id}`}
                               className={`inline-flex items-center gap-2 text-${color}-600 hover:text-${color}-700 font-medium group`}
                             >
                               View Details

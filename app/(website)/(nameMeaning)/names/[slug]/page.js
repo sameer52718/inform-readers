@@ -35,7 +35,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: `${name} - Meaning, Origin & Religion | Infrom Readers`,
         description: shortMeaning,
-        url: `http://informreaders.com/name-meaning/${slug}`,
+        url: `http://informreaders.com/names/${slug}`,
         siteName: "BabyNameFinder",
         images: [
           {

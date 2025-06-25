@@ -21,7 +21,7 @@ function Header() {
   });
 
   const categories = [
-    { id: 1, title: "Baby Names", url: "/name-meaning" },
+    { id: 1, title: "Baby Names", url: "/names" },
     { id: 2, title: "Postal Codes", url: "/postalcode" },
     { id: 3, title: "Swift Codes", url: "/swiftcode" },
     { id: 4, title: "Software & Games", url: "/software" },

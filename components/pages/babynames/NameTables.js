@@ -136,7 +136,7 @@ const NameTable = ({ gender, searchQuery, searchTrigger }) => {
                         </td>
                         <td className="px-6 py-4 text-center">
                           <Link
-                            href={`/name-meaning/${item?._id}`}
+                            href={`/names/${item?._id}`}
                             className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
                           >
                             View Details
@@ -184,6 +184,9 @@ export default function NameMeaning() {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTrigger, setSearchTrigger] = useState(0);
+
+  const [showAllReligions, setShowAllReligions] = useState(false);
+  const visibleReligions = showAllReligions ? data : data.slice(0, 8);
 
   useEffect(() => {
     const getData = async () => {
@@ -247,10 +250,10 @@ export default function NameMeaning() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data.map((item, index) => (
+            {visibleReligions.map((item, index) => (
               <Link
                 key={index}
-                href={`/name-meaning/religion/${item._id}`}
+                href={`/names/religion/${item._id}`}
                 className="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -264,6 +267,17 @@ export default function NameMeaning() {
               </Link>
             ))}
           </div>
+
+          {data.length > 8 && (
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setShowAllReligions(!showAllReligions)}
+                className="text-red-600 font-semibold hover:underline"
+              >
+                {showAllReligions ? "Show Less" : "Show More"}
+              </button>
+            </div>
+          )}
         </section>
 
         {/* Name Tables */}

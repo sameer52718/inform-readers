@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: `${category.name} Baby Names with Meanings | Infrom Readers`,
         description: `Explore a curated collection of ${category.name} baby names and their meanings.`,
-        url: `https://informreaders.com/name-meaning/religion/${id}`,
+        url: `https://informreaders.com/names/religion/${id}`,
         siteName: "BabyNameFinder",
         images: [
           {
