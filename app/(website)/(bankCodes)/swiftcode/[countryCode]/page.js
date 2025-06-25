@@ -36,7 +36,7 @@ function LocationTable({ data = [] }) {
                       href={`/swiftcode/${countryCode}/${code?.swiftCode}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
-                      {code?.swiftCode}
+                      View Details
                     </Link>
                   </td>
                 </tr>
