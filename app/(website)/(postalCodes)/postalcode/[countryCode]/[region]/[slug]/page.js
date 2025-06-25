@@ -3,6 +3,8 @@ import handleError from "@/lib/handleError";
 import { Share2, Navigation } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import ShareButton from "../../../components/ShareButton";
 
 export async function generateMetadata({ params }) {
   try {
@@ -80,10 +82,7 @@ export default async function PostalCodeDetail({ params }) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 rounded-full bg-red-100 px-4 py-2 text-red-600 hover:bg-red-200">
-                <Share2 className="h-4 w-4" />
-                Share
-              </button>
+              <ShareButton data={data} />
             </div>
           </div>
 

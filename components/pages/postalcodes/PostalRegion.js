@@ -34,7 +34,7 @@ function LocationTable({ data = [] }) {
                       href={`/postalcode/${countryCode}/${region}/${code?._id}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
-                      {code.code}
+                      View Details
                     </Link>
                   </td>
                 </tr>
