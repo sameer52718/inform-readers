@@ -1,18 +1,26 @@
-
-"use client"
-import React, { useState, useEffect } from 'react';
-import { TrendingDown, DollarSign, Volume2, Search, RefreshCw, BarChart3, TrendingUp, AlertCircle, Globe } from 'lucide-react';
-import axios from 'axios';
-import Loading from '@/components/ui/Loading';
-import { useSelector } from 'react-redux';
-
+"use client";
+import React, { useState, useEffect } from "react";
+import {
+  TrendingDown,
+  DollarSign,
+  Volume2,
+  Search,
+  RefreshCw,
+  BarChart3,
+  TrendingUp,
+  AlertCircle,
+  Globe,
+} from "lucide-react";
+import axios from "axios";
+import Loading from "@/components/ui/Loading";
+import { useSelector } from "react-redux";
 
 const CryptoTable = ({ rates, currency }) => {
-  const { color } = useSelector(state => state.config)
+  const { color } = useSelector((state) => state.config);
 
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency: currency.toUpperCase(),
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
@@ -57,13 +65,12 @@ const CryptoTable = ({ rates, currency }) => {
             {rates.map((coin) => {
               const isPositive = coin.price_change_24h >= 0;
               return (
-                <tr
-                  key={coin.id}
-                  className="hover:bg-gray-50/50 transition-colors duration-200"
-                >
+                <tr key={coin.id} className="hover:bg-gray-50/50 transition-colors duration-200">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 bg-gradient-to-br from-${color}-500 to-${color}-700 rounded-full flex items-center justify-center text-white font-bold text-sm`}>
+                      <div
+                        className={`w-10 h-10 bg-gradient-to-br from-${color}-500 to-${color}-700 rounded-full flex items-center justify-center text-white font-bold text-sm`}
+                      >
                         {coin.symbol.charAt(0)}
                       </div>
                       <div>
@@ -76,16 +83,13 @@ const CryptoTable = ({ rates, currency }) => {
                     {formatCurrency(coin.price)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
-                    <div className={`flex items-center justify-end space-x-1 ${isPositive ? 'text-green-600' : 'text-red-600'
-                      }`}>
-                      {isPositive ? (
-                        <TrendingUp className="h-4 w-4" />
-                      ) : (
-                        <TrendingDown className="h-4 w-4" />
-                      )}
-                      <span className="font-medium">
-                        {Math.abs(coin.price_change_24h).toFixed(2)}%
-                      </span>
+                    <div
+                      className={`flex items-center justify-end space-x-1 ${
+                        isPositive ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                      <span className="font-medium">{Math.abs(coin.price_change_24h).toFixed(2)}%</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right font-medium text-gray-700">
@@ -104,17 +108,13 @@ const CryptoTable = ({ rates, currency }) => {
   );
 };
 
-
-
-
-
 const CryptoCard = ({ coin, currency }) => {
-  const { color } = useSelector(state => state.config)
+  const { color } = useSelector((state) => state.config);
 
   const isPositive = coin.price_change_24h >= 0;
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency: currency.toUpperCase(),
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
@@ -136,7 +136,9 @@ const CryptoCard = ({ coin, currency }) => {
     <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className={`w-12 h-12 bg-gradient-to-br from-${color}-500 to-${color}-700 rounded-full flex items-center justify-center text-white font-bold text-lg`}>
+          <div
+            className={`w-12 h-12 bg-gradient-to-br from-${color}-500 to-${color}-700 rounded-full flex items-center justify-center text-white font-bold text-lg`}
+          >
             {coin.symbol.charAt(0)}
           </div>
           <div>
@@ -144,15 +146,12 @@ const CryptoCard = ({ coin, currency }) => {
             <p className="text-sm text-gray-500">{coin.symbol.toUpperCase()}</p>
           </div>
         </div>
-        <div className={`flex items-center space-x-1 px-3 py-1 rounded-full text-sm font-medium ${isPositive
-          ? 'bg-green-100 text-green-700'
-          : 'bg-red-100 text-red-700'
-          }`}>
-          {isPositive ? (
-            <TrendingUp className="h-4 w-4" />
-          ) : (
-            <TrendingDown className="h-4 w-4" />
-          )}
+        <div
+          className={`flex items-center space-x-1 px-3 py-1 rounded-full text-sm font-medium ${
+            isPositive ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+          }`}
+        >
+          {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
           <span>{Math.abs(coin.price_change_24h).toFixed(2)}%</span>
         </div>
       </div>
@@ -185,7 +184,6 @@ const CryptoCard = ({ coin, currency }) => {
     </div>
   );
 };
-
 
 const cryptocurrencies = [
   { id: "bitcoin", name: "Bitcoin", symbol: "BTC" },
@@ -251,9 +249,8 @@ const cryptocurrencies = [
   { id: "usd-coin", name: "USD Coin", symbol: "USDC" },
   { id: "gas", name: "Gas", symbol: "GAS" },
   { id: "bitcoin-hedge", name: "Bitcoin Hedge", symbol: "BTCHG" },
-  { id: "nano-dogecoin", name: "Nano Dogecoin", symbol: "INDC" }
+  { id: "nano-dogecoin", name: "Nano Dogecoin", symbol: "INDC" },
 ];
-
 
 const fiatCurrencies = [
   { code: "usd", name: "US Dollar", symbol: "$" },
@@ -264,13 +261,13 @@ const fiatCurrencies = [
 ];
 
 function App() {
-  const { color } = useSelector(state => state.config)
+  const { color } = useSelector((state) => state.config);
   const [isLoading, setIsLoading] = useState(true);
   const [currency, setCurrency] = useState("usd");
   const [rates, setRates] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [viewMode, setViewMode] = useState('cards');
+  const [viewMode, setViewMode] = useState("table");
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -302,7 +299,6 @@ function App() {
         };
       });
 
-
       setRates(ratesData);
       setLastUpdated(new Date());
     } catch (err) {
@@ -323,11 +319,11 @@ function App() {
     fetchRates();
   }, [currency]);
 
-  const filteredRates = rates.filter((coin) =>
-    coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredRates = rates.filter(
+    (coin) =>
+      coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -343,13 +339,11 @@ function App() {
                 disabled={isRefreshing}
                 className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200 disabled:opacity-50"
               >
-                <RefreshCw className={`h-5 w-5 text-gray-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`h-5 w-5 text-gray-600 ${isRefreshing ? "animate-spin" : ""}`} />
               </button>
 
               {lastUpdated && (
-                <div className="text-sm text-gray-500">
-                  Updated: {lastUpdated.toLocaleTimeString()}
-                </div>
+                <div className="text-sm text-gray-500">Updated: {lastUpdated.toLocaleTimeString()}</div>
               )}
             </div>
           </div>
@@ -390,7 +384,7 @@ function App() {
           </div>
 
           {/* View Mode Toggle */}
-          <div className="flex bg-gray-100 rounded-lg p-1">
+          {/* <div className="flex bg-gray-100 rounded-lg p-1">
             <button
               onClick={() => setViewMode('cards')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${viewMode === 'cards'
@@ -409,7 +403,7 @@ function App() {
             >
               Table
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Error State */}
@@ -440,13 +434,13 @@ function App() {
                   </div>
                   <div className="text-center">
                     <p className="text-2xl font-bold text-green-600">
-                      {filteredRates.filter(coin => coin.price_change_24h >= 0).length}
+                      {filteredRates.filter((coin) => coin.price_change_24h >= 0).length}
                     </p>
                     <p className="text-sm text-gray-600">Gainers</p>
                   </div>
                   <div className="text-center">
                     <p className="text-2xl font-bold text-red-600">
-                      {filteredRates.filter(coin => coin.price_change_24h < 0).length}
+                      {filteredRates.filter((coin) => coin.price_change_24h < 0).length}
                     </p>
                     <p className="text-sm text-gray-600">Losers</p>
                   </div>
@@ -454,7 +448,7 @@ function App() {
               </div>
 
               {/* Crypto Data */}
-              {viewMode === 'cards' ? (
+              {viewMode === "cards" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {filteredRates.map((coin) => (
                     <CryptoCard key={coin.id} coin={coin} currency={currency} />
