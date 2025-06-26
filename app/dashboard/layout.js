@@ -1,23 +1,95 @@
-// app/dashboard/layout.js
-export default function DashboardLayout({ children }) {
+"use client";
+
+import { Suspense } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { ToastContainer } from "react-toastify";
+import Header from "@/components/userPartials/header";
+import Sidebar from "@/components/userPartials/sidebar";
+import useWidth from "@/hooks/useWidth";
+import useSidebar from "@/hooks/useSidebar";
+import useContentWidth from "@/hooks/useContentWidth";
+import useMenulayout from "@/hooks/useMenulayout";
+import useMenuHidden from "@/hooks/useMenuHidden";
+// import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import MobileMenu from "@/components/userPartials/sidebar/MobileMenu";
+import useMobileMenu from "@/hooks/useMobileMenu";
+import useMonoChrome from "@/hooks/useMonoChrome";
+import useRtl from "@/hooks/useRtl";
+import useDarkMode from "@/hooks/useDarkMode";
+import useSkin from "@/hooks/useSkin";
+import Loading from "@/components/ui/Loading";
+import useNavbarType from "@/hooks/useNavbarType";
+import UserGaurd from "@/components/gaurds/userGaurd";
+
+export default function RootLayout({ children }) {
+  const { width, breakpoints } = useWidth();
+  const [collapsed] = useSidebar();
+  const [isRtl] = useRtl();
+  const [isDark] = useDarkMode();
+  const [skin] = useSkin();
+  const [navbarType] = useNavbarType();
+  const [isMonoChrome] = useMonoChrome();
+  const router = useRouter();
+
+  const location = usePathname();
+  // header switch class
+  const switchHeaderClass = () => {
+    if (menuType === "horizontal" || menuHidden) {
+      return "ltr:ml-0 rtl:mr-0";
+    } else if (collapsed) {
+      return "ltr:ml-[72px] rtl:mr-[72px]";
+    } else {
+      return "ltr:ml-[248px] rtl:mr-[248px]";
+    }
+  };
+
+  // content width
+  const [contentWidth] = useContentWidth();
+  const [menuType] = useMenulayout();
+  const [menuHidden] = useMenuHidden();
+  // mobile menu
+  const [mobileMenu, setMobileMenu] = useMobileMenu();
+
   return (
-    <div className="min-h-screen flex">
-      <aside className="w-64 bg-gray-700 text-white p-4">
-        <h2 className="text-xl font-bold">User Dashboard</h2>
-        <ul>
-          <li>
-            <a href="/dashboard" className="block py-2">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="/dashboard/profile" className="block py-2">
-              Profile
-            </a>
-          </li>
-        </ul>
-      </aside>
-      <main className="flex-1 p-6">{children}</main>
-    </div>
+    <UserGaurd>
+      <div
+        dir={isRtl ? "rtl" : "ltr"}
+        className={`app-warp    ${isDark ? "dark" : "light"} ${
+          skin === "bordered" ? "skin--bordered" : "skin--default"
+        }
+      ${navbarType === "floating" ? "has-floating" : ""}
+      `}
+      >
+        <ToastContainer />
+        <Header className={width > breakpoints.xl ? switchHeaderClass() : ""} />
+        {menuType === "vertical" && width > breakpoints.xl && !menuHidden && <Sidebar />}
+        <MobileMenu
+          className={`${
+            width < breakpoints.xl && mobileMenu
+              ? "left-0 visible opacity-100  z-[9999]"
+              : "left-[-300px] invisible opacity-0  z-[-999] "
+          }`}
+        />
+        {/* mobile menu overlay*/}
+        {width < breakpoints.xl && mobileMenu && (
+          <div
+            className="overlay bg-slate-900/50 backdrop-filter backdrop-blur-sm opacity-100 fixed inset-0 z-[999]"
+            onClick={() => setMobileMenu(false)}
+          ></div>
+        )}
+        <div
+          className={`content-wrapper transition-all duration-150 ${width > 1280 ? switchHeaderClass() : ""}`}
+        >
+          {/* md:min-h-screen will h-full*/}
+          <div className="page-content   page-min-height  ">
+            <div className={contentWidth === "boxed" ? "container mx-auto" : "container-fluid"}>
+              <div>
+                <Suspense fallback={<Loading />}>{children}</Suspense>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </UserGaurd>
   );
 }

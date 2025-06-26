@@ -192,6 +192,29 @@ export const menuItems = [
   },
 ];
 
+export const userMenuItems = [
+  {
+    isHeadr: true,
+    title: "menu",
+  },
+
+  {
+    title: "Dashboard",
+    icon: "heroicons-outline:home",
+    link: "/dashboard",
+  },
+  {
+    title: "Blogs",
+    icon: "heroicons-outline:home",
+    link: "/dashboard/blog",
+  },
+  {
+    title: "Settings",
+    icon: "uil:setting",
+    link: "/dashboard/setting",
+  },
+];
+
 export const topMenu = [];
 
 export const notifications = [];

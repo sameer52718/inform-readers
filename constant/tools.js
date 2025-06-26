@@ -1056,16 +1056,11 @@ export const TOOL_CATEGORIES = [
   {
     id: "other-tools",
     name: "Other Tools",
-    tools: [
+    subcategories: [
       {
-        id: "unit-converter",
-        name: "Unit Converter",
-        path: "/tools/other/unit-converter",
-      },
-      {
-        id: "text-to-speech",
-        name: "Text to Speech",
-        path: "/tools/other/text-to-speech",
+        id: "angle-converter",
+        name: "Angle Converter",
+        tools: [],
       },
     ],
   },
