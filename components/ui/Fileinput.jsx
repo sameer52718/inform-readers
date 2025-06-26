@@ -12,6 +12,7 @@ const Fileinput = ({
   selectedFile,
   badge,
   selectedFiles,
+  accept = "*/*",
 }) => {
   return (
     <div>
@@ -25,43 +26,28 @@ const Fileinput = ({
             id={id}
             multiple={multiple}
             placeholder={placeholder}
+            accept={accept}
           />
-          <div
-            className={`w-full h-[40px] file-control flex items-center ${className}`}
-          >
+          <div className={`w-full h-[40px] file-control flex items-center ${className}`}>
             {!multiple && (
               <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 {selectedFile && (
-                  <span
-                    className={
-                      badge ? " badge-title" : "text-slate-900 dark:text-white"
-                    }
-                  >
+                  <span className={badge ? " badge-title" : "text-slate-900 dark:text-white"}>
                     {selectedFile.name}
                   </span>
                 )}
-                {!selectedFile && (
-                  <span className="text-slate-400">{placeholder}</span>
-                )}
+                {!selectedFile && <span className="text-slate-400">{placeholder}</span>}
               </span>
             )}
 
             {multiple && (
               <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
                 {selectedFiles.length > 0 && (
-                  <span
-                    className={
-                      badge ? " badge-title" : "text-slate-900 dark:text-white"
-                    }
-                  >
-                    {selectedFiles.length > 0
-                      ? selectedFiles.length + " files selected"
-                      : ""}
+                  <span className={badge ? " badge-title" : "text-slate-900 dark:text-white"}>
+                    {selectedFiles.length > 0 ? selectedFiles.length + " files selected" : ""}
                   </span>
                 )}
-                {selectedFiles.length === 0 && (
-                  <span className="text-slate-400">{placeholder}</span>
-                )}
+                {selectedFiles.length === 0 && <span className="text-slate-400">{placeholder}</span>}
               </span>
             )}
             <span className="file-name flex-none cursor-pointer border-l px-4 border-slate-200 dark:border-slate-700 h-full inline-flex items-center bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-base rounded-tr rounded-br font-normal">

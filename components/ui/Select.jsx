@@ -28,9 +28,9 @@ const Select = ({
   options = options || Array(3).fill("option");
   return (
     <div
-      className={`fromGroup  ${error ? "has-error" : ""}  ${
-        horizontal ? "flex" : ""
-      }  ${validate ? "is-valid" : ""} `}
+      className={`fromGroup  ${error ? "has-error" : ""}  ${horizontal ? "flex" : ""}  ${
+        validate ? "is-valid" : ""
+      } `}
     >
       {label && (
         <label
@@ -48,9 +48,7 @@ const Select = ({
             onChange={onChange}
             {...register(name)}
             {...rest}
-            className={`${
-              error ? " has-error" : " "
-            } form-control py-2  appearance-none ${className}  `}
+            className={`${error ? " has-error" : " "} form-control py-2  appearance-none ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             disabled={disabled}
@@ -64,14 +62,16 @@ const Select = ({
             </option>
             {options.map((option, i) => (
               <Fragment key={i}>
-                {option.value && option.label ? (
-                  <option key={i} value={option.value}>
-                    {option.label}
-                  </option>
+                {typeof option === "object" && option !== null ? (
+                  // For { value, label } or { _id, name }
+                  option.value && option.label ? (
+                    <option value={option.value}>{option.label}</option>
+                  ) : option._id && option.name ? (
+                    <option value={option._id}>{option.name}</option>
+                  ) : null
                 ) : (
-                  <option key={i} value={option}>
-                    {option}
-                  </option>
+                  // For string values
+                  <option value={option}>{option}</option>
                 )}
               </Fragment>
             ))}
@@ -80,9 +80,7 @@ const Select = ({
         {!name && (
           <select
             onChange={onChange}
-            className={`${
-              error ? " has-error" : " "
-            } form-control py-2 appearance-none ${className}  `}
+            className={`${error ? " has-error" : " "} form-control py-2 appearance-none ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             disabled={disabled}
@@ -96,14 +94,16 @@ const Select = ({
             </option>
             {options.map((option, i) => (
               <Fragment key={i}>
-                {option.value && option.label ? (
-                  <option key={i} value={option.value}>
-                    {option.label}
-                  </option>
+                {typeof option === "object" && option !== null ? (
+                  // For { value, label } or { _id, name }
+                  option.value && option.label ? (
+                    <option value={option.value}>{option.label}</option>
+                  ) : option._id && option.name ? (
+                    <option value={option._id}>{option.name}</option>
+                  ) : null
                 ) : (
-                  <option key={i} value={option}>
-                    {option}
-                  </option>
+                  // For string values
+                  <option value={option}>{option}</option>
                 )}
               </Fragment>
             ))}
