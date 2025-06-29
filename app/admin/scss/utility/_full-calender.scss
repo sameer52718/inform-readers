@@ -126,7 +126,7 @@
 
 .dark {
   .fc-col-header-cell .fc-scrollgrid-sync-inner {
-    @apply bg-slate-700 text-slate-300;
+    @apply bg-red-500 text-slate-300;
   }
   .fc-daygrid-day-top {
     @apply text-slate-300;
@@ -156,7 +156,7 @@
   }
 
   .fc .fc-daygrid-day.fc-day-today {
-    background: #334155 !important;
+    background: #ef4444 !important;
   }
 
   .fc-theme-standard .fc-scrollgrid {
