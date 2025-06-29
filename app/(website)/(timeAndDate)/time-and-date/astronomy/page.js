@@ -1,59 +1,88 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import SunCalc from "suncalc";
 import { Loader2 } from "lucide-react";
-
-export default function AstronomyPage() {
-  const [location, setLocation] = useState({ lat: 24.8607, lng: 67.0011 }); // Karachi
-  const [data, setData] = useState(null);
+import axiosInstance from "@/lib/axiosInstance";
+import Link from "next/link";
+const Cities = () => {
+  const [allCities, setAllCities] = useState([]);
+  const [groupedCities, setGroupedCities] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const date = new Date();
-    const sunTimes = SunCalc.getTimes(date, location.lat, location.lng);
-    // Placeholder for astro.js eclipse/equinox data
-    const astroData = {
-      nextEclipse: "2025-03-29", // Mock data, replace with astro.js
-      equinox: "2025-03-20",
+    const fetchCities = async () => {
+      try {
+        const { data } = await axiosInstance.get("/common/city?capital=true");
+        const cities = data.cities || [];
+
+        // Sort cities alphabetically by name
+        const sortedCities = cities.sort((a, b) => a.name.localeCompare(b.name));
+
+        // Group cities by first letter
+        const grouped = sortedCities.reduce((acc, city) => {
+          const firstLetter = city.name[0].toUpperCase();
+          if (!acc[firstLetter]) {
+            acc[firstLetter] = [];
+          }
+          acc[firstLetter].push(city);
+          return acc;
+        }, {});
+
+        setAllCities(cities);
+        setGroupedCities(grouped);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    setData({ sunTimes, astroData });
-    setIsLoading(false);
-  }, [location]);
+    fetchCities();
+  }, []);
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Astronomical Data</h1>
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">Location</label>
-          <input
-            type="text"
-            value={`${location.lat}, ${location.lng}`}
-            onChange={(e) => {
-              const [lat, lng] = e.target.value.split(",").map(Number);
-              setLocation({ lat, lng });
-            }}
-            placeholder="Latitude, Longitude"
-            className="mt-1 block w-full max-w-xs rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring-red-600"
-          />
-        </div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Capital Cities</h1>
+
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-12">
-            <Loader2 className="h-12 w-12 animate-spin text-red-600" />
-            <p className="mt-4 text-lg font-medium text-gray-700">Loading astronomical data...</p>
+            <Loader2 className="h-12 w-12 animate-spin text-indigo-600" />
+            <p className="mt-4 text-lg font-medium text-gray-700">Loading cities...</p>
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Sunrise & Sunset</h2>
-            <p>Sunrise: {data?.sunTimes?.sunrise.toLocaleString()}</p>
-            <p>Sunset: {data?.sunTimes?.sunset.toLocaleString()}</p>
-            <h2 className="text-xl font-semibold text-gray-900 mt-6 mb-4">Astronomical Events</h2>
-            <p>Next Eclipse: {data?.astroData?.nextEclipse}</p>
-            <p>Equinox: {data?.astroData?.equinox}</p>
-          </div>
+          <section className="bg-white rounded-xl shadow-sm p-6">
+            {Object.keys(groupedCities).length === 0 ? (
+              <p className="text-gray-600">No capital cities found.</p>
+            ) : (
+              Object.keys(groupedCities)
+                .sort()
+                .map((letter) => (
+                  <div key={letter} className="mb-6">
+                    <h3 className="text-xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+                      {letter}
+                    </h3>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {groupedCities[letter].map((city) => (
+                        <li key={city?._id}>
+                          <Link
+                            href={`/time-and-date/astronomy/${city?.name
+                              ?.toLowerCase()
+                              ?.replace(/\s+/g, "-")}/${city?.country?.countryCode}`}
+                            className="text-indigo-600 hover:text-indigo-800 hover:underline"
+                          >
+                            {city.name} ({city?.country?.countryCode?.toUpperCase()})
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+            )}
+          </section>
         )}
       </div>
     </main>
   );
-}
+};
+
+export default Cities;
