@@ -1,19 +1,70 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { mockTeams, mockPlayers, mockLeagues } from "@/constant/sports";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 
 export default function TeamDetailPage() {
   const params = useParams();
   const teamId = params.id;
 
-  const team = mockTeams.find((t) => t.idTeam === teamId);
-  const teamPlayers = mockPlayers.filter((player) => player.team === teamId);
-  const teamLeagues =
-    team?.leagues.map((tl) => mockLeagues.find((l) => l.idLeague === tl.league)).filter(Boolean) || [];
+  const [team, setTeam] = useState(null);
+  const [teamPlayers, setTeamPlayers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!team) {
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      try {
+        setIsLoading(true);
+        // Fetch team details
+        const teamResponse = await axiosInstance.get(`/website/team/${teamId}`);
+        if (teamResponse.data.error) {
+          throw new Error("Team not found");
+        }
+        setTeam(teamResponse.data.team);
+
+        // Fetch players for the team
+        const playersResponse = await axiosInstance.get("/website/player", {
+          params: { team: teamResponse?.data?.team?._id },
+        });
+        if (!playersResponse.data.error) {
+          setTeamPlayers(playersResponse.data.players);
+        }
+      } catch (err) {
+        setError(handleError(err));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTeamData();
+  }, [teamId]);
+
+  const playersByPosition = teamPlayers.reduce((acc, player) => {
+    if (!acc[player.position]) {
+      acc[player.position] = [];
+    }
+    acc[player.position].push(player);
+    return acc;
+  }, {});
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center py-12">
+            <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !team) {
     return (
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -32,14 +83,6 @@ export default function TeamDetailPage() {
       </div>
     );
   }
-
-  const playersByPosition = teamPlayers.reduce((acc, player) => {
-    if (!acc[player.position]) {
-      acc[player.position] = [];
-    }
-    acc[player.position].push(player);
-    return acc;
-  }, {});
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -187,21 +230,21 @@ export default function TeamDetailPage() {
                 Stadium Information
               </h2>
 
-              {team.stadium.name ? (
+              {team.stadium?.name ? (
                 <div className="space-y-4">
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Stadium Name</p>
                     <p className="font-semibold text-gray-900">{team.stadium.name}</p>
                   </div>
 
-                  {team.stadium.location && (
+                  {team.stadium?.location && (
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Location</p>
                       <p className="text-gray-700">{team.stadium.location}</p>
                     </div>
                   )}
 
-                  {team.stadium.capacity && (
+                  {team.stadium?.capacity && (
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Capacity</p>
                       <p className="font-semibold text-gray-900 flex items-center gap-2">
@@ -223,21 +266,29 @@ export default function TeamDetailPage() {
                 Competitions
               </h2>
 
-              {teamLeagues.length > 0 ? (
+              {team.leagues?.length > 0 ? (
                 <div className="space-y-3">
-                  {teamLeagues.map((league) => (
+                  {team.leagues.map((league) => (
                     <Link
-                      key={league?.idLeague}
-                      href={`/leagues/${league?.idLeague}`}
+                      key={league.league}
+                      href={`/leagues/${league?.league?.idLeague}`}
                       className="block p-3 border rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
-                          <span className="text-red-500">🏆</span>
+                          {league.league.badge ? (
+                            <img
+                              src={league.league.badge}
+                              alt={league.leagueName}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <span className="text-red-500">🏆</span>
+                          )}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">{league?.name}</p>
-                          <p className="text-sm text-gray-500">{league?.country}</p>
+                          <p className="font-medium text-gray-900">{league.leagueName}</p>
+                          <p className="text-sm text-gray-500">{league.league?.country}</p>
                         </div>
                       </div>
                     </Link>
