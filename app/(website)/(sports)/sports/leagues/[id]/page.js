@@ -1,17 +1,62 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { mockLeagues, mockTeams } from "@/constant/sports";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 
 export default function LeagueDetailPage() {
   const params = useParams();
   const leagueId = params.id;
 
-  const league = mockLeagues.find((l) => l.idLeague === leagueId);
-  const leagueTeams = mockTeams.filter((team) => team.leagues.some((l) => l.league === leagueId));
+  const [league, setLeague] = useState(null);
+  const [leagueTeams, setLeagueTeams] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!league) {
+  useEffect(() => {
+    const fetchLeagueData = async () => {
+      try {
+        setIsLoading(true);
+        // Fetch league details
+        const leagueResponse = await axiosInstance.get(`/website/league/${leagueId}`);
+        if (leagueResponse.data.error) {
+          throw new Error("League not found");
+        }
+        setLeague(leagueResponse.data.league);
+
+        // Fetch teams for the league
+        const teamsResponse = await axiosInstance.get("/website/team", {
+          params: { league: leagueResponse?.data?.league?._id, limit: 10000 },
+        });
+        if (!teamsResponse.data.error) {
+          setLeagueTeams(teamsResponse.data.teams);
+        }
+      } catch (err) {
+        setError(handleError(err));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLeagueData();
+  }, [leagueId]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center py-12">
+            <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !league) {
     return (
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -133,7 +178,7 @@ export default function LeagueDetailPage() {
               <div className="flex items-center gap-4">
                 {league.website && (
                   <a
-                    href={league.website}
+                    href={`https://${league.website}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
@@ -144,7 +189,7 @@ export default function LeagueDetailPage() {
                 )}
                 {league.facebook && (
                   <a
-                    href={`https://facebook.com/${league.facebook}`}
+                    href={`https://${league.facebook}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-700 p-2 rounded-lg hover:bg-blue-50 transition-colors"
@@ -154,7 +199,7 @@ export default function LeagueDetailPage() {
                 )}
                 {league.twitter && (
                   <a
-                    href={`https://twitter.com/${league.twitter}`}
+                    href={`https://${league.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400 hover:text-blue-500 p-2 rounded-lg hover:bg-blue-50 transition-colors"
@@ -164,7 +209,7 @@ export default function LeagueDetailPage() {
                 )}
                 {league.instagram && (
                   <a
-                    href={`https://instagram.com/${league.instagram}`}
+                    href={`https://${league.instagram}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-500 hover:text-pink-600 p-2 rounded-lg hover:bg-pink-50 transition-colors"
@@ -210,7 +255,7 @@ export default function LeagueDetailPage() {
                     </div>
 
                     <div className="space-y-2">
-                      {team.stadium.name && (
+                      {team.stadium?.name && (
                         <div className="flex items-center gap-2 text-sm">
                           <span className="text-gray-400">🏟️</span>
                           <span>{team.stadium.name}</span>
@@ -229,7 +274,13 @@ export default function LeagueDetailPage() {
             </div>
           ) : (
             <div className="text-center py-12 bg-white rounded-lg border">
-              <span className="text-4xl text-gray-300 block mb-4">🛡️</span>
+              <span
+                className="
+
+text-4xl text-gray-300 block mb-4"
+              >
+                🛡️
+              </span>
               <h3 className="text-lg font-semibold text-gray-600 mb-2">No teams found</h3>
               <p className="text-gray-500">No teams are currently registered in this league.</p>
             </div>
@@ -246,7 +297,7 @@ export default function LeagueDetailPage() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-500 mb-2">
-                {leagueTeams.reduce((sum, team) => sum + (team.stadium.capacity || 0), 0).toLocaleString()}
+                {leagueTeams.reduce((sum, team) => sum + (team.stadium?.capacity || 0), 0).toLocaleString()}
               </div>
               <div className="text-sm text-gray-600">Total Capacity</div>
             </div>
@@ -258,7 +309,7 @@ export default function LeagueDetailPage() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-500 mb-2">
-                {leagueTeams.filter((t) => t.stadium.capacity && t.stadium.capacity > 50000).length}
+                {leagueTeams.filter((t) => t.stadium?.capacity && t.stadium.capacity > 50000).length}
               </div>
               <div className="text-sm text-gray-600">Large Stadiums</div>
             </div>
