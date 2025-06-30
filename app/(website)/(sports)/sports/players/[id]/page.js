@@ -1,17 +1,68 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { mockPlayers, mockTeams } from "@/constant/sports";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 
 export default function PlayerDetailPage() {
   const params = useParams();
   const playerId = params.id;
 
-  const player = mockPlayers.find((p) => p.idPlayer === playerId);
-  const playerTeam = player ? mockTeams.find((t) => t.idTeam === player.team) : null;
+  const [player, setPlayer] = useState(null);
+  const [playerTeam, setPlayerTeam] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!player) {
+  useEffect(() => {
+    const fetchPlayerData = async () => {
+      try {
+        setIsLoading(true);
+        // Fetch player details
+        const playerResponse = await axiosInstance.get(`/website/player/${playerId}`);
+        if (playerResponse.data.error) {
+          throw new Error("Player not found");
+        }
+        setPlayer(playerResponse.data.player);
+
+        // Fetch team details if player has a team
+        if (playerResponse.data.player.team) {
+          const teamResponse = await axiosInstance.get(
+            `/website/team/${playerResponse.data.player.team.idTeam}`
+          );
+          if (!teamResponse.data.error) {
+            setPlayerTeam(teamResponse.data.team);
+          }
+        }
+      } catch (err) {
+        setError(handleError(err));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPlayerData();
+  }, [playerId]);
+
+  const age = player?.dateBorn
+    ? Math.floor((Date.now() - new Date(player.dateBorn).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
+    : null;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center py-12">
+            <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !player) {
     return (
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -30,10 +81,6 @@ export default function PlayerDetailPage() {
       </div>
     );
   }
-
-  const age = player.dateBorn
-    ? Math.floor((Date.now() - new Date(player.dateBorn).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
-    : null;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -239,7 +286,7 @@ export default function PlayerDetailPage() {
                 </h2>
 
                 <Link
-                  href={`/teams/${playerTeam.idTeam}`}
+                  href={`/teams/${playerTeam._id}`}
                   className="block p-4 border rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors"
                 >
                   <div className="flex items-center gap-3">
