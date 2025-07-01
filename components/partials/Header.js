@@ -45,6 +45,7 @@ function Header() {
         { id: 18, title: "Real State", url: "/realstate" },
         { id: 20, title: "Blogs", url: "/blogs" },
         { id: 21, title: "Time & Date", url: "/time-and-date" },
+        { id: 22, title: "Sports", url: "/sports" },
       ],
     },
   ];
