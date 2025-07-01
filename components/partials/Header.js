@@ -2,11 +2,69 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { userTypes } from '@/constant/data';
 import { useTranslation } from 'react-i18next';
+import { allLanguages, languageNames, rtlLanguages } from '@/constant/languages';
+
+
+function LanguageSelect({ color }) {
+  const { i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    document.documentElement.dir = rtlLanguages.includes(lng) ? 'rtl' : 'ltr';
+    setIsOpen(false);
+  };
+
+  // Click outside logic
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center gap-2 text-sm text-gray-600 hover:text-${color}-600 transition-colors px-3 py-2 rounded-md bg-gray-100`}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+      >
+        <span>{languageNames[i18n.language] || 'English'}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute z-50 mt-2 w-48 bg-white rounded-lg shadow-dropdown max-h-96 overflow-y-auto">
+          {allLanguages.map((lang) => (
+            <button
+              key={lang}
+              onClick={() => changeLanguage(lang)}
+              className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-${color}-50 hover:text-${color}-600 transition-colors ${i18n.language === lang ? `bg-${color}-50 text-${color}-600` : ''
+                }`}
+            >
+              {languageNames[lang]}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 function Header() {
   const { t } = useTranslation();
@@ -67,6 +125,7 @@ function Header() {
           <div className="flex justify-between items-center">
             <p className="text-sm hidden md:block text-gray-600">{currentDate}</p>
             <div className="flex items-center gap-4">
+              <LanguageSelect color={color} />
               <Link
                 href="/about"
                 className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
@@ -140,9 +199,8 @@ function Header() {
 
                 {category.sublinks && (
                   <ul
-                    className={`absolute ${
-                      openDropdowns[category.id] || 'hidden group-hover:block'
-                    } bg-white shadow-dropdown rounded-lg py-2 w-48 z-50`}
+                    className={`absolute ${openDropdowns[category.id] || 'hidden group-hover:block'
+                      } bg-white shadow-dropdown rounded-lg py-2 w-48 z-50`}
                   >
                     {category.sublinks.map((sublink) => (
                       <li key={sublink.id}>
@@ -179,9 +237,8 @@ function Header() {
                       >
                         {category.title}
                         <ChevronDown
-                          className={`w-4 h-4 transition-transform ${
-                            openDropdowns[category.id] ? 'rotate-180' : ''
-                          }`}
+                          className={`w-4 h-4 transition-transform ${openDropdowns[category.id] ? 'rotate-180' : ''
+                            }`}
                         />
                       </button>
                       {openDropdowns[category.id] && (
