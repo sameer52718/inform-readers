@@ -1,1 +1,62 @@
-{}
+{
+    "header": {
+        "about": "Haqqında",
+        "contact": "Əlaqə",
+        "signin": "Daxil olun",
+        "myAccount": "Hesabım",
+        "categories": {
+            "names": "Körpə Adları",
+            "postalcode": "Poçt Kodları",
+            "swiftcode": "Swift Kodları",
+            "software": "Proqram təminatı və Oyunlar",
+            "specification": "Spesifikasiyalar",
+            "biography": "Bioqrafiya",
+            "more": "Daha çox",
+            "weather": "Hava",
+            "news": "Xəbərlər",
+            "forex": "Valyuta çeviricisi",
+            "metals": "Metal dərəcələri",
+            "crypto": "Kripto məzənnələri",
+            "cars": "Avtomobillər",
+            "bikes": "Velosipedlər",
+            "tools": "Alətlər",
+            "videoDownloader": "Video yükləyici",
+            "coupons": "Kuponlar",
+            "jobs": "İşlər",
+            "realstate": "Daşınmaz Əmlak",
+            "blogs": "Bloqlar",
+            "timeDate": "Vaxt və Tarix",
+            "sports": "İdman"
+        }
+    },
+    "footer": {
+        "aboutCompany": "InformReaders haqqında",
+        "aboutText": "Qlobal auditoriyamıza hərtərəfli xəbərlər və anlayışlar çatdırırıq. Biz müxtəlif mövzular üzrə dəqiq, vaxtında və cəlbedici məzmun təqdim etməyə çalışırıq.",
+        "categories": "Kateqoriyalar",
+        "quickLinks": "Sürətli bağlantılar",
+        "newsletter": "Xəbər bülleteni",
+        "newsletterText": "Gündəlik yeniləmələr və ən son xəbərlər üçün bülletenimizə abunə olun.",
+        "subscribeButton": "İndi abunə olun",
+        "contactUs": "Bizimlə əlaqə saxlayın",
+        "address": "123 News Street, Nyu York, NY 10001",
+        "phone": "+1 (555) 123-4567",
+        "email": "contact@informreaders.com",
+        "website": "www.informreaders.com",
+        "rights": "Bütün hüquqlar qorunur.",
+        "poweredBy": "Platforma The Byte Pulse Software Company tərəfindən hazırlanmışdır. (Veb sayt Hawkeye tərəfindən hazırlanmışdır)",
+        "links": {
+            "babyNames": "Körpə Adları",
+            "postalCodes": "Poçt Kodları",
+            "software": "Proqram təminatı və Oyunlar",
+            "swiftCodes": "Swift Kodları",
+            "specifications": "Spesifikasiyalar",
+            "news": "Xəbərlər",
+            "biography": "Bioqrafiya",
+            "about": "Haqqımızda",
+            "contact": "Əlaqə",
+            "privacy": "Məxfilik Siyasəti",
+            "terms": "İstifadə şərtləri",
+            "dmca": "DMCA Siyasəti"
+        }
+    }
+}

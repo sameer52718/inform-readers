@@ -1,1 +1,62 @@
-{}
+{
+    "header": {
+        "about": "Пра нас",
+        "contact": "Кантакт",
+        "signin": "Увайсці",
+        "myAccount": "Мой уліковы запіс",
+        "categories": {
+            "names": "Імёны для немаўлят",
+            "postalcode": "Паштовыя індэксы",
+            "swiftcode": "Swift-коды",
+            "software": "Праграмнае забеспячэнне і гульні",
+            "specification": "Тэхнічныя характарыстыкі",
+            "biography": "Біяграфія",
+            "more": "Больш",
+            "weather": "Надвор'е",
+            "news": "Навіны",
+            "forex": "Канвертар валют",
+            "metals": "Кошты на металы",
+            "crypto": "Курсы крыптавалют",
+            "cars": "Аўтамабілі",
+            "bikes": "Веласіпеды",
+            "tools": "Інструменты",
+            "videoDownloader": "Загрузнік відэа",
+            "coupons": "Купоны",
+            "jobs": "Вакансіі",
+            "realstate": "Нерухомасць",
+            "blogs": "Блогі",
+            "timeDate": "Час і дата",
+            "sports": "Спорт"
+        }
+    },
+    "footer": {
+        "aboutCompany": "Пра InformReaders",
+        "aboutText": "Прапануем вычарпальныя навіны і аналітыку нашай глабальнай аўдыторыі. Мы імкнемся прадастаўляць дакладны, своечасовы і цікавы кантэнт па розных тэмах.",
+        "categories": "Катэгорыі",
+        "quickLinks": "Хуткія спасылкі",
+        "newsletter": "Інфармацыйны бюлетэнь",
+        "newsletterText": "Падпішыцеся на нашу рассылку, каб штодня атрымліваць абнаўленні і апошнія навіны.",
+        "subscribeButton": "Падпішыцеся зараз",
+        "contactUs": "Звяжыцеся з намі",
+        "address": "123 News Street, Нью-Ёрк, NY 10001",
+        "phone": "+1 (555) 123-4567",
+        "email": "contact@informreaders.com",
+        "website": "www.informreaders.com",
+        "rights": "Усе правы абаронены.",
+        "poweredBy": "Платформа распрацавана кампаніяй Byte Pulse Software Company. (Вэб-сайт працуе на базе Hawkeye)",
+        "links": {
+            "babyNames": "Імёны для немаўлят",
+            "postalCodes": "Паштовыя індэксы",
+            "software": "Праграмнае забеспячэнне і гульні",
+            "swiftCodes": "Swift-коды",
+            "specifications": "Тэхнічныя характарыстыкі",
+            "news": "Навіны",
+            "biography": "Біяграфія",
+            "about": "Пра нас",
+            "contact": "Кантакт",
+            "privacy": "Палітыка прыватнасці",
+            "terms": "Умовы карыстання",
+            "dmca": "Палітыка DMCA"
+        }
+    }
+}

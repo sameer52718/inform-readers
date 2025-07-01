@@ -1,1 +1,62 @@
-{}
+{
+    "header": {
+        "about": "عن",
+        "contact": "اتصال",
+        "signin": "تسجيل الدخول",
+        "myAccount": "حسابي",
+        "categories": {
+            "names": "أسماء الأطفال",
+            "postalcode": "الرموز البريدية",
+            "swiftcode": "رموز سويفت",
+            "software": "البرامج والألعاب",
+            "specification": "تحديد",
+            "biography": "سيرة",
+            "more": "أكثر",
+            "weather": "طقس",
+            "news": "أخبار",
+            "forex": "محول العملات",
+            "metals": "أسعار المعادن",
+            "crypto": "أسعار العملات المشفرة",
+            "cars": "السيارات",
+            "bikes": "الدراجات",
+            "tools": "أدوات",
+            "videoDownloader": "تنزيل الفيديو",
+            "coupons": "كوبونات",
+            "jobs": "الوظائف",
+            "realstate": "العقارات",
+            "blogs": "المدونات",
+            "timeDate": "الوقت والتاريخ",
+            "sports": "الرياضة"
+        }
+    },
+    "footer": {
+        "aboutCompany": "حول InformReaders",
+        "aboutText": "نُقدّم أخبارًا ورؤىً شاملةً لجمهورنا العالمي. نسعى جاهدين لتقديم محتوى دقيق، وفي الوقت المناسب، وجذاب في مختلف المواضيع.",
+        "categories": "فئات",
+        "quickLinks": "روابط سريعة",
+        "newsletter": "النشرة الإخبارية",
+        "newsletterText": "اشترك في النشرة الإخبارية لدينا للحصول على التحديثات اليومية والأخبار العاجلة.",
+        "subscribeButton": "اشترك الآن",
+        "contactUs": "اتصل بنا",
+        "address": "123 شارع نيوز، نيويورك، نيويورك 10001",
+        "phone": "+1 (555) 123-4567",
+        "email": "contact@informreaders.com",
+        "website": "www.informreaders.com",
+        "rights": "جميع الحقوق محفوظة.",
+        "poweredBy": "منصة طورتها شركة بايت بالس للبرمجيات. (الموقع مدعوم من هوك آي)",
+        "links": {
+            "babyNames": "أسماء الأطفال",
+            "postalCodes": "الرموز البريدية",
+            "software": "البرامج والألعاب",
+            "swiftCodes": "رموز سويفت",
+            "specifications": "تحديد",
+            "news": "أخبار",
+            "biography": "سيرة",
+            "about": "معلومات عنا",
+            "contact": "اتصال",
+            "privacy": "سياسة الخصوصية",
+            "terms": "شروط الاستخدام",
+            "dmca": "سياسة قانون الألفية الرقمية"
+        }
+    }
+}
