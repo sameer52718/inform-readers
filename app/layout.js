@@ -1,6 +1,7 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/lib/i18n";
 import { Provider } from "react-redux";
 import store from "@/store";
 import { ConfigContextProvider } from "@/context/ThemeContext";

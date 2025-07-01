@@ -1,51 +1,53 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { useSelector } from "react-redux";
-import { userTypes } from "@/constant/data";
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { userTypes } from '@/constant/data';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
+  const { t } = useTranslation();
   const { color, logo } = useSelector((state) => state.config);
   const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState({});
 
-  const currentDate = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 
   const categories = [
-    { id: 1, title: "Baby Names", url: "/names" },
-    { id: 2, title: "Postal Codes", url: "/postalcode" },
-    { id: 3, title: "Swift Codes", url: "/swiftcode" },
-    { id: 4, title: "Software & Games", url: "/software" },
-    { id: 5, title: "Specifications", url: "/specification" },
-    { id: 7, title: "Biography", url: "/biography" },
+    { id: 1, title: t('header.categories.names'), url: '/names' },
+    { id: 2, title: t('header.categories.postalcode'), url: '/postalcode' },
+    { id: 3, title: t('header.categories.swiftcode'), url: '/swiftcode' },
+    { id: 4, title: t('header.categories.software'), url: '/software' },
+    { id: 5, title: t('header.categories.specification'), url: '/specification' },
+    { id: 7, title: t('header.categories.biography'), url: '/biography' },
     {
       id: 9,
-      title: "More",
+      title: t('header.categories.more'),
       sublinks: [
-        { id: 7, title: "Weather", url: "/weather" },
-        { id: 8, title: "News", url: "/news" },
-        { id: 10, title: "Currency Converter", url: "/forex" },
-        { id: 11, title: "Metal Rates", url: "/metals" },
-        { id: 16, title: "Crypto Rates", url: "/crypto" },
-        { id: 12, title: "Cars", url: "/cars" },
-        { id: 13, title: "Bikes", url: "/bikes" },
-        { id: 14, title: "Tools", url: "/tools" },
-        { id: 15, title: "Video Downloader", url: "/video-downloader" },
-        { id: 19, title: "Coupons", url: "/coupons" },
-        { id: 17, title: "Jobs", url: "/jobs" },
-        { id: 18, title: "Real State", url: "/realstate" },
-        { id: 20, title: "Blogs", url: "/blogs" },
-        { id: 21, title: "Time & Date", url: "/time-and-date" },
-        { id: 22, title: "Sports", url: "/sports" },
+        { id: 7, title: t('header.categories.weather'), url: '/weather' },
+        { id: 8, title: t('header.categories.news'), url: '/news' },
+        { id: 10, title: t('header.categories.forex'), url: '/forex' },
+        { id: 11, title: t('header.categories.metals'), url: '/metals' },
+        { id: 16, title: t('header.categories.crypto'), url: '/crypto' },
+        { id: 12, title: t('header.categories.cars'), url: '/cars' },
+        { id: 13, title: t('header.categories.bikes'), url: '/bikes' },
+        { id: 14, title: t('header.categories.tools'), url: '/tools' },
+        { id: 15, title: t('header.categories.videoDownloader'), url: '/video-downloader' },
+        { id: 19, title: t('header.categories.coupons'), url: '/coupons' },
+        { id: 17, title: t('header.categories.jobs'), url: '/jobs' },
+        { id: 18, title: t('header.categories.realstate'), url: '/realstate' },
+        { id: 20, title: t('header.categories.blogs'), url: '/blogs' },
+        { id: 21, title: t('header.categories.timeDate'), url: '/time-and-date' },
+        { id: 22, title: t('header.categories.sports'), url: '/sports' },
       ],
     },
   ];
@@ -69,27 +71,27 @@ function Header() {
                 href="/about"
                 className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
               >
-                About
+                {t('header.about')}
               </Link>
               <Link
                 href="/contact"
                 className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
               >
-                Contact
+                {t('header.contact')}
               </Link>
               {token && userType === userTypes.USER ? (
                 <Link
                   href="/dashboard"
                   className={`text-sm text-${color}-600 hover:text-${color}-700 font-medium transition-colors`}
                 >
-                  My Account
+                  {t('header.myAccount')}
                 </Link>
               ) : (
                 <Link
                   href="/signin"
                   className={`text-sm text-${color}-600 hover:text-${color}-700 font-medium transition-colors`}
                 >
-                  Sign in
+                  {t('header.signin')}
                 </Link>
               )}
             </div>
@@ -99,22 +101,20 @@ function Header() {
 
       {/* Main Header */}
       <div className="container py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/">
           <Image src={logo} alt="Website Logo" width={200} height={80} className="h-[80px] w-auto" />
         </Link>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={`p-2 text-gray-600 hover:text-${color}-600 transition-colors md:hidden`}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-8">
             {categories.map((category) => (
@@ -141,7 +141,7 @@ function Header() {
                 {category.sublinks && (
                   <ul
                     className={`absolute ${
-                      openDropdowns[category.id] || "hidden group-hover:block"
+                      openDropdowns[category.id] || 'hidden group-hover:block'
                     } bg-white shadow-dropdown rounded-lg py-2 w-48 z-50`}
                   >
                     {category.sublinks.map((sublink) => (
@@ -180,7 +180,7 @@ function Header() {
                         {category.title}
                         <ChevronDown
                           className={`w-4 h-4 transition-transform ${
-                            openDropdowns[category.id] ? "rotate-180" : ""
+                            openDropdowns[category.id] ? 'rotate-180' : ''
                           }`}
                         />
                       </button>

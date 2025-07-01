@@ -1,0 +1,62 @@
+{
+    "header": {
+        "about": "About",
+        "contact": "Contact",
+        "signin": "Sign in",
+        "myAccount": "My Account",
+        "categories": {
+            "names": "Baby Names",
+            "postalcode": "Postal Codes",
+            "swiftcode": "Swift Codes",
+            "software": "Software & Games",
+            "specification": "Specifications",
+            "biography": "Biography",
+            "more": "More",
+            "weather": "Weather",
+            "news": "News",
+            "forex": "Currency Converter",
+            "metals": "Metal Rates",
+            "crypto": "Crypto Rates",
+            "cars": "Cars",
+            "bikes": "Bikes",
+            "tools": "Tools",
+            "videoDownloader": "Video Downloader",
+            "coupons": "Coupons",
+            "jobs": "Jobs",
+            "realstate": "Real Estate",
+            "blogs": "Blogs",
+            "timeDate": "Time & Date",
+            "sports": "Sports"
+        }
+    },
+    "footer": {
+        "aboutCompany": "About InformReaders",
+        "aboutText": "Delivering comprehensive news and insights to our global audience. We strive to provide accurate, timely, and engaging content across various topics.",
+        "categories": "Categories",
+        "quickLinks": "Quick Links",
+        "newsletter": "Newsletter",
+        "newsletterText": "Subscribe to our newsletter for daily updates and breaking news.",
+        "subscribeButton": "Subscribe Now",
+        "contactUs": "Contact Us",
+        "address": "123 News Street, New York, NY 10001",
+        "phone": "+1 (555) 123-4567",
+        "email": "contact@informreaders.com",
+        "website": "www.informreaders.com",
+        "rights": "All rights reserved.",
+        "poweredBy": "Platform Developed by The Byte Pulse Software Company. (Website Powered by Hawkeye)",
+        "links": {
+            "babyNames": "Baby Names",
+            "postalCodes": "Postal Codes",
+            "software": "Software & Games",
+            "swiftCodes": "Swift Codes",
+            "specifications": "Specifications",
+            "news": "News",
+            "biography": "Biography",
+            "about": "About Us",
+            "contact": "Contact",
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Use",
+            "dmca": "DMCA Policy"
+        }
+    }
+}

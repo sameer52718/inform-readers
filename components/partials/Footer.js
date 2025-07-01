@@ -1,6 +1,7 @@
-"use client";
-import axiosInstance from "@/lib/axiosInstance";
-import handleError from "@/lib/handleError";
+'use client';
+
+import axiosInstance from '@/lib/axiosInstance';
+import handleError from '@/lib/handleError';
 import {
   Facebook,
   Twitter,
@@ -12,24 +13,26 @@ import {
   Phone,
   MapPin,
   ChevronRight,
-  Globe,
-} from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+  Globe
+} from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation();
   const { color } = useSelector((state) => state.config);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const { data } = await axiosInstance.post("/website/newsletter", { email });
+      const { data } = await axiosInstance.post('/website/newsletter', { email });
       if (!data.error) {
-        toast.success("Email Submitted For Future Newsletter updates.");
-        setEmail("");
+        toast.success('Email Submitted For Future Newsletter updates.');
+        setEmail('');
       } else {
         toast.error(data.message);
       }
@@ -40,189 +43,96 @@ export default function Footer() {
 
   return (
     <footer className={`bg-gradient-to-br from-${color}-600 to-${color}-800 text-gray-300`}>
-      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
+          {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-white text-lg font-semibold mb-4">About InformReaders</h3>
-            <p className="text-sm leading-relaxed">
-              Delivering comprehensive news and insights to our global audience. We strive to provide
-              accurate, timely, and engaging content across various topics.
-            </p>
+            <h3 className="text-white text-lg font-semibold mb-4">{t('footer.aboutCompany')}</h3>
+            <p className="text-sm leading-relaxed">{t('footer.aboutText')}</p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                <Youtube className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
+              <a href="#" className="hover:text-white transition-colors"><Facebook className="h-5 w-5" /></a>
+              <a href="#" className="hover:text-white transition-colors"><Twitter className="h-5 w-5" /></a>
+              <a href="#" className="hover:text-white transition-colors"><Instagram className="h-5 w-5" /></a>
+              <a href="#" className="hover:text-white transition-colors"><Linkedin className="h-5 w-5" /></a>
+              <a href="#" className="hover:text-white transition-colors"><Youtube className="h-5 w-5" /></a>
+              <a href="#" className="hover:text-white transition-colors"><Github className="h-5 w-5" /></a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Categories Links */}
           <div className="grid grid-cols-2 gap-8">
             <div>
-              <h3 className="text-white text-lg font-semibold mb-4">Categories</h3>
+              <h3 className="text-white text-lg font-semibold mb-4">{t('footer.categories')}</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/names" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Baby Names
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/postalcode" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Postal Codes
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/software" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Software & Games
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/swiftcode" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Swift Codes
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/specification"
-                    className="hover:text-white transition-colors flex items-center"
-                  >
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Specifications
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/news" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    News
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link href="/travel" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Travel
-                  </Link>
-                </li> */}
-                <li>
-                  <Link href="/biography" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Biography
-                  </Link>
-                </li>
+                <li><Link href="/names" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.babyNames')}</Link></li>
+                <li><Link href="/postalcode" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.postalCodes')}</Link></li>
+                <li><Link href="/software" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.software')}</Link></li>
+                <li><Link href="/swiftcode" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.swiftCodes')}</Link></li>
+                <li><Link href="/specification" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.specifications')}</Link></li>
+                <li><Link href="/news" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.news')}</Link></li>
+                <li><Link href="/biography" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.biography')}</Link></li>
               </ul>
             </div>
+
+            {/* Quick Links */}
             <div>
-              <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
+              <h3 className="text-white text-lg font-semibold mb-4">{t('footer.quickLinks')}</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/about" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    Terms of Use
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/dcmapolicy" className="hover:text-white transition-colors flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    DMCA Policy
-                  </Link>
-                </li>
+                <li><Link href="/about" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.about')}</Link></li>
+                <li><Link href="/contact" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.contact')}</Link></li>
+                <li><Link href="/privacy" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.privacy')}</Link></li>
+                <li><Link href="/terms" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.terms')}</Link></li>
+                <li><Link href="/dcmapolicy" className="hover:text-white flex items-center"><ChevronRight className="h-4 w-4 mr-1" />{t('footer.links.dmca')}</Link></li>
               </ul>
             </div>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-white text-lg font-semibold mb-4">{t('footer.contactUs')}</h3>
             <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin className="h-5 w-5 mr-2 mt-1" />
-                <span>123 News Street, New York, NY 10001</span>
-              </li>
-              <li className="flex items-center">
-                <Phone className="h-5 w-5 mr-2" />
-                <span>+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-center">
-                <Mail className="h-5 w-5 mr-2" />
-                <span>contact@informreaders.com</span>
-              </li>
-              <li className="flex items-center">
-                <Globe className="h-5 w-5 mr-2" />
-                <span>www.informreaders.com</span>
-              </li>
+              <li className="flex items-start"><MapPin className="h-5 w-5 mr-2 mt-1" /><span>{t('footer.address')}</span></li>
+              <li className="flex items-center"><Phone className="h-5 w-5 mr-2" /><span>{t('footer.phone')}</span></li>
+              <li className="flex items-center"><Mail className="h-5 w-5 mr-2" /><span>{t('footer.email')}</span></li>
+              <li className="flex items-center"><Globe className="h-5 w-5 mr-2" /><span>{t('footer.website')}</span></li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Newsletter</h3>
-            <p className="text-sm mb-4">Subscribe to our newsletter for daily updates and breaking news.</p>
+            <h3 className="text-white text-lg font-semibold mb-4">{t('footer.newsletter')}</h3>
+            <p className="text-sm mb-4">{t('footer.newsletterText')}</p>
             <form className="space-y-3" onSubmit={handleSubmit}>
               <input
                 type="email"
                 autoComplete="email"
                 placeholder="Your email address"
-                className="w-full px-4 py-2 text-black-500  rounded-md focus:outline-none focus:border-blue-500"
+                className="w-full px-4 py-2 text-black rounded-md focus:outline-none focus:border-blue-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
               <button
                 type="submit"
-                className={`w-full px-4 py-2  text-white rounded-md  transition-colors border border-white hover:bg-white hover:text-${color}-500`}
+                className={`w-full px-4 py-2 text-white rounded-md border border-white transition-colors hover:bg-white hover:text-${color}-500`}
               >
-                Subscribe Now
+                {t('footer.subscribeButton')}
               </button>
             </form>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Footer Bar */}
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="md:flex md:items-center md:justify-between">
-            <div className="text-sm">© {new Date().getFullYear()} InformReaders. All rights reserved.</div>
+            <div className="text-sm">
+              © {new Date().getFullYear()} InformReaders. {t('footer.rights')}
+            </div>
             <div className="mt-4 md:mt-0">
               <a href="https://thebytepulse.com" target="_blank" className="text-sm">
-                Platform Develop By The Byte Pulse Software Company. (Website Powerd by Hawkeye)
+                {t('footer.poweredBy')}
               </a>
             </div>
           </div>

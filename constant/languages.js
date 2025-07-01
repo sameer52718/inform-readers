@@ -1,0 +1,3 @@
+const allLanguages = ["ab", "sq", "ar", "hy", "az", "be", "bn", "bg", "my", "zh", "ca", "hr", "da", "dv", "nl", "dz", "en", "et", "fi", "fr", "ka", "de", "el", "gn", "he", "hi", "hu", "is", "id", "it", "ja", "kk", "km", "ko", "ky", "lo", "lv", "lt", "mk", "ms", "mt", "ro", "mn", "cnr", "no", "fa", "pl", "pt", "ru", "sr", "sk", "sl", "so", "es", "sv", "tg", "th", "ti", "tr", "tk", "uk", "ur", "uz", "vi"]
+
+const rtlLanguages = ["ar", "he", "fa", "ur", "dv"];
