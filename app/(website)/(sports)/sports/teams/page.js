@@ -5,9 +5,11 @@ import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import debounce from "lodash/debounce";
 import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 const Filters = ({ onFilterChange, filters }) => {
   const [countries, setCountries] = useState([]);
+  const [leagues, setLeagues] = useState([]);
   const [searchTerm, setSearchTerm] = useState(filters.name || "");
   const [selectedCountry, setSelectedCountry] = useState(filters.country || "");
   const [selectedGender, setSelectedGender] = useState(filters.gender || "");
@@ -67,13 +69,11 @@ const Filters = ({ onFilterChange, filters }) => {
     onFilterChange({});
   };
 
-  const [leagues, setLeagues] = useState([]);
-
   return (
     <div className="bg-white rounded-lg shadow-sm border">
       <div className="p-6 border-b border-gray-200">
         <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900">
-          <span className="text-red-500">🌍</span>
+          <Icon icon="mdi:filter" className="w-5 h-5 text-red-500" />
           Filters
         </h3>
       </div>
@@ -82,13 +82,16 @@ const Filters = ({ onFilterChange, filters }) => {
         {/* Search Input */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Search Teams</label>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Search by team name..."
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
+          <div className="relative">
+            <Icon icon="mdi:magnify" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search by team name..."
+              className="w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+          </div>
         </div>
 
         {/* Country Filter */}
@@ -200,10 +203,10 @@ export default function TeamsPage() {
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-red-500 rounded-xl">
-              <span className="text-white text-2xl">🛡️</span>
+              <Icon icon="mdi:shield" className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl stimulant-bold text-gray-900">Football Teams</h1>
+              <h1 className="text-3xl font-bold text-gray-900">Football Teams</h1>
               <p className="text-gray-600">Explore professional football teams and their home stadiums</p>
             </div>
           </div>
@@ -225,7 +228,7 @@ export default function TeamsPage() {
           <section className="lg:col-span-3">
             {isLoading ? (
               <div className="text-center py-12">
-                <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+                <Icon icon="mdi:loading" className="w-16 h-16 text-gray-300 animate-spin mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600">Loading...</h3>
               </div>
             ) : teams.length > 0 ? (
@@ -248,7 +251,7 @@ export default function TeamsPage() {
                                   className="w-full h-full object-cover"
                                 />
                               ) : (
-                                <span className="text-red-500 text-xl">🛡️</span>
+                                <Icon icon="mdi:shield" className="w-6 h-6 text-red-500" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -265,27 +268,27 @@ export default function TeamsPage() {
 
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center gap-2 text-sm">
-                            <span className="text-gray-400">🌍</span>
+                            <Icon icon="mdi:earth" className="w-5 h-5 text-gray-400" />
                             <span className="font-medium">{team.country}</span>
                           </div>
 
                           {team.stadium?.name && (
                             <div className="flex items-center gap-2 text-sm">
-                              <span className="text-gray-400">🏟️</span>
+                              <Icon icon="mdi:stadium" className="w-5 h-5 text-gray-400" />
                               <span>{team.stadium.name}</span>
                             </div>
                           )}
 
                           {team.stadium?.capacity && (
                             <div className="flex items-center gap-2 text-sm">
-                              <span className="text-gray-400">👥</span>
+                              <Icon icon="mdi:account-group" className="w-5 h-5 text-gray-400" />
                               <span>{team.stadium.capacity.toLocaleString()} capacity</span>
                             </div>
                           )}
 
                           {team.formedYear && (
                             <div className="flex items-center gap-2 text-sm">
-                              <span className="text-gray-400">📅</span>
+                              <Icon icon="mdi:calendar" className="w-5 h-5 text-gray-400" />
                               <span>Founded {team.formedYear}</span>
                             </div>
                           )}
@@ -315,7 +318,7 @@ export default function TeamsPage() {
                           <div className="flex items-center gap-2">
                             {team.stadium?.location && (
                               <span className="px-2 py-1 bg-gray-100 rounded-full text-xs">
-                                📍 {team.stadium.location.split(",")[0]}
+                                <Icon icon="mdi:map-marker" className="w-4 h-4 inline mr-1" /> {team.stadium.location.split(",")[0]}
                               </span>
                             )}
                           </div>
@@ -327,7 +330,7 @@ export default function TeamsPage() {
                               rel="noopener noreferrer"
                               className="text-red-500 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition-colors"
                             >
-                              <span className="text-sm">🔗</span>
+                              <Icon icon="mdi:link" className="w-5 h-5" />
                             </a>
                           )}
                         </div>
@@ -361,7 +364,7 @@ export default function TeamsPage() {
               </>
             ) : (
               <div className="text-center py-12">
-                <span className="text-6xl text-gray-300 block mb-4">🛡️</span>
+                <Icon icon="mdi:shield" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600 mb-2">No teams found</h3>
                 <p className="text-gray-500">Try adjusting your search or filter criteria</p>
               </div>

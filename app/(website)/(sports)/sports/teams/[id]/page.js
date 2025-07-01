@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
+import { Icon } from "@iconify/react";
 
 export default function TeamDetailPage() {
   const params = useParams();
@@ -56,7 +57,7 @@ export default function TeamDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-12">
-            <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+            <Icon icon="mdi:loading" className="w-16 h-16 text-gray-300 animate-spin mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
           </div>
         </main>
@@ -69,7 +70,7 @@ export default function TeamDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-12">
-            <span className="text-6xl text-gray-300 block mb-4">🛡️</span>
+            <Icon icon="mdi:shield" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Team Not Found</h1>
             <p className="text-gray-600 mb-6">The team you're looking for doesn't exist.</p>
             <Link
@@ -90,11 +91,11 @@ export default function TeamDetailPage() {
         {/* Breadcrumb */}
         <nav className="mb-6">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-red-600">
-              Home
+            <Link href="/sports" className="hover:text-red-600">
+              Sports
             </Link>
             <span>›</span>
-            <Link href="/teams" className="hover:text-red-600">
+            <Link href="/sports/teams" className="hover:text-red-600">
               Teams
             </Link>
             <span>›</span>
@@ -110,7 +111,7 @@ export default function TeamDetailPage() {
                 {team.badge ? (
                   <img src={team.badge} alt={team.name} className="w-full h-full object-cover" />
                 ) : (
-                  <span className="text-red-500 text-4xl">🛡️</span>
+                  <Icon icon="mdi:shield" className="w-12 h-12 text-red-500" />
                 )}
               </div>
             </div>
@@ -137,7 +138,7 @@ export default function TeamDetailPage() {
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Country</p>
                   <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>🌍</span>
+                    <Icon icon="mdi:earth" className="w-5 h-5" />
                     {team.country}
                   </p>
                 </div>
@@ -145,7 +146,7 @@ export default function TeamDetailPage() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Founded</p>
                     <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <span>📅</span>
+                      <Icon icon="mdi:calendar" className="w-5 h-5" />
                       {team.formedYear}
                     </p>
                   </div>
@@ -153,14 +154,14 @@ export default function TeamDetailPage() {
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Players</p>
                   <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>👤</span>
+                    <Icon icon="mdi:account-group" className="w-5 h-5" />
                     {teamPlayers.length}
                   </p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Leagues</p>
                   <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>🏆</span>
+                    <Icon icon="mdi:trophy" className="w-5 h-5" />
                     {team.leagues.length}
                   </p>
                 </div>
@@ -177,43 +178,43 @@ export default function TeamDetailPage() {
               <div className="flex items-center gap-4">
                 {team.website && (
                   <a
-                    href={team.website}
+                    href={`https://${team.website}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
                   >
-                    <span>🔗</span>
+                    <Icon icon="mdi:link" className="w-5 h-5" />
                     Official Website
                   </a>
                 )}
                 {team.facebook && (
                   <a
-                    href={`https://facebook.com/${team.facebook}`}
-                    target="_blank"
+                    href={`https://${team.facebook}`}
+                    target="_blanks"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-700 p-2 rounded-lg hover:bg-blue-50 transition-colors"
                   >
-                    <span>📘</span>
+                    <Icon icon="mdi:facebook" className="w-5 h-5" />
                   </a>
                 )}
                 {team.twitter && (
                   <a
-                    href={`https://twitter.com/${team.twitter}`}
+                    href={`https://${team.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400 hover:text-blue-500 p-2 rounded-lg hover:bg-blue-50 transition-colors"
                   >
-                    <span>🐦</span>
+                    <Icon icon="mdi:twitter" className="w-5 h-5" />
                   </a>
                 )}
                 {team.instagram && (
                   <a
-                    href={`https://instagram.com/${team.instagram}`}
+                    href={`https://${team.instagram}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-500 hover:text-pink-600 p-2 rounded-lg hover:bg-pink-50 transition-colors"
                   >
-                    <span>📷</span>
+                    <Icon icon="mdi:instagram" className="w-5 h-5" />
                   </a>
                 )}
               </div>
@@ -226,7 +227,7 @@ export default function TeamDetailPage() {
           <section className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span>🏟️</span>
+                <Icon icon="mdi:stadium" className="w-6 h-6" />
                 Stadium Information
               </h2>
 
@@ -248,7 +249,7 @@ export default function TeamDetailPage() {
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Capacity</p>
                       <p className="font-semibold text-gray-900 flex items-center gap-2">
-                        <span>👥</span>
+                        <Icon icon="mdi:account-group" className="w-5 h-5" />
                         {team.stadium.capacity.toLocaleString()}
                       </p>
                     </div>
@@ -262,7 +263,7 @@ export default function TeamDetailPage() {
             {/* Leagues */}
             <div className="bg-white rounded-lg shadow-sm border p-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span>🏆</span>
+                <Icon icon="mdi:trophy" className="w-6 h-6" />
                 Competitions
               </h2>
 
@@ -283,7 +284,7 @@ export default function TeamDetailPage() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <span className="text-red-500">🏆</span>
+                            <Icon icon="mdi:trophy" className="w-5 h-5 text-red-500" />
                           )}
                         </div>
                         <div>
@@ -313,7 +314,7 @@ export default function TeamDetailPage() {
                   {Object.entries(playersByPosition).map(([position, players]) => (
                     <div key={position}>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                        <span className="text-red-500">⚽</span>
+                        <Icon icon="mdi:soccer" className="w-5 h-5 text-red-500" />
                         {position} ({players.length})
                       </h3>
                       <div className="grid md:grid-cols-2 gap-4">
@@ -331,7 +332,7 @@ export default function TeamDetailPage() {
                                   className="w-full h-full object-cover"
                                 />
                               ) : (
-                                <span className="text-red-500">👤</span>
+                                <Icon icon="mdi:account" className="w-6 h-6 text-red-500" />
                               )}
                             </div>
                             <div className="flex-1">
@@ -351,7 +352,7 @@ export default function TeamDetailPage() {
                 </div>
               ) : (
                 <div className="text-center py-12">
-                  <span className="text-4xl text-gray-300 block mb-4">👤</span>
+                  <Icon icon="mdi:account-group" className="w-10 h-10 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-600 mb-2">No players found</h3>
                   <p className="text-gray-500">No players are currently registered for this team.</p>
                 </div>

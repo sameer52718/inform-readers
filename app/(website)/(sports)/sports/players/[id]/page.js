@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
+import { Icon } from "@iconify/react";
 
 export default function PlayerDetailPage() {
   const params = useParams();
@@ -54,7 +55,7 @@ export default function PlayerDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-12">
-            <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+            <Icon icon="mdi:loading" className="w-16 h-16 text-gray-300 animate-spin mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
           </div>
         </main>
@@ -67,7 +68,7 @@ export default function PlayerDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-12">
-            <span className="text-6xl text-gray-300 block mb-4">👤</span>
+            <Icon icon="mdi:account" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Player Not Found</h1>
             <p className="text-gray-600 mb-6">The player you're looking for doesn't exist.</p>
             <Link
@@ -88,11 +89,11 @@ export default function PlayerDetailPage() {
         {/* Breadcrumb */}
         <nav className="mb-6">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-red-600">
-              Home
+            <Link href="/sports" className="hover:text-red-600">
+              Sports
             </Link>
             <span>›</span>
-            <Link href="/players" className="hover:text-red-600">
+            <Link href="/sports/players" className="hover:text-red-600">
               Players
             </Link>
             <span>›</span>
@@ -108,7 +109,7 @@ export default function PlayerDetailPage() {
                 {player.thumb ? (
                   <img src={player.thumb} alt={player.name} className="w-full h-full object-cover" />
                 ) : (
-                  <span className="text-red-500 text-4xl">👤</span>
+                  <Icon icon="mdi:account" className="w-12 h-12 text-red-500" />
                 )}
               </div>
             </div>
@@ -149,7 +150,7 @@ export default function PlayerDetailPage() {
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Nationality</p>
                   <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>🌍</span>
+                    <Icon icon="mdi:earth" className="w-5 h-5" />
                     {player.nationality}
                   </p>
                 </div>
@@ -157,7 +158,7 @@ export default function PlayerDetailPage() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Age</p>
                     <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <span>🎂</span>
+                      <Icon icon="mdi:cake" className="w-5 h-5" />
                       {age} years
                     </p>
                   </div>
@@ -165,14 +166,14 @@ export default function PlayerDetailPage() {
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Position</p>
                   <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>⚽</span>
+                    <Icon icon="mdi:soccer" className="w-5 h-5" />
                     {player.position}
                   </p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Status</p>
                   <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>🟢</span>
+                    <Icon icon="mdi:checkbox-marked-circle" className="w-5 h-5" />
                     {player.status}
                   </p>
                 </div>
@@ -189,32 +190,32 @@ export default function PlayerDetailPage() {
               <div className="flex items-center gap-4">
                 {player.facebook && (
                   <a
-                    href={`https://facebook.com/${player.facebook}`}
+                    href={`https://${player.facebook}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-700 p-2 rounded-lg hover:bg-blue-50 transition-colors"
                   >
-                    <span>📘</span>
+                    <Icon icon="mdi:facebook" className="w-6 h-6" />
                   </a>
                 )}
                 {player.twitter && (
                   <a
-                    href={`https://twitter.com/${player.twitter}`}
+                    href={`https://${player.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400 hover:text-blue-500 p-2 rounded-lg hover:bg-blue-50 transition-colors"
                   >
-                    <span>🐦</span>
+                    <Icon icon="mdi:twitter" className="w-6 h-6" />
                   </a>
                 )}
                 {player.instagram && (
                   <a
-                    href={`https://instagram.com/${player.instagram}`}
+                    href={`https://${player.instagram}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-500 hover:text-pink-600 p-2 rounded-lg hover:bg-pink-50 transition-colors"
                   >
-                    <span>📷</span>
+                    <Icon icon="mdi:instagram" className="w-6 h-6" />
                   </a>
                 )}
               </div>
@@ -227,7 +228,7 @@ export default function PlayerDetailPage() {
           <section className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span>📋</span>
+                <Icon icon="mdi:information" className="w-6 h-6" />
                 Personal Information
               </h2>
 
@@ -252,7 +253,7 @@ export default function PlayerDetailPage() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Height</p>
                     <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <span>📏</span>
+                      <Icon icon="mdi:ruler" className="w-5 h-5" />
                       {player.height}
                     </p>
                   </div>
@@ -262,7 +263,7 @@ export default function PlayerDetailPage() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Weight</p>
                     <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <span>⚖️</span>
+                      <Icon icon="mdi:scale" className="w-5 h-5" />
                       {player.weight}
                     </p>
                   </div>
@@ -281,7 +282,7 @@ export default function PlayerDetailPage() {
             {playerTeam && (
               <div className="bg-white rounded-lg shadow-sm border p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span>🛡️</span>
+                  <Icon icon="mdi:shield" className="w-6 h-6" />
                   Current Team
                 </h2>
 
@@ -298,7 +299,7 @@ export default function PlayerDetailPage() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="text-red-500 text-xl">🛡️</span>
+                        <Icon icon="mdi:shield" className="w-6 h-6 text-red-500" />
                       )}
                     </div>
                     <div>
@@ -436,7 +437,7 @@ export default function PlayerDetailPage() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-500 mb-2">
-                {player.status === "Active" ? "✓" : "✗"}
+                {player.status === "Active" ? <Icon icon="mdi:check" className="inline w-8 h-8" /> : <Icon icon="mdi:close" className="inline w-8 h-8" />}
               </div>
               <div className="text-sm text-gray-600">Active Status</div>
             </div>

@@ -5,6 +5,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import debounce from "lodash/debounce";
 import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 const Filters = ({ onFilterChange, filters }) => {
   const [countries, setCountries] = useState([]);
@@ -75,7 +76,7 @@ const Filters = ({ onFilterChange, filters }) => {
     <div className="bg-white rounded-lg shadow-sm border">
       <div className="p-6 border-b border-gray-200">
         <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900">
-          <span className="text-red-500">🌍</span>
+          <Icon icon="mdi:filter" className="w-5 h-5 text-red-500" />
           Filters
         </h3>
       </div>
@@ -84,13 +85,16 @@ const Filters = ({ onFilterChange, filters }) => {
         {/* Search Input */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Search Players</label>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Search by player name..."
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
+          <div className="relative">
+            <Icon icon="mdi:magnify" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search by player name..."
+              className="w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+          </div>
         </div>
 
         {/* Country Filter */}
@@ -218,7 +222,7 @@ export default function PlayersPage() {
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-red-500 rounded-xl">
-              <span className="text-white text-2xl">👤</span>
+              <Icon icon="mdi:account" className="w-8 h-8 text-white" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Players</h1>
@@ -243,7 +247,7 @@ export default function PlayersPage() {
           <section className="lg:col-span-3">
             {isLoading ? (
               <div className="text-center py-12">
-                <span className="text-6xl text-gray-300 block mb-4">⏳</span>
+                <Icon icon="mdi:loading" className="w-16 h-16 text-gray-300 animate-spin mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600">Loading...</h3>
               </div>
             ) : players.length > 0 ? (
@@ -266,7 +270,7 @@ export default function PlayersPage() {
                                   className="w-full h-full object-cover"
                                 />
                               ) : (
-                                <span className="text-red-500 text-xl">👤</span>
+                                <Icon icon="mdi:account" className="w-6 h-6 text-red-500" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -289,18 +293,18 @@ export default function PlayersPage() {
 
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center gap-2 text-sm">
-                            <span className="text-gray-400">🌍</span>
+                            <Icon icon="mdi:earth" className="w-5 h-5 text-gray-400" />
                             <span className="font-medium">{player.nationality}</span>
                           </div>
 
                           <div className="flex items-center gap-2 text-sm">
-                            <span className="text-gray-400">⚽</span>
+                            <Icon icon="mdi:soccer" className="w-5 h-5 text-gray-400" />
                             <span>{player.position}</span>
                           </div>
 
                           {player.dateBorn && (
                             <div className="flex items-center gap-2 text-sm">
-                              <span className="text-gray-400">🎂</span>
+                              <Icon icon="mdi:cake" className="w-5 h-5 text-gray-400" />
                               <span>{new Date(player.dateBorn).toLocaleDateString()}</span>
                               <span className="text-gray-400">
                                 (Age{" "}
@@ -315,7 +319,7 @@ export default function PlayersPage() {
 
                           {player.birthLocation && (
                             <div className="flex items-center gap-2 text-sm">
-                              <span className="text-gray-400">📍</span>
+                              <Icon icon="mdi:map-marker" className="w-5 h-5 text-gray-400" />
                               <span>{player.birthLocation}</span>
                             </div>
                           )}
@@ -325,13 +329,13 @@ export default function PlayersPage() {
                           <div className="flex gap-4 mb-4 text-sm">
                             {player.height && (
                               <div className="flex items-center gap-1">
-                                <span className="text-gray-400">📏</span>
+                                <Icon icon="mdi:ruler" className="w-5 h-5 text-gray-400" />
                                 <span>{player.height}</span>
                               </div>
                             )}
                             {player.weight && (
                               <div className="flex items-center gap-1">
-                                <span className="text-gray-400">⚖️</span>
+                                <Icon icon="mdi:scale" className="w-5 h-5 text-gray-400" />
                                 <span>{player.weight}</span>
                               </div>
                             )}
@@ -355,32 +359,32 @@ export default function PlayersPage() {
                           <div className="flex items-center gap-1">
                             {player.facebook && (
                               <a
-                                href={`https://facebook.com/${player.facebook}`}
+                                href={`https:///${player.facebook}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-500 hover:text-blue-600 p-1 rounded hover:bg-blue-50 transition-colors"
                               >
-                                <span className="text-xs">📘</span>
+                                <Icon icon="mdi:facebook" className="w-4 h-4" />
                               </a>
                             )}
                             {player.twitter && (
                               <a
-                                href={`https://twitter.com/${player.twitter}`}
+                                href={`https:///${player.twitter}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-400 hover:text-blue-500 p-1 rounded hover:bg-blue-50 transition-colors"
                               >
-                                <span className="text-xs">🐦</span>
+                                <Icon icon="mdi:twitter" className="w-4 h-4" />
                               </a>
                             )}
                             {player.instagram && (
                               <a
-                                href={`https://instagram.com/${player.instagram}`}
+                                href={`https:///${player.instagram}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-pink-500 hover:text-pink-600 p-1 rounded hover:bg-pink-50 transition-colors"
                               >
-                                <span className="text-xs">📷</span>
+                                <Icon icon="mdi:instagram" className="w-4 h-4" />
                               </a>
                             )}
                           </div>
@@ -415,7 +419,7 @@ export default function PlayersPage() {
               </>
             ) : (
               <div className="text-center py-12">
-                <span className="text-6xl text-gray-300 block mb-4">👤</span>
+                <Icon icon="mdi:account" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600 mb-2">No players found</h3>
                 <p className="text-gray-500">Try adjusting your search or filter criteria</p>
               </div>
