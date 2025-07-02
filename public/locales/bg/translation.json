@@ -1,1 +1,62 @@
-{}
+{
+  "header": {
+    "about": "За нас",
+    "contact": "Контакти",
+    "signin": "Вход",
+    "myAccount": "Моят акаунт|",
+    "categories": {
+      "names": "Имена на бебета",
+      "postalcode": "Пощенски кодове",
+      "swiftcode": "Swift кодове",
+      "software": "Софтуер и игри",
+      "specification": "Спецификации",
+      "biography": "Биография",
+      "more": "Още",
+      "weather": "Времето",
+      "news": "Новини",
+      "forex": "Конвертор на валути",
+      "metals": "Цени на металите",
+      "crypto": "Крипто Цени",
+      "cars": "Автомобили",
+      "bikes": "Мотоциклети",
+      "tools": "Инструменти",
+      "videoDownloader": "Програма за изтегляне на видеоклипове",
+      "coupons": "Купони",
+      "jobs": "Работа",
+      "realstate": "Недвижими имоти",
+      "blogs": "Блогове",
+      "timeDate": "Час и дата",
+      "sports": "Спорт"
+    }
+  },
+  "footer": {
+    "aboutCompany": "За InformReaders",
+    "aboutText": "Предоставяне на изчерпателни новини и анализи на нашата глобална аудитория. Стремим се да предоставяме точно, навременно и ангажиращо съдържание по различни теми.",
+    "categories": "Категории",
+    "quickLinks": "Бързи връзки",
+    "newsletter": "Бюлетин",
+    "newsletterText": "Абонирайте се за нашия бюлетин за ежедневни актуализации и новини.",
+    "subscribeButton": "Абонирайте се сега",
+    "contactUs": "Свържете се с нас",
+    "address": "123 News Street, Ню Йорк, NY 10001",
+    "phone": "+1 (555) 123-4567",
+    "email": "contact@informreaders.com",
+    "website": "www.informreaders.com",
+    "rights": "Всички права са запазени резервирано.",
+    "poweredBy": "Платформа, разработена от The Byte Pulse Software Company. (Уебсайт, задвижван от Hawkeye)",
+    "links": {
+      "babyNames": "Имена на бебета",
+      "postalCodes": "Пощенски кодове",
+      "software": "Софтуер и игри",
+      "swiftCodes": "Swift кодове",
+      "specifications": "Спецификации",
+      "news": "Новини",
+      "biography": "Биография",
+      "about": "За нас",
+      "contact": "Контакти",
+      "privacy": "Политика за поверителност",
+      "terms": "Условия за ползване",
+      "dmca": "DMCA политика"
+    }
+  }
+}

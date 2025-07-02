@@ -1,1 +1,62 @@
-{}
+{
+  "header": {
+    "about": "Über",
+    "contact": "Kontakt",
+    "signin": "Anmelden",
+    "myAccount": "Mein Konto",
+    "categories": {
+      "names": "Babynamen",
+      "postalcode": "Postleitzahlen",
+      "swiftcode": "Swift-Codes",
+      "software": "Software & Spiele",
+      "specification": "Spezifikationen",
+      "biography": "Biografie",
+      "more": "Mehr",
+      "weather": "Wetter",
+      "news": "Neuigkeiten",
+      "forex": "Währungsrechner",
+      "metals": "Metal Kurse",
+      "crypto": "Kryptokurse",
+      "cars": "Autos",
+      "bikes": "Fahrräder",
+      "tools": "Tools",
+      "videoDownloader": "Video-Downloader",
+      "coupons": "Gutscheine",
+      "jobs": "Jobs",
+      "realstate": "Real Immobilien",
+      "blogs": "Blogs",
+      "timeDate": "Zeit & Datum",
+      "sports": "Sport"
+    }
+  },
+  "footer": {
+    "aboutCompany": "Über InformReaders",
+    "aboutText": "Wir liefern unserem globalen Publikum umfassende Neuigkeiten und Einblicke. Wir sind bestrebt, genaue, aktuelle und ansprechende Inhalte zu verschiedenen Themen bereitzustellen.",
+    "categories": "Kategorien",
+    "quickLinks": "Quick Links",
+    "newsletter": "Newsletter",
+    "newsletterText": "Abonnieren Sie unseren Newsletter für tägliche Updates und aktuelle Nachrichten.",
+    "subscribeButton": "Jetzt abonnieren",
+    "contactUs": "Kontakt",
+    "address": "123 News Street, New York, NY 10001",
+    "phone": "+1 (555) 123-4567",
+    "email": "contact@informreaders.com",
+    "website": "www.informreaders.com",
+    "rights": "Alle Rechte vorbehalten.",
+    "poweredBy": "Plattform entwickelt von The Byte Pulse Software Company. (Website betrieben durch Hawkeye)",
+    "links": {
+      "babyNames": "Babynamen",
+      "postalCodes": "Postleitzahlen",
+      "software": "Software & Spiele",
+      "swiftCodes": "Swift Codes",
+      "specifications": "Spezifikationen",
+      "news": "Neuigkeiten",
+      "biography": "Biografie",
+      "about": "Über uns",
+      "contact": "Kontakt",
+      "privacy": "Datenschutzrichtlinie",
+      "terms": "AGB Use",
+      "dmca": "DMCA-Richtlinie"
+    }
+  }
+}

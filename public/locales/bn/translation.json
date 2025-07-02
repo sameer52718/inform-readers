@@ -1,1 +1,62 @@
-{}
+{
+  "header": {
+    "about": "সম্পর্কে",
+    "contact": "যোগাযোগ",
+    "signin": "সাইন ইন",
+    "myAccount": "আমার অ্যাকাউন্ট",
+    "categories": {
+      "names": "শিশুর নাম",
+      "postalcode": "পোস্টাল কোড",
+      "swiftcode": "সুইফট কোড",
+      "software": "সফটওয়্যার এবং গেম",
+      "specification": "স্পেসিফিকেশন",
+      "biography": "জীবনী",
+      "more": "আরও",
+      "weather": "আবহাওয়া",
+      "news": "খবর",
+      "forex": "মুদ্রা রূপান্তরকারী",
+      "metals": "ধাতু রেট",
+      "crypto": "ক্রিপ্টো রেট",
+      "cars": "গাড়ি",
+      "bikes": "বাইক",
+      "tools": "টুল",
+      "videoDownloader": "ভিডিও Downloader",
+      "coupons": "কুপন",
+      "jobs": "চাকরি",
+      "realstate": "রিয়েল এস্টেট",
+      "blogs": "ব্লগ",
+      "timeDate": "সময় এবং তারিখ",
+      "sports": "খেলাধুলা"
+    }
+  },
+  "footer": {
+    "aboutCompany": "সম্পর্কে InformReaders",
+    "aboutText": "আমাদের বিশ্বব্যাপী দর্শকদের কাছে ব্যাপক সংবাদ এবং অন্তর্দৃষ্টি সরবরাহ করা। আমরা বিভিন্ন বিষয়ের উপর সঠিক, সময়োপযোগী এবং আকর্ষণীয় কন্টেন্ট প্রদান করার চেষ্টা করি।",
+    "categories": "বিভাগ",
+    "quickLinks": "দ্রুত লিঙ্ক",
+    "newsletter": "নিউজলেটার",
+    "newsletterText": "প্রতিদিনের আপডেট এবং ব্রেকিং নিউজের জন্য আমাদের নিউজলেটার সাবস্ক্রাইব করুন।",
+    "subscribeButton": "এখনই সাবস্ক্রাইব করুন",
+    "contactUs": "যোগাযোগ Us",
+    "address": "123 নিউজ স্ট্রিট, নিউ ইয়র্ক, NY 10001",
+    "phone": "+1 (555) 123-4567",
+    "email": "contact@informreaders.com",
+    "website": "www.informreaders.com",
+    "rights": "সর্বস্বত্ব সংরক্ষিত।",
+    "poweredBy": "প্ল্যাটফর্মটি দ্য বাইট পালস দ্বারা তৈরি সফটওয়্যার কোম্পানি। (ওয়েবসাইট চালিত হক্কি)",
+    "links": {
+      "babyNames": "শিশুর নাম",
+      "postalCodes": "পোস্টাল কোড",
+      "software": "সফটওয়্যার এবং গেম",
+      "swiftCodes": "সুইফট কোড",
+      "specifications": "স্পেসিফিকেশন",
+      "news": "খবর",
+      "biography": "জীবনী",
+      "about": "আমাদের সম্পর্কে",
+      "contact": "যোগাযোগ",
+      "privacy": "গোপনীয়তা নীতি",
+      "terms": "শর্তাবলী ব্যবহার",
+      "dmca": "DMCA নীতি"
+    }
+  }
+}

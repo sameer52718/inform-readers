@@ -1,1 +1,62 @@
-{}
+{
+  "header": {
+    "about": "Sobre",
+    "contact": "Contacte",
+    "signin": "Inicieu la sessió",
+    "myAccount": "El meu compte",
+    "categories": {
+      "names": "Noms de nadó",
+      "postalcode": "Codis postals",
+      "swiftcode": "Codis Swift",
+      "software": "Programari i Jocs",
+      "specification": "Especificacions",
+      "biography": "Biografia",
+      "more": "Més",
+      "weather": "Temps",
+      "news": "Notícies",
+      "forex": "Convertidor de divises",
+      "metals": "Preus dels metalls",
+      "crypto": "Criptomonedes Tarifes",
+      "cars": "Cotxes",
+      "bikes": "Motos",
+      "tools": "Eines",
+      "videoDownloader": "Descarregador de vídeo",
+      "coupons": "Cupons",
+      "jobs": "Feines",
+      "realstate": "Real Estate",
+      "blogs": "Blogs",
+      "timeDate": "Hora i data",
+      "sports": "Esports"
+    }
+  },
+  "footer": {
+    "aboutCompany": "Quant a InformReaders",
+    "aboutText": "Oferim notícies i informació completa al nostre públic global. Ens esforcem per oferir contingut precís, oportú i atractiu sobre diversos temes.",
+    "categories": "Categories",
+    "quickLinks": "Enllaços ràpids",
+    "newsletter": "Butlletí informatiu",
+    "newsletterText": "Subscriu-te al nostre butlletí informatiu per a actualitzacions diàries i notícies d'última hora.",
+    "subscribeButton": "Subscriu-te ara",
+    "contactUs": "Contacta amb nosaltres",
+    "address": "123 News Street, Nova York, NY 10001",
+    "phone": "+1 (555) 123-4567",
+    "email": "contact@informreaders.com",
+    "website": "www.informreaders.com",
+    "rights": "Tots els drets reservats.",
+    "poweredBy": "Plataforma desenvolupada per The Byte Pulse Software Company. (Lloc web desenvolupat per Hawkeye)",
+    "links": {
+      "babyNames": "Noms de nadons",
+      "postalCodes": "Codis postals",
+      "software": "Programari i jocs",
+      "swiftCodes": "Swift Codis",
+      "specifications": "Especificacions",
+      "news": "Notícies",
+      "biography": "Biografia",
+      "about": "Sobre nosaltres",
+      "contact": "Contacte",
+      "privacy": "Política de privacitat",
+      "terms": "Condicions d'ús",
+      "dmca": "Política DMCA"
+    }
+  }
+}

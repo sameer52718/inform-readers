@@ -1,1 +1,62 @@
-{}
+{
+  "header": {
+    "about": "Om",
+    "contact": "Kontakt",
+    "signin": "Log ind",
+    "myAccount": "Min konto",
+    "categories": {
+      "names": "Babynavne",
+      "postalcode": "Postnumre",
+      "swiftcode": "Swift-koder",
+      "software": "Software & Spil",
+      "specification": "Specifikationer",
+      "biography": "Biografi",
+      "more": "Mere",
+      "weather": "Vejr",
+      "news": "Nyheder",
+      "forex": "Valutaomregner",
+      "metals": "Metal Priser",
+      "crypto": "Kryptokurser",
+      "cars": "Biler",
+      "bikes": "Motorcykler",
+      "tools": "Værktøjer",
+      "videoDownloader": "Video Downloader",
+      "coupons": "Kuponer",
+      "jobs": "Job",
+      "realstate": "Ejendomme",
+      "blogs": "Blogs",
+      "timeDate": "Tidspunkt og dato",
+      "sports": "Sport"
+    }
+  },
+  "footer": {
+    "aboutCompany": "Om InformReaders",
+    "aboutText": "Vi leverer omfattende nyheder og indsigt til vores globale publikum. Vi stræber efter at levere præcist, rettidigt og engagerende indhold på tværs af forskellige emner.",
+    "categories": "Kategorier",
+    "quickLinks": "Hurtige links",
+    "newsletter": "Nyhedsbrev",
+    "newsletterText": "Abonner på vores nyhedsbrev for at få daglige opdateringer og de seneste nyheder.",
+    "subscribeButton": "Abonner nu",
+    "contactUs": "Kontakt Us",
+    "address": "123 News Street, New York, NY 10001",
+    "phone": "+1 (555) 123-4567",
+    "email": "contact@informreaders.com",
+    "website": "www.informreaders.com",
+    "rights": "Alle rettigheder forbeholdes.",
+    "poweredBy": "Platform udviklet af The Byte Pulse Software Company. (Hjemmeside drevet af Hawkeye)",
+    "links": {
+      "babyNames": "Babynavne",
+      "postalCodes": "Postnumre",
+      "software": "Software og spil",
+      "swiftCodes": "Swift Koder",
+      "specifications": "Specifikationer",
+      "news": "Nyheder",
+      "biography": "Biografi",
+      "about": "Om os",
+      "contact": "Kontakt",
+      "privacy": "Privatlivspolitik",
+      "terms": "Vilkår for Brug",
+      "dmca": "DMCA-politik"
+    }
+  }
+}
