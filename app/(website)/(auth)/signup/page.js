@@ -10,8 +10,10 @@ import { userTypes } from "@/constant/data";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setAuth } from "@/store/auth";
+import { useTranslation } from "react-i18next";
 
 export default function SignupPage() {
+  const { t } = useTranslation(); // Empty namespace as instructed
   const dispatch = useDispatch();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +34,7 @@ export default function SignupPage() {
         const { user, token } = data;
         dispatch(setAuth({ user: user, token: token, userType: userTypes.USER }));
         router.replace("/");
-        toast.success("Account Signup Successfull");
+        toast.success(t("signup.successMessage"));
       } else {
         toast.error(data.message);
       }
@@ -59,15 +61,15 @@ export default function SignupPage() {
             className="inline-flex items-center text-sm text-gray-500 hover:text-red-600 transition-colors duration-200"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            {t("signup.backToHome")}
           </Link>
 
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Create Account</h2>
+            <h2 className="text-3xl font-bold text-gray-900">{t("signup.title")}</h2>
             <p className="mt-2 text-sm text-gray-600">
-              Already have an account?{" "}
+              {t("signup.description")}{" "}
               <Link href="/signin" className="text-red-600 hover:text-red-700 font-medium">
-                Sign in
+                {t("signup.signinLink")}
               </Link>
             </p>
           </div>
@@ -75,7 +77,7 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Full Name
+                {t("signup.nameLabel")}
               </label>
               <input
                 id="name"
@@ -85,13 +87,13 @@ export default function SignupPage() {
                 value={formData.name}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 outline-none"
-                placeholder="John Doe"
+                placeholder={t("signup.namePlaceholder")}
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email Address
+                {t("signup.emailLabel")}
               </label>
               <input
                 id="email"
@@ -101,13 +103,13 @@ export default function SignupPage() {
                 value={formData.email}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 outline-none"
-                placeholder="john@example.com"
+                placeholder={t("signup.emailPlaceholder")}
               />
             </div>
 
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
+                {t("signup.phoneLabel")}
               </label>
               <input
                 id="phone"
@@ -117,13 +119,13 @@ export default function SignupPage() {
                 value={formData.phone}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 outline-none"
-                placeholder="+1 (555) 000-0000"
+                placeholder={t("signup.phonePlaceholder")}
               />
             </div>
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                {t("signup.passwordLabel")}
               </label>
               <div className="mt-1 relative">
                 <input
@@ -134,7 +136,7 @@ export default function SignupPage() {
                   value={formData.password}
                   onChange={handleChange}
                   className="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 outline-none"
-                  placeholder="••••••••"
+                  placeholder={t("signup.passwordPlaceholder")}
                 />
                 <button
                   type="button"
@@ -152,19 +154,19 @@ export default function SignupPage() {
                 disabled={isSubmitting}
                 className="w-full flex disabled:opacity-70 justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
               >
-                Create Account
+                {t("signup.submitButton")}
               </button>
             </div>
           </form>
 
           <div className="text-center text-sm text-gray-500">
-            By signing up, you agree to our{" "}
+            {t("signup.termsAndPrivacy")}{" "}
             <Link href="/terms" className="text-red-600 hover:text-red-700">
-              Terms of Service
+              {t("signup.termsLink")}
             </Link>{" "}
-            and{" "}
+            {t("signup.and")}{" "}
             <Link href="/privacy" className="text-red-600 hover:text-red-700">
-              Privacy Policy
+              {t("signup.privacyLink")}
             </Link>
           </div>
         </div>

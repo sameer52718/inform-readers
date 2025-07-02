@@ -9,8 +9,10 @@ import { Building2, Search } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function LocationTable({ data = [] }) {
+  const { t } = useTranslation(); // Empty namespace as instructed
   const { countryCode } = useParams();
   return (
     <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
@@ -18,10 +20,18 @@ function LocationTable({ data = [] }) {
         <table className="w-full min-w-max border-collapse">
           <thead>
             <tr className="border-b bg-red-600">
-              <th className="p-4 text-left text-sm font-medium text-white">Bank</th>
-              <th className="p-4 text-left text-sm font-medium text-white">City</th>
-              <th className="p-4 text-left text-sm font-medium text-white">Branch</th>
-              <th className="p-4 text-left text-sm font-medium text-white">Swift Code</th>
+              <th className="p-4 text-left text-sm font-medium text-white">
+                {t("swiftcodeLanding.tableHeaders.bank")}
+              </th>
+              <th className="p-4 text-left text-sm font-medium text-white">
+                {t("swiftcodeLanding.tableHeaders.city")}
+              </th>
+              <th className="p-4 text-left text-sm font-medium text-white">
+                {t("swiftcodeLanding.tableHeaders.branch")}
+              </th>
+              <th className="p-4 text-left text-sm font-medium text-white">
+                {t("swiftcodeLanding.tableHeaders.swiftCode")}
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -36,7 +46,7 @@ function LocationTable({ data = [] }) {
                       href={`/swiftcode/${countryCode}/${code?.swiftCode}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
-                      View Details
+                      {t("swiftcodeLanding.viewDetails")}
                     </Link>
                   </td>
                 </tr>
@@ -44,7 +54,7 @@ function LocationTable({ data = [] }) {
             ) : (
               <tr>
                 <td colSpan={4} className="p-4 text-center text-sm text-gray-500">
-                  No data available
+                  {t("swiftcodeLanding.noData")}
                 </td>
               </tr>
             )}
@@ -55,7 +65,8 @@ function LocationTable({ data = [] }) {
   );
 }
 
-function PostalLanding() {
+function SwiftCodeLanding() {
+  const { t } = useTranslation(); // Empty namespace as instructed
   const { countryCode } = useParams();
   const [bankCodes, setBankCodes] = useState([]);
   const [search, setSearch] = useState("");
@@ -111,10 +122,10 @@ function PostalLanding() {
             <Building2 className="h-12 w-12 text-red-600" />
           </div>
           <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Bank Swift Codes Directory
+            {t("swiftcodeLanding.heroTitle")}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
-            Search through our comprehensive database of bank SWIFT codes
+            {t("swiftcodeLanding.heroDescription")}
           </p>
         </div>
 
@@ -126,7 +137,7 @@ function PostalLanding() {
                 <input
                   type="search"
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 pr-10 text-sm focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200"
-                  placeholder="Enter bank name to search..."
+                  placeholder={t("swiftcodeLanding.searchPlaceholder")}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -136,7 +147,7 @@ function PostalLanding() {
                 type="submit"
                 className="rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               >
-                Search
+                {t("swiftcodeLanding.searchButton")}
               </button>
             </div>
           </form>
@@ -155,9 +166,11 @@ function PostalLanding() {
           ) : (
             <>
               <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-gray-900">Search Results</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t("swiftcodeLanding.resultsTitle")}</h2>
                 <span className="text-sm text-gray-500">
-                  Showing {bankCodes.length} of {pagination.totalItems} results
+                  {t("swiftcodeLanding.resultsSummary")
+                    .replace("{count}", bankCodes.length)
+                    .replace("{total}", pagination.totalItems)}
                 </span>
               </div>
               <LocationTable data={bankCodes} />
@@ -178,22 +191,11 @@ function PostalLanding() {
 
         {/* Features Section */}
         <div className="mt-16 rounded-2xl bg-white p-8 shadow-lg">
-          <h2 className="text-center text-2xl font-bold text-gray-900">Why Use Our SWIFT Code Directory?</h2>
+          <h2 className="text-center text-2xl font-bold text-gray-900">
+            {t("swiftcodeLanding.featuresTitle")}
+          </h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Comprehensive Database",
-                description: "Access SWIFT codes for banks worldwide",
-              },
-              {
-                title: "Real-time Updates",
-                description: "Our database is regularly updated for accuracy",
-              },
-              {
-                title: "Easy Search",
-                description: "Find any bank's SWIFT code in seconds",
-              },
-            ].map((feature, index) => (
+            {t("swiftcodeLanding.features", { returnObjects: true }).map((feature, index) => (
               <div key={index} className="rounded-xl border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
                 <p className="mt-2 text-sm text-gray-600">{feature.description}</p>
@@ -210,4 +212,4 @@ function PostalLanding() {
   );
 }
 
-export default PostalLanding;
+export default SwiftCodeLanding;

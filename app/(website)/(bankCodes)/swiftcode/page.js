@@ -8,8 +8,10 @@ import { Globe2, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function PostalCode() {
+  const { t } = useTranslation(); // Empty namespace as instructed
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -49,28 +51,25 @@ export default function PostalCode() {
             <Globe2 className="h-12 w-12 text-red-600" />
           </div>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-            World <span className="text-red-600">Bank Swift</span> Codes
+            <span className="text-red-600">{t("swiftcode.heroTitle")}</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
-            Access SWIFT codes for banks worldwide. Quick and easy international banking information at your
-            fingertips.
-          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">{t("swiftcode.heroDescription")}</p>
         </div>
 
         {/* Search Banner */}
         <div className="mt-12 rounded-xl bg-gradient-to-r from-gray-900 to-gray-800 p-8 shadow-xl">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">Find SWIFT Codes by Country</h2>
-            <p className="mt-2 text-gray-300">Enter a country name to explore its SWIFT code information</p>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">{t("swiftcode.searchTitle")}</h2>
+            <p className="mt-2 text-gray-300">{t("swiftcode.searchDescription")}</p>
             <div className="mt-6 flex justify-center">
               <div className="relative w-full max-w-md">
                 <input
                   type="text"
-                  placeholder="Search for a country..."
+                  placeholder={t("swiftcode.searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full rounded-full border border-gray-300 py-3 pl-10 pr-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600"
-                  aria-label="Search for a country by name"
+                  aria-label={t("swiftcode.searchAriaLabel")}
                 />
                 <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
               </div>
@@ -81,7 +80,7 @@ export default function PostalCode() {
           {searchQuery && (
             <div className="mt-6 max-w-3xl mx-auto">
               {isLoading ? (
-                <p className="text-center text-gray-300">Loading...</p>
+                <p className="text-center text-gray-300">{t("swiftcode.loading")}</p>
               ) : filteredCountries.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {filteredCountries.map((country) => (
@@ -108,7 +107,9 @@ export default function PostalCode() {
                   ))}
                 </div>
               ) : (
-                <p className="text-center text-gray-300">No countries found matching "{searchQuery}"</p>
+                <p className="text-center text-gray-300">
+                  {t("swiftcode.noResults").replace("{searchQuery}", searchQuery)}
+                </p>
               )}
             </div>
           )}
@@ -118,14 +119,14 @@ export default function PostalCode() {
         {!searchQuery && (
           <div className="mt-16 space-y-16">
             {isLoading ? (
-              <p className="text-center text-gray-600">Loading countries...</p>
+              <p className="text-center text-gray-600">{t("swiftcode.loading")}</p>
             ) : (
               data?.map((item) => (
                 <div key={item._id} className="rounded-3xl bg-white p-8 shadow-lg">
                   <div className="flex items-center justify-between border-b border-gray-200 pb-4">
                     <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">{item._id}</h2>
                     <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-600">
-                      {item.countries?.length} Countries
+                      {t("swiftcode.countriesCount").replace("{count}", item.countries?.length)}
                     </span>
                   </div>
 
@@ -165,27 +166,12 @@ export default function PostalCode() {
         <div className="mt-24 rounded-2xl bg-gradient-to-r from-red-600 to-red-700 px-6 py-12 sm:px-12">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Why Use Our SWIFT Code Directory?
+              {t("swiftcode.featuresTitle")}
             </h2>
-            <p className="mt-4 text-lg text-red-100">
-              Everything you need to process international bank transfers, all in one place.
-            </p>
+            <p className="mt-4 text-lg text-red-100">{t("swiftcode.featuresDescription")}</p>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Comprehensive Coverage",
-                description: "Access SWIFT codes for banks across multiple countries and territories.",
-              },
-              {
-                title: "Always Updated",
-                description: "Our database is regularly updated to ensure accuracy and reliability.",
-              },
-              {
-                title: "Easy Navigation",
-                description: "Find the SWIFT code you need quickly with our intuitive interface.",
-              },
-            ].map((feature, index) => (
+            {t("swiftcode.features", { returnObjects: true }).map((feature, index) => (
               <div key={index} className="rounded-xl bg-white/10 p-6 text-center backdrop-blur-lg">
                 <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
                 <p className="mt-2 text-red-100">{feature.description}</p>

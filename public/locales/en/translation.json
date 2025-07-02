@@ -1,62 +1,230 @@
 {
-    "header": {
-        "about": "About",
-        "contact": "Contact",
-        "signin": "Sign in",
-        "myAccount": "My Account",
-        "categories": {
-            "names": "Baby Names",
-            "postalcode": "Postal Codes",
-            "swiftcode": "Swift Codes",
-            "software": "Software & Games",
-            "specification": "Specifications",
-            "biography": "Biography",
-            "more": "More",
-            "weather": "Weather",
-            "news": "News",
-            "forex": "Currency Converter",
-            "metals": "Metal Rates",
-            "crypto": "Crypto Rates",
-            "cars": "Cars",
-            "bikes": "Bikes",
-            "tools": "Tools",
-            "videoDownloader": "Video Downloader",
-            "coupons": "Coupons",
-            "jobs": "Jobs",
-            "realstate": "Real Estate",
-            "blogs": "Blogs",
-            "timeDate": "Time & Date",
-            "sports": "Sports"
-        }
-    },
-    "footer": {
-        "aboutCompany": "About InformReaders",
-        "aboutText": "Delivering comprehensive news and insights to our global audience. We strive to provide accurate, timely, and engaging content across various topics.",
-        "categories": "Categories",
-        "quickLinks": "Quick Links",
-        "newsletter": "Newsletter",
-        "newsletterText": "Subscribe to our newsletter for daily updates and breaking news.",
-        "subscribeButton": "Subscribe Now",
-        "contactUs": "Contact Us",
-        "address": "123 News Street, New York, NY 10001",
-        "phone": "+1 (555) 123-4567",
-        "email": "contact@informreaders.com",
-        "website": "www.informreaders.com",
-        "rights": "All rights reserved.",
-        "poweredBy": "Platform Developed by The Byte Pulse Software Company. (Website Powered by Hawkeye)",
-        "links": {
-            "babyNames": "Baby Names",
-            "postalCodes": "Postal Codes",
-            "software": "Software & Games",
-            "swiftCodes": "Swift Codes",
-            "specifications": "Specifications",
-            "news": "News",
-            "biography": "Biography",
-            "about": "About Us",
-            "contact": "Contact",
-            "privacy": "Privacy Policy",
-            "terms": "Terms of Use",
-            "dmca": "DMCA Policy"
-        }
+  "header": {
+    "about": "About",
+    "contact": "Contact",
+    "signin": "Sign in",
+    "myAccount": "My Account",
+    "categories": {
+      "names": "Baby Names",
+      "postalcode": "Postal Codes",
+      "swiftcode": "Swift Codes",
+      "software": "Software & Games",
+      "specification": "Specifications",
+      "biography": "Biography",
+      "more": "More",
+      "weather": "Weather",
+      "news": "News",
+      "forex": "Currency Converter",
+      "metals": "Metal Rates",
+      "crypto": "Crypto Rates",
+      "cars": "Cars",
+      "bikes": "Bikes",
+      "tools": "Tools",
+      "videoDownloader": "Video Downloader",
+      "coupons": "Coupons",
+      "jobs": "Jobs",
+      "realstate": "Real Estate",
+      "blogs": "Blogs",
+      "timeDate": "Time & Date",
+      "sports": "Sports"
     }
+  },
+  "footer": {
+    "aboutCompany": "About InformReaders",
+    "aboutText": "Delivering comprehensive news and insights to our global audience. We strive to provide accurate, timely, and engaging content across various topics.",
+    "categories": "Categories",
+    "quickLinks": "Quick Links",
+    "newsletter": "Newsletter",
+    "newsletterText": "Subscribe to our newsletter for daily updates and breaking news.",
+    "subscribeButton": "Subscribe Now",
+    "contactUs": "Contact Us",
+    "address": "123 News Street, New York, NY 10001",
+    "phone": "+1 (555) 123-4567",
+    "email": "contact@informreaders.com",
+    "website": "www.informreaders.com",
+    "rights": "All rights reserved.",
+    "poweredBy": "Platform Developed by The Byte Pulse Software Company. (Website Powered by Hawkeye)",
+    "links": {
+      "babyNames": "Baby Names",
+      "postalCodes": "Postal Codes",
+      "software": "Software & Games",
+      "swiftCodes": "Swift Codes",
+      "specifications": "Specifications",
+      "news": "News",
+      "biography": "Biography",
+      "about": "About Us",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "dmca": "DMCA Policy"
+    }
+  },
+  "signin": {
+    "backToHome": "Back to Home",
+    "title": "Sign In Account",
+    "description": "Don't have an account?",
+    "signupLink": "Sign Up",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "submitButton": "Sign in",
+    "successMessage": "Account Signup Successful"
+  },
+  "signup": {
+    "backToHome": "Back to Home",
+    "title": "Create Account",
+    "description": "Already have an account?",
+    "signinLink": "Sign in",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "+1 (555) 000-0000",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "submitButton": "Create Account",
+    "successMessage": "Account Signup Successful",
+    "termsAndPrivacy": "By signing up, you agree to our",
+    "termsLink": "Terms of Service",
+    "and": "and",
+    "privacyLink": "Privacy Policy"
+  },
+  "swiftcode": {
+    "heroTitle": "World Bank Swift Codes",
+    "heroTitleHighlight": "Bank Swift",
+    "heroDescription": "Access SWIFT codes for banks worldwide. Quick and easy international banking information at your fingertips.",
+    "searchTitle": "Find SWIFT Codes by Country",
+    "searchDescription": "Enter a country name to explore its SWIFT code information",
+    "searchPlaceholder": "Search for a country...",
+    "searchAriaLabel": "Search for a country by name",
+    "loading": "Loading...",
+    "noResults": "No countries found matching \"{searchQuery}\"",
+    "countriesCount": "{count} Countries",
+    "featuresTitle": "Why Use Our SWIFT Code Directory?",
+    "featuresDescription": "Everything you need to process international bank transfers, all in one place.",
+    "features": [
+      {
+        "title": "Comprehensive Coverage",
+        "description": "Access SWIFT codes for banks across multiple countries and territories."
+      },
+      {
+        "title": "Always Updated",
+        "description": "Our database is regularly updated to ensure accuracy and reliability."
+      },
+      {
+        "title": "Easy Navigation",
+        "description": "Find the SWIFT code you need quickly with our intuitive interface."
+      }
+    ]
+  },
+  "swiftcodeLanding": {
+    "heroTitle": "Bank Swift Codes Directory",
+    "heroDescription": "Search through our comprehensive database of bank SWIFT codes",
+    "searchPlaceholder": "Enter bank name to search...",
+    "searchButton": "Search",
+    "tableHeaders": {
+      "bank": "Bank",
+      "city": "City",
+      "branch": "Branch",
+      "swiftCode": "Swift Code"
+    },
+    "viewDetails": "View Details",
+    "noData": "No data available",
+    "loading": "Loading...",
+    "resultsTitle": "Search Results",
+    "resultsSummary": "Showing {count} of {total} results",
+    "featuresTitle": "Why Use Our SWIFT Code Directory?",
+    "features": [
+      {
+        "title": "Comprehensive Database",
+        "description": "Access SWIFT codes for banks worldwide"
+      },
+      {
+        "title": "Real-time Updates",
+        "description": "Our database is regularly updated for accuracy"
+      },
+      {
+        "title": "Easy Search",
+        "description": "Find any bank's SWIFT code in seconds"
+      }
+    ]
+  },
+  "swiftcodeDetail": {
+    "heroTitle": "Bank Swift Code Details",
+    "servicesTitle": "Banking Services Offered by {bank}",
+    "servicesDescription": "At {bank}, customers can access a variety of services designed to cater to both personal and corporate needs. Some of the core offerings include:",
+    "services": [
+      {
+        "title": "Personal Banking",
+        "description": "From savings accounts to personal loans, {bank} ensures that individual customers have access to essential financial products."
+      },
+      {
+        "title": "Business Banking",
+        "description": "For businesses operating in {city}, {bank} provides tailored solutions like business loans, trade financing, and cash management services."
+      },
+      {
+        "title": "International Transfers",
+        "description": "Using the SWIFT Code {swiftCode}, customers can securely send and receive funds across the globe."
+      },
+      {
+        "title": "Investment Services",
+        "description": "The bank offers investment plans and advisory services to help customers grow their wealth responsibly."
+      }
+    ],
+    "swiftCodeTitle": "SWIFT Code: {swiftCode}",
+    "swiftCodeDescription": "Detailed information about this bank's SWIFT code",
+    "bankNameLabel": "Bank Name",
+    "locationLabel": "Location",
+    "countryLabel": "Country",
+    "importanceTitle": "Importance of the SWIFT Code: {swiftCode}",
+    "importanceDescription": "The SWIFT Code, also known as a Bank Identifier Code (BIC), is an essential tool for international banking. Here's why the {swiftCode} of {bank} is important:",
+    "importanceFeatures": [
+      {
+        "title": "Secure Transactions",
+        "description": "The {swiftCode} ensures that your international transfers are conducted through secure channels."
+      },
+      {
+        "title": "Global Recognition",
+        "description": "The {swiftCode} helps identify the {branch} branch in {city}, {country}, ensuring accurate processing of transactions."
+      },
+      {
+        "title": "Fast Transfers",
+        "description": "Using the {swiftCode}, funds can be sent and received quickly, minimizing delays."
+      }
+    ],
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": [
+      {
+        "question": "What is the SWIFT Code for {bank}?",
+        "answer": "The SWIFT Code for {bank} is {swiftCode}, used for secure and efficient international money transfers."
+      },
+      {
+        "question": "Where is the {branch} branch of {bank} located?",
+        "answer": "The {branch} branch is located in {city}, {country}."
+      },
+      {
+        "question": "Can I use the SWIFT Code for online transactions?",
+        "answer": "Yes, the SWIFT Code {swiftCode} can be used for global transfers and other international banking services."
+      },
+      {
+        "question": "What services are offered at the {branch} branch?",
+        "answer": "The branch provides services such as personal banking, business banking, investment solutions, and international money transfers."
+      },
+      {
+        "question": "Is {bank} suitable for international banking?",
+        "answer": "Absolutely! With its reliable SWIFT Code {swiftCode} and global network, {bank} is an excellent choice for international transactions."
+      }
+    ],
+    "relatedBranchesTitle": "More {bank} Branches",
+    "tableHeaders": {
+      "bank": "Bank",
+      "city": "City",
+      "branch": "Branch",
+      "swiftCode": "Swift Code"
+    },
+    "noData": "No data available",
+    "loading": "Loading..."
+  }
 }
