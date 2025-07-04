@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Car, Battery, Compass as GasPump, Calendar } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
 
 const FilterSection = ({ filters, setFilters, makes, models }) => {
   const fuelTypeOptions = ["PETROL", "DIESEL", "HYBRID", "ELECTRIC", "OTHER"];
@@ -156,14 +157,13 @@ const VehicleCard = ({ vehicle }) => {
           </div>
           <div className="flex justify-between items-center">
             <span
-              className={`text-sm font-medium px-3 py-1 rounded-full ${
-                isEV ? "bg-red-100 text-red-800" : "bg-red-100 text-red-800"
-              }`}
+              className={`text-sm font-medium px-3 py-1 rounded-full ${isEV ? "bg-red-100 text-red-800" : "bg-red-100 text-red-800"
+                }`}
             >
               {vehicle.vehicleType.charAt(0) + vehicle.vehicleType.slice(1).toLowerCase()}
             </span>
             <a
-              href={`/car/${vehicle._id}`}
+              href={`/cars/${vehicle._id}`}
               className="text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors"
             >
               View Details
@@ -230,11 +230,10 @@ const Pagination = ({ pagination, setFilters }) => {
         <button
           key={page}
           onClick={() => handlePageChange(page)}
-          className={`px-4 py-2 rounded-md ${
-            currentPage === page
-              ? "bg-red-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
+          className={`px-4 py-2 rounded-md ${currentPage === page
+            ? "bg-red-600 text-white"
+            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
         >
           {page}
         </button>
@@ -295,18 +294,33 @@ const CarListing = () => {
   useEffect(() => {
     const fetchFilterData = async () => {
       try {
-        const [makesRes, modelsRes] = await Promise.all([
+        const [makesRes] = await Promise.all([
           axiosInstance.get("/common/make"),
-          axiosInstance.get("/common/model"),
         ]);
         setMakes(makesRes.data.data || []);
-        setModels(modelsRes.data.data || []);
       } catch (error) {
         console.error("Error fetching filter data:", error);
       }
     };
     fetchFilterData();
   }, []);
+
+  useEffect(() => {
+    if (!filters?.makeId) return;
+
+    const getData = async () => {
+      try {
+        const { data } = await axiosInstance.get("/common/model", { params: { makeId: filters?.makeId } });
+        setModels(data.data || []);
+      } catch (error) {
+        handleError(error);
+      }
+    }
+
+    getData()
+  }, [filters?.makeId]);
+
+
 
   // Fetch vehicles
   useEffect(() => {
@@ -317,7 +331,7 @@ const CarListing = () => {
           ...Object.fromEntries(Object.entries(filters).filter(([_, v]) => v !== undefined && v !== "")),
           page: filters.page.toString(),
           limit: filters.limit.toString(),
-          category:"Car",
+          category: "Car",
         };
 
         const { data } = await axiosInstance.get("/website/vehicle", { params });
