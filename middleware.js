@@ -5,6 +5,7 @@ const supportedCountries = ['pk', 'us', 'uk', 'in', 'au', 'ca']; // Add all 150+
 export function middleware(request) {
     const host = request.headers.get('host') || '';
     const subdomain = host.split('.')[0];
+    console.log("Subdomain", new Date().toDateString(), subdomain);
 
     // Already on a country subdomain? Skip
     if (supportedCountries.includes(subdomain)) {
