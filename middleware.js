@@ -158,24 +158,34 @@ export function middleware(request) {
     const host = request.headers.get('host') || '';
     const subdomain = host.split('.')[0].toLowerCase();
     const country = request.headers.get('x-country-code')?.toLowerCase();
+    const languageCookie = request.cookies.get('i18next')?.value;
+
     console.log("Subdomain", new Date().toUTCString(), subdomain);
 
-    // Already on country subdomain, skip
+    // If subdomain is already valid (like pk, us, etc), skip
     if (Object.keys(supportedCountries).includes(subdomain)) {
         return NextResponse.next();
     }
 
-
     console.log("Country Code", new Date().toDateString(), country);
 
-    // If no country detected, skip
+    // If no country detected or unsupported country, skip
     if (!country || !supportedCountries[country]) {
         return NextResponse.next();
     }
 
     const language = supportedCountries[country];
 
-    const response = NextResponse.redirect(`https://${country}.informreaders.com${request.nextUrl.pathname}`);
+    // If cookie already set, skip redirection
+    if (languageCookie === language) {
+        return NextResponse.next();
+    }
+
+    // Set cookie and redirect to country subdomain
+    const response = NextResponse.redirect(
+        `https://${country}.informreaders.com${request.nextUrl.pathname}`
+    );
+
     response.cookies.set('i18next', language, {
         path: '/',
         maxAge: 60 * 60 * 24 * 365, // 1 year
