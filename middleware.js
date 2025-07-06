@@ -155,43 +155,51 @@ export const supportedCountries = {
 
 
 export function middleware(request) {
-    const host = request.headers.get('host') || '';
-    const subdomain = host.split('.')[0].toLowerCase();
-    const country = request.headers.get('x-country-code')?.toLowerCase();
-    const languageCookie = request.cookies.get('i18next')?.value;
+  const host = request.headers.get('host') || '';
+  const subdomain = host.split('.')[0].toLowerCase();
+  const country = request.headers.get('x-country-code')?.toLowerCase();
+  const cookieLang = request.cookies.get('i18next')?.value;
 
-    console.log("Subdomain", new Date().toUTCString(), subdomain);
+  const response = NextResponse.next();
 
-    // If subdomain is already valid (like pk, us, etc), skip
-    if (Object.keys(supportedCountries).includes(subdomain)) {
-        return NextResponse.next();
-    }
+  // ✅ If subdomain is a supported country code
+  if (supportedCountries[subdomain]) {
+    const subdomainLang = supportedCountries[subdomain];
 
-    console.log("Country Code", new Date().toDateString(), country);
-
-    // If no country detected or unsupported country, skip
-    if (!country || !supportedCountries[country]) {
-        return NextResponse.next();
-    }
-
-    const language = supportedCountries[country];
-
-    // If cookie already set, skip redirection
-    if (languageCookie === language) {
-        return NextResponse.next();
-    }
-
-    // Set cookie and redirect to country subdomain
-    const response = NextResponse.redirect(
-        `https://${country}.informreaders.com${request.nextUrl.pathname}`
-    );
-
-    response.cookies.set('i18next', language, {
+    // 🆕 First visit: Set cookie if missing
+    if (cookieLang !== subdomainLang) {
+      response.cookies.set('i18next', subdomainLang, {
         path: '/',
         maxAge: 60 * 60 * 24 * 365, // 1 year
-    });
+      });
+    }
 
     return response;
+  }
+
+  // 🛑 If country not detected or not supported, skip
+  if (!country || !supportedCountries[country]) {
+    return response;
+  }
+
+  const redirectLang = supportedCountries[country];
+
+  // 🚫 If cookie already set, skip redirect
+  if (cookieLang === redirectLang) {
+    return response;
+  }
+
+  // 🚀 Redirect and set cookie
+  const redirectResponse = NextResponse.redirect(
+    `https://${country}.informreaders.com${request.nextUrl.pathname}`
+  );
+
+  redirectResponse.cookies.set('i18next', redirectLang, {
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365, // 1 year
+  });
+
+  return redirectResponse;
 }
 
 export const config = {
