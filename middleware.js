@@ -12,7 +12,7 @@ export function middleware(request) {
     }
 
     const country = request.headers.get('x-country-code')?.toLowerCase();
-    console.log(country);
+    console.log("Country Code", new Date().toDateString(), country);
 
     if (country && supportedCountries.includes(country)) {
         return NextResponse.redirect(`https://${country}.informreaders.com${request.nextUrl.pathname}`);
