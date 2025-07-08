@@ -20,25 +20,36 @@ export const metadata = {
 
 const OtherTools = () => {
   // Get the other tools from TOOL_CATEGORIES
-  const otherTools = TOOL_CATEGORIES.find((category) => category.id === "other-tools")?.tools || [];
+
+  const calculatorsCategory = TOOL_CATEGORIES.find((category) => category.id === "other-tools");
+  const allCalculatorTools = calculatorsCategory?.subcategories
+    ? calculatorsCategory.subcategories.flatMap((subcategory) => subcategory.tools)
+    : [];
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">Other Tools</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {otherTools.map((tool) => (
-            <Link
-              href={tool.path}
-              key={tool.id}
-              className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex items-center space-x-4"
-            >
-              <span className="text-2xl">🔧</span> {/* Placeholder icon */}
-              <div>
-                <p className="text-gray-900 font-medium">{tool.name}</p>
-                <p className="text-sm text-gray-600">Click to use this tool</p>
+        <div className="space-y-6">
+          {calculatorsCategory?.subcategories?.map((subcategory) => (
+            <div key={subcategory.id}>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">{subcategory.name}</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {subcategory.tools.map((tool) => (
+                  <Link
+                    href={tool.path}
+                    key={tool.id}
+                    className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex items-center space-x-4"
+                  >
+                    <span className="text-2xl">🔧</span> {/* Placeholder icon */}
+                    <div>
+                      <p className="text-gray-900 font-medium">{tool.name}</p>
+                      <p className="text-sm text-gray-600">Click to use this tool</p>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

@@ -1060,7 +1060,84 @@ export const TOOL_CATEGORIES = [
       {
         id: "angle-converter",
         name: "Angle Converter",
-        tools: [],
+        tools: [
+          {
+            id: "angle_converter",
+            name: "Angle Converter",
+            path: "/tools/other-tools/angle-converter",
+          },
+          {
+            id: "degrees_to_radians",
+            name: "Degrees to Radians",
+            path: "/tools/other-tools/degrees-to-radians",
+          },
+          {
+            id: "radians_to_degrees",
+            name: "Radians to Degrees",
+            path: "/tools/other-tools/radians-to-degrees",
+          },
+        ],
+      },
+      {
+        id: "area-converter",
+        name: "Area Converter",
+        tools: [
+          {
+            id: "area_converter",
+            name: "Area Converter",
+            path: "/tools/other-tools/area-converter",
+          },
+          {
+            id: "acres_to_hectare",
+            name: "Acres to Hectare",
+            path: "/tools/other-tools/acres-to-hectare",
+          },
+          {
+            id: "acres_to_square_feet",
+            name: "Acres to Square Feet",
+            path: "/tools/other-tools/acres-to-square-feet",
+          },
+          {
+            id: "acres_to_square_miles",
+            name: "Acres to Square Miles",
+            path: "/tools/other-tools/acres-to-square-miles",
+          },
+          {
+            id: "hectare_to_acres",
+            name: "Hectare to Acres",
+            path: "/tools/other-tools/hectare-to-acres",
+          },
+          {
+            id: "square_feet_to_acres",
+            name: "Square Feet to Acres",
+            path: "/tools/other-tools/square-feet-to-acres",
+          },
+          {
+            id: "square_feet_to_square_meter",
+            name: "Square Feet to Square Meter",
+            path: "/tools/other-tools/square-feet-to-square-meter",
+          },
+          {
+            id: "square_feet_to_square_yards",
+            name: "Square Feet to Square Yards",
+            path: "/tools/other-tools/square-feet-to-square-yards",
+          },
+          {
+            id: "square_meter_to_square_feet",
+            name: "Square Meter to Square Feet",
+            path: "/tools/other-tools/square-meter-to-square-feet",
+          },
+          {
+            id: "square_miles_to_acres",
+            name: "Square Miles to Acres",
+            path: "/tools/other-tools/square-miles-to-acres",
+          },
+          {
+            id: "square_yards_to_square_feet",
+            name: "Square Yards to Square Feet",
+            path: "/tools/other-tools/square-yards-to-square-feet",
+          },
+        ],
       },
     ],
   },
@@ -2430,5 +2507,68 @@ export const pdfToolMetaData = {
   "word-to-pdf-converter": {
     title: "Word to PDF Converter | Inform Readers",
     description: "Transform Microsoft Word documents into PDF format for universal sharing and printing.",
+  },
+};
+
+export const otherToolMetaData = {
+  "angle-converter": {
+    title: "Angle Converter – Degrees, Radians & Grads",
+    description:
+      "Quickly convert angles between degrees, radians, and grads using this comprehensive angle converter tool.",
+  },
+  "degrees-to-radians": {
+    title: "Degrees to Radians Converter",
+    description:
+      "Convert degrees to radians easily with this fast and accurate degrees-to-radians converter.",
+  },
+  "radians-to-degrees": {
+    title: "Radians to Degrees Converter",
+    description: "Convert radians to degrees quickly using this simple and efficient angle converter.",
+  },
+  "area-converter": {
+    title: "Area Converter – Convert Between Units",
+    description:
+      "Easily convert area units like square feet, square meters, acres, hectares, and more with this area converter.",
+  },
+  "acres-to-hectare": {
+    title: "Acres to Hectare Converter",
+    description:
+      "Convert acres to hectares quickly and accurately with our user-friendly area conversion tool.",
+  },
+  "acres-to-square-feet": {
+    title: "Acres to Square Feet Converter",
+    description: "Easily convert acres to square feet with our fast and accurate converter.",
+  },
+  "acres-to-square-miles": {
+    title: "Acres to Square Miles Converter",
+    description: "Convert acres to square miles using this simple and efficient tool.",
+  },
+  "hectare-to-acres": {
+    title: "Hectare to Acres Converter",
+    description: "Convert hectares to acres instantly with our easy-to-use area converter.",
+  },
+  "square-feet-to-acres": {
+    title: "Square Feet to Acres Converter",
+    description: "Convert square feet to acres quickly and get accurate results in real-time.",
+  },
+  "square-feet-to-square-meter": {
+    title: "Square Feet to Square Meter Converter",
+    description: "Use this tool to convert square feet to square meters easily and accurately.",
+  },
+  "square-feet-to-square-yards": {
+    title: "Square Feet to Square Yards Converter",
+    description: "Convert square feet to square yards instantly with our efficient area converter.",
+  },
+  "square-meter-to-square-feet": {
+    title: "Square Meter to Square Feet Converter",
+    description: "Quickly convert square meters to square feet using this powerful tool.",
+  },
+  "square-miles-to-acres": {
+    title: "Square Miles to Acres Converter",
+    description: "Convert square miles to acres with high precision using our conversion tool.",
+  },
+  "square-yards-to-square-feet": {
+    title: "Square Yards to Square Feet Converter",
+    description: "Convert square yards to square feet instantly and accurately.",
   },
 };
