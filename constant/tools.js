@@ -1649,6 +1649,55 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "number-converter",
+        name: "Number Converter Tool",
+        tools: [
+          {
+            id: "binary-to-decimal",
+            name: "Binary to Decimal",
+            path: "/tools/other-tools/binary-to-decimal",
+          },
+          { id: "binary-to-hex", name: "Binary to Hex", path: "/tools/other-tools/binary-to-hex" },
+          {
+            id: "decimal-to-binary",
+            name: "Decimal to Binary",
+            path: "/tools/other-tools/decimal-to-binary",
+          },
+          { id: "decimal-to-hex", name: "Decimal to Hex", path: "/tools/other-tools/decimal-to-hex" },
+          { id: "hex-to-binary", name: "Hex to Binary", path: "/tools/other-tools/hex-to-binary" },
+          { id: "hex-to-decimal", name: "Hex to Decimal", path: "/tools/other-tools/hex-to-decimal" },
+          {
+            id: "numbers-converter",
+            name: "Number System Converter",
+            path: "/tools/other-tools/numbers-converter",
+          },
+        ],
+      },
+      {
+        id: "permeability-converter",
+        name: "Permeability Converter",
+        tools: [
+          {
+            id: "permeability-converter",
+            name: "Permeability Converter",
+            path: "/tools/other-tools/permeability-converter",
+          },
+        ],
+      },
+      {
+        id: "power-converter",
+        name: "Power Converter Tool",
+        tools: [
+          { id: "btu-to-ton", name: "BTU to Ton", path: "/tools/other-tools/btu-to-ton" },
+          { id: "hp-to-kw", name: "Horsepower to Kilowatts", path: "/tools/other-tools/hp-to-kw" },
+          { id: "hp-to-watts", name: "Horsepower to Watts", path: "/tools/other-tools/hp-to-watts" },
+          { id: "kw-to-hp", name: "Kilowatts to Horsepower", path: "/tools/other-tools/kw-to-hp" },
+          { id: "power-converter", name: "Power Converter", path: "/tools/other-tools/power-converter" },
+          { id: "ton-to-btu", name: "Ton to BTU", path: "/tools/other-tools/ton-to-btu" },
+          { id: "watts-to-hp", name: "Watts to Horsepower", path: "/tools/other-tools/watts-to-hp" },
+        ],
+      },
     ],
   },
 ];
@@ -3546,5 +3595,65 @@ export const otherToolMetaData = {
   "mass-flux-density-converter": {
     title: "Mass Flux Density Converter",
     description: "Instantly convert mass flux density values across different units.",
+  },
+  "binary-to-decimal": {
+    title: "Binary to Decimal Converter",
+    description: "Convert binary numbers to decimal values quickly and accurately.",
+  },
+  "binary-to-hex": {
+    title: "Binary to Hex Converter",
+    description: "Easily convert binary numbers to hexadecimal format.",
+  },
+  "decimal-to-binary": {
+    title: "Decimal to Binary Converter",
+    description: "Convert decimal numbers to binary using this fast converter.",
+  },
+  "decimal-to-hex": {
+    title: "Decimal to Hex Converter",
+    description: "Convert decimal numbers to hexadecimal values instantly.",
+  },
+  "hex-to-binary": {
+    title: "Hex to Binary Converter",
+    description: "Convert hexadecimal values to binary quickly and precisely.",
+  },
+  "hex-to-decimal": {
+    title: "Hex to Decimal Converter",
+    description: "Easily convert hex values to decimal numbers.",
+  },
+  "numbers-converter": {
+    title: "Number System Converter",
+    description: "Convert between binary, decimal, and hexadecimal number systems.",
+  },
+  "permeability-converter": {
+    title: "Permeability Converter",
+    description: "Convert permeability values between various units such as henry per meter.",
+  },
+  "btu-to-ton": {
+    title: "BTU to Ton Converter",
+    description: "Convert BTU/hr to refrigeration tons quickly and accurately.",
+  },
+  "hp-to-kw": {
+    title: "Horsepower to Kilowatts Converter",
+    description: "Convert horsepower (HP) to kilowatts (kW) easily.",
+  },
+  "hp-to-watts": {
+    title: "Horsepower to Watts Converter",
+    description: "Convert horsepower to watts instantly using this tool.",
+  },
+  "kw-to-hp": {
+    title: "Kilowatts to Horsepower Converter",
+    description: "Convert kilowatts to horsepower efficiently and accurately.",
+  },
+  "power-converter": {
+    title: "Power Converter Tool",
+    description: "Convert between different power units like watts, HP, BTU, and more.",
+  },
+  "ton-to-btu": {
+    title: "Ton to BTU Converter",
+    description: "Convert tons of refrigeration to BTU/hr quickly.",
+  },
+  "watts-to-hp": {
+    title: "Watts to Horsepower Converter",
+    description: "Convert watts to horsepower using this reliable power unit converter.",
   },
 };

@@ -138,6 +138,22 @@ import MagneticFluxDensityConverter from "@/components/pages/tools/other/magneti
 import MagnetomotiveForceConverter from "@/components/pages/tools/other/magnetomotive-force-converter";
 import MassFluxDensityConverter from "@/components/pages/tools/other/mass-flux-density-converter";
 
+import BinaryToDecimal from "@/components/pages/tools/other/binary-to-decimal";
+import BinaryToHex from "@/components/pages/tools/other/binary-to-hex";
+import DecimalToBinary from "@/components/pages/tools/other/decimal-to-binary";
+import DecimalToHex from "@/components/pages/tools/other/decimal-to-hex";
+import HexToBinary from "@/components/pages/tools/other/hex-to-binary";
+import HexToDecimal from "@/components/pages/tools/other/hex-to-decimal";
+import NumbersConverter from "@/components/pages/tools/other/numbers-converter";
+import PermeabilityConverter from "@/components/pages/tools/other/permeability-converter";
+import BtuToTon from "@/components/pages/tools/other/btu-to-ton";
+import HpToKw from "@/components/pages/tools/other/hp-to-kw";
+import HpToWatts from "@/components/pages/tools/other/hp-to-watts";
+import KwToHp from "@/components/pages/tools/other/kw-to-hp";
+import PowerConverter from "@/components/pages/tools/other/power-converter";
+import TonToBtu from "@/components/pages/tools/other/ton-to-btu";
+import WattsToHp from "@/components/pages/tools/other/watts-to-hp";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -267,6 +283,22 @@ const toolComponents = {
   "magnetic-flux-density-converter": MagneticFluxDensityConverter,
   "magnetomotive-force-converter": MagnetomotiveForceConverter,
   "mass-flux-density-converter": MassFluxDensityConverter,
+
+  "binary-to-decimal": BinaryToDecimal,
+  "binary-to-hex": BinaryToHex,
+  "decimal-to-binary": DecimalToBinary,
+  "decimal-to-hex": DecimalToHex,
+  "hex-to-binary": HexToBinary,
+  "hex-to-decimal": HexToDecimal,
+  "numbers-converter": NumbersConverter,
+  "permeability-converter": PermeabilityConverter,
+  "btu-to-ton": BtuToTon,
+  "hp-to-kw": HpToKw,
+  "hp-to-watts": HpToWatts,
+  "kw-to-hp": KwToHp,
+  "power-converter": PowerConverter,
+  "ton-to-btu": TonToBtu,
+  "watts-to-hp": WattsToHp,
 };
 
 export async function generateMetadata({ params }) {
