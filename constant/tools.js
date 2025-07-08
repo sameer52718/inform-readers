@@ -1305,6 +1305,130 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "data-transfer-converter",
+        name: "Data Transfer Converter",
+        tools: [
+          {
+            id: "data-transfer-converter",
+            name: "Data Transfer Converter",
+            path: "/tools/other-tools/data-transfer-converter",
+          },
+        ],
+      },
+      {
+        id: "digital-image-resolution-converter",
+        name: "Digital Image Resolution Converter",
+        tools: [
+          {
+            id: "digital-image-resolution-converter",
+            name: "Digital Image Resolution Converter",
+            path: "/tools/other-tools/digital-image-resolution-converter",
+          },
+        ],
+      },
+      {
+        id: "electric-tools",
+        name: "Electric Converters",
+        tools: [
+          {
+            id: "electric-conductance-converter",
+            name: "Electric Conductance Converter",
+            path: "/tools/other-tools/electric-conductance-converter",
+          },
+          {
+            id: "electric-conductivity-converter",
+            name: "Electric Conductivity Converter",
+            path: "/tools/other-tools/electric-conductivity-converter",
+          },
+          {
+            id: "electric-field-strength-converter",
+            name: "Electric Field Strength Converter",
+            path: "/tools/other-tools/electric-field-strength-converter",
+          },
+          {
+            id: "electric-potential-converter",
+            name: "Electric Potential Converter",
+            path: "/tools/other-tools/electric-potential-converter",
+          },
+          {
+            id: "electric-resistance-converter",
+            name: "Electric Resistance Converter",
+            path: "/tools/other-tools/electric-resistance-converter",
+          },
+          {
+            id: "electric-resistivity-converter",
+            name: "Electric Resistivity Converter",
+            path: "/tools/other-tools/electric-resistivity-converter",
+          },
+          {
+            id: "electrostatic-capacitance-converter",
+            name: "Electrostatic Capacitance Converter",
+            path: "/tools/other-tools/electrostatic-capacitance-converter",
+          },
+        ],
+      },
+      {
+        id: "energy-tools",
+        name: "Energy Converters",
+        tools: [
+          {
+            id: "energy-converter",
+            name: "Energy Converter",
+            path: "/tools/other-tools/energy-converter",
+          },
+          {
+            id: "cal-to-j",
+            name: "Cal to J",
+            path: "/tools/other-tools/cal-to-j",
+          },
+          {
+            id: "cal-to-kcal",
+            name: "Cal to Kcal",
+            path: "/tools/other-tools/cal-to-kcal",
+          },
+          {
+            id: "ftlb-to-nm",
+            name: "Foot-pounds to Newton-meters",
+            path: "/tools/other-tools/ftlb-to-nm",
+          },
+          {
+            id: "j-to-cal",
+            name: "Joules to Calories",
+            path: "/tools/other-tools/j-to-cal",
+          },
+          {
+            id: "j-to-kj",
+            name: "Joules to Kilojoules",
+            path: "/tools/other-tools/j-to-kj",
+          },
+          {
+            id: "kcal-to-cal",
+            name: "Kilocalories to Calories",
+            path: "/tools/other-tools/kcal-to-cal",
+          },
+          {
+            id: "kcal-to-kj",
+            name: "Kilocalories to Kilojoules",
+            path: "/tools/other-tools/kcal-to-kj",
+          },
+          {
+            id: "kj-to-j",
+            name: "Kilojoules to Joules",
+            path: "/tools/other-tools/kj-to-j",
+          },
+          {
+            id: "kj-to-kcal",
+            name: "Kilojoules to Kilocalories",
+            path: "/tools/other-tools/kj-to-kcal",
+          },
+          {
+            id: "nm-to-ftlb",
+            name: "Newton-meters to Foot-pounds",
+            path: "/tools/other-tools/nm-to-ftlb",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -2849,5 +2973,98 @@ export const otherToolMetaData = {
   "tb-to-pb": {
     title: "TB to PB Converter",
     description: "Easily convert terabytes to petabytes using this efficient TB to PB data size converter.",
+  },
+  // Data Transfer
+  "data-transfer-converter": {
+    title: "Data Transfer Converter – Mbps, MB/s, GBps & More",
+    description:
+      "Convert data transfer units such as Mbps, MB/s, GBps, and more using this quick and accurate data transfer converter.",
+  },
+
+  // Digital Image
+  "digital-image-resolution-converter": {
+    title: "Digital Image Resolution Converter – DPI, PPI & More",
+    description:
+      "Easily convert digital image resolutions between DPI, PPI, pixels per cm, and other formats with this resolution converter.",
+  },
+
+  // Electric Converters
+  "electric-conductance-converter": {
+    title: "Electric Conductance Converter",
+    description:
+      "Convert electric conductance between Siemens, mS, μS and more with this precise conductance converter tool.",
+  },
+  "electric-conductivity-converter": {
+    title: "Electric Conductivity Converter",
+    description: "Convert electric conductivity units with ease using this practical and accurate tool.",
+  },
+  "electric-field-strength-converter": {
+    title: "Electric Field Strength Converter",
+    description: "Convert electric field strength between volts per meter and other units effortlessly.",
+  },
+  "electric-potential-converter": {
+    title: "Electric Potential Converter",
+    description: "Use this tool to convert electric potential between volts, millivolts, and kilovolts.",
+  },
+  "electric-resistance-converter": {
+    title: "Electric Resistance Converter",
+    description: "Convert resistance values between ohms, kiloohms, and megaohms accurately.",
+  },
+  "electric-resistivity-converter": {
+    title: "Electric Resistivity Converter",
+    description:
+      "Accurately convert resistivity values using various scientific units including ohm-meters and ohm-centimeters.",
+  },
+  "electrostatic-capacitance-converter": {
+    title: "Electrostatic Capacitance Converter",
+    description:
+      "Convert electrostatic capacitance between farads, microfarads, nanofarads, and picofarads easily.",
+  },
+
+  // Energy Converters
+  "energy-converter": {
+    title: "Energy Converter – Joules, Calories, Kilojoules",
+    description:
+      "Convert energy units like joules, calories, kilojoules, and more using this all-in-one energy conversion tool.",
+  },
+  "cal-to-j": {
+    title: "Cal to J Converter – Calories to Joules",
+    description: "Quickly convert calories (cal) to joules (J) using this precise and simple tool.",
+  },
+  "cal-to-kcal": {
+    title: "Cal to Kcal Converter – Calories to Kilocalories",
+    description: "Convert calories to kilocalories instantly with this easy-to-use converter.",
+  },
+  "ftlb-to-nm": {
+    title: "Foot-pounds to Newton-meters Converter",
+    description: "Convert foot-pounds (ft·lb) to newton-meters (Nm) quickly and accurately.",
+  },
+  "j-to-cal": {
+    title: "Joules to Calories Converter",
+    description: "Easily convert energy from joules to calories using this fast conversion tool.",
+  },
+  "j-to-kj": {
+    title: "Joules to Kilojoules Converter",
+    description: "Convert joules (J) to kilojoules (kJ) quickly with this accurate tool.",
+  },
+  "kcal-to-cal": {
+    title: "Kilocalories to Calories Converter",
+    description: "Easily convert kcal to cal for energy, nutrition, and physics calculations.",
+  },
+  "kcal-to-kj": {
+    title: "Kilocalories to Kilojoules Converter",
+    description: "Convert kilocalories to kilojoules with this simple and precise tool.",
+  },
+  "kj-to-j": {
+    title: "Kilojoules to Joules Converter",
+    description: "Convert kilojoules (kJ) to joules (J) instantly and accurately.",
+  },
+  "kj-to-kcal": {
+    title: "Kilojoules to Kilocalories Converter",
+    description: "Quickly convert energy from kilojoules to kilocalories with this easy converter.",
+  },
+  "nm-to-ftlb": {
+    title: "Newton-meters to Foot-pounds Converter",
+    description: "Convert Nm to ft·lb quickly for torque, engineering, and mechanical uses.",
   },
 };

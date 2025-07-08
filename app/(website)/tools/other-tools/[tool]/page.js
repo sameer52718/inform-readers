@@ -44,6 +44,34 @@ import TbToKb from "@/components/pages/tools/other/tb-to-kb";
 import TbToMb from "@/components/pages/tools/other/tb-to-mb";
 import TbToPb from "@/components/pages/tools/other/tb-to-pb";
 
+// Data Transfer Converter
+import DataTransferConverter from "@/components/pages/tools/other/data-transfer-converter";
+
+// // Digital Image Resolution Converter
+import DigitalImageResolutionConverter from "@/components/pages/tools/other/digital-image-resolution-converter";
+
+// // Electric Converters
+import ElectricConductanceConverter from "@/components/pages/tools/other/electric-conductance-converter";
+import ElectricConductivityConverter from "@/components/pages/tools/other/electric-conductivity-converter";
+import ElectricFieldStrengthConverter from "@/components/pages/tools/other/electric-field-strength-converter";
+import ElectricPotentialConverter from "@/components/pages/tools/other/electric-potential-converter";
+import ElectricResistanceConverter from "@/components/pages/tools/other/electric-resistance-converter";
+import ElectricResistivityConverter from "@/components/pages/tools/other/electric-resistivity-converter";
+import ElectrostaticCapacitanceConverter from "@/components/pages/tools/other/electrostatic-capacitance-converter";
+
+// // Energy Converters
+import CalToJ from "@/components/pages/tools/other/cal-to-j";
+import CalToKcal from "@/components/pages/tools/other/cal-to-kcal";
+import EnergyConverter from "@/components/pages/tools/other/energy-converter";
+import FtlbToNm from "@/components/pages/tools/other/ftlb-to-nm";
+import JToCal from "@/components/pages/tools/other/j-to-cal";
+import JToKj from "@/components/pages/tools/other/j-to-kj";
+import KcalToCal from "@/components/pages/tools/other/kcal-to-cal";
+import KcalToKj from "@/components/pages/tools/other/kcal-to-kj";
+import KjToJ from "@/components/pages/tools/other/kj-to-j";
+import KjToKcal from "@/components/pages/tools/other/kj-to-kcal";
+import NmToFtlb from "@/components/pages/tools/other/nm-to-ftlb";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -88,6 +116,27 @@ const toolComponents = {
   "tb-to-kb": TbToKb,
   "tb-to-mb": TbToMb,
   "tb-to-pb": TbToPb,
+
+  "data-transfer-converter": DataTransferConverter,
+  "digital-image-resolution-converter": DigitalImageResolutionConverter,
+  "electric-conductance-converter": ElectricConductanceConverter,
+  "electric-conductivity-converter": ElectricConductivityConverter,
+  "electric-field-strength-converter": ElectricFieldStrengthConverter,
+  "electric-potential-converter": ElectricPotentialConverter,
+  "electric-resistance-converter": ElectricResistanceConverter,
+  "electric-resistivity-converter": ElectricResistivityConverter,
+  "electrostatic-capacitance-converter": ElectrostaticCapacitanceConverter,
+  "cal-to-j": CalToJ,
+  "cal-to-kcal": CalToKcal,
+  "energy-converter": EnergyConverter,
+  "ftlb-to-nm": FtlbToNm,
+  "j-to-cal": JToCal,
+  "j-to-kj": JToKj,
+  "kcal-to-cal": KcalToCal,
+  "kcal-to-kj": KcalToKj,
+  "kj-to-j": KjToJ,
+  "kj-to-kcal": KjToKcal,
+  "nm-to-ftlb": NmToFtlb,
 };
 
 export async function generateMetadata({ params }) {
