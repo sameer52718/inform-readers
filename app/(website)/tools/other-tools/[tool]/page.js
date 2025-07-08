@@ -165,6 +165,22 @@ import RadiationAbsorbedDoseConverter from "@/components/pages/tools/other/radia
 import RadiationActivityConverter from "@/components/pages/tools/other/radiation-activity-converter";
 import RadiationExposureConverter from "@/components/pages/tools/other/radiation-exposure-converter";
 
+import SoundConverter from "@/components/pages/tools/other/sound-converter";
+import SpecificHeatCapacityConverter from "@/components/pages/tools/other/specific-heat-capacity-converter";
+import FpsToMph from "@/components/pages/tools/other/fps-to-mph";
+import KnotToMph from "@/components/pages/tools/other/knot-to-mph";
+import KphToMph from "@/components/pages/tools/other/kph-to-mph";
+import MphToFps from "@/components/pages/tools/other/mph-to-fps";
+import MphToKnot from "@/components/pages/tools/other/mph-to-knot";
+import MphToKph from "@/components/pages/tools/other/mph-to-kph";
+import MphToMps from "@/components/pages/tools/other/mph-to-mps";
+import MpsToKph from "@/components/pages/tools/other/mps-to-kph";
+import MpsToMph from "@/components/pages/tools/other/mps-to-mph";
+import SpeedConverter from "@/components/pages/tools/other/speed-converter";
+import SurfaceChargeDensityConverter from "@/components/pages/tools/other/surface-charge-density-converter";
+import SurfaceCurrentDensityConverter from "@/components/pages/tools/other/surface-current-density-converter";
+import SurfaceTensionConverter from "@/components/pages/tools/other/surface-tension-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -321,6 +337,22 @@ const toolComponents = {
   "radiation-absorbed-dose-converter": RadiationAbsorbedDoseConverter,
   "radiation-activity-converter": RadiationActivityConverter,
   "radiation-exposure-converter": RadiationExposureConverter,
+
+  "sound-converter": SoundConverter,
+  "specific-heat-capacity-converter": SpecificHeatCapacityConverter,
+  "fps-to-mph": FpsToMph,
+  "knot-to-mph": KnotToMph,
+  "kph-to-mph": KphToMph,
+  "mph-to-fps": MphToFps,
+  "mph-to-knot": MphToKnot,
+  "mph-to-kph": MphToKph,
+  "mph-to-mps": MphToMps,
+  "mps-to-kph": MpsToKph,
+  "mps-to-mph": MpsToMph,
+  "speed-converter": SpeedConverter,
+  "surface-charge-density-converter": SurfaceChargeDensityConverter,
+  "surface-current-density-converter": SurfaceCurrentDensityConverter,
+  "surface-tension-converter": SurfaceTensionConverter,
 };
 
 export async function generateMetadata({ params }) {

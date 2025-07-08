@@ -1750,6 +1750,61 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "sound-converter",
+        name: "Sound Converter",
+        tools: [
+          { id: "sound-converter", name: "Sound Converter", path: "/tools/other-tools/sound-converter" },
+        ],
+      },
+      {
+        id: "specific-heat-capacity-converter",
+        name: "Specific Heat Capacity Converter",
+        tools: [
+          {
+            id: "specific-heat-capacity-converter",
+            name: "Specific Heat Capacity Converter",
+            path: "/tools/other-tools/specific-heat-capacity-converter",
+          },
+        ],
+      },
+      {
+        id: "speed-converter",
+        name: "Speed Converter",
+        tools: [
+          { id: "fps-to-mph", name: "FPS to MPH", path: "/tools/other-tools/fps-to-mph" },
+          { id: "knot-to-mph", name: "Knot to MPH", path: "/tools/other-tools/knot-to-mph" },
+          { id: "kph-to-mph", name: "KPH to MPH", path: "/tools/other-tools/kph-to-mph" },
+          { id: "mph-to-fps", name: "MPH to FPS", path: "/tools/other-tools/mph-to-fps" },
+          { id: "mph-to-knot", name: "MPH to Knot", path: "/tools/other-tools/mph-to-knot" },
+          { id: "mph-to-kph", name: "MPH to KPH", path: "/tools/other-tools/mph-to-kph" },
+          { id: "mph-to-mps", name: "MPH to MPS", path: "/tools/other-tools/mph-to-mps" },
+          { id: "mps-to-kph", name: "MPS to KPH", path: "/tools/other-tools/mps-to-kph" },
+          { id: "mps-to-mph", name: "MPS to MPH", path: "/tools/other-tools/mps-to-mph" },
+          { id: "speed-converter", name: "Speed Converter", path: "/tools/other-tools/speed-converter" },
+        ],
+      },
+      {
+        id: "surface-converter",
+        name: "Surface Converter",
+        tools: [
+          {
+            id: "surface-charge-density-converter",
+            name: "Surface Charge Density Converter",
+            path: "/tools/other-tools/surface-charge-density-converter",
+          },
+          {
+            id: "surface-current-density-converter",
+            name: "Surface Current Density Converter",
+            path: "/tools/other-tools/surface-current-density-converter",
+          },
+          {
+            id: "surface-tension-converter",
+            name: "Surface Tension Converter",
+            path: "/tools/other-tools/surface-tension-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -3747,5 +3802,65 @@ export const otherToolMetaData = {
   "radiation-exposure-converter": {
     title: "Radiation Exposure Converter",
     description: "Convert radiation exposure units such as roentgen, coulomb/kg, and more.",
+  },
+  "sound-converter": {
+    title: "Sound Unit Converter",
+    description: "Convert sound measurements such as decibels, sound pressure, and intensity effortlessly.",
+  },
+  "specific-heat-capacity-converter": {
+    title: "Specific Heat Capacity Converter",
+    description: "Convert specific heat capacity units between J/kg·K, cal/g·°C, and more.",
+  },
+  "fps-to-mph": {
+    title: "FPS to MPH Converter",
+    description: "Convert feet per second (FPS) to miles per hour (MPH) with ease.",
+  },
+  "knot-to-mph": {
+    title: "Knots to MPH Converter",
+    description: "Convert knots to miles per hour (MPH) using this simple tool.",
+  },
+  "kph-to-mph": {
+    title: "KPH to MPH Converter",
+    description: "Easily convert kilometers per hour (KPH) to miles per hour (MPH).",
+  },
+  "mph-to-fps": {
+    title: "MPH to FPS Converter",
+    description: "Convert miles per hour (MPH) to feet per second (FPS) quickly.",
+  },
+  "mph-to-knot": {
+    title: "MPH to Knots Converter",
+    description: "Convert miles per hour (MPH) to knots efficiently.",
+  },
+  "mph-to-kph": {
+    title: "MPH to KPH Converter",
+    description: "Convert miles per hour (MPH) to kilometers per hour (KPH) easily.",
+  },
+  "mph-to-mps": {
+    title: "MPH to MPS Converter",
+    description: "Convert miles per hour (MPH) to meters per second (MPS) accurately.",
+  },
+  "mps-to-kph": {
+    title: "MPS to KPH Converter",
+    description: "Convert meters per second (MPS) to kilometers per hour (KPH).",
+  },
+  "mps-to-mph": {
+    title: "MPS to MPH Converter",
+    description: "Convert meters per second (MPS) to miles per hour (MPH).",
+  },
+  "speed-converter": {
+    title: "Speed Converter",
+    description: "Convert between different speed units like MPH, KPH, knots, and more.",
+  },
+  "surface-charge-density-converter": {
+    title: "Surface Charge Density Converter",
+    description: "Convert between different surface charge density units easily and accurately.",
+  },
+  "surface-current-density-converter": {
+    title: "Surface Current Density Converter",
+    description: "Convert surface current density units in a few clicks.",
+  },
+  "surface-tension-converter": {
+    title: "Surface Tension Converter",
+    description: "Convert between surface tension units like N/m, dyn/cm, and more.",
   },
 };
