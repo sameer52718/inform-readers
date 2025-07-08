@@ -24,6 +24,26 @@ import AmpsToMilliampsConverter from "@/components/pages/tools/other/amps-to-mil
 import CurrentConverter from "@/components/pages/tools/other/current-converter";
 import MilliampsToAmpsConverter from "@/components/pages/tools/other/milliamps-to-amps-converter";
 
+import DataStorageConverter from "@/components/pages/tools/other/data-storage-converter";
+import GbToKb from "@/components/pages/tools/other/gb-to-kb";
+import GbToMb from "@/components/pages/tools/other/gb-to-mb";
+import GbToPb from "@/components/pages/tools/other/gb-to-pb";
+import GbToTb from "@/components/pages/tools/other/gb-to-tb";
+import KbToGb from "@/components/pages/tools/other/kb-to-gb";
+import KbToMb from "@/components/pages/tools/other/kb-to-mb";
+import KbToTb from "@/components/pages/tools/other/kb-to-tb";
+import MbToGb from "@/components/pages/tools/other/mb-to-gb";
+import MbToKb from "@/components/pages/tools/other/mb-to-kb";
+import MbToPb from "@/components/pages/tools/other/mb-to-pb";
+import MbToTb from "@/components/pages/tools/other/mb-to-tb";
+import PbToGb from "@/components/pages/tools/other/pb-to-gb";
+import PbToMb from "@/components/pages/tools/other/pb-to-mb";
+import PbToTb from "@/components/pages/tools/other/pb-to-tb";
+import TbToGb from "@/components/pages/tools/other/tb-to-gb";
+import TbToKb from "@/components/pages/tools/other/tb-to-kb";
+import TbToMb from "@/components/pages/tools/other/tb-to-mb";
+import TbToPb from "@/components/pages/tools/other/tb-to-pb";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -48,6 +68,26 @@ const toolComponents = {
   "amps-to-milliamps-converter": AmpsToMilliampsConverter,
   "current-converter": CurrentConverter,
   "milliamps-to-amps-converter": MilliampsToAmpsConverter,
+
+  "data-storage-converter": DataStorageConverter,
+  "gb-to-kb": GbToKb,
+  "gb-to-mb": GbToMb,
+  "gb-to-pb": GbToPb,
+  "gb-to-tb": GbToTb,
+  "kb-to-gb": KbToGb,
+  "kb-to-mb": KbToMb,
+  "kb-to-tb": KbToTb,
+  "mb-to-gb": MbToGb,
+  "mb-to-kb": MbToKb,
+  "mb-to-pb": MbToPb,
+  "mb-to-tb": MbToTb,
+  "pb-to-gb": PbToGb,
+  "pb-to-mb": PbToMb,
+  "pb-to-tb": PbToTb,
+  "tb-to-gb": TbToGb,
+  "tb-to-kb": TbToKb,
+  "tb-to-mb": TbToMb,
+  "tb-to-pb": TbToPb,
 };
 
 export async function generateMetadata({ params }) {

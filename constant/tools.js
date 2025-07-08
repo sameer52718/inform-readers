@@ -1204,6 +1204,107 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "data-storage-converter",
+        name: "Data Storage Converter",
+        tools: [
+          {
+            id: "data_storage_converter",
+            name: "Data Storage Converter",
+            path: "/tools/other-tools/data-storage-converter",
+          },
+          {
+            id: "gb_to_kb",
+            name: "GB to KB",
+            path: "/tools/other-tools/gb-to-kb",
+          },
+          {
+            id: "gb_to_mb",
+            name: "GB to MB",
+            path: "/tools/other-tools/gb-to-mb",
+          },
+          {
+            id: "gb_to_pb",
+            name: "GB to PB",
+            path: "/tools/other-tools/gb-to-pb",
+          },
+          {
+            id: "gb_to_tb",
+            name: "GB to TB",
+            path: "/tools/other-tools/gb-to-tb",
+          },
+          {
+            id: "kb_to_gb",
+            name: "KB to GB",
+            path: "/tools/other-tools/kb-to-gb",
+          },
+          {
+            id: "kb_to_mb",
+            name: "KB to MB",
+            path: "/tools/other-tools/kb-to-mb",
+          },
+          {
+            id: "kb_to_tb",
+            name: "KB to TB",
+            path: "/tools/other-tools/kb-to-tb",
+          },
+          {
+            id: "mb_to_gb",
+            name: "MB to GB",
+            path: "/tools/other-tools/mb-to-gb",
+          },
+          {
+            id: "mb_to_kb",
+            name: "MB to KB",
+            path: "/tools/other-tools/mb-to-kb",
+          },
+          {
+            id: "mb_to_pb",
+            name: "MB to PB",
+            path: "/tools/other-tools/mb-to-pb",
+          },
+          {
+            id: "mb_to_tb",
+            name: "MB to TB",
+            path: "/tools/other-tools/mb-to-tb",
+          },
+          {
+            id: "pb_to_gb",
+            name: "PB to GB",
+            path: "/tools/other-tools/pb-to-gb",
+          },
+          {
+            id: "pb_to_mb",
+            name: "PB to MB",
+            path: "/tools/other-tools/pb-to-mb",
+          },
+          {
+            id: "pb_to_tb",
+            name: "PB to TB",
+            path: "/tools/other-tools/pb-to-tb",
+          },
+          {
+            id: "tb_to_gb",
+            name: "TB to GB",
+            path: "/tools/other-tools/tb-to-gb",
+          },
+          {
+            id: "tb_to_kb",
+            name: "TB to KB",
+            path: "/tools/other-tools/tb-to-kb",
+          },
+          {
+            id: "tb_to_mb",
+            name: "TB to MB",
+            path: "/tools/other-tools/tb-to-mb",
+          },
+          {
+            id: "tb_to_pb",
+            name: "TB to PB",
+            path: "/tools/other-tools/tb-to-pb",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -2669,5 +2770,84 @@ export const otherToolMetaData = {
     title: "Milliamps to Amps Converter",
     description:
       "Easily convert milliamperes (mA) to amperes (A) with this accurate and fast electrical converter.",
+  },
+  "data-storage-converter": {
+    title: "Data Storage Converter – Convert KB, MB, GB, TB",
+    description:
+      "Convert digital storage units like kilobytes, megabytes, gigabytes, and terabytes easily with this universal data storage converter.",
+  },
+  "gb-to-kb": {
+    title: "GB to KB Converter",
+    description:
+      "Convert gigabytes to kilobytes (GB to KB) easily and accurately with this data size calculator.",
+  },
+  "gb-to-mb": {
+    title: "GB to MB Converter",
+    description: "Quickly convert gigabytes to megabytes using our easy-to-use GB to MB conversion tool.",
+  },
+  "gb-to-pb": {
+    title: "GB to PB Converter",
+    description: "Convert gigabytes to petabytes instantly using our digital storage conversion tool.",
+  },
+  "gb-to-tb": {
+    title: "GB to TB Converter",
+    description:
+      "Convert gigabytes to terabytes effortlessly with this accurate and simple GB to TB converter.",
+  },
+  "kb-to-gb": {
+    title: "KB to GB Converter",
+    description: "Convert kilobytes to gigabytes with our fast and reliable KB to GB conversion calculator.",
+  },
+  "kb-to-mb": {
+    title: "KB to MB Converter",
+    description: "Easily convert kilobytes to megabytes using this KB to MB tool with precision.",
+  },
+  "kb-to-tb": {
+    title: "KB to TB Converter",
+    description: "Convert kilobytes to terabytes accurately using this online KB to TB data converter.",
+  },
+  "mb-to-gb": {
+    title: "MB to GB Converter",
+    description: "Convert megabytes to gigabytes using our MB to GB data converter tool with quick results.",
+  },
+  "mb-to-kb": {
+    title: "MB to KB Converter",
+    description: "Convert megabytes to kilobytes (MB to KB) easily using this simple online tool.",
+  },
+  "mb-to-pb": {
+    title: "MB to PB Converter",
+    description: "Convert megabytes to petabytes quickly with this efficient MB to PB data conversion tool.",
+  },
+  "mb-to-tb": {
+    title: "MB to TB Converter",
+    description: "Convert megabytes to terabytes with ease using this MB to TB conversion calculator.",
+  },
+  "pb-to-gb": {
+    title: "PB to GB Converter",
+    description: "Convert petabytes to gigabytes (PB to GB) instantly with our digital storage calculator.",
+  },
+  "pb-to-mb": {
+    title: "PB to MB Converter",
+    description: "Easily convert petabytes to megabytes using this accurate PB to MB converter.",
+  },
+  "pb-to-tb": {
+    title: "PB to TB Converter",
+    description: "Convert petabytes to terabytes quickly and efficiently with our PB to TB converter tool.",
+  },
+  "tb-to-gb": {
+    title: "TB to GB Converter",
+    description: "Convert terabytes to gigabytes easily with our TB to GB digital storage conversion tool.",
+  },
+  "tb-to-kb": {
+    title: "TB to KB Converter",
+    description: "Convert terabytes to kilobytes using this simple and fast TB to KB conversion tool.",
+  },
+  "tb-to-mb": {
+    title: "TB to MB Converter",
+    description: "Convert terabytes to megabytes quickly and accurately with our TB to MB converter.",
+  },
+  "tb-to-pb": {
+    title: "TB to PB Converter",
+    description: "Easily convert terabytes to petabytes using this efficient TB to PB data size converter.",
   },
 };
