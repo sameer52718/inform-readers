@@ -1922,6 +1922,130 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "volume-converter",
+        name: "Volume Converter",
+        tools: [
+          {
+            id: "volume-dry-converter",
+            name: "Volume Dry Converter",
+            path: "/tools/other-tools/volume-dry-converter",
+          },
+          {
+            id: "volume-lumber-converter",
+            name: "Volume Lumber Converter",
+            path: "/tools/other-tools/volume-lumber-converter",
+          },
+          {
+            id: "volume-charge-density-converter",
+            name: "Volume Charge Density Converter",
+            path: "/tools/other-tools/volume-charge-density-converter",
+          },
+          { id: "cc-to-ml", name: "CC to ML", path: "/tools/other-tools/cc-to-ml" },
+          { id: "cc-to-oz", name: "CC to Ounces", path: "/tools/other-tools/cc-to-oz" },
+          {
+            id: "cubic-feet-to-cubic-yards",
+            name: "Cubic Feet to Cubic Yards",
+            path: "/tools/other-tools/cubic-feet-to-cubic-yards",
+          },
+          {
+            id: "cubic-feet-to-gallon",
+            name: "Cubic Feet to Gallon",
+            path: "/tools/other-tools/cubic-feet-to-gallon",
+          },
+          {
+            id: "cubic-inches-to-gallons",
+            name: "Cubic Inches to Gallons",
+            path: "/tools/other-tools/cubic-inches-to-gallons",
+          },
+          {
+            id: "cubic-inches-to-liters",
+            name: "Cubic Inches to Liters",
+            path: "/tools/other-tools/cubic-inches-to-liters",
+          },
+          {
+            id: "cubic-yards-to-cubic-feet",
+            name: "Cubic Yards to Cubic Feet",
+            path: "/tools/other-tools/cubic-yards-to-cubic-feet",
+          },
+          { id: "cups-to-gallon", name: "Cups to Gallon", path: "/tools/other-tools/cups-to-gallon" },
+          { id: "cups-to-liters", name: "Cups to Liters", path: "/tools/other-tools/cups-to-liters" },
+          { id: "cups-to-ml", name: "Cups to Milliliters", path: "/tools/other-tools/cups-to-ml" },
+          { id: "cups-to-pint", name: "Cups to Pints", path: "/tools/other-tools/cups-to-pint" },
+          { id: "cups-to-quart", name: "Cups to Quarts", path: "/tools/other-tools/cups-to-quart" },
+          {
+            id: "cups-to-tablespoons",
+            name: "Cups to Tablespoons",
+            path: "/tools/other-tools/cups-to-tablespoons",
+          },
+          {
+            id: "gallon-to-cubic-feet",
+            name: "Gallon to Cubic Feet",
+            path: "/tools/other-tools/gallon-to-cubic-feet",
+          },
+          { id: "gallon-to-cups", name: "Gallon to Cups", path: "/tools/other-tools/gallon-to-cups" },
+          { id: "gallon-to-ml", name: "Gallon to Milliliters", path: "/tools/other-tools/gallon-to-ml" },
+          { id: "gallon-to-pints", name: "Gallon to Pints", path: "/tools/other-tools/gallon-to-pints" },
+          { id: "gallon-to-quart", name: "Gallon to Quarts", path: "/tools/other-tools/gallon-to-quart" },
+          {
+            id: "gallons-to-cubic-inches",
+            name: "Gallons to Cubic Inches",
+            path: "/tools/other-tools/gallons-to-cubic-inches",
+          },
+          {
+            id: "gallons-to-liters",
+            name: "Gallons to Liters",
+            path: "/tools/other-tools/gallons-to-liters",
+          },
+          { id: "l-to-ml", name: "Liters to Milliliters", path: "/tools/other-tools/l-to-ml" },
+          { id: "liter-to-ounces", name: "Liter to Ounces", path: "/tools/other-tools/liter-to-ounces" },
+          {
+            id: "liters-to-cubic-inches",
+            name: "Liters to Cubic Inches",
+            path: "/tools/other-tools/liters-to-cubic-inches",
+          },
+          { id: "liters-to-cups", name: "Liters to Cups", path: "/tools/other-tools/liters-to-cups" },
+          {
+            id: "liters-to-gallons",
+            name: "Liters to Gallons",
+            path: "/tools/other-tools/liters-to-gallons",
+          },
+          { id: "liters-to-pints", name: "Liters to Pints", path: "/tools/other-tools/liters-to-pints" },
+          { id: "liters-to-quarts", name: "Liters to Quarts", path: "/tools/other-tools/liters-to-quarts" },
+          { id: "ml-to-cc", name: "ML to CC", path: "/tools/other-tools/ml-to-cc" },
+          { id: "ml-to-cups", name: "ML to Cups", path: "/tools/other-tools/ml-to-cups" },
+          { id: "ml-to-gallon", name: "ML to Gallon", path: "/tools/other-tools/ml-to-gallon" },
+          { id: "ml-to-l", name: "ML to Liters", path: "/tools/other-tools/ml-to-l" },
+          { id: "ml-to-pint", name: "ML to Pints", path: "/tools/other-tools/ml-to-pint" },
+          { id: "ml-to-teaspoon", name: "ML to Teaspoons", path: "/tools/other-tools/ml-to-teaspoon" },
+          { id: "ounces-to-liter", name: "Ounces to Liter", path: "/tools/other-tools/ounces-to-liter" },
+          { id: "oz-to-cc", name: "Ounces to CC", path: "/tools/other-tools/oz-to-cc" },
+          { id: "pint-to-cups", name: "Pint to Cups", path: "/tools/other-tools/pint-to-cups" },
+          { id: "pint-to-ml", name: "Pint to ML", path: "/tools/other-tools/pint-to-ml" },
+          { id: "pints-to-gallon", name: "Pints to Gallon", path: "/tools/other-tools/pints-to-gallon" },
+          { id: "pints-to-liters", name: "Pints to Liters", path: "/tools/other-tools/pints-to-liters" },
+          { id: "quart-to-cups", name: "Quart to Cups", path: "/tools/other-tools/quart-to-cups" },
+          { id: "quart-to-gallon", name: "Quart to Gallon", path: "/tools/other-tools/quart-to-gallon" },
+          { id: "quarts-to-liters", name: "Quarts to Liters", path: "/tools/other-tools/quarts-to-liters" },
+          {
+            id: "tablespoons-to-cups",
+            name: "Tablespoons to Cups",
+            path: "/tools/other-tools/tablespoons-to-cups",
+          },
+          {
+            id: "tablespoons-to-teaspoons",
+            name: "Tablespoons to Teaspoons",
+            path: "/tools/other-tools/tablespoons-to-teaspoons",
+          },
+          { id: "teaspoon-to-ml", name: "Teaspoon to ML", path: "/tools/other-tools/teaspoon-to-ml" },
+          {
+            id: "teaspoons-to-tablespoons",
+            name: "Teaspoons to Tablespoons",
+            path: "/tools/other-tools/teaspoons-to-tablespoons",
+          },
+          { id: "volume-converter", name: "Volume Converter", path: "/tools/other-tools/volume-converter" },
+        ],
+      },
     ],
   },
 ];
@@ -4096,5 +4220,205 @@ export const otherToolMetaData = {
   "typography-converter": {
     title: "Typography Converter",
     description: "Convert between points, pixels, ems, rems, and more using this typography unit converter.",
+  },
+  "volume-dry-converter": {
+    title: "Volume Dry Converter",
+    description: "Convert between dry volume units like dry pints, quarts, and more.",
+  },
+  "volume-lumber-converter": {
+    title: "Volume Lumber Converter",
+    description: "Convert between lumber volume units like board feet, cubic meters, etc.",
+  },
+  "volume-charge-density-converter": {
+    title: "Volume Charge Density Converter",
+    description: "Easily convert units of charge per unit volume using this tool.",
+  },
+  "cc-to-ml": {
+    title: "CC to ML Converter",
+    description: "Convert cubic centimeters (cc) to milliliters (ml) instantly.",
+  },
+  "cc-to-oz": {
+    title: "CC to Ounces Converter",
+    description: "Quickly convert cc to fluid ounces using this reliable converter.",
+  },
+  "cubic-feet-to-cubic-yards": {
+    title: "Cubic Feet to Cubic Yards Converter",
+    description: "Convert cubic feet to cubic yards accurately with this simple tool.",
+  },
+  "cubic-feet-to-gallon": {
+    title: "Cubic Feet to Gallons Converter",
+    description: "Convert cubic feet to gallons with ease using our tool.",
+  },
+  "cubic-inches-to-gallons": {
+    title: "Cubic Inches to Gallons Converter",
+    description: "Easily convert cubic inches to gallons using this converter.",
+  },
+  "cubic-inches-to-liters": {
+    title: "Cubic Inches to Liters Converter",
+    description: "Quickly convert cubic inches into liters using this handy tool.",
+  },
+  "cubic-yards-to-cubic-feet": {
+    title: "Cubic Yards to Cubic Feet Converter",
+    description: "Convert cubic yards to cubic feet accurately and easily.",
+  },
+  "cups-to-gallon": {
+    title: "Cups to Gallon Converter",
+    description: "Convert cups to gallons quickly with this efficient converter.",
+  },
+  "cups-to-liters": {
+    title: "Cups to Liters Converter",
+    description: "Easily convert cups to liters with precision.",
+  },
+  "cups-to-ml": {
+    title: "Cups to Milliliters Converter",
+    description: "Convert cups to ml instantly using this online tool.",
+  },
+  "cups-to-pint": {
+    title: "Cups to Pints Converter",
+    description: "Quickly convert cups into pints for kitchen or lab use.",
+  },
+  "cups-to-quart": {
+    title: "Cups to Quarts Converter",
+    description: "Convert cups to quarts easily with this helpful converter.",
+  },
+  "cups-to-tablespoons": {
+    title: "Cups to Tablespoons Converter",
+    description: "Convert cups to tablespoons quickly for cooking or measurements.",
+  },
+  "gallon-to-cubic-feet": {
+    title: "Gallon to Cubic Feet Converter",
+    description: "Convert gallons into cubic feet accurately and instantly.",
+  },
+  "gallon-to-cups": {
+    title: "Gallon to Cups Converter",
+    description: "Easily convert gallons into cups with this precise tool.",
+  },
+  "gallon-to-ml": {
+    title: "Gallon to Milliliters Converter",
+    description: "Convert gallons to ml with this fast and accurate converter.",
+  },
+  "gallon-to-pints": {
+    title: "Gallon to Pints Converter",
+    description: "Quickly convert gallons to pints for fluid volume measurement.",
+  },
+  "gallon-to-quart": {
+    title: "Gallon to Quarts Converter",
+    description: "Convert gallons to quarts instantly and reliably.",
+  },
+  "gallons-to-cubic-inches": {
+    title: "Gallons to Cubic Inches Converter",
+    description: "Easily convert gallons to cubic inches using this tool.",
+  },
+  "gallons-to-liters": {
+    title: "Gallons to Liters Converter",
+    description: "Convert gallons to liters accurately and quickly.",
+  },
+  "l-to-ml": {
+    title: "Liters to Milliliters Converter",
+    description: "Convert liters into milliliters quickly using this tool.",
+  },
+  "liter-to-ounces": {
+    title: "Liter to Ounces Converter",
+    description: "Convert liters to fluid ounces accurately for various needs.",
+  },
+  "liters-to-cubic-inches": {
+    title: "Liters to Cubic Inches Converter",
+    description: "Convert liters to cubic inches quickly and accurately.",
+  },
+  "liters-to-cups": {
+    title: "Liters to Cups Converter",
+    description: "Easily convert liters into US cups with this tool.",
+  },
+  "liters-to-gallons": {
+    title: "Liters to Gallons Converter",
+    description: "Convert liters to US gallons with precise results.",
+  },
+  "liters-to-pints": {
+    title: "Liters to Pints Converter",
+    description: "Quickly convert liters to pints using our online converter.",
+  },
+  "liters-to-quarts": {
+    title: "Liters to Quarts Converter",
+    description: "Convert liters into quarts with this simple tool.",
+  },
+  "ml-to-cc": {
+    title: "Milliliters to Cubic Centimeters Converter",
+    description: "Convert ml to cc instantly and accurately.",
+  },
+  "ml-to-cups": {
+    title: "Milliliters to Cups Converter",
+    description: "Convert ml to US cups quickly and easily.",
+  },
+  "ml-to-gallon": {
+    title: "Milliliters to Gallon Converter",
+    description: "Convert milliliters into US gallons efficiently.",
+  },
+  "ml-to-l": {
+    title: "Milliliters to Liters Converter",
+    description: "Quickly convert ml to liters for accurate volume conversion.",
+  },
+  "ml-to-pint": {
+    title: "Milliliters to Pints Converter",
+    description: "Convert ml to pints using this reliable tool.",
+  },
+  "ml-to-teaspoon": {
+    title: "Milliliters to Teaspoons Converter",
+    description: "Easily convert ml to teaspoons with this handy converter.",
+  },
+  "ounces-to-liter": {
+    title: "Ounces to Liter Converter",
+    description: "Convert fluid ounces to liters with precise calculation.",
+  },
+  "oz-to-cc": {
+    title: "Ounces to CC Converter",
+    description: "Convert ounces to cubic centimeters easily.",
+  },
+  "pint-to-cups": {
+    title: "Pints to Cups Converter",
+    description: "Quickly convert pints to cups with this simple tool.",
+  },
+  "pint-to-ml": {
+    title: "Pints to Milliliters Converter",
+    description: "Convert pints to ml easily and accurately.",
+  },
+  "pints-to-gallon": {
+    title: "Pints to Gallon Converter",
+    description: "Convert multiple pints to gallons instantly.",
+  },
+  "pints-to-liters": {
+    title: "Pints to Liters Converter",
+    description: "Convert pints to liters using this convenient tool.",
+  },
+  "quart-to-cups": {
+    title: "Quarts to Cups Converter",
+    description: "Easily convert quarts to cups for quick reference.",
+  },
+  "quart-to-gallon": {
+    title: "Quarts to Gallons Converter",
+    description: "Convert quarts to gallons accurately.",
+  },
+  "quarts-to-liters": {
+    title: "Quarts to Liters Converter",
+    description: "Convert quarts to liters with fast results.",
+  },
+  "tablespoons-to-cups": {
+    title: "Tablespoons to Cups Converter",
+    description: "Convert tablespoons to cups for recipes and measurements.",
+  },
+  "tablespoons-to-teaspoons": {
+    title: "Tablespoons to Teaspoons Converter",
+    description: "Convert tablespoons to teaspoons instantly.",
+  },
+  "teaspoon-to-ml": {
+    title: "Teaspoons to Milliliters Converter",
+    description: "Convert teaspoons to ml for accurate kitchen conversions.",
+  },
+  "teaspoons-to-tablespoons": {
+    title: "Teaspoons to Tablespoons Converter",
+    description: "Quickly convert teaspoons to tablespoons.",
+  },
+  "volume-converter": {
+    title: "Volume Converter",
+    description: "Comprehensive volume conversion tool for various units.",
   },
 };
