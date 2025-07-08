@@ -72,6 +72,22 @@ import KjToJ from "@/components/pages/tools/other/kj-to-j";
 import KjToKcal from "@/components/pages/tools/other/kj-to-kcal";
 import NmToFtlb from "@/components/pages/tools/other/nm-to-ftlb";
 
+import FlowMassConverter from "@/components/pages/tools/other/flow-mass-converter";
+import FlowConverter from "@/components/pages/tools/other/flow-converter";
+
+import ForceConverter from "@/components/pages/tools/other/force-converter";
+import KgToNewtons from "@/components/pages/tools/other/kg-to-newtons";
+import LbsToNewtons from "@/components/pages/tools/other/lbs-to-newtons";
+import NewtonsToKg from "@/components/pages/tools/other/newtons-to-kg";
+import NewtonsToLbs from "@/components/pages/tools/other/newtons-to-lbs";
+
+import FrequencyWavelengthConverter from "@/components/pages/tools/other/frequency-wavelength-converter";
+import HeatDensityConverter from "@/components/pages/tools/other/heat-density-converter";
+import HeatFluxDensityConverter from "@/components/pages/tools/other/heat-flux-density-converter";
+import HeatTransferCoefficientConverter from "@/components/pages/tools/other/heat-transfer-coefficient-converter";
+import IlluminationConverter from "@/components/pages/tools/other/illumination_converter";
+import InductanceConverter from "@/components/pages/tools/other/inductance-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -137,6 +153,21 @@ const toolComponents = {
   "kj-to-j": KjToJ,
   "kj-to-kcal": KjToKcal,
   "nm-to-ftlb": NmToFtlb,
+
+  "flow-mass-converter": FlowMassConverter,
+  "flow-converter": FlowConverter,
+
+  "force-converter": ForceConverter,
+  "kg-to-newtons": KgToNewtons,
+  "lbs-to-newtons": LbsToNewtons,
+  "newtons-to-kg": NewtonsToKg,
+  "newtons-to-lbs": NewtonsToLbs,
+  "frequency-wavelength-converter": FrequencyWavelengthConverter,
+  "heat-density-converter": HeatDensityConverter,
+  "heat-flux-density-converter": HeatFluxDensityConverter,
+  "heat-transfer-coefficient-converter": HeatTransferCoefficientConverter,
+  illumination_converter: IlluminationConverter,
+  "inductance-converter": InductanceConverter,
 };
 
 export async function generateMetadata({ params }) {

@@ -1429,6 +1429,107 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "flow-mass",
+        name: "Flow - Mass Converter",
+        tools: [
+          {
+            id: "flow_mass_converter",
+            name: "Mass Flow Converter",
+            path: "/tools/other-tools/flow-mass-converter",
+          },
+          {
+            id: "flow_converter",
+            name: "Flow Converter",
+            path: "/tools/other-tools/flow-converter",
+          },
+        ],
+      },
+      {
+        id: "force-converter",
+        name: "Force Converter Tool",
+        tools: [
+          {
+            id: "force_converter",
+            name: "Force Converter",
+            path: "/tools/other-tools/force-converter",
+          },
+          {
+            id: "kg_to_newtons",
+            name: "Kilograms to Newtons",
+            path: "/tools/other-tools/kg-to-newtons",
+          },
+          {
+            id: "lbs_to_newtons",
+            name: "Pounds to Newtons",
+            path: "/tools/other-tools/lbs-to-newtons",
+          },
+          {
+            id: "newtons_to_kg",
+            name: "Newtons to Kilograms",
+            path: "/tools/other-tools/newtons-to-kg",
+          },
+          {
+            id: "newtons_to_lbs",
+            name: "Newtons to Pounds",
+            path: "/tools/other-tools/newtons-to-lbs",
+          },
+        ],
+      },
+      {
+        id: "frequency-wavelength",
+        name: "Frequency Wavelength Converter",
+        tools: [
+          {
+            id: "frequency_wavelength_converter",
+            name: "Frequency-Wavelength Converter",
+            path: "/tools/other-tools/frequency-wavelength-converter",
+          },
+        ],
+      },
+      {
+        id: "heat",
+        name: "Heat Converter",
+        tools: [
+          {
+            id: "heat_density_converter",
+            name: "Heat Density Converter",
+            path: "/tools/other-tools/heat-density-converter",
+          },
+          {
+            id: "heat_flux_density_converter",
+            name: "Heat Flux Density Converter",
+            path: "/tools/other-tools/heat-flux-density-converter",
+          },
+          {
+            id: "heat_transfer_coefficient_converter",
+            name: "Heat Transfer Coefficient Converter",
+            path: "/tools/other-tools/heat-transfer-coefficient-converter",
+          },
+        ],
+      },
+      {
+        id: "illumination",
+        name: "Illumination Converter",
+        tools: [
+          {
+            id: "illumination_converter",
+            name: "Illumination Converter",
+            path: "/tools/other-tools/illumination_converter",
+          },
+        ],
+      },
+      {
+        id: "inductance",
+        name: "Inductance Converter",
+        tools: [
+          {
+            id: "inductance_converter",
+            name: "Inductance Converter",
+            path: "/tools/other-tools/inductance-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -3066,5 +3167,77 @@ export const otherToolMetaData = {
   "nm-to-ftlb": {
     title: "Newton-meters to Foot-pounds Converter",
     description: "Convert Nm to ft·lb quickly for torque, engineering, and mechanical uses.",
+  },
+  // Flow - Mass / Flow Converters
+  "flow-mass-converter": {
+    title: "Mass Flow Converter – Convert Mass Flow Rates",
+    description:
+      "Convert mass flow rate units such as kg/s, g/s, lb/min, and more with this accurate mass flow converter.",
+  },
+  "flow-converter": {
+    title: "Flow Converter – Volume and Mass Flow",
+    description:
+      "Easily convert between various flow units including volume and mass flow using this efficient tool.",
+  },
+
+  // Force Converter
+  "force-converter": {
+    title: "Force Converter – Newtons, kgf, lbf & More",
+    description:
+      "Convert force units including newtons, kilogram-force, pound-force and more with this accurate converter.",
+  },
+  "kg-to-newtons": {
+    title: "Kilograms to Newtons Converter",
+    description:
+      "Convert mass in kilograms (kg) to force in newtons (N) using this fast and reliable converter.",
+  },
+  "lbs-to-newtons": {
+    title: "Pounds to Newtons Converter",
+    description: "Convert pounds-force (lbf) to newtons (N) with ease using this simple converter.",
+  },
+  "newtons-to-kg": {
+    title: "Newtons to Kilograms Converter",
+    description: "Convert force in newtons to mass in kilograms using this efficient tool.",
+  },
+  "newtons-to-lbs": {
+    title: "Newtons to Pounds Converter",
+    description:
+      "Quickly convert force from newtons (N) to pounds-force (lbf) with this accurate calculator.",
+  },
+
+  // Frequency Wavelength
+  "frequency-wavelength-converter": {
+    title: "Frequency-Wavelength Converter",
+    description:
+      "Convert between frequency and wavelength for electromagnetic waves using this practical tool.",
+  },
+
+  // Heat Converters
+  "heat-density-converter": {
+    title: "Heat Density Converter",
+    description:
+      "Convert between units of heat density such as J/m³, BTU/ft³ and more using this specialized converter.",
+  },
+  "heat-flux-density-converter": {
+    title: "Heat Flux Density Converter",
+    description: "Accurately convert heat flux density between W/m², BTU/hr·ft², and more with this tool.",
+  },
+  "heat-transfer-coefficient-converter": {
+    title: "Heat Transfer Coefficient Converter",
+    description: "Convert heat transfer coefficient values easily between W/m²·K, BTU/hr·ft²·°F, and more.",
+  },
+
+  // Illumination Converter
+  illumination_converter: {
+    title: "Illumination Converter – Lux, Foot-candle & More",
+    description:
+      "Convert illumination units such as lux and foot-candles using this lighting intensity converter.",
+  },
+
+  // Inductance Converter
+  "inductance-converter": {
+    title: "Inductance Converter – Henry, mH, μH & More",
+    description:
+      "Convert inductance units including henry (H), millihenry (mH), and microhenry (μH) using this precise tool.",
   },
 };
