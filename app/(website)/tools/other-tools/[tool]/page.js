@@ -154,6 +154,17 @@ import PowerConverter from "@/components/pages/tools/other/power-converter";
 import TonToBtu from "@/components/pages/tools/other/ton-to-btu";
 import WattsToHp from "@/components/pages/tools/other/watts-to-hp";
 
+import PrefixesConverter from "@/components/pages/tools/other/prefixes-converter";
+import BarToPsi from "@/components/pages/tools/other/bar-to-psi";
+import KpaToPsi from "@/components/pages/tools/other/kpa-to-psi";
+import PressureConverter from "@/components/pages/tools/other/pressure-converter";
+import PsiToBar from "@/components/pages/tools/other/psi-to-bar";
+import PsiToKpa from "@/components/pages/tools/other/psi-to-kpa";
+import RadiationConverter from "@/components/pages/tools/other/radiation-converter";
+import RadiationAbsorbedDoseConverter from "@/components/pages/tools/other/radiation-absorbed-dose-converter";
+import RadiationActivityConverter from "@/components/pages/tools/other/radiation-activity-converter";
+import RadiationExposureConverter from "@/components/pages/tools/other/radiation-exposure-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -299,6 +310,17 @@ const toolComponents = {
   "power-converter": PowerConverter,
   "ton-to-btu": TonToBtu,
   "watts-to-hp": WattsToHp,
+
+  "prefixes-converter": PrefixesConverter,
+  "bar-to-psi": BarToPsi,
+  "kpa-to-psi": KpaToPsi,
+  "pressure-converter": PressureConverter,
+  "psi-to-bar": PsiToBar,
+  "psi-to-kpa": PsiToKpa,
+  "radiation-converter": RadiationConverter,
+  "radiation-absorbed-dose-converter": RadiationAbsorbedDoseConverter,
+  "radiation-activity-converter": RadiationActivityConverter,
+  "radiation-exposure-converter": RadiationExposureConverter,
 };
 
 export async function generateMetadata({ params }) {

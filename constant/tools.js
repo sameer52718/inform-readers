@@ -1698,6 +1698,58 @@ export const TOOL_CATEGORIES = [
           { id: "watts-to-hp", name: "Watts to Horsepower", path: "/tools/other-tools/watts-to-hp" },
         ],
       },
+      {
+        id: "prefixes-converter",
+        name: "Prefixes Converter",
+        tools: [
+          {
+            id: "prefixes-converter",
+            name: "Prefixes Converter",
+            path: "/tools/other-tools/prefixes-converter",
+          },
+        ],
+      },
+      {
+        id: "pressure-converter",
+        name: "Pressure Converter",
+        tools: [
+          { id: "bar-to-psi", name: "Bar to PSI", path: "/tools/other-tools/bar-to-psi" },
+          { id: "kpa-to-psi", name: "KPA to PSI", path: "/tools/other-tools/kpa-to-psi" },
+          {
+            id: "pressure-converter",
+            name: "Pressure Converter",
+            path: "/tools/other-tools/pressure-converter",
+          },
+          { id: "psi-to-bar", name: "PSI to Bar", path: "/tools/other-tools/psi-to-bar" },
+          { id: "psi-to-kpa", name: "PSI to KPA", path: "/tools/other-tools/psi-to-kpa" },
+        ],
+      },
+      {
+        id: "radiation-converter",
+        name: "Radiation Converter",
+        tools: [
+          {
+            id: "radiation-converter",
+            name: "Radiation Converter",
+            path: "/tools/other-tools/radiation-converter",
+          },
+          {
+            id: "radiation-absorbed-dose-converter",
+            name: "Absorbed Dose Converter",
+            path: "/tools/other-tools/radiation-absorbed-dose-converter",
+          },
+          {
+            id: "radiation-activity-converter",
+            name: "Radiation Activity Converter",
+            path: "/tools/other-tools/radiation-activity-converter",
+          },
+          {
+            id: "radiation-exposure-converter",
+            name: "Radiation Exposure Converter",
+            path: "/tools/other-tools/radiation-exposure-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -3655,5 +3707,45 @@ export const otherToolMetaData = {
   "watts-to-hp": {
     title: "Watts to Horsepower Converter",
     description: "Convert watts to horsepower using this reliable power unit converter.",
+  },
+  "prefixes-converter": {
+    title: "Prefixes Converter",
+    description: "Convert between metric prefixes such as kilo, mega, milli, and more.",
+  },
+  "bar-to-psi": {
+    title: "Bar to PSI Converter",
+    description: "Convert bar pressure units to pounds per square inch (PSI) quickly.",
+  },
+  "kpa-to-psi": {
+    title: "KPA to PSI Converter",
+    description: "Convert kilopascals (kPa) to PSI using this fast and accurate tool.",
+  },
+  "pressure-converter": {
+    title: "Pressure Unit Converter",
+    description: "Convert between different pressure units like bar, PSI, Pa, and kPa easily.",
+  },
+  "psi-to-bar": {
+    title: "PSI to Bar Converter",
+    description: "Easily convert PSI (pounds per square inch) to bar units.",
+  },
+  "psi-to-kpa": {
+    title: "PSI to KPA Converter",
+    description: "Convert PSI values to kilopascals (kPa) with this quick converter.",
+  },
+  "radiation-converter": {
+    title: "Radiation Unit Converter",
+    description: "Convert between various radiation measurement units accurately.",
+  },
+  "radiation-absorbed-dose-converter": {
+    title: "Radiation Absorbed Dose Converter",
+    description: "Convert radiation absorbed dose units like gray and rad quickly.",
+  },
+  "radiation-activity-converter": {
+    title: "Radiation Activity Converter",
+    description: "Easily convert between becquerel (Bq) and curie (Ci) activity units.",
+  },
+  "radiation-exposure-converter": {
+    title: "Radiation Exposure Converter",
+    description: "Convert radiation exposure units such as roentgen, coulomb/kg, and more.",
   },
 };
