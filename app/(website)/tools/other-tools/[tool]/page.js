@@ -181,6 +181,18 @@ import SurfaceChargeDensityConverter from "@/components/pages/tools/other/surfac
 import SurfaceCurrentDensityConverter from "@/components/pages/tools/other/surface-current-density-converter";
 import SurfaceTensionConverter from "@/components/pages/tools/other/surface-tension-converter";
 
+import CelsiusToFahrenheit from "@/components/pages/tools/other/celsius-to-fahrenheit";
+import CelsiusToKelvin from "@/components/pages/tools/other/celsius-to-kelvin";
+import FahrenheitToCelsius from "@/components/pages/tools/other/fahrenheit-to-celsius";
+import FahrenheitToKelvin from "@/components/pages/tools/other/fahrenheit-to-kelvin";
+import KelvinToCelsius from "@/components/pages/tools/other/kelvin-to-celsius";
+import KelvinToFahrenheit from "@/components/pages/tools/other/kelvin-to-fahrenheit";
+import TemperatureConverter from "@/components/pages/tools/other/temperature-converter";
+import TemperatureIntervalConverter from "@/components/pages/tools/other/temperature-interval-converter";
+import ThermalConductivityConverter from "@/components/pages/tools/other/thermal-conductivity-converter";
+import ThermalExpansionConverter from "@/components/pages/tools/other/thermal-expansion-converter";
+import ThermalResistanceConverter from "@/components/pages/tools/other/thermal-resistance-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -353,6 +365,18 @@ const toolComponents = {
   "surface-charge-density-converter": SurfaceChargeDensityConverter,
   "surface-current-density-converter": SurfaceCurrentDensityConverter,
   "surface-tension-converter": SurfaceTensionConverter,
+
+  "celsius-to-fahrenheit": CelsiusToFahrenheit,
+  "celsius-to-kelvin": CelsiusToKelvin,
+  "fahrenheit-to-celsius": FahrenheitToCelsius,
+  "fahrenheit-to-kelvin": FahrenheitToKelvin,
+  "kelvin-to-celsius": KelvinToCelsius,
+  "kelvin-to-fahrenheit": KelvinToFahrenheit,
+  "temperature-converter": TemperatureConverter,
+  "temperature-interval-converter": TemperatureIntervalConverter,
+  "thermal-conductivity-converter": ThermalConductivityConverter,
+  "thermal-expansion-converter": ThermalExpansionConverter,
+  "thermal-resistance-converter": ThermalResistanceConverter,
 };
 
 export async function generateMetadata({ params }) {

@@ -1805,6 +1805,73 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "temperature-converter",
+        name: "Temperature Converter",
+        tools: [
+          {
+            id: "celsius-to-fahrenheit",
+            name: "Celsius to Fahrenheit",
+            path: "/tools/other-tools/celsius-to-fahrenheit",
+          },
+          {
+            id: "celsius-to-kelvin",
+            name: "Celsius to Kelvin",
+            path: "/tools/other-tools/celsius-to-kelvin",
+          },
+          {
+            id: "fahrenheit-to-celsius",
+            name: "Fahrenheit to Celsius",
+            path: "/tools/other-tools/fahrenheit-to-celsius",
+          },
+          {
+            id: "fahrenheit-to-kelvin",
+            name: "Fahrenheit to Kelvin",
+            path: "/tools/other-tools/fahrenheit-to-kelvin",
+          },
+          {
+            id: "kelvin-to-celsius",
+            name: "Kelvin to Celsius",
+            path: "/tools/other-tools/kelvin-to-celsius",
+          },
+          {
+            id: "kelvin-to-fahrenheit",
+            name: "Kelvin to Fahrenheit",
+            path: "/tools/other-tools/kelvin-to-fahrenheit",
+          },
+          {
+            id: "temperature-converter",
+            name: "Temperature Converter",
+            path: "/tools/other-tools/temperature-converter",
+          },
+          {
+            id: "temperature-interval-converter",
+            name: "Temperature Interval Converter",
+            path: "/tools/other-tools/temperature-interval-converter",
+          },
+        ],
+      },
+      {
+        id: "thermal-converter",
+        name: "Thermal Converter",
+        tools: [
+          {
+            id: "thermal-conductivity-converter",
+            name: "Thermal Conductivity Converter",
+            path: "/tools/other-tools/thermal-conductivity-converter",
+          },
+          {
+            id: "thermal-expansion-converter",
+            name: "Thermal Expansion Converter",
+            path: "/tools/other-tools/thermal-expansion-converter",
+          },
+          {
+            id: "thermal-resistance-converter",
+            name: "Thermal Resistance Converter",
+            path: "/tools/other-tools/thermal-resistance-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -3862,5 +3929,49 @@ export const otherToolMetaData = {
   "surface-tension-converter": {
     title: "Surface Tension Converter",
     description: "Convert between surface tension units like N/m, dyn/cm, and more.",
+  },
+  "celsius-to-fahrenheit": {
+    title: "Celsius to Fahrenheit Converter",
+    description: "Convert Celsius to Fahrenheit instantly and accurately.",
+  },
+  "celsius-to-kelvin": {
+    title: "Celsius to Kelvin Converter",
+    description: "Easily convert Celsius to Kelvin using this tool.",
+  },
+  "fahrenheit-to-celsius": {
+    title: "Fahrenheit to Celsius Converter",
+    description: "Quickly convert Fahrenheit to Celsius with precision.",
+  },
+  "fahrenheit-to-kelvin": {
+    title: "Fahrenheit to Kelvin Converter",
+    description: "Convert Fahrenheit to Kelvin in just a few clicks.",
+  },
+  "kelvin-to-celsius": {
+    title: "Kelvin to Celsius Converter",
+    description: "Convert Kelvin to Celsius quickly and easily.",
+  },
+  "kelvin-to-fahrenheit": {
+    title: "Kelvin to Fahrenheit Converter",
+    description: "Convert Kelvin to Fahrenheit in an instant.",
+  },
+  "temperature-converter": {
+    title: "Temperature Converter",
+    description: "Convert between Celsius, Fahrenheit, Kelvin and other units.",
+  },
+  "temperature-interval-converter": {
+    title: "Temperature Interval Converter",
+    description: "Convert temperature differences between units like K, °C, and °F.",
+  },
+  "thermal-conductivity-converter": {
+    title: "Thermal Conductivity Converter",
+    description: "Convert between thermal conductivity units such as W/m·K and BTU/hr·ft·°F.",
+  },
+  "thermal-expansion-converter": {
+    title: "Thermal Expansion Converter",
+    description: "Convert thermal expansion coefficients across various units.",
+  },
+  "thermal-resistance-converter": {
+    title: "Thermal Resistance Converter",
+    description: "Convert between different units of thermal resistance easily.",
   },
 };
