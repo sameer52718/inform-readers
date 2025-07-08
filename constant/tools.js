@@ -1530,6 +1530,50 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "length-converter",
+        name: "Length Converter",
+        tools: [
+          { id: "cm-to-feet", name: "CM to Feet", path: "/tools/other-tools/cm-to-feet" },
+          { id: "cm-to-inches", name: "CM to Inches", path: "/tools/other-tools/cm-to-inches" },
+          { id: "cm-to-km", name: "CM to KM", path: "/tools/other-tools/cm-to-km" },
+          { id: "cm-to-m", name: "CM to Meters", path: "/tools/other-tools/cm-to-m" },
+          { id: "cm-to-mm", name: "CM to MM", path: "/tools/other-tools/cm-to-mm" },
+          { id: "feet-to-cm", name: "Feet to CM", path: "/tools/other-tools/feet-to-cm" },
+          { id: "feet-to-inches", name: "Feet to Inches", path: "/tools/other-tools/feet-to-inches" },
+          { id: "feet-to-meters", name: "Feet to Meters", path: "/tools/other-tools/feet-to-meters" },
+          { id: "feet-to-miles", name: "Feet to Miles", path: "/tools/other-tools/feet-to-miles" },
+          { id: "feet-to-mm", name: "Feet to MM", path: "/tools/other-tools/feet-to-mm" },
+          { id: "feet-to-yards", name: "Feet to Yards", path: "/tools/other-tools/feet-to-yards" },
+          { id: "inches-to-cm", name: "Inches to CM", path: "/tools/other-tools/inches-to-cm" },
+          { id: "inches-to-feet", name: "Inches to Feet", path: "/tools/other-tools/inches-to-feet" },
+          { id: "inches-to-meters", name: "Inches to Meters", path: "/tools/other-tools/inches-to-meters" },
+          { id: "inches-to-mm", name: "Inches to MM", path: "/tools/other-tools/inches-to-mm" },
+          { id: "inches-to-yards", name: "Inches to Yards", path: "/tools/other-tools/inches-to-yards" },
+          { id: "km-to-cm", name: "KM to CM", path: "/tools/other-tools/km-to-cm" },
+          { id: "km-to-m", name: "KM to Meters", path: "/tools/other-tools/km-to-m" },
+          { id: "km-to-miles", name: "KM to Miles", path: "/tools/other-tools/km-to-miles" },
+          { id: "m-to-cm", name: "Meters to CM", path: "/tools/other-tools/m-to-cm" },
+          { id: "m-to-km", name: "Meters to KM", path: "/tools/other-tools/m-to-km" },
+          { id: "m-to-mm", name: "Meters to MM", path: "/tools/other-tools/m-to-mm" },
+          { id: "meters-to-feet", name: "Meters to Feet", path: "/tools/other-tools/meters-to-feet" },
+          { id: "meters-to-inches", name: "Meters to Inches", path: "/tools/other-tools/meters-to-inches" },
+          { id: "meters-to-miles", name: "Meters to Miles", path: "/tools/other-tools/meters-to-miles" },
+          { id: "meters-to-yards", name: "Meters to Yards", path: "/tools/other-tools/meters-to-yards" },
+          { id: "miles-to-feet", name: "Miles to Feet", path: "/tools/other-tools/miles-to-feet" },
+          { id: "miles-to-km", name: "Miles to KM", path: "/tools/other-tools/miles-to-km" },
+          { id: "miles-to-meters", name: "Miles to Meters", path: "/tools/other-tools/miles-to-meters" },
+          { id: "miles-to-yards", name: "Miles to Yards", path: "/tools/other-tools/miles-to-yards" },
+          { id: "mm-to-cm", name: "MM to CM", path: "/tools/other-tools/mm-to-cm" },
+          { id: "mm-to-feet", name: "MM to Feet", path: "/tools/other-tools/mm-to-feet" },
+          { id: "mm-to-inches", name: "MM to Inches", path: "/tools/other-tools/mm-to-inches" },
+          { id: "mm-to-m", name: "MM to Meters", path: "/tools/other-tools/mm-to-m" },
+          { id: "yards-to-feet", name: "Yards to Feet", path: "/tools/other-tools/yards-to-feet" },
+          { id: "yards-to-inches", name: "Yards to Inches", path: "/tools/other-tools/yards-to-inches" },
+          { id: "yards-to-meters", name: "Yards to Meters", path: "/tools/other-tools/yards-to-meters" },
+          { id: "yards-to-miles", name: "Yards to Miles", path: "/tools/other-tools/yards-to-miles" },
+        ],
+      },
     ],
   },
 ];
@@ -3239,5 +3283,157 @@ export const otherToolMetaData = {
     title: "Inductance Converter – Henry, mH, μH & More",
     description:
       "Convert inductance units including henry (H), millihenry (mH), and microhenry (μH) using this precise tool.",
+  },
+  "cm-to-feet": {
+    title: "Centimeters to Feet Converter",
+    description: "Convert centimeters to feet quickly and accurately using this simple tool.",
+  },
+  "cm-to-inches": {
+    title: "Centimeters to Inches Converter",
+    description: "Easily convert centimeters to inches for fast measurement conversions.",
+  },
+  "cm-to-km": {
+    title: "Centimeters to Kilometers Converter",
+    description: "Convert centimeters to kilometers easily using our online tool.",
+  },
+  "cm-to-m": {
+    title: "Centimeters to Meters Converter",
+    description: "Convert cm to meters quickly and accurately.",
+  },
+  "cm-to-mm": {
+    title: "Centimeters to Millimeters Converter",
+    description: "Use this tool to convert centimeters to millimeters instantly.",
+  },
+  "feet-to-cm": {
+    title: "Feet to Centimeters Converter",
+    description: "Convert feet to centimeters using our quick and easy converter.",
+  },
+  "feet-to-inches": {
+    title: "Feet to Inches Converter",
+    description: "Easily convert feet to inches with this fast and accurate tool.",
+  },
+  "feet-to-meters": {
+    title: "Feet to Meters Converter",
+    description: "Convert feet to meters instantly using this reliable tool.",
+  },
+  "feet-to-miles": {
+    title: "Feet to Miles Converter",
+    description: "Convert feet to miles quickly with our user-friendly tool.",
+  },
+  "feet-to-mm": {
+    title: "Feet to Millimeters Converter",
+    description: "Convert feet to millimeters easily and accurately.",
+  },
+  "feet-to-yards": {
+    title: "Feet to Yards Converter",
+    description: "Quickly convert feet to yards using our simple calculator.",
+  },
+  "inches-to-cm": {
+    title: "Inches to Centimeters Converter",
+    description: "Convert inches to centimeters easily with this simple and efficient tool.",
+  },
+  "inches-to-feet": {
+    title: "Inches to Feet Converter",
+    description: "Quickly convert inches to feet with our reliable conversion calculator.",
+  },
+  "inches-to-meters": {
+    title: "Inches to Meters Converter",
+    description: "Accurate conversion from inches to meters made easy.",
+  },
+  "inches-to-mm": {
+    title: "Inches to Millimeters Converter",
+    description: "Instantly convert inches to millimeters online.",
+  },
+  "inches-to-yards": {
+    title: "Inches to Yards Converter",
+    description: "Easily convert inches to yards with precision.",
+  },
+  "km-to-cm": {
+    title: "Kilometers to Centimeters Converter",
+    description: "Convert kilometers to centimeters fast and effortlessly.",
+  },
+  "km-to-m": {
+    title: "Kilometers to Meters Converter",
+    description: "Get accurate conversions from kilometers to meters.",
+  },
+  "km-to-miles": {
+    title: "Kilometers to Miles Converter",
+    description: "Easily convert kilometers to miles with this calculator.",
+  },
+  "m-to-cm": {
+    title: "Meters to Centimeters Converter",
+    description: "Simple tool for converting meters to centimeters.",
+  },
+  "m-to-km": {
+    title: "Meters to Kilometers Converter",
+    description: "Convert meters to kilometers instantly.",
+  },
+  "m-to-mm": {
+    title: "Meters to Millimeters Converter",
+    description: "Quickly convert meters to millimeters online.",
+  },
+  "meters-to-feet": {
+    title: "Meters to Feet Converter",
+    description: "Fast and accurate conversion from meters to feet.",
+  },
+  "meters-to-inches": {
+    title: "Meters to Inches Converter",
+    description: "Convert meters to inches quickly with this handy tool.",
+  },
+  "meters-to-miles": {
+    title: "Meters to Miles Converter",
+    description: "Easily convert meters to miles using our online calculator.",
+  },
+  "meters-to-yards": {
+    title: "Meters to Yards Converter",
+    description: "Get quick results converting meters to yards.",
+  },
+  "miles-to-feet": {
+    title: "Miles to Feet Converter",
+    description: "Convert miles to feet instantly and accurately.",
+  },
+  "miles-to-km": {
+    title: "Miles to Kilometers Converter",
+    description: "Quick conversion from miles to kilometers.",
+  },
+  "miles-to-meters": {
+    title: "Miles to Meters Converter",
+    description: "Easily convert miles to meters with precision.",
+  },
+  "miles-to-yards": {
+    title: "Miles to Yards Converter",
+    description: "Fast tool to convert miles into yards accurately.",
+  },
+  "mm-to-cm": {
+    title: "Millimeters to Centimeters Converter",
+    description: "Simple tool for converting millimeters to centimeters.",
+  },
+  "mm-to-feet": {
+    title: "Millimeters to Feet Converter",
+    description: "Accurate conversion from millimeters to feet.",
+  },
+  "mm-to-inches": {
+    title: "Millimeters to Inches Converter",
+    description: "Quickly convert millimeters to inches online.",
+  },
+  "mm-to-m": {
+    title: "Millimeters to Meters Converter",
+    description: "Easily convert mm to meters with this calculator.",
+  },
+  "yards-to-feet": {
+    title: "Yards to Feet Converter",
+    description: "Fast and accurate conversion from yards to feet.",
+  },
+  "yards-to-inches": {
+    title: "Yards to Inches Converter",
+    description: "Convert yards to inches quickly with our tool.",
+  },
+  "yards-to-meters": {
+    title: "Yards to Meters Converter",
+    description: "Easily convert yards to meters online.",
+  },
+  "yards-to-miles": {
+    title: "Yards to Miles Converter",
+    description: "Accurate and fast conversion from yards to miles.",
   },
 };

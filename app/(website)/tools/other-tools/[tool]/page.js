@@ -88,6 +88,46 @@ import HeatTransferCoefficientConverter from "@/components/pages/tools/other/hea
 import IlluminationConverter from "@/components/pages/tools/other/illumination_converter";
 import InductanceConverter from "@/components/pages/tools/other/inductance-converter";
 
+// Length Converters
+import CmToFeet from "@/components/pages/tools/other/cm-to-feet";
+import CmToInches from "@/components/pages/tools/other/cm-to-inches";
+import CmToKm from "@/components/pages/tools/other/cm-to-km";
+import CmToM from "@/components/pages/tools/other/cm-to-m";
+import CmToMm from "@/components/pages/tools/other/cm-to-mm";
+import FeetToCm from "@/components/pages/tools/other/feet-to-cm";
+import FeetToInches from "@/components/pages/tools/other/feet-to-inches";
+import FeetToMeters from "@/components/pages/tools/other/feet-to-meters";
+import FeetToMiles from "@/components/pages/tools/other/feet-to-miles";
+import FeetToMm from "@/components/pages/tools/other/feet-to-mm";
+import FeetToYards from "@/components/pages/tools/other/feet-to-yards";
+import InchesToCm from "@/components/pages/tools/other/inches-to-cm";
+import InchesToFeet from "@/components/pages/tools/other/inches-to-feet";
+import InchesToMeters from "@/components/pages/tools/other/inches-to-meters";
+import InchesToMm from "@/components/pages/tools/other/inches-to-mm";
+import InchesToYards from "@/components/pages/tools/other/inches-to-yards";
+import KmToCm from "@/components/pages/tools/other/km-to-cm";
+import KmToM from "@/components/pages/tools/other/km-to-m";
+import KmToMiles from "@/components/pages/tools/other/km-to-miles";
+import MToCm from "@/components/pages/tools/other/m-to-cm";
+import MToKm from "@/components/pages/tools/other/m-to-km";
+import MToMm from "@/components/pages/tools/other/m-to-mm";
+import MetersToFeet from "@/components/pages/tools/other/meters-to-feet";
+import MetersToInches from "@/components/pages/tools/other/meters-to-inches";
+import MetersToMiles from "@/components/pages/tools/other/meters-to-miles";
+import MetersToYards from "@/components/pages/tools/other/meters-to-yards";
+import MilesToFeet from "@/components/pages/tools/other/miles-to-feet";
+import MilesToKm from "@/components/pages/tools/other/miles-to-km";
+import MilesToMeters from "@/components/pages/tools/other/miles-to-meters";
+import MilesToYards from "@/components/pages/tools/other/miles-to-yards";
+import MmToCm from "@/components/pages/tools/other/mm-to-cm";
+import MmToFeet from "@/components/pages/tools/other/mm-to-feet";
+import MmToInches from "@/components/pages/tools/other/mm-to-inches";
+import MmToM from "@/components/pages/tools/other/mm-to-m";
+import YardsToFeet from "@/components/pages/tools/other/yards-to-feet";
+import YardsToInches from "@/components/pages/tools/other/yards-to-inches";
+import YardsToMeters from "@/components/pages/tools/other/yards-to-meters";
+import YardsToMiles from "@/components/pages/tools/other/yards-to-miles";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -168,6 +208,45 @@ const toolComponents = {
   "heat-transfer-coefficient-converter": HeatTransferCoefficientConverter,
   illumination_converter: IlluminationConverter,
   "inductance-converter": InductanceConverter,
+
+  "cm-to-feet": CmToFeet,
+  "cm-to-inches": CmToInches,
+  "cm-to-km": CmToKm,
+  "cm-to-m": CmToM,
+  "cm-to-mm": CmToMm,
+  "feet-to-cm": FeetToCm,
+  "feet-to-inches": FeetToInches,
+  "feet-to-meters": FeetToMeters,
+  "feet-to-miles": FeetToMiles,
+  "feet-to-mm": FeetToMm,
+  "feet-to-yards": FeetToYards,
+  "inches-to-cm": InchesToCm,
+  "inches-to-feet": InchesToFeet,
+  "inches-to-meters": InchesToMeters,
+  "inches-to-mm": InchesToMm,
+  "inches-to-yards": InchesToYards,
+  "km-to-cm": KmToCm,
+  "km-to-m": KmToM,
+  "km-to-miles": KmToMiles,
+  "m-to-cm": MToCm,
+  "m-to-km": MToKm,
+  "m-to-mm": MToMm,
+  "meters-to-feet": MetersToFeet,
+  "meters-to-inches": MetersToInches,
+  "meters-to-miles": MetersToMiles,
+  "meters-to-yards": MetersToYards,
+  "miles-to-feet": MilesToFeet,
+  "miles-to-km": MilesToKm,
+  "miles-to-meters": MilesToMeters,
+  "miles-to-yards": MilesToYards,
+  "mm-to-cm": MmToCm,
+  "mm-to-feet": MmToFeet,
+  "mm-to-inches": MmToInches,
+  "mm-to-m": MmToM,
+  "yards-to-feet": YardsToFeet,
+  "yards-to-inches": YardsToInches,
+  "yards-to-meters": YardsToMeters,
+  "yards-to-miles": YardsToMiles,
 };
 
 export async function generateMetadata({ params }) {
