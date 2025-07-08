@@ -1574,6 +1574,81 @@ export const TOOL_CATEGORIES = [
           { id: "yards-to-miles", name: "Yards to Miles", path: "/tools/other-tools/yards-to-miles" },
         ],
       },
+      {
+        id: "linear-charge-density-converter",
+        name: "Linear Charge Density Converter",
+        tools: [
+          {
+            id: "linear_charge_density_converter",
+            name: "Linear Charge Density Converter",
+            path: "/tools/other-tools/linear-charge-density-converter",
+          },
+        ],
+      },
+      {
+        id: "linear-current-density-converter",
+        name: "Linear Current Density Converter",
+        tools: [
+          {
+            id: "linear_current_density_converter",
+            name: "Linear Current Density Converter",
+            path: "/tools/other-tools/linear-current-density-converter",
+          },
+        ],
+      },
+      {
+        id: "luminance-converter",
+        name: "Luminance Converter",
+        tools: [
+          {
+            id: "luminance_converter",
+            name: "Luminance Converter",
+            path: "/tools/other-tools/luminance-converter",
+          },
+        ],
+      },
+      {
+        id: "luminous-intensity-converter",
+        name: "Luminous Intensity Converter",
+        tools: [
+          {
+            id: "luminous_intensity_converter",
+            name: "Luminous Intensity Converter",
+            path: "/tools/other-tools/luminous-intensity-converter",
+          },
+        ],
+      },
+      {
+        id: "magnetic-field",
+        name: "Magnetic Field Converter",
+        tools: [
+          {
+            id: "magnetic_field_strength_converter",
+            name: "Magnetic Field Strength Converter",
+            path: "/tools/other-tools/magnetic-field-strength-converter",
+          },
+          {
+            id: "magnetic_flux_converter",
+            name: "Magnetic Flux Converter",
+            path: "/tools/other-tools/magnetic-flux-converter",
+          },
+          {
+            id: "magnetic_flux_density_converter",
+            name: "Magnetic Flux Density Converter",
+            path: "/tools/other-tools/magnetic-flux-density-converter",
+          },
+          {
+            id: "magnetomotive_force_converter",
+            name: "Magnetomotive Force Converter",
+            path: "/tools/other-tools/magnetomotive-force-converter",
+          },
+          {
+            id: "mass_flux_density_converter",
+            name: "Mass Flux Density Converter",
+            path: "/tools/other-tools/mass-flux-density-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -3435,5 +3510,41 @@ export const otherToolMetaData = {
   "yards-to-miles": {
     title: "Yards to Miles Converter",
     description: "Accurate and fast conversion from yards to miles.",
+  },
+  "linear-charge-density-converter": {
+    title: "Linear Charge Density Converter",
+    description: "Convert linear charge density units quickly and accurately using this tool.",
+  },
+  "linear-current-density-converter": {
+    title: "Linear Current Density Converter",
+    description: "Easily convert linear current density units with this efficient converter.",
+  },
+  "luminance-converter": {
+    title: "Luminance Converter",
+    description: "Convert luminance values across various units instantly.",
+  },
+  "luminous-intensity-converter": {
+    title: "Luminous Intensity Converter",
+    description: "Quickly convert luminous intensity between candela, millicandela, and more.",
+  },
+  "magnetic-field-strength-converter": {
+    title: "Magnetic Field Strength Converter",
+    description: "Convert magnetic field strength units like ampere per meter and oersted easily.",
+  },
+  "magnetic-flux-converter": {
+    title: "Magnetic Flux Converter",
+    description: "Quickly convert magnetic flux units such as weber and maxwell.",
+  },
+  "magnetic-flux-density-converter": {
+    title: "Magnetic Flux Density Converter",
+    description: "Convert magnetic flux density units like tesla and gauss with precision.",
+  },
+  "magnetomotive-force-converter": {
+    title: "Magnetomotive Force Converter",
+    description: "Convert magnetomotive force units easily and accurately.",
+  },
+  "mass-flux-density-converter": {
+    title: "Mass Flux Density Converter",
+    description: "Instantly convert mass flux density values across different units.",
   },
 };

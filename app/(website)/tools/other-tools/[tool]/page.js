@@ -128,6 +128,16 @@ import YardsToInches from "@/components/pages/tools/other/yards-to-inches";
 import YardsToMeters from "@/components/pages/tools/other/yards-to-meters";
 import YardsToMiles from "@/components/pages/tools/other/yards-to-miles";
 
+import LinearChargeDensityConverter from "@/components/pages/tools/other/linear-charge-density-converter";
+import LinearCurrentDensityConverter from "@/components/pages/tools/other/linear-current-density-converter";
+import LuminanceConverter from "@/components/pages/tools/other/luminance-converter";
+import LuminousIntensityConverter from "@/components/pages/tools/other/luminous-intensity-converter";
+import MagneticFieldStrengthConverter from "@/components/pages/tools/other/magnetic-field-strength-converter";
+import MagneticFluxConverter from "@/components/pages/tools/other/magnetic-flux-converter";
+import MagneticFluxDensityConverter from "@/components/pages/tools/other/magnetic-flux-density-converter";
+import MagnetomotiveForceConverter from "@/components/pages/tools/other/magnetomotive-force-converter";
+import MassFluxDensityConverter from "@/components/pages/tools/other/mass-flux-density-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -247,6 +257,16 @@ const toolComponents = {
   "yards-to-inches": YardsToInches,
   "yards-to-meters": YardsToMeters,
   "yards-to-miles": YardsToMiles,
+
+  "linear-charge-density-converter": LinearChargeDensityConverter,
+  "linear-current-density-converter": LinearCurrentDensityConverter,
+  "luminance-converter": LuminanceConverter,
+  "luminous-intensity-converter": LuminousIntensityConverter,
+  "magnetic-field-strength-converter": MagneticFieldStrengthConverter,
+  "magnetic-flux-converter": MagneticFluxConverter,
+  "magnetic-flux-density-converter": MagneticFluxDensityConverter,
+  "magnetomotive-force-converter": MagnetomotiveForceConverter,
+  "mass-flux-density-converter": MassFluxDensityConverter,
 };
 
 export async function generateMetadata({ params }) {
