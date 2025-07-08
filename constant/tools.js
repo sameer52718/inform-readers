@@ -1872,6 +1872,56 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "time-converter",
+        name: "Time Converter",
+        tools: [
+          { id: "days-to-hours", name: "Days to Hours", path: "/tools/other-tools/days-to-hours" },
+          { id: "days-to-minutes", name: "Days to Minutes", path: "/tools/other-tools/days-to-minutes" },
+          { id: "days-to-months", name: "Days to Months", path: "/tools/other-tools/days-to-months" },
+          { id: "days-to-seconds", name: "Days to Seconds", path: "/tools/other-tools/days-to-seconds" },
+          { id: "days-to-years", name: "Days to Years", path: "/tools/other-tools/days-to-years" },
+          { id: "hours-to-days", name: "Hours to Days", path: "/tools/other-tools/hours-to-days" },
+          { id: "hours-to-minutes", name: "Hours to Minutes", path: "/tools/other-tools/hours-to-minutes" },
+          {
+            id: "milliseconds-to-seconds",
+            name: "Milliseconds to Seconds",
+            path: "/tools/other-tools/milliseconds-to-seconds",
+          },
+          { id: "minutes-to-days", name: "Minutes to Days", path: "/tools/other-tools/minutes-to-days" },
+          { id: "minutes-to-hours", name: "Minutes to Hours", path: "/tools/other-tools/minutes-to-hours" },
+          {
+            id: "minutes-to-seconds",
+            name: "Minutes to Seconds",
+            path: "/tools/other-tools/minutes-to-seconds",
+          },
+          { id: "months-to-days", name: "Months to Days", path: "/tools/other-tools/months-to-days" },
+          { id: "seconds-to-days", name: "Seconds to Days", path: "/tools/other-tools/seconds-to-days" },
+          {
+            id: "seconds-to-milliseconds",
+            name: "Seconds to Milliseconds",
+            path: "/tools/other-tools/seconds-to-milliseconds",
+          },
+          {
+            id: "seconds-to-minutes",
+            name: "Seconds to Minutes",
+            path: "/tools/other-tools/seconds-to-minutes",
+          },
+          { id: "time-converter", name: "Time Converter", path: "/tools/other-tools/time-converter" },
+          { id: "years-to-days", name: "Years to Days", path: "/tools/other-tools/years-to-days" },
+        ],
+      },
+      {
+        id: "typography-converter",
+        name: "Typography Converter",
+        tools: [
+          {
+            id: "typography-converter",
+            name: "Typography Converter",
+            path: "/tools/other-tools/typography-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -3973,5 +4023,78 @@ export const otherToolMetaData = {
   "thermal-resistance-converter": {
     title: "Thermal Resistance Converter",
     description: "Convert between different units of thermal resistance easily.",
+  },
+  "days-to-hours": {
+    title: "Days to Hours Converter",
+    description: "Easily convert days to hours with this efficient time conversion tool.",
+  },
+  "days-to-minutes": {
+    title: "Days to Minutes Converter",
+    description: "Convert days into minutes instantly and accurately.",
+  },
+  "days-to-months": {
+    title: "Days to Months Converter",
+    description: "Quickly convert days to months with this simple tool.",
+  },
+  "days-to-seconds": {
+    title: "Days to Seconds Converter",
+    description: "Instantly convert days into seconds for accurate time calculations.",
+  },
+  "days-to-years": {
+    title: "Days to Years Converter",
+    description: "Convert days into years quickly with this helpful time tool.",
+  },
+  "hours-to-days": {
+    title: "Hours to Days Converter",
+    description: "Convert hours to days efficiently and accurately.",
+  },
+  "hours-to-minutes": {
+    title: "Hours to Minutes Converter",
+    description: "Easily convert hours into minutes with our online tool.",
+  },
+  "milliseconds-to-seconds": {
+    title: "Milliseconds to Seconds Converter",
+    description: "Convert milliseconds to seconds instantly and accurately.",
+  },
+  "minutes-to-days": {
+    title: "Minutes to Days Converter",
+    description: "Quickly convert minutes to days using this calculator.",
+  },
+  "minutes-to-hours": {
+    title: "Minutes to Hours Converter",
+    description: "Convert minutes to hours instantly and with precision.",
+  },
+  "minutes-to-seconds": {
+    title: "Minutes to Seconds Converter",
+    description: "Easily convert minutes into seconds for fast time conversion.",
+  },
+  "months-to-days": {
+    title: "Months to Days Converter",
+    description: "Convert months into days accurately using this time tool.",
+  },
+  "seconds-to-days": {
+    title: "Seconds to Days Converter",
+    description: "Convert seconds into days with this easy-to-use converter.",
+  },
+  "seconds-to-milliseconds": {
+    title: "Seconds to Milliseconds Converter",
+    description: "Instantly convert seconds to milliseconds for accurate timing.",
+  },
+  "seconds-to-minutes": {
+    title: "Seconds to Minutes Converter",
+    description: "Quickly convert seconds to minutes using this handy tool.",
+  },
+  "time-converter": {
+    title: "Time Converter",
+    description:
+      "Convert between hours, days, seconds, months, and more using this all-in-one time converter.",
+  },
+  "years-to-days": {
+    title: "Years to Days Converter",
+    description: "Convert years into days quickly with this precise calculator.",
+  },
+  "typography-converter": {
+    title: "Typography Converter",
+    description: "Convert between points, pixels, ems, rems, and more using this typography unit converter.",
   },
 };

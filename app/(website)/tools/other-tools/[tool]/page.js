@@ -193,6 +193,25 @@ import ThermalConductivityConverter from "@/components/pages/tools/other/thermal
 import ThermalExpansionConverter from "@/components/pages/tools/other/thermal-expansion-converter";
 import ThermalResistanceConverter from "@/components/pages/tools/other/thermal-resistance-converter";
 
+import DaysToHours from "@/components/pages/tools/other/days-to-hours";
+import DaysToMinutes from "@/components/pages/tools/other/days-to-minutes";
+import DaysToMonths from "@/components/pages/tools/other/days-to-months";
+import DaysToSeconds from "@/components/pages/tools/other/days-to-seconds";
+import DaysToYears from "@/components/pages/tools/other/days-to-years";
+import HoursToDays from "@/components/pages/tools/other/hours-to-days";
+import HoursToMinutes from "@/components/pages/tools/other/hours-to-minutes";
+import MillisecondsToSeconds from "@/components/pages/tools/other/milliseconds-to-seconds";
+import MinutesToDays from "@/components/pages/tools/other/minutes-to-days";
+import MinutesToHours from "@/components/pages/tools/other/minutes-to-hours";
+import MinutesToSeconds from "@/components/pages/tools/other/minutes-to-seconds";
+import MonthsToDays from "@/components/pages/tools/other/months-to-days";
+import SecondsToDays from "@/components/pages/tools/other/seconds-to-days";
+import SecondsToMilliseconds from "@/components/pages/tools/other/seconds-to-milliseconds";
+import SecondsToMinutes from "@/components/pages/tools/other/seconds-to-minutes";
+import TimeConverter from "@/components/pages/tools/other/time-converter";
+import YearsToDays from "@/components/pages/tools/other/years-to-days";
+import TypographyConverter from "@/components/pages/tools/other/typography-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -377,6 +396,25 @@ const toolComponents = {
   "thermal-conductivity-converter": ThermalConductivityConverter,
   "thermal-expansion-converter": ThermalExpansionConverter,
   "thermal-resistance-converter": ThermalResistanceConverter,
+
+  "days-to-hours": DaysToHours,
+  "days-to-minutes": DaysToMinutes,
+  "days-to-months": DaysToMonths,
+  "days-to-seconds": DaysToSeconds,
+  "days-to-years": DaysToYears,
+  "hours-to-days": HoursToDays,
+  "hours-to-minutes": HoursToMinutes,
+  "milliseconds-to-seconds": MillisecondsToSeconds,
+  "minutes-to-days": MinutesToDays,
+  "minutes-to-hours": MinutesToHours,
+  "minutes-to-seconds": MinutesToSeconds,
+  "months-to-days": MonthsToDays,
+  "seconds-to-days": SecondsToDays,
+  "seconds-to-milliseconds": SecondsToMilliseconds,
+  "seconds-to-minutes": SecondsToMinutes,
+  "time-converter": TimeConverter,
+  "years-to-days": YearsToDays,
+  "typography-converter": TypographyConverter,
 };
 
 export async function generateMetadata({ params }) {
