@@ -16,6 +16,14 @@ import SquareMeterToSquareFeet from "@/components/pages/tools/other/square-meter
 import SquareMilesToAcres from "@/components/pages/tools/other/square-miles-to-acres";
 import SquareYardsToSquareFeet from "@/components/pages/tools/other/square-yards-to-square-feet";
 
+import CaseConverter from "@/components/pages/tools/other/case-converter";
+import ChargeConverter from "@/components/pages/tools/other/charge-converter";
+import ConcentrationMolarConverter from "@/components/pages/tools/other/concentration-molar-converter";
+import ConcentrationSolutionConverter from "@/components/pages/tools/other/concentration-solution-converter";
+import AmpsToMilliampsConverter from "@/components/pages/tools/other/amps-to-milliamps-converter";
+import CurrentConverter from "@/components/pages/tools/other/current-converter";
+import MilliampsToAmpsConverter from "@/components/pages/tools/other/milliamps-to-amps-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -32,6 +40,14 @@ const toolComponents = {
   "square-meter-to-square-feet": SquareMeterToSquareFeet,
   "square-miles-to-acres": SquareMilesToAcres,
   "square-yards-to-square-feet": SquareYardsToSquareFeet,
+
+  "case-converter": CaseConverter,
+  "charge-converter": ChargeConverter,
+  "concentration-molar-converter": ConcentrationMolarConverter,
+  "concentration-solution-converter": ConcentrationSolutionConverter,
+  "amps-to-milliamps-converter": AmpsToMilliampsConverter,
+  "current-converter": CurrentConverter,
+  "milliamps-to-amps-converter": MilliampsToAmpsConverter,
 };
 
 export async function generateMetadata({ params }) {

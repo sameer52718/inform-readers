@@ -1139,6 +1139,71 @@ export const TOOL_CATEGORIES = [
           },
         ],
       },
+      {
+        id: "case-converter",
+        name: "Case Converter Tool",
+        tools: [
+          {
+            id: "case_converter",
+            name: "Case Converter",
+            path: "/tools/other-tools/case-converter",
+          },
+        ],
+      },
+      {
+        id: "charge-converter",
+        name: "Charge Converter",
+        tools: [
+          {
+            id: "charge_converter",
+            name: "Charge Converter",
+            path: "/tools/other-tools/charge-converter",
+          },
+        ],
+      },
+      {
+        id: "concentration-molar-converter",
+        name: "Concentration – Molar Converter",
+        tools: [
+          {
+            id: "concentration_molar_converter",
+            name: "Concentration Molar Converter",
+            path: "/tools/other-tools/concentration-molar-converter",
+          },
+        ],
+      },
+      {
+        id: "concentration-solution-converter",
+        name: "Concentration – Solution Converter",
+        tools: [
+          {
+            id: "concentration_solution_converter",
+            name: "Concentration Solution Converter",
+            path: "/tools/other-tools/concentration-solution-converter",
+          },
+        ],
+      },
+      {
+        id: "current-converter",
+        name: "Current Converter",
+        tools: [
+          {
+            id: "amps_to_milliamps_converter",
+            name: "Amps to Milliamps Converter",
+            path: "/tools/other-tools/amps-to-milliamps-converter",
+          },
+          {
+            id: "current_converter",
+            name: "Current Converter",
+            path: "/tools/other-tools/current-converter",
+          },
+          {
+            id: "milliamps_to_amps_converter",
+            name: "Milliamps to Amps Converter",
+            path: "/tools/other-tools/milliamps-to-amps-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -2570,5 +2635,39 @@ export const otherToolMetaData = {
   "square-yards-to-square-feet": {
     title: "Square Yards to Square Feet Converter",
     description: "Convert square yards to square feet instantly and accurately.",
+  },
+  "case-converter": {
+    title: "Case Converter Tool – Uppercase, Lowercase, Title Case",
+    description:
+      "Easily convert text between uppercase, lowercase, sentence case, and more with our Case Converter Tool.",
+  },
+  "charge-converter": {
+    title: "Charge Converter – Convert Electric Charge Units",
+    description:
+      "Convert between units of electric charge such as coulombs, milliamp-hours, and more with our Charge Converter.",
+  },
+  "concentration-molar-converter": {
+    title: "Molar Concentration Converter – Convert Molarity Units",
+    description:
+      "Easily convert between different molar concentration units such as mol/L, mmol/L, and more.",
+  },
+  "concentration-solution-converter": {
+    title: "Solution Concentration Converter – Percentage, ppm, ppb",
+    description:
+      "Convert solution concentration units like % w/w, ppm, ppb, and molarity using this comprehensive tool.",
+  },
+  "amps-to-milliamps-converter": {
+    title: "Amps to Milliamps Converter",
+    description:
+      "Convert amperes (amps) to milliamperes (mA) quickly with this electrical current conversion tool.",
+  },
+  "current-converter": {
+    title: "Current Converter – Electrical Unit Conversion",
+    description: "Convert electrical current units such as amperes, milliamperes, kiloamperes, and more.",
+  },
+  "milliamps-to-amps-converter": {
+    title: "Milliamps to Amps Converter",
+    description:
+      "Easily convert milliamperes (mA) to amperes (A) with this accurate and fast electrical converter.",
   },
 };
