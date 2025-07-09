@@ -2046,6 +2046,43 @@ export const TOOL_CATEGORIES = [
           { id: "volume-converter", name: "Volume Converter", path: "/tools/other-tools/volume-converter" },
         ],
       },
+      {
+        id: "weight-mass-converter",
+        name: "Weight and Mass Converter",
+        tools: [
+          { id: "g-to-kg", name: "Grams to Kilograms", path: "/tools/other-tools/g-to-kg" },
+          {
+            id: "grams-to-milligrams",
+            name: "Grams to Milligrams",
+            path: "/tools/other-tools/grams-to-milligrams",
+          },
+          { id: "grams-to-ounces", name: "Grams to Ounces", path: "/tools/other-tools/grams-to-ounces" },
+          { id: "grams-to-pounds", name: "Grams to Pounds", path: "/tools/other-tools/grams-to-pounds" },
+          { id: "kg-to-g", name: "Kilograms to Grams", path: "/tools/other-tools/kg-to-g" },
+          { id: "kg-to-lbs", name: "Kilograms to Pounds", path: "/tools/other-tools/kg-to-lbs" },
+          { id: "kg-to-oz", name: "Kilograms to Ounces", path: "/tools/other-tools/kg-to-oz" },
+          { id: "lbs-to-kg", name: "Pounds to Kilograms", path: "/tools/other-tools/lbs-to-kg" },
+          { id: "lbs-to-stone", name: "Pounds to Stone", path: "/tools/other-tools/lbs-to-stone" },
+          { id: "lbs-to-ton", name: "Pounds to Ton", path: "/tools/other-tools/lbs-to-ton" },
+          {
+            id: "milligrams-to-grams",
+            name: "Milligrams to Grams",
+            path: "/tools/other-tools/milligrams-to-grams",
+          },
+          { id: "ounces-to-grams", name: "Ounces to Grams", path: "/tools/other-tools/ounces-to-grams" },
+          { id: "ounces-to-pounds", name: "Ounces to Pounds", path: "/tools/other-tools/ounces-to-pounds" },
+          { id: "oz-to-kg", name: "Ounces to Kilograms", path: "/tools/other-tools/oz-to-kg" },
+          { id: "pounds-to-grams", name: "Pounds to Grams", path: "/tools/other-tools/pounds-to-grams" },
+          { id: "pounds-to-ounces", name: "Pounds to Ounces", path: "/tools/other-tools/pounds-to-ounces" },
+          { id: "stone-to-lbs", name: "Stone to Pounds", path: "/tools/other-tools/stone-to-lbs" },
+          { id: "ton-to-lbs", name: "Ton to Pounds", path: "/tools/other-tools/ton-to-lbs" },
+          {
+            id: "weight-mass-converter",
+            name: "Weight & Mass Converter",
+            path: "/tools/other-tools/weight-mass-converter",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -4420,5 +4457,81 @@ export const otherToolMetaData = {
   "volume-converter": {
     title: "Volume Converter",
     description: "Comprehensive volume conversion tool for various units.",
+  },
+  "g-to-kg": {
+    title: "Grams to Kilograms Converter",
+    description: "Easily convert grams to kilograms using this accurate tool.",
+  },
+  "grams-to-milligrams": {
+    title: "Grams to Milligrams Converter",
+    description: "Convert grams to milligrams quickly and precisely.",
+  },
+  "grams-to-ounces": {
+    title: "Grams to Ounces Converter",
+    description: "Convert grams to ounces instantly with this converter.",
+  },
+  "grams-to-pounds": {
+    title: "Grams to Pounds Converter",
+    description: "Accurately convert grams to pounds using our online tool.",
+  },
+  "kg-to-g": {
+    title: "Kilograms to Grams Converter",
+    description: "Convert kilograms to grams with a simple and fast converter.",
+  },
+  "kg-to-lbs": {
+    title: "Kilograms to Pounds Converter",
+    description: "Quickly convert kg to lbs using this conversion calculator.",
+  },
+  "kg-to-oz": {
+    title: "Kilograms to Ounces Converter",
+    description: "Easily convert kilograms to ounces with precision.",
+  },
+  "lbs-to-kg": {
+    title: "Pounds to Kilograms Converter",
+    description: "Convert pounds to kilograms accurately and fast.",
+  },
+  "lbs-to-stone": {
+    title: "Pounds to Stone Converter",
+    description: "Convert pounds to stone effortlessly with our calculator.",
+  },
+  "lbs-to-ton": {
+    title: "Pounds to Ton Converter",
+    description: "Quickly convert pounds to tons with precision.",
+  },
+  "milligrams-to-grams": {
+    title: "Milligrams to Grams Converter",
+    description: "Convert milligrams to grams in one click.",
+  },
+  "ounces-to-grams": {
+    title: "Ounces to Grams Converter",
+    description: "Convert ounces to grams with this easy tool.",
+  },
+  "ounces-to-pounds": {
+    title: "Ounces to Pounds Converter",
+    description: "Convert ounces to pounds quickly and accurately.",
+  },
+  "oz-to-kg": {
+    title: "Ounces to Kilograms Converter",
+    description: "Easily convert ounces to kilograms.",
+  },
+  "pounds-to-grams": {
+    title: "Pounds to Grams Converter",
+    description: "Convert pounds to grams for any weight conversion need.",
+  },
+  "pounds-to-ounces": {
+    title: "Pounds to Ounces Converter",
+    description: "Quickly convert pounds to ounces online.",
+  },
+  "stone-to-lbs": {
+    title: "Stone to Pounds Converter",
+    description: "Convert stone to pounds easily and accurately.",
+  },
+  "ton-to-lbs": {
+    title: "Ton to Pounds Converter",
+    description: "Convert tons to pounds instantly with our conversion tool.",
+  },
+  "weight-mass-converter": {
+    title: "Weight and Mass Converter",
+    description: "Comprehensive tool to convert between various weight and mass units.",
   },
 };

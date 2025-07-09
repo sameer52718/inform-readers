@@ -263,6 +263,26 @@ import TeaspoonToMl from "@/components/pages/tools/other/teaspoon-to-ml";
 import TeaspoonsToTablespoons from "@/components/pages/tools/other/teaspoons-to-tablespoons";
 import VolumeConverter from "@/components/pages/tools/other/volume-converter";
 
+import GToKg from "@/components/pages/tools/other/g-to-kg";
+import GramsToMilligrams from "@/components/pages/tools/other/grams-to-milligrams";
+import GramsToOunces from "@/components/pages/tools/other/grams-to-ounces";
+import GramsToPounds from "@/components/pages/tools/other/grams-to-pounds";
+import KgToG from "@/components/pages/tools/other/kg-to-g";
+import KgToLbs from "@/components/pages/tools/other/kg-to-lbs";
+import KgToOz from "@/components/pages/tools/other/kg-to-oz";
+import LbsToKg from "@/components/pages/tools/other/lbs-to-kg";
+import LbsToStone from "@/components/pages/tools/other/lbs-to-stone";
+import LbsToTon from "@/components/pages/tools/other/lbs-to-ton";
+import MilligramsToGrams from "@/components/pages/tools/other/milligrams-to-grams";
+import OuncesToGrams from "@/components/pages/tools/other/ounces-to-grams";
+import OuncesToPounds from "@/components/pages/tools/other/ounces-to-pounds";
+import OzToKg from "@/components/pages/tools/other/oz-to-kg";
+import PoundsToGrams from "@/components/pages/tools/other/pounds-to-grams";
+import PoundsToOunces from "@/components/pages/tools/other/pounds-to-ounces";
+import StoneToLbs from "@/components/pages/tools/other/stone-to-lbs";
+import TonToLbs from "@/components/pages/tools/other/ton-to-lbs";
+import WeightMassConverter from "@/components/pages/tools/other/weight-mass-converter";
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -517,6 +537,26 @@ const toolComponents = {
   "teaspoon-to-ml": TeaspoonToMl,
   "teaspoons-to-tablespoons": TeaspoonsToTablespoons,
   "volume-converter": VolumeConverter,
+
+  "g-to-kg": GToKg,
+  "grams-to-milligrams": GramsToMilligrams,
+  "grams-to-ounces": GramsToOunces,
+  "grams-to-pounds": GramsToPounds,
+  "kg-to-g": KgToG,
+  "kg-to-lbs": KgToLbs,
+  "kg-to-oz": KgToOz,
+  "lbs-to-kg": LbsToKg,
+  "lbs-to-stone": LbsToStone,
+  "lbs-to-ton": LbsToTon,
+  "milligrams-to-grams": MilligramsToGrams,
+  "ounces-to-grams": OuncesToGrams,
+  "ounces-to-pounds": OuncesToPounds,
+  "oz-to-kg": OzToKg,
+  "pounds-to-grams": PoundsToGrams,
+  "pounds-to-ounces": PoundsToOunces,
+  "stone-to-lbs": StoneToLbs,
+  "ton-to-lbs": TonToLbs,
+  "weight-mass-converter": WeightMassConverter,
 };
 
 export async function generateMetadata({ params }) {
