@@ -5,59 +5,16 @@ import { useParams } from "next/navigation";
 
 // Components
 import TabHeader from "@/components/pages/specification/TabHeader";
-import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import ProductGallery from "@/components/pages/specification/ProductGallery";
 import ProductInfoCard from "@/components/pages/specification/ProductInfoCard";
 import SpecificationTable from "@/components/pages/specification/SpecificationTable";
 import ReviewSection from "@/components/pages/specification/ReviewSection";
 import ReviewTabSection from "@/components/pages/specification/ReviewTabSection";
-import RelatedProducts from "@/components/pages/specification/RelatedProducts";
 import Loading from "@/components/ui/Loading";
 
 // Utils
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-
-// Sample data for development
-const sampleImages = [
-  { src: "/website/assets/images/product/01.png", type: "image" },
-  { src: "/website/assets/images/product/02.png", type: "video" },
-  { src: "/website/assets/images/product/03.png", type: "image" },
-];
-
-const sampleProducts = [
-  {
-    id: 1,
-    image: "/website/assets/images/product/01.png",
-    title: "iQOO Neo 10R (8GB RAM, 128GB) - Raging Black",
-    price: "₹26,998",
-    discount: "Flat ₹2,000 Discount*",
-    platform: "amazon",
-  },
-  {
-    id: 2,
-    image: "/website/assets/images/product/02.png",
-    title: "Deals on Refrigerators Starting @ ₹65/Day",
-    price: "No Cost EMI*",
-    discount: "Extra 10% Discount*",
-    platform: "amazon",
-  },
-  {
-    id: 3,
-    image: "/website/assets/images/product/03.png",
-    title: "Affordable Deals on Best Window & Split ACs",
-    price: "Starting ₹23,240",
-    discount: "10% Instant Discount",
-    platform: "amazon",
-  },
-  {
-    id: 4,
-    image: "/website/assets/images/product/04.png",
-    title: "Nothing Phone 3a (8GB RAM, 128GB) - White",
-    price: "₹24,999",
-    platform: "flipkart",
-  },
-];
 
 export default function SpecificationDetail() {
   const { id, category } = useParams();
@@ -102,14 +59,6 @@ export default function SpecificationDetail() {
     fetchData();
   }, [id, category]);
 
-  // Breadcrumb items
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Specification", href: "/specification" },
-    { label: category ? String(category).replaceAll("_", " ") : "", href: `/specification/${category}` },
-    { label: data?.name || "" },
-  ];
-
   // Handle smooth scrolling to sections
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -143,7 +92,6 @@ export default function SpecificationDetail() {
       <div className="container mx-auto px-4 lg:px-8 pb-12">
         <Loading loading={isLoading}>
           {/* Breadcrumb Navigation */}
-          <Breadcrumb items={breadcrumbItems} />
 
           {/* Product Title */}
           <section className="mb-6">
@@ -171,20 +119,20 @@ export default function SpecificationDetail() {
                   Specifications
                 </button>
                 <button
-                  onClick={() => scrollToSection("reviews")}
-                  className={`mr-6 text-lg font-medium whitespace-nowrap transition-colors ${
-                    activeTab === "Reviews" ? "text-red-600" : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  User Reviews
-                </button>
-                <button
                   onClick={() => scrollToSection("faqs")}
                   className={`text-lg font-medium whitespace-nowrap transition-colors ${
                     activeTab === "FAQs" ? "text-red-600" : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
                   FAQs
+                </button>
+                <button
+                  onClick={() => scrollToSection("reviews")}
+                  className={`mr-6 text-lg font-medium whitespace-nowrap transition-colors ${
+                    activeTab === "Reviews" ? "text-red-600" : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  User Reviews
                 </button>
               </div>
 
@@ -227,13 +175,20 @@ export default function SpecificationDetail() {
               {data?.data?.generalSpecs && (
                 <ProductInfoCard name={data.name} specs={data.data.generalSpecs} createdAt={data.createdAt} />
               )}
+              {console.log(data?.data)}
 
               {/* Specifications Section */}
               {data?.data &&
                 Object.keys(data.data).map((key) => {
-                  if (key === "_id" || data.data[key].length === 0) {
+                  if (
+                    key === "_id" ||
+                    key === "links" ||
+                    !Array.isArray(data.data[key]) ||
+                    data.data[key].length === 0
+                  ) {
                     return null;
                   }
+                  console.log(data.data[key]);
 
                   return (
                     <div key={key} className="mb-6">
@@ -245,19 +200,19 @@ export default function SpecificationDetail() {
                   );
                 })}
 
-              {/* Reviews Section */}
-              <div id="reviews" className="pt-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">User Reviews</h2>
-                <ReviewSection />
-                <ReviewTabSection />
-              </div>
-
               {/* FAQs Section */}
               <div id="faqs" className="pt-8 mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
                 <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200">
                   <p className="text-gray-500 text-center py-8">No FAQs available for this product yet.</p>
                 </div>
+              </div>
+
+              {/* Reviews Section */}
+              <div id="reviews" className="pt-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">User Reviews</h2>
+                <ReviewSection />
+                <ReviewTabSection />
               </div>
             </div>
 

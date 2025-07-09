@@ -77,7 +77,7 @@ const HeroSection = () => {
   );
 };
 
-const SpecificationCard = ({ product, category }) => {
+const SpecificationCard = ({ product, category, categoryId }) => {
   const { userType, user } = useSelector((state) => state.auth);
   const [isHovered, setIsHovered] = useState(false);
   const [wishlist, setWishlist] = useState(product?.wishlist?.includes(user?._id) || false);
@@ -104,7 +104,10 @@ const SpecificationCard = ({ product, category }) => {
       className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
     >
       <div className="relative p-3 pb-2">
-        <Link href={`/specification/${category}/${product._id}`} className="block overflow-hidden rounded-lg">
+        <Link
+          href={`/specification/${categoryId}/${product._id}`}
+          className="block overflow-hidden rounded-lg"
+        >
           <motion.div
             animate={{ scale: isHovered ? 1.05 : 1 }}
             transition={{ duration: 0.3 }}
@@ -123,7 +126,7 @@ const SpecificationCard = ({ product, category }) => {
 
         <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
           <Link
-            href={`/specification/${category}/${product._id}`}
+            href={`/specification/${categoryId}/${product._id}`}
             className="hover:text-red-600 transition-colors"
           >
             {product.name}
@@ -177,7 +180,7 @@ const SpecificationSection = ({ item }) => {
         </motion.h2>
 
         <Link
-          href={`/specification/${item?.categoryName}`}
+          href={`/specification/${item?.categoryId}`}
           className="text-sm md:text-base font-medium text-gray-600 hover:text-red-600 transition-colors"
         >
           View All
@@ -224,7 +227,11 @@ const SpecificationSection = ({ item }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <SpecificationCard product={product} category={item?.categoryName} />
+                <SpecificationCard
+                  product={product}
+                  category={item?.categoryName}
+                  categoryId={item.categoryId}
+                />
               </motion.div>
             </SwiperSlide>
           ))}
