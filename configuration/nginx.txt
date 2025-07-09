@@ -1,0 +1,407 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+error_log /var/log/nginx/error.log;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+        worker_connections 768;
+        # multi_accept on;
+}
+
+http {
+set_real_ip_from 0.0.0.0/0;
+real_ip_header X-Forwarded-For;
+        geoip_country /usr/share/GeoIP/GeoIP.dat;
+
+    map $geoip_country_code $country_code {
+    default $geoip_country_code;
+
+    AF AF;
+    AL AL;
+    DZ DZ;
+    AS AS;
+    AD AD;
+    AO AO;
+    AI AI;
+    AQ AQ;
+    AG AG;
+    AR AR;
+    AM AM;
+    AW AW;
+    AU AU;
+    AT AT;
+    AZ AZ;
+    BS BS;
+    BH BH;
+    BD BD;
+    BB BB;
+    BY BY;
+    BE BE;
+    BZ BZ;
+    BJ BJ;
+    BM BM;
+    BT BT;
+    BO BO;
+    BQ BQ;
+    BA BA;
+    BW BW;
+    BV BV;
+    BR BR;
+    IO IO;
+    BN BN;
+    BG BG;
+    BF BF;
+    BI BI;
+    CV CV;
+    KH KH;
+    CM CM;
+    CA CA;
+    KY KY;
+    CF CF;
+    TD TD;
+    CL CL;
+    CN CN;
+    CX CX;
+    CC CC;
+    CO CO;
+    KM KM;
+    CG CG;
+    CD CD;
+    CK CK;
+    CR CR;
+    HR HR;
+    CU CU;
+    CW CW;
+    CY CY;
+    CZ CZ;
+    DK DK;
+    DJ DJ;
+    DM DM;
+    DO DO;
+    EC EC;
+    EG EG;
+    SV SV;
+    GQ GQ;
+    ER ER;
+    EE EE;
+    SZ SZ;
+    ET ET;
+    FK FK;
+    FO FO;
+    FJ FJ;
+    FI FI;
+    FR FR;
+    GF GF;
+    PF PF;
+    TF TF;
+    GA GA;
+    GM GM;
+    GE GE;
+    DE DE;
+    GH GH;
+    GI GI;
+    GR GR;
+    GL GL;
+    GD GD;
+    GP GP;
+    GU GU;
+    GT GT;
+    GG GG;
+    GN GN;
+    GW GW;
+    GY GY;
+    HT HT;
+    HM HM;
+    VA VA;
+    HN HN;
+    HK HK;
+    HU HU;
+    IS IS;
+    IN IN;
+    ID ID;
+    IR IR;
+    IQ IQ;
+    IE IE;
+    IM IM;
+    IL IL;
+    IT IT;
+    JM JM;
+    JP JP;
+    JE JE;
+    JO JO;
+    KZ KZ;
+    KE KE;
+    KI KI;
+    KP KP;
+    KR KR;
+    KW KW;
+    KG KG;
+    LA LA;
+    LV LV;
+    LB LB;
+    LS LS;
+    LR LR;
+    LY LY;
+    LI LI;
+    LT LT;
+    LU LU;
+    MO MO;
+    MG MG;
+    MW MW;
+    MY MY;
+    MV MV;
+    ML ML;
+    MT MT;
+    MH MH;
+    MQ MQ;
+    MR MR;
+    MU MU;
+    YT YT;
+    MX MX;
+    FM FM;
+    MD MD;
+    MC MC;
+    MN MN;
+    ME ME;
+    MS MS;
+    MA MA;
+    MZ MZ;
+    MM MM;
+    NA NA;
+    NR NR;
+    NP NP;
+    NL NL;
+}
+
+
+map $geoip_country_code $redirect_country {
+    default "pk";
+
+        IN in;
+    CN cn;
+    US us;
+    ID id;
+    PK pk;
+    NG ng;
+    BR br;
+    BD bd;
+    RU ru;
+    ET et;
+    MX mx;
+    JP jp;
+    PH ph;
+    EG eg;
+    VN vn;
+    CD cd;
+    TR tr;
+    IR ir;
+    DE de;
+    TH th;
+    GB gb;
+    FR fr;
+    ZA za;
+    IT it;
+    TZ tz;
+    MM mm;
+    KR kr;
+    CO co;
+    KE ke;
+    ES es;
+    AR ar;
+    DZ dz;
+    SD sd;
+    UA ua;
+    UG ug;
+    IQ iq;
+    CA ca;
+    PL pl;
+    MA ma;
+    UZ uz;
+    SA sa;
+    PE pe;
+    AO ao;
+    MY my;
+    MZ mz;
+    GH gh;
+    YE ye;
+    NP np;
+    VE ve;
+    MG mg;
+    CM cm;
+    CI ci;
+    KP kp;
+    AU au;
+    NE ne;
+    LK lk;
+    BF bf;
+    ML ml;
+    RO ro;
+    CL cl;
+    KZ kz;
+    ZM zm;
+    MW mw;
+    EC ec;
+    SY sy;
+    NL nl;
+    SN sn;
+    GT gt;
+    TD td;
+    SO so;
+    ZW zw;
+    KH kh;
+    SS ss;
+    RW rw;
+    BI bi;
+    TN tn;
+    BO bo;
+    BE be;
+    HT ht;
+    CU cu;
+    BJ bj;
+    DO do;
+    GR gr;
+    CZ cz;
+    PT pt;
+    JO jo;
+    AZ az;
+    SE se;
+    HN hn;
+    AE ae;
+    TJ tj;
+    HU hu;
+    BY by;
+    AT at;
+    PG pg;
+    RS rs;
+    IL il;
+    CH ch;
+    TG tg;
+    SL sl;
+    LA la;
+    PY py;
+    BG bg;
+    LY ly;
+    LB lb;
+    NI ni;
+    KG kg;
+    SV sv;
+    TM tm;
+    SG sg;
+    DK dk;
+    FI fi;
+    CG cg;
+    SK sk;
+    NO no;
+    ER er;
+    PS ps;
+    OM om;
+    CR cr;
+    LR lr;
+    IE ie;
+    CF cf;
+    NZ nz;
+    MR mr;
+    PA pa;
+    KW kw;
+    HR hr;
+    MD md;
+    GE ge;
+    MN mn;
+    UY uy;
+    BA ba;
+    JM jm;
+    AM am;
+    QA qa;
+    AL al;
+    LT lt;
+    NA na;
+    GM gm;
+    BW bw;
+    GA ga;
+    LS ls;
+    MK mk;
+    SI si;
+    GW gw;
+    LV lv;
+    BH bh;
+    GQ gq;
+    TT tt;
+    EE ee; 
+
+}
+
+
+
+    log_format geoiptest '$remote_addr - $geoip_country_code - $country_code - [$time_local] "$request" $status';
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile on;
+        tcp_nopush on;
+        types_hash_max_size 2048;
+        # server_tokens off;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ##
+        # SSL Settings
+        ##
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+
+        ##
+        # Logging Settings
+        ##
+
+        access_log /var/log/nginx/access.log;
+
+        ##
+        # Gzip Settings
+        ##
+
+        gzip on;
+
+        # gzip_vary on;
+        # gzip_proxied any;
+        # gzip_comp_level 6;
+        # gzip_buffers 16 8k;
+        # gzip_http_version 1.1;
+        # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+        ##
+        # Virtual Host Configs
+        ##
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+}
+
+
+#mail {
+#       # See sample authentication script at:
+#       # http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+#
+#       # auth_http localhost/auth.php;
+#       # pop3_capabilities "TOP" "USER";
+#       # imap_capabilities "IMAP4rev1" "UIDPLUS";
+#
+#       server {
+#               listen     localhost:110;
+#               protocol   pop3;
+#               proxy      on;
+#       }
+#
+#       server {
+#               listen     localhost:143;
+#               protocol   imap;
+#               proxy      on;
+#       }
+#}
