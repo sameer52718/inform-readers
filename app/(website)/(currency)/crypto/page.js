@@ -1,16 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  TrendingDown,
-  DollarSign,
-  Volume2,
-  Search,
-  RefreshCw,
-  BarChart3,
-  TrendingUp,
-  AlertCircle,
-  Globe,
-} from "lucide-react";
+import { TrendingDown, Search, RefreshCw, TrendingUp, AlertCircle, Globe } from "lucide-react";
 import axios from "axios";
 import Loading from "@/components/ui/Loading";
 import { useSelector } from "react-redux";
@@ -57,7 +47,13 @@ const CryptoTable = ({ rates, currency }) => {
                 Market Cap
               </th>
               <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Volume (1h)
+              </th>
+              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Volume (24h)
+              </th>
+              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Volume (7d)
               </th>
             </tr>
           </thead>
@@ -89,7 +85,27 @@ const CryptoTable = ({ rates, currency }) => {
                       }`}
                     >
                       {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                      <span className="font-medium">{Math.abs(coin.price_change_1h).toFixed(2)}%</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right">
+                    <div
+                      className={`flex items-center justify-end space-x-1 ${
+                        isPositive ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
                       <span className="font-medium">{Math.abs(coin.price_change_24h).toFixed(2)}%</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right">
+                    <div
+                      className={`flex items-center justify-end space-x-1 ${
+                        isPositive ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                      <span className="font-medium">{Math.abs(coin.price_change_7d).toFixed(2)}%</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right font-medium text-gray-700">
@@ -108,150 +124,6 @@ const CryptoTable = ({ rates, currency }) => {
   );
 };
 
-const CryptoCard = ({ coin, currency }) => {
-  const { color } = useSelector((state) => state.config);
-
-  const isPositive = coin.price_change_24h >= 0;
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currency.toUpperCase(),
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
-  };
-
-  const formatLargeNumber = (value) => {
-    if (value >= 1e12) {
-      return `${(value / 1e12).toFixed(2)}T`;
-    } else if (value >= 1e9) {
-      return `${(value / 1e9).toFixed(2)}B`;
-    } else if (value >= 1e6) {
-      return `${(value / 1e6).toFixed(2)}M`;
-    }
-    return value.toLocaleString();
-  };
-
-  return (
-    <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <div
-            className={`w-12 h-12 bg-gradient-to-br from-${color}-500 to-${color}-700 rounded-full flex items-center justify-center text-white font-bold text-lg`}
-          >
-            {coin.symbol.charAt(0)}
-          </div>
-          <div>
-            <h3 className="font-semibold text-base text-gray-900">{coin.name}</h3>
-            <p className="text-sm text-gray-500">{coin.symbol.toUpperCase()}</p>
-          </div>
-        </div>
-        <div
-          className={`flex items-center space-x-1 px-3 py-1 rounded-full text-sm font-medium ${
-            isPositive ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-          }`}
-        >
-          {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-          <span>{Math.abs(coin.price_change_24h).toFixed(2)}%</span>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <DollarSign className="h-4 w-4 text-gray-400" />
-            <span className="text-sm text-gray-600">Price</span>
-          </div>
-          <span className="font-semibold text-gray-900">{formatCurrency(coin.price)}</span>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <BarChart3 className="h-4 w-4 text-gray-400" />
-            <span className="text-sm text-gray-600">Market Cap</span>
-          </div>
-          <span className="font-medium text-gray-700">{formatLargeNumber(coin.market_cap)}</span>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Volume2 className="h-4 w-4 text-gray-400" />
-            <span className="text-sm text-gray-600">24h Volume</span>
-          </div>
-          <span className="font-medium text-gray-700">{formatLargeNumber(coin.volume_24h)}</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const cryptocurrencies = [
-  { id: "bitcoin", name: "Bitcoin", symbol: "BTC" },
-  { id: "ethereum", name: "Ethereum", symbol: "ETH" },
-  { id: "tether", name: "Tether", symbol: "USDT" },
-  { id: "ripple", name: "Ripple", symbol: "XRP" },
-  { id: "binancecoin", name: "Binance Coin", symbol: "BNB" },
-  { id: "solana", name: "Solana", symbol: "SOL" },
-  { id: "dogecoin", name: "Dogecoin", symbol: "DOGE" },
-  { id: "tron", name: "TRON", symbol: "TRX" },
-  { id: "cardano", name: "Cardano", symbol: "ADA" },
-  { id: "wrapped-bitcoin", name: "Wrapped Bitcoin", symbol: "WBTC" },
-  { id: "chainlink", name: "Chainlink", symbol: "LINK" },
-  { id: "weth", name: "WETH", symbol: "WETH" },
-  { id: "bitcoin-cash", name: "Bitcoin Cash", symbol: "BCH" },
-  { id: "leo-token", name: "UNUS SED LEO", symbol: "LEO" },
-  { id: "stellar", name: "Stellar", symbol: "XLM" },
-  { id: "avalanche-2", name: "Avalanche", symbol: "AVAX" },
-  { id: "shiba-inu", name: "Shiba Inu", symbol: "SHIB" },
-  { id: "litecoin", name: "Litecoin", symbol: "LTC" },
-  { id: "polkadot", name: "Polkadot", symbol: "DOT" },
-  { id: "monero", name: "Monero", symbol: "XMR" },
-  { id: "uniswap", name: "Uniswap", symbol: "UNI" },
-  { id: "aave", name: "Aave", symbol: "AAVE" },
-  { id: "crypto-com-chain", name: "Cronos", symbol: "CRO" },
-  { id: "near", name: "NEAR Protocol", symbol: "NEAR" },
-  { id: "matic-network", name: "Polygon", symbol: "MATIC" },
-  { id: "cosmos", name: "Cosmos", symbol: "ATOM" },
-  { id: "fetch-ai", name: "Fetch.ai", symbol: "FET" },
-  { id: "eos", name: "EOS Coin", symbol: "EOS" },
-  { id: "floki", name: "Floki Inu", symbol: "FLOKI" },
-  { id: "zcash", name: "Zcash", symbol: "ZEC" },
-  { id: "bitcoin-sv", name: "Bitcoin SV", symbol: "BSV" },
-  { id: "decentraland", name: "Decentraland", symbol: "MANA" },
-  { id: "iota", name: "IOTA", symbol: "MIOTA" },
-  { id: "elrond-erd-2", name: "Elrond", symbol: "EGLD" },
-  { id: "neo", name: "NEO Coin", symbol: "NEO" },
-  { id: "underdog", name: "Underdog", symbol: "DOG" },
-  { id: "ftx-token", name: "FTX Token", symbol: "FTT" },
-  { id: "flex-coin", name: "FLEX", symbol: "FLEX" },
-  { id: "dash", name: "Dash", symbol: "DASH" },
-  { id: "zilliqa", name: "Zilliqa", symbol: "ZIL" },
-  { id: "qtum", name: "Qtum", symbol: "QTUM" },
-  { id: "status", name: "Status", symbol: "SNT" },
-  { id: "sushi", name: "SushiSwap", symbol: "SUSHI" },
-  { id: "terra-luna", name: "Terra", symbol: "LUNA" },
-  { id: "ardor", name: "Ardor", symbol: "ARDR" },
-  { id: "spell-token", name: "Spell Token", symbol: "SPELL" },
-  { id: "braintrust", name: "Braintrust", symbol: "BTRST" },
-  { id: "binance-usd", name: "Binance USD", symbol: "BUSD" },
-  { id: "cartesi", name: "Cartesi", symbol: "CTSI" },
-  { id: "nem", name: "NEM", symbol: "XEM" },
-  { id: "dia-data", name: "DIA", symbol: "DIA" },
-  { id: "mobox", name: "Mobox", symbol: "MBOX" },
-  { id: "doge-killer", name: "Doge Killer", symbol: "LEASH" },
-  { id: "kishu-inu", name: "Kishu Inu", symbol: "KISHU" },
-  { id: "augur", name: "Augur", symbol: "REP" },
-  { id: "circuits-of-value", name: "Circuits of Value", symbol: "COVAL" },
-  { id: "husky", name: "Husky", symbol: "HUSKY" },
-  { id: "baby-doge-coin", name: "Baby Doge Coin", symbol: "BABYDOGE" },
-  { id: "burger-swap", name: "BurgerCities", symbol: "BURGER" },
-  { id: "dogefi", name: "DOGEFI", symbol: "DOGEFI" },
-  { id: "usd-coin", name: "USD Coin", symbol: "USDC" },
-  { id: "gas", name: "Gas", symbol: "GAS" },
-  { id: "bitcoin-hedge", name: "Bitcoin Hedge", symbol: "BTCHG" },
-  { id: "nano-dogecoin", name: "Nano Dogecoin", symbol: "INDC" },
-];
-
 const fiatCurrencies = [
   { code: "usd", name: "US Dollar", symbol: "$" },
   { code: "eur", name: "Euro", symbol: "€" },
@@ -267,37 +139,36 @@ function App() {
   const [rates, setRates] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [viewMode, setViewMode] = useState("table");
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-
+  const [page, setPage] = useState(1);
   const fetchRates = async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const response = await axios.get("https://api.coingecko.com/api/v3/simple/price", {
+      const response = await axios.get("https://api.coingecko.com/api/v3/coins/markets", {
         params: {
-          ids: cryptocurrencies.map((c) => c.id).join(","),
-          vs_currencies: currency,
-          include_market_cap: true,
-          include_24hr_vol: true,
-          include_24hr_change: true,
+          vs_currency: currency,
+          order: "market_cap_desc",
+          per_page: 100,
+          page: page,
+          sparkline: false,
+          price_change_percentage: "1h,7d,24h",
         },
       });
-
-      const ratesData = cryptocurrencies.map((crypto) => {
-        const data = response?.data?.[crypto.id] || {};
-        return {
-          id: crypto.id,
-          name: crypto.name,
-          symbol: crypto.symbol,
-          price: data?.[currency] ?? 0,
-          market_cap: data?.[`${currency}_market_cap`] ?? 0,
-          volume_24h: data?.[`${currency}_24h_vol`] ?? 0,
-          price_change_24h: data?.[`${currency}_24h_change`] ?? 0,
-        };
-      });
+      const ratesData = response.data.map((coin) => ({
+        id: coin.id,
+        name: coin.name,
+        symbol: coin.symbol,
+        price: coin.current_price,
+        market_cap: coin.market_cap,
+        volume_24h: coin.total_volume,
+        price_change_24h: coin.price_change_percentage_24h_in_currency,
+        price_change_1h: coin.price_change_percentage_1h_in_currency,
+        price_change_7d: coin.price_change_percentage_7d_in_currency,
+      }));
+      console.log(response.data[0]);
 
       setRates(ratesData);
       setLastUpdated(new Date());
@@ -317,7 +188,7 @@ function App() {
 
   useEffect(() => {
     fetchRates();
-  }, [currency]);
+  }, [currency, page]);
 
   const filteredRates = rates.filter(
     (coin) =>
@@ -382,28 +253,6 @@ function App() {
               />
             </div>
           </div>
-
-          {/* View Mode Toggle */}
-          {/* <div className="flex bg-gray-100 rounded-lg p-1">
-            <button
-              onClick={() => setViewMode('cards')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${viewMode === 'cards'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-                }`}
-            >
-              Cards
-            </button>
-            <button
-              onClick={() => setViewMode('table')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${viewMode === 'table'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-                }`}
-            >
-              Table
-            </button>
-          </div> */}
         </div>
 
         {/* Error State */}
@@ -446,17 +295,19 @@ function App() {
                   </div>
                 </div>
               </div>
-
-              {/* Crypto Data */}
-              {viewMode === "cards" ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredRates.map((coin) => (
-                    <CryptoCard key={coin.id} coin={coin} currency={currency} />
-                  ))}
-                </div>
-              ) : (
-                <CryptoTable rates={filteredRates} currency={currency} />
-              )}
+              <CryptoTable rates={filteredRates} currency={currency} />
+              <div className="flex justify-center space-x-4">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="px-4 py-2 bg-gray-100 rounded-lg disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <button onClick={() => setPage((p) => p + 1)} className="px-4 py-2 bg-gray-100 rounded-lg">
+                  Next
+                </button>
+              </div>
             </div>
           ) : (
             !isLoading && (
