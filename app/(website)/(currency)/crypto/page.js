@@ -158,24 +158,25 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [page, setPage] = useState(1);
+  const [globalData, setGlobalData] = useState(null);
+
   const fetchRates = async () => {
     try {
-      setIsLoading(true);
-      setError(null);
+      const [marketsResponse, globalResponse] = await Promise.all([
+        axios.get("https://api.coingecko.com/api/v3/coins/markets", {
+          params: {
+            vs_currency: currency,
+            order: "market_cap_desc",
+            per_page: 100,
+            page: page,
+            sparkline: false,
+            price_change_percentage: "1h,7d,24h",
+          },
+        }),
+        axios.get("https://api.coingecko.com/api/v3/global"),
+      ]);
 
-      const response = await axios.get("https://api.coingecko.com/api/v3/coins/markets", {
-        params: {
-          vs_currency: currency,
-          order: "market_cap_desc",
-          per_page: 100,
-          page: page,
-          sparkline: false,
-          price_change_percentage: "1h,7d,24h",
-        },
-      });
-      console.log(response.data);
-
-      const ratesData = response.data.map((coin) => ({
+      const ratesData = marketsResponse.data.map((coin) => ({
         id: coin.id,
         image: coin.image,
         name: coin.name,
@@ -187,9 +188,9 @@ function App() {
         price_change_1h: coin.price_change_percentage_1h_in_currency,
         price_change_7d: coin.price_change_percentage_7d_in_currency,
       }));
-      console.log(response.data[0]);
 
       setRates(ratesData);
+      setGlobalData(globalResponse.data.data);
       setLastUpdated(new Date());
     } catch (err) {
       setError("Failed to fetch cryptocurrency data. Please try again later.");
@@ -214,6 +215,75 @@ function App() {
       coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const trendingCoins = rates
+    .sort((a, b) => b.volume_24h - a.volume_24h)
+    .slice(0, 6)
+    .map((coin) => ({ name: coin.name, symbol: coin.symbol, change: coin.price_change_24h }));
+
+  // Top gainers (top by 24h percentage increase)
+  const topGainers = rates
+    .filter((coin) => coin.price_change_24h > 0)
+    .sort((a, b) => b.price_change_24h - a.price_change_24h)
+    .slice(0, 6)
+    .map((coin) => ({ name: coin.name, symbol: coin.symbol, change: coin.price_change_24h }));
+
+  const formatLargeNumber = (value) => {
+    if (value >= 1e12) {
+      return `${(value / 1e12).toFixed(2)}T`;
+    } else if (value >= 1e9) {
+      return `${(value / 1e9).toFixed(2)}B`;
+    } else if (value >= 1e6) {
+      return `${(value / 1e6).toFixed(2)}M`;
+    }
+    return value?.toLocaleString?.();
+  };
+
+  const generateSparklineData = () => {
+    return Array.from({ length: 20 }, (_, i) => Math.random() * 50 + 25);
+  };
+
+  const SparklineChart = ({ data, positive = true }) => {
+    const max = Math.max(...data);
+    const min = Math.min(...data);
+    const range = max - min;
+
+    const pathData = data
+      .map((value, index) => {
+        const x = (index / (data.length - 1)) * 100;
+        const y = 100 - ((value - min) / range) * 100;
+        return `${index === 0 ? "M" : "L"} ${x} ${y}`;
+      })
+      .join(" ");
+
+    return (
+      <div className="h-12 w-full">
+        <svg width="100%" height="100%" viewBox="0 0 100 100" className="overflow-visible">
+          <defs>
+            <linearGradient id={`gradient-${positive ? "green" : "red"}`} x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor={positive ? "#10b981" : "#ef4444"} stopOpacity="0.3" />
+              <stop offset="100%" stopColor={positive ? "#10b981" : "#ef4444"} stopOpacity="0.05" />
+            </linearGradient>
+          </defs>
+          <path
+            d={`${pathData} L 100 100 L 0 100 Z`}
+            fill={`url(#gradient-${positive ? "green" : "red"})`}
+            className="opacity-30"
+          />
+          <path
+            d={pathData}
+            stroke={positive ? "#10b981" : "#ef4444"}
+            strokeWidth="1.5"
+            fill="none"
+            className="drop-shadow-sm"
+          />
+        </svg>
+      </div>
+    );
+  };
+
+  const marketCapData = generateSparklineData();
+  const volumeData = generateSparklineData();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -294,6 +364,78 @@ function App() {
             <div>
               <p className="text-red-800 font-medium">Error</p>
               <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          </div>
+        )}
+        {console.log(globalData)}
+
+        {!isLoading && globalData && (
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-4 mb-6">
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <h2 className="font-semibold text-xl">Cryptocurrency Prices by Market Cap</h2>
+              <span className="text-green-600 bg-green-100 px-2 py-1 rounded-full text-xs">Highlights ✔</span>
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              The global cryptocurrency market cap today is{" "}
+              {formatLargeNumber(globalData.total_market_cap.usd)}T, a{" "}
+              {globalData.market_cap_change_percentage_24h_usd.toFixed(2)}% change in the last 24 hours.{" "}
+              <Link href="/crypto/news" className="text-blue-500 hover:underline">
+                Read more
+              </Link>
+            </p>
+            <div className="grid grid-cols-3 gap-4 mt-4">
+              {/* Market Cap */}
+              <div>
+                <div className="text-center">
+                  <p className="text-lg font-bold text-gray-900">
+                    ${formatLargeNumber(globalData.total_market_cap.usd)}
+                  </p>
+                  <p className="text-xs text-gray-500">Market Cap</p>
+                  <div className="h-12 w-full bg-gray-200 mt-1">
+                    <SparklineChart data={marketCapData} positive={true} />
+                  </div>
+                  <p className="text-xs text-green-600 mt-1">
+                    +{globalData.market_cap_change_percentage_24h_usd.toFixed(2)}%
+                  </p>
+                </div>
+                {/* 24h Trading Volume */}
+                <div className="text-center">
+                  <p className="text-lg font-bold text-gray-900">
+                    ${formatLargeNumber(globalData.total_volume.usd)}
+                  </p>
+                  <p className="text-xs text-gray-500">24h Trading Volume</p>
+                  <div className="h-12 w-full bg-gray-200 mt-1">
+                    <SparklineChart data={volumeData} positive={true} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Trending */}
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-gray-600">Trending</h3>
+                {trendingCoins.map((coin, index) => (
+                  <div key={index} className="flex items-center justify-center space-x-2 mt-2">
+                    <span className="text-xs">{coin.name}</span>
+                    <span className="text-xs text-gray-500">{coin.symbol.toUpperCase()}</span>
+                    <span className={coin.change >= 0 ? "text-green-600" : "text-red-600"}>
+                      {coin.change.toFixed(2)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* Top Gainers */}
+              <div className="text-center ">
+                <h3 className="text-sm font-semibold text-gray-600">Top Gainers</h3>
+                {topGainers.map((coin, index) => (
+                  <div key={index} className="flex items-center justify-center space-x-2 mt-2">
+                    <span className="text-xs">{coin.name}</span>
+                    <span className="text-xs text-gray-500">{coin.symbol.toUpperCase()}</span>
+                    <span className={coin.change >= 0 ? "text-green-600" : "text-red-600"}>
+                      {coin.change.toFixed(2)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
