@@ -637,25 +637,6 @@ export default function Home() {
             </>
           )}
         </div>
-
-        <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-8 mb-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Create a free account to unlock full access
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Save jobs, track your applications, get personalized job recommendations and more.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
-                Sign Up Free
-              </button>
-              <button className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 dark:border-gray-700 text-base font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </>
   );

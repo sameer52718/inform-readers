@@ -446,32 +446,6 @@ export default function JobDetail() {
             </div>
           </motion.div>
         )}
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-8 bg-gradient-to-r from-red-600 to-red-600 dark:from-red-900 dark:to-red-900 rounded-lg p-8 text-white"
-        >
-          <div className="flex items-center mb-4">
-            <BookOpen className="w-6 h-6 mr-2" />
-            <h2 className="text-xl font-semibold text-white">Advance Your Career</h2>
-          </div>
-          <p className="mb-6 text-red-100 dark:text-red-200">
-            Get personalized job recommendations, salary insights, and career guidance tailored to your
-            experience.
-          </p>
-          <motion.a
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            href="https://informreaders.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-white text-red-600 rounded-lg font-medium hover:bg-red-50 transition-colors duration-200"
-          >
-            Visit Our Website
-          </motion.a>
-        </motion.div>
       </div>
     </motion.div>
   );
