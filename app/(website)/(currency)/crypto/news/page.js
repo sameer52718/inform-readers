@@ -1,27 +1,45 @@
 "use client";
 
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { Clock, ArrowRight, ChevronDown } from "lucide-react";
+import axiosInstance from "@/lib/axiosInstance";
+import handleError from "@/lib/handleError";
+import Image from "next/image";
+import getTimeAgo from "@/lib/fromNow";
 
 export default function News() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({
+    totalItems: 0,
+    currentPage: 1,
+    totalPages: 1,
+    pageSize: 10,
+  });
 
-  // Placeholder for news articles
-  const newsArticles = [
-    { id: 1, title: "Bitcoin Surges Past $100K", date: "2025-07-10", source: "CoinGecko", url: "#" },
-    {
-      id: 2,
-      title: "Ethereum ETF Approval Boosts Market",
-      date: "2025-07-09",
-      source: "CoinTelegraph",
-      url: "#",
-    },
-    // Add more placeholder articles as needed
-  ];
+  const getData = useCallback(async (page, limit) => {
+    try {
+      setIsLoading(true);
+      const { data } = await axiosInstance.get("/website/article", {
+        params: { page, limit, catagoryName: "Crypto" },
+      });
+      if (!data.error) {
+        setData((prev) => [...prev, ...data.categories]);
+        setPagination(data.pagination);
+      }
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+  useEffect(() => {
+    getData(pagination.currentPage, pagination.pageSize);
+  }, [pagination.currentPage, pagination.pageSize]);
 
-  const filteredArticles = newsArticles.filter((article) =>
-    article.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const loadMore = () => {
+    setPagination((prev) => ({ ...prev, currentPage: pagination.currentPage + 1 }));
+  };
 
   return (
     <>
@@ -34,52 +52,67 @@ export default function News() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search news..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 min-w-[240px]"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
-              <div
-                key={article.id}
-                className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-6"
-              >
-                <h3 className="text-lg font-semibold text-gray-900">
-                  <a href={article.url} className="hover:underline">
-                    {article.title}
-                  </a>
-                </h3>
-                <p className="text-sm text-gray-500">
-                  {article.date} • {article.source}
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {data.map((item, index) => (
+            <article key={index} className="bg-white rounded-xl shadow-sm overflow-hidden group">
+              <div className="relative h-48">
+                <Image
+                  src={`/website/assets/images/fallback/news2.png`}
+                  alt={`Article ${index + 1}`}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute space-x-2 top-4 left-4">
+                  <span className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    {item?.category?.name}
+                  </span>
+                  <span className="bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    {item?.source}
+                  </span>
+                </div>
               </div>
-            ))
-          ) : (
-            <div className="text-center py-12">
-              <SearchIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 text-lg">No news articles found</p>
-            </div>
-          )}
-        </div>
-      </main>
 
-      <footer className="bg-white/80 backdrop-blur-sm border-t border-gray-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="text-center text-sm text-gray-500">
-            <p>Powered by CoinGecko API • News updates coming soon</p>
-          </div>
+              <div className="p-6">
+                <h3 className="text-xl line-clamp-2 font-semibold mb-2 group-hover:text-red-600 transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="text-gray-600 mb-4 line-clamp-2">{item.content}</p>
+
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <div className="flex items-center space-x-4">
+                    <span className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {getTimeAgo(item.pubDate)}
+                    </span>
+                  </div>
+
+                  <a
+                    href={item.link}
+                    className="flex items-center text-red-600 font-medium hover:text-red-700"
+                    target="_blank"
+                  >
+                    Read more
+                    <ArrowRight className="h-4 w-4 ml-1" />
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-      </footer>
+        {pagination.totalPages !== pagination.currentPage && (
+          <div className="text-center mt-12">
+            <button
+              className="bg-red-600 text-white px-6 py-3 rounded-full font-medium hover:bg-red-700 transition-colors inline-flex items-center"
+              onClick={loadMore}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading.." : "Load more articles"}
+              <ChevronDown className="h-5 w-5 ml-2" />
+            </button>
+          </div>
+        )}
+      </main>
     </>
   );
 }

@@ -4,6 +4,7 @@ import { TrendingDown, Search, RefreshCw, TrendingUp, AlertCircle, Globe } from 
 import axios from "axios";
 import Loading from "@/components/ui/Loading";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const CryptoTable = ({ rates, currency }) => {
   const { color } = useSelector((state) => state.config);
@@ -25,7 +26,7 @@ const CryptoTable = ({ rates, currency }) => {
     } else if (value >= 1e6) {
       return `${(value / 1e6).toFixed(2)}M`;
     }
-    return value.toLocaleString();
+    return value?.toLocaleString?.();
   };
 
   return (
@@ -41,19 +42,19 @@ const CryptoTable = ({ rates, currency }) => {
                 Price
               </th>
               <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                1h Change
+              </th>
+              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 24h Change
+              </th>
+              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                7d Change
               </th>
               <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Market Cap
               </th>
               <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Volume (1h)
-              </th>
-              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Volume (24h)
-              </th>
-              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Volume (7d)
               </th>
             </tr>
           </thead>
@@ -64,11 +65,8 @@ const CryptoTable = ({ rates, currency }) => {
                 <tr key={coin.id} className="hover:bg-gray-50/50 transition-colors duration-200">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-3">
-                      <div
-                        className={`w-10 h-10 bg-gradient-to-br from-${color}-500 to-${color}-700 rounded-full flex items-center justify-center text-white font-bold text-sm`}
-                      >
-                        {coin.symbol.charAt(0)}
-                      </div>
+                      <img src={coin.image} alt={coin.name} className="w-8 h-8" />
+
                       <div>
                         <div className="font-medium text-gray-900">{coin.name}</div>
                         <div className="text-sm text-gray-500">{coin.symbol.toUpperCase()}</div>
@@ -79,34 +77,52 @@ const CryptoTable = ({ rates, currency }) => {
                     {formatCurrency(coin.price)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
-                    <div
-                      className={`flex items-center justify-end space-x-1 ${
-                        isPositive ? "text-green-600" : "text-red-600"
-                      }`}
-                    >
-                      {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-                      <span className="font-medium">{Math.abs(coin.price_change_1h).toFixed(2)}%</span>
-                    </div>
+                    <Link href={`/crypto/minutely/${coin.id}`}>
+                      <div
+                        className={`flex items-center justify-end space-x-1 ${
+                          isPositive ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {isPositive ? (
+                          <TrendingUp className="h-4 w-4" />
+                        ) : (
+                          <TrendingDown className="h-4 w-4" />
+                        )}
+                        <span className="font-medium">{Math.abs(coin.price_change_1h).toFixed(2)}%</span>
+                      </div>
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
-                    <div
-                      className={`flex items-center justify-end space-x-1 ${
-                        isPositive ? "text-green-600" : "text-red-600"
-                      }`}
-                    >
-                      {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-                      <span className="font-medium">{Math.abs(coin.price_change_24h).toFixed(2)}%</span>
-                    </div>
+                    <Link href={`/crypto/hourly/${coin.id}`}>
+                      <div
+                        className={`flex items-center justify-end space-x-1 ${
+                          isPositive ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {isPositive ? (
+                          <TrendingUp className="h-4 w-4" />
+                        ) : (
+                          <TrendingDown className="h-4 w-4" />
+                        )}
+                        <span className="font-medium">{Math.abs(coin.price_change_24h).toFixed(2)}%</span>
+                      </div>
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
-                    <div
-                      className={`flex items-center justify-end space-x-1 ${
-                        isPositive ? "text-green-600" : "text-red-600"
-                      }`}
-                    >
-                      {isPositive ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-                      <span className="font-medium">{Math.abs(coin.price_change_7d).toFixed(2)}%</span>
-                    </div>
+                    <Link href={`/crypto/daily/${coin.id}`}>
+                      <div
+                        className={`flex items-center justify-end space-x-1 ${
+                          isPositive ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {isPositive ? (
+                          <TrendingUp className="h-4 w-4" />
+                        ) : (
+                          <TrendingDown className="h-4 w-4" />
+                        )}
+                        <span className="font-medium">{Math.abs(coin.price_change_7d).toFixed(2)}%</span>
+                      </div>
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right font-medium text-gray-700">
                     {formatLargeNumber(coin.market_cap)}
@@ -157,8 +173,11 @@ function App() {
           price_change_percentage: "1h,7d,24h",
         },
       });
+      console.log(response.data);
+
       const ratesData = response.data.map((coin) => ({
         id: coin.id,
+        image: coin.image,
         name: coin.name,
         symbol: coin.symbol,
         price: coin.current_price,
@@ -199,10 +218,23 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
-      <header className=" backdrop-blur-sm border-b  sticky top-0 z-50">
+      <header className="backdrop-blur-sm border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div />
+            <div className="flex items-center space-x-4">
+              <Link
+                href="/news"
+                className="text-sm font-medium text-gray-600 hover:text-${color}-600 transition-colors duration-200"
+              >
+                News
+              </Link>
+              <Link
+                href="/exchange"
+                className="text-sm font-medium text-gray-600 hover:text-${color}-600 transition-colors duration-200"
+              >
+                Exchange
+              </Link>
+            </div>
 
             <div className="flex items-center space-x-4">
               <button

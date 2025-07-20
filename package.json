@@ -23,6 +23,7 @@
     "axios": "^1.8.3",
     "bignumber.js": "^9.3.0",
     "chart.js": "^4.4.9",
+    "chartjs-adapter-date-fns": "^3.0.0",
     "chrono-node": "^2.8.3",
     "cleave.js": "^1.6.0",
     "date-holidays": "^3.24.3",

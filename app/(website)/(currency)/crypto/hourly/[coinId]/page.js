@@ -6,7 +6,7 @@ import Chart from "../../components/Chart";
 import Loading from "@/components/ui/Loading";
 import axios from "axios";
 
-export default function HistoricalDaily() {
+export default function HistoricalHourly() {
   const { coinId } = useParams();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,8 +19,8 @@ export default function HistoricalDaily() {
         const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart`, {
           params: {
             vs_currency: "usd",
-            days: 30,
-            interval: "daily",
+            days: 7,
+            interval: "hourly",
           },
         });
         const historicalData = data.prices.map(([timestamp, price]) => ({ timestamp, price }));
@@ -41,7 +41,7 @@ export default function HistoricalDaily() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <h1 className="text-2xl font-bold text-gray-900">
-              {coinId.toUpperCase()} Historical Data (Daily)
+              {coinId.toUpperCase()} Historical Data (Hourly)
             </h1>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function HistoricalDaily() {
             <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-6">
               <Chart
                 data={data}
-                title={`${coinId.toUpperCase()} Price History (30 Days)`}
+                title={`${coinId.toUpperCase()} Price History (7 Days)`}
                 label="Price (USD)"
               />
             </div>
