@@ -1,7 +1,12 @@
-import { Bed, Bath, Square, Heart, MapPin } from "lucide-react";
+"use client";
+import { Bed, Bath, Square, Heart, MapPin, Search, ChevronDown, Home, Building, Wrench } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const PropertyGrid = () => {
+  const router = useRouter();
+
   const properties = [
     {
       id: 1,
@@ -70,7 +75,9 @@ const PropertyGrid = () => {
                 <span className="text-lg font-bold text-red-600">{property.price}</span>
               </div>
 
-              <h3 className="text-lg font-semibold mb-2">{property.title}</h3>
+              <h3 className="text-lg font-semibold mb-2" onClick={() => router.push(`/realstate/prop-1`)}>
+                {property.title}
+              </h3>
 
               <div className="flex items-center text-gray-600 mb-4">
                 <MapPin className="h-4 w-4 mr-1" />
@@ -100,6 +107,7 @@ const PropertyGrid = () => {
 };
 
 const FeaturedProperties = () => {
+  const router = useRouter();
   const properties = [
     {
       id: 1,
@@ -178,7 +186,10 @@ const FeaturedProperties = () => {
 
               <div className="flex items-center justify-between">
                 <span className="text-2xl font-bold text-red-600">{property.price}</span>
-                <button className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                <button
+                  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                  onClick={() => router.push(`/realstate/prop-1`)}
+                >
                   View Details
                 </button>
               </div>
@@ -190,23 +201,183 @@ const FeaturedProperties = () => {
   );
 };
 
+const SearchBar = () => {
+  const [activeTab, setActiveTab] = useState("BUY");
+  const [selectedCity, setSelectedCity] = useState("Islamabad");
+  const [location, setLocation] = useState("");
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
+
+  const tabs = [
+    { id: "BUY", label: "BUY", icon: Home },
+    { id: "RENT", label: "RENT", icon: Building },
+    { id: "PROJECTS", label: "PROJECTS", icon: Wrench },
+  ];
+
+  const cities = [
+    "Islamabad",
+    "Karachi",
+    "Lahore",
+    "Rawalpindi",
+    "Faisalabad",
+    "Multan",
+    "Peshawar",
+    "Quetta",
+  ];
+
+  return (
+    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-2xl overflow-hidden">
+      {/* Tab Navigation */}
+      <div className="flex">
+        {tabs.map((tab) => {
+          const IconComponent = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 px-6 py-4 flex items-center justify-center space-x-2 font-semibold transition-colors ${
+                activeTab === tab.id
+                  ? "bg-white text-gray-900 border-b-2 border-red-500"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              <IconComponent className="h-5 w-5" />
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Search Form */}
+      <div className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          {/* City Selector */}
+          <div className="md:col-span-3">
+            <label className="block text-sm font-medium text-gray-700 mb-2">CITY</label>
+            <div className="relative">
+              <select
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 appearance-none outline-none bg-white"
+              >
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Location Input */}
+          <div className="md:col-span-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">LOCATION</label>
+            <div className="relative">
+              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="Enter location, area, or neighborhood"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 outline-none rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              />
+            </div>
+          </div>
+
+          {/* Search Button */}
+          <div className="md:col-span-3 flex items-end">
+            <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2">
+              <Search className="h-5 w-5" />
+              <span>FIND</span>
+            </button>
+          </div>
+        </div>
+
+        {/* More Options Toggle */}
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <div className="flex flex-wrap items-center justify-between text-sm">
+            <button
+              onClick={() => setShowMoreOptions(!showMoreOptions)}
+              className="flex items-center space-x-1 text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${showMoreOptions ? "rotate-180" : ""}`}
+              />
+              <span>More Options</span>
+            </button>
+
+            <div className="flex flex-wrap items-center space-x-4 mt-2 md:mt-0">
+              <button className="text-red-600 hover:text-red-800 transition-colors">Change Currency</button>
+              <span className="text-gray-300">|</span>
+              <button className="text-red-600 hover:text-red-800 transition-colors">Change Area Unit</button>
+              <span className="text-gray-300">|</span>
+              <button className="text-red-600 hover:text-red-800 transition-colors">Reset Search</button>
+            </div>
+          </div>
+
+          {/* Expanded Options */}
+          {showMoreOptions && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Property Type</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                  <option>Any</option>
+                  <option>House</option>
+                  <option>Apartment</option>
+                  <option>Condo</option>
+                  <option>Villa</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                  <option>Any Price</option>
+                  <option>Under $500k</option>
+                  <option>$500k - $1M</option>
+                  <option>$1M - $2M</option>
+                  <option>Above $2M</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Bedrooms</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                  <option>Any</option>
+                  <option>1+</option>
+                  <option>2+</option>
+                  <option>3+</option>
+                  <option>4+</option>
+                  <option>5+</option>
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const RealEstate = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <div
-          className="relative h-[500px] bg-cover bg-center"
+          className="relative h-[600px] bg-cover bg-center"
           style={{
             backgroundImage: `url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg')`,
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="text-center text-white px-4">
-              <h1 className="text-4xl md:text-6xl text-white font-bold mb-4">Find Your Dream Home</h1>
-              <p className="text-xl md:text-2xl mb-8">
-                Discover the perfect property in your favorite location
-              </p>
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
+            <div className="text-center  mb-8">
+              <h1 className="text-4xl text-white md:text-6xl font-bold mb-4">
+                Search properties for sale in Pakistan
+              </h1>
             </div>
+
+            <SearchBar />
           </div>
         </div>
 

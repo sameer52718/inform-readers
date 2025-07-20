@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { DateTime } from "luxon";
-import { Loader2, Clock, Trash2, } from "lucide-react";
+import { Loader2, Clock as ClockIcon, Trash2 } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
+import Clock from "react-clock";
+import "react-clock/dist/Clock.css";
 
 export default function WorldClockPage() {
   const [cities, setCities] = useState([
@@ -34,7 +36,6 @@ export default function WorldClockPage() {
     fetchCities();
   }, []); // No dependencies, runs once
 
-
   // Update clock times every second
   useEffect(() => {
     const updateTimes = () => {
@@ -56,8 +57,6 @@ export default function WorldClockPage() {
     const interval = setInterval(updateTimes, 1000);
     return () => clearInterval(interval);
   }, [cities, timeFormat]); // Only depends on cities and timeFormat
-
-
 
   const removeCity = useCallback((zone) => {
     setCities((prev) => prev.filter((c) => c.zone !== zone));
@@ -102,14 +101,14 @@ export default function WorldClockPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">World Clock</h1>
 
         {/* Controls */}
-        <div className="mb-8 flex gap-4 items-center">
+        {/* <div className="mb-8 flex gap-4 items-center">
           <button
             onClick={toggleTimeFormat}
             className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300"
           >
             {timeFormat === "12h" ? "Switch to 24h" : "Switch to 12h"}
           </button>
-        </div>
+        </div> */}
 
         {/* City Clocks */}
         {isLoading ? (
@@ -147,10 +146,21 @@ export default function WorldClockPage() {
                   <Trash2 className="h-5 w-5" />
                 </button>
                 <div className="flex items-center gap-2 mb-4">
-                  <Clock className="h-6 w-6 text-red-600" />
+                  <ClockIcon className="h-6 w-6 text-red-600" />
                   <h2 className="text-xl font-semibold text-gray-900">{city.name}</h2>
                 </div>
-                <p className="text-2xl font-mono text-gray-700">{times[city.name]?.time}</p>
+                <Clock
+                  value={times[city.name]?.time}
+                  size={120}
+                  renderNumbers
+                  className="mb-4"
+                  hourHandWidth={4}
+                  minuteHandWidth={3}
+                  secondHandWidth={2}
+                  hourMarksWidth={3}
+                  renderHourMarks
+                  renderMinuteMarks
+                />
                 <p className="text-sm text-gray-500">{times[city.name]?.date}</p>
                 <p className="text-sm text-gray-500">
                   {times[city.name]?.offset} {times[city.name]?.dst}
@@ -180,10 +190,7 @@ export default function WorldClockPage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <button
-                        onClick={() => handleSort("name")}
-                        className="flex items-center gap-1"
-                      >
+                      <button onClick={() => handleSort("name")} className="flex items-center gap-1">
                         City
                         {sortConfig.key === "name" && (
                           <span>{sortConfig.direction === "asc" ? "↑" : "↓"}</span>
@@ -197,10 +204,7 @@ export default function WorldClockPage() {
                       Date
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <button
-                        onClick={() => handleSort("offset")}
-                        className="flex items-center gap-1"
-                      >
+                      <button onClick={() => handleSort("offset")} className="flex items-center gap-1">
                         Time Zone
                         {sortConfig.key === "offset" && (
                           <span>{sortConfig.direction === "asc" ? "↑" : "↓"}</span>
@@ -214,16 +218,15 @@ export default function WorldClockPage() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {sortedCities.map((city) => {
-
                     const dt = DateTime.now().setZone(city.zone);
 
                     const cityTime = {
-                      time: dt.toFormat(timeFormat === "12h" ? "hh:mm:ss a" : "HH:mm:ss"),
-                      date: dt.toFormat("cccc, LLLL d, yyyy"),
+                      time: dt.toFormat(timeFormat === "12h" ? "cccc hh:mm:ss a" : "cccc HH:mm:ss"),
+                      date: dt.toFormat("LLLL d, yyyy"),
                       dst: dt.isInDST ? "DST" : "",
                       offset: dt.toFormat("ZZZZ"),
                       offsetValue: dt.offset,
-                    }
+                    };
 
                     return (
                       <tr key={city._id}>
@@ -239,11 +242,9 @@ export default function WorldClockPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {cityTime?.offset}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {cityTime?.dst}
-                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cityTime?.dst}</td>
                       </tr>
-                    )
+                    );
                   })}
                 </tbody>
               </table>

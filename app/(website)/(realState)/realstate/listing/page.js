@@ -210,7 +210,7 @@ const PropertyListing = () => {
                     <span className="text-sm font-medium text-red-600">{property.type}</span>
                     <button
                       className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
-                      onClick={() => router.push(`/realstate/prop-1}`)}
+                      onClick={() => router.push(`/realstate/prop-1`)}
                     >
                       View Details
                     </button>
