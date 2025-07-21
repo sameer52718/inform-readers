@@ -1,338 +1,181 @@
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import { couponCategories, deals } from "@/constant/data";
+import { useRouter } from "next/navigation";
 
-const CategoryCard = ({ icon, title }) => (
-  <div className="text-center">
-    <div className="w-24 h-24 mx-auto mb-2 bg-gray-200 rounded-full flex items-center justify-center">
-      <Image src={icon} width={80} height={80} alt={title} />
-    </div>
-    <p className="text-lg font-medium">{title}</p>
-  </div>
-);
+export default function CouponsPage() {
+  const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState("All Deals");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [copiedCode, setCopiedCode] = useState(null);
 
-const App = () => {
-  const topCategories = [
-    {
-      icon: "/website/assets/images/category/bueaty.webp",
-      title: "Beauty and Personal Care",
-    },
-    {
-      icon: "/website/assets/images/category/shoes.webp",
-      title: "Clothing, Shoes, Accessories",
-    },
-    {
-      icon: "/website/assets/images/category/electronic.webp",
-      title: "Electronics",
-    },
-    {
-      icon: "/website/assets/images/category/home.webp",
-      title: "Home and Garden",
-    },
-  ];
+  const filteredDeals = deals.filter((deal) => {
+    const matchesCategory = selectedCategory === "All Deals" || deal.category === selectedCategory;
+    const matchesSearch =
+      deal.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      deal.store.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
-  const allCategories = {
-    Automotive: ["Motorcycles", "Car Stereo and Electronics", "Tires and Wheels"],
-    Baby: ["Baby Furniture"],
-    "Beauty and Personal Care": [
-      "Personal Care",
-      "Vitamins and Supplements",
-      "Weight Loss and Diet Supplements",
-      "Fragrances",
-      "Cosmetics",
-      "Skin Care",
-      "Acne Treatment",
-      "Anti-Aging",
-      "Hair Care",
-      "Hair Loss Solutions",
-      "Hair Styling Tools",
-      "Wigs",
-      "Men's Grooming",
-      "Eyewear",
-      "Contact Lenses",
-      "Eyeglasses",
-      "Sexual Wellness",
-      "Weight Loss and Dieting",
-      "Health and Social Services",
-      "Independent Living",
-      "Fitness and Sports Centers",
-      "Child Care Services",
-      "Medical Equipment and Supplies",
-      "Oral and Dental Care",
-      "Dating",
-    ],
-    "Clothing, Shoes, Accessories": [
-      "Women's Clothing",
-      "Activewear",
-      "Dresses",
-      "Shirts and Tops",
-      "Jeans and Pants",
-      "Sleepwear and Loungewear",
-      "Swimwear",
-      "Wedding and Bridal Party Dresses",
-      "Women's Shoes",
-      "Handbags",
-      "Lingerie",
-      "Shapewear",
-      "Plus Size Clothing",
-      "Maternity Clothing",
-      "Clothing Accessories",
-      "Men's Clothing",
-      "Activewear",
-      "Suits",
-      "Shirts and Tops",
-      "Jeans and Pants",
-      "Men's Shoes",
-      "Swimwear",
-      "Big and Tall",
-      "Kid's Clothing",
-      "Baby Clothing",
-      "Shoes",
-      "Jewelry and Watches",
-      "Beads and Charms",
-      "Body Jewelry",
-      "Bracelets",
-      "Earrings",
-      "Men's Jewelry and Cufflinks",
-      "Personalized Jewelry",
-      "Rings",
-      "Wedding and Engagement Rings",
-    ],
-    Electronics: [
-      "Computers",
-      "Desktops",
-      "Laptops",
-      "Networking",
-      "Hardware and Peripherals",
-      "Cameras",
-      "TVs and Home Theater",
-      "Headphones, Earphones and Speakers",
-      "Electronics Accessories",
-      "Gadgets",
-      "Smart Home",
-      "Video and Computer Games",
-      "Video Game Accessories",
-      "Video Game Consoles",
-      "Online Games",
-      "Wearables",
-      "Cell Phones, Plans and Accessories",
-      "Cell Phone Accessories",
-      "Cell Phones and Plans",
-      "Department Stores",
-      "Discount Stores",
-    ],
-    "Entertainment and Recreation": [
-      "Concerts and Event Tickets",
-      "Movie Theaters",
-      "Music and Musical Instruments",
-      "Amusement and Theme Parks",
-      "Gambling",
-      "Party and Event Supplies",
-      "Birthday Supplies",
-      "Graduation",
-      "Invitations",
-      "Wedding Supplies",
-      "Sports, Fitness and Outdoors",
-      "Indoor Games and Recreation",
-      "Outdoor Recreation",
-      "Sportswear",
-      "Team Sports Equipment",
-      "Water Sports",
-      "Winter Sports",
-      "Golf",
-      "Fitness Equipment",
-      "Workout Programs",
-      "Sports Teams and Clubs",
-    ],
-    "Hobby and Toys": [
-      "Toys and Games",
-      "Action Figures",
-      "Building Toys",
-      "Drones",
-      "Educational Toys",
-      "Stuffed Animals and Dolls",
-      "Arts, Crafts and Sewing",
-      "Collectibles",
-      "Coins",
-      "Sports Memorabilia",
-    ],
-    Media: ["Book, Magazine and Newspapers", "Video Streaming", "Music Streaming"],
-    "Food and Gifts": [
-      "Florists",
-      "Gift Shops",
-      "Novelty Gifts",
-      "Religious Gifts",
-      "Personalized Gifts",
-      "Baby Gifts",
-      "Personalized Books",
-      "Wedding Gifts",
-      "Gift Baskets",
-      "Gift Cards",
-      "Wine Clubs",
-    ],
-    "Food and Grocery": [
-      "Wine and Spirits",
-      "Wine",
-      "Homebrew and Winemaking Supplies",
-      "Gourmet Grocery",
-      "Packaged Meals and Snacks",
-      "Coffee",
-      "Tea",
-      "Convenience Food Stores",
-      "Specialty Foods",
-      "Cheese",
-      "Meat and Seafood",
-      "Desserts and Sweets",
-      "Tobacco",
-      "Cigars",
-      "Vaping",
-    ],
-    "Home and Garden": [
-      "Furniture and Decor",
-      "Bathroom Furniture and Vanities",
-      "Chairs",
-      "Mattresses",
-      "Patio Furniture",
-      "Home Decor",
-      "Blinds",
-      "Bed and Bath",
-      "Bedding",
-      "Pillows",
-      "Cleaning and Organization",
-      "Vacuums and Cleaning Products",
-      "Food Storage",
-      "Lunchbags",
-      "Household Appliances",
-      "Fireplaces and Woodstoves",
-      "Grills",
-      "Heating and Cooling",
-      "Ovens and Ranges",
-      "Refrigerators and Freezers",
-      "Kitchen and Dining",
-      "Cookware and Cutlery",
-      "Small Appliances",
-      "Tableware",
-      "Lighting",
-    ],
-    Luggage: [
-      "Backpacks",
-      "Nursery and Garden",
-      "Seeds and Plants",
-      "Pools and Supplies",
-      "Home Improvement and Tools",
-      "Power Tools",
-      "Woodworking Tools",
-      "Outdoor Power Equipment",
-      "Hardware and Tools",
-    ],
-    Pets: ["Pet Food and Supplies"],
-    "Business Services and Supplies": [
-      "Office Supplies and Stationery",
-      "Office Supplies",
-      "Stationery and Cards",
-      "School Supplies",
-      "Office Furniture",
-      "Checks",
-      "Restaurant Supplies",
-      "Web Hosting",
-      "VPN",
-      "Accounting",
-      "Career Services",
-      "Ink and Toner",
-      "Marketing and PR",
-      "Business Cards and Printing",
-      "Custom Printing",
-      "Software",
-      "Antivirus",
-      "Parental Control Software",
-      "Education Software",
-      "Audio and Video Editing Software",
-      "Graphics and Photo Editing Software",
-      "Maintenance and Utility Software",
-      "Online Backup Services",
-      "Productivity Software",
-      "Web Design and Development Software",
-    ],
-    "Professional and Education Services": [
-      "People Search",
-      "Tutoring and Test Prep",
-      "Professional Development",
-      "Photo Prints and Printing",
-      "Genealogy",
-      "Legal Services",
-      "Insurance",
-      "Financial Services",
-      "Credit Reports and Scores",
-      "Tax Preparation",
-      "Credit Cards and Banking",
-      "Currency and Crypto Exchanges",
-      "Identity Theft Protection",
-    ],
-    "Home Services and Utilities": [
-      "Contractors",
-      "Moving",
-      "Storage Facilities",
-      "Grocery Delivery",
-      "VoIP",
-    ],
-    "Restaurants and Dining": [
-      "Fast Food Restaurants",
-      "Burger",
-      "Chicken",
-      "Pizza",
-      "Sandwich",
-      "Food Delivery Services",
-      "Full-Service Restaurants",
-      "Casual Dining Restaurants",
-      "Bar and Grill",
-      "Breakfast",
-      "Italian",
-      "Mexican",
-      "Seafood",
-      "Steak",
-    ],
-    Travel: [
-      "Hotel and Motels",
-      "Flights",
-      "Airlines",
-      "Travel Agencies",
-      "Car Rentals",
-      "Truck and RV Rentals",
-      "Rail and Car Services",
-      "Cruises",
-      "Short-term Rentals and Lodging",
-      "Sightseeing",
-      "Amusement Parks",
-      "Aquariums",
-      "Museums",
-      "Zoos",
-    ],
+  const copyCode = (code) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2000);
   };
 
   return (
-    <div className="container mx-auto p-6 bg-white font-sans">
-      <h2 className="text-2xl font-bold mb-4">Top Coupons & Deals Categories</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        {topCategories.map((category, index) => (
-          <CategoryCard key={index} icon={category.icon} title={category.title} />
-        ))}
-      </div>
-      <h2 className="text-2xl font-bold mb-4">All Coupons & Deals Categories</h2>
-      <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
-        {Object.entries(allCategories).map(([section, items], index) => (
-          <div key={index} className="break-inside-avoid">
-            <h3 className="text-xl font-semibold mb-2">{section}</h3>
-            <ul className="list-disc pl-5">
-              {items.map((item, idx) => (
-                <Link href={"/coupons/listing"} key={idx}>
-                  <li className="ml-2 hover:text-red-600">{item}</li>
-                </Link>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+    <main className="min-h-screen bg-neutral-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-red-600 to-red-700 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-4xl text-white md:text-5xl font-bold mb-6">Latest Deals & Coupons</h1>
+              <p className="text-xl text-white mb-8">
+                Save money with our hand-picked deals and discount codes
+              </p>
 
-export default App;
+              {/* Search Bar */}
+              <div className="relative max-w-2xl mx-auto">
+                <input
+                  type="text"
+                  placeholder="Search for deals..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-6 py-4 rounded-full text-neutral-900 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/20"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Categories */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-wrap gap-3 justify-center mb-12">
+          {couponCategories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                selectedCategory === category
+                  ? "bg-red-600 text-white"
+                  : "bg-white text-neutral-700 hover:bg-neutral-100"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+
+          <button
+            onClick={() => router.push("/coupons/categories")}
+            className="px-6 py-2 rounded-full text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+          >
+            View More
+          </button>
+        </div>
+
+        {/* Featured Deals */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Featured Deals</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDeals
+              .filter((deal) => deal.featured)
+              .map((deal) => (
+                <motion.div
+                  key={deal.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                >
+                  <div className="relative h-48">
+                    <Image src={deal.image} alt={deal.title} fill className="object-cover" />
+                    {deal.verified && (
+                      <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Verified
+                      </div>
+                    )}
+                    <div className="absolute top-4 right-4 bg-white/90 text-neutral-900 text-xs px-2 py-1 rounded-full">
+                      Expires {new Date(deal.expiryDate).toLocaleDateString()}
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="text-sm text-red-600 font-medium mb-2">{deal.store}</div>
+                    <h3 className="text-xl font-semibold mb-3">{deal.title}</h3>
+                    <p className="text-neutral-600 text-sm mb-4">{deal.description}</p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-neutral-500">
+                        <span>{deal.usedCount} used</span>
+                      </div>
+                      <button
+                        onClick={() => copyCode(deal.code)}
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                      >
+                        {copiedCode === deal.code ? "Copied!" : deal.code}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+          </div>
+        </div>
+
+        {/* All Deals */}
+        <div>
+          <h2 className="text-2xl font-bold mb-6">All Deals</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDeals
+              .filter((deal) => !deal.featured)
+              .map((deal) => (
+                <motion.div
+                  key={deal.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                >
+                  <div className="relative h-48">
+                    <Image src={deal.image} alt={deal.title} fill className="object-cover" />
+                    {deal.verified && (
+                      <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Verified
+                      </div>
+                    )}
+                    <div className="absolute top-4 right-4 bg-white/90 text-neutral-900 text-xs px-2 py-1 rounded-full">
+                      Expires {new Date(deal.expiryDate).toLocaleDateString()}
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="text-sm text-red-600 font-medium mb-2">{deal.store}</div>
+                    <h3 className="text-xl font-semibold mb-3">{deal.title}</h3>
+                    <p className="text-neutral-600 text-sm mb-4">{deal.description}</p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-neutral-500">
+                        <span>{deal.usedCount} used</span>
+                      </div>
+                      <button
+                        onClick={() => copyCode(deal.code)}
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                      >
+                        {copiedCode === deal.code ? "Copied!" : deal.code}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
