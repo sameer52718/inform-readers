@@ -9,6 +9,9 @@ import handleError from "@/lib/handleError";
 import Loading from "@/components/ui/Loading";
 import AdBanner from "@/components/partials/AdBanner";
 import { useSelector } from "react-redux";
+import SpecificationCard from "../shared/SpecificationCard";
+import BiographyCard from "../shared/BiographyCard";
+import ArticleCard from "../shared/ArticleCard";
 
 export default function Home() {
   const { color } = useSelector((state) => state.config);
@@ -269,6 +272,81 @@ export default function Home() {
                       </div>
                     </div>
                   </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Specification Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Specifications</h2>
+                  <p className="text-gray-600">View Specification of Goods</p>
+                </div>
+                <Link
+                  href="/specification"
+                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                >
+                  View All Specifications
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data?.randomSpecifications?.map((item) => (
+                  <SpecificationCard product={item} categoryId={item.categoryId} key={item?._id} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Bigraphies Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Biographies</h2>
+                  <p className="text-gray-600">View Biographies of Peoples</p>
+                </div>
+                <Link
+                  href="/biography"
+                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                >
+                  View All Biographies
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data?.randomBiographies?.map((item) => (
+                  <BiographyCard celebrity={item} category={item.categoryName} key={item?._id} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Articles Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">News Articles</h2>
+                  <p className="text-gray-600">View News Articles of Today’s</p>
+                </div>
+                <Link
+                  href="/biography"
+                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                >
+                  View All Biographies
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data?.randomArticles?.map((item) => (
+                  <ArticleCard item={item} key={item?._id} />
                 ))}
               </div>
             </div>
