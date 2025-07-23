@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 const VehicleCard = ({ vehicle, type = "cars" }) => {
   const isEV = vehicle.vehicleType === "ELECTRIC";
+  console.log(vehicle?.image);
 
   return (
     <motion.div
@@ -17,7 +18,13 @@ const VehicleCard = ({ vehicle, type = "cars" }) => {
       <div className="flex flex-col">
         <div className="">
           <Image
-            src={vehicle.image || "https://via.placeholder.com/300x200?text=No+Image"}
+            src={
+              vehicle.image
+                ? vehicle.image === "Not Available"
+                  ? "https://via.placeholder.com/300x200?text=No+Image"
+                  : vehicle.image
+                : "https://via.placeholder.com/300x200?text=No+Image"
+            }
             alt={vehicle.name}
             className="w-full h-64  object-cover"
             height={256}
@@ -27,7 +34,7 @@ const VehicleCard = ({ vehicle, type = "cars" }) => {
         <div className=" p-6">
           <div className="flex justify-between items-start mb-2">
             <div>
-              <h3 className="text-lg font-semibold mb-2">{vehicle.name}</h3>
+              <h3 className="text-lg font-semibold line-clamp-2 mb-2">{vehicle.name}</h3>
               <div className="flex items-center text-gray-600 mb-2">
                 <Calendar className="h-4 w-4 mr-1" />
                 <span>{vehicle.year}</span>

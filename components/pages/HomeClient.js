@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import SpecificationCard from "../shared/SpecificationCard";
 import BiographyCard from "../shared/BiographyCard";
 import ArticleCard from "../shared/ArticleCard";
+import VehicleCard from "../vehicle/vehicleCard";
 
 export default function Home() {
   const { color } = useSelector((state) => state.config);
@@ -347,6 +348,56 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {data?.randomArticles?.map((item) => (
                   <ArticleCard item={item} key={item?._id} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Cars Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Cars</h2>
+                  <p className="text-gray-600">View Cars of Specifications</p>
+                </div>
+                <Link
+                  href="/cars"
+                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                >
+                  View All Cars
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data?.randomVehicles?.map((item) => (
+                  <VehicleCard vehicle={item} key={item?._id} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Bikes Section */}
+          <section className="py-16">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Bikes</h2>
+                  <p className="text-gray-600">View Bikes of Specifications</p>
+                </div>
+                <Link
+                  href="/bikes"
+                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                >
+                  View All Bikes
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data?.randomBikes?.map((item) => (
+                  <VehicleCard vehicle={item} key={item?._id} type="bikes" />
                 ))}
               </div>
             </div>
