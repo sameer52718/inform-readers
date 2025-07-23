@@ -4,6 +4,7 @@ import { Play } from "lucide-react";
 
 const ProductGallery = ({ images, mainImage = "/website/assets/images/product/01.png" }) => {
   const [selectedImage, setSelectedImage] = useState(mainImage);
+  console.log(mainImage);
 
   return (
     <div className="sticky top-32">
@@ -43,16 +44,6 @@ const ProductGallery = ({ images, mainImage = "/website/assets/images/product/01
           />
         </div>
       </div>
-
-      {/* <div className="h-[250px] sm:h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
-        <Image
-          src={mainImage}
-          alt="Product main image"
-          width={1000}
-          height={1000}
-          className="w-full h-full object-contain"
-        />
-      </div> */}
     </div>
   );
 };

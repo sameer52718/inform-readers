@@ -3,29 +3,39 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { Car, Fuel, Gauge, Wrench, Shield, Battery, ChevronLeft } from "lucide-react";
+import { Car, Fuel, Gauge, Wrench, Shield, Battery, ChevronLeft, Share2 } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
-import Link from "next/link";
 import handleError from "@/lib/handleError";
 import VehicleCard from "@/components/vehicle/vehicleCard";
+import ProductGallery from "@/components/pages/specification/ProductGallery";
 
-const quickStats = [
-  {
-    icon: Fuel,
-    value: "6.5 l/100 km",
-    label: "Combined Fuel Economy",
-  },
-  {
-    icon: Gauge,
-    value: "205 km/h",
-    label: "Max Speed",
-  },
-  {
-    icon: Wrench,
-    value: "135 Hp",
-    label: "Power",
-  },
-];
+const ShareButton = ({ data }) => {
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${data.name} | Specification Info`,
+          text: `Explore Specification of ${data.name}.`,
+          url: typeof window !== "undefined" ? window.location.href : "",
+        });
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      toast.error("Web Share API is not supported in this browser. Use the social links to share.");
+    }
+  };
+
+  return (
+    <button
+      className="flex items-center gap-2 rounded-full bg-red-100 px-4 py-2 text-red-600 hover:bg-red-200"
+      onClick={handleNativeShare}
+    >
+      <Share2 className="h-4 w-4" />
+      Share
+    </button>
+  );
+};
 
 export default function VehicleDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,23 +65,128 @@ export default function VehicleDetailPage() {
     return () => controller.abort();
   }, [id]);
 
+  // Define the sections and their corresponding keys in the desired order
+  const sections = [
+    {
+      title: "General Information",
+      icon: Car,
+      keys: [
+        "Body Type",
+        "Seats",
+        "Doors",
+        "Length",
+        "Width",
+        "Height",
+        "Wheelbase",
+        "Front Track",
+        "Rear Track",
+        "Kerb Weight",
+        "Max Weight",
+        "Max Load",
+        "Trunk (Boot) Space - Minimum",
+        "Trunk (Boot) Space - Maximum",
+        "Fuel Tank Capacity",
+      ],
+    },
+    {
+      title: "Engine Specifications",
+      icon: Wrench,
+      keys: [
+        "Powertrain Architecture",
+        "Fuel Type",
+        "Engine Displacement",
+        "Power",
+        "Power per Litre",
+        "Torque",
+        "Engine Layout",
+        "Engine Model/Code",
+        "Number of Cylinders",
+        "Engine Configuration",
+        "Cylinder Bore",
+        "Piston Stroke",
+        "Number of Valves per Cylinder",
+        "Fuel Injection System",
+        "Engine Aspiration",
+        "Engine Oil Capacity",
+        "Coolant",
+      ],
+    },
+    {
+      title: "Performance",
+      icon: Gauge,
+      keys: [
+        "Acceleration 0 - 100 km/h",
+        "Acceleration 0 - 62 mph",
+        "Acceleration 0 - 60 mph",
+        "Maximum Speed",
+        "Weight-to-Power Ratio",
+        "Weight-to-Torque Ratio",
+      ],
+    },
+    {
+      title: "Fuel Economy and Emissions",
+      icon: Fuel,
+      keys: [
+        "Fuel Consumption (Urban)",
+        "Fuel Consumption (Extra Urban)",
+        "Fuel Consumption (Combined)",
+        "CO₂ Emissions",
+        "Emission Standard",
+      ],
+    },
+    {
+      title: "Drivetrain and Transmission",
+      icon: Car,
+      keys: ["Drivetrain Architecture", "Drive Wheel", "Number of Gears and Type of Gearbox"],
+    },
+    {
+      title: "Suspension and Brakes",
+      icon: Wrench,
+      keys: ["Front Suspension", "Rear Suspension", "Front Brakes", "Rear Brakes"],
+    },
+    {
+      title: "Steering and Tires",
+      icon: Car,
+      keys: ["Steering Type", "Power Steering", "Tire Size", "Wheel Rims Size"],
+    },
+  ];
+
+  // Combine all specification arrays into a single map for lookup
+  const specMap = {};
+  if (data?.data) {
+    [
+      ...(data.data.technicalSpecs || []),
+      ...(data.data.featureAndSafety || []),
+      ...(data.data.evsFeatures || []),
+    ].forEach((spec) => {
+      if (spec.name) {
+        specMap[spec.name] = spec.value || spec.value === "" ? spec.value : "---";
+      }
+    });
+  }
+
   const renderSpecSection = (title, icon, specs) => {
     const Icon = icon;
     return (
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
+      <div className="bg-white rounded-xl p-6 border border-gray-200 transition-all hover:shadow-md">
         <div className="flex items-center gap-3 mb-4">
           <Icon className="h-6 w-6 text-red-500" />
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {specs?.map((spec) =>
-            spec.value && spec.value.trim() !== "" ? (
-              <div key={spec._id} className="flex flex-col">
-                <span className="text-sm text-gray-500">{spec.name}</span>
-                <span className="text-gray-800">{spec.value}</span>
-              </div>
-            ) : null
-          )}
+        <div className="border rounded-lg overflow-hidden">
+          <table className="w-full text-sm text-gray-700">
+            <tbody>
+              {specs.map((spec, index) => (
+                <tr
+                  key={spec.name}
+                  className="odd:bg-gray-50 even:bg-white border-b border-gray-100 last:border-0"
+                >
+                  <td className="px-4 py-3 font-medium text-gray-900">{spec.name}</td>
+                  <td className="px-4 py-3">{spec.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     );
@@ -80,34 +195,12 @@ export default function VehicleDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-white hover:text-gray-200 mb-6"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            Back to Vehicles
-          </button>
-          <div className="text-center">
-            {isLoading ? (
-              <div className="animate-pulse">
-                <div className="h-8 bg-white/20 rounded w-1/2 mx-auto mb-4" />
-                <div className="h-4 bg-white/20 rounded w-1/4 mx-auto mb-8" />
-              </div>
-            ) : (
-              <>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">{data?.data.name}</h1>
-                <p className="text-xl text-red-100 mb-8">
-                  {data?.data.makeId.name} {data?.data.modelId.name} - {data?.data.year}
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
+        <section className="mb-6 flex justify-between">
+          <h1 className="text-3xl font-bold text-gray-900">{data?.data?.name}</h1>
+          <ShareButton data={data} />
+        </section>
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Vehicle Image */}
@@ -135,23 +228,40 @@ export default function VehicleDetailPage() {
               <div className="space-y-6">
                 <div className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse">
                   <div className="h-6 bg-gray-200 rounded w-1/4 mb-4" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {Array(6)
-                      .fill(0)
-                      .map((_, i) => (
-                        <div key={i} className="flex flex-col">
-                          <div className="h-4 bg-gray-200 rounded w-1/2 mb-2" />
-                          <div className="h-4 bg-gray-200 rounded w-3/4" />
-                        </div>
-                      ))}
+                  <div className="border rounded-lg overflow-hidden">
+                    <table className="w-full text-sm text-gray-700">
+                      <tbody>
+                        {Array(6)
+                          .fill(0)
+                          .map((_, i) => (
+                            <tr
+                              key={i}
+                              className="odd:bg-gray-50 even:bg-white border-b border-gray-100 last:border-0"
+                            >
+                              <td className="px-4 py-3">
+                                <div className="h-4 bg-gray-200 rounded w-1/2" />
+                              </td>
+                              <td className="px-4 py-3">
+                                <div className="h-4 bg-gray-200 rounded w-3/4" />
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             ) : (
               <>
-                {renderSpecSection("Technical Specifications", Car, data?.data.technicalSpecs)}
-                {renderSpecSection("Features & Safety", Shield, data?.data.featureAndSafety)}
-                {renderSpecSection("EV Features", Battery, data?.data.evsFeatures)}
+                {sections.map((section) => {
+                  // Filter specs that exist in the data for this section
+                  const sectionSpecs = section.keys.map((key) => ({
+                    name: key,
+                    value: specMap[key] || "---",
+                  }));
+
+                  return renderSpecSection(section.title, section.icon, sectionSpecs);
+                })}
               </>
             )}
           </div>
