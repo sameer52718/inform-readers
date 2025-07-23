@@ -1,275 +1,13 @@
-// "use client";
-// import React, { useState } from "react";
-// import { motion } from "framer-motion";
-// import { cars } from "@/constant/car-data";
-
-// import {
-//   Search,
-//   DollarSign,
-//   MapPin,
-//   Filter,
-//   Car,
-//   Battery,
-//   Compass as GasPump,
-//   Calendar,
-//   Bike,
-//   Gauge,
-// } from "lucide-react";
-// const FilterSection = ({ type, filters, setFilters }) => {
-//   const isCar = type === "car";
-//   const vehicleTypeOptions = ["Sedan", "SUV", "Hatchback", "Convertible", "Pickup", "Van"];
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFilters((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   return (
-//     <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-//       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-//         <div className="relative">
-//           <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-//           <input
-//             type="text"
-//             placeholder="Location"
-//             name="location"
-//             value={filters.location}
-//             onChange={handleChange}
-//             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-//           />
-//         </div>
-
-//         <div className="relative">
-//           <Car className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-//           <select
-//             name="vehicleType"
-//             value={filters.vehicleType}
-//             onChange={handleChange}
-//             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-//           >
-//             <option value="">Vehicle Type</option>
-//             {vehicleTypeOptions.map((option) => (
-//               <option key={option} value={option.toLowerCase()}>
-//                 {option}
-//               </option>
-//             ))}
-//           </select>
-//         </div>
-
-//         <div className="relative">
-//           <DollarSign className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-//           <select
-//             name="priceRange"
-//             value={filters.priceRange}
-//             onChange={handleChange}
-//             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-//           >
-//             <option value="">Price Range</option>
-//             <option value="0-10000">Under $10,000</option>
-//             <option value="10000-25000">$10,000 - $25,000</option>
-//             <option value="25000-50000">$25,000 - $50,000</option>
-//             <option value="50000+">$50,000+</option>
-//           </select>
-//         </div>
-
-//         <div className="relative">
-//           <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-//           <select
-//             name="year"
-//             value={filters.year}
-//             onChange={handleChange}
-//             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-//           >
-//             <option value="">Year</option>
-//             <option value="2023+">2023 & Newer</option>
-//             <option value="2020-2022">2020 - 2022</option>
-//             <option value="2015-2019">2015 - 2019</option>
-//             <option value="2010-2014">2010 - 2014</option>
-//             <option value="2010-">2009 & Older</option>
-//           </select>
-//         </div>
-
-//         <div className="relative">
-//           <div className="absolute left-3 top-3 h-5 w-5 text-gray-400">
-//             {filters.fuelType === "electric" ? (
-//               <Battery className="h-5 w-5" />
-//             ) : (
-//               <GasPump className="h-5 w-5" />
-//             )}
-//           </div>
-//           <select
-//             name="fuelType"
-//             value={filters.fuelType}
-//             onChange={handleChange}
-//             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-//           >
-//             <option value="">Fuel Type</option>
-//             <option value="petrol">Petrol</option>
-//             <option value="diesel">Diesel</option>
-//             <option value="hybrid">Hybrid</option>
-//             <option value="electric">Electric</option>
-//           </select>
-//         </div>
-
-//         <button
-//           className={`${
-//             isCar ? "bg-red-600 hover:bg-red-700" : "bg-red-600 hover:bg-red-700"
-//           } text-white px-6 py-2 rounded-lg transition-colors flex items-center justify-center gap-2`}
-//         >
-//           <Search className="h-5 w-5" />
-//           <span>Search</span>
-//         </button>
-//       </div>
-
-//       <div className="flex flex-wrap items-center gap-4 mt-4">
-//         <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-//           <Filter className="h-4 w-4" />
-//           More Filters
-//         </button>
-//         <button className="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-//           Price: Low to High
-//         </button>
-//         <button className="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-//           Recently Added
-//         </button>
-//         <button className="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition-colors">
-//           Top Rated
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const VehicleCard = ({ vehicle, type }) => {
-//   const isCar = type === "car";
-//   const isEV = vehicle.fuelType === "Electric";
-
-//   return (
-//     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-//       <div className="flex flex-col md:flex-row">
-//         <div className="md:w-1/3">
-//           <img src={vehicle.image} alt={vehicle.title} className="w-full h-64 md:h-full object-cover" />
-//         </div>
-//         <div className="md:w-2/3 p-6">
-//           <div className="flex justify-between items-start mb-4">
-//             <div>
-//               <h3 className="text-2xl font-semibold mb-2">{vehicle.title}</h3>
-//               <div className="flex items-center text-gray-600 mb-2">
-//                 <MapPin className="h-4 w-4 mr-1" />
-//                 <span>{vehicle.location}</span>
-//               </div>
-//               <div className="flex items-center text-gray-600 mb-4">
-//                 <Calendar className="h-4 w-4 mr-1" />
-//                 <span>{vehicle.year}</span>
-//               </div>
-//             </div>
-//             <span className="text-2xl font-bold text-red-600">{vehicle.price}</span>
-//           </div>
-
-//           <p className="text-gray-600 mb-4">{vehicle.description}</p>
-
-//           <div className="flex flex-wrap items-center gap-4 md:gap-6 text-gray-600 mb-6">
-//             <div className="flex items-center">
-//               {isEV ? (
-//                 <Battery className="h-5 w-5 mr-2 text-red-500" />
-//               ) : (
-//                 <GasPump className="h-5 w-5 mr-2 text-red-500" />
-//               )}
-//               <span>{vehicle.fuelType}</span>
-//             </div>
-
-//             <div className="flex items-center">
-//               <span className="font-medium mr-2">Transmission:</span>
-//               <span>{vehicle.transmission}</span>
-//             </div>
-
-//             <div className="flex items-center">
-//               <Gauge className="h-5 w-5 mr-2" />
-//               <span>{`${vehicle.mileage} miles`}</span>
-//             </div>
-//           </div>
-
-//           <div className="flex justify-between items-center">
-//             <span
-//               className={`text-sm font-medium px-3 py-1 rounded-full ${
-//                 isEV ? "bg-red-100 text-red-800" : "bg-red-100 text-red-800"
-//               }`}
-//             >
-//               {vehicle.fuelType}
-//             </span>
-//             <button
-//               className={`text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors `}
-//             >
-//               View Details
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const CarListing = () => {
-//   const [filters, setFilters] = useState({
-//     priceRange: "",
-//     vehicleType: "",
-//     location: "",
-//     year: "",
-//     fuelType: "",
-//     brand: "",
-//   });
-
-//   return (
-//     <>
-//       <div className="bg-gradient-to-br from-red-500 to-red-700 text-white py-16">
-//         <div className="container mx-auto px-4">
-//           <div className="max-w-3xl mx-auto text-center">
-//             <motion.div
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               transition={{ duration: 0.6 }}
-//             >
-//               <h1 className="text-4xl text-white md:text-5xl font-bold mb-6">Find Your Perfect Car</h1>
-//               <p className="text-xl text-white mb-8">
-//                 Explore our extensive collection of premium cars, from innovative electric vehicles to
-//                 powerful petrol engines.
-//               </p>
-//             </motion.div>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="container mx-auto px-4 py-8">
-//         {/* Filters */}
-//         <FilterSection type="car" filters={filters} setFilters={setFilters} />
-
-//         {/* Vehicle Grid */}
-//         <div className="grid grid-cols-1 gap-8">
-//           {cars.map((car) => (
-//             <motion.div
-//               key={car.id}
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               transition={{ duration: 0.4, delay: car.id * 0.1 }}
-//             >
-//               <VehicleCard vehicle={car} type="car" />
-//             </motion.div>
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default CarListing;
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Car, Battery, Compass as GasPump, Calendar } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
+import Image from "next/image";
+import Link from "next/link";
 
-const FilterSection = ({ filters, setFilters, makes, models }) => {
-  const fuelTypeOptions = ["PETROL", "DIESEL", "HYBRID", "ELECTRIC", "OTHER"];
+const FilterSection = ({ filters, setFilters, makes }) => {
+  const fuelTypeOptions = ["PETROL", "ELECTRIC", "OTHER"];
 
   const yearOptions = [
     { value: "2023+", label: "2023 & Newer" },
@@ -292,7 +30,7 @@ const FilterSection = ({ filters, setFilters, makes, models }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
           <input
@@ -358,23 +96,6 @@ const FilterSection = ({ filters, setFilters, makes, models }) => {
             ))}
           </select>
         </div>
-        <div className="relative">
-          <Car className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-          <select
-            name="modelId"
-            value={filters.modelId || ""}
-            onChange={handleChange}
-            disabled={!filters.makeId}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white disabled:opacity-50"
-          >
-            <option value="">Model</option>
-            {models.map((model) => (
-              <option key={model._id} value={model._id}>
-                {model.name}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
     </div>
   );
@@ -392,10 +113,12 @@ const VehicleCard = ({ vehicle }) => {
     >
       <div className="flex flex-col">
         <div className="">
-          <img
+          <Image
             src={vehicle.image || "https://via.placeholder.com/300x200?text=No+Image"}
             alt={vehicle.name}
             className="w-full h-64  object-cover"
+            height={256}
+            width={256}
           />
         </div>
         <div className=" p-6">
@@ -426,25 +149,45 @@ const VehicleCard = ({ vehicle }) => {
             >
               {vehicle.vehicleType.charAt(0) + vehicle.vehicleType.slice(1).toLowerCase()}
             </span>
-            <a
-              href={`/car/${vehicle._id}`}
+            <Link
+              href={`/bikes/${vehicle._id}`}
               className="text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors"
             >
               View Details
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </motion.div>
   );
 };
-
 const Pagination = ({ pagination, setFilters }) => {
   const { totalPages, currentPage } = pagination;
+  const maxButtons = 5; // Maximum number of page buttons to show
 
   const handlePageChange = (page) => {
     setFilters((prev) => ({ ...prev, page }));
   };
+
+  // Calculate the range of pages to display
+  const getPageNumbers = () => {
+    const half = Math.floor(maxButtons / 2);
+    let start = Math.max(1, currentPage - half);
+    let end = Math.min(totalPages, start + maxButtons - 1);
+
+    // Adjust start if end is at totalPages
+    if (end === totalPages) {
+      start = Math.max(1, end - maxButtons + 1);
+    }
+
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+
+  const pageNumbers = getPageNumbers();
 
   return (
     <div className="flex justify-center items-center space-x-2 mt-6">
@@ -455,7 +198,22 @@ const Pagination = ({ pagination, setFilters }) => {
       >
         Previous
       </button>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+
+      {/* Always show first page */}
+      {totalPages > maxButtons && currentPage > Math.floor(maxButtons / 2) + 1 && (
+        <>
+          <button
+            onClick={() => handlePageChange(1)}
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+          >
+            1
+          </button>
+          {currentPage > Math.floor(maxButtons / 2) + 2 && <span className="px-4 py-2">...</span>}
+        </>
+      )}
+
+      {/* Render page buttons */}
+      {pageNumbers.map((page) => (
         <button
           key={page}
           onClick={() => handlePageChange(page)}
@@ -466,6 +224,22 @@ const Pagination = ({ pagination, setFilters }) => {
           {page}
         </button>
       ))}
+
+      {/* Always show last page */}
+      {totalPages > maxButtons && currentPage < totalPages - Math.floor(maxButtons / 2) && (
+        <>
+          {currentPage < totalPages - Math.floor(maxButtons / 2) - 1 && (
+            <span className="px-4 py-2">...</span>
+          )}
+          <button
+            onClick={() => handlePageChange(totalPages)}
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+          >
+            {totalPages}
+          </button>
+        </>
+      )}
+
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
@@ -483,7 +257,6 @@ const CarListing = () => {
     limit: 12, // 12 vehicles (4 per row, 3 rows)
     search: "",
     makeId: "",
-    modelId: "",
     categoryId: "",
     vehicleType: "",
     location: "",
@@ -498,19 +271,16 @@ const CarListing = () => {
     pageSize: 12,
   });
   const [makes, setMakes] = useState([]);
-  const [models, setModels] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Fetch filter data
   useEffect(() => {
     const fetchFilterData = async () => {
       try {
-        const [makesRes, modelsRes] = await Promise.all([
-          axiosInstance.get("/common/make"),
-          axiosInstance.get("/common/model"),
+        const [makesRes] = await Promise.all([
+          axiosInstance.get("/common/make", { params: { type: "BIKE" } }),
         ]);
         setMakes(makesRes.data.data || []);
-        setModels(modelsRes.data.data || []);
       } catch (error) {
         console.error("Error fetching filter data:", error);
       }
@@ -530,7 +300,7 @@ const CarListing = () => {
           category: "Bike",
         };
 
-        const { data } = await axiosInstance.get("/website/vehicle", { params });
+        const { data } = await axiosInstance.get("/website/bike", { params });
 
         setVehicles(data.data || []);
         setPagination(
@@ -572,7 +342,7 @@ const CarListing = () => {
       </div>
       <div className="container mx-auto px-4 py-8">
         {/* Horizontal Filter Section */}
-        <FilterSection filters={filters} setFilters={setFilters} makes={makes} models={models} />
+        <FilterSection filters={filters} setFilters={setFilters} makes={makes} />
         {/* Vehicle List */}
         {loading ? (
           <p className="text-center text-gray-500">Loading...</p>

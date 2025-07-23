@@ -14,6 +14,7 @@ const nextConfig = {
       "www.thefamouspeople.com",
       "www.auto-data.net",
       "api.informreaders.com",
+      "www.ultimatespecs.com",
     ],
   },
 };
