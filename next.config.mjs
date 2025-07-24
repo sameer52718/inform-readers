@@ -15,6 +15,7 @@ const nextConfig = {
       "www.auto-data.net",
       "api.informreaders.com",
       "www.ultimatespecs.com",
+      "via.placeholder.com",
     ],
   },
 };
