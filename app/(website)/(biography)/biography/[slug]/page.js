@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 // Components
 import ProductGallery from "@/components/pages/specification/ProductGallery";
 import Loading from "@/components/ui/Loading";
-import BiographyCard from "@/components/card/BiographyCard"; // Adjust path as needed
+import BiographyCard from "@/components/shared/BiographyCard"; // Adjust path as needed
 
 // Utils
 import axiosInstance from "@/lib/axiosInstance";
@@ -56,8 +56,10 @@ export default function BiographyDetail() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axiosInstance.get(`/website/biography/${slug}`);
+        const response = await axiosInstance.get(`/website/biography/detail/${slug}`);
         if (!response.data.error) {
+          console.log(response.data);
+
           setData(response?.data?.biography);
           setRelated(response?.data?.related || []);
         }
@@ -259,7 +261,7 @@ export default function BiographyDetail() {
     sections.forEach((section) => {
       section.keys.forEach((key) => {
         if (!specMap[key]) {
-          specMap[key] = "---";
+          specMap[key] = "Update Soon When Available";
         }
       });
     });
@@ -297,7 +299,7 @@ export default function BiographyDetail() {
             {sections.map((section) => {
               const sectionSpecs = section.keys.map((key) => ({
                 name: key,
-                value: specMap[key] || "---",
+                value: specMap[key] || "Update Soon When Available",
               }));
 
               return (
@@ -360,9 +362,7 @@ export default function BiographyDetail() {
                 <BiographyCard
                   key={biography._id}
                   celebrity={biography}
-                  category={biography.categoryName}
-                  subCategory={biography.subCategoryName}
-                  nationality={biography.nationality}
+                  category={biography?.categoryId?.name}
                 />
               ))}
             </div>
