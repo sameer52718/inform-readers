@@ -197,7 +197,7 @@ function BiographySection({ category, className = "" }) {
       {category?.biographies?.length > 0 && (
         <div className="mt-8 text-center">
           <Link
-            href={`/biography/listing?category=${category?._id}`}
+            href={`/biography/listing?category=${category?.categoryId}`}
             className={`text-red-600 hover:text-red-700 font-medium`}
           >
             View All {category.categoryName} →

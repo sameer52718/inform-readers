@@ -226,6 +226,155 @@ function HeroSection() {
   );
 }
 
+const FilterBar = ({ filters, setFilters, applyFilters, categories, subCategories, nationalities }) => {
+  const [isOpen, setIsOpen] = useState(false); // For mobile toggle
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value || "", // Reset to empty string if no value
+    }));
+  };
+
+  return (
+    <div className="lg:w-1/4 w-full">
+      {/* Mobile toggle button */}
+      <button
+        className="lg:hidden w-full bg-red-600 text-white py-2 px-4 rounded mb-4"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? "Close Filters" : "Open Filters"}
+      </button>
+      <div className={`${isOpen ? "block" : "hidden"} lg:block bg-white p-6 rounded-lg shadow-md`}>
+        <h2 className="text-xl font-semibold mb-4">Filters</h2>
+        {/* Category Filter */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <select
+            name="categoryId"
+            value={filters.categoryId}
+            onChange={handleFilterChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
+          >
+            <option value="">All Categories</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Sub-Category Filter */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Sub-Category</label>
+          <select
+            name="subCategoryId"
+            value={filters.subCategoryId}
+            onChange={handleFilterChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
+            disabled={!filters.categoryId} // Disable if no category selected
+          >
+            <option value="">All Sub-Categories</option>
+            {subCategories.map((subCategory) => (
+              <option key={subCategory._id} value={subCategory._id}>
+                {subCategory.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Net Worth Range Filter */}
+        {/* <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Net Worth Range</label>
+          <select
+            name="netWorthRange"
+            value={filters.netWorthRange}
+            onChange={handleFilterChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
+          >
+            <option value="">All Ranges</option>
+            {["Under $1M", "$1M-$10M", "$10M-$50M", "$50M-$100M", "$100M-$1B", "Over $1B"].map((range) => (
+              <option key={range} value={range}>
+                {range}
+              </option>
+            ))}
+          </select>
+        </div> */}
+        {/* Country/Region Filter */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Country/Region</label>
+          <select
+            name="country"
+            value={filters.country}
+            onChange={handleFilterChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
+          >
+            <option value="">All Countries</option>
+            {nationalities.map((nationality) => (
+              <option key={nationality._id} value={nationality.name}>
+                {nationality.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Industry/Field Filter */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Industry/Field</label>
+          <select
+            name="industry"
+            value={filters.industry}
+            onChange={handleFilterChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
+          >
+            <option value="">All Industries</option>
+            {[
+              "Entertainment",
+              "Technology",
+              "Sports",
+              "Politics",
+              "Science",
+              "Art",
+              "Literature",
+              "Activism",
+              "Business",
+              "Media",
+              "Religion",
+            ].map((industry) => (
+              <option key={industry} value={industry}>
+                {industry}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Gender Filter */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Gender</label>
+          <select
+            name="gender"
+            value={filters.gender}
+            onChange={handleFilterChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
+          >
+            <option value="">All Genders</option>
+            {["Male", "Female", "Non-Binary"].map((gender) => (
+              <option key={gender} value={gender}>
+                {gender}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Apply Filters Button */}
+        <button
+          onClick={applyFilters}
+          className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+        >
+          Apply Filters
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const BiographyListing = () => {
   const searchParams = useSearchParams();
   const [celebrities, setCelebrities] = useState([]);
@@ -235,67 +384,147 @@ const BiographyListing = () => {
     totalItems: 0,
     currentPage: 1,
     totalPages: 1,
-    pageSize: 25,
+    pageSize: 24,
+  });
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [nationalities, setNationalities] = useState([]);
+  const [filters, setFilters] = useState({
+    categoryId: searchParams.get("category") || "",
+    subCategoryId: "",
+    netWorthRange: "",
+    country: "",
+    industry: "",
+    gender: "",
   });
 
-  const categoryId = searchParams.get("category");
-
-  const loadData = useCallback(
-    async (loading = true, page = 1, search = "") => {
+  // Fetch categories and nationalities on mount
+  useEffect(() => {
+    const fetchCategories = async () => {
       try {
-        setIsLoading(loading);
-        const { data } = await axiosInstance.get(`website/biography/${categoryId}`, {
-          params: { page, limit: 24, search },
-        });
-        if (!data.error) {
-          setCelebrities(data.biographies);
-          setPagination(data.pagination);
-        }
+        const { data } = await axiosInstance.get("/common/category", { params: { type: "Biography" } });
+        setCategories(data.categories || []);
       } catch (error) {
         handleError(error);
-      } finally {
-        setIsLoading(false);
       }
-    },
-    [categoryId]
-  );
+    };
 
-  useEffect(() => {
-    loadData();
+    const fetchNationalities = async () => {
+      try {
+        const { data } = await axiosInstance.get("/common/nationality");
+        setNationalities(data.nationalities || []);
+      } catch (error) {
+        handleError(error);
+      }
+    };
+
+    fetchCategories();
+    fetchNationalities();
   }, []);
 
+  // Fetch subcategories when categoryId changes
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      if (filters.categoryId) {
+        try {
+          const { data } = await axiosInstance.get("/common/subCategory", {
+            params: { categoryId: filters.categoryId },
+          });
+          setSubCategories(data.subCategories || []);
+        } catch (error) {
+          handleError(error);
+        }
+      } else {
+        setSubCategories([]);
+      }
+    };
+
+    fetchSubCategories();
+  }, [filters.categoryId]);
+
+  const loadData = useCallback(async (loading = true, page = 1, search = "", filters = {}) => {
+    try {
+      setIsLoading(loading);
+      const { data } = await axiosInstance.get(`website/biography/${filters.categoryId || "all"}`, {
+        params: {
+          page,
+          limit: 24,
+          search,
+          subCategoryId: filters.subCategoryId,
+          netWorthRange: filters.netWorthRange,
+          country: filters.country,
+          industry: filters.industry,
+          gender: filters.gender,
+        },
+      });
+      if (!data.error) {
+        setCelebrities(data.biographies);
+        setPagination(data.pagination);
+      }
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadData(true, 1, search, filters);
+  }, [loadData, filters.categoryId]);
+
   const onPageChange = async (page) => {
-    loadData(true, page, search);
+    loadData(true, page, search, filters);
   };
 
   const onSearch = async () => {
-    loadData(true, 1, search);
+    loadData(true, 1, search, filters);
+  };
+
+  const applyFilters = () => {
+    loadData(true, 1, search, filters);
   };
 
   return (
     <main className="min-h-screen bg-neutral-50">
       <HeroSection />
       <Loading loading={isLoading}>
-        <div className="container mx-auto px-4 py-12">
-          <SearchBanner setSearch={setSearch} search={search} onSearch={onSearch} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {celebrities?.map((item) => (
-              <BiographyCard celebrity={item} key={item?._id} category={item?.categoryId?.name} />
-            ))}
-          </div>
-          <div className="flex justify-center mt-12">
-            <Pagination
-              currentPage={pagination.currentPage}
-              totalPages={pagination.totalPages}
-              onPageChange={onPageChange}
-            />
+        <div className="container mx-auto px-4 py-12 flex flex-col lg:flex-row gap-6">
+          {/* Filter Bar */}
+          <FilterBar
+            filters={filters}
+            setFilters={setFilters}
+            applyFilters={applyFilters}
+            categories={categories}
+            subCategories={subCategories}
+            nationalities={nationalities}
+          />
+          {/* Biography Listing */}
+          <div className="lg:w-3/4 w-full">
+            <SearchBanner setSearch={setSearch} search={search} onSearch={onSearch} />
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {celebrities?.map((item) => (
+                <BiographyCard
+                  celebrity={item}
+                  key={item?._id}
+                  category={item?.categoryName}
+                  subCategory={item?.subCategoryName}
+                  nationality={item?.nationality}
+                />
+              ))}
+            </div>
+            <div className="flex justify-center mt-12">
+              <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                onPageChange={onPageChange}
+              />
+            </div>
           </div>
         </div>
       </Loading>
     </main>
   );
 };
-
 const page = () => {
   return (
     <Suspense>
