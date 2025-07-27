@@ -89,20 +89,20 @@ export default function BiographyDetail() {
         "Family Details",
         "Education",
         "Religion",
-        "Nicknames/Aliases",
+        "Nick Name",
       ],
     },
     {
       title: "Professional Information",
       keys: [
-        "Occupation/Profession",
-        "Industry/Field",
+        "Occupation",
+        "industry",
         "Notable Works",
-        "Career Start",
+        "Carrer Start",
         "Major Achievements",
         "Awards and Honors",
-        "Current Role/Position",
-        "Past Roles/Positions",
+        "Current Role",
+        "Past Role",
         "Companies/Organizations Affiliated",
       ],
     },
@@ -120,22 +120,24 @@ export default function BiographyDetail() {
     {
       title: "Physical Attributes",
       keys: [
+        "Body Measurements",
+        "Height",
+        "Weight",
+        "Shoe Size",
         "Arms Size",
         "Body Type",
-        "Breast Size/Bust Size",
+        "Breast Size",
         "Clothing Size",
         "Distinctive Features",
         "Eye Color",
         "Fitness Level",
         "Hair Color",
         "Health Conditions",
-        "Height",
         "Hip Size",
         "Piercings",
         "Skin Tone",
         "Tattoos",
         "Voice Type",
-        "Weight",
       ],
     },
     {
@@ -199,65 +201,106 @@ export default function BiographyDetail() {
     },
   ];
 
-  // Combine all specification arrays into a single map for lookup
+  // Initialize the specMap
   const specMap = {};
+
+  // Helper function to normalize keys for comparison (lowercase, remove special chars)
+  const normalizeKey = (str) => {
+    return str
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .trim();
+  };
+
+  // Helper function to title-case keys, preserving special characters
+  const toTitleCase = (str) => {
+    // Split by spaces or special characters like '/', keep delimiters
+    const parts = str.split(/(\s+|\/)/);
+    return parts
+      .map((part) => {
+        if (part.match(/^\s+$/) || part === "/") return part; // Preserve spaces and '/'
+        return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+      })
+      .join("");
+  };
+
+  // Create a lookup map for section keys to their normalized forms
+  const sectionKeyMap = {};
+  sections.forEach((section) => {
+    section.keys.forEach((key) => {
+      sectionKeyMap[normalizeKey(key)] = key;
+    });
+  });
+
   if (data) {
     // Map personalInformation
     data.personalInformation?.forEach((spec) => {
       if (spec.name) {
-        if (spec.name === "family details" && Array.isArray(spec.value)) {
+        let key = spec.name.toLowerCase();
+        let value = spec.value;
+        if (key === "family details" && Array.isArray(spec.value)) {
           const family = spec.value[0];
           specMap["Family Details"] = Object.entries(family)
-            .filter(([key]) => key !== "spouse") // Exclude spouse to avoid duplication
-            .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
+            .map(([k, v]) => `${toTitleCase(k)}: ${v}`)
             .join(", ");
-        } else if (spec.name === "education" && Array.isArray(spec.value)) {
+          // Map individual family fields
+          specMap["Spouse/Partner"] = family.spouse || "Update Soon When Available";
+          specMap["Children"] = family.children || "Update Soon When Available";
+          specMap["Parents"] = `${family.father || "Unknown"}, ${family.mother || "Unknown"}`;
+          specMap["Siblings"] = family.siblings || "Update Soon When Available";
+          specMap["Father"] = family.father || "Update Soon When Available";
+          specMap["Mother"] = family.mother || "Update Soon When Available";
+        } else if (key === "education" && Array.isArray(spec.value)) {
           const education = spec.value[0];
           specMap["Education"] = Object.entries(education)
-            .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
+            .map(([k, v]) => `${toTitleCase(k.replace(":", ""))}: ${v || "---"}`)
             .join(", ");
-        } else if (spec.name === "nick name") {
-          specMap["Nicknames/Aliases"] = spec.value || "---";
+          specMap["School_college"] = education["school_college:"] || "Update Soon When Available";
+          specMap["Educational_qualification"] =
+            education["educational_qualification:"] || "Update Soon When Available";
         } else {
-          specMap[spec.name.charAt(0).toUpperCase() + spec.name.slice(1)] = spec.value || "---";
+          // Find the matching section key by normalizing
+          const normalizedKey = normalizeKey(key);
+          const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
+          specMap[sectionKey] = value;
         }
       }
     });
+
     // Map professionalInformation
     data.professionalInformation?.forEach((spec) => {
       if (spec.name) {
-        if (spec.name === "occupation") {
-          specMap["Occupation/Profession"] = spec.value || "---";
-        } else if (spec.name === "award and honours") {
-          specMap["Awards and Honors"] = spec.value || "---";
-        } else {
-          specMap[spec.name.charAt(0).toUpperCase() + spec.name.slice(1)] = spec.value || "---";
-        }
+        let key = spec.name.toLowerCase();
+        let value = spec.value;
+        const normalizedKey = normalizeKey(key);
+        const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
+        specMap[sectionKey] = value;
       }
     });
+
     // Map netWorthAndAssets
     data.netWorthAndAssets?.forEach((spec) => {
       if (spec.name) {
-        if (spec.name === "income") {
-          specMap["Income Sources"] = spec.value || "---";
-        } else if (spec.name === "luxury assets") {
-          specMap["Luxury Assets"] = spec.value || "---";
-        } else {
-          specMap[spec.name.charAt(0).toUpperCase() + spec.name.slice(1)] = spec.value || "---";
-        }
+        let key = spec.name.toLowerCase();
+        let value = spec.value;
+        const normalizedKey = normalizeKey(key);
+        const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
+        specMap[sectionKey] = value;
       }
     });
+
     // Map physicalAttributes
     data.physicalAttributes?.forEach((spec) => {
       if (spec.name) {
-        if (spec.name === "body measurements") {
-          specMap["Body Type"] = spec.value || "---";
-        } else {
-          specMap[spec.name.charAt(0).toUpperCase() + spec.name.slice(1)] = spec.value || "---";
-        }
+        let key = spec.name.toLowerCase();
+        let value = spec.value;
+        const normalizedKey = normalizeKey(key);
+        const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
+        specMap[sectionKey] = value;
       }
     });
-    // Map additional fields not in response
+
+    // Fill in missing fields from sections
     sections.forEach((section) => {
       section.keys.forEach((key) => {
         if (!specMap[key]) {
