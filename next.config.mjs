@@ -16,6 +16,7 @@ const nextConfig = {
       "api.informreaders.com",
       "www.ultimatespecs.com",
       "via.placeholder.com",
+      "bikez.com",
     ],
   },
 };
