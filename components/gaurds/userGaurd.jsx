@@ -7,13 +7,13 @@ import { userTypes } from "@/constant/data";
 
 const UserGaurd = ({ children }) => {
   const router = useRouter();
-  const { user, userType } = useSelector((state) => state.auth);
+  const { token, userType } = useSelector((state) => state.auth);
 
-  const isAuthenticated = Boolean(user && userType === userTypes.USER);
+  const isAuthenticated = Boolean(token && userType === userTypes.USER);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.replace("/admin/login");
+      router.replace("/signin");
     }
   }, [isAuthenticated, router]);
 

@@ -17,59 +17,35 @@ import {
   Zap,
   Trophy,
   Clock,
+  Users,
+  Award,
+  TrendingUp,
+  Filter,
 } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
 import Link from "next/link";
+import { formatLargeNumber } from "@/lib/functions";
+import handleError from "@/lib/handleError";
 
 const operatingSystems = [
-  { name: "Windows", icon: Monitor },
-  { name: "Mac", icon: Apple },
-  { name: "Android", icon: Smartphone },
-  { name: "iOS", icon: TabletSmartphone },
+  { name: "Windows", icon: Monitor, count: "15,000+" },
+  { name: "Mac", icon: Apple, count: "8,500+" },
+  { name: "Android", icon: Smartphone, count: "12,000+" },
+  { name: "iOS", icon: TabletSmartphone, count: "9,200+" },
 ];
 
-const tags = ["Free", "Paid", "Premium"];
-
-const featuredSoftware = [
-  {
-    title: "Most Popular",
-    icon: Star,
-    items: ["Chrome", "Firefox", "VS Code", "Spotify"],
-  },
-  {
-    title: "New Releases",
-    icon: Zap,
-    items: ["Brave Browser", "Discord", "Slack", "Zoom"],
-  },
-  {
-    title: "Top Rated",
-    icon: Trophy,
-    items: ["Adobe CC", "Microsoft Office", "AutoCAD", "Photoshop"],
-  },
-];
-
-const quickStats = [
-  {
-    icon: Download,
-    value: "10M+",
-    label: "Downloads",
-  },
-  {
-    icon: Shield,
-    value: "100%",
-    label: "Secure",
-  },
-];
+const tags = ["Free", "Paid", "Premium", "Trial"];
 
 export default function SoftwarePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-
   const [currentOS, setCurrentOS] = useState("Windows");
+  const [currentCategory, setCurrentCategory] = useState("");
   const [currentTag, setCurrentTag] = useState("Free");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(12); // default value, adjust as needed
+  const [pageSize, setPageSize] = useState(12);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -78,7 +54,7 @@ export default function SoftwarePage() {
       setIsLoading(true);
       try {
         const { data } = await axiosInstance.get(
-          `/website/software?operatingSystem=${currentOS}&tag=${currentTag}&page=${currentPage}&limit=${pageSize}&search=${searchTerm}`,
+          `/website/software?operatingSystem=${currentOS}&tag=${currentTag}&page=${currentPage}&limit=${pageSize}&search=${searchTerm}&subCategoryId=${currentCategory}`,
           { signal: controller.signal }
         );
         setData(data);
@@ -91,11 +67,29 @@ export default function SoftwarePage() {
     fetchData();
 
     return () => controller.abort();
-  }, [currentOS, currentTag, currentPage, pageSize, searchTerm]);
+  }, [currentOS, currentTag, currentPage, pageSize, searchTerm, currentCategory]);
+
+  useEffect(() => {
+    const getSubCatagories = async () => {
+      try {
+        const { data } = await axiosInstance.get("/common/subCategory", { params: { category: currentOS } });
+        if (!data.error) {
+          setCategories(data?.subCategories || []);
+        }
+      } catch (error) {
+        handleError(error);
+      }
+    };
+    getSubCatagories();
+  }, [currentOS]);
 
   const updateFilters = (type, value) => {
     if (type === "os") {
       setCurrentOS(value);
+      setCurrentCategory("");
+      setCurrentTag("");
+    } else if (type === "category") {
+      setCurrentCategory(value);
     } else {
       setCurrentTag(value);
     }
@@ -104,223 +98,335 @@ export default function SoftwarePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-indigo-600 via-red-600 to-pink-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Discover Amazing Software</h1>
-            <p className="text-xl text-red-100 mb-8">
-              Find the perfect tools to enhance your digital experience
-            </p>
-            <div className="flex justify-center gap-4">
-              {quickStats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={index} className="text-center px-6 py-4 bg-white/10 rounded-lg backdrop-blur-sm">
-                    <Icon className="h-6 w-6 mx-auto mb-2" />
-                    <div className="text-2xl font-bold">{stat.value}</div>
-                    <div className="text-sm text-red-100">{stat.label}</div>
-                  </div>
-                );
-              })}
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Software Downloads</h1>
+              <p className="text-gray-600 mt-1">Safe, secure, and trusted by millions</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-600">10M+</div>
+                <div className="text-sm text-gray-500">Downloads</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600">100%</div>
+                <div className="text-sm text-gray-500">Safe</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold mb-4 md:mb-0">Browse Software</h2>
-          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto items-center">
-            <div className="relative w-full md:w-64">
-              <input
-                type="search"
-                placeholder="Search software..."
-                className="w-full px-4 py-2 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Search and OS Selection */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Search */}
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Search Software</label>
+              <div className="relative">
+                <input
+                  type="search"
+                  placeholder="Search for software..."
+                  className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Search className="absolute right-3 top-3.5 h-5 w-5 text-gray-400" />
+              </div>
             </div>
 
-            <select
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                setCurrentPage(1); // reset to first page on size change
-              }}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-            >
-              {[8, 12, 16, 20, 24].map((size) => (
-                <option key={size} value={size}>
-                  {size} / page
-                </option>
-              ))}
-            </select>
+            {/* Operating Systems */}
+            <div className="lg:w-80">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Operating System</label>
+              <div className="grid grid-cols-2 gap-2">
+                {operatingSystems.map((os) => {
+                  const Icon = os.icon;
+                  return (
+                    <button
+                      key={os.name}
+                      onClick={() => updateFilters("os", os.name)}
+                      className={`p-3 rounded-lg border transition-all duration-200 ${
+                        currentOS === os.name
+                          ? "border-red-500 bg-red-50 text-red-700"
+                          : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon className="h-4 w-4" />
+                        <div className="text-left">
+                          <div className="font-medium text-sm">{os.name}</div>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="space-y-2">
-            <h2 className="text-lg font-semibold mb-3">Operating System</h2>
-            <div className="flex flex-wrap gap-2">
-              {operatingSystems.map((os) => {
-                const Icon = os.icon;
-                return (
-                  <button
-                    key={os.name}
-                    onClick={() => updateFilters("os", os.name)}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${
-                      currentOS === os.name
-                        ? "bg-red-500 text-white"
-                        : "bg-white border border-gray-300 hover:bg-gray-50"
-                    }`}
-                  >
-                    <Icon className="h-4 w-4" />
-                    {os.name}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <h2 className="text-lg font-semibold mb-3">License Type</h2>
-            <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
+        <div className="grid lg:grid-cols-4 gap-6">
+          {/* Sidebar */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Categories */}
+            <div className="bg-white rounded-lg border border-gray-200 p-4">
+              <h3 className="font-semibold text-gray-900 text-xl mb-4 flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                Categories
+              </h3>
+              <div className="space-y-1">
                 <button
-                  key={tag}
-                  onClick={() => updateFilters("tag", tag)}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    currentTag === tag
-                      ? "bg-red-500 text-white"
-                      : "bg-white border border-gray-300 hover:bg-gray-50"
+                  onClick={() => updateFilters("category", "")}
+                  className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                    currentCategory === ""
+                      ? "bg-red-100 text-red-700 font-medium"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
-                  {tag}
+                  <div className="flex items-center justify-between">
+                    <span>All Softwares</span>
+                  </div>
                 </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Software Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {isLoading
-            ? Array(pageSize)
-                .fill(0)
-                .map((_, i) => (
-                  <div key={i} className="bg-white rounded-xl p-6 border border-gray-200 animate-pulse">
-                    <div className="w-16 h-16 bg-gray-200 rounded-lg mx-auto mb-4" />
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-3" />
-                    <div className="h-4 bg-gray-200 rounded w-full mb-3" />
-                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
-                  </div>
-                ))
-            : data?.data.map((software) => (
-                <Link
-                  href={`/software/${software._id}`}
-                  key={software._id}
-                  className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
-                >
-                  <div className="flex flex-col items-center">
-                    <Image
-                      src={software.logo}
-                      alt={software.name}
-                      width={64}
-                      height={64}
-                      className="rounded-lg mb-4"
-                    />
-                    <h3 className="text-lg font-semibold text-center mb-2">{software.name}</h3>
-                    <p className="text-sm text-gray-600 text-center mb-4 line-clamp-2">{software.overview}</p>
-                    <div className="flex items-center gap-2 flex-wrap justify-center">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
-                        v{software.version}
-                      </span>
-                      {software.tag.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2 py-1 border border-gray-200 text-gray-600 text-sm rounded-md"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Link>
-              ))}
-        </div>
-
-        {/* Pagination */}
-        {data && (
-          <div className="mt-8 flex justify-center items-center gap-2">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="p-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-
-            <div className="flex items-center gap-1">
-              {Array.from({ length: Math.min(5, data.pagination.totalPages) }, (_, i) => {
-                const pageNumber = i + 1;
-                return (
+                {categories.map((category) => (
                   <button
-                    key={pageNumber}
-                    onClick={() => setCurrentPage(pageNumber)}
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      currentPage === pageNumber
-                        ? "bg-red-500 text-white"
-                        : "border border-gray-300 hover:bg-gray-50"
+                    key={category._id}
+                    onClick={() => updateFilters("category", category._id)}
+                    className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                      currentCategory === category._id
+                        ? "bg-red-100 text-red-700 font-medium"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     }`}
                   >
-                    {pageNumber}
+                    <div className="flex items-center justify-between">
+                      <span>{category.name}</span>
+                    </div>
                   </button>
-                );
-              })}
-              {data.pagination.totalPages > 5 && <span className="px-2">...</span>}
+                ))}
+              </div>
             </div>
 
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === data.pagination.totalPages}
-              className="p-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
+            {/* License Type */}
+            <div className="bg-white rounded-lg border  border-gray-200 p-4">
+              <h3 className="font-semibold text-gray-900 text-xl mb-4">License Type</h3>
+              <div className="space-y-2">
+                {tags.map((tag) => (
+                  <label key={tag} className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="license"
+                      checked={currentTag === tag}
+                      onChange={() => updateFilters("tag", tag)}
+                      className="text-red-600 focus:ring-red-500"
+                    />
+                    <span className="text-sm text-gray-700">{tag}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
           </div>
-        )}
 
-        {/* Featured Software Section */}
-        <div className="mt-16 space-y-12">
-          <h2 className="text-2xl font-bold text-center mb-8">Featured Software Collections</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredSoftware.map((category, index) => {
-              const Icon = category.icon;
-              return (
-                <div key={index} className="bg-white rounded-xl p-6 border border-gray-200">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Icon className="h-6 w-6 text-red-500" />
-                    <h3 className="text-lg font-semibold">{category.title}</h3>
-                  </div>
-                  <ul className="space-y-3">
-                    {category.items.map((item, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-center gap-2 text-gray-600 hover:text-red-500 cursor-pointer"
-                      >
-                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+          {/* Main Content */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Results Header */}
+            <div className="bg-white rounded-lg border border-gray-200 p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="font-semibold text-gray-900 text-xl">
+                    {currentCategory
+                      ? categories.find((item) => item._id === currentCategory)?.name
+                      : "All Softwares"}{" "}
+                    for {currentOS}
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    {data?.pagination?.totalItems || 0} software programs available
+                  </p>
                 </div>
-              );
-            })}
+                <select
+                  value={pageSize}
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                    setCurrentPage(1);
+                  }}
+                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
+                >
+                  {[8, 12, 16, 20, 24].map((size) => (
+                    <option key={size} value={size}>
+                      Show {size}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Software List */}
+            <div className="space-y-4">
+              {isLoading
+                ? Array(pageSize)
+                    .fill(0)
+                    .map((_, i) => (
+                      <div key={i} className="bg-white rounded-lg border border-gray-200 p-6 animate-pulse">
+                        <div className="flex items-start gap-4">
+                          <div className="w-16 h-16 bg-gray-200 rounded-lg"></div>
+                          <div className="flex-1 space-y-2">
+                            <div className="h-5 bg-gray-200 rounded w-1/3"></div>
+                            <div className="h-4 bg-gray-200 rounded w-full"></div>
+                            <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                            <div className="h-6 bg-gray-200 rounded w-24"></div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                : data?.data.map((software) => (
+                    <div
+                      key={software._id}
+                      className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200"
+                    >
+                      <div className="flex items-start gap-4">
+                        <Image
+                          src={software.logo}
+                          alt={software.name}
+                          width={64}
+                          height={64}
+                          className="rounded-lg border border-gray-200"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <Link
+                                href={`/software/${software._id}`}
+                                className="font-semibold text-lg text-gray-900 hover:text-red-600 transition-colors"
+                              >
+                                {software.name}
+                              </Link>
+                              <div className="flex items-center gap-3 mt-1 text-sm text-gray-600">
+                                <span>v{software.version}</span>
+                                <span>•</span>
+                                <div className="flex items-center gap-1">
+                                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                                  <span>4.5</span>
+                                </div>
+                                <span>•</span>
+                                <div className="flex items-center gap-1">
+                                  <Download className="h-3 w-3" />
+                                  <span>{formatLargeNumber(software.downloadCount)} downloads</span>
+                                </div>
+                              </div>
+                              <p className="text-gray-600 mt-2 line-clamp-2">{software.overview}</p>
+                              <div className="flex items-center gap-2 mt-3">
+                                {software.tag.map((t) => (
+                                  <span
+                                    key={t}
+                                    className={`px-2 py-1 text-xs rounded-full ${
+                                      t === "Free"
+                                        ? "bg-green-100 text-green-700"
+                                        : t === "Premium"
+                                        ? "bg-purple-100 text-purple-700"
+                                        : "bg-red-100 text-red-700"
+                                    }`}
+                                  >
+                                    {t}
+                                  </span>
+                                ))}
+                                <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                                  {currentOS}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <Link
+                                href={`/software/${software._id}`}
+                                className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-sm text-center"
+                              >
+                                Download
+                              </Link>
+                              <Link
+                                href={`/software/${software._id}`}
+                                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm text-center"
+                              >
+                                Details
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+            </div>
+
+            {/* Pagination */}
+            {data && (
+              <div className="bg-white rounded-lg border border-gray-200 p-4">
+                <div className="flex justify-between items-center">
+                  <div className="text-sm text-gray-600">
+                    Showing {(currentPage - 1) * pageSize + 1} to{" "}
+                    {Math.min(currentPage * pageSize, data.pagination.totalItems)} of{" "}
+                    {data.pagination.totalItems} results
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setCurrentPage(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="p-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </button>
+
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: Math.min(5, data.pagination.totalPages) }, (_, i) => {
+                        const pageNumber = i + 1;
+                        return (
+                          <button
+                            key={pageNumber}
+                            onClick={() => setCurrentPage(pageNumber)}
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${
+                              currentPage === pageNumber
+                                ? "bg-red-600 text-white"
+                                : "border border-gray-300 hover:bg-gray-50"
+                            }`}
+                          >
+                            {pageNumber}
+                          </button>
+                        );
+                      })}
+                      {data.pagination.totalPages > 5 && <span className="px-2 text-gray-500">...</span>}
+                    </div>
+
+                    <button
+                      onClick={() => setCurrentPage(currentPage + 1)}
+                      disabled={currentPage === data.pagination.totalPages}
+                      className="p-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+        </div>
+        {/* Disclaimer Section */}
+        <div className="mt-12 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-2xl p-6 text-sm leading-relaxed shadow-sm">
+          <h2 className="text-lg font-semibold mb-2">Disclaimer</h2>
+          <p className="mb-2">
+            We do <strong>not host</strong> any software or games on our server. All download links provided
+            on this page redirect to third-party websites such as <strong>download.cnet.com</strong>.
+          </p>
+          <p className="mb-2">
+            We are <strong>not responsible</strong> for the content, availability, or any damages resulting
+            from the downloads.
+          </p>
+          <p className="mb-2">
+            All rights to the software and games belong to their{" "}
+            <strong>respective developers or owners</strong>.
+          </p>
+          <p>
+            If you encounter any issues with a file or link, please{" "}
+            <strong>contact the official website</strong> directly.
+          </p>
         </div>
       </div>
     </div>

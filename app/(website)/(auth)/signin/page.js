@@ -66,7 +66,7 @@ export default function SignupPage() {
             <h2 className="text-3xl font-bold text-gray-900">{t("signin.title")}</h2>
             <p className="mt-2 text-sm text-gray-600">
               {t("signin.description")}{" "}
-              <Link href="/signin" className="text-red-600 hover:text-red-700 font-medium">
+              <Link href="/signup" className="text-red-600 hover:text-red-700 font-medium">
                 {t("signin.signupLink")}
               </Link>
             </p>
