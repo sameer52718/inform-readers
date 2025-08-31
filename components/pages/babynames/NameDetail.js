@@ -25,12 +25,29 @@ import {
 } from "lucide-react";
 import { toast } from "react-toastify";
 
+// ✅ import helpers
+import { countryNames } from "@/constant/supportContries";
+import { generateFAQs } from "@/templates/faq";
+import { getCountryCodeFromHost } from "@/lib/getCountryFromSubdomain";
+
 export default function NameDetail() {
   const { slug } = useParams();
   const [data, setData] = useState([]);
   const [name, setName] = useState(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [isLoading, setIsLoading] = useState(true);
+
+  const [faqs, setFaqs] = useState([]);
+
+  useEffect(() => {
+    // detect subdomain
+    if (typeof window !== "undefined") {
+      const host = window.location.hostname;
+      const sub = getCountryCodeFromHost(host);
+      const country = countryNames[sub] || "Global";
+      setFaqs(generateFAQs(country));
+    }
+  }, []);
 
   // Get the current page URL
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -334,24 +351,24 @@ export default function NameDetail() {
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
                 <div className="space-y-6">
-                  <div className="border-b pb-4">
-                    <h3 className="text-xl font-semibold mb-2">What does the name {name?.name} mean?</h3>
-                    <p className="text-gray-600">{name?.shortMeaning}</p>
-                  </div>
-                  <div className="border-b pb-4">
-                    <h3 className="text-xl font-semibold mb-2">Is {name?.name} a traditional name?</h3>
-                    <p className="text-gray-600">
-                      Yes, {name?.name} is a traditional name with roots in {name?.origion} culture.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      What are common nicknames for {name?.name}?
-                    </h3>
-                    <p className="text-gray-600">
-                      Common nicknames include {name?.shortName} and variations.
-                    </p>
-                  </div>
+                  {faqs.map((faq, idx) => (
+                    <div key={idx} className="border-b pb-4">
+                      <h3 className="text-xl font-semibold mb-2">
+                        {faq.question
+                          .replace("{name}", name?.name || "this name")
+                          .replace("{gender}", name?.gender || "the")
+                          .replace("{origin}", name?.origion || "unknown")
+                          .replace("{religion}", name?.religionId?.name || "faith")}
+                      </h3>
+                      <p className="text-gray-600">
+                        {faq.answer
+                          .replace("{name}", name?.name || "this name")
+                          .replace("{gender}", name?.gender || "the")
+                          .replace("{origin}", name?.origion || "unknown")
+                          .replace("{religion}", name?.religionId?.name || "faith")}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -365,7 +382,7 @@ export default function NameDetail() {
                   More Names By Religion
                 </h2>
                 <div className="space-y-3">
-                  {data.map((item, index) => (
+                  {data.slice(0, 10).map((item, index) => (
                     <Link
                       key={index}
                       href={`/names/religion/${item._id}`}

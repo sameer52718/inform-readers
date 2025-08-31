@@ -1,12 +1,31 @@
 import axiosInstance from "@/lib/axiosInstance";
 import NameMeaning from "@/components/pages/babynames/NameDetail";
+import { headers } from "next/headers";
+import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+const metaTemplates = {
+  title: "{name} Meaning, Origin & Popularity in {country}",
+  description:
+    "Discover the meaning of the {gender} name {name}, its {origin} roots, {religion} influence, and popularity in {country}.",
+};
+
+function applyMetaTemplate(template, values) {
+  return template
+    .replace(/{name}/g, values.name || "")
+    .replace(/{gender}/g, values.gender || "")
+    .replace(/{origin}/g, values.origin || "")
+    .replace(/{religion}/g, values.religion || "")
+    .replace(/{country}/g, values.country || "");
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
 
+  const host = (await headers()).get("host") || "informreaders.com";
+    const country = getCountryName(getCountryCodeFromHost(host))
+
   try {
     const { data } = await axiosInstance.get(`/website/name/${slug}`);
-
+    
     if (data.error || !data.data) {
       return {
         title: "Name Details | Infrom Readers",
@@ -14,35 +33,42 @@ export async function generateMetadata({ params }) {
       };
     }
 
-    const nameData = data.data;
+     const nameData = data.data;
+    console.log(nameData);
 
-    const name = nameData?.name;
-    const gender = nameData?.gender;
-    const shortMeaning = nameData?.shortMeaning || "";
-    const origion = nameData?.origion || "";
-    const religion = nameData?.religionId?.name || "";
+    const values = {
+      name: nameData?.name || "",
+      gender: nameData?.gender || "",
+      origin: nameData?.origion || "",
+      religion: nameData?.religionId?.name || "",
+      country,
+    };
+
+    const title = applyMetaTemplate(metaTemplates.title, values);
+    const description = applyMetaTemplate(metaTemplates.description, values);
+
 
     return {
-      title: `${name} - Meaning, Origin & Religion | Infrom Readers`,
-      description: `${name} is a ${gender} name of ${origion} origin associated with ${religion}. ${shortMeaning}`,
+      title,
+      description,
       keywords: [
-        `${name} name meaning`,
-        `${name} origin`,
-        `${name} religion`,
-        `${name} baby name`,
-        `meaning of the name ${name}`,
+        `${values.name} name meaning`,
+        `${values.name} origin`,
+        `${values.name} religion`,
+        `${values.name} baby name`,
+        `meaning of the name ${values.name}`,
       ],
       openGraph: {
-        title: `${name} - Meaning, Origin & Religion | Infrom Readers`,
-        description: shortMeaning,
-        url: `http://informreaders.com/names/${slug}`,
+        title,
+        description,
+        url: `http://${host}/names/${slug}`,
         siteName: "BabyNameFinder",
         images: [
           {
-            url: "http://informreaders.com/images/baby-name-og.jpg", // You can replace this with a relevant image URL
+            url: `http://${host}/images/baby-name-og.jpg`,
             width: 1200,
             height: 630,
-            alt: `${name} - Name Details`,
+            alt: `${values.name} - Name Details`,
           },
         ],
         locale: "en_US",
