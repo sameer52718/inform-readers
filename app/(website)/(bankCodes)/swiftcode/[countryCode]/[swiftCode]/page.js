@@ -1,254 +1,89 @@
-"use client";
-
-import AdBanner from "@/components/partials/AdBanner";
-import HoverBanner from "@/components/partials/HoverBanner";
 import axiosInstance from "@/lib/axiosInstance";
-import handleError from "@/lib/handleError";
-import { Building2, Globe2, MapPin } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import SwiftCodeDetail from "@/components/pages/bankcodes/SwifrCodeDetail"; // Adjust path as needed
+import { headers } from "next/headers";
+import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
 
-function LocationTable({ data = [] }) {
-  const { t } = useTranslation(); // Empty namespace as instructed
-  const { countryCode } = useParams();
-  return (
-    <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-max border-collapse">
-          <thead>
-            <tr className="border-b bg-red-600">
-              <th className="p-4 text-left text-sm font Sweden-medium text-white">
-                {t("swiftcodeDetail.tableHeaders.bank")}
-              </th>
-              <th className="p-4 text-left text-sm font-medium text-white">
-                {t("swiftcodeDetail.tableHeaders.city")}
-              </th>
-              <th className="p-4 text-left text-sm font-medium text-white">
-                {t("swiftcodeDetail.tableHeaders.branch")}
-              </th>
-              <th className="p-4 text-left text-sm font-medium text-white">
-                {t("swiftcodeDetail.tableHeaders.swiftCode")}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
-            {data.length > 0 ? (
-              data.map((code, index) => (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="p-4 text-sm">{code?.bank}</td>
-                  <td className="p-4 text-sm">{code?.city}</td>
-                  <td className="p-4 text-sm">{code?.branch || "---"}</td>
-                  <td className="p-4">
-                    <Link
-                      href={`/swiftcode/${countryCode}/${code?.swiftCode}`}
-                      className="text-sm font-medium text-red-600 hover:text-red-700"
-                    >
-                      {code?.swiftCode}
-                    </Link>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className="p-4 text-center text-sm text-gray-500">
-                  {t("swiftcodeDetail.noData")}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+// Meta templates based on Bank Codes Meta title and Description.rtf
+const metaTemplates = {
+  title: "{bank_name} SWIFT Codes in {country} | {location}",
+  description:
+    "Find SWIFT codes for {bank_name} in {location}, {country}. Ensure secure international transfers with accurate bank codes!",
+};
+
+// Function to replace placeholders in meta templates
+function applyMetaTemplate(template, values) {
+  return template
+    .replace(/{bank_name}/g, values.bank_name || "")
+    .replace(/{location}/g, values.location || "")
+    .replace(/{country}/g, values.country || "");
 }
 
-function SwiftCodeDetail() {
-  const { t } = useTranslation(); // Empty namespace as instructed
-  const { swiftCode } = useParams();
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [related, setRelated] = useState([]);
+export async function generateMetadata({ params }) {
+  const { swiftCode } = params;
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await axiosInstance.get(`/website/bankCode/${swiftCode}`);
-        if (!data.error) {
-          setData(data.bankCodes);
-          setRelated(data.related);
-        }
-      } catch (error) {
-        handleError(error);
-      } finally {
-        setIsLoading(false);
-      }
+  // Get host and country from headers
+  const host = (await headers()).get("host") || "informreaders.com";
+  const country = getCountryName(getCountryCodeFromHost(host));
+
+  try {
+    // Fetch SWIFT code data
+    const { data } = await axiosInstance.get(`/website/bankCode/${swiftCode}`);
+
+    if (data.error || !data.bankCodes) {
+      return {
+        title: "SWIFT Code Details | Inform Readers",
+        description: "Find SWIFT codes for secure international bank transfers.",
+      };
+    }
+
+    const bankData = data.bankCodes;
+
+    // Prepare values for meta template replacement
+    const values = {
+      bank_name: bankData?.bank || "",
+      location: bankData?.city || "",
+      country: bankData?.countryId?.name || country,
     };
-    getData();
-  }, [swiftCode]);
 
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-red-600"></div>
-      </div>
-    );
+    // Generate title and description
+    const title = applyMetaTemplate(metaTemplates.title, values);
+    const description = applyMetaTemplate(metaTemplates.description, values);
+
+    return {
+      title,
+      description,
+      keywords: [
+        `${values.bank_name} SWIFT code`,
+        `${values.bank_name} bank codes ${values.location}`,
+        `SWIFT code ${values.location} ${values.country}`,
+        `${values.bank_name} international transfers`,
+        `bank codes ${values.country}`,
+      ],
+      openGraph: {
+        title,
+        description,
+        url: `http://${host}/swiftcode/${swiftCode}`,
+        siteName: "BankCodeFinder",
+        images: [
+          {
+            url: `http://${host}/images/bank-code-og.jpg`, // Adjust to your actual image path
+            width: 1200,
+            height: 630,
+            alt: `${values.bank_name} SWIFT Code - ${values.location}, ${values.country}`,
+          },
+        ],
+        locale: "en_US",
+        type: "article",
+      },
+    };
+  } catch (error) {
+    return {
+      title: "SWIFT Code Details | Inform Readers",
+      description: "Explore SWIFT codes for secure international bank transfers.",
+    };
   }
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <AdBanner />
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-          {t("swiftcodeDetail.heroTitle")}
-        </h1>
-
-        <div className="mt-12 rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            {t("swiftcodeDetail.servicesTitle").replace("{bank}", data?.bank)}
-          </h2>
-          <p className="mt-4 text-gray-600">
-            {t("swiftcodeDetail.servicesDescription").replace("{bank}", data?.bank)}
-          </p>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            {t("swiftcodeDetail.services", { returnObjects: true }).map((service, index) => (
-              <div key={index} className="rounded-xl border bg-gray-50 p-6">
-                <h6 className="font-semibold text-gray-900">{service.title}</h6>
-                <p className="mt-2 text-sm text-gray-600">
-                  {service.description
-                    .replace("{bank}", data?.bank)
-                    .replace("{city}", data?.city)
-                    .replace("{swiftCode}", data?.swiftCode)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="my-4">
-          <HoverBanner />
-        </div>
-
-        <div className="mt-12">
-          <div className="rounded-xl bg-gradient-to-r from-red-600 to-red-700 p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              {t("swiftcodeDetail.swiftCodeTitle").replace("{swiftCode}", data?.swiftCode)}
-            </h2>
-            <p className="mt-2 text-red-100">{t("swiftcodeDetail.swiftCodeDescription")}</p>
-          </div>
-
-          <div className="mt-6 space-y-4">
-            <div className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-                <Building2 className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500">{t("swiftcodeDetail.bankNameLabel")}</p>
-                <p className="text-lg font-semibold text-gray-900">{data?.bank}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-                <MapPin className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500">{t("swiftcodeDetail.locationLabel")}</p>
-                <p className="text-lg font-semibold text-gray-900">
-                  {data?.branch ? `${data.branch}, ` : ""}
-                  {data?.city}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-                <Globe2 className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500">{t("swiftcodeDetail.countryLabel")}</p>
-                <p className="text-lg font-semibold text-gray-900">{data?.countryId?.name}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="my-4">
-          <HoverBanner />
-        </div>
-        <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            {t("swiftcodeDetail.importanceTitle")
-              .replace("{swiftCode}", data?.swiftCode)
-              .replace("{bank}", data?.bank)}
-          </h2>
-          <p className="mt-4 text-gray-600">
-            {t("swiftcodeDetail.importanceDescription")
-              .replace("{swiftCode}", data?.swiftCode)
-              .replace("{bank}", data?.bank)}
-          </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            {t("swiftcodeDetail.importanceFeatures", { returnObjects: true }).map((feature, index) => (
-              <div key={index} className="rounded-xl border bg-gray-50 p-6">
-                <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
-                <p className="mt-2 text-sm text-gray-600">
-                  {feature.description
-                    .replace("{swiftCode}", data?.swiftCode)
-                    .replace("{branch}", data?.branch || "main")
-                    .replace("{city}", data?.city)
-                    .replace("{country}", data?.countryId?.name)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="my-4">
-          <HoverBanner />
-        </div>
-
-        <div className="">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">{t("swiftcodeDetail.faqTitle")}</h2>
-          <div className="mt-6 space-y-6">
-            {t("swiftcodeDetail.faqs", { returnObjects: true }).map((faq, index) => (
-              <div key={index} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-                <h6 className="font-medium text-gray-900">
-                  {faq.question
-                    .replace("{bank}", data?.bank)
-                    .replace("{branch}", data?.branch || "main")
-                    .replace("{swiftCode}", data?.swiftCode)}
-                </h6>
-                <p className="mt-2 text-gray-600">
-                  {faq.answer
-                    .replace("{bank}", data?.bank)
-                    .replace("{branch}", data?.branch || "main")
-                    .replace("{city}", data?.city)
-                    .replace("{country}", data?.countryId?.name)
-                    .replace("{swiftCode}", data?.swiftCode)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="my-4">
-          <HoverBanner />
-        </div>
-
-        {related.length > 0 && (
-          <div className="mt-12">
-            <h2 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl">
-              {t("swiftcodeDetail.relatedBranchesTitle").replace("{bank}", data?.bank)}
-            </h2>
-            <LocationTable data={related} />
-          </div>
-        )}
-
-        <div className="mt-12">
-          <HoverBanner />
-        </div>
-      </div>
-    </div>
-  );
 }
 
-export default SwiftCodeDetail;
+export default function Page() {
+  return <SwiftCodeDetail />;
+}
