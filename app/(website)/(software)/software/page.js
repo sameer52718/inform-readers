@@ -297,7 +297,7 @@ export default function SoftwarePage() {
                           <div className="flex items-start justify-between gap-4">
                             <div className="flex-1 min-w-0">
                               <Link
-                                href={`/software/${software._id}`}
+                                href={`/software/${software.slug}`}
                                 className="font-semibold text-lg text-gray-900 hover:text-red-600 transition-colors"
                               >
                                 {software.name}
@@ -338,13 +338,13 @@ export default function SoftwarePage() {
                             </div>
                             <div className="flex flex-col gap-2">
                               <Link
-                                href={`/software/${software._id}`}
+                                href={`/software/${software.slug}`}
                                 className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-sm text-center"
                               >
                                 Download
                               </Link>
                               <Link
-                                href={`/software/${software._id}`}
+                                href={`/software/${software.slug}`}
                                 className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm text-center"
                               >
                                 Details
