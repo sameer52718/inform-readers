@@ -123,7 +123,7 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
                         </td>
                         <td className="px-6 py-4 text-center">
                           <Link
-                            href={`/names/${item?._id}`}
+                            href={`/names/${item?.slug}`}
                             className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
                           >
                             View Details

@@ -31,7 +31,7 @@ function LocationTable({ data = [] }) {
                   <td className="p-4 text-sm">{code?.area || "---"}</td>
                   <td className="p-4">
                     <Link
-                      href={`/postalcode/${countryCode}/${region}/${code?._id}`}
+                      href={`/postalcode/${countryCode}/${region}/${code?.slug}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
                       View Details

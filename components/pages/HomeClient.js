@@ -162,7 +162,7 @@ export default function Home() {
                           </td>
                           <td className="py-4 px-6 text-center">
                             <Link
-                              href={`/names/${item?._id}`}
+                              href={`/names/${item?.slug}`}
                               className={`inline-flex items-center gap-2 text-${color}-600 hover:text-${color}-700 font-medium group`}
                             >
                               View Details
