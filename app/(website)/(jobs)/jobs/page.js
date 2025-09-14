@@ -2,18 +2,9 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { Building2 } from "lucide-react";
 
 function JobCard({ job }) {
-  const [saved, setSaved] = useState(false);
-  const router = useRouter();
-
-  const toggleSaved = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setSaved(!saved);
-  };
-
   const getTimeAgo = (date) => {
     const now = new Date();
     const posted = new Date(date);
@@ -28,12 +19,12 @@ function JobCard({ job }) {
     <div className="relative bg-white rounded-lg overflow-hidden transition-all duration-300 shadow hover:shadow-md mb-4">
       <div className="p-6">
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0">
-            <img
-              src={job.logo || "/placeholder-logo.png"}
-              alt={`${job.company} logo`}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+            {job.logo ? (
+              <img src={job.logo} alt={`${job.company} logo`} className="w-full h-full object-cover" />
+            ) : (
+              <Building2 className="h-6 w-6 text-gray-500" />
+            )}
           </div>
 
           <div className="flex-1">
@@ -93,8 +84,8 @@ function JobCard({ job }) {
         </div>
 
         <div className="mt-4 flex justify-between items-center">
-          <div className="text-sm font-medium text-green-600">{job.salary || "Not specified"}</div>
-          <div className="text-xs text-gray-500">{job.applicants || 0} applicants</div>
+          <div className="text-sm font-medium text-green-600">Salary: {job.salary || "Not specified"}</div>
+          {/* <div className="text-xs text-gray-500">{job.applicants || 0} applicants</div> */}
         </div>
 
         <div className="mt-6 flex justify-between items-center">
@@ -210,267 +201,14 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   );
 }
 
-function JobFilter({ onFilterChange }) {
-  const [filters, setFilters] = useState({
-    jobTypes: [],
-    experienceLevels: [],
-    location: "",
-    searchTerm: "",
-    salaryRange: "",
-    datePosted: "",
-    remoteWork: "",
-    companyType: "",
-  });
-
-  const [expanded, setExpanded] = useState(true);
-
-  const jobTypes = ["Full-time", "Part-time", "Contract", "Temporary", "Internship"];
-  const experienceLevels = ["Entry level", "Mid level", "Senior level"];
-  const salaryRanges = ["Any", "$30k-$50k", "$50k-$80k", "$80k-$120k", "$120k+"];
-  const datePostedOptions = ["Any time", "Past 24 hours", "Past week", "Past month"];
-  const remoteWorkOptions = ["Any", "Remote", "On-site", "Hybrid"];
-  const companyTypes = ["Any", "Startup", "Enterprise", "Non-profit", "Government"];
-
-  const handleFilterChange = (newFilters) => {
-    setFilters(newFilters);
-    onFilterChange(newFilters);
-  };
-
-  const handleSearchChange = (e) => {
-    handleFilterChange({ ...filters, searchTerm: e.target.value });
-  };
-
-  const handleLocationChange = (e) => {
-    handleFilterChange({ ...filters, location: e.target.value });
-  };
-
-  const handleJobTypeChange = (jobType) => {
-    let newJobTypes = filters.jobTypes.includes(jobType)
-      ? filters.jobTypes.filter((type) => type !== jobType)
-      : [...filters.jobTypes, jobType];
-    handleFilterChange({ ...filters, jobTypes: newJobTypes });
-  };
-
-  const handleExperienceLevelChange = (level) => {
-    let newLevels = filters.experienceLevels.includes(level)
-      ? filters.experienceLevels.filter((l) => l !== level)
-      : [...filters.experienceLevels, level];
-    handleFilterChange({ ...filters, experienceLevels: newLevels });
-  };
-
-  const handleSalaryRangeChange = (e) => {
-    handleFilterChange({ ...filters, salaryRange: e.target.value });
-  };
-
-  const handleDatePostedChange = (e) => {
-    handleFilterChange({ ...filters, datePosted: e.target.value });
-  };
-
-  const handleRemoteWorkChange = (e) => {
-    handleFilterChange({ ...filters, remoteWork: e.target.value });
-  };
-
-  const handleCompanyTypeChange = (e) => {
-    handleFilterChange({ ...filters, companyType: e.target.value });
-  };
-
-  const clearFilters = () => {
-    const newFilters = {
-      jobTypes: [],
-      experienceLevels: [],
-      location: "",
-      searchTerm: "",
-      salaryRange: "",
-      datePosted: "",
-      remoteWork: "",
-      companyType: "",
-    };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
-  };
-
-  return (
-    <div className="bg-white rounded-lg shadow p-6 sticky top-4">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">Filter Jobs</h2>
-
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Search</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg
-                className="h-5 w-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              className="block w-full bg-gray-50 border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
-              placeholder="Keywords, job titles, companies..."
-              value={filters.searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg
-                className="h-5 w-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              className="block w-full bg-gray-50 border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
-              placeholder="City, state, remote..."
-              value={filters.location}
-              onChange={handleLocationChange}
-            />
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Job Type</h3>
-          <div className="space-y-2">
-            {jobTypes.map((jobType) => (
-              <div key={jobType} className="flex items-center">
-                <input
-                  id={`jobType-${jobType}`}
-                  name={`jobType-${jobType}`}
-                  type="checkbox"
-                  className="h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
-                  checked={filters.jobTypes.includes(jobType)}
-                  onChange={() => handleJobTypeChange(jobType)}
-                />
-                <label htmlFor={`jobType-${jobType}`} className="ml-2 text-sm text-gray-700">
-                  {jobType}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Experience Level</h3>
-          <div className="space-y-2">
-            {experienceLevels.map((level) => (
-              <div key={level} className="flex items-center">
-                <input
-                  id={`experience-${level}`}
-                  name={`experience-${level}`}
-                  type="checkbox"
-                  className="h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
-                  checked={filters.experienceLevels.includes(level)}
-                  onChange={() => handleExperienceLevelChange(level)}
-                />
-                <label htmlFor={`experience-${level}`} className="ml-2 text-sm text-gray-700">
-                  {level}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Salary Range</h3>
-          <select
-            className="block w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-            value={filters.salaryRange}
-            onChange={handleSalaryRangeChange}
-          >
-            {salaryRanges.map((range) => (
-              <option key={range} value={range}>
-                {range}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Date Posted</h3>
-          <select
-            className="block w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-            value={filters.datePosted}
-            onChange={handleDatePostedChange}
-          >
-            {datePostedOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Remote Work</h3>
-          <select
-            className="block w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-            value={filters.remoteWork}
-            onChange={handleRemoteWorkChange}
-          >
-            {remoteWorkOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Company Type</h3>
-          <select
-            className="block w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-            value={filters.companyType}
-            onChange={handleCompanyTypeChange}
-          >
-            {companyTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button
-          type="button"
-          className="w-full mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors duration-200"
-          onClick={clearFilters}
-        >
-          Clear all filters
-        </button>
-      </div>
-    </div>
-  );
-}
 export default function Home() {
   const [filters, setFilters] = useState({
-    jobTypes: [],
-    experienceLevels: [],
     location: "",
     searchTerm: "",
-    salaryRange: "",
-    datePosted: "",
-    remoteWork: "",
-    companyType: "",
+  });
+  const [tempFilters, setTempFilters] = useState({
+    location: "",
+    searchTerm: "",
   });
   const [jobsData, setJobsData] = useState({
     jobs: [],
@@ -518,22 +256,6 @@ export default function Home() {
 
   const filteredJobs = useMemo(() => {
     return jobsData.jobs.filter((job) => {
-      // Filter by job type
-      if (
-        filters.jobTypes.length > 0 &&
-        !filters.jobTypes.some((type) => job.title.toLowerCase().includes(type.toLowerCase()))
-      ) {
-        return false;
-      }
-
-      // Filter by experience level
-      if (
-        filters.experienceLevels.length > 0 &&
-        !filters.experienceLevels.some((level) => job.description.toLowerCase().includes(level.toLowerCase()))
-      ) {
-        return false;
-      }
-
       // Filter by location
       if (filters.location && !job.locations.toLowerCase().includes(filters.location.toLowerCase())) {
         return false;
@@ -549,79 +271,29 @@ export default function Home() {
         );
       }
 
-      // Filter by salary range
-      if (filters.salaryRange && filters.salaryRange !== "Any") {
-        const [min, max] = filters.salaryRange
-          .replace(/[^0-9-]/g, "")
-          .split("-")
-          .map(Number);
-        if (job.salary_min) {
-          const salaryMin = parseInt(job.salary_min);
-          const salaryMax = job.salary_max ? parseInt(job.salary_max) : salaryMin;
-          if (salaryMin > max || (max && salaryMax < min)) {
-            return false;
-          }
-        } else {
-          return false;
-        }
-      }
-
-      // Filter by date posted
-      if (filters.datePosted && filters.datePosted !== "Any time") {
-        const now = new Date();
-        const posted = new Date(job.date);
-        const diffInMs = now - posted;
-        const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-        if (filters.datePosted === "Past 24 hours" && diffInDays > 1) return false;
-        if (filters.datePosted === "Past week" && diffInDays > 7) return false;
-        if (filters.datePosted === "Past month" && diffInDays > 30) return false;
-      }
-
-      // Filter by remote work
-      if (filters.remoteWork && filters.remoteWork !== "Any") {
-        const isRemote =
-          job.description.toLowerCase().includes("remote") || job.title.toLowerCase().includes("remote");
-        const isOnSite =
-          job.description.toLowerCase().includes("on-site") ||
-          job.description.toLowerCase().includes("onsite");
-        const isHybrid = job.description.toLowerCase().includes("hybrid");
-        if (filters.remoteWork === "Remote" && !isRemote) return false;
-        if (filters.remoteWork === "On-site" && !isOnSite) return false;
-        if (filters.remoteWork === "Hybrid" && !isHybrid) return false;
-      }
-
-      // Filter by company type
-      if (filters.companyType && filters.companyType !== "Any") {
-        const companyLower = job.company.toLowerCase();
-        if (
-          filters.companyType === "Startup" &&
-          !companyLower.includes("tech") &&
-          !companyLower.includes("start")
-        )
-          return false;
-        if (
-          filters.companyType === "Enterprise" &&
-          !companyLower.includes("corp") &&
-          !companyLower.includes("inc")
-        )
-          return false;
-        if (
-          filters.companyType === "Non-profit" &&
-          !companyLower.includes("foundation") &&
-          !companyLower.includes("non-profit")
-        )
-          return false;
-        if (
-          filters.companyType === "Government" &&
-          !companyLower.includes("city") &&
-          !companyLower.includes("gov")
-        )
-          return false;
-      }
-
       return true;
     });
   }, [jobsData.jobs, filters]);
+
+  const handleApplyFilters = () => {
+    setFilters(tempFilters);
+    setCurrentPage(1); // Reset to first page when applying filters
+  };
+
+  const handleSearchChange = (e) => {
+    setTempFilters({ ...tempFilters, searchTerm: e.target.value });
+  };
+
+  const handleLocationChange = (e) => {
+    setTempFilters({ ...tempFilters, location: e.target.value });
+  };
+
+  const clearFilters = () => {
+    const newFilters = { location: "", searchTerm: "" };
+    setTempFilters(newFilters);
+    setFilters(newFilters);
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -641,7 +313,79 @@ export default function Home() {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex">
         <div className="w-1/4 pr-6">
-          <JobFilter onFilterChange={setFilters} />
+          <div className="bg-white rounded-lg shadow p-6 sticky top-4">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Filter Jobs</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg
+                      className="h-5 w-5 text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    className="block w-full bg-gray-50 border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    placeholder="Keywords, job titles, companies..."
+                    value={tempFilters.searchTerm}
+                    onChange={handleSearchChange}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg
+                      className="h-5 w-5 text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    className="block w-full bg-gray-50 border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    placeholder="City, state, remote..."
+                    value={tempFilters.location}
+                    onChange={handleLocationChange}
+                  />
+                </div>
+              </div>
+              <div className="flex space-x-4">
+                <button
+                  type="button"
+                  className="flex-1 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md py-2 transition-colors duration-200"
+                  onClick={handleApplyFilters}
+                >
+                  Apply Filters
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 text-sm font-medium text-red-600 hover:text-red-800 transition-colors duration-200"
+                  onClick={clearFilters}
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="w-3/4">
           {loading ? (
@@ -712,18 +456,7 @@ export default function Home() {
               <h3 className="mt-4 text-lg font-medium text-gray-900">No jobs found</h3>
               <p className="mt-2 text-gray-600">Try adjusting your search or filter criteria</p>
               <button
-                onClick={() =>
-                  setFilters({
-                    jobTypes: [],
-                    experienceLevels: [],
-                    location: "",
-                    searchTerm: "",
-                    salaryRange: "",
-                    datePosted: "",
-                    remoteWork: "",
-                    companyType: "",
-                  })
-                }
+                onClick={clearFilters}
                 className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 transition-colors duration-200"
               >
                 Clear all filters
@@ -733,7 +466,9 @@ export default function Home() {
             <>
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-4">
-                  <div></div>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {filteredJobs.length} Jobs Available
+                  </h2>
                   <div className="flex items-center">
                     <span className="text-sm text-gray-500 mr-2">Sort by:</span>
                     <select
