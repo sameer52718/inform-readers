@@ -6,6 +6,42 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 900;
 
+export async function generateMetadata({ params }) {
+  const location = decodeURIComponent(params.location);
+
+  try {
+    const forecast = await getForecast(location, 3);
+    const city = forecast?.location?.name ?? location;
+    const country = forecast?.location?.country ?? "";
+    const firstDay = forecast?.forecast?.forecastday?.[0];
+    const todayHigh = firstDay?.day?.maxtemp_f;
+    const todayLow = firstDay?.day?.mintemp_f;
+    const todayCondition = firstDay?.day?.condition?.text ?? "Weather";
+
+    return {
+      title: `3-Day Weather Forecast for ${city}${country ? `, ${country}` : ""}`,
+      description: `${todayCondition} today with a high of ${Math.round(
+        todayHigh ?? 0
+      )}°F and low of ${Math.round(todayLow ?? 0)}°F. See detailed forecasts for the next three days including temperatures, precipitation, wind, and sunrise/sunset times.`,
+      openGraph: {
+        title: `3-Day Forecast for ${city}`,
+        description: `${todayCondition} today. High: ${Math.round(todayHigh ?? 0)}°F / Low: ${Math.round(
+          todayLow ?? 0
+        )}°F. Plan ahead with our 3-day forecast.`,
+        url: `https://informreaders.com/weather/3day/${encodeURIComponent(location)}`,
+        type: "website",
+      },
+    };
+  } catch (error) {
+    return {
+      title: "3-Day Weather Forecast | Inform Readers",
+      description:
+        "Get a detailed 3-day weather forecast with temperatures, rain chances, wind speeds, and more.",
+    };
+  }
+}
+
+
 export default async function ThreeDayPage({ params }) {
   const location = decodeURIComponent(params.location);
 

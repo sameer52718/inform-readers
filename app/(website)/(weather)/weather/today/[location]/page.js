@@ -8,6 +8,35 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 300; // 5 minutes
 
+export async function generateMetadata({ params }) {
+  const location = decodeURIComponent(params.location);
+
+  try {
+    const current = await getCurrentWeather(location);
+
+    const city = current?.location?.name ?? location;
+    const country = current?.location?.country ?? "";
+
+    return {
+      title: `Today's Weather in ${city}${country ? `, ${country}` : ""} | Inform Readers`,
+      description: `Live weather for ${city}${country ? `, ${country}` : ""}: ${current.current.condition.text}, ${Math.round(
+        current.current.temp_f
+      )}°F. Check hourly forecast, sunrise & sunset times, and air quality.`,
+      openGraph: {
+        title: `Weather Today in ${city}`,
+        description: `Get real-time weather conditions, forecast, and air quality for ${city}.`,
+        type: "website",
+      },
+    };
+  } catch (error) {
+    return {
+      title: `Weather Today | Inform Readers`,
+      description: `Get live weather updates, hourly forecasts, and air quality information for any city.`,
+    };
+  }
+}
+
+
 export default async function TodayPage({ params }) {
   const location = decodeURIComponent(params.location);
 

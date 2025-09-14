@@ -6,6 +6,33 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 300;
 
+export async function generateMetadata({ params }) {
+  const location = decodeURIComponent(params.location);
+
+  try {
+    const forecast = await getForecast(location, 1);
+    const city = forecast?.location?.name ?? location;
+    const country = forecast?.location?.country ?? "";
+
+    return {
+      title: `24-Hour Weather Forecast in ${city}${country ? `, ${country}` : ""} | Inform Readers`,
+      description: `View detailed hourly weather forecast for ${city}${country ? `, ${country}` : ""} — including temperature, feels like, wind, humidity, and chance of rain.`,
+      openGraph: {
+        title: `Hourly Weather in ${city}`,
+        description: `Plan ahead with a full 24-hour weather outlook for ${city}${country ? `, ${country}` : ""}.`,
+        type: "website",
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Hourly Weather Forecast | Inform Readers",
+      description:
+        "Get the next 24 hours of temperature, rain chance, humidity, and wind conditions for any city worldwide.",
+    };
+  }
+}
+
+
 export default async function HourlyPage({ params }) {
   const location = decodeURIComponent(params.location);
 

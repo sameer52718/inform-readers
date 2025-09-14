@@ -7,6 +7,36 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 600;
 
+export async function generateMetadata({ params }) {
+  const location = decodeURIComponent(params.location);
+
+  try {
+    const data = await getAirQuality(location);
+    const city = data?.location?.name ?? location;
+    const country = data?.location?.country ?? "";
+    const aq = data?.current?.air_quality;
+    const aqi = aq ? Math.round(aq["us-epa-index"]) : null;
+    const category = aqi ? getAQICategory(aqi).level : "Unavailable";
+
+    return {
+      title: `Air Quality in ${city}${country ? `, ${country}` : ""} | AQI ${aqi ?? "-"}`,
+      description: `Current AQI in ${city}${country ? `, ${country}` : ""}: ${category}. See detailed pollutant breakdown, health impacts, and recommendations.`,
+      openGraph: {
+        title: `Air Quality Index in ${city}`,
+        description: `AQI: ${aqi ?? "N/A"} (${category}). Check pollutant levels (PM2.5, PM10, O3) and health guidance.`,
+        type: "website",
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Air Quality Information | Inform Readers",
+      description:
+        "Check live air quality index (AQI), pollutant levels, and health recommendations for any location worldwide.",
+    };
+  }
+}
+
+
 export default async function AirQualityPage({ params }) {
   const location = decodeURIComponent(params.location);
 

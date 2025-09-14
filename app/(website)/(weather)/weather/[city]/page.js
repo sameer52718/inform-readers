@@ -12,6 +12,35 @@ import formatDate from "@/lib/formatDate";
 
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
+export async function generateMetadata({ params }) {
+  const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+  try {
+    const response = await axios.get("https://api.weatherapi.com/v1/current.json", {
+      params: { key: API_KEY, q: params.city },
+    });
+
+    const location = response.data.location;
+    const current = response.data.current;
+
+    return {
+      title: `Weather in ${location.name}, ${location.country} | 15-Day Forecast`,
+      description: `${current.condition.text}, ${Math.round(current.temp_c)}°C right now. See hourly and 15-day forecast for ${location.name}.`,
+      openGraph: {
+        title: `Weather in ${location.name}`,
+        description: `${current.condition.text}, High ${current.temp_c}°C. View extended forecast, alerts & air quality.`,
+        url: `https://informreaders.com/weather/${params.city}`,
+        type: "website",
+      },
+    };
+  } catch {
+    return {
+      title: "Weather Forecast | Inform Readers",
+      description: "Search and view 15-day weather forecasts for cities worldwide.",
+    };
+  }
+}
+
+
 export default function CityWeather() {
   const { city } = useParams();
 
