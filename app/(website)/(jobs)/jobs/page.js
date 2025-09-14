@@ -467,9 +467,9 @@ export default function Home() {
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-semibold text-gray-900">
-                    {filteredJobs.length} Jobs Available
+                    Available Jobs 
                   </h2>
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <span className="text-sm text-gray-500 mr-2">Sort by:</span>
                     <select
                       className="bg-white border border-gray-300 rounded-md py-1 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -482,7 +482,7 @@ export default function Home() {
                       <option>Salary: High to Low</option>
                       <option>Salary: Low to High</option>
                     </select>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="grid grid-cols-1 gap-6">
