@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 const VehicleCard = ({ vehicle, type = "cars" }) => {
   const isEV = vehicle.vehicleType === "ELECTRIC";
-  console.log(vehicle?.image);
 
   return (
     <motion.div

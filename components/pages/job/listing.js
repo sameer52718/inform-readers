@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Building2 } from "lucide-react";
+import Link from "next/link";
 
 function JobCard({ job }) {
   const getTimeAgo = (date) => {
@@ -90,12 +91,12 @@ function JobCard({ job }) {
 
         <div className="mt-6 flex justify-between items-center">
           <span className="text-xs text-gray-500">Posted on {new Date(job.date).toLocaleDateString()}</span>
-          <button
+          <Link
             className="inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md transition-colors duration-300"
-            onClick={() => window.open(job.url, "_blank")}
+            href={`/jobs/${job.job_id}`}
           >
             View
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -466,9 +467,7 @@ export default function JobListing() {
             <>
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    Available Jobs 
-                  </h2>
+                  <h2 className="text-xl font-semibold text-gray-900">Available Jobs</h2>
                   {/* <div className="flex items-center">
                     <span className="text-sm text-gray-500 mr-2">Sort by:</span>
                     <select
