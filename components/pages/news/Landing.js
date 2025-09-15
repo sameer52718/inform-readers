@@ -153,14 +153,13 @@ export default function NewsPage() {
                       </span>
                     </div>
 
-                    <a
-                      href={item.link}
+                    <Link
+                      href={`/news/${item?._id}`}
                       className="flex items-center text-red-600 font-medium hover:text-red-700"
-                      target="_blank"
                     >
                       Read more
                       <ArrowRight className="h-4 w-4 ml-1" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </article>
