@@ -1,45 +1,30 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Globe2, Search } from "lucide-react";
+import { ArrowRight, ChevronRight, Globe2 } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
-import handleError from "@/lib/handleError";
-import Loading from "@/components/ui/Loading";
 import AdBanner from "@/components/partials/AdBanner";
-import { useSelector } from "react-redux";
 import SpecificationCard from "../shared/SpecificationCard";
 import BiographyCard from "../shared/BiographyCard";
 import ArticleCard from "../shared/ArticleCard";
 import VehicleCard from "../vehicle/vehicleCard";
 
-export default function Home() {
-  const { color } = useSelector((state) => state.config);
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+const getData = async () => {
+  try {
+    const res = await axiosInstance.get("/website/home");
+    return res.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await axiosInstance.get("/website/home");
-        setData(data.data);
-      } catch (error) {
-        handleError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
-  }, []);
+export default async function Home() {
+  let data = await getData();
 
   return (
-    <Loading loading={isLoading}>
+    <>
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
-        <div className={`bg-gradient-to-br from-${color}-600 to-${color}-800 text-white`}>
+        <div className={`bg-gradient-to-br from-red-600 to-red-800 text-white`}>
           <div className="container mx-auto px-4 py-16 md:py-24">
             <div className="max-w-3xl mx-auto text-center">
               <Globe2 className="w-16 h-16 mx-auto mb-6 text-red-100 animate-pulse" />
@@ -63,7 +48,7 @@ export default function Home() {
               </div>
               <Link
                 href="/software"
-                className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
               >
                 View All Software
                 <ArrowRight className="w-5 h-5" />
@@ -90,9 +75,7 @@ export default function Home() {
                     <h3 className="text-xl font-semibold text-center mb-3 text-gray-900">{software.name}</h3>
                     <p className="text-gray-600 text-center mb-4 line-clamp-2">{software.overview}</p>
                     <div className="flex items-center gap-2 flex-wrap justify-center">
-                      <span
-                        className={`px-3 py-1 bg-${color}-50 text-${color}-600 text-sm rounded-full font-medium`}
-                      >
+                      <span className={`px-3 py-1 bg-red-50 text-red-600 text-sm rounded-full font-medium`}>
                         v{software.version}
                       </span>
                       {software.tag.slice(0, 2).map((t) => (
@@ -112,15 +95,15 @@ export default function Home() {
           {/* Names Section */}
           <section className="py-16">
             <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-              <div className={`bg-gradient-to-r from-${color}-600 to-${color}-500 p-8`}>
+              <div className={`bg-gradient-to-r from-red-600 to-red-500 p-8`}>
                 <div className="flex flex-col md:flex-row  justify-between items-center">
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-2">Name Meanings</h2>
-                    <p className={`text-${color}-100`}>Browse through our collection of beautiful names</p>
+                    <p className={`text-red-100`}>Browse through our collection of beautiful names</p>
                   </div>
                   <Link
                     href="/names"
-                    className={`flex items-center gap-2 text-white hover:text-${color}-100 transition-colors duration-200`}
+                    className={`flex items-center gap-2 text-white hover:text-red-100 transition-colors duration-200`}
                   >
                     View All Names
                     <ArrowRight className="w-5 h-5" />
@@ -147,7 +130,7 @@ export default function Home() {
                           <td className="py-4 px-6">
                             <div className="flex items-center">
                               <div
-                                className={`w-10 h-10 rounded-full bg-${color}-100 text-${color}-600 flex items-center justify-center font-semibold mr-4`}
+                                className={`w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-semibold mr-4`}
                               >
                                 {item?.name?.[0]}
                               </div>
@@ -163,7 +146,7 @@ export default function Home() {
                           <td className="py-4 px-6 text-center">
                             <Link
                               href={`/names/${item?.slug}`}
-                              className={`inline-flex items-center gap-2 text-${color}-600 hover:text-${color}-700 font-medium group`}
+                              className={`inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium group`}
                             >
                               View Details
                               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -190,7 +173,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/postalcode"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Codes
                   <ArrowRight className="w-5 h-5" />
@@ -215,7 +198,7 @@ export default function Home() {
                       </div>
                       <div className="ml-4">
                         <p
-                          className={`font-medium text-gray-900 group-hover:text-${color}-600 transition-colors duration-200`}
+                          className={`font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200`}
                         >
                           {country.name}
                         </p>
@@ -240,7 +223,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/swiftcode"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Codes
                   <ArrowRight className="w-5 h-5" />
@@ -265,7 +248,7 @@ export default function Home() {
                       </div>
                       <div className="ml-4">
                         <p
-                          className={`font-medium text-gray-900 group-hover:text-${color}-600 transition-colors duration-200`}
+                          className={`font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200`}
                         >
                           {country.name}
                         </p>
@@ -288,7 +271,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/specification"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Specifications
                   <ArrowRight className="w-5 h-5" />
@@ -313,7 +296,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/biography"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Biographies
                   <ArrowRight className="w-5 h-5" />
@@ -338,7 +321,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/biography"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Biographies
                   <ArrowRight className="w-5 h-5" />
@@ -363,7 +346,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/cars"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Cars
                   <ArrowRight className="w-5 h-5" />
@@ -388,7 +371,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/bikes"
-                  className={`flex items-center gap-2 text-${color}-600 hover:text-${color}-700 transition-colors duration-200`}
+                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Bikes
                   <ArrowRight className="w-5 h-5" />
@@ -406,6 +389,6 @@ export default function Home() {
           <AdBanner />
         </div>
       </div>
-    </Loading>
+    </>
   );
 }
