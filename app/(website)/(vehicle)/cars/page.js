@@ -163,7 +163,7 @@ const VehicleCard = ({ vehicle }) => {
               {vehicle.vehicleType.charAt(0) + vehicle.vehicleType.slice(1).toLowerCase()}
             </span>
             <a
-              href={`/cars/${vehicle._id}`}
+              href={`/cars/${vehicle.slug}`}
               className="text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors"
             >
               View Details
