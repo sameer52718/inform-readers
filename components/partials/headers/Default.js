@@ -39,7 +39,7 @@ function LanguageSelect({ color }) {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 text-sm text-gray-600 hover:text-${color}-600 transition-colors px-3 py-2 rounded-md bg-gray-100`}
+        className={`flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors px-3 py-2 rounded-md bg-gray-100`}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -53,7 +53,7 @@ function LanguageSelect({ color }) {
             <button
               key={lang}
               onClick={() => changeLanguage(lang)}
-              className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-${color}-50 hover:text-${color}-600 transition-colors ${i18n.language === lang ? `bg-${color}-50 text-${color}-600` : ''
+              className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors ${i18n.language === lang ? `bg-red-50 text-red-600` : ''
                 }`}
             >
               {languageNames[lang]}
@@ -128,27 +128,27 @@ function Header() {
               <LanguageSelect color={color} />
               <Link
                 href="/about"
-                className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
+                className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}
               >
                 {t('header.about')}
               </Link>
               <Link
                 href="/contact"
-                className={`text-sm text-gray-600 hover:text-${color}-600 transition-colors`}
+                className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}
               >
                 {t('header.contact')}
               </Link>
               {token && userType === userTypes.USER ? (
                 <Link
                   href="/dashboard"
-                  className={`text-sm text-${color}-600 hover:text-${color}-700 font-medium transition-colors`}
+                  className={`text-sm text-red-600 hover:text-red-700 font-medium transition-colors`}
                 >
                   {t('header.myAccount')}
                 </Link>
               ) : (
                 <Link
                   href="/signin"
-                  className={`text-sm text-${color}-600 hover:text-${color}-700 font-medium transition-colors`}
+                  className={`text-sm text-red-600 hover:text-red-700 font-medium transition-colors`}
                 >
                   {t('header.signin')}
                 </Link>
@@ -166,7 +166,7 @@ function Header() {
 
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`p-2 text-gray-600 hover:text-${color}-600 transition-colors md:hidden`}
+          className={`p-2 text-gray-600 hover:text-red-600 transition-colors md:hidden`}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
         >
@@ -180,7 +180,7 @@ function Header() {
               <li key={category.id} className="relative group">
                 {category.sublinks ? (
                   <button
-                    className={`flex items-center gap-1 text-gray-700 hover:text-${color}-600 transition-colors`}
+                    className={`flex items-center gap-1 text-gray-700 hover:text-red-600 transition-colors`}
                     onClick={() => toggleDropdown(category.id)}
                     aria-expanded={openDropdowns[category.id] || false}
                     aria-haspopup="true"
@@ -191,7 +191,7 @@ function Header() {
                 ) : (
                   <Link
                     href={category.url}
-                    className={`text-gray-700 hover:text-${color}-600 transition-colors`}
+                    className={`text-gray-700 hover:text-red-600 transition-colors`}
                   >
                     {category.title}
                   </Link>
@@ -206,7 +206,7 @@ function Header() {
                       <li key={sublink.id}>
                         <Link
                           href={sublink.url}
-                          className={`block px-4 py-2 text-gray-700 hover:bg-${color}-50 hover:text-${color}-600 transition-colors`}
+                          className={`block px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors`}
                         >
                           {sublink.title}
                         </Link>
@@ -231,7 +231,7 @@ function Header() {
                     <>
                       <button
                         onClick={() => toggleDropdown(category.id)}
-                        className={`flex items-center justify-between w-full py-2 text-gray-700 hover:text-${color}-600 transition-colors`}
+                        className={`flex items-center justify-between w-full py-2 text-gray-700 hover:text-red-600 transition-colors`}
                         aria-expanded={openDropdowns[category.id] || false}
                         aria-haspopup="true"
                       >
@@ -247,7 +247,7 @@ function Header() {
                             <li key={sublink.id}>
                               <Link
                                 href={sublink.url}
-                                className={`block py-1 text-gray-600 hover:text-${color}-600 transition-colors`}
+                                className={`block py-1 text-gray-600 hover:text-red-600 transition-colors`}
                               >
                                 {sublink.title}
                               </Link>
@@ -259,7 +259,7 @@ function Header() {
                   ) : (
                     <Link
                       href={category.url}
-                      className={`block py-2 text-gray-700 hover:text-${color}-600 transition-colors`}
+                      className={`block py-2 text-gray-700 hover:text-red-600 transition-colors`}
                     >
                       {category.title}
                     </Link>

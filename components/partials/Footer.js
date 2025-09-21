@@ -42,7 +42,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className={`bg-gradient-to-br from-${color}-600 to-${color}-800 text-gray-300`}>
+    <footer className={`bg-gradient-to-br from-red-600 to-red-800 text-gray-300`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
@@ -50,22 +50,22 @@ export default function Footer() {
             <h3 className="text-white text-lg font-semibold mb-4">{t("footer.aboutCompany")}</h3>
             <p className="text-sm leading-relaxed">{t("footer.aboutText")}</p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-white transition-colors" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-white transition-colors" aria-label="Twitter">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-white transition-colors" aria-label="LinkedIn">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-white transition-colors" aria-label="YouTube">
                 <Youtube className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-white transition-colors" aria-label="GitHub">
                 <Github className="h-5 w-5" />
               </a>
             </div>
@@ -192,7 +192,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className={`w-full px-4 py-2 text-white rounded-md border border-white transition-colors hover:bg-white hover:text-${color}-500`}
+                className={`w-full px-4 py-2 text-white rounded-md border border-white transition-colors hover:bg-white hover:text-red-500`}
               >
                 {t("footer.subscribeButton")}
               </button>
