@@ -213,7 +213,7 @@ function BiographyCard({ celebrity, category }) {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-      <Link href={`/biography/${celebrity._id}`}>
+      <Link href={`/biography/${celebrity.slug}`}>
         <div
           className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl bg-white"
           onMouseEnter={() => setIsHovered(true)}
