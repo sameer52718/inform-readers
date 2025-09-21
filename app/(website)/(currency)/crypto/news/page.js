@@ -21,7 +21,7 @@ export default function News() {
     try {
       setIsLoading(true);
       const { data } = await axiosInstance.get("/website/article", {
-        params: { page, limit, catagoryName: "Crypto" },
+        params: { page, limit, type: "blog" },
       });
       if (!data.error) {
         setData((prev) => [...prev, ...data.articles]);
