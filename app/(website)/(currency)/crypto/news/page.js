@@ -24,7 +24,7 @@ export default function News() {
         params: { page, limit, catagoryName: "Crypto" },
       });
       if (!data.error) {
-        setData((prev) => [...prev, ...data.categories]);
+        setData((prev) => [...prev, ...data.articles]);
         setPagination(data.pagination);
       }
     } catch (error) {

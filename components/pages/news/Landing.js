@@ -23,7 +23,7 @@ export default function NewsPage() {
       setIsLoading(true);
       const { data } = await axiosInstance.get("/website/article", { params: { page, limit } });
       if (!data.error) {
-        setData((prev) => [...prev, ...data.categories]);
+        setData((prev) => [...prev, ...data.articles]);
         setPagination(data.pagination);
       }
     } catch (error) {
