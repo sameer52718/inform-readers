@@ -1,87 +1,70 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+// app/sports/players/[id]/page.jsx
 import Link from "next/link";
-import axiosInstance from "@/lib/axiosInstance";
-import handleError from "@/lib/handleError";
 import { Icon } from "@iconify/react";
+import axiosInstance from "@/lib/axiosInstance";
 
-export default function PlayerDetailPage() {
-  const params = useParams();
-  const playerId = params.id;
+// ===================
+// DYNAMIC METADATA
+// ===================
+export async function generateMetadata({ params }) {
+  try {
+    const playerResponse = await axiosInstance.get(`/website/player/${params.id}`);
+    const player = playerResponse?.data?.player;
 
-  const [player, setPlayer] = useState(null);
-  const [playerTeam, setPlayerTeam] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+    if (!player) {
+      return {
+        title: "Player Not Found | Inform Readers",
+        description: "The player you are looking for does not exist.",
+      };
+    }
 
-  useEffect(() => {
-    const fetchPlayerData = async () => {
-      try {
-        setIsLoading(true);
-        // Fetch player details
-        const playerResponse = await axiosInstance.get(`/website/player/${playerId}`);
-        if (playerResponse.data.error) {
-          throw new Error("Player not found");
-        }
-        setPlayer(playerResponse.data.player);
-
-        // Fetch team details if player has a team
-        if (playerResponse.data.player.team) {
-          const teamResponse = await axiosInstance.get(
-            `/website/team/${playerResponse.data.player.team.idTeam}`
-          );
-          if (!teamResponse.data.error) {
-            setPlayerTeam(teamResponse.data.team);
-          }
-        }
-      } catch (err) {
-        setError(handleError(err));
-      } finally {
-        setIsLoading(false);
-      }
+    return {
+      title: `${player.name} - Stats, Profile & Career | Inform Readers`,
+      description:
+        player.description?.slice(0, 160) ||
+        `Explore profile, stats, and career information of ${player.name}.`,
+      openGraph: {
+        title: `${player.name} | Inform Readers`,
+        description:
+          player.description?.slice(0, 160) ||
+          `Explore profile, stats, and career information of ${player.name}.`,
+      },
     };
+  } catch (error) {
+    return {
+      title: "Player | Inform Readers",
+      description: "Explore player profiles, statistics, and career information.",
+    };
+  }
+}
 
-    fetchPlayerData();
-  }, [playerId]);
+// ===================
+// SERVER COMPONENT
+// ===================
+export default async function PlayerDetailPage({ params }) {
+  let player = null;
+  let playerTeam = null;
+
+  try {
+    const playerResponse = await axiosInstance.get(`/website/player/${params.id}`);
+    if (playerResponse?.data?.error) return NotFoundUI();
+
+    player = playerResponse.data.player;
+
+    // Fetch team if exists
+    if (player.team?.idTeam) {
+      const teamResponse = await axiosInstance.get(`/website/team/${player.team.idTeam}`);
+      if (!teamResponse.data.error) {
+        playerTeam = teamResponse.data.team;
+      }
+    }
+  } catch (error) {
+    return NotFoundUI();
+  }
 
   const age = player?.dateBorn
     ? Math.floor((Date.now() - new Date(player.dateBorn).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
     : null;
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <Icon icon="mdi:loading" className="w-16 h-16 text-gray-300 animate-spin mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  if (error || !player) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <Icon icon="mdi:account" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Player Not Found</h1>
-            <p className="text-gray-600 mb-6">The player you're looking for doesn't exist.</p>
-            <Link
-              href="/players"
-              className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors"
-            >
-              Back to Players
-            </Link>
-          </div>
-        </main>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -147,36 +130,10 @@ export default function PlayerDetailPage() {
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Nationality</p>
-                  <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <Icon icon="mdi:earth" className="w-5 h-5" />
-                    {player.nationality}
-                  </p>
-                </div>
-                {age && (
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Age</p>
-                    <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <Icon icon="mdi:cake" className="w-5 h-5" />
-                      {age} years
-                    </p>
-                  </div>
-                )}
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Position</p>
-                  <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <Icon icon="mdi:soccer" className="w-5 h-5" />
-                    {player.position}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Status</p>
-                  <p className="font-semibold text-gray-900 flex items-center gap-2">
-                    <Icon icon="mdi:checkbox-marked-circle" className="w-5 h-5" />
-                    {player.status}
-                  </p>
-                </div>
+                <InfoRow label="Nationality" icon="mdi:earth" value={player.nationality} />
+                {age && <InfoRow label="Age" icon="mdi:cake" value={`${age} years`} />}
+                <InfoRow label="Position" icon="mdi:soccer" value={player.position} />
+                <InfoRow label="Status" icon="mdi:checkbox-marked-circle" value={player.status} />
               </div>
 
               {player.description && (
@@ -189,34 +146,13 @@ export default function PlayerDetailPage() {
               {/* Social Links */}
               <div className="flex items-center gap-4">
                 {player.facebook && (
-                  <a
-                    href={`https://${player.facebook}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-700 p-2 rounded-lg hover:bg-blue-50 transition-colors"
-                  >
-                    <Icon icon="mdi:facebook" className="w-6 h-6" />
-                  </a>
+                  <SocialLink href={player.facebook} icon="mdi:facebook" color="text-blue-600" />
                 )}
                 {player.twitter && (
-                  <a
-                    href={`https://${player.twitter}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-500 p-2 rounded-lg hover:bg-blue-50 transition-colors"
-                  >
-                    <Icon icon="mdi:twitter" className="w-6 h-6" />
-                  </a>
+                  <SocialLink href={player.twitter} icon="mdi:twitter" color="text-blue-400" />
                 )}
                 {player.instagram && (
-                  <a
-                    href={`https://${player.instagram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-pink-500 hover:text-pink-600 p-2 rounded-lg hover:bg-pink-50 transition-colors"
-                  >
-                    <Icon icon="mdi:instagram" className="w-6 h-6" />
-                  </a>
+                  <SocialLink href={player.instagram} icon="mdi:instagram" color="text-pink-500" />
                 )}
               </div>
             </div>
@@ -224,226 +160,188 @@ export default function PlayerDetailPage() {
         </header>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Personal Information */}
+          {/* Personal Info */}
           <section className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Icon icon="mdi:information" className="w-6 h-6" />
-                Personal Information
-              </h2>
-
-              <div className="space-y-4">
-                {player.dateBorn && (
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Date of Birth</p>
-                    <p className="font-semibold text-gray-900">
-                      {new Date(player.dateBorn).toLocaleDateString()}
-                    </p>
-                  </div>
-                )}
-
-                {player.birthLocation && (
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Birth Location</p>
-                    <p className="text-gray-700">{player.birthLocation}</p>
-                  </div>
-                )}
-
-                {player.height && (
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Height</p>
-                    <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <Icon icon="mdi:ruler" className="w-5 h-5" />
-                      {player.height}
-                    </p>
-                  </div>
-                )}
-
-                {player.weight && (
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Weight</p>
-                    <p className="font-semibold text-gray-900 flex items-center gap-2">
-                      <Icon icon="mdi:scale" className="w-5 h-5" />
-                      {player.weight}
-                    </p>
-                  </div>
-                )}
-
-                {player.signing && (
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Contract Until</p>
-                    <p className="text-gray-700">{player.signing}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Current Team */}
-            {playerTeam && (
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Icon icon="mdi:shield" className="w-6 h-6" />
-                  Current Team
-                </h2>
-
-                <Link
-                  href={`/teams/${playerTeam._id}`}
-                  className="block p-4 border rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-                      {playerTeam.badge ? (
-                        <img
-                          src={playerTeam.badge}
-                          alt={playerTeam.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <Icon icon="mdi:shield" className="w-6 h-6 text-red-500" />
-                      )}
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">{playerTeam.name}</p>
-                      <p className="text-sm text-gray-500">{playerTeam.country}</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            )}
+            <PersonalInfo player={player} />
+            {playerTeam && <TeamCard playerTeam={playerTeam} />}
           </section>
 
-          {/* Career Information */}
+          {/* Career Info */}
           <section className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Career Information</h2>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Playing Details</h3>
-
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Primary Position</p>
-                    <p className="font-semibold text-gray-900 text-lg">{player.position}</p>
-                  </div>
-
-                  {player.number && (
-                    <div>
-                      <p className="text-sm text-gray-500 mb-1">Jersey Number</p>
-                      <p className="font-semibold text-gray-900 text-lg">#{player.number}</p>
-                    </div>
-                  )}
-
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Current Status</p>
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                        player.status === "Active"
-                          ? "bg-green-100 text-green-800"
-                          : player.status === "Injured"
-                          ? "bg-red-100 text-red-800"
-                          : "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {player.status}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Physical Attributes</h3>
-
-                  {player.height && (
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-gray-600">Height</span>
-                      <span className="font-semibold">{player.height}</span>
-                    </div>
-                  )}
-
-                  {player.weight && (
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-gray-600">Weight</span>
-                      <span className="font-semibold">{player.weight}</span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-600">Gender</span>
-                    <span className="font-semibold">{player.gender}</span>
-                  </div>
-
-                  {age && (
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-gray-600">Age</span>
-                      <span className="font-semibold">{age} years</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Additional Images */}
-            {(player.cutout || player.render) && (
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Gallery</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {player.thumb && (
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                      <img
-                        src={player.thumb}
-                        alt={`${player.name} - Profile`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                  {player.cutout && (
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                      <img
-                        src={player.cutout}
-                        alt={`${player.name} - Cutout`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                  {player.render && (
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                      <img
-                        src={player.render}
-                        alt={`${player.name} - Render`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+            <CareerInfo player={player} age={age} />
+            {(player.cutout || player.render) && <Gallery player={player} />}
           </section>
         </div>
 
-        {/* Player Statistics */}
+        {/* Quick Stats */}
         <section className="mt-8 bg-white rounded-lg shadow-sm border p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Stats</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-red-500 mb-2">{age || "N/A"}</div>
-              <div className="text-sm text-gray-600">Age</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-500 mb-2">{player.number || "N/A"}</div>
-              <div className="text-sm text-gray-600">Jersey Number</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-500 mb-2">{playerTeam ? "1" : "0"}</div>
-              <div className="text-sm text-gray-600">Current Team</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-500 mb-2">
-                {player.status === "Active" ? <Icon icon="mdi:check" className="inline w-8 h-8" /> : <Icon icon="mdi:close" className="inline w-8 h-8" />}
-              </div>
-              <div className="text-sm text-gray-600">Active Status</div>
-            </div>
+            <StatCard value={age || "N/A"} label="Age" color="text-red-500" />
+            <StatCard value={player.number || "N/A"} label="Jersey Number" color="text-blue-500" />
+            <StatCard value={playerTeam ? "1" : "0"} label="Current Team" color="text-green-500" />
+            <StatCard
+              value={
+                player.status === "Active" ? (
+                  <Icon icon="mdi:check" className="inline w-8 h-8" />
+                ) : (
+                  <Icon icon="mdi:close" className="inline w-8 h-8" />
+                )
+              }
+              label="Active Status"
+              color="text-purple-500"
+            />
           </div>
         </section>
       </main>
+    </div>
+  );
+}
+
+// ===================
+// REUSABLE COMPONENTS
+// ===================
+function InfoRow({ label, icon, value }) {
+  return (
+    <div>
+      <p className="text-sm text-gray-500 mb-1">{label}</p>
+      <p className="font-semibold text-gray-900 flex items-center gap-2">
+        <Icon icon={icon} className="w-5 h-5" /> {value}
+      </p>
+    </div>
+  );
+}
+
+function StatCard({ value, label, color }) {
+  return (
+    <div className="text-center">
+      <div className={`text-3xl font-bold ${color} mb-2`}>{value}</div>
+      <div className="text-sm text-gray-600">{label}</div>
+    </div>
+  );
+}
+
+function SocialLink({ href, icon, color }) {
+  return (
+    <a
+      href={`https://${href}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${color} hover:opacity-80 p-2 rounded-lg hover:bg-gray-50 transition-colors`}
+    >
+      <Icon icon={icon} className="w-6 h-6" />
+    </a>
+  );
+}
+
+function NotFoundUI() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center py-12">
+          <Icon icon="mdi:account" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Player Not Found</h1>
+          <p className="text-gray-600 mb-6">The player you're looking for doesn't exist.</p>
+          <Link
+            href="/sports/players"
+            className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors"
+          >
+            Back to Players
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+// Components for Personal Info, Career Info, Team Card, and Gallery
+function PersonalInfo({ player }) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+      <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <Icon icon="mdi:information" className="w-6 h-6" />
+        Personal Information
+      </h2>
+      <div className="space-y-4">
+        {player.dateBorn && (
+          <InfoRow
+            label="Date of Birth"
+            icon="mdi:cake"
+            value={new Date(player.dateBorn).toLocaleDateString()}
+          />
+        )}
+        {player.birthLocation && (
+          <InfoRow label="Birth Location" icon="mdi:map-marker" value={player.birthLocation} />
+        )}
+        {player.height && <InfoRow label="Height" icon="mdi:ruler" value={player.height} />}
+        {player.weight && <InfoRow label="Weight" icon="mdi:scale" value={player.weight} />}
+        {player.signing && <InfoRow label="Contract Until" icon="mdi:file-sign" value={player.signing} />}
+      </div>
+    </div>
+  );
+}
+
+function TeamCard({ playerTeam }) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border p-6">
+      <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <Icon icon="mdi:shield" className="w-6 h-6" />
+        Current Team
+      </h2>
+      <Link
+        href={`/sports/teams/${playerTeam._id}`}
+        className="block p-4 border rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+            {playerTeam.badge ? (
+              <img src={playerTeam.badge} alt={playerTeam.name} className="w-full h-full object-cover" />
+            ) : (
+              <Icon icon="mdi:shield" className="w-6 h-6 text-red-500" />
+            )}
+          </div>
+          <div>
+            <p className="font-medium text-gray-900">{playerTeam.name}</p>
+            <p className="text-sm text-gray-500">{playerTeam.country}</p>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+}
+
+function CareerInfo({ player, age }) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Career Information</h2>
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Playing Details</h3>
+          <InfoRow label="Primary Position" icon="mdi:soccer" value={player.position} />
+          {player.number && <InfoRow label="Jersey Number" icon="mdi:numeric" value={`#${player.number}`} />}
+          <InfoRow label="Current Status" icon="mdi:checkbox-marked-circle" value={player.status} />
+        </div>
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">Physical Attributes</h3>
+          {player.height && <InfoRow label="Height" icon="mdi:ruler" value={player.height} />}
+          {player.weight && <InfoRow label="Weight" icon="mdi:scale" value={player.weight} />}
+          <InfoRow label="Gender" icon="mdi:gender-male-female" value={player.gender} />
+          {age && <InfoRow label="Age" icon="mdi:cake" value={`${age} years`} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Gallery({ player }) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border p-6">
+      <h2 className="text-xl font-bold text-gray-900 mb-4">Gallery</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {player.thumb && <img src={player.thumb} alt="Profile" className="rounded-lg object-cover" />}
+        {player.cutout && <img src={player.cutout} alt="Cutout" className="rounded-lg object-cover" />}
+        {player.render && <img src={player.render} alt="Render" className="rounded-lg object-cover" />}
+      </div>
     </div>
   );
 }

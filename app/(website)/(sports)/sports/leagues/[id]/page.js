@@ -1,80 +1,66 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+// app/sports/leagues/[id]/page.jsx
 import Link from "next/link";
-import axiosInstance from "@/lib/axiosInstance";
-import handleError from "@/lib/handleError";
 import { Icon } from "@iconify/react";
+import axiosInstance from "@/lib/axiosInstance";
 
-export default function LeagueDetailPage() {
-  const params = useParams();
-  const leagueId = params.id;
+// ===================
+// DYNAMIC METADATA
+// ===================
+export async function generateMetadata({ params }) {
+  try {
+    const leagueResponse = await axiosInstance.get(`/website/league/${params.id}`);
+    const league = leagueResponse?.data?.league;
 
-  const [league, setLeague] = useState(null);
-  const [leagueTeams, setLeagueTeams] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+    if (!league) {
+      return {
+        title: "League Not Found | Inform Readers",
+        description: "The league you are looking for does not exist.",
+      };
+    }
 
-  useEffect(() => {
-    const fetchLeagueData = async () => {
-      try {
-        setIsLoading(true);
-        // Fetch league details
-        const leagueResponse = await axiosInstance.get(`/website/league/${leagueId}`);
-        if (leagueResponse.data.error) {
-          throw new Error("League not found");
-        }
-        setLeague(leagueResponse.data.league);
-
-        // Fetch teams for the league
-        const teamsResponse = await axiosInstance.get("/website/team", {
-          params: { league: leagueResponse?.data?.league?._id, limit: 10000 },
-        });
-        if (!teamsResponse.data.error) {
-          setLeagueTeams(teamsResponse.data.teams);
-        }
-      } catch (err) {
-        setError(handleError(err));
-      } finally {
-        setIsLoading(false);
-      }
+    return {
+      title: `${league.name} - Stats, Teams & Info | Inform Readers`,
+      description:
+        league.description?.slice(0, 160) || `Explore teams, statistics, and history for ${league.name}.`,
+      openGraph: {
+        title: `${league.name} | Inform Readers`,
+        description:
+          league.description?.slice(0, 160) || `Explore teams, statistics, and history for ${league.name}.`,
+      },
     };
-
-    fetchLeagueData();
-  }, [leagueId]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <Icon icon="mdi:loading" className="w-16 h-16 text-gray-300 animate-spin mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h1>
-          </div>
-        </main>
-      </div>
-    );
+  } catch (error) {
+    return {
+      title: "League | Inform Readers",
+      description: "Explore league statistics, teams, and history.",
+    };
   }
+}
 
-  if (error || !league) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <Icon icon="mdi:trophy" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">League Not Found</h1>
-            <p className="text-gray-600 mb-6">The league you're looking for doesn't exist.</p>
-            <Link
-              href="/leagues"
-              className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors"
-            >
-              Back to Leagues
-            </Link>
-          </div>
-        </main>
-      </div>
-    );
+// ===================
+// SERVER COMPONENT
+// ===================
+export default async function LeagueDetailPage({ params }) {
+  let league = null;
+  let leagueTeams = [];
+
+  try {
+    // Fetch league details (server-side)
+    const leagueResponse = await axiosInstance.get(`/website/league/${params.id}`);
+    if (leagueResponse?.data?.error) {
+      return NotFoundUI();
+    }
+
+    league = leagueResponse.data.league;
+
+    // Fetch league teams (server-side)
+    const teamsResponse = await axiosInstance.get("/website/team", {
+      params: { league: league._id, limit: 10000 },
+    });
+    if (!teamsResponse.data.error) {
+      leagueTeams = teamsResponse.data.teams;
+    }
+  } catch (error) {
+    return NotFoundUI();
   }
 
   return (
@@ -135,6 +121,7 @@ export default function LeagueDetailPage() {
                 </div>
               </div>
 
+              {/* League Stats Summary */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Country</p>
@@ -168,6 +155,7 @@ export default function LeagueDetailPage() {
                 </div>
               </div>
 
+              {/* Description */}
               {league.description && (
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">About</h3>
@@ -223,7 +211,7 @@ export default function LeagueDetailPage() {
           </div>
         </header>
 
-        {/* Teams in League */}
+        {/* Teams Section */}
         <section className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Teams in {league.name}</h2>
@@ -286,30 +274,58 @@ export default function LeagueDetailPage() {
         <section className="bg-white rounded-lg shadow-sm border p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">League Statistics</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-red-500 mb-2">{leagueTeams.length}</div>
-              <div className="text-sm text-gray-600">Total Teams</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-500 mb-2">
-                {leagueTeams.reduce((sum, team) => sum + (team.stadium?.capacity || 0), 0).toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-600">Total Capacity</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-500 mb-2">
-                {league.formedYear ? new Date().getFullYear() - parseInt(league.formedYear) : "N/A"}
-              </div>
-              <div className="text-sm text-gray-600">Years Active</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-500 mb-2">
-                {leagueTeams.filter((t) => t.stadium?.capacity && t.stadium.capacity > 50000).length}
-              </div>
-              <div className="text-sm text-gray-600">Large Stadiums</div>
-            </div>
+            <StatCard value={leagueTeams.length} label="Total Teams" color="text-red-500" />
+            <StatCard
+              value={leagueTeams
+                .reduce((sum, team) => sum + (team.stadium?.capacity || 0), 0)
+                .toLocaleString()}
+              label="Total Capacity"
+              color="text-blue-500"
+            />
+            <StatCard
+              value={league.formedYear ? new Date().getFullYear() - parseInt(league.formedYear) : "N/A"}
+              label="Years Active"
+              color="text-green-500"
+            />
+            <StatCard
+              value={leagueTeams.filter((t) => t.stadium?.capacity && t.stadium.capacity > 50000).length}
+              label="Large Stadiums"
+              color="text-purple-500"
+            />
           </div>
         </section>
+      </main>
+    </div>
+  );
+}
+
+// ===================
+// REUSABLE COMPONENTS
+// ===================
+function StatCard({ value, label, color }) {
+  return (
+    <div className="text-center">
+      <div className={`text-3xl font-bold ${color} mb-2`}>{value}</div>
+      <div className="text-sm text-gray-600">{label}</div>
+    </div>
+  );
+}
+
+function NotFoundUI() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center py-12">
+          <Icon icon="mdi:trophy" className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">League Not Found</h1>
+          <p className="text-gray-600 mb-6">The league you're looking for doesn't exist.</p>
+          <Link
+            href="/sports/leagues"
+            className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors"
+          >
+            Back to Leagues
+          </Link>
+        </div>
       </main>
     </div>
   );
