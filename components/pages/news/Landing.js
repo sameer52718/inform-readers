@@ -21,7 +21,9 @@ export default function NewsPage() {
   const getData = useCallback(async (page, limit) => {
     try {
       setIsLoading(true);
-      const { data } = await axiosInstance.get("/website/article", { params: { page, limit, articleType: "news" } });
+      const { data } = await axiosInstance.get("/website/article", {
+        params: { page, limit, articleType: "news" },
+      });
       if (!data.error) {
         setData((prev) => [...prev, ...data.articles]);
         setPagination(data.pagination);
@@ -123,8 +125,8 @@ export default function NewsPage() {
               <article key={index} className="bg-white rounded-xl shadow-sm overflow-hidden group">
                 <div className="relative h-48">
                   <Image
-                    src={`/website/assets/images/fallback/news2.png`}
-                    alt={`Article ${index + 1}`}
+                    src={item.image || `/website/assets/images/fallback/news2.png`}
+                    alt={item.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
