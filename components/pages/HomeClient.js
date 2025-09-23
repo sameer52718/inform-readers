@@ -19,7 +19,8 @@ const getData = async () => {
 
 export default async function Home() {
   let data = await getData();
-
+  console.log(data,"Home Page Data");
+  
   return (
     <>
       <div className="min-h-screen bg-gray-50">
