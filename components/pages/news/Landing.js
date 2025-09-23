@@ -21,7 +21,7 @@ export default function NewsPage() {
   const getData = useCallback(async (page, limit) => {
     try {
       setIsLoading(true);
-      const { data } = await axiosInstance.get("/website/article", { params: { page, limit, type: "news" } });
+      const { data } = await axiosInstance.get("/website/article", { params: { page, limit, articleType: "news" } });
       if (!data.error) {
         setData((prev) => [...prev, ...data.articles]);
         setPagination(data.pagination);
