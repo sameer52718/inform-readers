@@ -36,6 +36,15 @@ export default async function ArticlePage({ params }) {
   return (
     <main className=" bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 space-y-6">
+        <div className="w-full mb-6 flex justify-center">
+          <img
+            src={article.image || "/website/assets/images/fallback/news2.png"}
+            alt={article.title}
+            className=" object-cover rounded-xl shadow"
+            height={256}
+            width={"auto"}
+          />
+        </div>
         <h1 className="text-3xl font-bold text-gray-900">{article.title}</h1>
 
         <div className="flex items-center space-x-4 text-sm text-gray-500">
