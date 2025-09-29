@@ -1,4 +1,4 @@
-import { pdfToolMetaData } from "@/constant/tools";
+import { TOOL_CATEGORIES } from "@/constant/tools";
 
 import AddPageNumberToPDF from "@/components/pages/tools/pdf/add-page-number-to-pdf";
 import BmpToPDFConverter from "@/components/pages/tools/pdf/bmp-to-pdf-converter";
@@ -25,6 +25,26 @@ import RepairPDFTool from "@/components/pages/tools/pdf/repair-pdf-tool";
 import RotatePDFTool from "@/components/pages/tools/pdf/rotate-pdf-tool";
 import TxtToPDFTool from "@/components/pages/tools/pdf/txt-to-pdf-tool";
 // import WordToPDFConverter from "@/components/pages/tools/pdf/word-to-pdf-converter";
+
+import { headers } from "next/headers";
+import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+
+const metaTitleTemplates = [
+  "Free {ToolName} Online Tool in {Country} – Fast & Easy",
+  "Best {ToolName} for {Country} Users – Secure & Reliable",
+  "{ToolName} Service in {Country} – Quick Results Online",
+];
+
+// Description templates
+const metaDescriptionTemplates = [
+  "Try our advanced {ToolName} tool in {Country}. Get fast, accurate, and reliable results within seconds. Perfect for students, professionals, and daily users who want a simple yet powerful online tool. No installation required, works directly in your browser.",
+  "Looking for a secure and user-friendly {ToolName} in {Country}? Our free online solution helps you complete tasks instantly with high precision. Easy to use on mobile and desktop. Save time and boost productivity with just one click.",
+  "Use {ToolName} online in {Country} to make your work easier. Designed for speed, simplicity, and efficiency. Whether you are a professional, student, or casual user, this tool provides high-quality results without any signup or hidden costs.",
+];
+
+function applyMetaTemplate(template, values) {
+  return template.replace(/{ToolName}/g, values.toolName || "").replace(/{Country}/g, values.country || "");
+}
 
 const toolComponents = {
   "add-page-number-to-pdf": AddPageNumberToPDF,
@@ -56,12 +76,39 @@ const toolComponents = {
 
 export async function generateMetadata({ params }) {
   const { tool } = params;
-  return (
-    pdfToolMetaData[tool] || {
+
+  // Get tool details
+  const toolData = TOOL_CATEGORIES.find((item) => item.id === "pdf-tools")?.tools.find((t) => t.id === tool);
+  const toolName = toolData?.name;
+
+  // Get country from host
+  const host = (await headers()).get("host") || "informreaders.com";
+  const country = getCountryName(getCountryCodeFromHost(host));
+
+  if (!toolName) {
+    return {
       title: "Image Tool Not Found | Inform Readers",
       description: "The requested image tool was not found. Explore other free tools at Inform Readers.",
-    }
+    };
+  }
+
+  // Values for replacement
+  const values = { toolName, country };
+
+  // Pick random templates
+  const randomTitle = applyMetaTemplate(
+    metaTitleTemplates[Math.floor(Math.random() * metaTitleTemplates.length)],
+    values
   );
+  const randomDescription = applyMetaTemplate(
+    metaDescriptionTemplates[Math.floor(Math.random() * metaDescriptionTemplates.length)],
+    values
+  );
+
+  return {
+    title: randomTitle,
+    description: randomDescription,
+  };
 }
 
 export default function ToolPage({ params }) {

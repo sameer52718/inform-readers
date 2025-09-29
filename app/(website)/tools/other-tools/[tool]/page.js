@@ -1,4 +1,4 @@
-import { otherToolMetaData } from "@/constant/tools";
+import { TOOL_CATEGORIES } from "@/constant/tools";
 
 import AngleConverter from "@/components/pages/tools/other/angle-converter";
 import DegreesToRadians from "@/components/pages/tools/other/degrees-to-radians";
@@ -283,6 +283,26 @@ import StoneToLbs from "@/components/pages/tools/other/stone-to-lbs";
 import TonToLbs from "@/components/pages/tools/other/ton-to-lbs";
 import WeightMassConverter from "@/components/pages/tools/other/weight-mass-converter";
 
+import { headers } from "next/headers";
+import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+
+const metaTitleTemplates = [
+  "Free {ToolName} Online Tool in {Country} – Fast & Easy",
+  "Best {ToolName} for {Country} Users – Secure & Reliable",
+  "{ToolName} Service in {Country} – Quick Results Online",
+];
+
+// Description templates
+const metaDescriptionTemplates = [
+  "Try our advanced {ToolName} tool in {Country}. Get fast, accurate, and reliable results within seconds. Perfect for students, professionals, and daily users who want a simple yet powerful online tool. No installation required, works directly in your browser.",
+  "Looking for a secure and user-friendly {ToolName} in {Country}? Our free online solution helps you complete tasks instantly with high precision. Easy to use on mobile and desktop. Save time and boost productivity with just one click.",
+  "Use {ToolName} online in {Country} to make your work easier. Designed for speed, simplicity, and efficiency. Whether you are a professional, student, or casual user, this tool provides high-quality results without any signup or hidden costs.",
+];
+
+function applyMetaTemplate(template, values) {
+  return template.replace(/{ToolName}/g, values.toolName || "").replace(/{Country}/g, values.country || "");
+}
+
 const toolComponents = {
   "angle-converter": AngleConverter,
   "degrees-to-radians": DegreesToRadians,
@@ -561,12 +581,41 @@ const toolComponents = {
 
 export async function generateMetadata({ params }) {
   const { tool } = params;
-  return (
-    otherToolMetaData[tool] || {
-      title: "Other Tool Not Found | Inform Readers",
+
+  // Get tool details
+  const toolData = TOOL_CATEGORIES.find((item) => item.id === "other-tools")
+    ?.subcategories.flatMap((sub) => sub.tools)
+    .find((t) => t.id === tool);
+  const toolName = toolData?.name;
+
+  // Get country from host
+  const host = (await headers()).get("host") || "informreaders.com";
+  const country = getCountryName(getCountryCodeFromHost(host));
+
+  if (!toolName) {
+    return {
+      title: "Image Tool Not Found | Inform Readers",
       description: "The requested image tool was not found. Explore other free tools at Inform Readers.",
-    }
+    };
+  }
+
+  // Values for replacement
+  const values = { toolName, country };
+
+  // Pick random templates
+  const randomTitle = applyMetaTemplate(
+    metaTitleTemplates[Math.floor(Math.random() * metaTitleTemplates.length)],
+    values
   );
+  const randomDescription = applyMetaTemplate(
+    metaDescriptionTemplates[Math.floor(Math.random() * metaDescriptionTemplates.length)],
+    values
+  );
+
+  return {
+    title: randomTitle,
+    description: randomDescription,
+  };
 }
 
 export default function ToolPage({ params }) {
