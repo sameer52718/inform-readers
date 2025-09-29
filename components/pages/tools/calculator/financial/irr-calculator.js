@@ -217,7 +217,7 @@ Generated on: ${new Date().toLocaleString()}
   return (
     <>
       <div
-        className={`bg-white min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${
+        className={`bg-white  flex items-center justify-center p-4 transition-colors duration-300 ${
           darkMode ? "dark" : ""
         }`}
       >

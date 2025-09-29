@@ -369,7 +369,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex justify-center items-center p-5">
+      <div className=" bg-white flex justify-center items-center p-5">
         <div className="w-full max-w-4xl bg-gray-100 border border-gray-200 rounded-2xl p-6 shadow-lg">
           <h1 className="text-3xl font-bold text-center text-red-500 mb-6 animate-pulse">
             Wave Mechanics Calculator

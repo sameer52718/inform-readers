@@ -295,7 +295,7 @@ export default function Home() {
   return (
     <>
      
-      <div className="bg-white min-h-screen flex items-center justify-center p-4 relative">
+      <div className="bg-white  flex items-center justify-center p-4 relative">
         <button onClick={toggleTheme} className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg">🌙 Toggle Theme</button>
         <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-2xl w-full transition-transform hover:-translate-y-1">
           <h1 className="text-2xl font-bold text-red-500 text-center mb-6">Advanced Income Tax Calculator</h1>

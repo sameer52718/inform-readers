@@ -143,7 +143,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex items-center justify-center p-4">
+    <div className="bg-white  flex items-center justify-center p-4">
       <div className="bg-gray-100 rounded-lg shadow-2xl p-6 max-w-md w-full animate-slide-in">
         <h1 className="text-xl font-bold text-red-500 mb-5 text-center">Debt Consolidation Calculator</h1>
         <div className="space-y-4">

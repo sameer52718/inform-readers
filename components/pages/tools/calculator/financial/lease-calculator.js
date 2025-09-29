@@ -193,7 +193,7 @@ Generated on: ${new Date().toLocaleString()}
 
   return (
     <>
-      <div className="bg-white min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white  flex items-center justify-center p-4">
         <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 max-w-4xl w-full">
           <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Advanced Lease Calculator</h1>
           <div className="mb-8">

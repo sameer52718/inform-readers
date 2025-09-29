@@ -374,7 +374,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-start">
+    <div className="bg-white  p-4 flex justify-center items-start">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-3xl w-full animate-slide-in">
         <h1 className="text-2xl font-bold text-red-500 text-center mb-6">Advanced Rent Calculator</h1>
         {errorMessage && <div className="text-red-500 text-sm mb-4 text-center">{errorMessage}</div>}

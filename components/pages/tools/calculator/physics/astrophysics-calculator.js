@@ -355,7 +355,7 @@ const AstrophysicsCalculator = () => {
 
   return (
     <div
-      className="min-h-screen  flex justify-center items-center p-5"
+      className="  flex justify-center items-center p-5"
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >

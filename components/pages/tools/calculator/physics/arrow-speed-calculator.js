@@ -116,7 +116,7 @@ export default function ArrowCalculator() {
   }, [results]);
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className=" bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-4xl bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-lg">
         <h1 className="text-3xl text-center font-bold text-red-500 animate-pulse mb-6">
           Arrow Speed Calculator

@@ -243,7 +243,7 @@ const EnergyCalculator = () => {
 
   return (
     <div
-      className="min-h-screen bg-white flex justify-center items-center p-4"
+      className=" bg-white flex justify-center items-center p-4"
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >

@@ -213,7 +213,7 @@ const GravitationalForceCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex justify-center items-center p-4">
+    <div className=" bg-white flex justify-center items-center p-4">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 w-full max-w-md text-gray-900">
         <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">Gravitational Force Calculator</h1>
         <div className="mb-4">

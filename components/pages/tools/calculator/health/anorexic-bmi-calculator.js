@@ -338,7 +338,7 @@ export default function AdvancedAnorexicBMICalculator() {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className=" bg-white flex items-center justify-center p-4">
         <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 max-w-6xl w-full">
           <h1 className="text-3xl font-bold text-red-700 mb-8">Advanced Anorexic BMI Calculator</h1>
 

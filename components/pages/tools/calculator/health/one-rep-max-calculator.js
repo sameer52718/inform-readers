@@ -428,7 +428,7 @@ Generated on: ${new Date().toLocaleString()}
   };
 
   return (
-    <div className="bg-white min-h-screen flex items-center justify-center p-4">
+    <div className="bg-white  flex items-center justify-center p-4">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 max-w-5xl w-full animate-slide-in">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Advanced One Rep Max Calculator</h1>

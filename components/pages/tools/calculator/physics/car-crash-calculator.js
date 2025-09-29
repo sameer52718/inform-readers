@@ -223,7 +223,7 @@ const CarCrashCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className=" bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg">
         <h1 className="text-3xl font-bold text-center text-gray-900 mb-6">
           Car Crash Calculator

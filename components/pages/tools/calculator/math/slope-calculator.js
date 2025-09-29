@@ -646,7 +646,7 @@ export default function Home() {
   return (
     <>
       <div
-        className="min-h-screen bg-white flex justify-center items-center p-4 font-inter"
+        className=" bg-white flex justify-center items-center p-4 font-inter"
         onKeyDown={handleKeyDown}
       >
         <div className="w-full max-w-5xl bg-gray-100 rounded-2xl shadow-lg p-6">

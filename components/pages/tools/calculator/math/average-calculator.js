@@ -632,7 +632,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex justify-center items-center p-4">
+      <div className=" bg-white flex justify-center items-center p-4">
         <div className="w-full max-w-5xl bg-gray-100 rounded-2xl shadow-lg p-6">
           <h1 className="text-2xl font-bold text-red-500 mb-6 animate-pulse">Advanced Average Calculator</h1>
           {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}

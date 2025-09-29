@@ -723,7 +723,7 @@ export default function AdvancedZScoreCalculator() {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className=" bg-white flex items-center justify-center p-4">
         <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-5xl w-full">
           <h1 className="text-2xl font-bold text-red-700 mb-6">Advanced Z-score Calculator</h1>
 

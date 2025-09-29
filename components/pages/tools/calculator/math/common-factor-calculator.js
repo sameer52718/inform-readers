@@ -356,7 +356,7 @@ export default function CommonFactorCalculator() {
 
   return (
     <>
-      <div className="bg-white min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white  flex items-center justify-center p-4">
         <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-[900px] w-full">
           <h1 className="text-2xl font-bold text-red-900 mb-6">Common Factor Calculator</h1>
 

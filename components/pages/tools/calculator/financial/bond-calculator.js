@@ -306,7 +306,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex items-center justify-center p-4">
+    <div className="bg-white  flex items-center justify-center p-4">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-3xl w-full">
         <h1 className="text-2xl font-bold text-red-500 text-center mb-6">Advanced Bond Calculator</h1>
         <div className="mb-4">

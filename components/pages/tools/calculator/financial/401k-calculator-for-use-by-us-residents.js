@@ -403,7 +403,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white  flex items-center justify-center p-4">
         <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 max-w-5xl w-full flex flex-col md:flex-row gap-8">
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-gray-900 mb-6 text-center">Advanced 401(k) Calculator</h1>

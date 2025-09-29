@@ -280,7 +280,7 @@ Generated on: ${new Date().toLocaleString()}
   return (
     <>
       <div
-        className={`bg-white min-h-screen flex items-center justify-center p-4 ${isDarkMode ? "dark" : ""}`}
+        className={`bg-white  flex items-center justify-center p-4 ${isDarkMode ? "dark" : ""}`}
       >
         <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-4xl w-full">
           <div className="flex justify-between items-center mb-8">

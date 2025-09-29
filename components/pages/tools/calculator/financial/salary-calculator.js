@@ -364,7 +364,7 @@ export default function Home() {
   const isItemized = deductionType === "itemized";
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-start">
+    <div className="bg-white  p-4 flex justify-center items-start">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-xl w-full">
         <h1 className="text-2xl font-bold text-red-500 text-center mb-6">Advanced Salary Calculator</h1>
         <div className="space-y-4">

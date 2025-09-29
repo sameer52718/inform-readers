@@ -351,7 +351,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-5 flex justify-center items-start">
+    <div className="bg-white  p-5 flex justify-center items-start">
       <div className="bg-gray-100 rounded-xl shadow-2xl p-6 max-w-5xl w-full flex gap-6 flex-col md:flex-row">
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-gray-900 text-center mb-5">Advanced Pension Calculator</h1>

@@ -388,7 +388,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-6">
+    <div className="bg-white  p-6">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900">Advanced IRA Calculator</h1>

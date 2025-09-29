@@ -392,7 +392,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white min-h-screen p-6">
+      <div className="bg-white  p-6">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Advanced Auto Lease Calculator</h1>
           <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-6">

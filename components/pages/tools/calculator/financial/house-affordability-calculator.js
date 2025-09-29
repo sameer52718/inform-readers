@@ -303,7 +303,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex items-center justify-center p-4 relative">
+    <div className="bg-white  flex items-center justify-center p-4 relative">
       <button
         onClick={() => setIsDarkMode(!isDarkMode)}
         className="absolute top-5 right-5 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"

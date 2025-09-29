@@ -271,7 +271,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex justify-center items-center p-4 font-inter">
+      <div className=" bg-white flex justify-center items-center p-4 font-inter">
         <div className="w-full max-w-2xl bg-gray-100 rounded-2xl shadow-lg p-6">
           <h1 className="text-2xl font-bold text-red-500 mb-6 animate-pulse">Big Number Calculator</h1>
           <div className="bg-gray-200 rounded-lg p-4 text-right text-xl mb-6 shadow-inner">

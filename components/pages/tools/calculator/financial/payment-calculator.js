@@ -250,7 +250,7 @@ export default function Home() {
   };
 
   return (
-    <div className={`bg-white min-h-screen flex justify-center items-center p-4 ${theme}`}>
+    <div className={`bg-white  flex justify-center items-center p-4 ${theme}`}>
       <button
         onClick={toggleTheme}
         className="fixed top-4 right-4 bg-red-500 text-white p-2 rounded-lg hover:bg-red-600"

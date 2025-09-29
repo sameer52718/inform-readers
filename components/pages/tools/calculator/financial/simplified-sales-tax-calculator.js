@@ -136,7 +136,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-start">
+    <div className="bg-white  p-4 flex justify-center items-start">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-7xl w-full flex flex-col md:flex-row gap-6">
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-red-500 text-center mb-6">
