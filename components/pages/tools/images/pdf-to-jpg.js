@@ -52,7 +52,7 @@ const PdfToJpg = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+    <div className=" bg-gray-50 flex items-center justify-center px-4 py-12">
       <div className="bg-white p-6 rounded-lg max-w-md w-full shadow-lg space-y-6">
         <h1 className="text-3xl text-gray-700 font-semibold text-center">PDF to JPG</h1>
 

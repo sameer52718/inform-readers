@@ -76,7 +76,7 @@ const ImageBrightnessContrast = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className=" bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto space-y-6">
           <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">Adjust Brightness/Contrast</h1>

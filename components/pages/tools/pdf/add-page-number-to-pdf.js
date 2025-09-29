@@ -181,7 +181,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-center">
+    <div className="bg-white  p-4 flex justify-center items-center">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-6 max-w-md w-full">
         <h1 className="text-2xl font-bold text-red-500 text-center mb-6">Add Page Numbers to PDF</h1>
         <div className="space-y-4">

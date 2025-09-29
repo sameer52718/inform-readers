@@ -148,7 +148,7 @@ export default function Home() {
             "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js";
         }}
       />
-      <div className="bg-white min-h-screen flex justify-center items-center p-4">
+      <div className="bg-white  flex justify-center items-center p-4">
         <div className="bg-gray-100 p-5 rounded-lg max-w-md w-full shadow-lg">
           <h1 className="text-2xl font-bold text-red-500 text-center mb-5">PDF to CSV (Extract Tables)</h1>
           <div className="mb-4">

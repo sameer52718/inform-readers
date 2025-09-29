@@ -91,7 +91,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-center">
+    <div className="bg-white  p-4 flex justify-center items-center">
       <div className="bg-gray-100 p-10 rounded-xl shadow-2xl max-w-md w-full text-center">
         <h1 className="text-2xl font-bold text-red-500 mb-5">PDF to Word Converter</h1>
         <input

@@ -145,7 +145,7 @@ export default function Home() {
             "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
         }}
       />
-      <div className="bg-white min-h-screen flex justify-center items-center p-4">
+      <div className="bg-white  flex justify-center items-center p-4">
         <div className="bg-gray-100 p-8 rounded-lg shadow-lg text-center max-w-xl w-full">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">PDF to BMP Converter</h1>
           <input

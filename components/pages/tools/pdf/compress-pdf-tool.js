@@ -103,7 +103,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white  flex items-center justify-center p-4">
         <div className="bg-gray-100 p-8 rounded-xl shadow-2xl max-w-lg w-full transform transition-all hover:scale-105 duration-300">
           <h1 className="text-3xl font-extrabold text-gray-900 mb-3">Compress PDF Tool</h1>
           <p className="text-gray-600 mb-6">

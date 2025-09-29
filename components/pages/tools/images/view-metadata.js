@@ -38,7 +38,7 @@ const ViewMetadata = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-white flex justify-center items-center px-4">
+    <div className=" bg-gray-50 text-white flex justify-center items-center px-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-3xl text-red-400 font-bold text-center mb-6">View Metadata</h1>
 

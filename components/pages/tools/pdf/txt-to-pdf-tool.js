@@ -130,7 +130,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-center">
+    <div className="bg-white  p-4 flex justify-center items-center">
       <div className="bg-gray-100 p-8 rounded-xl shadow-2xl max-w-4xl w-full">
         <h1 className="text-3xl font-extrabold text-red-500 mb-3">Advanced TXT to PDF Tool</h1>
         <p className="text-gray-600 mb-6">

@@ -58,7 +58,7 @@ const PixelateImage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 flex justify-center items-center px-4">
+    <div className=" bg-gray-50 py-12 flex justify-center items-center px-4">
       <div className="bg-white max-w-md w-full p-6 rounded-lg shadow-md space-y-6">
         <h1 className="text-3xl font-bold text-red-500 text-center">Pixelate Image</h1>
 

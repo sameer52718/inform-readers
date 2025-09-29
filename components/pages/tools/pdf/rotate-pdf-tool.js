@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-center">
+    <div className="bg-white  p-4 flex justify-center items-center">
       <div className="bg-gray-100 p-6 rounded-lg shadow-lg max-w-md w-full">
         <h1 className="text-2xl font-bold text-red-500 mb-2">Rotate PDF Tool</h1>
         <p className="text-gray-600 mb-4">Adjust the orientation of pages in your PDF document.</p>
