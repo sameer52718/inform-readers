@@ -63,7 +63,7 @@ export default function SpecificHeatCapacityConverter() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className=" bg-white flex items-center justify-center p-4">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Specific Heat Capacity Converter

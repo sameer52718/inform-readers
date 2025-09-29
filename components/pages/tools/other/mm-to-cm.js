@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center  bg-white">
       <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center w-72">
         <h2 className="text-red-500 text-xl mb-4">MM to CM</h2>
         <input

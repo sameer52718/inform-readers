@@ -17,7 +17,7 @@ export default function HpToKwConverter() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className=" bg-white flex items-center justify-center p-4">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 text-center w-full max-w-xs">
         <h2 className="text-2xl font-bold text-gray-800 mb-5">hp to kW</h2>
         <input

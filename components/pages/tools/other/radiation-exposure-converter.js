@@ -46,7 +46,7 @@ export default function RadiationExposureConverter() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className=" bg-white flex items-center justify-center p-4">
       <div className="bg-gray-100 p-5 rounded-lg max-w-md w-full shadow-lg">
         <h1 className="text-red-500 text-2xl text-center mb-5">Radiation-Exposure Converter</h1>
         <div className="mb-4">

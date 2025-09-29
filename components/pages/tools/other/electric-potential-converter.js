@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center  bg-white">
       <div className="bg-gray-100 p-5 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-red-500 text-2xl text-center mb-5">Electric Potential Converter</h1>
         <div className="mb-4">

@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white p-4">
+    <div className="flex justify-center items-center  bg-white p-4">
       <div className="bg-gray-100 rounded-2xl shadow-lg p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Luminance Converter</h2>
         <div className="space-y-4">

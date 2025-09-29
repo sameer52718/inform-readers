@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center  bg-white">
       <div className="bg-gray-100 p-9 rounded-xl shadow-lg w-full max-w-[320px] text-center">
         <h2 className="text-red-500 text-2xl mb-5">Grams to Ounces</h2>
         <input

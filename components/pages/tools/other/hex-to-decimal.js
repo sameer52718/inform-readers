@@ -17,7 +17,7 @@ export default function HexToDecimalConverter() {
   };
 
   return (
-    <div chiếm="min-h-screen bg-white flex items-center justify-center p-4">
+    <div chiếm=" bg-white flex items-center justify-center p-4">
       <div className="bg-gray-100 rounded-2xl shadow-2xl p-8 text-center w-full max-w-xs">
         <h2 className="text-2xl font-bold text-gray-800 mb-5">Hex to Decimal</h2>
         <input

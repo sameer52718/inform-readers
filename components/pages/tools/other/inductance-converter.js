@@ -86,7 +86,7 @@ export default function InductanceConverter() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white p-4">
+    <div className="flex justify-center items-center  bg-white p-4">
       <div className="bg-gray-100 rounded-xl shadow-lg p-6 w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-red-500 mb-5">Inductance Converter</h1>
         <div className="mb-4">

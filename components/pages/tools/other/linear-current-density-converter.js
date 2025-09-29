@@ -47,7 +47,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center  bg-white">
       <div className="bg-gray-100 p-5 rounded-lg shadow-lg max-w-md w-full">
         <h1 className="text-2xl font-bold text-center text-red-500 mb-5">Linear Current Density Converter</h1>
         <div className="mb-4">

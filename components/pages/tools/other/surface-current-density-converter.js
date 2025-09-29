@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex justify-center items-center">
+    <div className="bg-white  flex justify-center items-center">
       <div className="bg-gray-100 p-5 rounded-lg max-w-md w-full shadow-lg">
         <h1 className="text-red-500 text-2xl font-bold text-center mb-5">
           Surface Current Density Converter

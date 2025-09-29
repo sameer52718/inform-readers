@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4 flex justify-center items-center">
+    <div className="bg-white  p-4 flex justify-center items-center">
       <div className="bg-gray-100 p-8 rounded-xl shadow-2xl w-full max-w-xs text-center">
         <h2 className="text-2xl font-bold text-red-500 mb-5">Acres to Hectare</h2>
         <input

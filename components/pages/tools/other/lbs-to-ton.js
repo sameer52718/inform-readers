@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex justify-center items-center">
+    <div className="bg-white  flex justify-center items-center">
       <div className="bg-gray-100 p-8 rounded-xl shadow-lg text-center w-full max-w-xs">
         <h2 className="text-red-500 text-2xl font-bold mb-5">LBS to Ton</h2>
         <input

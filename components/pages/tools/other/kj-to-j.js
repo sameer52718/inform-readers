@@ -17,7 +17,7 @@ export default function KjToJConverter() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center  bg-white">
       <div className="bg-gray-100 p-8 rounded-xl shadow-lg text-center w-80">
         <h2 className="text-red-500 text-2xl mb-5">kJ to J</h2>
         <input
