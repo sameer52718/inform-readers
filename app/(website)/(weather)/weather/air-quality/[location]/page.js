@@ -1,4 +1,4 @@
-import { getAirQuality, getAQICategory } from "@/lib/weather";
+import { getAirQuality, getAQICategory, getCurrentWeather } from "@/lib/weather";
 import LocationHeader from "@/components/weather/LocationHeader";
 import Navigation from "@/components/weather/Navigation";
 import DataTable from "@/components/weather/DataTable";
@@ -10,32 +10,113 @@ export const revalidate = 600;
 export async function generateMetadata({ params }) {
   const location = decodeURIComponent(params.location);
 
+  const metaTemplates = [
+    {
+      title: (city, country) =>
+        `Weather in ${city}${country ? `, ${country}` : ""} | Today’s Forecast & Temperature`,
+      description: (city, country) =>
+        `Get the latest weather updates for ${city}${
+          country ? `, ${country}` : ""
+        }. Check today’s temperature, conditions, and 7-day forecast tailored for ${city}.`,
+    },
+    {
+      title: (city, country) =>
+        `${city} Weather | Live Forecast & Climate Updates${country ? ` in ${country}` : ""}`,
+      description: (city, country) =>
+        `Stay informed with real-time ${city} weather updates${
+          country ? ` in ${country}` : ""
+        }. Find temperature, humidity, wind speed, and accurate forecasts.`,
+    },
+    {
+      title: (city, country) =>
+        `${city}${country ? `, ${country}` : ""} Weather Today | Accurate Weather Forecast`,
+      description: (city, country) =>
+        `See live weather in ${city}${
+          country ? `, ${country}` : ""
+        }. Get current conditions, hourly updates, and tomorrow’s weather forecast for ${city}.`,
+    },
+    {
+      title: (city, country) => `Current Weather in ${city}${country ? `, ${country}` : ""} | 7-Day Forecast`,
+      description: (city, country) =>
+        `Discover ${city}’s latest weather conditions${
+          country ? ` in ${country}` : ""
+        }. Check temperature, sunrise, sunset, and 7-day detailed weather forecast.`,
+    },
+    {
+      title: (city, country) =>
+        `${city} Weather Updates | Real-Time Forecast${country ? ` for ${country}` : ""}`,
+      description: (city, country) =>
+        `Get up-to-date weather reports for ${city}${
+          country ? `, ${country}` : ""
+        }. View daily temperature, weather alerts, and accurate forecasts instantly.`,
+    },
+    {
+      title: (city, country) =>
+        `${city}${country ? `, ${country}` : ""} Climate & Weather | Live Updates Today`,
+      description: (city, country) =>
+        `Check ${city}${
+          country ? `, ${country}` : ""
+        } weather conditions today. Find real-time temperature, humidity, rain chances, and weather warnings.`,
+    },
+    {
+      title: (city, country) =>
+        `Weather Forecast ${city}${country ? `, ${country}` : ""} | Hourly & Weekly Updates`,
+      description: (city, country) =>
+        `Accurate weather forecast for ${city}${
+          country ? `, ${country}` : ""
+        }. Explore hourly weather, 7-day updates, and live climate conditions.`,
+    },
+    {
+      title: (city, country) =>
+        `${city} Temperature & Forecast | Weather${country ? ` in ${country}` : ""} Today`,
+      description: (city, country) =>
+        `Find out ${city}’s current temperature, weather forecast, and air conditions${
+          country ? ` in ${country}` : ""
+        }. Stay updated with daily weather alerts.`,
+    },
+    {
+      title: (city, country) =>
+        `Live Weather ${city}${country ? `, ${country}` : ""} | Today’s Conditions & Alerts`,
+      description: (city, country) =>
+        `Stay safe with live weather data for ${city}${
+          country ? `, ${country}` : ""
+        }. Get temperature, wind speed, rain chances, and weather alerts.`,
+    },
+    {
+      title: (city, country) =>
+        `${city}${country ? `, ${country}` : ""} Weather Information | Daily & Weekly Forecast`,
+      description: (city, country) =>
+        `Get comprehensive weather information for ${city}${
+          country ? `, ${country}` : ""
+        }. View today’s forecast, extended 7-day outlook, and climate updates.`,
+    },
+  ];
+
   try {
-    const data = await getAirQuality(location);
-    const city = data?.location?.name ?? location;
-    const country = data?.location?.country ?? "";
-    const aq = data?.current?.air_quality;
-    const aqi = aq ? Math.round(aq["us-epa-index"]) : null;
-    const category = aqi ? getAQICategory(aqi).level : "Unavailable";
+    const current = await getCurrentWeather(location);
+
+    const city = current?.location?.name ?? location;
+    const country = current?.location?.country ?? "";
+
+    // 🎲 Pick random template
+    const randomTemplate = metaTemplates[Math.floor(Math.random() * metaTemplates.length)];
 
     return {
-      title: `Air Quality in ${city}${country ? `, ${country}` : ""} | AQI ${aqi ?? "-"}`,
-      description: `Current AQI in ${city}${country ? `, ${country}` : ""}: ${category}. See detailed pollutant breakdown, health impacts, and recommendations.`,
+      title: randomTemplate.title(city, country),
+      description: randomTemplate.description(city, country),
       openGraph: {
-        title: `Air Quality Index in ${city}`,
-        description: `AQI: ${aqi ?? "N/A"} (${category}). Check pollutant levels (PM2.5, PM10, O3) and health guidance.`,
+        title: randomTemplate.title(city, country),
+        description: randomTemplate.description(city, country),
         type: "website",
       },
     };
   } catch (error) {
     return {
-      title: "Air Quality Information | Inform Readers",
-      description:
-        "Check live air quality index (AQI), pollutant levels, and health recommendations for any location worldwide.",
+      title: `Weather Today | Inform Readers`,
+      description: `Get live weather updates, hourly forecasts, and air quality information for any city.`,
     };
   }
 }
-
 
 export default async function AirQualityPage({ params }) {
   const location = decodeURIComponent(params.location);
