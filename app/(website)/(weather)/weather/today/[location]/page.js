@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
       title: `Today's Weather in ${city}${country ? `, ${country}` : ""} | Inform Readers`,
       description: `Live weather for ${city}${country ? `, ${country}` : ""}: ${current.current.condition.text}, ${Math.round(
         current.current.temp_f
-      )}°F. Check hourly forecast, sunrise & sunset times, and air quality.`,
+      )}°C. Check hourly forecast, sunrise & sunset times, and air quality.`,
       openGraph: {
         title: `Weather Today in ${city}`,
         description: `Get real-time weather conditions, forecast, and air quality for ${city}.`,
@@ -45,7 +45,8 @@ export default async function TodayPage({ params }) {
 
     const today = forecast.forecast.forecastday[0];
     const alerts = forecast.alerts?.alert || [];
-
+    console.log(today,current);
+    
     return (
       <div className="min-h-screen bg-gray-100">
         <LocationHeader location={current.location.name} currentPage="weather/today" />
@@ -85,7 +86,7 @@ function CurrentConditions({ current }) {
     <div className="bg-white border border-gray-300 rounded-sm p-4">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-medium text-gray-900">Current Conditions</h2>
-        <TempToggle />
+        {/* <TempToggle /> */}
       </div>
 
       <div className="flex items-center gap-4">
@@ -95,9 +96,9 @@ function CurrentConditions({ current }) {
           className="w-16 h-16"
         />
         <div>
-          <div className="text-4xl font-bold text-gray-900">{Math.round(current.current.temp_f)}°F</div>
+          <div className="text-4xl font-bold text-gray-900">{Math.round(current.current.temp_c)}°C</div>
           <div className="text-sm text-gray-600">{current.current.condition.text}</div>
-          <div className="text-sm text-gray-600">Feels like {Math.round(current.current.feelslike_f)}°F</div>
+          <div className="text-sm text-gray-600">Feels like {Math.round(current.current.feelslike_C)}°C</div>
         </div>
       </div>
     </div>
@@ -106,7 +107,7 @@ function CurrentConditions({ current }) {
 
 function TodayDetails({ today }) {
   const details = [
-    ["High / Low", `${Math.round(today.day.maxtemp_f)}°F / ${Math.round(today.day.mintemp_f)}°F`],
+    ["High / Low", `${Math.round(today.day.maxtemp_f)}°F / ${Math.round(today.day.mintemp_c)}°C`],
     ["Humidity", `${today.day.avghumidity}%`],
     ["Wind", `${Math.round(today.day.maxwind_mph)} mph`],
     ["Visibility", `${today.day.avgvis_miles} miles`],

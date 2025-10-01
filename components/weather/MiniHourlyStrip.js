@@ -1,13 +1,13 @@
-import { formatConditionIcon } from '@/lib/weather';
+import { formatConditionIcon } from "@/lib/weather";
 
-export default function MiniHourlyStrip({ hours, tempUnit = 'F' }) {
+export default function MiniHourlyStrip({ hours, tempUnit = "F" }) {
   const getTemp = (hour) => {
-    return tempUnit === 'C' ? Math.round(hour.temp_c) : Math.round(hour.temp_f);
+    return Math.round(hour.temp_c);
   };
 
   const formatHour = (timeStr) => {
     const hour = new Date(timeStr).getHours();
-    return hour === 0 ? '12 AM' : hour <= 12 ? `${hour} AM` : `${hour - 12} PM`;
+    return hour === 0 ? "12 AM" : hour <= 12 ? `${hour} AM` : `${hour - 12} PM`;
   };
 
   return (
@@ -16,20 +16,14 @@ export default function MiniHourlyStrip({ hours, tempUnit = 'F' }) {
       <div className="flex gap-4 overflow-x-auto">
         {hours.slice(0, 12).map((hour, index) => (
           <div key={index} className="flex-shrink-0 text-center min-w-16">
-            <div className="text-xs text-gray-600 mb-1">
-              {formatHour(hour.time)}
-            </div>
+            <div className="text-xs text-gray-600 mb-1">{formatHour(hour.time)}</div>
             <img
               src={formatConditionIcon(hour.condition.icon)}
               alt={hour.condition.text}
               className="w-8 h-8 mx-auto mb-1"
             />
-            <div className="text-sm font-medium text-gray-900">
-              {getTemp(hour)}°
-            </div>
-            <div className="text-xs text-gray-500">
-              {Math.round(hour.chance_of_rain)}%
-            </div>
+            <div className="text-sm font-medium text-gray-900">{getTemp(hour)}°</div>
+            <div className="text-xs text-gray-500">{Math.round(hour.chance_of_rain)}%</div>
           </div>
         ))}
       </div>

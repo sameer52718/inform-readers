@@ -52,8 +52,8 @@ export default async function HourlyPage({ params }) {
         <img src={formatConditionIcon(hour.condition.icon)} alt={hour.condition.text} className="w-6 h-6" />
         <span className="text-sm">{hour.condition.text}</span>
       </div>,
-      `${Math.round(hour.temp_f)}°F`,
-      `${Math.round(hour.feelslike_f)}°F`,
+      `${Math.round(hour.temp_c)}°C`,
+      `${Math.round(hour.feelslike_c)}°C`,
       `${Math.round(hour.wind_mph)} mph ${hour.wind_dir}`,
       `${hour.humidity}%`,
       `${hour.chance_of_rain}%`,

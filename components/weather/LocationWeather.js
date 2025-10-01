@@ -137,7 +137,7 @@ export default function LocationWeather() {
             {location.name}, {location.region}
           </h2>
         </div>
-        <TempToggle onToggle={setTempUnit} />
+        {/* <TempToggle onToggle={setTempUnit} /> */}
       </div>
 
       <div className="flex items-center gap-4 mb-4">

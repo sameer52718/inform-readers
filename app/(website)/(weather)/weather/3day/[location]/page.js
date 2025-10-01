@@ -14,8 +14,8 @@ export async function generateMetadata({ params }) {
     const city = forecast?.location?.name ?? location;
     const country = forecast?.location?.country ?? "";
     const firstDay = forecast?.forecast?.forecastday?.[0];
-    const todayHigh = firstDay?.day?.maxtemp_f;
-    const todayLow = firstDay?.day?.mintemp_f;
+    const todayHigh = firstDay?.day?.maxtemp_c;
+    const todayLow = firstDay?.day?.mintemp_c;
     const todayCondition = firstDay?.day?.condition?.text ?? "Weather";
 
     return {
@@ -86,7 +86,7 @@ function DailyOverview({ days }) {
       />
       <span className="text-sm">{day.day.condition.text}</span>
     </div>,
-    `${Math.round(day.day.maxtemp_f)}°F / ${Math.round(day.day.mintemp_f)}°F`,
+    `${Math.round(day.day.maxtemp_c)}°C / ${Math.round(day.day.mintemp_c)}°C`,
     `${day.day.daily_chance_of_rain}%`,
     `${Math.round(day.day.maxwind_mph)} mph`,
     `${day.day.avghumidity}%`,
@@ -116,8 +116,8 @@ function DayDetails({ day, isToday }) {
       <img src={formatConditionIcon(hour.condition.icon)} alt={hour.condition.text} className="w-6 h-6" />
       <span className="text-sm">{hour.condition.text}</span>
     </div>,
-    `${Math.round(hour.temp_f)}°F`,
-    `${Math.round(hour.feelslike_f)}°F`,
+    `${Math.round(hour.temp_c)}°C`,
+    `${Math.round(hour.feelslike_c)}°C`,
     `${Math.round(hour.wind_mph)} mph ${hour.wind_dir}`,
     `${hour.humidity}%`,
   ]);
