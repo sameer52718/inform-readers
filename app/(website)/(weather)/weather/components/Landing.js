@@ -1,7 +1,9 @@
+"use client"
 import { Search } from "lucide-react";
 import Link from "next/link";
 import LocationWeather from "@/components/weather/LocationWeather";
-
+import { weatherCities } from "@/constant/cities";
+import { useState } from "react";
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-100">
@@ -58,24 +60,65 @@ export default function HomePage() {
 }
 
 function SearchForm() {
+  const [query, setQuery] = useState("");
+  const [filtered, setFiltered] = useState([]);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (value.length > 1) {
+      const results = weatherCities.filter((city) =>
+        city.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setFiltered(results.slice(0, 8)); // show max 8 suggestions
+    } else {
+      setFiltered([]);
+    }
+  };
+
   return (
-    <form action="/weather/search" method="get" className="flex gap-2">
-      <div className="relative flex-1">
-        <input
-          type="text"
-          name="q"
-          placeholder="Enter city, state, or ZIP code"
-          className="w-full pl-10 pr-4 py-2 border border-gray-400 rounded-sm focus:outline-none focus:border-red-500"
-          required
-        />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+    <form action="/weather/search" method="get" className="relative w-full ">
+      <div className="flex gap-2">
+        <div className="relative flex-1">
+          <input
+            type="text"
+            name="q"
+            value={query}
+            onChange={handleChange}
+            placeholder="Enter city, state, or ZIP code"
+            className="w-full pl-10 pr-4 py-2 border border-gray-400 rounded-sm focus:outline-none focus:border-red-500"
+            autoComplete="off"
+            required
+          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+
+          {/* Suggestions dropdown */}
+          {filtered.length > 0 && (
+            <ul className="absolute z-10 bg-white border border-gray-300 w-full rounded-sm mt-1 max-h-60 overflow-y-auto shadow-md">
+              {filtered.map((city, index) => (
+                <li
+                  key={index}
+                  className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => {
+                    setQuery(city.name);
+                    setFiltered([]);
+                  }}
+                >
+                  {city.name}, {city.country}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="px-6 py-2 bg-red-600 text-white rounded-sm hover:bg-red-700 focus:outline-none focus:bg-red-700"
+        >
+          Search
+        </button>
       </div>
-      <button
-        type="submit"
-        className="px-6 py-2 bg-red-600 text-white rounded-sm hover:bg-red-700 focus:outline-none focus:bg-red-700"
-      >
-        Search
-      </button>
     </form>
   );
 }
