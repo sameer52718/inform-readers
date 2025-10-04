@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import usePaginate from "@/hooks/usePaginate";
 import ConfirmationDialog from "@/components/shared/ConfirmationDialog";
 import useConfirmationDialog from "@/hooks/useConfirmationDialog";
+import { useRouter } from "next/navigation";
 
 const COLUMNS = [
   {
@@ -34,7 +35,21 @@ const COLUMNS = [
     Header: "price",
     accessor: "price",
     Cell: (row) => {
-      return <span>{`${row?.cell?.value} ${row.cell.row.original.priceSymbal}`}</span>;
+      return <span>{`${row?.cell?.value}`}</span>;
+    },
+  },
+  {
+    Header: "category",
+    accessor: "categoryId.name",
+    Cell: (row) => {
+      return <span>{`${row?.cell?.value}`}</span>;
+    },
+  },
+  {
+    Header: "SubCategory",
+    accessor: "subCategoryId.name",
+    Cell: (row) => {
+      return <span>{`${row?.cell?.value}`}</span>;
     },
   },
   {
@@ -67,6 +82,7 @@ const COLUMNS = [
 ];
 
 const UserPage = () => {
+  const router = useRouter();
   const columns = useMemo(() => COLUMNS, []);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -149,6 +165,11 @@ const UserPage = () => {
                   title="Delete"
                   icon={"mdi:delete-outline"}
                   onClick={() => openDialog(() => handleDelete(row.original._id))}
+                />
+                <ActionButton
+                  title="Edit"
+                  icon={"uil:edit"}
+                  onClick={() => router.push(`/admin/specification/${row.original._id}/edit`)}
                 />
               </div>
             );
