@@ -1,30 +1,78 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { couponCategories, deals } from "@/constant/data";
-import { useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axiosInstance";
+import Link from "next/link";
 
 export default function CouponsPage() {
-  const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState("All Deals");
   const [searchQuery, setSearchQuery] = useState("");
   const [copiedCode, setCopiedCode] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [coupons, setCoupons] = useState([]);
+  const [offers, setOffers] = useState([]);
+  const [merchants, setMerchants] = useState([]);
 
-  const filteredDeals = deals.filter((deal) => {
-    const matchesCategory = selectedCategory === "All Deals" || deal.category === selectedCategory;
-    const matchesSearch =
-      deal.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      deal.store.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  useEffect(() => {
+    let isMounted = true;
+    async function load() {
+      try {
+        setLoading(true);
+        setError(null);
+        const { data } = await axiosInstance("/website/coupon/get/home");
+        if (!data.error) {
+          setCoupons(Array.isArray(data.coupons) ? data.coupons : []);
+          setOffers(Array.isArray(data.offers) ? data.offers : []);
+          setMerchants(Array.isArray(data.merchants) ? data.merchants : []);
+        }
+      } catch (err) {
+        if (isMounted) setError(err.message || "Something went wrong");
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+    load();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const copyCode = (code) => {
+    if (!code) return;
     navigator.clipboard.writeText(code);
     setCopiedCode(code);
     setTimeout(() => setCopiedCode(null), 2000);
   };
+
+  const FALLBACK_IMAGE = "/website/assets/images/fallback/news2.png";
+
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filteredCoupons = coupons.filter((c) => {
+    if (!normalizedQuery) return true;
+    return (
+      (c.offerdescription || "").toLowerCase().includes(normalizedQuery) ||
+      (c.advertisername || "").toLowerCase().includes(normalizedQuery) ||
+      (c.couponcode || "").toLowerCase().includes(normalizedQuery)
+    );
+  });
+  const filteredOffers = offers.filter((o) => {
+    if (!normalizedQuery) return true;
+    return (
+      (o.name || "").toLowerCase().includes(normalizedQuery) ||
+      ((o.advertiser && o.advertiser.name) || "").toLowerCase().includes(normalizedQuery) ||
+      (o.type || "").toLowerCase().includes(normalizedQuery)
+    );
+  });
+  const filteredMerchants = merchants.filter((m) => {
+    if (!normalizedQuery) return true;
+    return (
+      (m.name || "").toLowerCase().includes(normalizedQuery) ||
+      (m.description || "").toLowerCase().includes(normalizedQuery) ||
+      ((m.contact && m.contact.country) || "").toLowerCase().includes(normalizedQuery)
+    );
+  });
 
   return (
     <main className="min-h-screen bg-neutral-50">
@@ -57,124 +105,188 @@ export default function CouponsPage() {
         </div>
       </div>
 
-      {/* Categories */}
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
-          {couponCategories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
-                selectedCategory === category
-                  ? "bg-red-600 text-white"
-                  : "bg-white text-neutral-700 hover:bg-neutral-100"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+        {loading && <div className="text-center text-neutral-600">Loading...</div>}
+        {error && <div className="text-center text-red-600">{error}</div>}
 
-          <button
-            onClick={() => router.push("/coupons/categories")}
-            className="px-6 py-2 rounded-full text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
-          >
-            View More
-          </button>
-        </div>
-
-        {/* Featured Deals */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Featured Deals</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredDeals
-              .filter((deal) => deal.featured)
-              .map((deal) => (
-                <motion.div
-                  key={deal.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+        {!loading && !error && (
+          <>
+            {/* Coupons */}
+            <div className="mb-12">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold">Coupons</h2>
+                <a
+                  href="/coupons/categories"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
                 >
-                  <div className="relative h-48">
-                    <Image src={deal.image} alt={deal.title} fill className="object-cover" />
-                    {deal.verified && (
-                      <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                        Verified
+                  View More
+                </a>
+              </div>
+              {filteredCoupons.length === 0 ? (
+                <div className="text-neutral-600">No coupons found.</div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredCoupons.map((c) => (
+                    <motion.div
+                      key={c._id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white rounded-xl shadow-sm overflow-hidden"
+                    >
+                      <div className="relative h-40">
+                        <Image
+                          src={FALLBACK_IMAGE}
+                          alt={c.offerdescription || "Coupon"}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                    )}
-                    <div className="absolute top-4 right-4 bg-white/90 text-neutral-900 text-xs px-2 py-1 rounded-full">
-                      Expires {new Date(deal.expiryDate).toLocaleDateString()}
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="text-sm text-red-600 font-medium mb-2">{deal.store}</div>
-                    <h3 className="text-xl font-semibold mb-3">{deal.title}</h3>
-                    <p className="text-neutral-600 text-sm mb-4">{deal.description}</p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-neutral-500">
-                        <span>{deal.usedCount} used</span>
+                      <div className="p-6">
+                        <div className="text-sm text-red-600 font-medium mb-2">{c.advertisername}</div>
+                        <h3 className="text-lg font-semibold mb-2">{c.offerdescription}</h3>
+                        <p className="text-neutral-500 text-sm mb-4">
+                          {c.offerstartdate ? new Date(c.offerstartdate).toLocaleDateString() : ""} - {""}
+                          {c.offerenddate ? new Date(c.offerenddate).toLocaleDateString() : ""}
+                        </p>
+                        <div className="flex items-center justify-between gap-2">
+                          {c.couponcode ? (
+                            <button
+                              onClick={() => copyCode(c.couponcode)}
+                              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                            >
+                              {copiedCode === c.couponcode ? "Copied!" : c.couponcode}
+                            </button>
+                          ) : (
+                            <span className="text-sm text-neutral-500">No code needed</span>
+                          )}
+                          {c.clickurl && (
+                            <a
+                              href={c.clickurl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+                            >
+                              View More
+                            </a>
+                          )}
+                        </div>
                       </div>
-                      <button
-                        onClick={() => copyCode(deal.code)}
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-                      >
-                        {copiedCode === deal.code ? "Copied!" : deal.code}
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-          </div>
-        </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
 
-        {/* All Deals */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6">All Deals</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredDeals
-              .filter((deal) => !deal.featured)
-              .map((deal) => (
-                <motion.div
-                  key={deal.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+            {/* Offers */}
+            <div className="mb-12">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold">Offers</h2>
+                <Link
+                  href="/coupons/offers"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
                 >
-                  <div className="relative h-48">
-                    <Image src={deal.image} alt={deal.title} fill className="object-cover" />
-                    {deal.verified && (
-                      <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                        Verified
+                  View More
+                </Link>
+              </div>
+              {filteredOffers.length === 0 ? (
+                <div className="text-neutral-600">No offers found.</div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredOffers.map((o) => (
+                    <motion.div
+                      key={o._id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white rounded-xl shadow-sm overflow-hidden"
+                    >
+                      <div className="relative h-40">
+                        <Image src={FALLBACK_IMAGE} alt={o.name || "Offer"} fill className="object-cover" />
                       </div>
-                    )}
-                    <div className="absolute top-4 right-4 bg-white/90 text-neutral-900 text-xs px-2 py-1 rounded-full">
-                      Expires {new Date(deal.expiryDate).toLocaleDateString()}
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="text-sm text-red-600 font-medium mb-2">{deal.store}</div>
-                    <h3 className="text-xl font-semibold mb-3">{deal.title}</h3>
-                    <p className="text-neutral-600 text-sm mb-4">{deal.description}</p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-neutral-500">
-                        <span>{deal.usedCount} used</span>
+                      <div className="p-6">
+                        <div className="text-sm text-red-600 font-medium mb-2">{o.advertiser?.name}</div>
+                        <h3 className="text-lg font-semibold mb-2">{o.name}</h3>
+                        <p className="text-neutral-500 text-sm mb-4">
+                          {o.type} • {o.offer_number}
+                        </p>
+                        <p className="text-neutral-500 text-sm mb-4">
+                          {o.start_datetime ? new Date(o.start_datetime).toLocaleDateString() : ""} - {""}
+                          {o.end_datetime ? new Date(o.end_datetime).toLocaleDateString() : ""}
+                        </p>
+                        <div className="flex items-center justify-end">
+                          <a
+                            href={`https://rakutenadvertising.com/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+                          >
+                            View More
+                          </a>
+                        </div>
                       </div>
-                      <button
-                        onClick={() => copyCode(deal.code)}
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-                      >
-                        {copiedCode === deal.code ? "Copied!" : deal.code}
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-          </div>
-        </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Merchants */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold">Merchants</h2>
+                <Link
+                  href="/coupons/store"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+                >
+                  View More
+                </Link>
+              </div>
+              {filteredMerchants.length === 0 ? (
+                <div className="text-neutral-600">No merchants found.</div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredMerchants.map((m) => (
+                    <motion.div
+                      key={m._id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white rounded-xl shadow-sm overflow-hidden"
+                    >
+                      <div className="relative h-40">
+                        <Image
+                          src={FALLBACK_IMAGE}
+                          alt={m.name || "Merchant"}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <div className="text-sm text-red-600 font-medium mb-2">
+                          {m.contact?.country || ""}
+                        </div>
+                        <h3 className="text-lg font-semibold mb-2">{m.name}</h3>
+                        {m.description && (
+                          <p className="text-neutral-600 text-sm mb-4 line-clamp-3">{m.description}</p>
+                        )}
+                        <div className="flex items-center justify-end">
+                          {m.url && (
+                            <a
+                              href={m.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+                            >
+                              Visit Store
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </main>
   );
