@@ -116,7 +116,7 @@ export default function CouponsPage() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold">Coupons</h2>
                 <a
-                  href="/coupons/categories"
+                  href="/coupons/list"
                   className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
                 >
                   View More
