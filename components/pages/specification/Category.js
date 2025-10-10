@@ -96,6 +96,107 @@ const SpecificationCard = ({ product, category }) => {
 
 function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, categoryName }) {
   const [brand, setBrand] = useState([]);
+  const [expandedGroups, setExpandedGroups] = useState({});
+
+
+  // Normalize category names from API to filter groups
+  const effectiveCategory = React.useMemo(() => {
+    const raw = (categoryName || "").toLowerCase();
+    if (!raw) return "";
+    if (
+      raw.includes("mobile") ||
+      raw.includes("tablet") ||
+      raw.includes("ipad") ||
+      raw.includes("mvobiles")
+    ) {
+      return "Mobiles & Tablets";
+    }
+    if (raw.includes("laptop") || raw.includes("computer")) {
+      return "Laptops & Computers";
+    }
+    if (raw.includes("camera")) {
+      return "Cameras & Drones";
+    }
+    if (raw.includes("game") || raw.includes("console")) {
+      return "Gaming";
+    }
+    if (raw.includes("tv") || raw.includes("entertainment") || raw.includes("projector")) {
+      return "TVs & Home Entertainment";
+    }
+    if (raw.includes("printer") || raw.includes("office")) {
+      return "Printers & Office Equipment";
+    }
+    if (raw.includes("appliance") || raw.includes("home & kitchen")) {
+      return "Home & Kitchen Appliances";
+    }
+    // Accessories and others can be extended as needed
+    if (
+      raw.includes("airpods") ||
+      raw.includes("watch") ||
+      raw.includes("smart watch") ||
+      raw.includes("accessor")
+    ) {
+      return "Accessories";
+    }
+    return categoryName;
+  }, [categoryName]);
+
+  const isMobiles =
+    effectiveCategory === "Mobiles & Tablets" ||
+    effectiveCategory === "Mobiles" ||
+    effectiveCategory === "Tablets";
+  const isLaptops = effectiveCategory === "Laptops & Computers";
+  const isCameras = effectiveCategory === "Cameras & Drones";
+  const isTVs = effectiveCategory === "TVs & Home Entertainment";
+  const isGaming = effectiveCategory === "Gaming";
+  const isPrinters = effectiveCategory === "Printers & Office Equipment";
+  const isHomeAppliances = effectiveCategory === "Home & Kitchen Appliances";
+
+
+  const CheckboxGroup = ({
+    title,
+    items,
+    groupKey,
+    isItemChecked,
+    onToggleItem,
+    renderItemLabel = (item) => item,
+    getItemValue = (item) => item,
+    maxVisible = 10,
+  }) => {
+    const isExpanded = !!expandedGroups[groupKey];
+    const showToggle = items.length > maxVisible;
+    const visibleItems = isExpanded ? items : items.slice(0, maxVisible);
+
+    return (
+      <div>
+        <h3 className="text-sm font-medium text-gray-800">{title}</h3>
+        {visibleItems.map((item) => {
+          const value = getItemValue(item);
+          return (
+            <label key={value} className="block text-sm">
+              <input
+                type="checkbox"
+                value={value}
+                checked={isItemChecked(value)}
+                onChange={() => onToggleItem(value)}
+                className="mr-2"
+              />
+              {renderItemLabel(item)}
+            </label>
+          );
+        })}
+        {showToggle && (
+          <button
+            type="button"
+            onClick={() => setExpandedGroups((prev) => ({ ...prev, [groupKey]: !isExpanded }))}
+            className="mt-2 text-xs text-red-600 hover:underline"
+          >
+            {isExpanded ? "See less" : `See more (${items.length - visibleItems.length} more)`}
+          </button>
+        )}
+      </div>
+    );
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -125,22 +226,17 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
             </button>
           </div>
           <div className="space-y-6">
-            {/* Brand Filter */}
-            <div>
-              <h3 className="text-sm font-medium text-gray-800">Brand</h3>
-              {brand.map((item) => (
-                <label key={item._id} className="block text-sm">
-                  <input
-                    type="checkbox"
-                    value={item.name}
-                    checked={filters.brand.includes(item.name)}
-                    onChange={() => handleFilterChange("brand", item.name)}
-                    className="mr-2"
-                  />
-                  {item.name}
-                </label>
-              ))}
-            </div>
+            {/* Brand Filter with See More */}
+            <CheckboxGroup
+              title="Brand"
+              items={brand}
+              groupKey="brand"
+              isItemChecked={(val) => filters.brand.includes(val)}
+              onToggleItem={(val) => handleFilterChange("brand", val)}
+              renderItemLabel={(item) => item.name}
+              getItemValue={(item) => item._id || item.name}
+              maxVisible={10}
+            />
             {/* Price Range Filter */}
             <div>
               <h3 className="text-sm font-medium text-gray-800">Price Range</h3>
@@ -196,38 +292,24 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
               ))}
             </div>
             {/* Category-Specific Filters */}
-            {categoryName === "Mobiles & Tablets" && (
+            {isMobiles && (
               <>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">RAM</h3>
-                  {["2GB", "3GB", "4GB", "6GB", "8GB", "12GB", "16GB"].map((ram) => (
-                    <label key={ram} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={ram}
-                        checked={filters.ram.includes(ram)}
-                        onChange={() => handleFilterChange("ram", ram)}
-                        className="mr-2"
-                      />
-                      {ram}
-                    </label>
-                  ))}
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Storage</h3>
-                  {["16GB", "32GB", "64GB", "128GB", "256GB", "512GB", "1TB"].map((storage) => (
-                    <label key={storage} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={storage}
-                        checked={filters.storage.includes(storage)}
-                        onChange={() => handleFilterChange("storage", storage)}
-                        className="mr-2"
-                      />
-                      {storage}
-                    </label>
-                  ))}
-                </div>
+                <CheckboxGroup
+                  title="RAM"
+                  items={["2GB", "3GB", "4GB", "6GB", "8GB", "12GB", "16GB"]}
+                  groupKey="mobiles_ram"
+                  isItemChecked={(v) => filters.ram.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("ram", v)}
+                  maxVisible={6}
+                />
+                <CheckboxGroup
+                  title="Storage"
+                  items={["16GB", "32GB", "64GB", "128GB", "256GB", "512GB", "1TB"]}
+                  groupKey="mobiles_storage"
+                  isItemChecked={(v) => filters.storage.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("storage", v)}
+                  maxVisible={6}
+                />
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Camera</h3>
                   {["12MP", "48MP", "50MP", "108MP", "200MP"].map((camera) => (
@@ -343,30 +425,21 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                     </label>
                   ))}
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Features</h3>
-                  {["Fingerprint Sensor", "Face Unlock", "PTA Approved", "Dual SIM", "Waterproof"].map(
-                    (feat) => (
-                      <label key={feat} className="block text-sm">
-                        <input
-                          type="checkbox"
-                          value={feat}
-                          checked={filters.features.includes(feat)}
-                          onChange={() => handleFilterChange("features", feat)}
-                          className="mr-2"
-                        />
-                        {feat}
-                      </label>
-                    )
-                  )}
-                </div>
+                <CheckboxGroup
+                  title="Features"
+                  items={["Fingerprint Sensor", "Face Unlock", "PTA Approved", "Dual SIM", "Waterproof"]}
+                  groupKey="mobiles_features"
+                  isItemChecked={(v) => filters.features.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("features", v)}
+                  maxVisible={4}
+                />
               </>
             )}
-            {categoryName === "Laptops & Computers" && (
+            {isLaptops && (
               <>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Processor</h3>
-                  {[
+                <CheckboxGroup
+                  title="Processor"
+                  items={[
                     "Intel Core i3",
                     "Intel Core i5",
                     "Intel Core i7",
@@ -377,19 +450,12 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                     "AMD Ryzen 9",
                     "Apple M1",
                     "Apple M2",
-                  ].map((proc) => (
-                    <label key={proc} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={proc}
-                        checked={filters.processor.includes(proc)}
-                        onChange={() => handleFilterChange("processor", proc)}
-                        className="mr-2"
-                      />
-                      {proc}
-                    </label>
-                  ))}
-                </div>
+                  ]}
+                  groupKey="laptops_processor"
+                  isItemChecked={(v) => filters.processor.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("processor", v)}
+                  maxVisible={6}
+                />
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">RAM</h3>
                   {["4GB", "8GB", "16GB", "32GB", "64GB"].map((ram) => (
@@ -405,71 +471,45 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                     </label>
                   ))}
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Storage Type</h3>
-                  {["HDD", "SSD", "Hybrid"].map((type) => (
-                    <label key={type} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={type}
-                        checked={filters.storageType.includes(type)}
-                        onChange={() => handleFilterChange("storageType", type)}
-                        className="mr-2"
-                      />
-                      {type}
-                    </label>
-                  ))}
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Storage Capacity</h3>
-                  {["128GB", "256GB", "512GB", "1TB", "2TB"].map((storage) => (
-                    <label key={storage} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={storage}
-                        checked={filters.storage.includes(storage)}
-                        onChange={() => handleFilterChange("storage", storage)}
-                        className="mr-2"
-                      />
-                      {storage}
-                    </label>
-                  ))}
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Screen Size</h3>
-                  {[
+                <CheckboxGroup
+                  title="Storage Type"
+                  items={["HDD", "SSD", "Hybrid"]}
+                  groupKey="laptops_storage_type"
+                  isItemChecked={(v) => filters.storageType.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("storageType", v)}
+                  maxVisible={3}
+                />
+                <CheckboxGroup
+                  title="Storage Capacity"
+                  items={["128GB", "256GB", "512GB", "1TB", "2TB"]}
+                  groupKey="laptops_storage_capacity"
+                  isItemChecked={(v) => filters.storage.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("storage", v)}
+                  maxVisible={4}
+                />
+                <CheckboxGroup
+                  title="Screen Size"
+                  items={[
                     { value: "0-13", label: "Under 13 inches" },
                     { value: "13-14", label: "13-14 inches" },
                     { value: "15-16", label: "15-16 inches" },
                     { value: "16-", label: "Above 16 inches" },
-                  ].map(({ value, label }) => (
-                    <label key={value} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={value}
-                        checked={filters.screenSize.includes(value)}
-                        onChange={() => handleFilterChange("screenSize", value)}
-                        className="mr-2"
-                      />
-                      {label}
-                    </label>
-                  ))}
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-800">Graphics Card</h3>
-                  {["Integrated", "NVIDIA GeForce", "AMD Radeon"].map((card) => (
-                    <label key={card} className="block text-sm">
-                      <input
-                        type="checkbox"
-                        value={card}
-                        checked={filters.graphicsCard.includes(card)}
-                        onChange={() => handleFilterChange("graphicsCard", card)}
-                        className="mr-2"
-                      />
-                      {card}
-                    </label>
-                  ))}
-                </div>
+                  ]}
+                  groupKey="laptops_screen_size"
+                  isItemChecked={(v) => filters.screenSize.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("screenSize", v)}
+                  renderItemLabel={(item) => item.label}
+                  getItemValue={(item) => item.value}
+                  maxVisible={4}
+                />
+                <CheckboxGroup
+                  title="Graphics Card"
+                  items={["Integrated", "NVIDIA GeForce", "AMD Radeon"]}
+                  groupKey="laptops_graphics"
+                  isItemChecked={(v) => filters.graphicsCard.includes(v)}
+                  onToggleItem={(v) => handleFilterChange("graphicsCard", v)}
+                  maxVisible={3}
+                />
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Operating System</h3>
                   {["Windows", "macOS", "Linux"].map((os) => (
@@ -517,7 +557,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                 </div>
               </>
             )}
-            {categoryName === "Cameras & Drones" && (
+            {isCameras && (
               <>
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Camera Type</h3>
@@ -616,7 +656,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                 </div>
               </>
             )}
-            {categoryName === "TVs & Home Entertainment" && (
+            {isTVs && (
               <>
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Screen Size</h3>
@@ -700,7 +740,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                 </div>
               </>
             )}
-            {categoryName === "Gaming" && (
+            {isGaming && (
               <>
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Console Type</h3>
@@ -749,7 +789,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                 </div>
               </>
             )}
-            {categoryName === "Printers & Office Equipment" && (
+            {isPrinters && (
               <>
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Printer Type</h3>
@@ -798,7 +838,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
                 </div>
               </>
             )}
-            {categoryName === "Home & Kitchen Appliances" && (
+            {isHomeAppliances && (
               <>
                 <div>
                   <h3 className="text-sm font-medium text-gray-800">Appliance Type</h3>
@@ -858,7 +898,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
 
 function SpecificationCategory() {
   const [fetching, setFetching] = useState(false);
-  const [activeTab, setActiveTab] = useState("popularity");
+  const [activeTab, setActiveTab] = useState("");
   const { category } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -1028,6 +1068,8 @@ function SpecificationCategory() {
   const toggleFilter = () => {
     setIsFilterOpen((prev) => !prev);
   };
+
+  
 
   return (
     <section className="container mx-auto px-4">
