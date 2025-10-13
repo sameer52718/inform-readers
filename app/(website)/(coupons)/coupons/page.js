@@ -14,6 +14,7 @@ export default function CouponsPage() {
   const [coupons, setCoupons] = useState([]);
   const [offers, setOffers] = useState([]);
   const [merchants, setMerchants] = useState([]);
+  const [advertisements, setAdvertisements] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -26,6 +27,7 @@ export default function CouponsPage() {
           setCoupons(Array.isArray(data.coupons) ? data.coupons : []);
           setOffers(Array.isArray(data.offers) ? data.offers : []);
           setMerchants(Array.isArray(data.merchants) ? data.merchants : []);
+          setAdvertisements(Array.isArray(data.advertisements) ? data.advertisements : []);
         }
       } catch (err) {
         if (isMounted) setError(err.message || "Something went wrong");
@@ -176,7 +178,6 @@ export default function CouponsPage() {
                 </div>
               )}
             </div>
-
             {/* Offers */}
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
@@ -228,7 +229,6 @@ export default function CouponsPage() {
                 </div>
               )}
             </div>
-
             {/* Merchants */}
             <div className="mb-4">
               <div className="flex items-center justify-between mb-6">
@@ -284,6 +284,88 @@ export default function CouponsPage() {
                   ))}
                 </div>
               )}
+            </div>
+            {/* Advertisements */}
+            <div className="mb-12">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold">Featured Advertisements</h2>
+                <Link
+                  href="/coupons/advertisements"
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+                >
+                  View More
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {advertisements.map((ad) => (
+                  <motion.div
+                    key={ad._id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white rounded-xl shadow-sm overflow-hidden border"
+                  >
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-lg font-semibold mb-2">{ad.advertiserName}</h3>
+                          <div className="text-sm text-red-600 font-medium">
+                            {ad.primaryCategory?.parent} • {ad.primaryCategory?.child}
+                          </div>
+                        </div>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            ad.accountStatus === "Active"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
+                          }`}
+                        >
+                          {ad.accountStatus}
+                        </span>
+                      </div>
+
+
+                      <div className="text-sm text-gray-600 mb-4">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span>Network Rank:</span>
+                          <span className="font-medium">{ad.networkRank || "N/A"}</span>
+                        </div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span>7 Day EPC:</span>
+                          <span className="font-medium">${ad.sevenDayEpc}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span>3 Month EPC:</span>
+                          <span className="font-medium">${ad.threeMonthEpc}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between items-center mt-4">
+                        <div className="flex gap-2">
+                          {ad.mobileTrackingCertified && (
+                            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                              Mobile Certified
+                            </span>
+                          )}
+                          {ad.cookielessTrackingEnabled && (
+                            <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                              Cookieless
+                            </span>
+                          )}
+                        </div>
+                        <a
+                          href={ad.programUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-2 rounded-lg text-sm font-medium bg-red-800 text-white hover:bg-red-700"
+                        >
+                          Visit Store
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </>
         )}
