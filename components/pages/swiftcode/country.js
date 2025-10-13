@@ -10,8 +10,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-
-
 export default function BankCountryListing() {
   const { t } = useTranslation(); // Empty namespace as instructed
   const [data, setData] = useState([]);
@@ -173,7 +171,20 @@ export default function BankCountryListing() {
             <p className="mt-4 text-lg text-red-100">{t("swiftcode.featuresDescription")}</p>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {t("swiftcode.features", { returnObjects: true }).map((feature, index) => (
+            {[
+              {
+                title: "Comprehensive Coverage",
+                description: "Access SWIFT codes for banks across multiple countries and territories.",
+              },
+              {
+                title: "Always Updated",
+                description: "Our database is regularly updated to ensure accuracy and reliability.",
+              },
+              {
+                title: "Easy Navigation",
+                description: "Find the SWIFT code you need quickly with our intuitive interface.",
+              },
+            ].map((feature, index) => (
               <div key={index} className="rounded-xl bg-white/10 p-6 text-center backdrop-blur-lg">
                 <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
                 <p className="mt-2 text-red-100">{feature.description}</p>
