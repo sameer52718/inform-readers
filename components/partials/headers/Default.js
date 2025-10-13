@@ -1,23 +1,22 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { userTypes } from '@/constant/data';
-import { useTranslation } from 'react-i18next';
-import { allLanguages, languageNames, rtlLanguages } from '@/constant/languages';
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { useSelector } from "react-redux";
+import { userTypes } from "@/constant/data";
+import { useTranslation } from "react-i18next";
+import { allLanguages, languageNames, rtlLanguages } from "@/constant/languages";
 
-
-function LanguageSelect({ color }) {
+function LanguageSelect() {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    document.documentElement.dir = rtlLanguages.includes(lng) ? 'rtl' : 'ltr';
+    document.documentElement.dir = rtlLanguages.includes(lng) ? "rtl" : "ltr";
     setIsOpen(false);
   };
 
@@ -43,8 +42,8 @@ function LanguageSelect({ color }) {
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span>{languageNames[i18n.language] || 'English'}</span>
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span>{languageNames[i18n.language] || "English"}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
 
       {isOpen && (
@@ -53,8 +52,9 @@ function LanguageSelect({ color }) {
             <button
               key={lang}
               onClick={() => changeLanguage(lang)}
-              className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors ${i18n.language === lang ? `bg-red-50 text-red-600` : ''
-                }`}
+              className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors ${
+                i18n.language === lang ? `bg-red-50 text-red-600` : ""
+              }`}
             >
               {languageNames[lang]}
             </button>
@@ -65,47 +65,45 @@ function LanguageSelect({ color }) {
   );
 }
 
-
 function Header() {
   const { t } = useTranslation();
-  const { color, logo } = useSelector((state) => state.config);
   const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState({});
 
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  const currentDate = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 
   const categories = [
-    { id: 1, title: t('header.categories.names'), url: '/names' },
-    { id: 2, title: t('header.categories.postalcode'), url: '/postalcode' },
-    { id: 3, title: t('header.categories.swiftcode'), url: '/swiftcode' },
-    { id: 4, title: t('header.categories.software'), url: '/software' },
-    { id: 5, title: t('header.categories.specification'), url: '/specification' },
-    { id: 7, title: t('header.categories.biography'), url: '/biography' },
+    { id: 1, title: t("header.categories.names"), url: "/names" },
+    { id: 2, title: t("header.categories.postalcode"), url: "/postalcode" },
+    { id: 3, title: t("header.categories.swiftcode"), url: "/swiftcode" },
+    { id: 4, title: t("header.categories.software"), url: "/software" },
+    { id: 5, title: t("header.categories.specification"), url: "/specification" },
+    { id: 7, title: t("header.categories.biography"), url: "/biography" },
     {
       id: 9,
-      title: t('header.categories.more'),
+      title: t("header.categories.more"),
       sublinks: [
-        { id: 7, title: t('header.categories.weather'), url: '/weather' },
-        { id: 8, title: t('header.categories.news'), url: '/news' },
-        { id: 10, title: t('header.categories.forex'), url: '/forex' },
-        { id: 11, title: t('header.categories.metals'), url: '/metals' },
-        { id: 16, title: t('header.categories.crypto'), url: '/crypto' },
-        { id: 12, title: t('header.categories.cars'), url: '/cars' },
-        { id: 13, title: t('header.categories.bikes'), url: '/bikes' },
-        { id: 14, title: t('header.categories.tools'), url: '/tools' },
-        { id: 15, title: t('header.categories.videoDownloader'), url: '/video-downloader' },
-        { id: 19, title: t('header.categories.coupons'), url: '/coupons' },
-        { id: 17, title: t('header.categories.jobs'), url: '/jobs' },
-        { id: 18, title: t('header.categories.realstate'), url: '/realstate' },
-        { id: 20, title: t('header.categories.blogs'), url: '/blogs' },
-        { id: 21, title: t('header.categories.timeDate'), url: '/time-and-date' },
-        { id: 22, title: t('header.categories.sports'), url: '/sports' },
+        { id: 7, title: t("header.categories.weather"), url: "/weather" },
+        { id: 8, title: t("header.categories.news"), url: "/news" },
+        { id: 10, title: t("header.categories.forex"), url: "/forex" },
+        { id: 11, title: t("header.categories.metals"), url: "/metals" },
+        { id: 16, title: t("header.categories.crypto"), url: "/crypto" },
+        { id: 12, title: t("header.categories.cars"), url: "/cars" },
+        { id: 13, title: t("header.categories.bikes"), url: "/bikes" },
+        { id: 14, title: t("header.categories.tools"), url: "/tools" },
+        { id: 15, title: t("header.categories.videoDownloader"), url: "/video-downloader" },
+        { id: 19, title: t("header.categories.coupons"), url: "/coupons" },
+        { id: 17, title: t("header.categories.jobs"), url: "/jobs" },
+        { id: 18, title: t("header.categories.realstate"), url: "/realstate" },
+        { id: 20, title: t("header.categories.blogs"), url: "/blogs" },
+        { id: 21, title: t("header.categories.timeDate"), url: "/time-and-date" },
+        { id: 22, title: t("header.categories.sports"), url: "/sports" },
       ],
     },
   ];
@@ -125,32 +123,26 @@ function Header() {
           <div className="flex justify-between items-center">
             <p className="text-sm hidden md:block text-gray-600">{currentDate}</p>
             <div className="flex items-center gap-4">
-              <LanguageSelect color={color} />
-              <Link
-                href="/about"
-                className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}
-              >
-                {t('header.about')}
+              <LanguageSelect />
+              <Link href="/about" className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}>
+                {t("header.about")}
               </Link>
-              <Link
-                href="/contact"
-                className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}
-              >
-                {t('header.contact')}
+              <Link href="/contact" className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}>
+                {t("header.contact")}
               </Link>
               {token && userType === userTypes.USER ? (
                 <Link
                   href="/dashboard"
                   className={`text-sm text-red-600 hover:text-red-700 font-medium transition-colors`}
                 >
-                  {t('header.myAccount')}
+                  {t("header.myAccount")}
                 </Link>
               ) : (
                 <Link
                   href="/signin"
                   className={`text-sm text-red-600 hover:text-red-700 font-medium transition-colors`}
                 >
-                  {t('header.signin')}
+                  {t("header.signin")}
                 </Link>
               )}
             </div>
@@ -161,13 +153,19 @@ function Header() {
       {/* Main Header */}
       <div className="container py-4 flex items-center justify-between">
         <Link href="/">
-          <Image src={logo} alt="Website Logo" width={200} height={80} className="h-[80px] w-auto" />
+          <Image
+            src={"/website/assets/images/logo/logo.png"}
+            alt="Website Logo"
+            width={200}
+            height={80}
+            className="h-[80px] w-auto"
+          />
         </Link>
 
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={`p-2 text-gray-600 hover:text-red-600 transition-colors md:hidden`}
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -189,18 +187,16 @@ function Header() {
                     <ChevronDown className="w-4 h-4" />
                   </button>
                 ) : (
-                  <Link
-                    href={category.url}
-                    className={`text-gray-700 hover:text-red-600 transition-colors`}
-                  >
+                  <Link href={category.url} className={`text-gray-700 hover:text-red-600 transition-colors`}>
                     {category.title}
                   </Link>
                 )}
 
                 {category.sublinks && (
                   <ul
-                    className={`absolute ${openDropdowns[category.id] || 'hidden group-hover:block'
-                      } bg-white shadow-dropdown rounded-lg py-2 w-48 z-50`}
+                    className={`absolute ${
+                      openDropdowns[category.id] || "hidden group-hover:block"
+                    } bg-white shadow-dropdown rounded-lg py-2 w-48 z-50`}
                   >
                     {category.sublinks.map((sublink) => (
                       <li key={sublink.id}>
@@ -237,8 +233,9 @@ function Header() {
                       >
                         {category.title}
                         <ChevronDown
-                          className={`w-4 h-4 transition-transform ${openDropdowns[category.id] ? 'rotate-180' : ''
-                            }`}
+                          className={`w-4 h-4 transition-transform ${
+                            openDropdowns[category.id] ? "rotate-180" : ""
+                          }`}
                         />
                       </button>
                       {openDropdowns[category.id] && (

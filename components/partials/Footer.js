@@ -23,7 +23,6 @@ import { useTranslation } from "react-i18next";
 
 export default function Footer() {
   const { t } = useTranslation();
-  const { color } = useSelector((state) => state.config);
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {

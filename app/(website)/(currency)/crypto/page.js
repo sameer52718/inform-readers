@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 
 const CryptoTable = ({ rates, currency }) => {
-  const { color } = useSelector((state) => state.config);
-
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -149,7 +147,6 @@ const fiatCurrencies = [
 ];
 
 function App() {
-  const { color } = useSelector((state) => state.config);
   const [isLoading, setIsLoading] = useState(true);
   const [currency, setCurrency] = useState("usd");
   const [rates, setRates] = useState([]);
@@ -294,13 +291,13 @@ function App() {
             <div className="flex items-center space-x-4">
               <Link
                 href="/news"
-                className="text-sm font-medium text-gray-600 hover:text-${color}-600 transition-colors duration-200"
+                className="text-sm font-medium text-gray-600 hover:text-red-600 transition-colors duration-200"
               >
                 News
               </Link>
               <Link
                 href="/exchange"
-                className="text-sm font-medium text-gray-600 hover:text-${color}-600 transition-colors duration-200"
+                className="text-sm font-medium text-gray-600 hover:text-red-600 transition-colors duration-200"
               >
                 Exchange
               </Link>
@@ -333,7 +330,7 @@ function App() {
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className={`pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-${color}-500 focus:border-${color}-500 transition-colors duration-200 min-w-[140px]`}
+                className={`pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 min-w-[140px]`}
               >
                 {fiatCurrencies.map((curr) => (
                   <option key={curr.code} value={curr.code}>
@@ -351,7 +348,7 @@ function App() {
                 placeholder="Search cryptocurrencies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className={`pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-${color}-500 focus:border-${color}-500 transition-colors duration-200 min-w-[240px]`}
+                className={`pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 min-w-[240px]`}
               />
             </div>
           </div>

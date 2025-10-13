@@ -9,7 +9,7 @@ import { userTypes } from "@/constant/data";
 import { useTranslation } from "react-i18next";
 import { allLanguages, languageNames, rtlLanguages } from "@/constant/languages";
 
-function LanguageSelect({ color }) {
+function LanguageSelect() {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -67,7 +67,6 @@ function LanguageSelect({ color }) {
 
 function Header() {
   const { t } = useTranslation();
-  const { color, logo } = useSelector((state) => state.config);
   const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState({});
@@ -124,17 +123,11 @@ function Header() {
           <div className="flex justify-between items-center">
             <p className="text-sm hidden md:block text-gray-600">{currentDate}</p>
             <div className="flex items-center gap-4">
-              <LanguageSelect color={color} />
-              <Link
-                href="/about"
-                className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}
-              >
+              <LanguageSelect />
+              <Link href="/about" className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}>
                 {t("header.about")}
               </Link>
-              <Link
-                href="/contact"
-                className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}
-              >
+              <Link href="/contact" className={`text-sm text-gray-600 hover:text-red-600 transition-colors`}>
                 {t("header.contact")}
               </Link>
               {token && userType === userTypes.USER ? (
@@ -160,7 +153,13 @@ function Header() {
       {/* Main Header */}
       <div className="container py-4 flex items-center justify-between">
         <Link href="/">
-          <Image src={logo} alt="Website Logo" width={200} height={80} className="h-[80px] w-auto" />
+          <Image
+            src={"/website/assets/images/logo/logo.png"}
+            alt="Website Logo"
+            width={200}
+            height={80}
+            className="h-[80px] w-auto"
+          />
         </Link>
 
         <button
@@ -188,10 +187,7 @@ function Header() {
                     <ChevronDown className="w-4 h-4" />
                   </button>
                 ) : (
-                  <Link
-                    href={category.url}
-                    className={`text-gray-700 hover:text-red-600 transition-colors`}
-                  >
+                  <Link href={category.url} className={`text-gray-700 hover:text-red-600 transition-colors`}>
                     {category.title}
                   </Link>
                 )}

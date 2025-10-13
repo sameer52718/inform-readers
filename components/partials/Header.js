@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import DefaultHeader from "./headers/Default";
 import NamesHeader from "./headers/Names";
