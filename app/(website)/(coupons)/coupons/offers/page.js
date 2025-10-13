@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, Suspense } from "react";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
 
 const FALLBACK_IMAGE = "/website/assets/images/fallback/news2.png";
 
-export default function OffersPage() {
+function Offers() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -171,8 +171,6 @@ export default function OffersPage() {
                 />
               </div>
 
-              
-
               <div className="grid grid-cols-1 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-1">Start From</label>
@@ -195,7 +193,6 @@ export default function OffersPage() {
               </div>
 
               <div className="grid grid-cols-1 gap-3">
-               
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-1">Per page</label>
                   <select
@@ -334,5 +331,13 @@ export default function OffersPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function OffersPage() {
+  return (
+    <Suspense>
+      <Offers />
+    </Suspense>
   );
 }

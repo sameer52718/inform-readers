@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, Suspense } from "react";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
 
 const FALLBACK_IMAGE = "/website/assets/images/fallback/news2.png";
 
-export default function CouponsListPage() {
+function CouponsList() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -360,5 +360,13 @@ export default function CouponsListPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function CouponsListPage() {
+  return (
+    <Suspense>
+      <CouponsList />
+    </Suspense>
   );
 }
