@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState, Suspense } from "react";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
+import Link from "next/link";
 
 const FALLBACK_IMAGE = "/website/assets/images/fallback/news2.png";
 
@@ -290,41 +291,28 @@ function CouponsList() {
                       <div key={c._id} className="bg-white rounded-xl shadow-sm overflow-hidden">
                         <div className="relative h-40">
                           <Image
-                            src={FALLBACK_IMAGE}
+                            src={c?.impressionpixel ?? FALLBACK_IMAGE}
                             alt={c.offerdescription || "Coupon"}
                             fill
                             className="object-cover"
+                            onError={(e) => (e.target.src = FALLBACK_IMAGE)}
                           />
                         </div>
                         <div className="p-5">
                           <div className="text-sm text-red-600 font-medium mb-1">{c.advertisername}</div>
-                          <h3 className="text-lg font-semibold mb-2">{c.offerdescription}</h3>
+                          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{c.offerdescription}</h3>
                           <p className="text-xs text-neutral-500 mb-2">{c.promotiontypes?.promotiontype}</p>
                           <p className="text-xs text-neutral-500 mb-3">
                             {c.offerstartdate ? new Date(c.offerstartdate).toLocaleDateString() : ""} - {""}
                             {c.offerenddate ? new Date(c.offerenddate).toLocaleDateString() : ""}
                           </p>
-                          <div className="flex items-center justify-between">
-                            {c.couponcode ? (
-                              <button
-                                onClick={() => copyCode(c.couponcode)}
-                                className="bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm"
-                              >
-                                {copiedCode === c.couponcode ? "Copied!" : c.couponcode}
-                              </button>
-                            ) : (
-                              <span className="text-xs text-neutral-500">No code needed</span>
-                            )}
-                            {c.clickurl && (
-                              <a
-                                href={c.clickurl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-3 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-gray-200"
-                              >
-                                View
-                              </a>
-                            )}
+                          <div className="flex items-center justify-end gap-2">
+                            <Link
+                              href={`/coupons/${c._id}`}
+                              className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-neutral-700 hover:bg-neutral-200"
+                            >
+                              View Code
+                            </Link>
                           </div>
                         </div>
                       </div>
