@@ -97,7 +97,7 @@ const SpecificationCard = ({ product, category }) => {
 function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, categoryName }) {
   const [brand, setBrand] = useState([]);
   const [expandedGroups, setExpandedGroups] = useState({});
-
+  const { category } = useParams();
 
   // Normalize category names from API to filter groups
   const effectiveCategory = React.useMemo(() => {
@@ -152,7 +152,6 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
   const isPrinters = effectiveCategory === "Printers & Office Equipment";
   const isHomeAppliances = effectiveCategory === "Home & Kitchen Appliances";
 
-
   const CheckboxGroup = ({
     title,
     items,
@@ -201,14 +200,16 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
   useEffect(() => {
     const getData = async () => {
       try {
-        const [brandRes] = await Promise.all([axiosInstance.get("/common/brand")]);
+        const [brandRes] = await Promise.all([
+          axiosInstance.get("/common/brand", { params: { category: category } }),
+        ]);
         setBrand(brandRes?.data?.brands || []);
       } catch (error) {
         handleError(error);
       }
     };
     getData();
-  }, []);
+  }, [category]);
 
   return (
     <AnimatePresence>
@@ -1068,8 +1069,6 @@ function SpecificationCategory() {
   const toggleFilter = () => {
     setIsFilterOpen((prev) => !prev);
   };
-
-  
 
   return (
     <section className="container mx-auto px-4">
