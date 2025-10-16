@@ -167,7 +167,7 @@ export function middleware(request) {
     const subdomainLang = supportedCountries[subdomain];
 
     // 🆕 First visit: Set cookie if missing
-    if (cookieLang !== subdomainLang) {
+    if (!cookieLang) {
       response.cookies.set('i18next', subdomainLang, {
         path: '/',
         maxAge: 60 * 60 * 24 * 365, // 1 year
