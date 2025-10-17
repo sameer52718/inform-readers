@@ -1,4 +1,3 @@
-
 "use client";
 import React from "react";
 import HeroSection from "@/components/pages/converters/metal/HeroSection";
@@ -6,6 +5,7 @@ import ConverterSection from "@/components/pages/converters/metal/ConverterSecti
 import MetalPricesSection from "@/components/pages/converters/metal/MetalPricesSection";
 import ConversionTable from "@/components/pages/converters/metal/ConversionTable";
 import { useMetalConverter } from "@/hooks/useMetalConverter";
+import InterlinkSection from "@/components/pages/converters/metal/InterlinkSection";
 
 function App() {
   const {
@@ -57,8 +57,8 @@ function App() {
         setMetalCurrency={setMetalCurrency}
         isLoading={isLoading}
       />
-
       <ConversionTable metalTable={metalTable} metalMetadata={metalMetadata} />
+      <InterlinkSection />
     </div>
   );
 }
