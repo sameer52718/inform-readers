@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { ArrowLeftRight } from "lucide-react";
 import axiosInstance from "@/lib/axiosInstance";
 
@@ -128,7 +129,59 @@ export default function CurrencyConverter() {
                 <section className="mb-8">
                   <ResultDisplay amount={amount} result={result} metadata={metadata} />
                 </section>
+                {/* 🔗 Interlink Section */}
+                <section className="my-10 border-t bg-white rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
+                  <h2 className="text-2xl font-semibold mb-4 text-gray-800">Explore More Conversions</h2>
 
+                  {/* Forex Pair Link */}
+                  <p className="text-gray-700 mb-4">
+                    View live exchange rate between{" "}
+                    <Link
+                      href={`/forex/${fromCurrency.toLowerCase()}-to-${toCurrency.toLowerCase()}`}
+                      className="text-red-600 hover:underline font-medium"
+                    >
+                      {fromCurrency} → {toCurrency}
+                    </Link>{" "}
+                    or explore related conversions.
+                  </p>
+
+                  {/* Country Info Links */}
+                  {metadata.from.country && metadata.to.country && (
+                    <div className="mb-6 space-x-4">
+                      <Link
+                        href={`/forex/${metadata.from.country.name.toLowerCase().replaceAll(" ", "-")}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        About {metadata.from.country.name}
+                      </Link>
+                      <span className="text-gray-400">|</span>
+                      <Link
+                        href={`/forex/${metadata.to.country.name.toLowerCase().replaceAll(" ", "-")}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        About {metadata.to.country.name}
+                      </Link>
+                    </div>
+                  )}
+
+                  {/* Random Suggestions */}
+                  <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                    {["usd-to-eur", "eur-to-gbp", "inr-to-usd", "aud-to-cad", "pkr-to-usd"]
+                      .filter((s) => s !== `${fromCurrency.toLowerCase()}-to-${toCurrency.toLowerCase()}`)
+                      .map((pair) => {
+                        const [from, , to] = pair.split("-");
+                        return (
+                          <Link
+                            key={pair}
+                            href={`/forex/rate/${pair}`}
+                            className="text-sm text-gray-700 hover:text-red-600 underline"
+                          >
+                            {from.toUpperCase()} → {to.toUpperCase()} Live Rate
+                          </Link>
+                        );
+                      })}
+                  </div>
+                </section>
                 {/* Currency Information */}
                 <section className="mb-8">
                   <CurrencyInfo metadata={metadata} />
