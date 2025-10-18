@@ -295,13 +295,13 @@ function App() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <Link
-                href="/news"
+                href="/crypto/news"
                 className="text-sm font-medium text-gray-600 hover:text-red-600 transition-colors duration-200"
               >
                 News
               </Link>
               <Link
-                href="/exchange"
+                href="/crypto/exchange"
                 className="text-sm font-medium text-gray-600 hover:text-red-600 transition-colors duration-200"
               >
                 Exchange
