@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { TrendingDown, Search, RefreshCw, TrendingUp, AlertCircle, Globe } from "lucide-react";
+import { TrendingDown, Search, RefreshCw, TrendingUp, AlertCircle, Globe, ArrowRight } from "lucide-react";
 import axios from "axios";
 import Loading from "@/components/ui/Loading";
-import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const CryptoTable = ({ rates, currency }) => {
+  const router = useRouter();
+
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -61,7 +63,10 @@ const CryptoTable = ({ rates, currency }) => {
               const isPositive = coin.price_change_24h >= 0;
               return (
                 <tr key={coin.id} className="hover:bg-gray-50/50 transition-colors duration-200">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => router.push(`/crypto/${coin.id}`)}
+                  >
                     <div className="flex items-center space-x-3">
                       <img src={coin.image} alt={coin.name} className="w-8 h-8" />
 
@@ -491,6 +496,16 @@ function App() {
           )}
         </Loading>
       </main>
+
+      <div className="text-center">
+        <Link
+          href="/crypto/news"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300"
+        >
+          <ArrowRight className="w-5 h-5" />
+          Read Crypt News
+        </Link>
+      </div>
 
       {/* Footer */}
       <footer className="bg-white/80 backdrop-blur-sm border-t border-gray-200 mt-16">
