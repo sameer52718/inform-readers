@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 export async function generateMetadata({ params }) {
   try {
@@ -44,6 +45,12 @@ export default async function RegionPostalCodePage({ params }) {
       return <div className="p-8 text-center text-gray-600">No data available for this country.</div>;
     }
 
+    const breadcrumbItems = [
+      { label: "Home", href: "/" },
+      { label: "Postal Codes", href: "/postalcode" },
+      { label: info.country.name },
+    ];
+
     return (
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
@@ -62,6 +69,7 @@ export default async function RegionPostalCodePage({ params }) {
         {/* Regions Section */}
         <div className="bg-white py-16">
           <div className="container mx-auto px-4">
+            <Breadcrumb items={breadcrumbItems} />
             <div className="mb-8 flex items-center justify-between">
               <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Regions in {info.country.name}</h2>
               <div className="flex items-center gap-2">

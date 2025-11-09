@@ -7,6 +7,7 @@ import { Navigation, Mail, Building2, MapPinned, Info, Search } from "lucide-rea
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
+import Breadcrumb from "../specification/Breadcrumb";
 
 function LocationTable({ data = [] }) {
   const { countryCode, region } = useParams();
@@ -108,6 +109,15 @@ function PostalLanding() {
     );
   }
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Postal Codes", href: "/postalcode" },
+    { label: data?.country.name, href: `/postalcode/${countryCode?.toUpperCase()}` },
+    {
+      label: region,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -139,6 +149,7 @@ function PostalLanding() {
 
       {/* Quick Stats */}
       <div className="container mx-auto px-4 py-12">
+        <Breadcrumb items={breadcrumbItems} />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: Mail, title: "Total Areas", value: pagination.totalItems },

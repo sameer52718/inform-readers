@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-const Breadcrumb = ({ items }) => {
+const Breadcrumb = ({ items = [] }) => {
   return (
     <nav className="flex items-center py-4 text-sm">
       {items.map((item, index) => (

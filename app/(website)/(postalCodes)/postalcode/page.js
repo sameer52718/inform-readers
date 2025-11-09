@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 // export const metadata = {
 //   title: "Global Postal Code Directory | Country-wise ZIP & Format Guide",
@@ -74,6 +75,8 @@ export default function PostalCode() {
   const filteredCountries = allCountries.filter((country) =>
     country.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Postal Codes" }];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -151,7 +154,7 @@ export default function PostalCode() {
             </div>
           )}
         </div>
-
+        <Breadcrumb items={breadcrumbItems} />
         {/* Content */}
         {!searchQuery && (
           <div className="mt-16 space-y-16">
