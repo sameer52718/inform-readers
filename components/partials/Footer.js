@@ -94,7 +94,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/swiftcode" className="hover:text-white flex items-center">
+                  <Link href="/bank-codes" className="hover:text-white flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     {t("footer.links.swiftCodes")}
                   </Link>

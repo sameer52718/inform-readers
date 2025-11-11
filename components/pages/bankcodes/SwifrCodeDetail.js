@@ -11,10 +11,11 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { generateFAQs } from "@/templates/faq"; // Import FAQ generator from baby names
 import { getCountryCodeFromHost } from "@/lib/getCountryFromSubdomain";
+import Breadcrumb from "../specification/Breadcrumb";
 
 function LocationTable({ data = [] }) {
   const { t } = useTranslation();
-  const { countryCode } = useParams();
+  const { countryCode, bankSlug, branchSlug } = useParams();
   return (
     <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
       <div className="overflow-x-auto">
@@ -44,7 +45,7 @@ function LocationTable({ data = [] }) {
                   <td className="p-4 text-sm">{code?.branch || "---"}</td>
                   <td className="p-4">
                     <Link
-                      href={`/swiftcode/${countryCode}/${code?.swiftCode}`}
+                      href={`/bank-codes/${countryCode}/${bankSlug}/${branchSlug}/${code?.swiftCode}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
                       {code?.swiftCode}
@@ -68,7 +69,7 @@ function LocationTable({ data = [] }) {
 
 function SwiftCodeDetail() {
   const { t } = useTranslation();
-  const { swiftCode, countryCode } = useParams();
+  const { swiftCode, countryCode, bankSlug, branchSlug } = useParams();
   const [data, setData] = useState(null);
   const [related, setRelated] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -109,13 +110,24 @@ function SwiftCodeDetail() {
     );
   }
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Swift Codes", href: "/bank-codes" },
+    { label: data?.countryId?.name, href: `/bank-codes/${countryCode}` },
+    { label: data?.bank, href: `/bank-codes/${countryCode}/${bankSlug}` },
+    { label: data?.branch, href: `/bank-codes/${countryCode}/${bankSlug}/${branchSlug}` },
+    { label: data.swiftCode }, // last one: no href (current page)
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <AdBanner />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero Heading */}
         <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-          {t("swiftcodeDetail.heroTitle").replace("{bank}", data?.bank).replace("{swiftCode}", data?.swiftCode)}
+          {t("swiftcodeDetail.heroTitle")
+            .replace("{bank}", data?.bank)
+            .replace("{swiftCode}", data?.swiftCode)}
         </h1>
         <p className="mt-4 text-center text-lg text-gray-600">
           {t("swiftcodeDetail.heroDescription")
@@ -149,7 +161,7 @@ function SwiftCodeDetail() {
         <div className="my-4">
           <HoverBanner />
         </div>
-
+        <Breadcrumb items={breadcrumbItems} />
         {/* SWIFT Code Details Section */}
         <div className="mt-12">
           <div className="rounded-xl bg-gradient-to-r from-red-600 to-red-700 p-6 sm:p-8">

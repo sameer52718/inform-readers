@@ -43,7 +43,7 @@ function LocationTable({ data = [] }) {
                   <td className="p-4 text-sm">{code?.branch || "---"}</td>
                   <td className="p-4">
                     <Link
-                      href={`/swiftcode/${countryCode}/${code?.swiftCode}`}
+                      href={`/bank-codes/${countryCode}/${code?.swiftCode}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
                       {t("swiftcodeLanding.viewDetails")}

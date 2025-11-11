@@ -14,7 +14,7 @@ function Header() {
   const headerComponents = {
     "/names": NamesHeader,
     "/postalcode": PostalcodeHeader,
-    "/swiftcode": SwiftcodeHeader,
+    "/bank-codes": SwiftcodeHeader,
   };
 
   // Find the first matching route

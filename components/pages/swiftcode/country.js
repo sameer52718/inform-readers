@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Breadcrumb from "../specification/Breadcrumb";
 
 export default function BankCountryListing() {
   const { t } = useTranslation(); // Empty namespace as instructed
@@ -40,6 +41,8 @@ export default function BankCountryListing() {
   const filteredCountries = allCountries.filter((country) =>
     country.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Swift Codes" }];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -85,7 +88,7 @@ export default function BankCountryListing() {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {filteredCountries.map((country) => (
                     <Link
-                      href={`/swiftcode/${country.countryCode}`}
+                      href={`/bank-codes/${country.countryCode}`}
                       key={country.countryCode}
                       className="group relative"
                     >
@@ -114,7 +117,7 @@ export default function BankCountryListing() {
             </div>
           )}
         </div>
-
+        <Breadcrumb items={breadcrumbItems} />
         {/* Content */}
         {!searchQuery && (
           <div className="mt-16 space-y-16">
@@ -133,7 +136,7 @@ export default function BankCountryListing() {
                   <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {item?.countries?.map((country) => (
                       <Link
-                        href={`/swiftcode/${country.countryCode}`}
+                        href={`/bank-codes/${country.countryCode}`}
                         key={country.countryCode}
                         className="group relative"
                       >

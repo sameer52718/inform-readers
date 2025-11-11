@@ -19,8 +19,7 @@ const getData = async () => {
 
 export default async function Home() {
   let data = await getData();
-  console.log(data,"Home Page Data");
-  
+
   return (
     <>
       <div className="min-h-screen bg-gray-50">
@@ -223,7 +222,7 @@ export default async function Home() {
                   <p className="text-gray-600">Access international bank identification codes</p>
                 </div>
                 <Link
-                  href="/swiftcode"
+                  href="/bank-codes"
                   className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Codes
@@ -234,7 +233,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {data?.bankCodeCountry?.map((country) => (
                   <Link
-                    href={`/swiftcode/${country.countryCode}`}
+                    href={`/bank-codes/${country.countryCode}`}
                     key={country.countryCode}
                     className="group"
                   >

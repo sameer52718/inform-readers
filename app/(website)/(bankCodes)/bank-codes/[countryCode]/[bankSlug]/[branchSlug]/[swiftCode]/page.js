@@ -19,12 +19,15 @@ function applyMetaTemplate(template, values) {
 }
 
 export async function generateMetadata({ params }) {
-  const { swiftCode } = params;
+  const { swiftCode, countryCode, bankSlug, branchSlug } = params;
 
   // Get host and country from headers
   const host = (await headers()).get("host") || "informreaders.com";
   const country = getCountryName(getCountryCodeFromHost(host));
 
+  const canonicalUrl = new URL(
+    `https://${host}/bank-codes/${countryCode}/${bankSlug}/${branchSlug}/${swiftCode}/`
+  );
   try {
     // Fetch SWIFT code data
     const { data } = await axiosInstance.get(`/website/bankCode/${swiftCode}`);
@@ -33,6 +36,9 @@ export async function generateMetadata({ params }) {
       return {
         title: "SWIFT Code Details | Inform Readers",
         description: "Find SWIFT codes for secure international bank transfers.",
+        alternates: {
+          canonical: canonicalUrl.toString(),
+        },
       };
     }
 
@@ -59,10 +65,13 @@ export async function generateMetadata({ params }) {
         `${values.bank_name} international transfers`,
         `bank codes ${values.country}`,
       ],
+      alternates: {
+        canonical: canonicalUrl.toString(),
+      },
       openGraph: {
         title,
         description,
-        url: `http://${host}/swiftcode/${swiftCode}`,
+        url: `http://${host}/bank-codes/${swiftCode}`,
         siteName: "BankCodeFinder",
         images: [
           {
