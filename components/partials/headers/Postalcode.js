@@ -76,7 +76,7 @@ function LanguageSelect() {
 
 function NamesHeader() {
   const { t } = useTranslation();
-  const { token, userType } = useSelector(state => state.auth);
+  const { token, userType } = useSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -96,7 +96,7 @@ function NamesHeader() {
           const fetchedCategories = (data?.response?.country || []).map((cat, index) => ({
             id: cat.id || index + 1,
             title: cat.name || t(`header.categories.${cat.key || "unknown"}`),
-            url: cat.url || `/postalcode/${cat.countryCode}`,
+            url: cat.url || `/postal-codes/${cat.countryCode}`,
           }));
           // Shuffle categories
           const shuffledCategories = fetchedCategories.sort(() => Math.random() - 0.5);

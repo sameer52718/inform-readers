@@ -82,7 +82,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/postalcode" className="hover:text-white flex items-center">
+                  <Link href="/postal-codes" className="hover:text-white flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     {t("footer.links.postalCodes")}
                   </Link>

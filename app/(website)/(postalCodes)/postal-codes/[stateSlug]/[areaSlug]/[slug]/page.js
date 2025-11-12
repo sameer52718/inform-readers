@@ -1,10 +1,9 @@
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-import { Navigation } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import ShareButton from "../../../components/ShareButton";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
+import { headers } from "next/headers";
 
 // Helper function to get term based on country
 function getTerm(country) {
@@ -22,10 +21,14 @@ function applyTemplate(template, values) {
 
 export async function generateMetadata({ params }) {
   try {
+    const { stateSlug, areaSlug } = params;
     const res = await axiosInstance.get(`/website/postalCode/${params.slug}`);
     const data = res.data.data;
+    const host = (await headers()).get("host") || "informreaders.com";
     const country = data.postalCode.countryId.name;
     const term = getTerm(country);
+
+    const canonicalUrl = new URL(`https://${host}/postal-codes/${stateSlug}/${areaSlug}/${params.slug}`);
 
     // Use first meta title and description from document
     let titleTemplate = `{Postal Code} ${term} {Area}, {Country}`;
@@ -44,6 +47,7 @@ export async function generateMetadata({ params }) {
     return {
       title,
       description,
+      alternates: { canonical: canonicalUrl.toString() },
       openGraph: {
         title,
         description,
@@ -69,6 +73,7 @@ async function getPostalCodeData(slug) {
 }
 
 export default async function PostalCodeDetail({ params }) {
+  const { stateSlug, areaSlug } = params;
   const data = await getPostalCodeData(params.slug);
 
   if (!data) {
@@ -83,13 +88,10 @@ export default async function PostalCodeDetail({ params }) {
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: "Postal Codes", href: "/postalcode" },
-    { label: country, href: `/postalcode/${data?.postalCode?.countryId?.countryCode?.toUpperCase()}` },
-    {
-      label: data?.postalCode.area,
-      href: `/postalcode/${data?.postalCode?.countryId?.countryCode?.toUpperCase()}/${data?.postalCode.area}`,
-    },
-    { label: data.postalCode.code }, // last one: no href (current page)
+    { label: "Postal Codes", href: "/postal-codes" },
+    { label: data?.postalCode.state, href: `/postal-codes/${stateSlug}` },
+    { label: data?.postalCode.area, href: `/postal-codes/${stateSlug}/${areaSlug}` },
+    { label: data.postalCode.code },
   ];
 
   return (
@@ -144,10 +146,11 @@ export default async function PostalCodeDetail({ params }) {
         <Section title={`Other Countries in ${data.postalCode.countryId.region}`}>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {data.otherCountries.slice(0, 12).map((country) => (
-              <Link
+              <a
                 key={country._id}
-                href={`/postalcode/${country.countryCode}`}
+                href={`https://${country.countryCode}.informreaders.com/postal-codes`}
                 className="transform rounded-xl border bg-white p-4 transition-all hover:scale-105 hover:shadow-md"
+                target="_blank"
               >
                 <div className="flex items-center gap-3">
                   <Image
@@ -159,7 +162,7 @@ export default async function PostalCodeDetail({ params }) {
                   />
                   <span className="font-medium text-gray-900">{country.name}</span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </Section>
@@ -187,23 +190,6 @@ export default async function PostalCodeDetail({ params }) {
             title="3. Support for E-commerce"
             description={`Used for shipping estimates and logistics in ${data.postalCode.area}.`}
           />
-        </Section>
-
-        {/* Regions */}
-        <Section title={`Regions in ${country}`}>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {data.regions.map((region) => (
-              <div
-                key={region}
-                className="flex items-center rounded-xl border bg-white p-4 shadow-sm hover:scale-105 transition"
-              >
-                <div className="mr-4 rounded-full bg-red-100 p-2">
-                  <Navigation className="h-5 w-5 text-red-600" />
-                </div>
-                <span className="font-medium text-gray-900">{region}</span>
-              </div>
-            ))}
-          </div>
         </Section>
 
         {/* About Area */}

@@ -172,7 +172,7 @@ export default async function Home() {
                   <p className="text-gray-600">Find postal codes for countries worldwide</p>
                 </div>
                 <Link
-                  href="/postalcode"
+                  href="/postal-codes"
                   className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Codes
@@ -183,7 +183,7 @@ export default async function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {data?.postalCodeCountry?.map((country) => (
                   <Link
-                    href={`/postalcode/${country.countryCode}`}
+                    href={`/postal-codes/${country.countryCode}`}
                     key={country.countryCode}
                     className="group"
                   >

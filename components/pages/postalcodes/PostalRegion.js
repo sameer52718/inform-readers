@@ -32,7 +32,7 @@ function LocationTable({ data = [] }) {
                   <td className="p-4 text-sm">{code?.area || "---"}</td>
                   <td className="p-4">
                     <Link
-                      href={`/postalcode/${countryCode}/${region}/${code?.slug}`}
+                      href={`/postal-codes/${countryCode}/${region}/${code?.slug}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
                       View Details
@@ -111,8 +111,8 @@ function PostalLanding() {
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: "Postal Codes", href: "/postalcode" },
-    { label: data?.country.name, href: `/postalcode/${countryCode?.toUpperCase()}` },
+    { label: "Postal Codes", href: "/postal-codes" },
+    { label: data?.country.name, href: `/postal-codes/${countryCode?.toUpperCase()}` },
     {
       label: region,
     },
