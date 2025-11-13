@@ -6,9 +6,9 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
 
 // 🔹 Fetch data function
-async function getPostalStatesData() {
+async function getPostalStatesData(host) {
   try {
-    const res = await axiosInstance.get(`/website/postalCode/state`);
+    const res = await axiosInstance.get(`/website/postalCode/state`, { params: { host } });
     return res.data;
   } catch (error) {
     console.error("Error fetching postal code states:", error);
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   const canonicalUrl = new URL(`https://${host}/postal-codes/`);
 
   try {
-    const data = await getPostalStatesData();
+    const data = await getPostalStatesData(host);
 
     if (!data?.success) {
       return {
@@ -58,7 +58,8 @@ export async function generateMetadata({ params }) {
 
 // 🔹 Page Component
 export default async function PostalStatesPage() {
-  const data = await getPostalStatesData();
+  const host = (await headers()).get("host") || "informreaders.com";
+  const data = await getPostalStatesData(host);
 
   if (!data || !data.success) {
     return (
