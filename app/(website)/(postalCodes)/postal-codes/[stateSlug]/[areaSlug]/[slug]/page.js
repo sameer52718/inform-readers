@@ -22,9 +22,9 @@ function applyTemplate(template, values) {
 export async function generateMetadata({ params }) {
   try {
     const { stateSlug, areaSlug } = params;
-    const res = await axiosInstance.get(`/website/postalCode/${params.slug}`);
-    const data = res.data.data;
     const host = (await headers()).get("host") || "informreaders.com";
+    const res = await axiosInstance.get(`/website/postalCode/${params.slug}`, { params: { host } });
+    const data = res.data.data;
     const country = data.postalCode.countryId.name;
     const term = getTerm(country);
 
@@ -62,9 +62,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
-async function getPostalCodeData(slug) {
+async function getPostalCodeData(slug, host) {
   try {
-    const res = await axiosInstance.get(`/website/postalCode/${slug}`);
+    const res = await axiosInstance.get(`/website/postalCode/${slug}`, { params: { host } });
     return res.data.data;
   } catch (error) {
     handleError(error);
@@ -74,7 +74,8 @@ async function getPostalCodeData(slug) {
 
 export default async function PostalCodeDetail({ params }) {
   const { stateSlug, areaSlug } = params;
-  const data = await getPostalCodeData(params.slug);
+  const host = (await headers()).get("host") || "informreaders.com";
+  const data = await getPostalCodeData(params.slug, host);
 
   if (!data) {
     return (

@@ -6,10 +6,10 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
 
 // 🔹 Fetch Data
-async function getAreaDetail(areaSlug) {
+async function getAreaDetail(areaSlug, host) {
   try {
     const res = await axiosInstance.get(`/website/postalCode/detail`, {
-      params: { areaSlug },
+      params: { areaSlug, host },
     });
     return res.data;
   } catch (error) {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
   const host = (await headers()).get("host") || "informreaders.com";
   const canonicalUrl = new URL(`https://${host}/postal-codes/${stateSlug}/${areaSlug}/`);
 
-  const data = await getAreaDetail(areaSlug);
+  const data = await getAreaDetail(areaSlug, host);
 
   if (!data || !data.success) {
     return {
@@ -53,7 +53,8 @@ export async function generateMetadata({ params }) {
 // 🔹 Page Component
 export default async function AreaDetailPage({ params }) {
   const { areaSlug, stateSlug } = params;
-  const data = await getAreaDetail(areaSlug);
+  const host = (await headers()).get("host") || "informreaders.com";
+  const data = await getAreaDetail(areaSlug, host);
 
   if (!data || !data.success) {
     return (

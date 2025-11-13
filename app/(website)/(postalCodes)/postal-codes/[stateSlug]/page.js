@@ -6,10 +6,10 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
 
 // 🔹 Fetch data
-async function getPostalAreasData(stateSlug) {
+async function getPostalAreasData(stateSlug, host) {
   try {
     const res = await axiosInstance.get(`/website/postalCode/area`, {
-      params: { stateSlug },
+      params: { stateSlug, host },
     });
     return res.data;
   } catch (error) {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
   const canonicalUrl = new URL(`https://${host}/postal-codes/${stateSlug}/`);
 
   try {
-    const data = await getPostalAreasData(stateSlug);
+    const data = await getPostalAreasData(stateSlug, host);
 
     if (!data?.success) {
       return {
@@ -62,7 +62,8 @@ export async function generateMetadata({ params }) {
 // 🔹 Page Component
 export default async function PostalAreasPage({ params }) {
   const { stateSlug } = params;
-  const data = await getPostalAreasData(stateSlug);
+  const host = (await headers()).get("host") || "informreaders.com";
+  const data = await getPostalAreasData(stateSlug, host);
 
   if (!data || !data.success) {
     return (
