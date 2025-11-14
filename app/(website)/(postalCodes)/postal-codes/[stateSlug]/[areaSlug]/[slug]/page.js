@@ -143,31 +143,6 @@ export default async function PostalCodeDetail({ params }) {
           </div>
         </div>
 
-        {/* Other Countries */}
-        <Section title={`Other Countries in ${data.postalCode.countryId.region}`}>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {data.otherCountries.slice(0, 12).map((country) => (
-              <a
-                key={country._id}
-                href={`https://${country.countryCode}.informreaders.com/postal-codes`}
-                className="transform rounded-xl border bg-white p-4 transition-all hover:scale-105 hover:shadow-md"
-                target="_blank"
-              >
-                <div className="flex items-center gap-3">
-                  <Image
-                    src={country.flag}
-                    alt={`${country.name} flag`}
-                    width={32}
-                    height={32}
-                    className="rounded"
-                  />
-                  <span className="font-medium text-gray-900">{country.name}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </Section>
-
         {/* Purpose Section */}
         <Section title={`What Is the Purpose of Postal Code ${data.postalCode.code}?`}>
           <p className="text-gray-600">

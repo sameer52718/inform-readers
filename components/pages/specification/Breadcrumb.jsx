@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 
 const Breadcrumb = ({ items = [] }) => {
   return (
-    <nav className="flex items-center py-4 text-sm">
+    <nav className="flex overflow-x-auto whitespace-nowrap py-4 text-sm">
       {items.map((item, index) => (
         <React.Fragment key={index}>
           {index > 0 && <ChevronRight className="mx-2 h-4 w-4 text-gray-400 flex-shrink-0" />}

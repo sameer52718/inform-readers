@@ -118,6 +118,14 @@ export default async function AreaDetailPage({ params }) {
               <p className="text-gray-600">Postal Code:</p>
               <p className="font-medium text-gray-900">{postalCode.code}</p>
             </div>
+            <div>
+              <p className="text-gray-600">Latitude:</p>
+              <p className="font-medium text-gray-900">{postalCode.latitude}</p>
+            </div>
+            <div>
+              <p className="text-gray-600">Longitude:</p>
+              <p className="font-medium text-gray-900">{postalCode.longitude}</p>
+            </div>
           </div>
 
           <div className="mt-6 flex gap-3">
@@ -130,13 +138,13 @@ export default async function AreaDetailPage({ params }) {
               <Compass className="h-4 w-4 mr-2" />
               View on Map
             </a>
-            <Link
+            {/* <Link
               href={`/postal-codes/${stateSlug}/${areaSlug}/${postalCode.code}`}
               className="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
             >
               <ArrowRight className="h-4 w-4 mr-2" />
               View Postal Code
-            </Link>
+            </Link> */}
           </div>
         </div>
 
