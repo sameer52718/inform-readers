@@ -28,22 +28,6 @@ export async function generateMetadata({ params }) {
         "religious baby names",
         "unique baby names",
       ],
-      openGraph: {
-        title: `${category.name} Baby Names with Meanings | Infrom Readers`,
-        description: `Explore a curated collection of ${category.name} baby names and their meanings.`,
-        url: `https://informreaders.com/names/religion/${id}`,
-        siteName: "BabyNameFinder",
-        images: [
-          {
-            url: "https://informreaders.com/images/baby-names-cover.jpg",
-            width: 1200,
-            height: 630,
-            alt: `${category.name} Baby Names`,
-          },
-        ],
-        locale: "en_US",
-        type: "website",
-      },
     };
   } catch (error) {
     return {

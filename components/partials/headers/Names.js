@@ -96,7 +96,7 @@ function NamesHeader() {
           const fetchedCategories = (data.categories || []).map((cat, index) => ({
             id: cat.id || index + 1,
             title: cat.name || t(`header.categories.${cat.key || "unknown"}`),
-            url: cat.url || `/names/religion/${cat._id}`,
+            url: cat.url || `/baby-names/religion/${cat._id}`,
           }));
           // Shuffle categories
           const shuffledCategories = fetchedCategories.sort(() => Math.random() - 0.5);

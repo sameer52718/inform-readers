@@ -102,7 +102,7 @@ export default async function Home() {
                     <p className={`text-red-100`}>Browse through our collection of beautiful names</p>
                   </div>
                   <Link
-                    href="/names"
+                    href="/baby-names"
                     className={`flex items-center gap-2 text-white hover:text-red-100 transition-colors duration-200`}
                   >
                     View All Names
@@ -145,7 +145,7 @@ export default async function Home() {
                           </td>
                           <td className="py-4 px-6 text-center">
                             <Link
-                              href={`/names/${item?.slug}`}
+                              href={`/baby-names/${item?.slug}`}
                               className={`inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium group`}
                             >
                               View Details

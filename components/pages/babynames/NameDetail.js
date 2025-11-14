@@ -6,35 +6,58 @@ import Link from "next/link";
 import Loading from "@/components/ui/Loading";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-import {
-  Share2,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  MessageCircle,
-  Heart,
-  Globe,
-  Hash,
-  BookOpen,
-  Users,
-  Star,
-  Calendar,
-  Sparkles,
-  Clock,
-} from "lucide-react";
-import { toast } from "react-toastify";
+import { Globe, Hash, BookOpen, Users, Star, Clock, Palette, Gem } from "lucide-react";
 
 // ✅ import helpers
 import { countryNames } from "@/constant/supportContries";
 import { generateFAQs } from "@/templates/faq";
 import { getCountryCodeFromHost } from "@/lib/getCountryFromSubdomain";
+import Breadcrumb from "../specification/Breadcrumb";
+import ShareButton from "@/components/shared/ShareButton";
 
+// Helper to pick n random letters
+function getRandomLetters(n) {
+  const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const shuffled = alphabets.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, n);
+}
+
+function RandomAlphabetLinks({ count = 6 }) {
+  const [randomLetters, setRandomLetters] = useState([]);
+
+  useEffect(() => {
+    setRandomLetters(getRandomLetters(count));
+  }, [count]);
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {randomLetters.map((letter) => (
+        <Link
+          key={letter}
+          href={`/baby-names/letter/${letter.toLowerCase()}`}
+          className="group relative p-6 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition-all hover:scale-105 flex flex-col gap-3"
+        >
+          <div className="flex items-center gap-3">
+            <Star className="w-6 h-6 text-red-500 group-hover:animate-bounce" />
+            <h2 className="text-2xl font-bold text-gray-800">{letter}</h2>
+          </div>
+          <p className="text-gray-600 text-sm">
+            Explore baby names starting with <strong>{letter}</strong> and discover their meanings, origins,
+            and popularity.
+          </p>
+          <div className="flex gap-2 mt-auto">
+            <BookOpen className="w-5 h-5 text-gray-400" />
+            <Globe className="w-5 h-5 text-gray-400" />
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
 export default function NameDetail() {
   const { slug } = useParams();
   const [data, setData] = useState([]);
   const [name, setName] = useState(null);
-  const [activeTab, setActiveTab] = useState("overview");
   const [isLoading, setIsLoading] = useState(true);
 
   const [faqs, setFaqs] = useState([]);
@@ -48,68 +71,6 @@ export default function NameDetail() {
       setFaqs(generateFAQs(country));
     }
   }, []);
-
-  // Get the current page URL
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-
-  // Social media share links
-  const socialLinks = [
-    {
-      icon: Facebook,
-      label: "Share on Facebook",
-      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
-    },
-    {
-      icon: Twitter,
-      label: "Share on Twitter",
-      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-        currentUrl
-      )}&text=Check out the meaning of the name ${encodeURIComponent(name?.name || "")}!`,
-    },
-    {
-      icon: Linkedin,
-      label: "Share on LinkedIn",
-      href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-        currentUrl
-      )}&title=${encodeURIComponent(name?.name || "")}&summary=${encodeURIComponent(
-        name?.shortMeaning || ""
-      )}`,
-    },
-    {
-      icon: Instagram,
-      label: "Share on Instagram",
-      href: "#", // Instagram doesn't support direct web sharing; handle via copy link or redirect
-      onClick: () => {
-        // Copy link to clipboard for Instagram
-        navigator.clipboard.writeText(currentUrl);
-        toast.success("Link copied! Paste it in Instagram to share.");
-      },
-    },
-    {
-      icon: MessageCircle,
-      label: "Share on WhatsApp",
-      href: `https://api.whatsapp.com/send?text=${encodeURIComponent(
-        `Check out the meaning of the name ${name?.name || ""}: ${currentUrl}`
-      )}`,
-    },
-  ];
-
-  // Web Share API handler
-  const handleNativeShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Name: ${name?.name}`,
-          text: `Discover the meaning of the name ${name?.name}! ${name?.shortMeaning}`,
-          url: currentUrl,
-        });
-      } catch (error) {
-        console.error("Error sharing:", error);
-      }
-    } else {
-      alert("Web Share API is not supported in this browser. Use the social links to share.");
-    }
-  };
 
   useEffect(() => {
     const getData = async () => {
@@ -144,11 +105,17 @@ export default function NameDetail() {
 
   const nameAttributes = [
     { icon: Globe, label: "Origin", value: name?.origion || "---" },
-    { icon: Heart, label: "Religion", value: name?.religionId?.name },
     { icon: Hash, label: "Length", value: `${name?.nameLength} Letters` },
     { icon: BookOpen, label: "Short Name", value: name?.shortName },
-    { icon: Star, label: "Lucky Number", value: "7" },
-    { icon: Calendar, label: "Lucky Day", value: "Friday" },
+    { icon: Gem, label: "Lucky Stone", value: name?.luckyStone },
+    { icon: Star, label: "Lucky Number", value: name?.luckyNumber },
+    { icon: Palette, label: "Lucky Color", value: name?.luckyColor },
+  ];
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Baby Names", href: "/baby-names" },
+    { label: name?.name }, // last one: no href (current page)
   ];
 
   return (
@@ -168,25 +135,17 @@ export default function NameDetail() {
                 <p className="text-xl text-white/90 max-w-2xl">{name?.shortMeaning}</p>
               </div>
               <div className="flex gap-3">
-                {socialLinks.map((social, index) => (
-                  <Link
-                    key={index}
-                    href={social.href}
-                    onClick={social.onClick || (() => {})}
-                    className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all hover:scale-110"
-                    aria-label={social.label}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </Link>
-                ))}
+                <ShareButton
+                  title={`${name?.name} | Baby Name Info`}
+                  text={`Explore the meaning and details of the name "${name?.name}", a ${name?.gender} name with origin "${name?.origion}".`}
+                />
               </div>
             </div>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Breadcrumb items={breadcrumbItems} />
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             {nameAttributes.map((attr, index) => (
@@ -206,147 +165,6 @@ export default function NameDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Tabs Navigation */}
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div className="border-b overflow-x-auto">
-                  <div className="flex">
-                    {["overview", "meaning", "numerology", "popularity"].map((tab) => (
-                      <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-6 py-4 text-lg font-medium transition-colors relative ${
-                          activeTab === tab ? "text-red-600" : "text-gray-500 hover:text-gray-700"
-                        }`}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                        {activeTab === tab && (
-                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-600" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  {activeTab === "overview" && (
-                    <div className="space-y-8">
-                      <div>
-                        <h2 className="text-2xl font-bold mb-4">Name Overview</h2>
-                        <p className="text-gray-600 leading-relaxed">{name?.longMeaning}</p>
-                      </div>
-
-                      <div className="bg-red-50 rounded-lg p-6">
-                        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                          <Sparkles className="w-5 h-5 text-red-500" />
-                          Key Characteristics
-                        </h3>
-                        <ul className="grid md:grid-cols-2 gap-4">
-                          <li className="flex items-center gap-2 text-gray-700">
-                            <span className="w-2 h-2 bg-red-500 rounded-full" />
-                            Strong and meaningful origin
-                          </li>
-                          <li className="flex items-center gap-2 text-gray-700">
-                            <span className="w-2 h-2 bg-red-500 rounded-full" />
-                            Cultural significance
-                          </li>
-                          <li className="flex items-center gap-2 text-gray-700">
-                            <span className="w-2 h-2 bg-red-500 rounded-full" />
-                            Modern appeal
-                          </li>
-                          <li className="flex items-center gap-2 text-gray-700">
-                            <span className="w-2 h-2 bg-red-500 rounded-full" />
-                            Positive associations
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h3 className="text-xl font-semibold mb-4">Cultural Significance</h3>
-                        <p className="text-gray-600 leading-relaxed">
-                          The name {name?.name} holds deep cultural significance in {name?.origion}
-                          traditions. It has been passed down through generations, carrying with it a rich
-                          history and meaningful heritage that continues to resonate with modern families.
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === "meaning" && (
-                    <div className="space-y-8">
-                      <div>
-                        <h2 className="text-2xl font-bold mb-4">Detailed Meaning</h2>
-                        <p className="text-gray-600 leading-relaxed">{name?.longMeaning}</p>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-gray-50 rounded-lg p-6">
-                          <h3 className="text-xl font-semibold mb-4">Religious Context</h3>
-                          <p className="text-gray-600">
-                            In {name?.religionId?.name} tradition, this name carries special significance...
-                          </p>
-                        </div>
-                        <div className="bg-gray-50 rounded-lg p-6">
-                          <h3 className="text-xl font-semibold mb-4">Modern Usage</h3>
-                          <p className="text-gray-600">
-                            Today, {name?.name} is chosen by parents who value its cultural heritage...
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === "numerology" && (
-                    <div className="space-y-8">
-                      <div>
-                        <h2 className="text-2xl font-bold mb-4">Numerological Significance</h2>
-                        <p className="text-gray-600 leading-relaxed">
-                          In numerology, each letter in {name?.name} carries a unique vibration...
-                        </p>
-                      </div>
-
-                      <div className="bg-red-50 rounded-lg p-6">
-                        <h3 className="text-xl font-semibold mb-4">Lucky Attributes</h3>
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div>
-                            <p className="text-sm text-gray-500 mb-1">Lucky Number</p>
-                            <p className="text-2xl font-bold text-red-600">7</p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-500 mb-1">Lucky Day</p>
-                            <p className="text-2xl font-bold text-red-600">Friday</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === "popularity" && (
-                    <div className="space-y-8">
-                      <div>
-                        <h2 className="text-2xl font-bold mb-4">Name Popularity</h2>
-                        <p className="text-gray-600 leading-relaxed">
-                          {name?.name} has maintained a steady popularity over the years...
-                        </p>
-                      </div>
-
-                      <div className="bg-gray-50 rounded-lg p-6">
-                        <h3 className="text-xl font-semibold mb-4">Usage Statistics</h3>
-                        <div className="space-y-4">
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-600">Current Rank</span>
-                            <span className="font-semibold">#123</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-600">Trend</span>
-                            <span className="font-semibold text-green-500">↑ Rising</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
               {/* FAQ Section */}
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
@@ -371,6 +189,7 @@ export default function NameDetail() {
                   ))}
                 </div>
               </div>
+              <RandomAlphabetLinks />
             </div>
 
             {/* Sidebar */}
@@ -385,7 +204,7 @@ export default function NameDetail() {
                   {data.slice(0, 10).map((item, index) => (
                     <Link
                       key={index}
-                      href={`/names/religion/${item._id}`}
+                      href={`/baby-names/religion/${item.slug}`}
                       className="block w-full text-left px-4 py-3 rounded-lg bg-gray-50 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       {item.name}

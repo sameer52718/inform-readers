@@ -3,7 +3,6 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import DefaultHeader from "./headers/Default";
-import NamesHeader from "./headers/Names";
 import SwiftcodeHeader from "./headers/Swiftcode";
 
 function Header() {
@@ -11,7 +10,6 @@ function Header() {
 
   // Map routes to header components
   const headerComponents = {
-    "/names": NamesHeader,
     "/bank-codes": SwiftcodeHeader,
   };
 

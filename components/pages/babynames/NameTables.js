@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-import { Search, Filter, ChevronRight, Users, Baby, Heart, ArrowRight, BookOpen } from "lucide-react";
+import { Search, ChevronRight, Users, Baby, Heart, BookOpen } from "lucide-react";
+import Breadcrumb from "../specification/Breadcrumb";
 
 const AlphabetSelector = ({ currentLetter, onLetterChange }) => {
   const alphabet = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -136,7 +137,7 @@ const NameTable = ({ gender, searchQuery, searchTrigger }) => {
                         </td>
                         <td className="px-6 py-4 text-center">
                           <Link
-                            href={`/names/${item?.slug}`}
+                            href={`/baby-names/${item?.slug}`}
                             className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
                           >
                             View Details
@@ -207,6 +208,11 @@ export default function NameMeaning() {
     setSearchTrigger((prev) => prev + 1);
   };
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Baby Names", href: "/baby-names" },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -241,6 +247,7 @@ export default function NameMeaning() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Religion Categories */}
+        <Breadcrumb items={breadcrumbItems} />
         <section className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -253,7 +260,7 @@ export default function NameMeaning() {
             {visibleReligions.map((item, index) => (
               <Link
                 key={index}
-                href={`/names/religion/${item._id}`}
+                href={`/baby-names/religion/${item.slug}`}
                 className="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />

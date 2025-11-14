@@ -76,7 +76,7 @@ export default function Footer() {
               <h3 className="text-white text-lg font-semibold mb-4">{t("footer.categories")}</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/names" className="hover:text-white flex items-center">
+                  <Link href="/baby-names" className="hover:text-white flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     {t("footer.links.babyNames")}
                   </Link>

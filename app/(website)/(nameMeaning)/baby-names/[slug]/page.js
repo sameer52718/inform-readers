@@ -21,11 +21,11 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
 
   const host = (await headers()).get("host") || "informreaders.com";
-    const country = getCountryName(getCountryCodeFromHost(host))
+  const country = getCountryName(getCountryCodeFromHost(host));
 
   try {
     const { data } = await axiosInstance.get(`/website/name/${slug}`);
-    
+
     if (data.error || !data.data) {
       return {
         title: "Name Details | Infrom Readers",
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
       };
     }
 
-     const nameData = data.data;
+    const nameData = data.data;
     console.log(nameData);
 
     const values = {
@@ -46,7 +46,6 @@ export async function generateMetadata({ params }) {
 
     const title = applyMetaTemplate(metaTemplates.title, values);
     const description = applyMetaTemplate(metaTemplates.description, values);
-
 
     return {
       title,
@@ -61,7 +60,6 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title,
         description,
-        url: `http://${host}/names/${slug}`,
         siteName: "BabyNameFinder",
         images: [
           {

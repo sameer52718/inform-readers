@@ -4,34 +4,12 @@ import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Search, ChevronRight, Users, BookOpen } from "lucide-react";
 import { useParams } from "next/navigation";
+import { Search, ChevronRight } from "lucide-react";
 import Breadcrumb from "../specification/Breadcrumb";
 
-const AlphabetSelector = ({ currentLetter, onLetterChange }) => {
-  const alphabet = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-
-  return (
-    <div className="flex flex-wrap gap-2 justify-center">
-      {alphabet.map((letter) => (
-        <button
-          key={letter}
-          onClick={() => onLetterChange(letter)}
-          className={`w-10 h-10 rounded-lg font-semibold transition-all ${
-            currentLetter === letter
-              ? "bg-red-600 text-white scale-110"
-              : "bg-white hover:bg-red-50 text-gray-700 hover:text-red-600"
-          }`}
-        >
-          {letter}
-        </button>
-      ))}
-    </div>
-  );
-};
-
-const NameTable = ({ searchQuery, searchTrigger }) => {
-  const { id } = useParams();
+const LetterTable = ({ searchQuery, searchTrigger }) => {
+  const { letter } = useParams();
   const [pagination, setPagination] = useState({
     totalItems: 0,
     currentPage: 1,
@@ -40,14 +18,19 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
   });
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [initialLetter, setInitialLetter] = useState("A");
 
-  const getData = async (loading = true, page = 1, initialLetter = "A") => {
+  const getData = async (loadingFlag = true, page = 1) => {
     try {
-      setLoading(loading);
+      setLoading(loadingFlag);
       const { data } = await axiosInstance.get("/website/name", {
-        params: { initialLetter, page, limit: 50, categoryId: id, search: searchQuery },
+        params: {
+          initialLetter: letter.toUpperCase(),
+          page,
+          limit: 50,
+          search: searchQuery,
+        },
       });
+
       if (!data.error) {
         setData(data.data);
         setPagination(data.pagination);
@@ -60,28 +43,19 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
   };
 
   useEffect(() => {
-    getData(true, 1, initialLetter);
-  }, [searchTrigger]);
+    getData(true, 1);
+  }, [letter, searchTrigger]);
 
   return (
     <section className="py-12">
       <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
         <div className="bg-gradient-to-r from-red-600 to-pink-500 p-6">
-          <p className="text-white/80 mt-2">Browse through our collection of beautiful names</p>
+          <p className="text-white/80 mt-2">
+            Browse baby names starting with <strong>{letter?.toUpperCase()}</strong>
+          </p>
         </div>
 
         <div className="p-6">
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4">Select a letter to begin:</h3>
-            <AlphabetSelector
-              currentLetter={initialLetter}
-              onLetterChange={(letter) => {
-                setInitialLetter(letter);
-                getData(true, 1, letter);
-              }}
-            />
-          </div>
-
           <div className="overflow-hidden rounded-xl border border-gray-200">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -102,7 +76,7 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
                   ) : data.length === 0 ? (
                     <tr>
                       <td colSpan={3} className="text-center py-6 text-gray-500">
-                        No data available.
+                        No names found starting with "{letter?.toUpperCase()}"
                       </td>
                     </tr>
                   ) : (
@@ -142,7 +116,7 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
           {!loading && data.length > 0 && (
             <div className="mt-6 flex items-center justify-between px-4">
               <button
-                onClick={() => getData(true, Math.max(1, pagination.currentPage - 1), initialLetter)}
+                onClick={() => getData(true, Math.max(1, pagination.currentPage - 1))}
                 disabled={pagination.currentPage === 1}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
               >
@@ -152,9 +126,7 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
                 Page {pagination.currentPage} of {pagination.totalPages}
               </span>
               <button
-                onClick={() =>
-                  getData(true, Math.min(pagination.totalPages, pagination.currentPage + 1), initialLetter)
-                }
+                onClick={() => getData(true, Math.min(pagination.totalPages, pagination.currentPage + 1))}
                 disabled={pagination.currentPage === pagination.totalPages}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
               >
@@ -168,42 +140,19 @@ const NameTable = ({ searchQuery, searchTrigger }) => {
   );
 };
 
-function NameMeaning() {
-  const { id } = useParams();
-  const [data, setData] = useState([]);
+function LetterPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTrigger, setSearchTrigger] = useState(0);
-
-  const [showAllReligions, setShowAllReligions] = useState(false);
-  const visibleReligions = showAllReligions ? data : data.slice(0, 8);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const { data } = await axiosInstance.get("/common/category", { params: { type: "Name" } });
-        if (!data.error) {
-          setData(data.categories || []);
-        }
-      } catch (error) {
-        handleError(error);
-      }
-    };
-    getData();
-  }, []);
-
+  const { letter } = useParams();
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTrigger((prev) => prev + 1);
   };
-  const formatted = id
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Baby Names", href: "/baby-names" },
-    { label: formatted }, // last one: no href (current page)
+    { label: `Names Starting with "${letter.toUpperCase()}"` },
   ];
 
   return (
@@ -213,10 +162,10 @@ function NameMeaning() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Find the Perfect Name for Your Baby
+              Baby Names Starting with Your Favorite Letter
             </h1>
             <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
-              Explore thousands of meaningful names from different cultures and traditions
+              Explore meaningful names that start with any letter of your choice
             </p>
 
             {/* Search Bar */}
@@ -238,52 +187,13 @@ function NameMeaning() {
         </div>
       </div>
 
+      {/* Letter Table */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Breadcrumb items={breadcrumbItems} />
-        {/* Religion Categories */}
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              <Users className="w-6 h-6 text-red-600" />
-              Browse Names by Religion
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {visibleReligions.map((item, index) => (
-              <Link
-                key={index}
-                href={`/baby-names/religion/${item.slug}`}
-                className="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="p-6">
-                  <BookOpen className="w-6 h-6 text-red-600 mb-3" />
-                  <h3 className="font-semibold text-gray-900 group-hover:text-red-600 text-xl transition-colors">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-gray-500 mt-1">Explore {item.name} names</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          {data.length > 8 && (
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setShowAllReligions(!showAllReligions)}
-                className="text-red-600 font-semibold hover:underline"
-              >
-                {showAllReligions ? "Show Less" : "Show More"}
-              </button>
-            </div>
-          )}
-        </section>
-
-        {/* Name Tables */}
-        <NameTable searchQuery={searchQuery} searchTrigger={searchTrigger} />
+        <LetterTable searchQuery={searchQuery} searchTrigger={searchTrigger} />
       </div>
     </div>
   );
 }
 
-export default NameMeaning;
+export default LetterPage;

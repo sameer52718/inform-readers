@@ -79,7 +79,7 @@ function Header() {
   });
 
   const categories = [
-    { id: 1, title: t("header.categories.names"), url: "/names" },
+    { id: 1, title: t("header.categories.names"), url: "/baby-names" },
     { id: 2, title: t("header.categories.postalcode"), url: "/postal-codes" },
     { id: 3, title: t("header.categories.swiftcode"), url: "/bank-codes" },
     { id: 4, title: t("header.categories.software"), url: "/software" },
