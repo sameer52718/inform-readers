@@ -1,7 +1,5 @@
 "use client";
 
-
-
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +19,7 @@ import {
 import { useParams } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
 import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+import Breadcrumb from "../specification/Breadcrumb";
 
 function applyTemplate(template, values) {
   return template
@@ -37,7 +36,8 @@ function applyTemplate(template, values) {
 }
 
 function getIntroParagraph(values) {
-  const template = "Looking to download {Software Name} in {Country}? Get the latest {Version} ({File Size}), updated on {Last Update}, for {Operating System}. This {Status} software ensures seamless performance on systems with {Memory} RAM, {Processor}, and {Storage}. Whether you're gaming or working, {Software Name} delivers top-notch functionality tailored for {Country} users. Download now and optimize your {Operating System} experience with this reliable, high-performance software designed for efficiency and ease of use.";
+  const template =
+    "Looking to download {Software Name} in {Country}? Get the latest {Version} ({File Size}), updated on {Last Update}, for {Operating System}. This {Status} software ensures seamless performance on systems with {Memory} RAM, {Processor}, and {Storage}. Whether you're gaming or working, {Software Name} delivers top-notch functionality tailored for {Country} users. Download now and optimize your {Operating System} experience with this reliable, high-performance software designed for efficiency and ease of use.";
   return applyTemplate(template, values);
 }
 
@@ -46,24 +46,26 @@ function getFAQs(values) {
   const faqs = [
     {
       question: "Is {Software Name} compatible with {Operating System} in {Country}?",
-      answer: "{Software Name} {Version} is fully compatible with {Operating System} in {Country}. This {Status} software, updated on {Last Update}, requires {Memory} RAM, a {Processor}, and {Storage}. With a file size of {File Size}, it’s optimized for seamless performance on {Operating System} devices in {Country}. Whether for gaming or productivity, {Software Name} ensures a reliable experience. Download it securely to enhance your setup in {Country}."
+      answer:
+        "{Software Name} {Version} is fully compatible with {Operating System} in {Country}. This {Status} software, updated on {Last Update}, requires {Memory} RAM, a {Processor}, and {Storage}. With a file size of {File Size}, it’s optimized for seamless performance on {Operating System} devices in {Country}. Whether for gaming or productivity, {Software Name} ensures a reliable experience. Download it securely to enhance your setup in {Country}.",
     },
     {
       question: "What are the system requirements for {Software Name} in {Country}?",
-      answer: "To run {Software Name} {Version} in {Country}, your device needs {Memory} RAM, a {Processor}, and {Storage}. This {Status} software, with a {File Size} download, was last updated on {Last Update}. It’s designed for {Operating System} and ensures smooth operation for {Country} users. Install now to enjoy {Software Name}’s robust features tailored for your needs."
+      answer:
+        "To run {Software Name} {Version} in {Country}, your device needs {Memory} RAM, a {Processor}, and {Storage}. This {Status} software, with a {File Size} download, was last updated on {Last Update}. It’s designed for {Operating System} and ensures smooth operation for {Country} users. Install now to enjoy {Software Name}’s robust features tailored for your needs.",
     },
     {
       question: "How do I download {Software Name} for {Operating System} in {Country}?",
-      answer: "Downloading {Software Name} {Version} for {Operating System} in {Country} is simple. This {Status} software, updated {Last Update}, has a {File Size} download and requires {Memory} RAM, {Processor}, and {Storage}. Visit our secure download page to get started. {Software Name} is optimized for {Country} users, offering top performance for gaming and productivity on {Operating System}."
-    }
+      answer:
+        "Downloading {Software Name} {Version} for {Operating System} in {Country} is simple. This {Status} software, updated {Last Update}, has a {File Size} download and requires {Memory} RAM, {Processor}, and {Storage}. Visit our secure download page to get started. {Software Name} is optimized for {Country} users, offering top performance for gaming and productivity on {Operating System}.",
+    },
   ];
 
-  return faqs.map(faq => ({
+  return faqs.map((faq) => ({
     question: applyTemplate(faq.question, values),
-    answer: applyTemplate(faq.answer, values)
+    answer: applyTemplate(faq.answer, values),
   }));
 }
-
 
 // Mock related software data
 const relatedSoftware = [
@@ -113,13 +115,14 @@ const quickStats = [
 ];
 
 export default function SoftwareDetailPage() {
-  const { slug } = useParams();
+  const { subCategorySlug, slug } = useParams();
 
   const [software, setSoftware] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [country, setCountry] = useState("Global");
   const [introParagraph, setIntroParagraph] = useState("");
   const [faqs, setFaqs] = useState([]);
+  const [versions, setVersions] = useState([]);
 
   useEffect(() => {
     // Detect country from subdomain
@@ -151,6 +154,7 @@ export default function SoftwareDetailPage() {
 
         setIntroParagraph(getIntroParagraph(values));
         setFaqs(getFAQs(values));
+        setVersions(data.versions || []);
       } catch (error) {
         console.error("Error fetching software details:", error);
       }
@@ -174,6 +178,18 @@ export default function SoftwareDetailPage() {
   }
 
   if (!software) return null;
+
+  const subCategory = subCategorySlug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Softwares & Games", href: "/software" },
+    { label: subCategory, href: `/software/${subCategorySlug}` },
+    { label: software.name },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -202,6 +218,7 @@ export default function SoftwareDetailPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <Breadcrumb items={breadcrumbItems} />
         {/* Hero Section */}
         <div className="bg-white rounded-2xl p-8 shadow-sm">
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
@@ -327,42 +344,45 @@ export default function SoftwareDetailPage() {
         {/* Software Description Section */}
         <div className="mt-8 bg-white rounded-2xl p-8 shadow-sm">
           <h2 className="text-xl font-bold mb-4">Why Choose {software.name}?</h2>
-          <p className="text-gray-700 leading-relaxed">
-            {introParagraph}
-          </p>
+          <p className="text-gray-700 leading-relaxed">{introParagraph}</p>
         </div>
 
-        {/* Related Software */}
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-6">Related Software</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {relatedSoftware.map((item) => (
-              <Link
-                key={item.id}
-                href={`/software/${item.id}`}
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="flex flex-col items-center">
-                  <Image src={item.logo} alt={item.name} width={64} height={64} className="rounded-lg mb-4" />
-                  <h3 className="text-lg font-semibold text-center mb-2">{item.name}</h3>
-                  <div className="flex items-center gap-2 flex-wrap justify-center">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
-                      v{item.version}
-                    </span>
-                    {item.tag.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-1 border border-gray-200 text-gray-600 text-sm rounded-md"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Link>
-            ))}
+        {versions.length > 0 && (
+          <div className="mt-8 bg-white rounded-2xl p-8 shadow-sm">
+            <h2 className="text-xl font-bold mb-6">Available Versions</h2>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 text-left text-gray-600 text-sm">
+                    <th className="p-3">Version</th>
+                    <th className="p-3">Size</th>
+                    <th className="p-3">Release Date</th>
+                    <th className="p-3">Download</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {versions.map((item, index) => (
+                    <tr key={index} className="border-b hover:bg-gray-50">
+                      <td className="p-3 font-medium">{item.version}</td>
+                      <td className="p-3">{item.size} MB</td>
+                      <td className="p-3">{new Date(item.releaseDate).toLocaleDateString()}</td>
+                      <td className="p-3">
+                        <Link
+                          href={`/software/${subCategorySlug}/${item.slug}`}
+                          className="inline-block px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
+                        >
+                          Download
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* FAQ Section */}
         <div className="mt-8 bg-white rounded-2xl p-8 shadow-sm">
