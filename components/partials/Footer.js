@@ -10,14 +10,11 @@ import {
   Youtube,
   Github,
   Mail,
-  Phone,
-  MapPin,
   ChevronRight,
   Globe,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
@@ -103,12 +100,6 @@ export default function Footer() {
                   <Link href="/specification" className="hover:text-white flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     {t("footer.links.specifications")}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/news" className="hover:text-white flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-1" />
-                    {t("footer.links.news")}
                   </Link>
                 </li>
                 <li>
