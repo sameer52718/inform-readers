@@ -8,8 +8,25 @@ import { useParams } from "next/navigation";
 import { Search, ChevronRight } from "lucide-react";
 import Breadcrumb from "../specification/Breadcrumb";
 
+function parseNameSlug(slug) {
+  // expected: "boys-starting-with-a"
+  const regex = /(boys|girls)-starting-with-([a-z])/i;
+
+  const match = slug.match(regex);
+
+  if (!match) return null;
+
+  return {
+    gender: match[1],
+    alphabet: match[2].toUpperCase(), // A / B / C...
+  };
+}
+
 const LetterTable = ({ searchQuery, searchTrigger }) => {
-  const { letter } = useParams();
+  const { slug } = useParams();
+
+  const { alphabet: letter, gender } = parseNameSlug(slug);
+
   const [pagination, setPagination] = useState({
     totalItems: 0,
     currentPage: 1,
@@ -24,10 +41,11 @@ const LetterTable = ({ searchQuery, searchTrigger }) => {
       setLoading(loadingFlag);
       const { data } = await axiosInstance.get("/website/name", {
         params: {
-          initialLetter: letter.toUpperCase(),
+          initialLetter: letter,
           page,
           limit: 50,
           search: searchQuery,
+          gender: gender === "girls" ? "FEMALE" : "MALE",
         },
       });
 
@@ -44,14 +62,14 @@ const LetterTable = ({ searchQuery, searchTrigger }) => {
 
   useEffect(() => {
     getData(true, 1);
-  }, [letter, searchTrigger]);
+  }, [letter, searchTrigger, gender]);
 
   return (
     <section className="py-12">
       <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
         <div className="bg-gradient-to-r from-red-600 to-pink-500 p-6">
           <p className="text-white/80 mt-2">
-            Browse baby names starting with <strong>{letter?.toUpperCase()}</strong>
+            Browse {gender} names starting with <strong>{letter}</strong>
           </p>
         </div>
 
@@ -76,7 +94,7 @@ const LetterTable = ({ searchQuery, searchTrigger }) => {
                   ) : data.length === 0 ? (
                     <tr>
                       <td colSpan={3} className="text-center py-6 text-gray-500">
-                        No names found starting with "{letter?.toUpperCase()}"
+                        No names found starting with "{letter}"
                       </td>
                     </tr>
                   ) : (
@@ -143,7 +161,9 @@ const LetterTable = ({ searchQuery, searchTrigger }) => {
 function LetterPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTrigger, setSearchTrigger] = useState(0);
-  const { letter } = useParams();
+  const { slug } = useParams();
+  const { alphabet: letter, gender } = parseNameSlug(slug);
+
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTrigger((prev) => prev + 1);
@@ -152,7 +172,7 @@ function LetterPage() {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Baby Names", href: "/baby-names" },
-    { label: `Names Starting with "${letter.toUpperCase()}"` },
+    { label: `${gender} Names Starting with "${letter}"` },
   ];
 
   return (
@@ -191,6 +211,26 @@ function LetterPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Breadcrumb items={breadcrumbItems} />
         <LetterTable searchQuery={searchQuery} searchTrigger={searchTrigger} />
+        <section className="grid grid-cols-1  gap-6 mb-12">
+          {/* Boys Box */}
+          <div className="bg-white shadow-sm rounded-xl overflow-hidden">
+            <div className="bg-red-500 text-white font-bold text-center py-4 text-lg">
+              Browse {gender} Names by Alphabets
+            </div>
+
+            <div className="p-6 grid grid-cols-12 gap-4 text-center">
+              {Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map((letter) => (
+                <Link
+                  key={letter}
+                  href={`/baby-names/letter/${gender}-starting-with-${letter.toLowerCase()}`}
+                  className="text-gray-700 font-semibold hover:text-red-500"
+                >
+                  {letter}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

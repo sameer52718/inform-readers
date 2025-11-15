@@ -290,6 +290,46 @@ export default function NameMeaning() {
         {/* Name Tables */}
         <NameTable gender="MALE" searchQuery={searchQuery} searchTrigger={searchTrigger} />
         <NameTable gender="FEMALE" searchQuery={searchQuery} searchTrigger={searchTrigger} />
+        {/* Alphabet Browse Section */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {/* Boys Box */}
+          <div className="bg-white shadow-sm rounded-xl overflow-hidden">
+            <div className="bg-red-500 text-white font-bold text-center py-4 text-lg">
+              Browse Boy Names by Alphabets
+            </div>
+
+            <div className="p-6 grid grid-cols-7 gap-4 text-center">
+              {Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map((letter) => (
+                <Link
+                  key={letter}
+                  href={`/baby-names/letter/boys-starting-with-${letter.toLowerCase()}`}
+                  className="text-gray-700 font-semibold hover:text-red-500"
+                >
+                  {letter}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Girls Box */}
+          <div className="bg-white shadow-sm rounded-xl overflow-hidden">
+            <div className="bg-red-500 text-white font-bold text-center py-4 text-lg">
+              Browse Girls Names by Alphabets
+            </div>
+
+            <div className="p-6 grid grid-cols-7 gap-4 text-center">
+              {Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map((letter) => (
+                <Link
+                  key={letter}
+                  href={`/baby-names/letter/girls-starting-with-${letter.toLowerCase()}`}
+                  className="text-gray-700 font-semibold hover:text-red-500"
+                >
+                  {letter}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

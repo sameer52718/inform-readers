@@ -311,31 +311,6 @@ export default async function Home() {
             </div>
           </section>
 
-          {/* Articles Section */}
-          <section className="py-16">
-            <div className="bg-white rounded-2xl shadow-sm p-8">
-              <div className="flex flex-col md:flex-row  justify-between items-center border-b border-gray-200 pb-6 mb-8">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">News Articles</h2>
-                  <p className="text-gray-600">View News Articles of Today’s</p>
-                </div>
-                <Link
-                  href="/biography"
-                  className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
-                >
-                  View All Biographies
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {data?.randomArticles?.map((item) => (
-                  <ArticleCard item={item} key={item?._id} />
-                ))}
-              </div>
-            </div>
-          </section>
-
           {/* Cars Section */}
           <section className="py-16">
             <div className="bg-white rounded-2xl shadow-sm p-8">

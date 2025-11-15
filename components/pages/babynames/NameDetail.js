@@ -15,45 +15,6 @@ import { getCountryCodeFromHost } from "@/lib/getCountryFromSubdomain";
 import Breadcrumb from "../specification/Breadcrumb";
 import ShareButton from "@/components/shared/ShareButton";
 
-// Helper to pick n random letters
-function getRandomLetters(n) {
-  const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const shuffled = alphabets.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, n);
-}
-
-function RandomAlphabetLinks({ count = 6 }) {
-  const [randomLetters, setRandomLetters] = useState([]);
-
-  useEffect(() => {
-    setRandomLetters(getRandomLetters(count));
-  }, [count]);
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {randomLetters.map((letter) => (
-        <Link
-          key={letter}
-          href={`/baby-names/letter/${letter.toLowerCase()}`}
-          className="group relative p-6 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition-all hover:scale-105 flex flex-col gap-3"
-        >
-          <div className="flex items-center gap-3">
-            <Star className="w-6 h-6 text-red-500 group-hover:animate-bounce" />
-            <h2 className="text-2xl font-bold text-gray-800">{letter}</h2>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Explore baby names starting with <strong>{letter}</strong> and discover their meanings, origins,
-            and popularity.
-          </p>
-          <div className="flex gap-2 mt-auto">
-            <BookOpen className="w-5 h-5 text-gray-400" />
-            <Globe className="w-5 h-5 text-gray-400" />
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}
 export default function NameDetail() {
   const { slug } = useParams();
   const [data, setData] = useState([]);
@@ -189,7 +150,6 @@ export default function NameDetail() {
                   ))}
                 </div>
               </div>
-              <RandomAlphabetLinks />
             </div>
 
             {/* Sidebar */}

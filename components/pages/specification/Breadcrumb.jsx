@@ -10,14 +10,14 @@ const Breadcrumb = ({ items = [] }) => {
           {index > 0 && <ChevronRight className="mx-2 h-4 w-4 text-gray-400 flex-shrink-0" />}
 
           {item.href && index !== items.length - 1 ? (
-            <Link href={item.href} className="text-gray-600 hover:text-red-600 transition-colors">
+            <Link href={item.href} className="text-gray-600 capitalize hover:text-red-600 transition-colors">
               {item.label}
             </Link>
           ) : (
             <span
               className={
                 index === items.length - 1
-                  ? "font-medium text-gray-900 line-clamp-1"
+                  ? "font-medium text-gray-900 line-clamp-1 capitalize"
                   : "text-gray-600 line-clamp-1"
               }
             >
