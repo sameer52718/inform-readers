@@ -15,7 +15,7 @@ import Breadcrumb from "../specification/Breadcrumb";
 
 function LocationTable({ data = [] }) {
   const { t } = useTranslation();
-  const { countryCode, bankSlug, branchSlug } = useParams();
+  const { bankSlug, branchSlug } = useParams();
   return (
     <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
       <div className="overflow-x-auto">
@@ -45,7 +45,7 @@ function LocationTable({ data = [] }) {
                   <td className="p-4 text-sm">{code?.branch || "---"}</td>
                   <td className="p-4">
                     <Link
-                      href={`/bank-codes/${countryCode}/${bankSlug}/${branchSlug}/${code?.swiftCode}`}
+                      href={`/bank-codes/${bankSlug}/${branchSlug}/${code?.swiftCode}`}
                       className="text-sm font-medium text-red-600 hover:text-red-700"
                     >
                       {code?.swiftCode}
@@ -69,7 +69,7 @@ function LocationTable({ data = [] }) {
 
 function SwiftCodeDetail() {
   const { t } = useTranslation();
-  const { swiftCode, countryCode, bankSlug, branchSlug } = useParams();
+  const { swiftCode, bankSlug, branchSlug } = useParams();
   const [data, setData] = useState(null);
   const [related, setRelated] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -113,9 +113,8 @@ function SwiftCodeDetail() {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Swift Codes", href: "/bank-codes" },
-    { label: data?.countryId?.name, href: `/bank-codes/${countryCode}` },
-    { label: data?.bank, href: `/bank-codes/${countryCode}/${bankSlug}` },
-    { label: data?.branch, href: `/bank-codes/${countryCode}/${bankSlug}/${branchSlug}` },
+    { label: data?.bank, href: `/bank-codes/${bankSlug}` },
+    { label: data?.branch, href: `/bank-codes/${bankSlug}/${branchSlug}` },
     { label: data.swiftCode }, // last one: no href (current page)
   ];
 

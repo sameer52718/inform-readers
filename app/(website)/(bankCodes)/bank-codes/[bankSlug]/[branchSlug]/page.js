@@ -6,9 +6,9 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
 
 // Fetch branch detail
-async function getBranchData(countryCode, bankSlug, branchSlug) {
+async function getBranchData(host, bankSlug, branchSlug) {
   try {
-    const res = await axiosInstance.get(`/website/bankCode/${countryCode}/${bankSlug}/${branchSlug}`);
+    const res = await axiosInstance.get(`/website/bankCode/${bankSlug}/${branchSlug}`, { params: { host } });
     return res.data;
   } catch (error) {
     console.error("Error fetching branch detail:", error);
@@ -18,12 +18,11 @@ async function getBranchData(countryCode, bankSlug, branchSlug) {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
-  const { countryCode, bankSlug, branchSlug } = params;
-  const data = await getBranchData(countryCode, bankSlug, branchSlug);
-
+  const { bankSlug, branchSlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
+  const data = await getBranchData(host, bankSlug, branchSlug);
 
-  const canonicalUrl = new URL(`https://${host}/bank-codes/${countryCode}/${bankSlug}/${branchSlug}/`);
+  const canonicalUrl = new URL(`https://${host}/bank-codes/${bankSlug}/${branchSlug}/`);
 
   if (!data || !data.success) {
     return {
@@ -55,8 +54,10 @@ export async function generateMetadata({ params }) {
 
 // Page component
 export default async function BranchDetailPage({ params }) {
-  const { countryCode, bankSlug, branchSlug } = params;
-  const data = await getBranchData(countryCode, bankSlug, branchSlug);
+  const { bankSlug, branchSlug } = params;
+  const host = (await headers()).get("host") || "informreaders.com";
+
+  const data = await getBranchData(host, bankSlug, branchSlug);
 
   if (!data || !data.success) {
     return (
@@ -71,8 +72,7 @@ export default async function BranchDetailPage({ params }) {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Swift Codes", href: "/bank-codes" },
-    { label: branch?.country?.name, href: `/bank-codes/${countryCode}` },
-    { label: branch?.bank, href: `/bank-codes/${countryCode}/${bankSlug}` },
+    { label: branch?.bank, href: `/bank-codes/${bankSlug}` },
     { label: branch?.name },
   ];
   return (
@@ -135,7 +135,7 @@ export default async function BranchDetailPage({ params }) {
                 are not displayed for security reasons.
               </p>
               <Link
-                href={`/bank-codes/${countryCode}/${bankSlug}/${branchSlug}/${branch?.swiftCode}`}
+                href={`/bank-codes/${bankSlug}/${branchSlug}/${branch?.swiftCode}`}
                 className="inline-flex items-center text-red-600 hover:text-red-800 font-medium transition mt-4"
               >
                 View Swift Code →
@@ -152,7 +152,7 @@ export default async function BranchDetailPage({ params }) {
               {related.map((b) => (
                 <Link
                   key={b.slug}
-                  href={`/bank-codes/${countryCode}/${bankSlug}/${b.slug}`}
+                  href={`/bank-codes/${bankSlug}/${b.slug}`}
                   className="rounded-xl bg-white p-6 shadow-md hover:shadow-lg transition transform hover:-translate-y-1 border border-gray-100"
                 >
                   <div className="flex items-center gap-3 mb-2">

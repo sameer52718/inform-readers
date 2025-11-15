@@ -6,10 +6,10 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
 
 // Fetch grouped branch data
-async function getBranchesData(countryCode, bankSlug) {
+async function getBranchesData(host, bankSlug) {
   try {
     const res = await axiosInstance.get(`/website/bankCode/branches`, {
-      params: { countryCode, bankSlug },
+      params: { host, bankSlug },
     });
     return res.data;
   } catch (error) {
@@ -19,12 +19,11 @@ async function getBranchesData(countryCode, bankSlug) {
 }
 
 export async function generateMetadata({ params }) {
-  const { countryCode, bankSlug } = params;
-  const data = await getBranchesData(countryCode, bankSlug);
-
+  const { bankSlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
+  const data = await getBranchesData(host, bankSlug);
 
-  const canonicalUrl = new URL(`https://${host}/bank-codes/${countryCode}/${bankSlug}/`);
+  const canonicalUrl = new URL(`https://${host}/bank-codes/${bankSlug}/`);
 
   if (!data || !data.success) {
     return {
@@ -53,8 +52,10 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BankBranchesPage({ params }) {
-  const { countryCode, bankSlug } = params;
-  const data = await getBranchesData(countryCode, bankSlug);
+  const { bankSlug } = params;
+  const host = (await headers()).get("host") || "informreaders.com";
+
+  const data = await getBranchesData(host, bankSlug);
 
   if (!data || !data.success) {
     return (
@@ -69,7 +70,6 @@ export default async function BankBranchesPage({ params }) {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Swift Codes", href: "/bank-codes" },
-    { label: country?.name, href: `/bank-codes/${countryCode}` },
     { label: bank.name },
   ];
 
@@ -122,7 +122,7 @@ export default async function BankBranchesPage({ params }) {
 
                 <div className="flex justify-between items-center mt-4">
                   <Link
-                    href={`/bank-codes/${countryCode}/${bankSlug}/${branch.branchSlug}`}
+                    href={`/bank-codes/${bankSlug}/${branch.branchSlug}`}
                     className="inline-flex items-center text-red-600 hover:text-red-800 font-medium transition"
                   >
                     View Details →
