@@ -167,11 +167,14 @@ export default async function PostalCodeDetail({ params }) {
             description={`Used for shipping estimates and logistics in ${data.postalCode.area}.`}
           />
         </Section>
-
-        {/* About Area */}
-        <Section title={`About ${data.postalCode.area}`}>
-          <p className="text-gray-600">{data.content.summary}</p>
-        </Section>
+        {/* Constants Section */}
+        {data?.content?.constants && (
+          <Section title="Postal System Details">
+            <InfoBlock title="Postal Authority" content={data.content.constants.postal_authority} />
+            <InfoBlock title="Postal System" content={data.content.constants.postal_system} />
+            <InfoBlock title="Region Structure" content={data.content.constants.region_structure} />
+          </Section>
+        )}
 
         {/* FAQs */}
         <Section title="Frequently Asked Questions">
