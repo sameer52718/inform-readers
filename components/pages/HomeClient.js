@@ -5,8 +5,9 @@ import axiosInstance from "@/lib/axiosInstance";
 import AdBanner from "@/components/partials/AdBanner";
 import SpecificationCard from "../shared/SpecificationCard";
 import BiographyCard from "../shared/BiographyCard";
-import ArticleCard from "../shared/ArticleCard";
 import VehicleCard from "../vehicle/vehicleCard";
+import { headers } from "next/headers";
+import CountryDialog from "../shared/CountryDialog";
 
 const getData = async () => {
   try {
@@ -19,6 +20,10 @@ const getData = async () => {
 
 export default async function Home() {
   let data = await getData();
+  const h = await headers();
+  const countryCode = h.get("x-country-code") || "";
+  const host = h.get("host") || "";
+  const isMainDomain = host === "informreaders.com" || host === "www.informreaders.com";
 
   return (
     <>
@@ -364,6 +369,7 @@ export default async function Home() {
           <AdBanner />
         </div>
       </div>
+      {isMainDomain && countryCode && <CountryDialog country={countryCode} />}
     </>
   );
 }
