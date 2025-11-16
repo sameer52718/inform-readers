@@ -96,7 +96,7 @@ function Header() {
         { id: 12, title: t("header.categories.cars"), url: "/cars" },
         { id: 13, title: t("header.categories.bikes"), url: "/bikes" },
         { id: 14, title: t("header.categories.tools"), url: "/tools" },
-        { id: 15, title: t("header.categories.videoDownloader"), url: "/video-downloader" },
+        { id: 15, title: t("header.categories.videoDownloader"), url: "/downloaders" },
         { id: 19, title: t("header.categories.coupons"), url: "/coupons" },
         { id: 17, title: t("header.categories.jobs"), url: "/jobs" },
         { id: 20, title: t("header.categories.blogs"), url: "/blogs" },

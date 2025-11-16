@@ -1,8 +1,8 @@
-"use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { createElement } from "react";
 import { Youtube, Facebook, Instagram, Music } from "lucide-react";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
+import { headers } from "next/headers";
 
 const iconMap = {
   Youtube,
@@ -11,9 +11,47 @@ const iconMap = {
   Music, // Placeholder for TikTok
 };
 
+// Dynamic Metadata for Video Downloader Tools Page
+export async function generateMetadata() {
+  const host = (await headers()).get("host") || "informreaders.com";
+  const canonicalUrl = new URL(`https://${host}/downloaders/`);
+
+  const title = "Video Downloader Tools – YouTube, Facebook, Instagram & TikTok";
+  const description =
+    "Free online video downloader tools for YouTube, Facebook, Instagram, and TikTok. Paste the URL and download videos quickly and easily.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl.toString(),
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl.toString(),
+      type: "website",
+      images: [
+        {
+          url: `https://${host}/website/assets/images/logo/logo.png`,
+          width: 1200,
+          height: 630,
+          alt: "Video Downloader Tools",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`https://${host}/website/assets/images/logo/logo.png`],
+    },
+  };
+}
+
 const ToolCard = ({ name, description, href, icon }) => {
   return (
-    <motion.div
+    <div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -30,7 +68,7 @@ const ToolCard = ({ name, description, href, icon }) => {
       >
         Go to Downloader
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
@@ -38,30 +76,32 @@ const tools = [
   {
     name: "YouTube Downloader",
     description: "Download videos from YouTube quickly and easily by pasting the video URL.",
-    href: "/video-downloader/youtube",
+    href: "/downloaders/youtube-video-downloader",
     icon: "Youtube",
   },
   {
     name: "Facebook Downloader",
     description: "Save videos from Facebook with a simple URL paste.",
-    href: "/video-downloader/facebook",
+    href: "/downloaders/facebook-video-downloader",
     icon: "Facebook",
   },
   {
     name: "Instagram Downloader",
     description: "Download Instagram videos and reels effortlessly.",
-    href: "/video-downloader/instagram",
+    href: "/downloaders/instagram-video-downloader",
     icon: "Instagram",
   },
   {
     name: "TikTok Downloader",
     description: "Grab TikTok videos in seconds using the video URL.",
-    href: "/video-downloader/tiktok",
-    icon: "Music", // Placeholder, as lucide-react may not have a TikTok icon
+    href: "/downloaders/tiktok-video-downloader",
+    icon: "Music",
   },
 ];
 
 export default function Home() {
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Downloaders" }];
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-gradient-to-br from-red-600 to-red-700 text-white py-16">
@@ -75,6 +115,7 @@ export default function Home() {
         </div>
       </header>
       <main className="flex-grow container mx-auto px-4 py-8">
+        <Breadcrumb items={breadcrumbItems} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {tools.map((tool) => (
             <ToolCard key={tool.href} {...tool} />
