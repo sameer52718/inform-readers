@@ -24,7 +24,6 @@ export default async function Home() {
   const countryCode = h.get("x-country-code") || "pk";
   const host = h.get("host") || "";
   const isMainDomain = host === "informreaders.com" || host === "www.informreaders.com" || "localhost:3000";
-  console.log(isMainDomain && countryCode);
 
   return (
     <>
@@ -370,7 +369,7 @@ export default async function Home() {
           <AdBanner />
         </div>
       </div>
-      {isMainDomain && countryCode && <CountryDialog country={countryCode} />}
+      {isMainDomain && countryCode && <CountryDialog countryCode={countryCode} />}
     </>
   );
 }
