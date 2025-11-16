@@ -189,9 +189,9 @@ export function middleware(request) {
   }
 
   // 🚀 Redirect and set cookie
-  const redirectResponse = NextResponse.redirect(
-    `https://${country}.informreaders.com${request.nextUrl.pathname}`
-  );
+  // const redirectResponse = NextResponse.redirect(
+  //   `https://${country}.informreaders.com${request.nextUrl.pathname}`
+  // );
 
   // redirectResponse.cookies.set('i18next', redirectLang, {
   //   path: '/',
