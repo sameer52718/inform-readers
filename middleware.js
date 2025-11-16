@@ -198,7 +198,7 @@ export function middleware(request) {
   //   maxAge: 60 * 60 * 24 * 365, // 1 year
   // });
 
-  return redirectResponse;
+  return response;
 }
 
 export const config = {
