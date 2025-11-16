@@ -21,9 +21,10 @@ const getData = async () => {
 export default async function Home() {
   let data = await getData();
   const h = await headers();
-  const countryCode = h.get("x-country-code") || "";
+  const countryCode = h.get("x-country-code") || "pk";
   const host = h.get("host") || "";
-  const isMainDomain = host === "informreaders.com" || host === "www.informreaders.com";
+  const isMainDomain = host === "informreaders.com" || host === "www.informreaders.com" || "localhost:3000";
+  console.log(isMainDomain && countryCode);
 
   return (
     <>
