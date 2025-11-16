@@ -23,7 +23,7 @@ export default async function Home() {
   const h = await headers();
   const countryCode = h.get("x-country-code") || "pk";
   const host = h.get("host") || "";
-  const isMainDomain = host === "informreaders.com" || host === "www.informreaders.com" || "localhost:3000";
+  const isMainDomain = host === "informreaders.com" || host === "www.informreaders.com";
 
   return (
     <>

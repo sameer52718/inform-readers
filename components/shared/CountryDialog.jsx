@@ -37,7 +37,6 @@ export default function CountryDialog({ countryCode }) {
 
   const countryName = countryData.name.common;
   const flag = countryData.flag;
-  const subdomain = countryName.toLowerCase().replace(/\s+/g, "-");
 
   return (
     <div className="fixed inset-0 bg-black-500/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
@@ -85,7 +84,7 @@ export default function CountryDialog({ countryCode }) {
               Stay Here
             </button>
             <a
-              href={`https://${countryCode}.informreaders.com`}
+              href={`https://${countryCode.toLowerCase()}.informreaders.com`}
               className="flex-1 px-4 py-3 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white font-medium hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
             >
               Switch
