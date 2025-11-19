@@ -1,7 +1,6 @@
 "use client";
 
 import AdBanner from "@/components/partials/AdBanner";
-import HoverBanner from "@/components/partials/HoverBanner";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import { Building2, Globe2, MapPin } from "lucide-react";
@@ -9,8 +8,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { generateFAQs } from "@/templates/faq"; // Import FAQ generator from baby names
-import { getCountryCodeFromHost } from "@/lib/getCountryFromSubdomain";
 import Breadcrumb from "../specification/Breadcrumb";
 
 function LocationTable({ data = [] }) {
@@ -72,17 +69,8 @@ function SwiftCodeDetail() {
   const { swiftCode, bankSlug, branchSlug } = useParams();
   const [data, setData] = useState(null);
   const [related, setRelated] = useState([]);
+  const [content, setContent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [faqs, setFaqs] = useState([]);
-
-  useEffect(() => {
-    // Detect subdomain and generate FAQs
-    if (typeof window !== "undefined") {
-      const host = window.location.hostname;
-      const country = getCountryCodeFromHost(host);
-      setFaqs(generateFAQs(country, "swiftcode")); // Pass context to generate SWIFT code-specific FAQs
-    }
-  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -92,6 +80,7 @@ function SwiftCodeDetail() {
         if (!data.error) {
           setData(data.bankCodes);
           setRelated(data.related);
+          setContent(data.content);
         }
       } catch (error) {
         handleError(error);
@@ -124,16 +113,9 @@ function SwiftCodeDetail() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero Heading */}
         <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-          {t("swiftcodeDetail.heroTitle")
-            .replace("{bank}", data?.bank)
-            .replace("{swiftCode}", data?.swiftCode)}
+          {content?.title}
         </h1>
-        <p className="mt-4 text-center text-lg text-gray-600">
-          {t("swiftcodeDetail.heroDescription")
-            .replace("{bank}", data?.bank)
-            .replace("{city}", data?.city)
-            .replace("{country}", data?.countryId?.name)}
-        </p>
+        <p className="mt-4 text-center text-lg text-gray-600">{content?.paragraph}</p>
 
         {/* Services Section */}
         <div className="mt-12 rounded-2xl bg-white p-6 shadow-lg sm:p-8">
@@ -156,9 +138,6 @@ function SwiftCodeDetail() {
               </div>
             ))}
           </div>
-        </div>
-        <div className="my-4">
-          <HoverBanner />
         </div>
         <Breadcrumb items={breadcrumbItems} />
         {/* SWIFT Code Details Section */}
@@ -208,10 +187,6 @@ function SwiftCodeDetail() {
           </div>
         </div>
 
-        <div className="my-4">
-          <HoverBanner />
-        </div>
-
         {/* Importance Section */}
         <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
           <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -239,10 +214,27 @@ function SwiftCodeDetail() {
             ))}
           </div>
         </div>
-
-        <div className="my-4">
-          <HoverBanner />
-        </div>
+        <section className="my-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 text-2xl font-bold text-gray-900">Swift Code System Details</h2>
+          <div className="rounded-lg bg-gray-50 p-4">
+            <h3 className="text-sm font-medium text-gray-500">Banking Authority</h3>
+            <p className={`text-xl font-semibold ${"text-gray-900"}`}>
+              {content?.constants?.banking_authority}
+            </p>
+          </div>
+          <div className="rounded-lg bg-gray-50 p-4">
+            <h3 className="text-sm font-medium text-gray-500">Systems Used</h3>
+            <p className={`text-xl font-semibold ${"text-gray-900"}`}>
+              {content?.constants?.systems_used?.join?.(", ")}
+            </p>
+          </div>
+          <div className="rounded-lg bg-gray-50 p-4">
+            <h3 className="text-sm font-medium text-gray-500">Routing Structure</h3>
+            <p className={`text-xl font-semibold ${"text-gray-900"}`}>
+              {content?.constants?.routing_structure}
+            </p>
+          </div>
+        </section>
 
         {/* FAQ Section */}
         <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
@@ -250,31 +242,13 @@ function SwiftCodeDetail() {
             {t("swiftcodeDetail.faqTitle").replace("{bank}", data?.bank)}
           </h2>
           <div className="mt-6 space-y-6">
-            {faqs.map((faq, index) => (
+            {content?.faqs?.map((faq, index) => (
               <div key={index} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {faq.question
-                    .replace("{bank}", data?.bank)
-                    .replace("{branch}", data?.branch || "main")
-                    .replace("{swiftCode}", data?.swiftCode)
-                    .replace("{city}", data?.city)
-                    .replace("{country}", data?.countryId?.name)}
-                </h3>
-                <p className="mt-2 text-gray-600">
-                  {faq.answer
-                    .replace("{bank}", data?.bank)
-                    .replace("{branch}", data?.branch || "main")
-                    .replace("{city}", data?.city)
-                    .replace("{country}", data?.countryId?.name)
-                    .replace("{swiftCode}", data?.swiftCode)}
-                </p>
+                <h3 className="text-xl font-semibold text-gray-900">{faq.question}</h3>
+                <p className="mt-2 text-gray-600">{faq.answer}</p>
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="my-4">
-          <HoverBanner />
         </div>
 
         {/* Related Branches Section */}
@@ -286,10 +260,6 @@ function SwiftCodeDetail() {
             <LocationTable data={related} />
           </div>
         )}
-
-        <div className="my-4">
-          <HoverBanner />
-        </div>
       </div>
     </div>
   );

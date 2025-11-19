@@ -1,22 +1,7 @@
 import axiosInstance from "@/lib/axiosInstance";
-import SwiftCodeDetail from "@/components/pages/bankcodes/SwifrCodeDetail"; // Adjust path as needed
+import SwiftCodeDetail from "@/components/pages/bankcodes/SwifrCodeDetail";
 import { headers } from "next/headers";
 import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
-
-// Meta templates based on Bank Codes Meta title and Description.rtf
-const metaTemplates = {
-  title: "{bank_name} SWIFT Codes in {country} | {location}",
-  description:
-    "Find SWIFT codes for {bank_name} in {location}, {country}. Ensure secure international transfers with accurate bank codes!",
-};
-
-// Function to replace placeholders in meta templates
-function applyMetaTemplate(template, values) {
-  return template
-    .replace(/{bank_name}/g, values.bank_name || "")
-    .replace(/{location}/g, values.location || "")
-    .replace(/{country}/g, values.country || "");
-}
 
 export async function generateMetadata({ params }) {
   const { swiftCode, countryCode, bankSlug, branchSlug } = params;
@@ -52,8 +37,8 @@ export async function generateMetadata({ params }) {
     };
 
     // Generate title and description
-    const title = applyMetaTemplate(metaTemplates.title, values);
-    const description = applyMetaTemplate(metaTemplates.description, values);
+    const title = data.content.title;
+    const description = data.content.paragraph;
 
     return {
       title,
