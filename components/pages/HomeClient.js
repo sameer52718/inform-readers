@@ -63,7 +63,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {data?.randomSoftware?.map((software) => (
                 <Link
-                  href={`/software/${software.slug}`}
+                  href={`/software/${software.subCategory.slug}/${software.slug}`}
                   key={software._id}
                   className="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:border-red-100 transition-all duration-300"
                 >
