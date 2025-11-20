@@ -10,23 +10,8 @@ export default async function sitemap() {
 
   const sitemaps = result.data; // Array of DB sitemap entries
 
-  const finalUrls = [];
-
-  for (const sm of sitemaps) {
-    const xml = sm.xmlContent;
-
-    // Extract <loc> URLs
-    const matches = xml.matchAll(/<loc>(.*?)<\/loc>/g);
-
-    for (const m of matches) {
-      finalUrls.push({
-        url: m[1],
-        lastModified: sm.updatedAt,
-        changeFrequency: "weekly",
-        priority: 0.8,
-      });
-    }
-  }
-
-  return finalUrls;
+  return sitemaps.map((item, index) => ({
+    url: `https://${host}/sitemaps/${item.fileName}`,
+    lastModified: item.updatedAt,
+  }));
 }
