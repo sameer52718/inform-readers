@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://api.informreaders.com/sitemaps/sitemap-index.xml
