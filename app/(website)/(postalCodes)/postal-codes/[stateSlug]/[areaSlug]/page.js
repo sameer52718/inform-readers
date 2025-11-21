@@ -98,6 +98,13 @@ export default async function AreaDetailPage({ params }) {
       {/* 🔹 Main Section */}
       <div className="container mx-auto px-4 pb-20">
         <Breadcrumb items={breadcrumbItems} />
+        {content?.constants && (
+          <Section title="Postal System Details">
+            <InfoBlock title="Postal Authority" content={content.constants.postal_authority} />
+            <InfoBlock title="Postal System" content={content.constants.postal_system} />
+            <InfoBlock title="Region Structure" content={content.constants.region_structure} />
+          </Section>
+        )}
 
         {/* Area Information Card */}
         <div className="bg-white rounded-2xl shadow-md p-8 mb-10 border border-gray-100">
@@ -152,13 +159,6 @@ export default async function AreaDetailPage({ params }) {
           </div>
         </div>
         {/* Constants Section */}
-        {content?.constants && (
-          <Section title="Postal System Details">
-            <InfoBlock title="Postal Authority" content={content.constants.postal_authority} />
-            <InfoBlock title="Postal System" content={content.constants.postal_system} />
-            <InfoBlock title="Region Structure" content={content.constants.region_structure} />
-          </Section>
-        )}
 
         {/* FAQs */}
         <Section title="Frequently Asked Questions">

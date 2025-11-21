@@ -112,109 +112,12 @@ function SwiftCodeDetail() {
       <AdBanner />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero Heading */}
-        <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
+        <h1 className="text-center text-3xl font-bold tracking-tight mb-6 text-gray-900 sm:text-4xl md:text-5xl">
           {content?.title}
         </h1>
-        <p className="mt-4 text-center text-lg text-gray-600">{content?.paragraph}</p>
 
-        {/* Services Section */}
-        <div className="mt-12 rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            {t("swiftcodeDetail.servicesTitle").replace("{bank}", data?.bank)}
-          </h2>
-          <p className="mt-4 text-gray-600">
-            {t("swiftcodeDetail.servicesDescription").replace("{bank}", data?.bank)}
-          </p>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            {t("swiftcodeDetail.services", { returnObjects: true }).map((service, index) => (
-              <div key={index} className="rounded-xl border bg-gray-50 p-6">
-                <h6 className="font-semibold text-gray-900">{service.title}</h6>
-                <p className="mt-2 text-sm text-gray-600">
-                  {service.description
-                    .replace("{bank}", data?.bank)
-                    .replace("{city}", data?.city)
-                    .replace("{swiftCode}", data?.swiftCode)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
         <Breadcrumb items={breadcrumbItems} />
-        {/* SWIFT Code Details Section */}
-        <div className="mt-12">
-          <div className="rounded-xl bg-gradient-to-r from-red-600 to-red-700 p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              {t("swiftcodeDetail.swiftCodeTitle").replace("{swiftCode}", data?.swiftCode)}
-            </h2>
-            <p className="mt-2 text-red-100">
-              {t("swiftcodeDetail.swiftCodeDescription").replace("{bank}", data?.bank)}
-            </p>
-          </div>
-
-          <div className="mt-6 space-y-4">
-            <div className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-                <Building2 className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500">{t("swiftcodeDetail.bankNameLabel")}</p>
-                <p className="text-lg font-semibold text-gray-900">{data?.bank}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-                <MapPin className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500">{t("swiftcodeDetail.locationLabel")}</p>
-                <p className="text-lg font-semibold text-gray-900">
-                  {data?.branch ? `${data.branch}, ` : ""}
-                  {data?.city}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-                <Globe2 className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500">{t("swiftcodeDetail.countryLabel")}</p>
-                <p className="text-lg font-semibold text-gray-900">{data?.countryId?.name}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Importance Section */}
-        <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            {t("swiftcodeDetail.importanceTitle")
-              .replace("{swiftCode}", data?.swiftCode)
-              .replace("{bank}", data?.bank)}
-          </h2>
-          <p className="mt-4 text-gray-600">
-            {t("swiftcodeDetail.importanceDescription")
-              .replace("{swiftCode}", data?.swiftCode)
-              .replace("{bank}", data?.bank)}
-          </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            {t("swiftcodeDetail.importanceFeatures", { returnObjects: true }).map((feature, index) => (
-              <div key={index} className="rounded-xl border bg-gray-50 p-6">
-                <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
-                <p className="mt-2 text-sm text-gray-600">
-                  {feature.description
-                    .replace("{swiftCode}", data?.swiftCode)
-                    .replace("{branch}", data?.branch || "main")
-                    .replace("{city}", data?.city)
-                    .replace("{country}", data?.countryId?.name)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <section className="my-12 rounded-xl bg-white p-8 shadow-lg">
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
           <h2 className="mb-6 text-2xl font-bold text-gray-900">Swift Code System Details</h2>
           <div className="rounded-lg bg-gray-50 p-4">
             <h3 className="text-sm font-medium text-gray-500">Banking Authority</h3>
@@ -235,6 +138,32 @@ function SwiftCodeDetail() {
             </p>
           </div>
         </section>
+
+        {/* SWIFT Code Details Section */}
+        <div className="bg-white rounded-2xl shadow-md p-8 mb-10 border border-gray-100">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Bank Information</h2>
+          <div className="mb-6">
+            <p className="text-gray-600">{content?.paragraph}</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <p className="text-gray-600">Country:</p>
+              <p className="font-medium text-gray-900">{data?.countryId?.name}</p>
+            </div>
+            <div>
+              <p className="text-gray-600">Bank:</p>
+              <p className="font-medium text-gray-900">{data.bank}</p>
+            </div>
+            <div>
+              <p className="text-gray-600">Branch:</p>
+              <p className="font-medium text-gray-900">{data.branch}</p>
+            </div>
+            <div>
+              <p className="text-gray-600">Swift Code:</p>
+              <p className="font-medium text-gray-900">{data.swiftCode}</p>
+            </div>
+          </div>
+        </div>
 
         {/* FAQ Section */}
         <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
