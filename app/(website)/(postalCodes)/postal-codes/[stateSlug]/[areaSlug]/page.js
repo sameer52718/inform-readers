@@ -64,7 +64,7 @@ export default async function AreaDetailPage({ params }) {
     );
   }
 
-  const { postalCode, country, relatedAreas } = data.data;
+  const { postalCode, country, relatedAreas, content } = data.data;
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -86,7 +86,8 @@ export default async function AreaDetailPage({ params }) {
             className="mx-auto mb-4 rounded-lg shadow-lg"
           />
           <h1 className="text-4xl sm:text-5xl font-bold text-white">
-            {postalCode.area}, {postalCode.state}
+            {content?.title}
+            {/* {postalCode.area}, {postalCode.state} */}
           </h1>
           <p className="mt-3 text-lg opacity-90">
             Postal Code: <span className="font-semibold">{postalCode.code}</span>
@@ -101,6 +102,9 @@ export default async function AreaDetailPage({ params }) {
         {/* Area Information Card */}
         <div className="bg-white rounded-2xl shadow-md p-8 mb-10 border border-gray-100">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Area Information</h2>
+          <div className="mb-6">
+            <p className="text-gray-600">{content?.paragraph}</p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <p className="text-gray-600">Country:</p>
@@ -147,6 +151,21 @@ export default async function AreaDetailPage({ params }) {
             </Link> */}
           </div>
         </div>
+        {/* Constants Section */}
+        {content?.constants && (
+          <Section title="Postal System Details">
+            <InfoBlock title="Postal Authority" content={content.constants.postal_authority} />
+            <InfoBlock title="Postal System" content={content.constants.postal_system} />
+            <InfoBlock title="Region Structure" content={content.constants.region_structure} />
+          </Section>
+        )}
+
+        {/* FAQs */}
+        <Section title="Frequently Asked Questions">
+          {content?.faqs.map((faq, index) => (
+            <FunctionItem key={index} title={`${index + 1}. ${faq.question}`} description={faq.answer} />
+          ))}
+        </Section>
 
         {/* Related Areas Section */}
         {relatedAreas.length > 0 && (
@@ -183,6 +202,35 @@ export default async function AreaDetailPage({ params }) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+function Section({ title, children }) {
+  return (
+    <section className="my-12 rounded-xl bg-white p-8 shadow-lg">
+      <h2 className="mb-6 text-2xl font-bold text-gray-900">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function InfoBlock({ title, content, highlight = false }) {
+  return (
+    <div className="rounded-lg bg-gray-50 p-4">
+      <h3 className="text-sm font-medium text-gray-500">{title}</h3>
+      <p className={`text-xl font-semibold ${highlight ? "text-red-600 text-2xl" : "text-gray-900"}`}>
+        {content}
+      </p>
+    </div>
+  );
+}
+
+function FunctionItem({ title, description }) {
+  return (
+    <div className="mb-4">
+      <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+      <p className="text-gray-600">{description}</p>
     </div>
   );
 }
