@@ -51,7 +51,9 @@ export default function NameDetail() {
     const getData = async () => {
       try {
         setIsLoading(true);
-        const { data } = await axiosInstance.get(`/website/name/${slug}`);
+        const { data } = await axiosInstance.get(`/website/name/${slug}`, {
+          params: { host: window.location.host },
+        });
         if (!data.error) {
           setName(data.data);
         }
@@ -126,26 +128,15 @@ export default function NameDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
+              <p>{name?.content.paragraph}</p>
               {/* FAQ Section */}
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
                 <div className="space-y-6">
-                  {faqs.map((faq, idx) => (
+                  {name?.content?.faqs.map((faq, idx) => (
                     <div key={idx} className="border-b pb-4">
-                      <h3 className="text-xl font-semibold mb-2">
-                        {faq.question
-                          .replace("{name}", name?.name || "this name")
-                          .replace("{gender}", name?.gender || "the")
-                          .replace("{origin}", name?.origion || "unknown")
-                          .replace("{religion}", name?.religionId?.name || "faith")}
-                      </h3>
-                      <p className="text-gray-600">
-                        {faq.answer
-                          .replace("{name}", name?.name || "this name")
-                          .replace("{gender}", name?.gender || "the")
-                          .replace("{origin}", name?.origion || "unknown")
-                          .replace("{religion}", name?.religionId?.name || "faith")}
-                      </p>
+                      <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
+                      <p className="text-gray-600">{faq.answer}</p>
                     </div>
                   ))}
                 </div>
