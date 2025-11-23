@@ -8,8 +8,7 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        allow: ["/baby-names/", "/postal-codes/", "/bank-codes/"],
-        disallow: ["/software/", "/games/"],
+        allow: ["/"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
