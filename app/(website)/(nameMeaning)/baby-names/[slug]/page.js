@@ -44,8 +44,8 @@ export async function generateMetadata({ params }) {
       country,
     };
 
-    const title = applyMetaTemplate(metaTemplates.title, values);
-    const description = applyMetaTemplate(metaTemplates.description, values);
+    const title = nameData.content.title;
+    const description = nameData.content.intro;
 
     return {
       title,

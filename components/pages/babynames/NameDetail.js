@@ -128,7 +128,27 @@ export default function NameDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              <p>{name?.content.paragraph}</p>
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold">{name?.content.title}</h2>
+
+                <p className="text-gray-700">{name?.content.intro}</p>
+
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Meaning</h3>
+                  <p className="text-gray-700">{name?.content.meaningSection}</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Lucky Details</h3>
+                  <p className="text-gray-700">{name?.content.luckySection}</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Cultural Note</h3>
+                  <p className="text-gray-700">{name?.content.countryNote}</p>
+                </div>
+              </div>
+
               {/* FAQ Section */}
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
