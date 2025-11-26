@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
   const country = getCountryName(getCountryCodeFromHost(host));
 
   try {
-    const { data } = await axiosInstance.get(`/website/name/${slug}`);
+    const { data } = await axiosInstance.get(`/website/name/${slug}`, { params: { host } });
 
     if (data.error || !data.data) {
       return {
