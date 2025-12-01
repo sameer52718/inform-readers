@@ -65,7 +65,6 @@ async function getRandom() {
 export default async function SoftwareLandingPage() {
   const { subCategories } = await getSubCategories();
   const { data } = await getRandom();
-  console.log(data);
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
