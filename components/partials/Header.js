@@ -84,7 +84,7 @@ function Header() {
     { id: 3, title: t("header.categories.swiftcode"), url: "/bank-codes" },
     { id: 4, title: t("header.categories.software"), url: "/software" },
     { id: 5, title: t("header.categories.specification"), url: "/specification" },
-    { id: 7, title: t("header.categories.biography"), url: "/biography" },
+    { id: 7, title: t("header.categories.biography"), url: "https://informreaders.com/biography" },
     {
       id: 9,
       title: t("header.categories.more"),

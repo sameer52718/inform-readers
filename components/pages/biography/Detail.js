@@ -225,6 +225,7 @@ export default function BiographyDetail() {
   };
 
   // Create a lookup map for section keys to their normalized forms
+  // Create a lookup map for section keys to their normalized forms
   const sectionKeyMap = {};
   sections.forEach((section) => {
     section.keys.forEach((key) => {
@@ -232,37 +233,54 @@ export default function BiographyDetail() {
     });
   });
 
+  const addIfValid = (obj, key, value) => {
+    if (value !== undefined && value !== null && value !== "" && value !== "Update Soon When Available") {
+      obj[key] = value;
+    }
+  };
+
   if (data) {
     // Map personalInformation
     data.personalInformation?.forEach((spec) => {
       if (spec.name) {
         let key = spec.name.toLowerCase();
         let value = spec.value;
-        if (key === "family details" && Array.isArray(spec.value)) {
-          const family = spec.value[0];
-          specMap["Family Details"] = Object.entries(family)
+
+        if (key === "family details" && Array.isArray(value)) {
+          const family = value[0];
+
+          const formatted = Object.entries(family)
+            .filter(([_, v]) => v) // skip empty
             .map(([k, v]) => `${toTitleCase(k)}: ${v}`)
             .join(", ");
-          // Map individual family fields
-          specMap["Spouse/Partner"] = family.spouse || "Update Soon When Available";
-          specMap["Children"] = family.children || "Update Soon When Available";
-          specMap["Parents"] = `${family.father || "Unknown"}, ${family.mother || "Unknown"}`;
-          specMap["Siblings"] = family.siblings || "Update Soon When Available";
-          specMap["Father"] = family.father || "Update Soon When Available";
-          specMap["Mother"] = family.mother || "Update Soon When Available";
-        } else if (key === "education" && Array.isArray(spec.value)) {
-          const education = spec.value[0];
-          specMap["Education"] = Object.entries(education)
-            .map(([k, v]) => `${toTitleCase(k.replace(":", ""))}: ${v || "---"}`)
+
+          addIfValid(specMap, "Family Details", formatted);
+
+          addIfValid(specMap, "Spouse/Partner", family.spouse);
+          addIfValid(specMap, "Children", family.children);
+          addIfValid(
+            specMap,
+            "Parents",
+            family.father && family.mother ? `${family.father}, ${family.mother}` : null
+          );
+          addIfValid(specMap, "Siblings", family.siblings);
+          addIfValid(specMap, "Father", family.father);
+          addIfValid(specMap, "Mother", family.mother);
+        } else if (key === "education" && Array.isArray(value)) {
+          const education = value[0];
+
+          const formatted = Object.entries(education)
+            .filter(([_, v]) => v) // skip empty
+            .map(([k, v]) => `${toTitleCase(k.replace(":", ""))}: ${v}`)
             .join(", ");
-          specMap["School_college"] = education["school_college:"] || "Update Soon When Available";
-          specMap["Educational_qualification"] =
-            education["educational_qualification:"] || "Update Soon When Available";
+
+          addIfValid(specMap, "Education", formatted);
+          addIfValid(specMap, "School_college", education["school_college:"]);
+          addIfValid(specMap, "Educational_qualification", education["educational_qualification:"]);
         } else {
-          // Find the matching section key by normalizing
           const normalizedKey = normalizeKey(key);
           const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
-          specMap[sectionKey] = value;
+          addIfValid(specMap, sectionKey, value);
         }
       }
     });
@@ -274,7 +292,7 @@ export default function BiographyDetail() {
         let value = spec.value;
         const normalizedKey = normalizeKey(key);
         const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
-        specMap[sectionKey] = value;
+        addIfValid(specMap, sectionKey, value);
       }
     });
 
@@ -285,7 +303,7 @@ export default function BiographyDetail() {
         let value = spec.value;
         const normalizedKey = normalizeKey(key);
         const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
-        specMap[sectionKey] = value;
+        addIfValid(specMap, sectionKey, value);
       }
     });
 
@@ -296,17 +314,8 @@ export default function BiographyDetail() {
         let value = spec.value;
         const normalizedKey = normalizeKey(key);
         const sectionKey = sectionKeyMap[normalizedKey] || toTitleCase(key);
-        specMap[sectionKey] = value;
+        addIfValid(specMap, sectionKey, value);
       }
-    });
-
-    // Fill in missing fields from sections
-    sections.forEach((section) => {
-      section.keys.forEach((key) => {
-        if (!specMap[key]) {
-          specMap[key] = "Update Soon When Available";
-        }
-      });
     });
   }
 
@@ -359,21 +368,29 @@ export default function BiographyDetail() {
           {/* Right Column - Biography Info */}
           <div className="md:col-span-8">
             {/* Biography Description */}
-            {data?.description && (
+            {/* {data?.description && (
               <div className="mb-6">
                 <div className="bg-white shadow-sm rounded-lg p-6 border border-gray-200 transition-all hover:shadow-md">
                   <h2 className="text-lg font-semibold mb-4 text-gray-800">About {data.name}</h2>
                   <p className="text-gray-700">{data.description}</p>
                 </div>
               </div>
-            )}
+            )} */}
 
             {/* Sections */}
             {sections.map((section) => {
-              const sectionSpecs = section.keys.map((key) => ({
-                name: key,
-                value: specMap[key] || "Update Soon When Available",
-              }));
+              const sectionSpecs = section.keys.reduce((acc, key) => {
+                if (specMap[key]) {
+                  acc.push({
+                    name: key,
+                    value: specMap[key],
+                  });
+                }
+                return acc;
+              }, []);
+              if (sectionSpecs.length === 0) {
+                return;
+              }
 
               return (
                 <div key={section.title} className="mb-6">
