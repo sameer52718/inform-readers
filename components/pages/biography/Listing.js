@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import handleError from "@/lib/handleError";
 import axiosInstance from "@/lib/axiosInstance";
 import Loading from "@/components/ui/Loading";
+import Breadcrumb from "../specification/Breadcrumb";
 
 function SearchBanner({ searchQuery, setSearchQuery, getData }) {
   return (
@@ -213,7 +214,7 @@ function BiographyCard({ celebrity, category }) {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-      <Link href={`/biography/${celebrity.slug}`}>
+      <Link href={`/biography/${celebrity?.categorySlug}/${celebrity.slug}`}>
         <div
           className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl bg-white"
           onMouseEnter={() => setIsHovered(true)}
@@ -298,10 +299,13 @@ export default function BiographyListing() {
     getData();
   }, []);
 
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Biographies" }];
+
   return (
     <main className="min-h-screen bg-neutral-50">
       <HeroSection />
       <div className="container mx-auto px-4 py-12">
+        <Breadcrumb items={breadcrumbItems} />
         <SearchBanner setSearchQuery={setSearchQuery} searchQuery={searchQuery} getData={getData} />
         <Loading loading={isLoading}>
           {data.map((category, index) => (

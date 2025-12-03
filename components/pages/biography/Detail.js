@@ -13,6 +13,7 @@ import BiographyCard from "@/components/shared/BiographyCard"; // Adjust path as
 // Utils
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
+import Breadcrumb from "../specification/Breadcrumb";
 
 const ShareButton = ({ data }) => {
   const handleNativeShare = async () => {
@@ -44,7 +45,7 @@ const ShareButton = ({ data }) => {
 };
 
 export default function BiographyDetail() {
-  const { slug } = useParams();
+  const { slug, categorySlug } = useParams();
 
   // State
   const [isLoading, setIsLoading] = useState(true);
@@ -348,9 +349,22 @@ export default function BiographyDetail() {
     return templates[Math.floor(Math.random() * templates.length)];
   };
 
+  const category = categorySlug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Biographies", href: "/biography" },
+    { label: category, href: `/biography/${categorySlug}` },
+    { label: data?.name },
+  ];
+
   return (
     <div className="container mx-auto px-4 lg:px-8 pb-12">
       <Loading loading={isLoading}>
+        <Breadcrumb items={breadcrumbItems} />
         {/* Biography Title */}
         <section className="mb-6 flex justify-between">
           <h1 className="text-3xl font-bold text-gray-900">{data?.name}</h1>

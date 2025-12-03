@@ -2,6 +2,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import BiographyDetail from "@/components/pages/biography/Detail";
 import { headers } from "next/headers";
 import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 const metaTemplates = {
   title: "{name} Biography, Age, Net Worth, Family & More in {country}",
@@ -23,9 +24,10 @@ function applyMetaTemplate(template, values) {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug, categorySlug } = params;
 
   const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/biography/${categorySlug}/${slug}`, host, true);
   const country = getCountryName(getCountryCodeFromHost(host));
 
   try {
@@ -34,7 +36,9 @@ export async function generateMetadata({ params }) {
     if (data.error || !data.biography) {
       return {
         title: "Biography Details | Inform Readers",
-        description: "Discover detailed biographies, life stories, net worth, and achievements of famous personalities.",
+        description:
+          "Discover detailed biographies, life stories, net worth, and achievements of famous personalities.",
+        alternates,
       };
     }
 
@@ -43,7 +47,9 @@ export async function generateMetadata({ params }) {
     const values = {
       name: safe(bio?.name),
       gender: safe(bio?.personalInformation?.find((i) => i.name?.toLowerCase() === "gender")?.value),
-      occupation: safe(bio?.professionalInformation?.find((i) => i.name?.toLowerCase() === "occupation")?.value),
+      occupation: safe(
+        bio?.professionalInformation?.find((i) => i.name?.toLowerCase() === "occupation")?.value
+      ),
       country: safe(country),
     };
 
@@ -60,6 +66,7 @@ export async function generateMetadata({ params }) {
         `${values.name} family`,
         `${values.name} career`,
       ],
+      alternates,
       openGraph: {
         title,
         description,
@@ -80,11 +87,13 @@ export async function generateMetadata({ params }) {
   } catch (error) {
     return {
       title: "Biography Details | Inform Readers",
-      description: "Explore detailed biographies, career journeys, and personal life insights of famous people.",
+      description:
+        "Explore detailed biographies, career journeys, and personal life insights of famous people.",
+      alternates,
     };
   }
 }
 
-export default function page() {
+export default function BiographyDetail() {
   return <BiographyDetail />;
 }

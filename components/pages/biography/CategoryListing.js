@@ -4,17 +4,18 @@ import { motion } from "framer-motion";
 import Loading from "@/components/ui/Loading";
 import Image from "next/image";
 import handleError from "@/lib/handleError";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
 import Link from "next/link";
 import Pagination from "@/components/ui/Pagination.js";
+import Breadcrumb from "../specification/Breadcrumb";
 
 function BiographyCard({ celebrity, category }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-      <Link href={`/biography/${celebrity.slug}`}>
+      <Link href={`/biography/${celebrity?.categorySlug}/${celebrity.slug}`}>
         <div
           className="group relative rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl bg-white"
           onMouseEnter={() => setIsHovered(true)}
@@ -226,7 +227,7 @@ function HeroSection() {
   );
 }
 
-const FilterBar = ({ filters, setFilters, applyFilters, categories, subCategories, nationalities }) => {
+const FilterBar = ({ filters, setFilters, applyFilters, nationalities }) => {
   const [isOpen, setIsOpen] = useState(false); // For mobile toggle
 
   const handleFilterChange = (e) => {
@@ -248,58 +249,6 @@ const FilterBar = ({ filters, setFilters, applyFilters, categories, subCategorie
       </button>
       <div className={`${isOpen ? "block" : "hidden"} lg:block bg-white p-6 rounded-lg shadow-md`}>
         <h2 className="text-xl font-semibold mb-4">Filters</h2>
-        {/* Category Filter */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Category</label>
-          <select
-            name="categoryId"
-            value={filters.categoryId}
-            onChange={handleFilterChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
-          >
-            <option value="">All Categories</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        {/* Sub-Category Filter */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Sub-Category</label>
-          <select
-            name="subCategoryId"
-            value={filters.subCategoryId}
-            onChange={handleFilterChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500  px-2 py-2 focus:outline-none "
-            disabled={!filters.categoryId} // Disable if no category selected
-          >
-            <option value="">All Sub-Categories</option>
-            {subCategories.map((subCategory) => (
-              <option key={subCategory._id} value={subCategory._id}>
-                {subCategory.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        {/* Net Worth Range Filter */}
-        {/* <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Net Worth Range</label>
-          <select
-            name="netWorthRange"
-            value={filters.netWorthRange}
-            onChange={handleFilterChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
-          >
-            <option value="">All Ranges</option>
-            {["Under $1M", "$1M-$10M", "$10M-$50M", "$50M-$100M", "$100M-$1B", "Over $1B"].map((range) => (
-              <option key={range} value={range}>
-                {range}
-              </option>
-            ))}
-          </select>
-        </div> */}
         {/* Country/Region Filter */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Country/Region</label>
@@ -376,7 +325,7 @@ const FilterBar = ({ filters, setFilters, applyFilters, categories, subCategorie
 };
 
 const BiographyListing = () => {
-  const searchParams = useSearchParams();
+  const { categorySlug } = useParams();
   const [celebrities, setCelebrities] = useState([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -386,13 +335,8 @@ const BiographyListing = () => {
     totalPages: 1,
     pageSize: 24,
   });
-  const [categories, setCategories] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
   const [nationalities, setNationalities] = useState([]);
   const [filters, setFilters] = useState({
-    categoryId: searchParams.get("category") || "",
-    subCategoryId: "",
-    netWorthRange: "",
     country: "",
     industry: "",
     gender: "",
@@ -400,15 +344,6 @@ const BiographyListing = () => {
 
   // Fetch categories and nationalities on mount
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axiosInstance.get("/common/category", { params: { type: "Biography" } });
-        setCategories(data.categories || []);
-      } catch (error) {
-        handleError(error);
-      }
-    };
-
     const fetchNationalities = async () => {
       try {
         const { data } = await axiosInstance.get("/common/nationality");
@@ -418,40 +353,17 @@ const BiographyListing = () => {
       }
     };
 
-    fetchCategories();
     fetchNationalities();
   }, []);
-
-  // Fetch subcategories when categoryId changes
-  useEffect(() => {
-    const fetchSubCategories = async () => {
-      if (filters.categoryId) {
-        try {
-          const { data } = await axiosInstance.get("/common/subCategory", {
-            params: { categoryId: filters.categoryId },
-          });
-          setSubCategories(data.subCategories || []);
-        } catch (error) {
-          handleError(error);
-        }
-      } else {
-        setSubCategories([]);
-      }
-    };
-
-    fetchSubCategories();
-  }, [filters.categoryId]);
 
   const loadData = useCallback(async (loading = true, page = 1, search = "", filters = {}) => {
     try {
       setIsLoading(loading);
-      const { data } = await axiosInstance.get(`website/biography/${filters.categoryId || "all"}`, {
+      const { data } = await axiosInstance.get(`website/biography/${categorySlug}`, {
         params: {
           page,
           limit: 24,
           search,
-          subCategoryId: filters.subCategoryId,
-          netWorthRange: filters.netWorthRange,
           country: filters.country,
           industry: filters.industry,
           gender: filters.gender,
@@ -470,7 +382,7 @@ const BiographyListing = () => {
 
   useEffect(() => {
     loadData(true, 1, search, filters);
-  }, [loadData, filters.categoryId]);
+  }, [loadData, categorySlug]);
 
   const onPageChange = async (page) => {
     loadData(true, page, search, filters);
@@ -484,18 +396,32 @@ const BiographyListing = () => {
     loadData(true, 1, search, filters);
   };
 
+  const category = categorySlug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Biographies", href: "/biography" },
+    { label: category },
+  ];
+
   return (
     <main className="min-h-screen bg-neutral-50">
       <HeroSection />
       <Loading loading={isLoading}>
-        <div className="container mx-auto px-4 py-12 flex flex-col lg:flex-row gap-6">
+        <div className="container mx-auto pt-12 px-4">
+          <Breadcrumb items={breadcrumbItems} />
+        </div>
+
+        <div className="container mx-auto px-4 pb-12 flex flex-col lg:flex-row gap-6">
           {/* Filter Bar */}
+
           <FilterBar
             filters={filters}
             setFilters={setFilters}
             applyFilters={applyFilters}
-            categories={categories}
-            subCategories={subCategories}
             nationalities={nationalities}
           />
           {/* Biography Listing */}
@@ -525,7 +451,7 @@ const BiographyListing = () => {
     </main>
   );
 };
-const page = () => {
+const CategoryListing = () => {
   return (
     <Suspense>
       <BiographyListing />
@@ -533,4 +459,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CategoryListing;

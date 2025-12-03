@@ -1,11 +1,12 @@
-import React from "react";
-import BiographyListing from "@/components/pages/biography/Listing";
-import { headers } from "next/headers";
+import CategoryListing from "@/components/pages/biography/CategoryListing";
 import { buildHreflangLinks } from "@/lib/hreflang";
+import { headers } from "next/headers";
+import React from "react";
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }) {
+  const { categorySlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
-  const alternates = buildHreflangLinks(`/biography/`, host, true);
+  const alternates = buildHreflangLinks(`/biography/${categorySlug}`, host, true);
 
   return {
     title: "Famous Celebrity Biographies || Inform Readers",
@@ -32,8 +33,8 @@ export async function generateMetadata() {
   };
 }
 
-const Page = () => {
-  return <BiographyListing />;
+const CategoryListing = () => {
+  return <CategoryListing />;
 };
 
-export default Page;
+export default CategoryListing;
