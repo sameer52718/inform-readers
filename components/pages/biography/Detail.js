@@ -319,24 +319,29 @@ export default function BiographyDetail() {
     });
   }
 
-  const getIntro = (bio) => {
+  const getIntro = (bio, specMap) => {
     if (!bio) return "";
 
-    // Safe getter with fallback
-    const safe = (value, fallback = "Update Soon When Available") =>
-      value && value !== "" ? value : fallback;
+    // Helper
+    const pick = (key) =>
+      specMap[key] && specMap[key] !== "" && specMap[key] !== "Update Soon When Available"
+        ? specMap[key]
+        : null;
 
-    const name = safe(bio.name);
-    const nationality = safe(bio.nationality, "N/A");
-    const occupation = safe(bio.occupation);
-    const dob = safe(bio.dateOfBirth, "N/A");
-    const pob = safe(bio.placeOfBirth, "N/A");
-    const country = safe(bio.country, "N/A");
-    const netWorth = safe(bio.netWorth);
+    // Pulling from specMap (correct source)
+    const name = bio.name || "";
+    const nationality = pick("Nationality") || "N/A";
+    const occupation = pick("Occupation") || "N/A";
+    const dob = pick("Date of Birth") || "N/A";
+    const pob = pick("Place of Birth") || "N/A";
+    const country = bio.country || "N/A";
+    const netWorth = pick("Estimated Net Worth") || "N/A";
 
     const templates = [
       `Unveil the remarkable story of ${name}, a distinguished ${nationality} ${occupation} born on ${dob} in ${pob}, ${country}. With an estimated net worth of ${netWorth}, ${name} has significantly shaped ${country}'s cultural and professional landscape.`,
+
       `${name}, an iconic ${nationality} ${occupation} from ${country}, was born on ${dob} in ${pob}. Boasting an estimated net worth of ${netWorth}, ${name} embodies both talent and determination.`,
+
       `Get to know ${name}, a celebrated ${nationality} ${occupation} born on ${dob} in ${pob}, ${country}. With an estimated net worth of ${netWorth}, ${name}'s journey is truly inspiring.`,
     ];
 
@@ -354,7 +359,7 @@ export default function BiographyDetail() {
 
         {data && (
           <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
-            <p className="text-gray-700 text-lg leading-relaxed">{getIntro(data)}</p>
+            <p className="text-gray-700 text-lg leading-relaxed">{getIntro(data, specMap)}</p>
           </div>
         )}
 
