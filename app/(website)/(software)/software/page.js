@@ -1,43 +1,21 @@
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import axiosInstance from "@/lib/axiosInstance";
+import { buildHreflangLinks } from "@/lib/hreflang";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
 export async function generateMetadata() {
   const host = (await headers()).get("host") || "informreaders.com";
-
+  const alternates = buildHreflangLinks(`/software/`, host);
   const title = "Software Hub – Explore Windows Software Categories & Downloads || Informreaders";
   const description =
     "Discover Windows software across categories like Browsers, Developers, Security, Internet Tools, Games, Multimedia and more. Browse popular software and explore detailed subcategories.";
-  const canonicalUrl = `https://${host}/software`;
 
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      type: "website",
-      images: [
-        {
-          url: `https://${host}/website/assets/images/logo/logo.png`,
-          width: 600,
-          height: 600,
-          alt: "Software Hub Logo",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`https://${host}/website/assets/images/logo/logo.png`],
-    },
+    alternates,
   };
 }
 

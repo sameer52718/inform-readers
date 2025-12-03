@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import Image from "next/image";
 import Link from "next/link";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // Fetch Software by Subcategory Slug
 async function getSoftwareList(slug, page = 1, limit = 12, search = "") {
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }) {
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+  const alternates = buildHreflangLinks(`/software/${subCategorySlug}/`, host);
 
   const title = subCategory
     ? `${subCategory} Software Download Best Tools || Informreaders`
@@ -35,16 +37,14 @@ export async function generateMetadata({ params }) {
     ? `Explore and download software under the ${subCategory} category.`
     : "Explore software by category.";
 
-  const canonicalUrl = `https://${host}/software/${subCategorySlug}`;
-
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl },
+    alternates,
     openGraph: {
       title,
       description,
-      url: canonicalUrl,
+      url: alternates.canonical,
       images: [
         {
           url: `https://${host}/website/assets/images/logo/logo.png`,
