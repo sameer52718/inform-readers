@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Landmark, MapPin } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // Fetch grouped branch data
 async function getBranchesData(host, bankSlug) {
@@ -21,17 +22,14 @@ async function getBranchesData(host, bankSlug) {
 export async function generateMetadata({ params }) {
   const { bankSlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/bank-codes/${bankSlug}/`, host);
   const data = await getBranchesData(host, bankSlug);
-
-  const canonicalUrl = new URL(`https://${host}/bank-codes/${bankSlug}/`);
 
   if (!data || !data.success) {
     return {
       title: "Bank Branches Information",
       description: "Details about bank branches and SWIFT codes.",
-      alternates: {
-        canonical: canonicalUrl.toString(),
-      },
+      alternates,
     };
   }
 
@@ -40,9 +38,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${bank.name} Branches in ${country.name}`,
     description: `Explore all ${bank.name} branches across ${country.name}. Find branch details, SWIFT codes, and cities served.`,
-    alternates: {
-      canonical: canonicalUrl.toString(),
-    },
+    alternates,
     openGraph: {
       title: `${bank.name} Branches in ${country.name}`,
       description: `Comprehensive list of ${bank.name} branches in ${country.name}.`,

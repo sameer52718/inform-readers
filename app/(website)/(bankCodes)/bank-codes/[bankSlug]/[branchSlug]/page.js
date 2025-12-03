@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MapPin, Building2, Landmark } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // Fetch branch detail
 async function getBranchData(host, bankSlug, branchSlug) {
@@ -20,17 +21,14 @@ async function getBranchData(host, bankSlug, branchSlug) {
 export async function generateMetadata({ params }) {
   const { bankSlug, branchSlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/bank-codes/${bankSlug}/${branchSlug}/`, host);
   const data = await getBranchData(host, bankSlug, branchSlug);
-
-  const canonicalUrl = new URL(`https://${host}/bank-codes/${bankSlug}/${branchSlug}/`);
 
   if (!data || !data.success) {
     return {
       title: "Branch Detail",
       description: "Details of selected bank branch.",
-      alternates: {
-        canonical: canonicalUrl.toString(),
-      },
+      alternates,
     };
   }
 
@@ -41,9 +39,7 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl.toString(),
-    },
+    alternates,
     openGraph: {
       title,
       description,

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Building2, MapPin } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 //  Fetch data function
 async function getBanksData(host) {
@@ -21,8 +22,7 @@ async function getBanksData(host) {
 //  Dynamic Metadata
 export async function generateMetadata() {
   const host = (await headers()).get("host") || "informreaders.com";
-
-  const canonicalUrl = new URL(`https://${host}/bank-codes/`);
+  const alternates = buildHreflangLinks(`/bank-codes/`, host);
 
   try {
     const data = await getBanksData(host);
@@ -31,9 +31,7 @@ export async function generateMetadata() {
       return {
         title: "Banks Information",
         description: "Explore detailed information about banks worldwide.",
-        alternates: {
-          canonical: canonicalUrl.toString(),
-        },
+        alternates,
       };
     }
 
@@ -45,9 +43,7 @@ export async function generateMetadata() {
     return {
       title,
       description,
-      alternates: {
-        canonical: canonicalUrl.toString(),
-      },
+      alternates,
       openGraph: {
         title,
         description,
@@ -58,9 +54,7 @@ export async function generateMetadata() {
     return {
       title: "Banks Information",
       description: "Explore major banks and their branches by country.",
-      alternates: {
-        canonical: canonicalUrl.toString(),
-      },
+      alternates,
     };
   }
 }
