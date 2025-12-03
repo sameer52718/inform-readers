@@ -3,6 +3,7 @@ import { createElement } from "react";
 import { Youtube, Facebook, Instagram, Music } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 const iconMap = {
   Youtube,
@@ -14,7 +15,7 @@ const iconMap = {
 // Dynamic Metadata for Video Downloader Tools Page
 export async function generateMetadata() {
   const host = (await headers()).get("host") || "informreaders.com";
-  const canonicalUrl = new URL(`https://${host}/downloaders/`);
+  const alternates = buildHreflangLinks(`/downloaders/`, host);
 
   const title = "Video Downloader Tools – YouTube, Facebook, Instagram & TikTok";
   const description =
@@ -23,13 +24,11 @@ export async function generateMetadata() {
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl.toString(),
-    },
+    alternates,
     openGraph: {
       title,
       description,
-      url: canonicalUrl.toString(),
+      url: alternates.canonical,
       type: "website",
       images: [
         {

@@ -2,11 +2,12 @@ import { VideoDownloadProvider } from "@/context/VideoDownloadContext";
 import DownloaderForm from "../components/DownloaderForm";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // Dynamic Metadata for Instagram Video Downloader Page
 export async function generateMetadata() {
   const host = (await headers()).get("host") || "informreaders.com";
-  const canonicalUrl = new URL(`https://${host}/downloaders/instagram-video-downloader`);
+  const alternates = buildHreflangLinks(`/downloaders/instagram-video-downloader/`, host);
 
   const title = "Instagram Video Downloader – Free & Fast Online Tool";
   const description =
@@ -15,13 +16,11 @@ export async function generateMetadata() {
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl.toString(),
-    },
+    alternates,
     openGraph: {
       title,
       description,
-      url: canonicalUrl.toString(),
+      url: alternates.canonical.toString(),
       type: "website",
       images: [
         {
