@@ -2,20 +2,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import NameMeaning from "@/components/pages/babynames/NameDetail";
 import { headers } from "next/headers";
 import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
-const metaTemplates = {
-  title: "{name} Meaning, Origin & Popularity in {country}",
-  description:
-    "Discover the meaning of the {gender} name {name}, its {origin} roots, {religion} influence, and popularity in {country}.",
-};
-
-function applyMetaTemplate(template, values) {
-  return template
-    .replace(/{name}/g, values.name || "")
-    .replace(/{gender}/g, values.gender || "")
-    .replace(/{origin}/g, values.origin || "")
-    .replace(/{religion}/g, values.religion || "")
-    .replace(/{country}/g, values.country || "");
-}
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
@@ -25,16 +12,17 @@ export async function generateMetadata({ params }) {
 
   try {
     const { data } = await axiosInstance.get(`/website/name/${slug}`, { params: { host } });
+    const alternates = buildHreflangLinks(`/baby-names/${slug}/`, host);
 
     if (data.error || !data.data) {
       return {
         title: "Name Details | Infrom Readers",
         description: "Find detailed meanings, origin, and cultural background of baby names.",
+        alternates,
       };
     }
 
     const nameData = data.data;
-    console.log(nameData);
 
     const values = {
       name: nameData?.name || "",
@@ -57,21 +45,7 @@ export async function generateMetadata({ params }) {
         `${values.name} baby name`,
         `meaning of the name ${values.name}`,
       ],
-      openGraph: {
-        title,
-        description,
-        siteName: "BabyNameFinder",
-        images: [
-          {
-            url: `http://${host}/images/baby-name-og.jpg`,
-            width: 1200,
-            height: 630,
-            alt: `${values.name} - Name Details`,
-          },
-        ],
-        locale: "en_US",
-        type: "article",
-      },
+      alternates,
     };
   } catch (error) {
     return {
