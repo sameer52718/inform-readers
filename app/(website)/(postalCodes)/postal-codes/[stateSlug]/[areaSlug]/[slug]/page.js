@@ -4,6 +4,7 @@ import Image from "next/image";
 import ShareButton from "../../../components/ShareButton";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // Helper function to get term based on country
 function getTerm(country) {
@@ -27,8 +28,7 @@ export async function generateMetadata({ params }) {
     const data = res.data.data;
     const country = data.postalCode.countryId.name;
     const term = getTerm(country);
-
-    const canonicalUrl = new URL(`https://${host}/postal-codes/${stateSlug}/${areaSlug}/${params.slug}`);
+    const alternates = buildHreflangLinks(`/postal-codes/${stateSlug}/${areaSlug}/${params.slug}`, host);
 
     // Use first meta title and description from document
     let titleTemplate = `{Postal Code} ${term} {Area}, {Country}`;
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }) {
     return {
       title,
       description,
-      alternates: { canonical: canonicalUrl.toString() },
+      alternates,
       openGraph: {
         title,
         description,

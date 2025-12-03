@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MapPin, Mail } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // 🔹 Fetch data
 async function getPostalAreasData(stateSlug, host, search = "") {
@@ -24,7 +25,7 @@ export async function generateMetadata({ params, searchParams }) {
   const { stateSlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
   const search = searchParams?.search || "";
-  const canonicalUrl = new URL(`https://${host}/postal-codes/${stateSlug}/`);
+  const alternates = buildHreflangLinks(`/postal-codes/${stateSlug}/`, host);
 
   try {
     const data = await getPostalAreasData(stateSlug, host, search);
@@ -33,7 +34,7 @@ export async function generateMetadata({ params, searchParams }) {
       return {
         title: "Postal Codes by Area",
         description: "Explore postal codes organized by region and area.",
-        alternates: { canonical: canonicalUrl.toString() },
+        alternates,
       };
     }
 
@@ -45,7 +46,7 @@ export async function generateMetadata({ params, searchParams }) {
     return {
       title,
       description,
-      alternates: { canonical: canonicalUrl.toString() },
+      alternates,
       openGraph: {
         title,
         description,
@@ -56,7 +57,7 @@ export async function generateMetadata({ params, searchParams }) {
     return {
       title: "Postal Codes by Area",
       description: "Explore postal codes organized by region and area.",
-      alternates: { canonical: canonicalUrl.toString() },
+      alternates,
     };
   }
 }

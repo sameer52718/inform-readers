@@ -1,9 +1,10 @@
 import axiosInstance from "@/lib/axiosInstance";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Globe2, Compass, ArrowRight, Mail } from "lucide-react";
+import { MapPin, Compass, Mail } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // 🔹 Fetch Data
 async function getAreaDetail(areaSlug, host) {
@@ -22,7 +23,7 @@ async function getAreaDetail(areaSlug, host) {
 export async function generateMetadata({ params }) {
   const { areaSlug, stateSlug } = params;
   const host = (await headers()).get("host") || "informreaders.com";
-  const canonicalUrl = new URL(`https://${host}/postal-codes/${stateSlug}/${areaSlug}/`);
+  const alternates = buildHreflangLinks(`/postal-codes/${stateSlug}/${areaSlug}/`, host);
 
   const data = await getAreaDetail(areaSlug, host);
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }) {
     return {
       title: "Postal Code Information",
       description: "Explore postal code and area details worldwide.",
-      alternates: { canonical: canonicalUrl.toString() },
+      alternates,
     };
   }
 
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
-    alternates: { canonical: canonicalUrl.toString() },
+    alternates,
     openGraph: {
       title,
       description,

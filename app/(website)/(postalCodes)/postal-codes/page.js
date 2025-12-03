@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MapPin, Globe2 } from "lucide-react";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 // 🔹 Fetch data function
 async function getPostalStatesData(host, search = "") {
@@ -23,7 +23,7 @@ async function getPostalStatesData(host, search = "") {
 // 🔹 Dynamic Metadata
 export async function generateMetadata({ params, searchParams }) {
   const host = (await headers()).get("host") || "informreaders.com";
-  const canonicalUrl = new URL(`https://${host}/postal-codes/`);
+  const alternates = buildHreflangLinks(`/postal-codes/`, host);
   const search = searchParams?.search || "";
 
   try {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params, searchParams }) {
       return {
         title: "Postal Codes by Country",
         description: "Browse postal codes organized by country and region.",
-        alternates: { canonical: canonicalUrl.toString() },
+        alternates,
       };
     }
 
@@ -44,14 +44,14 @@ export async function generateMetadata({ params, searchParams }) {
     return {
       title,
       description,
-      alternates: { canonical: canonicalUrl.toString() },
+      alternates,
       openGraph: { title, description, images: [country.flag] },
     };
   } catch {
     return {
       title: "Postal Codes by Country",
       description: "Browse postal codes organized by country and region.",
-      alternates: { canonical: canonicalUrl.toString() },
+      alternates,
     };
   }
 }
