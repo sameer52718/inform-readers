@@ -33,8 +33,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const CategoryListing = () => {
+const page = () => {
   return <CategoryListing />;
 };
 
-export default CategoryListing;
+export default page;
