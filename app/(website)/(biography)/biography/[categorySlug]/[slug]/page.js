@@ -94,6 +94,6 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function BiographyDetail() {
+export default function page() {
   return <BiographyDetail />;
 }
