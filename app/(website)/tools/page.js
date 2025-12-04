@@ -1,21 +1,20 @@
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 import { TOOL_CATEGORIES } from "@/constant/tools"; // Adjust path as needed
+import { buildHreflangLinks } from "@/lib/hreflang";
+import { headers } from "next/headers";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Free Online Tools to Simplify Your Business - Inform Readers",
-  description:
-    "Discover free online tools at Inform Readers to simplify your business tasks. From PDF and image tools to calculators, we make your life easier.",
-  keywords: "free online tools, business tools, PDF tools, image tools, calculators, Inform Readers",
-  author: "Inform Readers",
-  robots: "index, follow",
-  openGraph: {
+export async function generateMetadata() {
+  const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/tools/`, host);
+  return {
     title: "Free Online Tools to Simplify Your Business - Inform Readers",
     description:
       "Discover free online tools at Inform Readers to simplify your business tasks. From PDF and image tools to calculators, we make your life easier.",
-    type: "website",
-    url: "https://www.informreaders.com/",
-  },
-};
+    keywords: "free online tools, business tools, PDF tools, image tools, calculators, Inform Readers",
+    alternates,
+  };
+}
 
 export default function Home() {
   const getRandomTools = (count) => {
@@ -27,10 +26,14 @@ export default function Home() {
   };
 
   const popularTools = getRandomTools(20);
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Tools" }];
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
+      <div className="max-w-7xl mx-auto">
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
       <section className="bg-gradient-to-b from-blue-50 to-white py-12 text-center">
         <h1 className="text-5xl font-bold tracking-tight">
           <span className="text-gray-900">Free Tools to Make</span>{" "}

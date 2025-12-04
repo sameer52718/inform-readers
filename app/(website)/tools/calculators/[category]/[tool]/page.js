@@ -179,6 +179,8 @@ import VATCalculator from "@/components/pages/tools/calculator/financial/vat-cal
 
 import { headers } from "next/headers";
 import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+import { buildHreflangLinks } from "@/lib/hreflang";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 const metaTitleTemplates = [
   "Free {ToolName} Online Tool in {Country} – Fast & Easy",
@@ -413,7 +415,7 @@ const toolComponents = {
 };
 
 export async function generateMetadata({ params }) {
-  const { tool } = params;
+  const { tool, category } = params;
 
   // Get tool details
   const toolData = TOOL_CATEGORIES.find((item) => item.id === "calculators")
@@ -423,12 +425,14 @@ export async function generateMetadata({ params }) {
 
   // Get country from host
   const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/tools/calculators/${category}/${tool}`, host);
   const country = getCountryName(getCountryCodeFromHost(host));
 
   if (!toolName) {
     return {
       title: "Image Tool Not Found | Inform Readers",
       description: "The requested image tool was not found. Explore other free tools at Inform Readers.",
+      alternates,
     };
   }
 
@@ -448,6 +452,7 @@ export async function generateMetadata({ params }) {
   return {
     title: randomTitle,
     description: randomDescription,
+    alternates,
   };
 }
 
@@ -473,9 +478,17 @@ export default async function ToolPage({ params }) {
     values
   );
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Tools", href: "/tools" },
+    { label: "Calculators", href: "/tools/calculators" },
+    { label: toolName },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Intro Section */}
+      <Breadcrumb items={breadcrumbItems} />
       <div className="mb-6">
         <p className="text-gray-700 text-lg font-semibold text-center leading-relaxed">{chosenIntro}</p>
       </div>
