@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
 import Image from "next/image";
 import { Crown, Globe, Plane } from "lucide-react";
+import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 // ✅ Fetch data server-side
 async function getCountryForex(country) {
@@ -25,13 +28,15 @@ async function getCountryForex(country) {
 export async function generateMetadata({ params }) {
   const { country } = params;
   const data = await getCountryForex(country);
-
+  const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/currency-converter/country/${country}`, host);
   if (!data) return {};
 
   const { seo } = data;
   return {
     title: seo?.title || "Currency Information",
     description: seo?.description || "Explore currency exchange rates and information.",
+    alternates,
     openGraph: {
       title: seo?.title,
       description: seo?.description,
@@ -47,11 +52,17 @@ export default async function ForexCountryPage({ params }) {
 
   const { data: forex } = data;
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Currency Converter", href: "/currency-converter" },
+    { label: forex.currency.name },
+  ];
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-16 px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
             <div className="relative">
               <Image
@@ -92,8 +103,9 @@ export default async function ForexCountryPage({ params }) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12">
         {/* Currency Overview */}
+        <Breadcrumb items={breadcrumbItems} />
         <section className="mb-12">
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -129,7 +141,7 @@ export default async function ForexCountryPage({ params }) {
               {forex.conversions.map((conv) => (
                 <Link
                   key={conv.pair}
-                  href={`/forex/rate/${conv.pair}`}
+                  href={`/currency-converter/${conv.pair}`}
                   className="group bg-white border-2 border-gray-100 hover:border-red-400 hover:shadow-xl transition-all duration-300 rounded-xl p-5"
                 >
                   <div className="flex items-center justify-between mb-3">

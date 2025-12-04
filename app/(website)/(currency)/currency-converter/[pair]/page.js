@@ -4,18 +4,24 @@ import { notFound } from "next/navigation";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import Image from "next/image";
-import { Info, Globe, Zap, Smartphone } from "lucide-react";
+import { Globe, Zap, Smartphone } from "lucide-react";
+import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 // 👇 Dynamic Metadata (SEO)
 export async function generateMetadata({ params }) {
   const { pair } = params;
   const { data } = await axiosInstance.get(`/website/currency/convert/${pair}`);
   if (data.error) return {};
+  const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/currency-converter/${pair}`, host);
 
   const { seo } = data || {};
   return {
     title: seo?.title || "Currency Converter",
     description: seo?.description || "Live forex conversion rates.",
+    alternates,
     openGraph: {
       title: seo?.title,
       description: seo?.description,
@@ -42,11 +48,17 @@ export default async function ForexPage({ params }) {
 
   const { data: conv } = data;
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Currency Converter", href: "/currency-converter" },
+    { label: `${conv.from.code} to ${conv.to.code}` },
+  ];
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-red-600 to-red-700 text-white py-16 px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="container mx-auto">
           <div className="flex items-center justify-center gap-4 mb-4">
             <h1 className="text-4xl text-white md:text-5xl font-bold text-center">
               {conv.from.code} to {conv.to.code} Converter
@@ -106,13 +118,20 @@ export default async function ForexPage({ params }) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12">
+        <Breadcrumb items={breadcrumbItems} />
         {/* Quick Conversion Table */}
         <section className="mb-12">
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-              Quick Conversion Table
-            </h2>
+          <div className="bg-white rounded-2xl shadow-lg p-8 gap-2">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-800   ">Quick Conversion Table</h2>
+              <Link
+                href={`/currency-converter/${pair}/history/30d`}
+                className="text-base font-semibold text-red-500"
+              >
+                View History
+              </Link>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[1, 5, 10, 25, 50, 100, 500, 1000].map((amount) => (
                 <div
@@ -139,7 +158,9 @@ export default async function ForexPage({ params }) {
           <div className="grid md:grid-cols-2 gap-6">
             {/* From Currency Info */}
             <Link
-              href={`/forex/${conv?.from?.country?.name?.replaceAll(" ", "-")}`}
+              href={`/currency-converter/country/${conv?.from?.country?.name
+                ?.toLowerCase()
+                ?.replaceAll(" ", "-")}`}
               className="group bg-white border-2 border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-red-300 transition-all duration-300"
             >
               <div className="flex items-center gap-4 mb-4">
@@ -171,7 +192,9 @@ export default async function ForexPage({ params }) {
             {/* To Currency Info */}
 
             <Link
-              href={`/forex/${conv?.to?.country?.name?.replaceAll(" ", "-")}`}
+              href={`/currency-converter/country/${conv?.to?.country?.name
+                ?.toLowerCase()
+                ?.replaceAll(" ", "-")}`}
               className="group bg-white border-2 border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-red-300 transition-all duration-300"
             >
               <div className="flex items-center gap-4 mb-4">
@@ -247,7 +270,7 @@ export default async function ForexPage({ params }) {
               {conv.relatedPairs.map((pair) => (
                 <Link
                   key={pair.pair}
-                  href={`/forex/rate/${pair.pair}`}
+                  href={`/currency-converter/rate/${pair.pair}`}
                   className="group bg-white border-2 border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-red-300 transition-all duration-300"
                 >
                   <div className="flex items-center gap-3 mb-2">

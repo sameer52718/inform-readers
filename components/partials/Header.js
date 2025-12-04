@@ -90,7 +90,7 @@ function Header() {
       title: t("header.categories.more"),
       sublinks: [
         { id: 7, title: t("header.categories.weather"), url: "/weather" },
-        { id: 10, title: t("header.categories.forex"), url: "/forex" },
+        { id: 10, title: t("header.categories.forex"), url: "/currency-converter" },
         { id: 11, title: t("header.categories.metals"), url: "/metals" },
         { id: 16, title: t("header.categories.crypto"), url: "/crypto" },
         { id: 12, title: t("header.categories.cars"), url: "/cars" },

@@ -10,6 +10,7 @@ import ResultDisplay from "@/components/pages/converters/currency/ResultDisplay"
 import CurrencyInfo from "@/components/pages/converters/currency/CurrencyInfo";
 import ConversionTable from "@/components/pages/converters/currency/ConversionTable";
 import Loading from "@/components/pages/converters/currency/Loading";
+import Breadcrumb from "../../specification/Breadcrumb";
 
 export default function CurrencyConverter() {
   const [initialLoading, setInitialLoading] = useState(true);
@@ -94,6 +95,8 @@ export default function CurrencyConverter() {
     setToCurrency(fromCurrency);
   };
 
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Currency Converter" }];
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -103,6 +106,15 @@ export default function CurrencyConverter() {
       <main className="py-8 md:py-12 px-4">
         <div className="container mx-auto max-w-6xl">
           {/* Conversion Form */}
+          <Breadcrumb items={breadcrumbItems} />
+          <div className="mb-4 text-right">
+            <Link
+              href="/currency-converter/symbols"
+              className="text-red-600 hover:underline font-medium text-sm"
+            >
+              View Supported Currencies
+            </Link>
+          </div>
           <section className="mb-8">
             <ConversionForm
               amount={amount}
@@ -137,7 +149,7 @@ export default function CurrencyConverter() {
                   <p className="text-gray-700 mb-4">
                     View live exchange rate between{" "}
                     <Link
-                      href={`/forex/${fromCurrency.toLowerCase()}-to-${toCurrency.toLowerCase()}`}
+                      href={`/currency-converter/${fromCurrency.toLowerCase()}-to-${toCurrency.toLowerCase()}`}
                       className="text-red-600 hover:underline font-medium"
                     >
                       {fromCurrency} → {toCurrency}
@@ -149,14 +161,18 @@ export default function CurrencyConverter() {
                   {metadata.from.country && metadata.to.country && (
                     <div className="mb-6 space-x-4">
                       <Link
-                        href={`/forex/${metadata.from.country.name.toLowerCase().replaceAll(" ", "-")}`}
+                        href={`/currency-converter/${metadata.from.country.name
+                          .toLowerCase()
+                          .replaceAll(" ", "-")}`}
                         className="text-blue-600 hover:underline"
                       >
                         About {metadata.from.country.name}
                       </Link>
                       <span className="text-gray-400">|</span>
                       <Link
-                        href={`/forex/${metadata.to.country.name.toLowerCase().replaceAll(" ", "-")}`}
+                        href={`/currency-converter/${metadata.to.country.name
+                          .toLowerCase()
+                          .replaceAll(" ", "-")}`}
                         className="text-blue-600 hover:underline"
                       >
                         About {metadata.to.country.name}
@@ -173,7 +189,7 @@ export default function CurrencyConverter() {
                         return (
                           <Link
                             key={pair}
-                            href={`/forex/rate/${pair}`}
+                            href={`/currency-converter/${pair}`}
                             className="text-sm text-gray-700 hover:text-red-600 underline"
                           >
                             {from.toUpperCase()} → {to.toUpperCase()} Live Rate
@@ -199,6 +215,7 @@ export default function CurrencyConverter() {
               </>
             )}
           </Loading>
+          {/* Link to Supported Currencies */}
         </div>
       </main>
     </div>
