@@ -17,6 +17,7 @@ import "swiper/css/navigation";
 import { useSelector } from "react-redux";
 import { userTypes } from "@/constant/data";
 import { toast } from "react-toastify";
+import Breadcrumb from "./Breadcrumb";
 
 const HeroSection = () => {
   return (
@@ -105,7 +106,7 @@ const SpecificationCard = ({ product, category, categoryId }) => {
     >
       <div className="relative p-3 pb-2">
         <Link
-          href={`/specification/${categoryId}/${product._id}`}
+          href={`/spec/${product.categorySlug}/${product.brandSlug}/${product.slug}`}
           className="block overflow-hidden rounded-lg"
         >
           <motion.div
@@ -126,7 +127,7 @@ const SpecificationCard = ({ product, category, categoryId }) => {
 
         <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
           <Link
-            href={`/specification/${categoryId}/${product._id}`}
+            href={`/spec/${product.categorySlug}/${product.brandSlug}/${product.slug}`}
             className="hover:text-red-600 transition-colors"
           >
             {product.name}
@@ -180,7 +181,7 @@ const SpecificationSection = ({ item }) => {
         </motion.h2>
 
         <Link
-          href={`/specification/${item?.categoryId}`}
+          href={`/spec/${item?.categorySlug}`}
           className="text-sm md:text-base font-medium text-gray-600 hover:text-red-600 transition-colors"
         >
           View All
@@ -276,11 +277,14 @@ export default function SpecificationLanding() {
     };
   }, []);
 
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Specifications" }];
+
   return (
     <div className="bg-background min-h-screen">
       <Loading loading={isLoading}>
         <HeroSection />
         <div className="container mx-auto px-4 py-8">
+          <Breadcrumb items={breadcrumbItems} />
           <div className="space-y-16 mt-8">
             {data.map((item) => (
               <SpecificationSection key={item.categoryId} item={item} />

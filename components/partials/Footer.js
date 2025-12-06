@@ -97,7 +97,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/specification" className="hover:text-white flex items-center">
+                  <Link href="/spec" className="hover:text-white flex items-center">
                     <ChevronRight className="h-4 w-4 mr-1" />
                     {t("footer.links.specifications")}
                   </Link>

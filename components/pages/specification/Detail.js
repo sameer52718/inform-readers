@@ -8,8 +8,6 @@ import TabHeader from "@/components/pages/specification/TabHeader";
 import ProductGallery from "@/components/pages/specification/ProductGallery";
 import ProductInfoCard from "@/components/pages/specification/ProductInfoCard";
 import SpecificationTable from "@/components/pages/specification/SpecificationTable";
-import ReviewSection from "@/components/pages/specification/ReviewSection";
-import ReviewTabSection from "@/components/pages/specification/ReviewTabSection";
 import Loading from "@/components/ui/Loading";
 
 // Utils
@@ -17,6 +15,7 @@ import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import { Share2 } from "lucide-react";
 import { toast } from "react-toastify";
+import Breadcrumb from "./Breadcrumb";
 
 const ShareButton = ({ data }) => {
   const handleNativeShare = async () => {
@@ -47,7 +46,7 @@ const ShareButton = ({ data }) => {
 };
 
 export default function SpecificationDetail() {
-  const { id, category } = useParams();
+  const { slug, categorySlug, brandSlug } = useParams();
 
   // State
   const [isLoading, setIsLoading] = useState(true);
@@ -75,7 +74,9 @@ export default function SpecificationDetail() {
       try {
         setIsLoading(true);
         // You can replace this with your actual API call
-        const { data } = await axiosInstance.get(`/website/specification/${category}/${id}`);
+        const { data } = await axiosInstance.get(
+          `/website/specification/${categorySlug}/${brandSlug}/${slug}`
+        );
         if (!data.error) {
           setData(data.specification);
         }
@@ -87,7 +88,7 @@ export default function SpecificationDetail() {
     };
 
     fetchData();
-  }, [id, category]);
+  }, [slug, categorySlug, brandSlug]);
 
   // Handle smooth scrolling to sections
   const scrollToSection = (sectionId) => {
@@ -106,6 +107,14 @@ export default function SpecificationDetail() {
     );
   };
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Specifications", href: "/spec" },
+    { label: data?.categoryId?.name, href: `/spec/${categorySlug}` },
+    { label: data?.brandId?.name, href: `/spec/${categorySlug}/${brandSlug}` },
+    { label: data?.name },
+  ];
+
   return (
     <>
       {/* Fixed Header on Scroll */}
@@ -122,7 +131,7 @@ export default function SpecificationDetail() {
       <div className="container mx-auto px-4 lg:px-8 pb-12">
         <Loading loading={isLoading}>
           {/* Breadcrumb Navigation */}
-
+          <Breadcrumb items={breadcrumbItems} />
           {/* Product Title */}
           <section className="mb-6 flex justify-between">
             <h1 className="text-3xl font-bold text-gray-900">{data?.name}</h1>
@@ -206,7 +215,6 @@ export default function SpecificationDetail() {
               {data?.data?.generalSpecs && (
                 <ProductInfoCard name={data.name} specs={data.data.generalSpecs} createdAt={data.createdAt} />
               )}
-              {console.log(data?.data)}
 
               {/* Specifications Section */}
               {data?.data &&
@@ -238,19 +246,7 @@ export default function SpecificationDetail() {
                   <p className="text-gray-500 text-center py-8">No FAQs available for this product yet.</p>
                 </div>
               </div>
-
-              {/* Reviews Section */}
-              <div id="reviews" className="pt-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">User Reviews</h2>
-                <ReviewSection />
-                <ReviewTabSection />
-              </div>
             </div>
-
-            {/* Right Column - Related Products */}
-            {/* <div className="md:col-span-3">
-              <RelatedProducts products={sampleProducts} />
-            </div> */}
           </div>
         </Loading>
       </div>

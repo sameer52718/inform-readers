@@ -2,10 +2,15 @@ import React from "react";
 
 import axiosInstance from "@/lib/axiosInstance";
 import SpecificationDetail from "@/components/pages/specification/Detail";
+import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 export async function generateMetadata({ params }) {
+  const { slug, categorySlug, brandSlug } = params;
+  const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/spec/${categorySlug}/${brandSlug}/${slug}`, host);
   try {
-    const { data } = await axiosInstance.get(`/website/specification/${params.category}/${params.id}`);
+    const { data } = await axiosInstance.get(`/website/specification/${categorySlug}/${brandSlug}/${slug}`);
 
     const product = data?.specification;
     const productName = product?.name ?? "Product";
@@ -21,11 +26,13 @@ export async function generateMetadata({ params }) {
         locale: "en_US",
         type: "article",
       },
+      alternates,
     };
   } catch (error) {
     return {
       title: "Product Specification | Inform Readers",
       description: "Explore product specifications, features, and reviews for all categories.",
+      alternates,
     };
   }
 }

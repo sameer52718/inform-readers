@@ -296,7 +296,7 @@ export default async function Home() {
                   <p className="text-gray-600">View Specification of Goods</p>
                 </div>
                 <Link
-                  href="/specification"
+                  href="/spec"
                   className={`flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors duration-200`}
                 >
                   View All Specifications

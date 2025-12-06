@@ -1,5 +1,5 @@
-import React from 'react'
-import SpecificationCategory from '@/components/pages/specification/Category'
+import React from "react";
+import SpecificationCategory from "@/components/pages/specification/Category";
 
 export const metadata = {
   title: "Product Specifications & Comparisons | Inform Readers",
@@ -23,11 +23,8 @@ export const metadata = {
   },
 };
 
-
 const Page = () => {
-  return (
-    <SpecificationCategory/>
-  )
-}
+  return <SpecificationCategory />;
+};
 
-export default Page
+export default Page;

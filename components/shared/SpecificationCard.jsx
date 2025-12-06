@@ -36,10 +36,7 @@ const SpecificationCard = ({ product, category, categoryId }) => {
       className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
     >
       <div className="relative p-3 pb-2">
-        <Link
-          href={`/specification/${categoryId}/${product._id}`}
-          className="block overflow-hidden rounded-lg"
-        >
+        <Link href={`/spec/${categoryId}/${product._id}`} className="block overflow-hidden rounded-lg">
           <motion.div
             animate={{ scale: isHovered ? 1.05 : 1 }}
             transition={{ duration: 0.3 }}
@@ -57,10 +54,7 @@ const SpecificationCard = ({ product, category, categoryId }) => {
         </Link>
 
         <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
-          <Link
-            href={`/specification/${categoryId}/${product._id}`}
-            className="hover:text-red-600 transition-colors"
-          >
+          <Link href={`/spec/${categoryId}/${product._id}`} className="hover:text-red-600 transition-colors">
             {product.name}
           </Link>
         </h3>

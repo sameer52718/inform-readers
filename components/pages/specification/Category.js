@@ -1,10 +1,8 @@
 "use client";
 
-import HoverBanner from "@/components/partials/HoverBanner";
 import Loading from "@/components/ui/Loading";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
-import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,8 +12,10 @@ import { toast } from "react-toastify";
 import { Heart, X, Menu } from "lucide-react";
 import Image from "next/image";
 import { userTypes } from "@/constant/data";
+import Breadcrumb from "./Breadcrumb";
 
-const SpecificationCard = ({ product, category }) => {
+const SpecificationCard = ({ product }) => {
+  const { categorySlug, brandSlug } = useParams();
   const { userType, user } = useSelector((state) => state.auth);
   const [isHovered, setIsHovered] = useState(false);
   const [wishlist, setWishlist] = useState(product?.wishlist?.includes(user?._id) || false);
@@ -42,7 +42,10 @@ const SpecificationCard = ({ product, category }) => {
       className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
     >
       <div className="relative p-3 pb-2">
-        <Link href={`/specification/${category}/${product._id}`} className="block overflow-hidden rounded-lg">
+        <Link
+          href={`/spec/${categorySlug}/${brandSlug}/${product.slug}`}
+          className="block overflow-hidden rounded-lg"
+        >
           <motion.div
             animate={{ scale: isHovered ? 1.05 : 1 }}
             transition={{ duration: 0.3 }}
@@ -61,7 +64,7 @@ const SpecificationCard = ({ product, category }) => {
 
         <h3 className="mt-3 text-sm font-medium text-gray-800 line-clamp-2 h-10">
           <Link
-            href={`/specification/${category}/${product._id}`}
+            href={`/spec/${categorySlug}/${brandSlug}/${product.slug}`}
             className="hover:text-red-600 transition-colors"
           >
             {product.name}
@@ -95,9 +98,7 @@ const SpecificationCard = ({ product, category }) => {
 };
 
 function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, categoryName }) {
-  const [brand, setBrand] = useState([]);
   const [expandedGroups, setExpandedGroups] = useState({});
-  const { category } = useParams();
 
   // Normalize category names from API to filter groups
   const effectiveCategory = React.useMemo(() => {
@@ -197,20 +198,6 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
     );
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const [brandRes] = await Promise.all([
-          axiosInstance.get("/common/brand", { params: { category: category } }),
-        ]);
-        setBrand(brandRes?.data?.brands || []);
-      } catch (error) {
-        handleError(error);
-      }
-    };
-    getData();
-  }, [category]);
-
   return (
     <AnimatePresence>
       {isFilterOpen && (
@@ -227,17 +214,6 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
             </button>
           </div>
           <div className="space-y-6">
-            {/* Brand Filter with See More */}
-            <CheckboxGroup
-              title="Brand"
-              items={brand}
-              groupKey="brand"
-              isItemChecked={(val) => filters.brand.includes(val)}
-              onToggleItem={(val) => handleFilterChange("brand", val)}
-              renderItemLabel={(item) => item.name}
-              getItemValue={(item) => item._id || item.name}
-              maxVisible={10}
-            />
             {/* Price Range Filter */}
             <div>
               <h3 className="text-sm font-medium text-gray-800">Price Range</h3>
@@ -900,7 +876,7 @@ function Filters({ isFilterOpen, handleFilterChange, filters, toggleFilter, cate
 function SpecificationCategory() {
   const [fetching, setFetching] = useState(false);
   const [activeTab, setActiveTab] = useState("");
-  const { category } = useParams();
+  const { categorySlug, brandSlug } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -1019,7 +995,7 @@ function SpecificationCategory() {
           ...(filters.applianceFeatures.length && { applianceFeatures: filters.applianceFeatures.join(",") }),
         });
 
-        const { data } = await axiosInstance.get(`/website/specification/${category}`, {
+        const { data } = await axiosInstance.get(`/website/specification/${categorySlug}/${brandSlug}`, {
           params: queryParams,
         });
         if (!data.error) {
@@ -1035,12 +1011,12 @@ function SpecificationCategory() {
         setIsLoading(false);
       }
     },
-    [category, activeTab, filters]
+    [categorySlug, brandSlug, activeTab, filters]
   );
 
   useEffect(() => {
     getData(true, 1, activeTab);
-  }, [category, activeTab, filters]);
+  }, [categorySlug, brandSlug, activeTab, filters]);
 
   const onPageChange = async (page) => {
     setFetching(true);
@@ -1070,8 +1046,16 @@ function SpecificationCategory() {
     setIsFilterOpen((prev) => !prev);
   };
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Specifications", href: "/spec" },
+    { label: categoryName, href: `/spec/${categorySlug}` },
+    { label: brandSlug },
+  ];
+
   return (
     <section className="container mx-auto px-4">
+      <Breadcrumb items={breadcrumbItems} />
       <div className={"grid grid-cols-12 gap-6"}>
         {/* Filter Sidebar */}
         <Filters
@@ -1120,7 +1104,7 @@ function SpecificationCategory() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {data.map((item) => (
-                <SpecificationCard key={item._id} product={item} category={category} />
+                <SpecificationCard key={item._id} product={item} />
               ))}
             </div>
             <div className="flex items-center justify-center my-5">

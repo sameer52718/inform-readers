@@ -83,7 +83,7 @@ function Header() {
     { id: 2, title: t("header.categories.postalcode"), url: "/postal-codes" },
     { id: 3, title: t("header.categories.swiftcode"), url: "/bank-codes" },
     { id: 4, title: t("header.categories.software"), url: "/software" },
-    { id: 5, title: t("header.categories.specification"), url: "/specification" },
+    { id: 5, title: t("header.categories.specification"), url: "/spec" },
     { id: 7, title: t("header.categories.biography"), url: "https://informreaders.com/biography" },
     {
       id: 9,
