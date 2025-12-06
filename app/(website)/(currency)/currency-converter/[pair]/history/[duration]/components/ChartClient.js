@@ -22,6 +22,7 @@ ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip,
 
 export default function Page() {
   const { duration, pair } = useParams();
+  const [from, to] = pair.toUpperCase().split("-TO-");
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -104,7 +105,7 @@ export default function Page() {
         displayColors: false,
         callbacks: {
           label: function (context) {
-            return `PKR ${context.parsed.y.toFixed(2)}`;
+            return `${to} ${context.parsed.y.toFixed(2)}`;
           },
         },
       },
@@ -129,7 +130,7 @@ export default function Page() {
         ticks: {
           color: "#9ca3af",
           callback: function (value) {
-            return "PKR " + value.toFixed(2);
+            return `${to} ` + value.toFixed(2);
           },
         },
       },
@@ -139,7 +140,7 @@ export default function Page() {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Currency Converter", href: "/currency-converter" },
-    { label: pair, href: `/currency-converter/${pair}` },
+    { label: `${from} to ${to}`, href: `/currency-converter/${pair}` },
     { label: "History" },
   ];
 
@@ -155,7 +156,7 @@ export default function Page() {
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 capitalize">{pair}</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 capitalize">{`${from} to ${to}`}</h1>
                 <div className="p-2 bg-red-100 rounded-lg">
                   <ArrowLeftRight className="w-5 h-5 text-red-600" />
                 </div>
@@ -174,7 +175,7 @@ export default function Page() {
                   <span>Current Rate</span>
                 </div>
                 <div className="text-4xl sm:text-5xl font-bold text-white mb-3">
-                  PKR {currentRate.toFixed(2)}
+                  {to} {currentRate.toFixed(2)}
                 </div>
                 <div className="flex items-center gap-2">
                   {isPositive ? (
@@ -228,7 +229,9 @@ export default function Page() {
               </div>
               <span className="text-sm text-gray-600 font-medium">Highest</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">PKR {highRate.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-gray-900">
+              {to} {highRate.toFixed(2)}
+            </div>
             <div className="text-xs text-gray-500 mt-1">Last 30 days</div>
           </div>
 
@@ -239,7 +242,9 @@ export default function Page() {
               </div>
               <span className="text-sm text-gray-600 font-medium">Lowest</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">PKR {lowRate.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-gray-900">
+              {to} {lowRate.toFixed(2)}
+            </div>
             <div className="text-xs text-gray-500 mt-1">Last 30 days</div>
           </div>
 
@@ -250,7 +255,9 @@ export default function Page() {
               </div>
               <span className="text-sm text-gray-600 font-medium">Average</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">PKR {avgRate}</div>
+            <div className="text-2xl font-bold text-gray-900">
+              {to} {avgRate}
+            </div>
             <div className="text-xs text-gray-500 mt-1">Last 30 days</div>
           </div>
         </div>
