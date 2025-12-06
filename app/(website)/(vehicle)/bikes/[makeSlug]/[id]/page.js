@@ -1,15 +1,22 @@
 // app/bike/[id]/page.jsx (or wherever your route is)
 import ProductGallery from "@/components/pages/specification/ProductGallery";
 import VehicleCard from "@/components/vehicle/vehicleCard";
-import ShareButton from "../components/Sharebutton";
+import ShareButton from "../../components/Sharebutton";
 import axiosInstance from "@/lib/axiosInstance";
 import handleError from "@/lib/handleError";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 // ✅ Generate Metadata for SEO
 export async function generateMetadata({ params }) {
   try {
-    const { id } = params;
+    const { id, makeSlug } = params;
+
+    const host = (await headers()).get("host") || "informreaders.com";
+    const alternates = buildHreflangLinks(`/bikes/${makeSlug}/${id}`, host);
+
     const response = await axiosInstance.get(`/website/bike/${id}`);
     const data = response?.data?.data;
 
@@ -57,6 +64,7 @@ export async function generateMetadata({ params }) {
     return {
       title: randomTitle,
       description: randomDescription,
+      alternates,
     };
   } catch (error) {
     return { title: "Bike Details | InformReaders" };
@@ -181,7 +189,7 @@ function BikeFaqs({ make, model, year, fuelType, bodyType }) {
 }
 
 export default async function SpecificationDetail({ params }) {
-  const { id } = params;
+  const { id, makeSlug } = params;
   const result = await fetchBikeData(id);
 
   if (!result?.data) return notFound();
@@ -270,8 +278,16 @@ export default async function SpecificationDetail({ params }) {
     }
   );
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Bikes", href: "/bikes" },
+    { label: data?.makeId?.name, href: `/bikes/${makeSlug}` },
+    { label: data?.name },
+  ];
+
   return (
     <div className="container mx-auto px-4 lg:px-8 pb-12">
+      <Breadcrumb items={breadcrumbItems} />
       {/* Product Title */}
       <section className="mb-6 flex justify-between">
         <h1 className="text-3xl font-bold text-gray-900">{data?.name}</h1>

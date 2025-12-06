@@ -1,365 +1,135 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Search, Car, Battery, Compass as GasPump, Calendar } from "lucide-react";
+import React from "react";
 import axiosInstance from "@/lib/axiosInstance";
-import Image from "next/image";
 import Link from "next/link";
+import { Bike, ArrowRight, Tag, Layers } from "lucide-react";
+import { headers } from "next/headers";
+import { buildHreflangLinks } from "@/lib/hreflang";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
-const FilterSection = ({ filters, setFilters, makes }) => {
-  const fuelTypeOptions = ["PETROL", "ELECTRIC", "OTHER"];
+// --- Server function to get makes ---
+async function getMakes() {
+  try {
+    const res = await axiosInstance.get(`/website/bike/make`);
+    return res.data.data || [];
+  } catch (error) {
+    console.error("Error fetching makes:", error);
+    return [];
+  }
+}
 
-  const yearOptions = [
-    { value: "2023+", label: "2023 & Newer" },
-    { value: "2020-2022", label: "2020 - 2022" },
-    { value: "2015-2019", label: "2015 - 2019" },
-    { value: "2010-2014", label: "2010 - 2014" },
-    { value: "2010-", label: "2009 & Older" },
-  ];
+export async function generateMetadata() {
+  const host = (await headers()).get("host") || "informreaders.com";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({
-      ...prev,
-      [name]: value === "" ? undefined : value,
-      // Reset modelId if makeId changes
-      ...(name === "makeId" ? { modelId: undefined } : {}),
-      page: 1, // Reset to page 1 on filter change
-    }));
+  // Generate multilingual alternates for /bike/makes
+  const alternates = buildHreflangLinks(`/bikes/`, host);
+
+  return {
+    title: "All Bike Makes | Inform Readers",
+    description:
+      "Browse all available bike makes and brands. Explore detailed information and stay updated with the latest bike manufacturers on Inform Readers.",
+    keywords: [
+      "bike makes",
+      "motorcycle brands",
+      "bike companies",
+      "motorbike manufacturers",
+      "two-wheeler brands",
+      "inform readers bikes",
+    ],
+    alternates,
+    openGraph: {
+      title: "All Bike Makes | Inform Readers",
+      description:
+        "Explore all motorcycle brands and bike makes. Browse updated data and stay informed on the latest bike manufacturers.",
+      type: "website",
+      siteName: "Inform Readers",
+      url: alternates.canonical,
+    },
   };
+}
+
+const BikesMakes = async () => {
+  const makes = await getMakes();
+
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Bikes" }];
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search vehicles..."
-            name="search"
-            value={filters.search || ""}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
-        </div>
-        <div className="relative">
-          <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-          <select
-            name="year"
-            value={filters.year || ""}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-          >
-            <option value="">Year</option>
-            {yearOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="relative">
-          <div className="absolute left-3 top-3 h-5 w-5 text-gray-400">
-            {filters.vehicleType === "ELECTRIC" ? (
-              <Battery className="h-5 w-5" />
-            ) : (
-              <GasPump className="h-5 w-5" />
-            )}
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-red-50 to-pink-50">
+      {/* Hero Header */}
+      <div className="bg-gradient-to-r from-red-600 to-red-700 text-white">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
+              <Bike className="w-8 h-8" />
+            </div>
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white">Bike Makes</h1>
+              <p className="text-red-100 mt-2 text-lg">Explore {makes.length} motorcycle brands</p>
+            </div>
           </div>
-          <select
-            name="vehicleType"
-            value={filters.vehicleType || ""}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-          >
-            <option value="">Fuel Type</option>
-            {fuelTypeOptions.map((option) => (
-              <option key={option} value={option}>
-                {option.charAt(0) + option.slice(1).toLowerCase()}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="relative">
-          <Car className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-          <select
-            name="makeId"
-            value={filters.makeId || ""}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 appearance-none bg-white"
-          >
-            <option value="">Make</option>
-            {makes.map((make) => (
-              <option key={make._id} value={make._id}>
-                {make.name}
-              </option>
-            ))}
-          </select>
+          <p className="text-white/90 max-w-2xl text-lg">
+            Discover your perfect ride from the world's leading motorcycle manufacturers. Compare models,
+            specifications, and find the bike that matches your style.
+          </p>
         </div>
       </div>
-    </div>
-  );
-};
 
-const VehicleCard = ({ vehicle }) => {
-  const isEV = vehicle.vehicleType === "ELECTRIC";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-    >
-      <div className="flex flex-col">
-        <div className="">
-          <Image
-            src={vehicle.image || "https://via.placeholder.com/300x200?text=No+Image"}
-            alt={vehicle.name}
-            className="w-full h-64  object-cover"
-            height={256}
-            width={256}
-          />
-        </div>
-        <div className=" p-6">
-          <div className="flex justify-between items-start mb-2">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <Breadcrumb items={breadcrumbItems} />
+        {makes.length === 0 ? (
+          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-12 text-center">
+            <Bike className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-slate-700 mb-2">No bike makes found</h2>
+            <p className="text-slate-500">Check back soon for updated bike manufacturers.</p>
+          </div>
+        ) : (
+          <div className="space-y-12">
             <div>
-              <h3 className="text-lg font-semibold mb-2">{vehicle.name}</h3>
-              <div className="flex items-center text-gray-600 mb-2">
-                <Calendar className="h-4 w-4 mr-1" />
-                <span>{vehicle.year}</span>
+              {/* Type Header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <Layers className="w-5 h-5 text-red-600" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900">Bikes</h2>
+                  <p className="text-sm text-slate-500">{makes.length} brands</p>
+                </div>
+              </div>
+
+              {/* Makes Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {makes.map((make) => (
+                  <Link key={make._id} href={`/bikes/${make.slug}`} className="group">
+                    <div className="bg-white rounded-xl border-2 border-slate-200 p-6 h-full transition-all duration-300 hover:border-red-400 hover:shadow-xl hover:-translate-y-2">
+                      {/* Icon & Arrow */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="p-3 bg-gradient-to-br from-red-100 to-red-100 rounded-xl group-hover:from-red-200 group-hover:to-red-200 transition-all">
+                          <Bike className="w-6 h-6 text-red-600" />
+                        </div>
+                        <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
+                      </div>
+
+                      {/* Make Name */}
+                      <h3 className="text-xl font-bold capitalize text-slate-900 group-hover:text-red-600 transition-colors">
+                        {make.name}
+                      </h3>
+
+                      {/* View Link */}
+                      <div className="mt-6 pt-4 border-t border-slate-100">
+                        <span className="text-sm font-semibold text-red-600 group-hover:underline">
+                          View Models →
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-4  text-gray-600 mb-2">
-            <div className="flex items-center">
-              {isEV ? (
-                <Battery className="h-5 w-5 mr-2 text-red-500" />
-              ) : (
-                <GasPump className="h-5 w-5 mr-2 text-red-500" />
-              )}
-              <span>{vehicle.vehicleType.charAt(0) + vehicle.vehicleType.slice(1).toLowerCase()}</span>
-            </div>
-          </div>
-          <div className="flex justify-between items-center">
-            <span
-              className={`text-sm font-medium px-3 py-1 rounded-full ${
-                isEV ? "bg-red-100 text-red-800" : "bg-red-100 text-red-800"
-              }`}
-            >
-              {vehicle.vehicleType.charAt(0) + vehicle.vehicleType.slice(1).toLowerCase()}
-            </span>
-            <Link
-              href={`/bikes/${vehicle.slug}`}
-              className="text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors"
-            >
-              View Details
-            </Link>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-const Pagination = ({ pagination, setFilters }) => {
-  const { totalPages, currentPage } = pagination;
-  const maxButtons = 5; // Maximum number of page buttons to show
-
-  const handlePageChange = (page) => {
-    setFilters((prev) => ({ ...prev, page }));
-  };
-
-  // Calculate the range of pages to display
-  const getPageNumbers = () => {
-    const half = Math.floor(maxButtons / 2);
-    let start = Math.max(1, currentPage - half);
-    let end = Math.min(totalPages, start + maxButtons - 1);
-
-    // Adjust start if end is at totalPages
-    if (end === totalPages) {
-      start = Math.max(1, end - maxButtons + 1);
-    }
-
-    const pages = [];
-    for (let i = start; i <= end; i++) {
-      pages.push(i);
-    }
-    return pages;
-  };
-
-  const pageNumbers = getPageNumbers();
-
-  return (
-    <div className="flex justify-center items-center space-x-2 mt-6">
-      <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="px-4 py-2 bg-red-600 text-white rounded-md disabled:opacity-50 hover:bg-red-700"
-      >
-        Previous
-      </button>
-
-      {/* Always show first page */}
-      {totalPages > maxButtons && currentPage > Math.floor(maxButtons / 2) + 1 && (
-        <>
-          <button
-            onClick={() => handlePageChange(1)}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-          >
-            1
-          </button>
-          {currentPage > Math.floor(maxButtons / 2) + 2 && <span className="px-4 py-2">...</span>}
-        </>
-      )}
-
-      {/* Render page buttons */}
-      {pageNumbers.map((page) => (
-        <button
-          key={page}
-          onClick={() => handlePageChange(page)}
-          className={`px-4 py-2 rounded-md ${
-            currentPage === page ? "bg-red-600 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          {page}
-        </button>
-      ))}
-
-      {/* Always show last page */}
-      {totalPages > maxButtons && currentPage < totalPages - Math.floor(maxButtons / 2) && (
-        <>
-          {currentPage < totalPages - Math.floor(maxButtons / 2) - 1 && (
-            <span className="px-4 py-2">...</span>
-          )}
-          <button
-            onClick={() => handlePageChange(totalPages)}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-          >
-            {totalPages}
-          </button>
-        </>
-      )}
-
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="px-4 py-2 bg-red-600 text-white rounded-md disabled:opacity-50 hover:bg-red-700"
-      >
-        Next
-      </button>
-    </div>
-  );
-};
-
-const CarListing = () => {
-  const [filters, setFilters] = useState({
-    page: 1,
-    limit: 12, // 12 vehicles (4 per row, 3 rows)
-    search: "",
-    makeId: "",
-    categoryId: "",
-    vehicleType: "",
-    location: "",
-    priceRange: "",
-    year: "",
-  });
-  const [vehicles, setVehicles] = useState([]);
-  const [pagination, setPagination] = useState({
-    totalItems: 0,
-    totalPages: 1,
-    currentPage: 1,
-    pageSize: 12,
-  });
-  const [makes, setMakes] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  // Fetch filter data
-  useEffect(() => {
-    const fetchFilterData = async () => {
-      try {
-        const [makesRes] = await Promise.all([
-          axiosInstance.get("/common/make", { params: { type: "BIKE" } }),
-        ]);
-        setMakes(makesRes.data.data || []);
-      } catch (error) {
-        console.error("Error fetching filter data:", error);
-      }
-    };
-    fetchFilterData();
-  }, []);
-
-  // Fetch vehicles
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      setLoading(true);
-      try {
-        const params = {
-          ...Object.fromEntries(Object.entries(filters).filter(([_, v]) => v !== undefined && v !== "")),
-          page: filters.page.toString(),
-          limit: filters.limit.toString(),
-          category: "Bike",
-        };
-
-        const { data } = await axiosInstance.get("/website/bike", { params });
-
-        setVehicles(data.data || []);
-        setPagination(
-          data.pagination || {
-            totalItems: 0,
-            totalPages: 1,
-            currentPage: 1,
-            pageSize: 12,
-          }
-        );
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchVehicles();
-  }, [filters]);
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-br from-red-500 to-red-700 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Find Your Perfect Car</h1>
-              <p className="text-xl mb-8">
-                Explore our extensive collection of premium cars, from innovative electric vehicles to
-                powerful petrol engines.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-      <div className="container mx-auto px-4 py-8">
-        {/* Horizontal Filter Section */}
-        <FilterSection filters={filters} setFilters={setFilters} makes={makes} />
-        {/* Vehicle List */}
-        {loading ? (
-          <p className="text-center text-gray-500">Loading...</p>
-        ) : vehicles.length === 0 ? (
-          <p className="text-center text-gray-500">No vehicles found.</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {vehicles.map((vehicle) => (
-              <VehicleCard key={vehicle._id} vehicle={vehicle} />
-            ))}
-          </div>
         )}
-        {/* Pagination */}
-        <Pagination pagination={pagination} setFilters={setFilters} />
       </div>
     </div>
   );
 };
 
-export default CarListing;
+export default BikesMakes;
