@@ -22,7 +22,7 @@ async function getPostalAreasData(stateSlug, host, search = "") {
 
 // 🔹 Dynamic Metadata
 export async function generateMetadata({ params, searchParams }) {
-  const { stateSlug } = params;
+  const { stateSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const search = searchParams?.search || "";
   const alternates = buildHreflangLinks(`/postal-codes/${stateSlug}/`, host);
@@ -64,7 +64,8 @@ export async function generateMetadata({ params, searchParams }) {
 
 // 🔹 Page Component
 export default async function PostalAreasPage({ params, searchParams }) {
-  const { stateSlug } = params;
+  const { stateSlug } = await params;
+
   const host = (await headers()).get("host") || "informreaders.com";
   const search = searchParams?.search || "";
 

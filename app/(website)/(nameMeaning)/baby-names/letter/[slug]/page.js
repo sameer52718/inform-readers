@@ -17,7 +17,7 @@ function parseNameSlug(slug) {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const { gender, alphabet: upperLetter } = parseNameSlug(slug);
 
   try {

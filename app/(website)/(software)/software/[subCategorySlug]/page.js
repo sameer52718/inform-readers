@@ -20,7 +20,7 @@ async function getSoftwareList(slug, page = 1, limit = 12, search = "") {
 
 // SEO Metadata
 export async function generateMetadata({ params }) {
-  const { subCategorySlug } = params;
+  const { subCategorySlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
 
   const subCategory = subCategorySlug
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }) {
 
 // PAGE COMPONENT
 export default async function SoftwareCategoryPage({ params, searchParams }) {
-  const { subCategorySlug } = params;
+  const { subCategorySlug } = await params;
   console.log(subCategorySlug);
 
   const page = Number(searchParams.page) || 1;

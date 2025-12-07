@@ -7,7 +7,7 @@ import { buildHreflangLinks } from "@/lib/hreflang";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 export async function generateMetadata({ params }) {
-  const { categorySlug } = params;
+  const { categorySlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/spec/${categorySlug}`, host);
   return {
@@ -45,7 +45,7 @@ async function getBrands(categorySlug) {
 }
 
 const Page = async ({ params }) => {
-  const { categorySlug } = params;
+  const { categorySlug } = await params;
   const { brands, category } = await getBrands(categorySlug);
 
   const breadcrumbItems = [

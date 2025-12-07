@@ -12,7 +12,7 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 // ✅ Generate Metadata for SEO
 export async function generateMetadata({ params }) {
   try {
-    const { id, makeSlug } = params;
+    const { id, makeSlug } = await params;
 
     const host = (await headers()).get("host") || "informreaders.com";
     const alternates = buildHreflangLinks(`/bikes/${makeSlug}/${id}`, host);
@@ -189,7 +189,7 @@ function BikeFaqs({ make, model, year, fuelType, bodyType }) {
 }
 
 export default async function SpecificationDetail({ params }) {
-  const { id, makeSlug } = params;
+  const { id, makeSlug } = await params;
   const result = await fetchBikeData(id);
 
   if (!result?.data) return notFound();

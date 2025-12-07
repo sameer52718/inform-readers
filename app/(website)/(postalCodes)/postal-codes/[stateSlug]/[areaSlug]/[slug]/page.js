@@ -22,7 +22,7 @@ function applyTemplate(template, values) {
 
 export async function generateMetadata({ params }) {
   try {
-    const { stateSlug, areaSlug } = params;
+    const { stateSlug, areaSlug } = await params;
     const host = (await headers()).get("host") || "informreaders.com";
     const res = await axiosInstance.get(`/website/postalCode/${params.slug}`, { params: { host } });
     const data = res.data.data;
@@ -73,7 +73,7 @@ async function getPostalCodeData(slug, host) {
 }
 
 export default async function PostalCodeDetail({ params }) {
-  const { stateSlug, areaSlug } = params;
+  const { stateSlug, areaSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const data = await getPostalCodeData(params.slug, host);
 

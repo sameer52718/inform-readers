@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import React from "react";
 
 export async function generateMetadata({ params }) {
-  const { categorySlug } = params;
+  const { categorySlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/biography/${categorySlug}`, host, true);
 

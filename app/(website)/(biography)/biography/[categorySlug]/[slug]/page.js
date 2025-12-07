@@ -24,7 +24,7 @@ function applyMetaTemplate(template, values) {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug, categorySlug } = params;
+  const { slug, categorySlug } = await params;
 
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/biography/${categorySlug}/${slug}`, host, true);

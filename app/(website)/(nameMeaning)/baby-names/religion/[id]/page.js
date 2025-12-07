@@ -4,7 +4,7 @@ import { buildHreflangLinks } from "@/lib/hreflang";
 import { headers } from "next/headers";
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const host = (await headers()).get("host") || "informreaders.com";

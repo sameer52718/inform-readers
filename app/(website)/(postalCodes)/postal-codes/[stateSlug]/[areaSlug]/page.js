@@ -21,7 +21,7 @@ async function getAreaDetail(areaSlug, host) {
 
 // 🔹 Dynamic Metadata
 export async function generateMetadata({ params }) {
-  const { areaSlug, stateSlug } = params;
+  const { areaSlug, stateSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/postal-codes/${stateSlug}/${areaSlug}/`, host);
 
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }) {
 
 // 🔹 Page Component
 export default async function AreaDetailPage({ params }) {
-  const { areaSlug, stateSlug } = params;
+  const { areaSlug, stateSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const data = await getAreaDetail(areaSlug, host);
 

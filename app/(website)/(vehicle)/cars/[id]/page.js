@@ -38,7 +38,7 @@ function applyMetaTemplate(template, values) {
 }
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   // Get country from subdomain
   const host = (await headers()).get("host") || "informreaders.com";

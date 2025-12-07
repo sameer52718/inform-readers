@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { buildHreflangLinks } from "@/lib/hreflang";
 
 export async function generateMetadata({ params }) {
-  const { makeSlug } = params;
+  const { makeSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
 
   const name = makeSlug.replace(/-/g, " ");

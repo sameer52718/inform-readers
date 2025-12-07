@@ -14,7 +14,7 @@ async function fetchMetalCurrency(metal, currency) {
 }
 
 export default async function MetalCurrencyPage({ params }) {
-  const { metal, currency } = params;
+  const { metal, currency } = await params;
 
   const response = await fetchMetalCurrency(metal, currency);
   if (!response || !response.success) notFound();

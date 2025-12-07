@@ -15,7 +15,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function MetalComparePage({ params }) {
-  const { pair } = params;
+  const { pair } = await params;
 
   let data = null;
   let related = [];

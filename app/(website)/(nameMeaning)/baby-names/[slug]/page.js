@@ -5,7 +5,7 @@ import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubd
 import { buildHreflangLinks } from "@/lib/hreflang";
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const host = (await headers()).get("host") || "informreaders.com";
   const country = getCountryName(getCountryCodeFromHost(host));

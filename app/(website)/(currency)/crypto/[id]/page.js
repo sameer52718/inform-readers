@@ -4,7 +4,7 @@ import { ArrowLeft, TrendingUp, TrendingDown, ExternalLink, Globe, Github } from
 
 // ✅ Generate Dynamic Metadata for SEO
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`, {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }) {
 
 // ✅ Server Component — SSR data fetch
 export default async function CryptoDetailPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   // Fetch crypto details from CoinGecko (server-side)
   const res = await fetch(

@@ -120,7 +120,7 @@ const toolComponents = {
 };
 
 export async function generateMetadata({ params }) {
-  const { tool } = params;
+  const { tool } = await params;
 
   // Get tool details
   const toolData = TOOL_CATEGORIES.find((item) => item.id === "image-tools")?.tools.find(
@@ -162,7 +162,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ToolPage({ params }) {
-  const { tool } = params;
+  const { tool } = await params;
   const Component = toolComponents[tool] || (() => <div>Tool not found</div>);
 
   const toolData = TOOL_CATEGORIES.find((item) => item.id === "image-tools")?.tools.find(

@@ -3,7 +3,7 @@ import ChartClient from "./components/ChartClient";
 import { buildHreflangLinks } from "@/lib/hreflang";
 
 export async function generateMetadata({ params }) {
-  const { pair, duration } = params;
+  const { pair, duration } = await params;
 
   const [from, to] = pair.toUpperCase().split("-TO-");
 

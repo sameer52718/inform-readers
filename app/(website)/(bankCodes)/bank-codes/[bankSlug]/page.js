@@ -20,7 +20,7 @@ async function getBranchesData(host, bankSlug) {
 }
 
 export async function generateMetadata({ params }) {
-  const { bankSlug } = params;
+  const { bankSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/bank-codes/${bankSlug}/`, host);
   const data = await getBranchesData(host, bankSlug);
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BankBranchesPage({ params }) {
-  const { bankSlug } = params;
+  const { bankSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
 
   const data = await getBranchesData(host, bankSlug);

@@ -4,7 +4,7 @@ import SoftwareDetail from "@/components/pages/software/SoftwareDetail";
 import { buildHreflangLinks } from "@/lib/hreflang";
 
 export async function generateMetadata({ params }) {
-  const { slug, subCategorySlug } = params;
+  const { slug, subCategorySlug } = await params;
 
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/software/${subCategorySlug}/${slug}/`, host);

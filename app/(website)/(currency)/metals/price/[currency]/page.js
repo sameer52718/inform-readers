@@ -15,7 +15,7 @@ async function fetchMetalPrices(currency) {
 }
 
 export default async function MetalPricesPage({ params }) {
-  const { currency } = params;
+  const { currency } = await params;
   const data = await fetchMetalPrices(currency);
 
   if (!data?.success) notFound();

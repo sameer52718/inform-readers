@@ -11,7 +11,7 @@ import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
 // 👇 Dynamic Metadata (SEO)
 export async function generateMetadata({ params }) {
-  const { pair } = params;
+  const { pair } = await params;
   const { data } = await axiosInstance.get(`/website/currency/convert/${pair}`);
   if (data.error) return {};
   const host = (await headers()).get("host") || "informreaders.com";
@@ -42,7 +42,7 @@ async function getForexData(pair) {
 }
 
 export default async function ForexPage({ params }) {
-  const { pair } = params;
+  const { pair } = await params;
   const data = await getForexData(pair);
   if (!data?.success) notFound();
 

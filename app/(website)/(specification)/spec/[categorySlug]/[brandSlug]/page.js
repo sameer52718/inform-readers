@@ -4,7 +4,7 @@ import React from "react";
 import SpecificationCategory from "@/components/pages/specification/Category";
 
 export async function generateMetadata({ params }) {
-  const { categorySlug, brandSlug } = params;
+  const { categorySlug, brandSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/spec/${categorySlug}/${brandSlug}/`, host);
   return {

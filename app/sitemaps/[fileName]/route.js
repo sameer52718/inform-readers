@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import axiosInstance from "@/lib/axiosInstance";
 
 export async function GET(_req, { params }) {
-  const { fileName } = params;
+  const { fileName } = await params;
 
   const { data: xml } = await axiosInstance.get(`/sitemaps/${fileName}`, {
     responseType: "text", // <-- important!

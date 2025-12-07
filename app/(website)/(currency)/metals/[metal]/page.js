@@ -14,7 +14,7 @@ async function fetchMetalData(metal) {
 }
 
 export default async function MetalPage({ params }) {
-  const { metal } = params;
+  const { metal } = await params;
   const response = await fetchMetalData(metal);
 
   if (!response?.success) notFound();

@@ -26,7 +26,7 @@ async function getCountryForex(country) {
 
 // ✅ Generate Metadata
 export async function generateMetadata({ params }) {
-  const { country } = params;
+  const { country } = await params;
   const data = await getCountryForex(country);
   const host = (await headers()).get("host") || "informreaders.com";
   const alternates = buildHreflangLinks(`/currency-converter/country/${country}`, host);
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ForexCountryPage({ params }) {
-  const { country } = params;
+  const { country } = await params;
   const data = await getCountryForex(country);
 
   if (!data) notFound();
