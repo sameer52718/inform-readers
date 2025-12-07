@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { median, std, mean } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -172,9 +172,9 @@ export default function AdvancedPercentErrorCalculator() {
     if (isBatch && results.length > 1) {
       const percentErrors = results.map((r) => r.percentError);
       const stats = {
-        mean: math.mean(percentErrors),
-        median: math.median(percentErrors),
-        stdDev: math.std(percentErrors),
+        mean: mean(percentErrors),
+        median: median(percentErrors),
+        stdDev: std(percentErrors),
         min: Math.min(...percentErrors),
         max: Math.max(...percentErrors),
       };
@@ -210,9 +210,9 @@ export default function AdvancedPercentErrorCalculator() {
       if (errors.length === 0) throw new Error("Invalid percent error list");
 
       const stats = {
-        mean: math.mean(errors),
-        median: math.median(errors),
-        stdDev: math.std(errors),
+        mean: mean(errors),
+        median: median(errors),
+        stdDev: std(errors),
         min: Math.min(...errors),
         max: Math.max(...errors),
       };

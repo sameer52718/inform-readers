@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import * as math from "mathjs";
+import { median as takeMedian, mean as takeMean } from "mathjs";
 import { jsPDF } from "jspdf";
 
 export default function AdvancedVolumeCalculator() {
@@ -544,8 +544,8 @@ export default function AdvancedVolumeCalculator() {
         .filter((n) => !isNaN(n) && n >= 0);
       if (volumes.length === 0) throw new Error("Invalid volume list");
 
-      const mean = math.mean(volumes);
-      const median = math.median(volumes);
+      const mean = takeMean(volumes);
+      const median = takeMedian(volumes);
       const formattedMean =
         outputFormat === "scientific"
           ? mean.toExponential(parseInt(precision))

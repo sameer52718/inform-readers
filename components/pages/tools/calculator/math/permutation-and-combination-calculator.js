@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { factorial, combinations } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -105,11 +105,11 @@ export default function AdvancedPermCombCalculator() {
       formula = "";
     if (calcType === "permutation") {
       if (isNaN(r) || r < 0 || r > n) throw new Error("Selected items (r) must be between 0 and n");
-      result.value = math.factorial(n) / math.factorial(n - r);
+      result.value = factorial(n) / factorial(n - r);
       formula = `P(${n},${r}) = ${n}! / (${n}-${r})! = ${result.value.toFixed(precision)}`;
     } else if (calcType === "combination") {
       if (isNaN(r) || r < 0 || r > n) throw new Error("Selected items (r) must be between 0 and n");
-      result.value = math.combinations(n, r);
+      result.value = combinations(n, r);
       formula = `C(${n},${r}) = ${n}! / (${r}! * (${n}-${r})!) = ${result.value.toFixed(precision)}`;
     } else if (calcType === "permutation-rep") {
       if (isNaN(r) || r < 0) throw new Error("Selected items (r) must be non-negative");
@@ -117,10 +117,10 @@ export default function AdvancedPermCombCalculator() {
       formula = `P_rep(${n},${r}) = ${n}^${r} = ${result.value.toFixed(precision)}`;
     } else if (calcType === "combination-rep") {
       if (isNaN(r) || r < 0) throw new Error("Selected items (r) must be non-negative");
-      result.value = math.combinations(n + r - 1, r);
+      result.value = combinations(n + r - 1, r);
       formula = `C_rep(${n},${r}) = C(${n}+${r}-1,${r}) = ${result.value.toFixed(precision)}`;
     } else if (calcType === "circular") {
-      result.value = math.factorial(n - 1);
+      result.value = factorial(n - 1);
       formula = `Circular P(${n}) = (${n}-1)! = ${result.value.toFixed(precision)}`;
     } else if (calcType === "multiset") {
       if (!multiset) throw new Error("Multiset frequencies required");
@@ -131,7 +131,7 @@ export default function AdvancedPermCombCalculator() {
       if (frequencies.length === 0 || frequencies.some((f) => f < 0))
         throw new Error("Invalid multiset frequencies");
       const sum = frequencies.reduce((a, b) => a + b, 0);
-      result.value = math.factorial(sum) / frequencies.reduce((prod, f) => prod * math.factorial(f), 1);
+      result.value = factorial(sum) / frequencies.reduce((prod, f) => prod * factorial(f), 1);
       formula = `Multiset P = ${sum}! / (${frequencies.join("! * ")}!) = ${result.value.toFixed(precision)}`;
     } else if (calcType === "stirling-first") {
       if (isNaN(r) || r < 0 || r > n) throw new Error("Number of cycles (k) must be between 0 and n");
@@ -143,7 +143,7 @@ export default function AdvancedPermCombCalculator() {
       formula = `S2(${n},${r}) = ${result.value.toFixed(precision)}`;
     } else if (calcType === "binomial") {
       if (isNaN(r) || r < 0 || r > n) throw new Error("Selected items (r) must be between 0 and n");
-      result.value = math.combinations(n, r);
+      result.value = combinations(n, r);
       formula = `Binomial(${n},${r}) = C(${n},${r}) = ${result.value.toFixed(precision)}`;
     } else {
       throw new Error("Invalid calculation type");
@@ -276,11 +276,11 @@ export default function AdvancedPermCombCalculator() {
 
       let result, formula;
       if (probType === "lottery") {
-        const favorable = math.combinations(nVal, rVal);
+        const favorable = combinations(nVal, rVal);
         result = { probability: 1 / favorable };
         formula = `P = 1 / C(${nVal},${rVal}) = ${result.probability.toFixed(prec)}`;
       } else {
-        const favorable = math.combinations(nVal, rVal);
+        const favorable = combinations(nVal, rVal);
         const total = Math.pow(nVal, rVal);
         result = { probability: favorable / total };
         formula = `P = C(${nVal},${rVal}) / ${nVal}^${rVal} = ${result.probability.toFixed(prec)}`;

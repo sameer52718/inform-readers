@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { fraction, mean, median } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -58,7 +58,7 @@ export default function AdvancedPercentageCalculator() {
     if (format === "decimal") {
       result = value.toFixed(precision);
     } else if (format === "fraction") {
-      const frac = math.fraction(value / 100);
+      const frac = fraction(value / 100);
       result = `${frac.n}/${frac.d}`;
     } else {
       result = `${value.toFixed(precision)}%`;
@@ -262,8 +262,8 @@ export default function AdvancedPercentageCalculator() {
         .filter((n) => !isNaN(n));
       if (percentages.length === 0) throw new Error("Invalid percentage list");
 
-      const mean = math.mean(percentages);
-      const median = math.median(percentages);
+      const mean = mean(percentages);
+      const median = median(percentages);
       const result = `Mean: ${formatOutput(
         mean,
         outputFormat,

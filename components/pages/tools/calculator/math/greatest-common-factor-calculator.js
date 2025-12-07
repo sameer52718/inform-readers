@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { evaluate, median, std, mean } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -33,7 +33,7 @@ export default function GCFCalculator() {
   const parseInput = (input) => {
     if (!input.trim()) throw new Error("Input cannot be empty");
     const numbers = input.split(",").map((s) => {
-      const num = math.evaluate(s.trim());
+      const num = evaluate(s.trim());
       if (!Number.isInteger(num) || num <= 0) throw new Error("Numbers must be positive integers");
       if (num > Number.MAX_SAFE_INTEGER) throw new Error("Number too large");
       return num;
@@ -206,9 +206,9 @@ export default function GCFCalculator() {
       const gcfs = results.map((r) => r.gcf).filter((g) => !isNaN(g));
       if (gcfs.length > 0) {
         const stats = {
-          mean: math.mean(gcfs),
-          median: math.median(gcfs),
-          stdDev: math.std(gcfs),
+          mean: mean(gcfs),
+          median: median(gcfs),
+          stdDev: std(gcfs),
           min: Math.min(...gcfs),
           max: Math.max(...gcfs),
         };
@@ -244,9 +244,9 @@ export default function GCFCalculator() {
         .filter((n) => !isNaN(n) && Number.isInteger(n) && n > 0);
       if (values.length === 0) throw new Error("Invalid value list");
       const stats = {
-        mean: math.mean(values),
-        median: math.median(values),
-        stdDev: math.std(values),
+        mean: mean(values),
+        median: median(values),
+        stdDev: std(values),
         min: Math.min(...values),
         max: Math.max(...values),
       };

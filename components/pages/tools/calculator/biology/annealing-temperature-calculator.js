@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { evaluate, log, log10, abs, median, std, max, mean, min } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -80,7 +80,7 @@ export default function Home() {
         if (!validBases.test(input)) throw new Error("Sequence must contain only A, T, G, C");
         return input.toUpperCase();
       }
-      const value = math.evaluate(input);
+      const value = evaluate(input);
       if (isNaN(value) || !isFinite(value)) throw new Error("Invalid numerical value");
       return value;
     } catch (e) {
@@ -120,7 +120,7 @@ export default function Home() {
         dS += terminalAT.dS;
       }
       const salt = saltConc / 1000;
-      tm = (dH * 1000) / (dS + R * Math.log(salt)) - 273.15 + 16.6 * Math.log10(salt);
+      tm = (dH * 1000) / (dS + R * log(salt)) - 273.15 + 16.6 * log10(salt);
     }
 
     const taOffset = method === "basic" ? 5 : 3;
@@ -155,7 +155,7 @@ export default function Home() {
     if (reverseProps) {
       results.reverse = reverseProps;
       const taAvg = (parseFloat(forwardProps.ta) + parseFloat(reverseProps.ta)) / 2;
-      const taDiff = Math.abs(parseFloat(forwardProps.ta) - parseFloat(reverseProps.ta));
+      const taDiff = abs(parseFloat(forwardProps.ta) - parseFloat(reverseProps.ta));
       results.pair = {
         ta: taAvg.toFixed(precision),
         taRange: `${(taAvg - 2).toFixed(precision)}–${(taAvg + 2).toFixed(precision)}`,
@@ -297,11 +297,11 @@ export default function Home() {
         const tas = results.map((r) => parseFloat(r.forward.ta)).filter((t) => !isNaN(t));
         if (tas.length > 0) {
           const stats = {
-            mean: math.mean(tas),
-            median: math.median(tas),
-            stdDev: math.std(tas),
-            min: Math.min(...tas),
-            max: Math.max(...tas),
+            mean: mean(tas),
+            median: median(tas),
+            stdDev: std(tas),
+            min: min(...tas),
+            max: max(...tas),
           };
           statsText = `
             <strong>Statistics (Forward T_a):</strong><br>
@@ -371,11 +371,11 @@ export default function Home() {
       if (values.length === 0) throw new Error("Invalid value list");
 
       const stats = {
-        mean: math.mean(values),
-        median: math.median(values),
-        stdDev: math.std(values),
-        min: Math.min(...values),
-        max: Math.max(...values),
+        mean: mean(values),
+        median: median(values),
+        stdDev: std(values),
+        min: min(...values),
+        max: max(...values),
       };
       const unit = statType === "gc" ? "%" : "°C";
       const statsText = `
@@ -469,7 +469,7 @@ export default function Home() {
 
     try {
       const seq = primer.sequence;
-      const boxWidth = Math.min(20, (width - 40) / seq.length);
+      const boxWidth = min(20, (width - 40) / seq.length);
       const xStart = (width - seq.length * boxWidth) / 2;
       const y = 50;
 

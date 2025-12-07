@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { median, std, mean } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -287,9 +287,9 @@ export default function HalfLifeCalculator() {
         return r.halfLife;
       });
       const stats = {
-        mean: math.mean(values),
-        median: math.median(values),
-        stdDev: math.std(values),
+        mean: mean(values),
+        median: median(values),
+        stdDev: std(values),
         min: Math.min(...values),
         max: Math.max(...values),
       };
@@ -322,9 +322,9 @@ export default function HalfLifeCalculator() {
         .filter((n) => !isNaN(n));
       if (values.length === 0) throw new Error("Invalid values list");
       const stats = {
-        mean: math.mean(values),
-        median: math.median(values),
-        stdDev: math.std(values),
+        mean: mean(values),
+        median: median(values),
+        stdDev: std(values),
         min: Math.min(...values),
         max: Math.max(...values),
       };

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { mean } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -262,7 +262,7 @@ export default function FractionCalculator() {
         }
       });
       const decimals = fractions.map((f) => f.num / f.den);
-      const meanNum = math.mean(decimals);
+      const meanNum = mean(decimals);
       const meanFrac = decimalToFraction(meanNum);
       const sorted = decimals.slice().sort((a, b) => a - b);
       const medianNum =

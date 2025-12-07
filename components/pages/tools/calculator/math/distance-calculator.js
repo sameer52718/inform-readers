@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { unit } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 import L from "leaflet";
@@ -105,10 +105,10 @@ export default function DistanceCalculator() {
       if (lon1 < -180 || lon1 > 180 || lon2 < -180 || lon2 > 180)
         throw new Error("Longitude must be between -180 and 180 degrees");
       const R = 6371; // Earth's radius in km
-      const phi1 = math.unit(lat1, "deg").toNumber("rad");
-      const phi2 = math.unit(lat2, "deg").toNumber("rad");
-      const deltaPhi = math.unit(lat2 - lat1, "deg").toNumber("rad");
-      const deltaLambda = math.unit(lon2 - lon1, "deg").toNumber("rad");
+      const phi1 = unit(lat1, "deg").toNumber("rad");
+      const phi2 = unit(lat2, "deg").toNumber("rad");
+      const deltaPhi = unit(lat2 - lat1, "deg").toNumber("rad");
+      const deltaLambda = unit(lon2 - lon1, "deg").toNumber("rad");
       const a =
         Math.sin(deltaPhi / 2) ** 2 + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) ** 2;
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));

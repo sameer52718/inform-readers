@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { add, subtract, multiply, det, transpose, inv, trace, eigs, lup, lusolve } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -103,54 +103,50 @@ export default function AdvancedMatrixCalculator() {
     const result = {};
     switch (op) {
       case "add":
-        result.value = math.add(matA, matB);
+        result.value = add(matA, matB);
         result.steps = ["Element-wise addition of matrices"];
         break;
       case "subtract":
-        result.value = math.subtract(matA, matB);
+        result.value = subtract(matA, matB);
         result.steps = ["Element-wise subtraction of matrices"];
         break;
       case "multiply":
-        result.value = math.multiply(matA, matB);
+        result.value = multiply(matA, matB);
         result.steps = ["Matrix multiplication"];
         break;
       case "scalar-multiply":
         if (!Number.isFinite(scal)) throw new Error("Scalar must be a valid number");
-        result.value = math.multiply(scal, matA);
+        result.value = multiply(scal, matA);
         result.steps = [`Multiply each element by ${scal}`];
         break;
       case "determinant":
-        result.value = math.det(matA);
+        result.value = det(matA);
         result.steps = ["Compute determinant using cofactor expansion"];
         break;
       case "inverse":
-        result.value = math.inv(matA);
+        result.value = inv(matA);
         result.steps = ["Compute inverse using adjugate and determinant"];
         break;
       case "transpose":
-        result.value = math.transpose(matA);
+        result.value = transpose(matA);
         result.steps = ["Swap rows and columns"];
         break;
-      case "rank":
-        result.value = math.rank(matA);
-        result.steps = ["Compute rank using Gaussian elimination"];
-        break;
       case "trace":
-        result.value = math.trace(matA);
+        result.value = trace(matA);
         result.steps = ["Sum of diagonal elements"];
         break;
       case "eigenvalues":
-        const eig = math.eigs(matA);
+        const eig = eigs(matA);
         result.value = { eigenvalues: eig.values, eigenvectors: eig.vectors };
         result.steps = ["Compute eigenvalues and eigenvectors"];
         break;
       case "lu":
-        const lu = math.lup(matA);
+        const lu = lup(matA);
         result.value = { L: lu.L, U: lu.U, P: lu.P };
         result.steps = ["LU decomposition with partial pivoting"];
         break;
       case "solve":
-        result.value = math.lusolve(matA, matB);
+        result.value = lusolve(matA, matB);
         result.steps = ["Solve Ax = b using LU decomposition"];
         break;
       default:

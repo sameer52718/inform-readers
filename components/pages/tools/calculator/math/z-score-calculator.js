@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import * as math from "mathjs";
+import { evaluate, erf, inv, mean, median, std } from "mathjs";
 import { jsPDF } from "jspdf";
 
 export default function AdvancedZScoreCalculator() {
@@ -44,7 +44,7 @@ export default function AdvancedZScoreCalculator() {
   const parseInput = (input) => {
     try {
       if (!input.trim()) throw new Error("Input cannot be empty");
-      const value = math.evaluate(input);
+      const value = evaluate(input);
       if (isNaN(value) || !isFinite(value)) throw new Error("Invalid numerical value");
       return value;
     } catch (e) {
@@ -63,12 +63,12 @@ export default function AdvancedZScoreCalculator() {
         if (std <= 0) throw new Error("Standard deviation must be positive");
         const z = (x - mean) / std;
         const pdf = (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * z * z);
-        const cdf = 0.5 * (1 + math.erf(z / Math.sqrt(2)));
+        const cdf = 0.5 * (1 + erf(z / Math.sqrt(2)));
         results = { z, pdf, cdf, x, mean, std };
       } else if (type === "probability") {
         const [z, tail] = params;
         const pdf = (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * z * z);
-        const cdf = 0.5 * (1 + math.erf(z / Math.sqrt(2)));
+        const cdf = 0.5 * (1 + erf(z / Math.sqrt(2)));
         let prob;
         if (tail === "left") prob = cdf;
         else if (tail === "right") prob = 1 - cdf;
@@ -79,7 +79,7 @@ export default function AdvancedZScoreCalculator() {
         const [p, mean, std] = params;
         if (p <= 0 || p >= 1) throw new Error("Probability must be between 0 and 1");
         if (std <= 0) throw new Error("Standard deviation must be positive");
-        const z = math.invErf(2 * p - 1) * Math.sqrt(2);
+        const z = inv(2 * p - 1) * Math.sqrt(2);
         const x = mean + z * std;
         results = { z, x, mean, std, p };
       } else if (type === "critical") {
@@ -89,7 +89,7 @@ export default function AdvancedZScoreCalculator() {
         if (tail === "two") p = (1 - confidence) / 2;
         else if (tail === "left" || tail === "right") p = 1 - confidence;
         else throw new Error("Invalid tail type");
-        const z = Math.abs(math.invErf(2 * p - 1) * Math.sqrt(2));
+        const z = Math.abs(inv(2 * p - 1) * Math.sqrt(2));
         results = { z, confidence: confidence * 100, tail };
       }
       return Object.fromEntries(
@@ -181,9 +181,9 @@ export default function AdvancedZScoreCalculator() {
       const prec = parseInt(precision);
       if (zScores.length === 0) throw new Error("Invalid Z-score list");
       const stats = {
-        mean: math.mean(zScores),
-        median: math.median(zScores),
-        stdDev: math.std(zScores),
+        mean: mean(zScores),
+        median: median(zScores),
+        stdDev: std(zScores),
         min: Math.min(...zScores),
         max: Math.max(...zScores),
       };
@@ -266,9 +266,9 @@ export default function AdvancedZScoreCalculator() {
       let statsText = "";
       if (results.length > 1 && zScores.length > 0) {
         const stats = {
-          mean: math.mean(zScores),
-          median: math.median(zScores),
-          stdDev: math.std(zScores),
+          mean: mean(zScores),
+          median: median(zScores),
+          stdDev: std(zScores),
           min: Math.min(...zScores),
           max: Math.max(...zScores),
         };
@@ -525,7 +525,7 @@ export default function AdvancedZScoreCalculator() {
         const zValue = xMin + (x - 50) / scaleX;
         if (zValue >= xMin && zValue <= xMax) {
           const pdf = (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * zValue * zValue);
-          const cdf = 0.5 * (1 + math.erf(zValue / Math.sqrt(2)));
+          const cdf = 0.5 * (1 + erf(zValue / Math.sqrt(2)));
           tooltipRef.current.style.left = `${e.clientX + 10}px`;
           tooltipRef.current.style.top = `${e.clientY + 10}px`;
           tooltipRef.current.style.opacity = "1";

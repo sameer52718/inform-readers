@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { evaluate, log, log10, abs, median, std, max, mean, min, variance, quantileSeq } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -41,7 +41,7 @@ export default function AdvancedStatsCalculator() {
   const parseInput = (input) => {
     try {
       if (!input.trim()) throw new Error("Input cannot be empty");
-      const value = math.evaluate(input);
+      const value = evaluate(input);
       if (isNaN(value) || !isFinite(value)) throw new Error("Invalid numerical value");
       return value;
     } catch (e) {
@@ -56,8 +56,8 @@ export default function AdvancedStatsCalculator() {
 
     try {
       if (calcType === "basic" || calcType === "all") {
-        results.mean = math.mean(data);
-        results.median = math.median(data);
+        results.mean = mean(data);
+        results.median = median(data);
         const freq = {};
         data.forEach((d) => (freq[d] = (freq[d] || 0) + 1));
         const maxFreq = Math.max(...Object.values(freq));
@@ -65,25 +65,23 @@ export default function AdvancedStatsCalculator() {
           .filter((k) => freq[k] === maxFreq)
           .map(Number);
         if (results.mode.length === data.length) results.mode = ["No mode"];
-        results.range = math.max(data) - math.min(data);
-        results.midrange = (math.max(data) + math.min(data)) / 2;
+        results.range = max(data) - min(data);
+        results.midrange = (max(data) + min(data)) / 2;
       }
 
       if (calcType === "advanced" || calcType === "all") {
-        results.variance = math.variance(data);
-        results.stdDev = math.std(data);
+        results.variance = variance(data);
+        results.stdDev = std(data);
         const sorted = [...data].sort((a, b) => a - b);
-        results.q1 = math.quantileSeq(sorted, 0.25);
-        results.q2 = math.quantileSeq(sorted, 0.5);
-        results.q3 = math.quantileSeq(sorted, 0.75);
+        results.q1 = quantileSeq(sorted, 0.25);
+        results.q2 = quantileSeq(sorted, 0.5);
+        results.q3 = quantileSeq(sorted, 0.75);
         results.iqr = results.q3 - results.q1;
         results.skewness =
-          data.length >= 2
-            ? math.mean(data.map((x) => Math.pow((x - results.mean) / results.stdDev, 3))) || 0
-            : 0;
+          data.length >= 2 ? mean(data.map((x) => Math.pow((x - results.mean) / results.stdDev, 3))) || 0 : 0;
         results.kurtosis =
           data.length >= 2
-            ? math.mean(data.map((x) => Math.pow((x - results.mean) / results.stdDev, 4))) - 3 || 0
+            ? mean(data.map((x) => Math.pow((x - results.mean) / results.stdDev, 4))) - 3 || 0
             : 0;
         results.coefficientOfVariation = results.stdDev / results.mean;
       }
@@ -214,9 +212,9 @@ export default function AdvancedStatsCalculator() {
       const means = results.map((r) => parseFloat(r.mean)).filter((m) => !isNaN(m));
       if (means.length > 0) {
         const stats = {
-          mean: math.mean(means),
-          median: math.median(means),
-          stdDev: math.std(means),
+          mean: mean(means),
+          median: median(means),
+          stdDev: std(means),
           min: Math.min(...means),
           max: Math.max(...means),
         };
@@ -252,9 +250,9 @@ export default function AdvancedStatsCalculator() {
       if (values.length === 0) throw new Error("Invalid value list");
 
       const stats = {
-        mean: math.mean(values),
-        median: math.median(values),
-        stdDev: math.std(values),
+        mean: mean(values),
+        median: median(values),
+        stdDev: std(values),
         min: Math.min(...values),
         max: Math.max(...values),
       };
@@ -487,9 +485,9 @@ export default function AdvancedStatsCalculator() {
         ctx.clearRect(0, 0, boxplotChartRef.current.width, boxplotChartRef.current.height);
 
         const data = result.data.map(Number);
-        const q1 = parseFloat(result.q1) || math.quantileSeq(data, 0.25);
-        const q2 = parseFloat(result.q2) || math.quantileSeq(data, 0.5);
-        const q3 = parseFloat(result.q3) || math.quantileSeq(data, 0.75);
+        const q1 = parseFloat(result.q1) || quantileSeq(data, 0.25);
+        const q2 = parseFloat(result.q2) || quantileSeq(data, 0.5);
+        const q3 = parseFloat(result.q3) || quantileSeq(data, 0.75);
         const min = Math.min(...data);
         const max = Math.max(...data);
         const iqr = q3 - q1;

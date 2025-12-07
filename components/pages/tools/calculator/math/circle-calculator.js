@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { evaluate } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -36,7 +36,7 @@ export default function CircleCalculator() {
   const parseInput = (input) => {
     try {
       if (!input.trim()) throw new Error("Input cannot be empty");
-      const value = math.evaluate(input);
+      const value = evaluate(input);
       if (isNaN(value) || !isFinite(value)) throw new Error("Invalid numerical value");
       return value;
     } catch (e) {

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import * as math from "mathjs";
+import { log, log10, pow } from "mathjs";
 import Chart from "chart.js/auto";
 import { jsPDF } from "jspdf";
 
@@ -48,25 +48,25 @@ export default function LogarithmCalculator() {
       if (isNaN(value) || isNaN(base)) throw new Error("Value and base are required");
       if (value <= 0) throw new Error("Value must be positive");
       if (base <= 0 || base === 1) throw new Error("Base must be positive and not 1");
-      result = math.log(value, base);
+      result = log(value, base);
       formula = `log_${base}(${value}) = ${result.toFixed(precision)}`;
     } else if (calcType === "natural") {
       const { value } = params;
       if (isNaN(value)) throw new Error("Value is required");
       if (value <= 0) throw new Error("Value must be positive");
-      result = math.log(value);
+      result = log(value);
       formula = `ln(${value}) = ${result.toFixed(precision)}`;
     } else if (calcType === "base10") {
       const { value } = params;
       if (isNaN(value)) throw new Error("Value is required");
       if (value <= 0) throw new Error("Value must be positive");
-      result = math.log10(value);
+      result = log10(value);
       formula = `log_10(${value}) = ${result.toFixed(precision)}`;
     } else if (calcType === "inverse") {
       const { exponent, base } = params;
       if (isNaN(exponent) || isNaN(base)) throw new Error("Exponent and base are required");
       if (base <= 0 || base === 1) throw new Error("Base must be positive and not 1");
-      result = math.pow(base, exponent);
+      result = pow(base, exponent);
       formula = `${base}^${exponent} = ${result.toFixed(precision)}`;
     } else {
       throw new Error("Invalid calculation type");
@@ -83,20 +83,20 @@ export default function LogarithmCalculator() {
     if (calcType === "basic") {
       const { base } = params;
       for (let x = 0.1; x <= 100; x += 0.5) {
-        data.push({ x, y: math.log(x, base) });
+        data.push({ x, y: log(x, base) });
       }
     } else if (calcType === "natural") {
       for (let x = 0.1; x <= 100; x += 0.5) {
-        data.push({ x, y: math.log(x) });
+        data.push({ x, y: log(x) });
       }
     } else if (calcType === "base10") {
       for (let x = 0.1; x <= 100; x += 0.5) {
-        data.push({ x, y: math.log10(x) });
+        data.push({ x, y: log10(x) });
       }
     } else if (calcType === "inverse") {
       const { base } = params;
       for (let x = -2; x <= 2; x += 0.1) {
-        data.push({ x, y: math.pow(base, x) });
+        data.push({ x, y: pow(base, x) });
       }
     }
     return data;
