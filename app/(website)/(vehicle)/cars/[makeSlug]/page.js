@@ -6,44 +6,64 @@ import { headers } from "next/headers";
 import { buildHreflangLinks } from "@/lib/hreflang";
 import Breadcrumb from "@/components/pages/specification/Breadcrumb";
 
-// --- Server function to get makes ---
-async function getMakes() {
+// --- Server function to get models ---
+async function getModels(slug) {
   try {
-    const res = await axiosInstance.get(`/website/vehicle/make`);
+    const res = await axiosInstance.get(`/website/vehicle/model/${slug}`);
     return res.data.data || [];
   } catch (error) {
-    console.error("Error fetching makes:", error);
-    return [];
+    console.error("Error fetching Models:", error);
+    return { models: [], make: {} };
   }
 }
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }) {
+  const { makeSlug } = await params;
   const host = (await headers()).get("host") || "informreaders.com";
 
-  // Generate multilingual alternates for /cars/makes
-  const alternates = buildHreflangLinks(`/cars/`, host);
+  // 1. Call API to get make + models
+  let makeName = "";
+  try {
+    const res = await axiosInstance.get(`/website/vehicle/model/${makeSlug}`);
+    makeName = res?.data?.data?.make?.name || "";
+  } catch (error) {
+    console.error("Metadata Make Fetch Error:", error);
+  }
+
+  // 2. Build hreflang links for /cars/{makeSlug}
+  const alternates = buildHreflangLinks(`/cars/${makeSlug}/`, host);
+
+  // 3. Prepare dynamic title/description
+  const title = `${makeName ? makeName + " Models" : "Car Models"} | Inform Readers`;
+  const description = makeName
+    ? `Explore all available ${makeName} car models, specifications, price ranges, and detailed information. Stay updated with the latest ${makeName} cars on Inform Readers.`
+    : "Explore all available car models and brands. Stay updated with latest car specs and information.";
 
   return {
-    title: "All Cars Makes | Inform Readers",
-    description:
-      "Browse all available car makes and brands. Explore detailed information and stay updated with the latest car manufacturers on Inform Readers.",
-    keywords: ["car makes", "car companies", "inform readers cars"],
+    title,
+    description,
+    keywords: [`${makeName} models`, `${makeName} cars`, "car models", "inform readers cars"],
     alternates,
     openGraph: {
-      title: "All Cars Makes | Inform Readers",
-      description:
-        "Explore all cars brands and car makes. Browse updated data and stay informed on the latest cars manufacturers.",
+      title,
+      description,
       type: "website",
       siteName: "Inform Readers",
-      url: alternates.canonical,
+      url: alternates?.canonical,
     },
   };
 }
 
-const CarsMakes = async () => {
-  const makes = await getMakes();
+const CarsModels = async ({ params }) => {
+  const { makeSlug } = await params;
 
-  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Cars" }];
+  const { models, make } = await getModels(makeSlug);
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Cars", href: "/cars" },
+    { label: make?.name },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-red-50 to-pink-50">
@@ -55,8 +75,10 @@ const CarsMakes = async () => {
               <Car className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white">Car Makes</h1>
-              <p className="text-red-100 mt-2 text-lg">Explore {makes.length} cars brands</p>
+              <h1 className="text-4xl md:text-5xl font-bold text-white">{make?.name} Models</h1>
+              <p className="text-red-100 mt-2 text-lg">
+                Explore {models.length} {make?.name} models
+              </p>
             </div>
           </div>
           <p className="text-white/90 max-w-2xl text-lg">
@@ -69,11 +91,11 @@ const CarsMakes = async () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8 md:py-12">
         <Breadcrumb items={breadcrumbItems} />
-        {makes.length === 0 ? (
+        {models.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-12 text-center">
             <Car className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-slate-700 mb-2">No Car makes found</h2>
-            <p className="text-slate-500">Check back soon for updated Car manufacturers.</p>
+            <h2 className="text-xl font-semibold text-slate-700 mb-2">No {make?.name} model found</h2>
+            <p className="text-slate-500">Check back soon for updated {make?.name} models.</p>
           </div>
         ) : (
           <div className="space-y-12">
@@ -84,15 +106,15 @@ const CarsMakes = async () => {
                   <Layers className="w-5 h-5 text-red-600" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900">Cars</h2>
-                  <p className="text-sm text-slate-500">{makes.length} brands</p>
+                  <h2 className="text-2xl font-bold text-slate-900">{make?.name}</h2>
+                  <p className="text-sm text-slate-500">{models.length} models</p>
                 </div>
               </div>
 
               {/* Makes Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {makes.map((make) => (
-                  <Link key={make._id} href={`/cars/${make.slug}`} className="group">
+                {models.map((model) => (
+                  <Link key={model._id} href={`/cars/${makeSlug}/${model.slug}`} className="group">
                     <div className="bg-white rounded-xl border-2 border-slate-200 p-6 h-full transition-all duration-300 hover:border-red-400 hover:shadow-xl hover:-translate-y-2">
                       {/* Icon & Arrow */}
                       <div className="flex items-start justify-between mb-4">
@@ -102,15 +124,15 @@ const CarsMakes = async () => {
                         <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
                       </div>
 
-                      {/* Make Name */}
+                      {/* model Name */}
                       <h3 className="text-xl font-bold capitalize text-slate-900 group-hover:text-red-600 transition-colors">
-                        {make.name}
+                        {model.name}
                       </h3>
 
                       {/* View Link */}
                       <div className="mt-6 pt-4 border-t border-slate-100">
                         <span className="text-sm font-semibold text-red-600 group-hover:underline">
-                          View Models →
+                          View Cars →
                         </span>
                       </div>
                     </div>
@@ -125,4 +147,4 @@ const CarsMakes = async () => {
   );
 };
 
-export default CarsMakes;
+export default CarsModels;

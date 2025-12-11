@@ -52,14 +52,13 @@ const VehicleCard = ({ vehicle, type = "cars" }) => {
           </div>
           <div className="flex justify-between items-center">
             <span
-              className={`text-sm font-medium px-3 py-1 rounded-full ${
-                isEV ? "bg-red-100 text-red-800" : "bg-red-100 text-red-800"
-              }`}
+              className={`text-sm font-medium px-3 py-1 rounded-full ${isEV ? "bg-red-100 text-red-800" : "bg-red-100 text-red-800"
+                }`}
             >
               {vehicle.vehicleType.charAt(0) + vehicle.vehicleType.slice(1).toLowerCase()}
             </span>
             <Link
-              href={`/${type}/${vehicle?.makeId?.slug || vehicle?.make?.slug}/${vehicle.slug}`}
+              href={type === "cars" ? `/${type}/${vehicle?.makeId?.slug || vehicle?.make?.slug}/${vehicle?.modelId?.slug || vehicle?.model?.slug}/${vehicle.slug}` : `/${type}/${vehicle?.makeId?.slug || vehicle?.make?.slug}/${vehicle.slug}`}
               className="text-white bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors"
             >
               View Details

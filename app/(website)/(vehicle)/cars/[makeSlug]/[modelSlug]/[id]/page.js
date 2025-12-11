@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { Car, Fuel, Gauge, Wrench } from "lucide-react";
 import VehicleCard from "@/components/vehicle/vehicleCard";
-import ShareButton from "../components/ShareButton";
+import ShareButton from "../../../components/ShareButton";
 import handleError from "@/lib/handleError";
 import axiosInstance from "@/lib/axiosInstance";
 import { headers } from "next/headers";
 import { getCountryCodeFromHost, getCountryName } from "@/lib/getCountryFromSubdomain";
+import Breadcrumb from "@/components/pages/specification/Breadcrumb";
+import { buildHreflangLinks } from "@/lib/hreflang";
 
 const metaTemplates = [
   {
@@ -38,10 +40,11 @@ function applyMetaTemplate(template, values) {
 }
 
 export async function generateMetadata({ params }) {
-  const { id } = await params;
+  const { id, makeSlug, modelSlug } = await params;
 
   // Get country from subdomain
   const host = (await headers()).get("host") || "informreaders.com";
+  const alternates = buildHreflangLinks(`/cars/${makeSlug}/${id}`, host);
   const country = getCountryName(getCountryCodeFromHost(host));
 
   try {
@@ -141,9 +144,11 @@ function applyIntroTemplate(template, values) {
 }
 
 export default async function VehicleDetailPage({ params }) {
+  const { id, makeSlug, modelSlug } = await params;
+
   const host = (await headers()).get("host") || "informreaders.com";
   const country = getCountryName(getCountryCodeFromHost(host));
-  const data = await getVehicleData(params.id);
+  const data = await getVehicleData(id);
 
   // Define sections
   const sections = [
@@ -291,6 +296,7 @@ export default async function VehicleDetailPage({ params }) {
   const values = {
     carName: data?.data?.name || "",
     make: data?.data?.makeId?.name || "",
+    model: data?.data?.modelId?.name || "",
     year: data?.data?.year || "",
     bodyType: specMap["Body Type"] || "",
     fuelType: specMap["Fuel Type"] || "",
@@ -332,9 +338,18 @@ export default async function VehicleDetailPage({ params }) {
     );
   };
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Bikes", href: "/cars" },
+    { label: values.make, href: `/cars/${makeSlug}` },
+    { label: values.model, href: `/cars/${makeSlug}/${modelSlug}` },
+    { label: data?.data?.name },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
+        <Breadcrumb items={breadcrumbItems} />
         {/* Hero Section */}
         <section className="mb-6 flex justify-between">
           <h1 className="text-3xl font-bold text-gray-900">{data?.data?.name}</h1>
