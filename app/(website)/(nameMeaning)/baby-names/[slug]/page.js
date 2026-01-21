@@ -8,15 +8,14 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
 
   const host = (await headers()).get("host") || "informreaders.com";
-  const country = getCountryName(getCountryCodeFromHost(host));
 
   try {
     const { data } = await axiosInstance.get(`/website/name/${slug}`, { params: { host } });
-    const alternates = buildHreflangLinks(`/baby-names/${slug}/`, host);
+    const alternates = buildHreflangLinks(`/baby-names/${slug}/`, host, true);
 
     if (data.error || !data.data) {
       return {
-        title: "Name Details | Infrom Readers",
+        title: "Name Details | Inform Readers",
         description: "Find detailed meanings, origin, and cultural background of baby names.",
         alternates,
       };
@@ -24,32 +23,35 @@ export async function generateMetadata({ params }) {
 
     const nameData = data.data;
 
-    const values = {
-      name: nameData?.name || "",
-      gender: nameData?.gender || "",
-      origin: nameData?.origion || "",
-      religion: nameData?.religionId?.name || "",
-      country,
-    };
-
-    const title = nameData.content.title;
-    const description = nameData.content.intro;
+    // Use SEO data from API response
+    const seoTitle = nameData?.seo?.title || `${nameData?.name || ""} Name Meaning, Origin, and Usage - Inform Readers`;
+    const seoDescription = nameData?.seo?.meta_description || nameData?.ai_overview_summary || `Explore the name ${nameData?.name || ""}, its meaning, origin, and cultural significance.`;
+    const metaTags = nameData?.seo?.meta_tags || [];
+    const focusKeywords = [
+      ...(nameData?.focus_keywords?.hard_keywords || []),
+      ...(nameData?.focus_keywords?.query_based_keywords || []),
+      ...(nameData?.focus_keywords?.paa_keywords || []),
+    ];
 
     return {
-      title,
-      description,
-      keywords: [
-        `${values.name} name meaning`,
-        `${values.name} origin`,
-        `${values.name} religion`,
-        `${values.name} baby name`,
-        `meaning of the name ${values.name}`,
-      ],
+      title: seoTitle,
+      description: seoDescription,
+      keywords: [...metaTags, ...focusKeywords].filter(Boolean),
       alternates,
+      openGraph: {
+        title: seoTitle,
+        description: seoDescription,
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seoTitle,
+        description: seoDescription,
+      },
     };
   } catch (error) {
     return {
-      title: "Baby Name Details | Infrom Readers",
+      title: "Baby Name Details | Inform Readers",
       description: "Explore baby name meanings, origins, and religious significance.",
     };
   }
