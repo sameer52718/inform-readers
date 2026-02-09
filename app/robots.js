@@ -1,7 +1,8 @@
 import { headers } from "next/headers";
 
-export default function robots() {
-  const host = headers().get("host") || "informreaders.com";
+export default async function robots() {
+  const h = await headers();
+  const host = h.get("host") || "informreaders.com";
   const baseUrl = `https://${host}`;
 
   return {
